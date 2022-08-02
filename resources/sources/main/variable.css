@@ -1,0 +1,42 @@
+@font-face {
+  font-family: 'SVN-Gilroy Thin';
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/svn-gilroy_regular.ttf");
+}
+
+@font-face {
+  font-family: 'SVN-Gilroy Light';
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/svn-gilroy_regular.ttf");
+}
+
+@font-face {
+  font-family: 'SVN-Gilroy';
+  font-style: normal;
+  font-weight: 500;
+  src: url("/fonts/svn-gilroy_medium.ttf");
+}
+
+@font-face {
+  font-family: 'SVN-Gilroy Med';
+  font-style: normal;
+  font-weight: 700;
+  src: url("/fonts/svn-gilroy_med.ttf");
+}
+
+@font-face {
+  font-family: 'SVN-Gilroy Semi';
+  font-style: normal;
+  font-weight: 700;
+  src: url("/fonts/svn-gilroy_semibold.ttf");
+}
+
+@font-face {
+  font-family: 'SVN-Gilroy Bold';
+  font-style: normal;
+  font-weight: 700;
+  src: url("/fonts/svn-gilroy_semibold.ttf");
+}
+/*# sourceMappingURL=variable.css.map */

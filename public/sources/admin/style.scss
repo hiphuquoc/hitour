@@ -1,0 +1,233 @@
+$color-title            : #345;
+$color-primary          : rgb(0, 170, 240);
+$color-primary-hover    : rgb(0, 150, 220);
+$color-primary-01       : rgba(0, 170, 240, 0.1);
+$color-primary-02       : rgba(0, 170, 240, 0.2);
+$color-primary-03       : rgba(0, 170, 240, 0.3);
+$color-primary-04       : rgba(0, 170, 240, 0.4);
+$color-primary-05       : rgba(0, 170, 240, 0.5);
+$color-primary-06       : rgba(0, 170, 240, 0.6);
+$color-primary-07       : rgba(0, 170, 240, 0.7);
+$color-primary-08       : rgba(0, 170, 240, 0.8);
+$color-primary-09       : rgba(0, 170, 240, 0.9);
+$color-primary-light    : rgb(0, 190, 260);
+
+$color-secondary        : rgb(244, 208, 63);
+$color-secondary-01     : rgba(244, 208, 63, 0.1);
+$color-secondary-02     : rgba(244, 208, 63, 0.2);
+$color-secondary-03     : rgba(244, 208, 63, 0.3);
+$color-secondary-04     : rgba(244, 208, 63, 0.4);
+$color-secondary-05     : rgba(244, 208, 63, 0.5);
+$color-secondary-06     : rgba(244, 208, 63, 0.6);
+$color-secondary-07     : rgba(244, 208, 63, 0.7);
+$color-secondary-08     : rgba(244, 208, 63, 0.8);
+$color-secondary-09     : rgba(244, 208, 63, 0.9);
+$color-secondary-hover  : rgb(241, 196, 15);
+$color-price: rgb(255, 90, 50);
+
+$bg-1: 			#212529;
+$bg-09: 		#343a40;
+$bg-08: 		#495057;
+$bg-07: 		#6c757d;
+$bg-06: 		#adb5bd;
+$bg-05: 		#ced4da;
+$bg-04: 		#dee2e6;
+$bg-03: 		#e9ecef;
+$bg-02: 		#f8f9fa;
+$color-link: #3498DB;
+$color-link-dark: #2E86C1;
+$color-des : #567;
+$color-text: #456;
+
+$font-primary-title: "SVN-Gilroy", "Verdana", "Roboto", "Tahoma", sans-serif;
+$font-primary-title-bold: "SVN-Gilroy Bold", "Verdana", "Roboto", "Tahoma", sans-serif;
+$font-primary-text: "Open Sans", "Verdana", "Tahoma", sans-serif;
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: $font-primary-text;
+}
+
+.highLight_700 {
+    font-weight: 700;
+    color: $color-primary;
+}
+
+.highLight_500 {
+    font-weight: 500;
+    color: $color-primary;
+}
+
+table {
+    tr {
+        vertical-align: top;
+        td, th {
+            padding: 0.7rem !important;
+            img {
+                width: inherit;
+                border-radius: 5px;
+            }
+            .tableHighLight {
+                font-weight: 700;
+            }
+            div.oneLine {
+                &:not(:first-child){
+                    margin-top: 0.5rem;
+                }
+                .badge {
+                    margin-top: 0.3rem;
+                }
+            }
+            .iconAction {
+                width: 40px;
+                text-align: center;
+                a {
+                    color: $color-primary;
+                    &:hover {
+                        color: $color-primary-hover;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.formBox {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    &_column2 {
+        width: calc(50% - 1rem);
+        &:not(:first-child){
+            margin-left: 2rem;
+        }
+        &_item {
+            &_row {
+                &:not(:first-child){
+                    margin-top: 1.2rem;
+                }
+            }
+        }
+    }
+    &_full {
+        width: 100%;
+    }
+}
+
+.inputWithNumberChacractor {
+    display: flex;
+    justify-content: space-between;
+    &_count {
+        font-weight: bold;
+        font-size: 1.1rem;
+        background: $color-primary-01;
+        padding: 2px 5px;
+        width: 60px;
+        text-align: center;
+        border-radius: 5px 5px 0 0;
+    }
+}
+
+.imageUpload {
+    margin-top: 1.5rem;
+    border-radius: 5px;
+    img {
+        width: 100%;
+        max-width: 320px;
+        max-height: 196px;
+        object-fit: cover;
+        box-shadow: 0 0 3px $bg-06;
+        border-radius: inherit;
+    }
+}
+
+.inputRequired {
+    &:after {
+        margin-left: 0.5rem;
+        content: '*';
+        color: $color-price;
+        font-weight: bold;
+    }
+}
+.explainInput {
+    margin-right: 0.5rem;
+    width: 18px;
+    height: 18px;
+    vertical-align: top;
+}
+.tooltip {
+    text-align: left !important;
+}
+
+/* ===== Viết đè CSS Theme ===== */
+.navigation {
+    font-family: $font-primary-text !important;
+}
+
+.main-menu.menu-light .navigation > li > a i, .main-menu.menu-light .navigation > li > a svg {
+    top: 0 !important;
+}
+
+.navigation {
+    font-size: 1.15rem !important;
+    > li {
+        font-weight: 700;
+        margin-top: 0.75rem !important;
+        > a {
+            padding: 7px 12px !important;
+            > i, > svg {
+                height: 20px !important;
+                width: 20px !important;
+                font-size: 20px !important;
+            }
+        }
+        ul {
+            font-weight: normal;
+            margin-left: 1.2rem !important;
+        }
+    }
+    
+}
+
+html .content.app-content {
+    padding: 2rem 2rem 0 !important;
+}
+
+.col-form-label, 
+.col-form-label-lg, 
+.col-form-label-sm {
+    font-size: 1rem !important;
+}
+
+.form-label {
+    font-size: 1rem !important;
+    cursor: pointer;
+}
+
+.card .card-header .card-title {
+    font-weight: 700;
+}
+
+.card-footer {
+    > button {
+        &:not(:first-child){
+            margin-left: 1rem;
+        }
+    }
+}
+
+.select2-container .select2-selection--single {
+    height: unset !important;
+}
+
+.invalid-feedback, .valid-feedback {
+    font-size: 1rem !important;
+}
+
+label.error {
+    display: none !important;
+}
