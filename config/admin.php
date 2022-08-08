@@ -14,7 +14,13 @@ return [
         'smallResize_width'     => 400,
         'smallResize_height'    => 250,
         'default_750x460'       => '/images/admin/image-default-750x460.png',
-        'default_660x660'       => '/images/admin/image-default-660x660.png'
+        'default_660x660'       => '/images/admin/image-default-660x660.png',
+        /* danh sách action: copy_url, change_name, change_image, delete */
+        'keyType'               => '-type-',
+        'type'                  => [
+            'default'           => ['copy_url', 'change_image'],
+            'manager-upload'    => ['copy_url', 'change_name', 'change_image', 'delete']
+        ]
     ],
     
     /* Vùng miền trong bảng region_info */

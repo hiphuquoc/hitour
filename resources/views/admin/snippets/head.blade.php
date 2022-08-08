@@ -29,7 +29,7 @@
   {{-- <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/css/plugins/extensions/ext-component-sweet-alerts.min.css') }}"> --}}
   <!-- END: Page CSS-->
   <!-- BEGIN: Custom CSS-->
-  <link rel="stylesheet" type="text/css" href="{{ asset('css/admin/style.css?'.time()) }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/css/style.css?'.time()) }}">
   <!-- END: Custom CSS-->
   <!-- BEGIN: FONT AWESOME -->
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">

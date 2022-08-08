@@ -12,6 +12,7 @@
 <script src="{{ asset('sources/admin/app-assets/js/scripts/forms/pickers/form-pickers.js') }}"></script>
 <script src="{{ asset('sources/admin/app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
 <script src="{{ asset('sources/admin/app-assets/js/scripts/forms/form-select2.min.js') }}"></script>
+{{-- <script src="{{ asset('sources/admin/app-assets/js/scripts/components/components-tooltips.min.js') }}"></script> --}}
 
 {{-- <script src="{{ asset('sources/admin/app-assets/js/scripts/forms/form-validation.js') }}"></script> --}}
 {{-- <script src="{{ asset('sources/admin/app-assets/vendors/js/forms/validation/jquery.validate.min.js') }}"></script> --}}
@@ -34,6 +35,8 @@
                 height: 14
             });
         }
+
+        $('[data-bs-toggle="tooltip"]').tooltip();
     })
 
     $(function () {

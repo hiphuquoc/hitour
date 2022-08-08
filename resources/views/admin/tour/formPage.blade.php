@@ -1,5 +1,5 @@
 @if(!empty($item->id))
-    <input type="hidden" name="tourLocation_id" value="{{ $item->id }}" />
+    <input type="hidden" name="tour_location_id" value="{{ $item->id }}" />
 @endif
 @if(!empty($item->seo->id))
     <input type="hidden" name="seo_id" value="{{ $item->seo->id }}" />
@@ -51,7 +51,7 @@
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
-            <label class="form-label inputRequired" for="location">Khu vực Tour</label>
+            <label class="form-label inputRequired" for="location">Điểm đến Tour</label>
             <select class="select2 form-select select2-hidden-accessible" id="location" name="location[]" multiple="true">
                 @if(!empty($tourLocations))
                     @foreach($tourLocations as $location)
@@ -67,6 +67,22 @@
                             }
                         @endphp
                         <option value="{{ $location['id'] }}"{{ $selected }}>{{ $location['name'] }}</option>
+                    @endforeach
+                @endif
+            </select>
+        </div>
+        <!-- One Row -->
+        <div class="formBox_full_item">
+            <label class="form-label inputRequired" for="tour_departure_id">Điểm khởi hành</label>
+            <select class="select2 form-select select2-hidden-accessible" id="tour_departure_id" name="tour_departure_id">
+                <option value="0">- Lựa chọn -</option>
+                @if(!empty($tourDepartures))
+                    @foreach($tourDepartures as $departure)
+                        @php
+                            $selected   = null;
+                            if(!empty($item->tour_departure_id)&&$item->tour_departure_id==$departure->id) $selected = 'selected';
+                        @endphp
+                        <option value="{{ $departure['id'] }}"{{ $selected }}>{{ $departure['name'] }}</option>
                     @endforeach
                 @endif
             </select>

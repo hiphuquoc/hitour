@@ -52,21 +52,21 @@
                         <div class="card">
                             <div class="card-header border-bottom">
                                 <h4 class="card-title">
-                                    Danh sách hành khách
-                                </h4>
-                            </div>
-                            <div class="card-body">
-                                @include('admin.form.formCustomerList')
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header border-bottom">
-                                <h4 class="card-title">
                                     Thông tin hóa đơn
                                 </h4>
                             </div>
                             <div class="card-body">
                                 @include('admin.form.formVAT')
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header border-bottom">
+                                <h4 class="card-title">
+                                    Danh sách hành khách
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                                @include('admin.form.formCustomerList')
                             </div>
                         </div>
                     </div>

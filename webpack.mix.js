@@ -15,10 +15,9 @@ const mix = require('laravel-mix');
 //     .sass('resources/sass/app.scss', 'public/css')
 //     .sourceMaps();
 
-mix.copy('resources/sources', 'public/sources');
+mix.copy('resources/sources/admin/app-assets', 'public/sources/admin/app-assets');
 mix.copy('resources/images', 'public/images');
-mix.js('resources/js/app.js', 'public/js/')
-    .js('resources/js/bootstrap.js', 'public/js/')
-    .js('resources/js/jquery-3.6.0.min.js', 'public/js/')
-    .sass('resources/scss/admin/style.scss', 'public/css/admin')
+mix.js('resources/js/bootstrap.js', 'public/js/')
+    .sass('resources/sources/admin/scss/style.scss', 'public/sources/admin/css')
+    .sass('resources/sources/main/scss/style.scss', 'public/sources/main/css')
     .version();

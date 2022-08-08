@@ -10,9 +10,13 @@
         <img src="{{ $item->seo->image_small }}" />
         @if(!empty($item->locations))
             <div class="oneLine">
+                Điểm đến: 
                 @foreach($item->locations as $location)
                     <div class="badge bg-primary" {{ $loop->index>0 ? 'style=margin-left:0.25rem' : null }}>{{ $location->infoLocation['name'] ?? null }}</div>
                 @endforeach
+            </div>
+            <div class="oneLine">
+                Khởi hành: <div class="badge bg-primary">{{ $item->departure->name ?? null }}</div>
             </div>
         @endif
     </td>
@@ -117,7 +121,10 @@
     </td>
     <td style="vertical-align:top;display:flex;">
         <div class="icon-wrapper iconAction">
-            <a href="{{ url($item->seo->slug) }}" target="_blank">
+            @php
+                $tmp    = \App\Helpers\Url::buildFullLinkOne($item->seo);
+            @endphp
+            <a href="/{{ $tmp->slug_full }}" target="_blank">
                 <i data-feather='eye'></i>
                 <div>Xem</div>
             </a>

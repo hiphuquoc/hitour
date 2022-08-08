@@ -38,25 +38,26 @@ class AdminTourLocationController extends Controller {
 
     public function viewEdit(Request $request, $id){
         if(!empty($id)){
-            $tourLocation   = TourLocation::all();
             $item           = TourLocation::select('*')
                                             ->where('id', $id)
-                                            ->with('seo', 'files')
+                                            ->with(['files' => function($query){
+                                                $query->where('relation_table', 'tour_location');
+                                            }], 'seo')
                                             ->first();
             $provinces      = Province::getItemByIdRegion($item->region_id);
             $districts      = District::getItemByIdProvince($item->province_id);
+            $message        = $request->get('message') ?? null; 
             $type           = 'edit';
             if(!empty($request->get('type'))) $type = $request->get('type');
-            if(!empty($item)) return view('admin.tourLocation.view', compact('tourLocation', 'item', 'type', 'provinces', 'districts'));
+            if(!empty($item)) return view('admin.tourLocation.view', compact('item', 'type', 'provinces', 'districts', 'message'));
 
         }
         return redirect()->route('admin.TourLocation.list');
     }
 
     public function viewInsert(Request $request){
-        $tourLocation       = TourLocation::all();
         $type               = 'create';
-        return view('admin.tourLocation.view', compact('tourLocation', 'type'));
+        return view('admin.tourLocation.view', compact('type'));
     }
 
     public function create(TourLocationRequest $request){
@@ -67,7 +68,7 @@ class AdminTourLocationController extends Controller {
             $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
         }
         /* insert page */
-        $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $dataPath);
+        $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'tour_location', $dataPath);
         $pageId             = Seo::insertItem($insertPage);
         /* insert tour_location */
         $insertTourLocation = $this->BuildInsertUpdateModel->buildArrayTableTourLocation($request->all(), $pageId);
@@ -83,10 +84,17 @@ class AdminTourLocationController extends Controller {
             AdminSliderController::uploadSlider($request->file('slider'), $params);
         }
         /* Message */
-        return redirect()->route('admin.tourLocation.list');
+        $message        = [
+            'type'      => 'success',
+            'message'   => '<strong>Thành công!</strong> Đã tạo Điểm đến Tour mới'
+        ];
+        return redirect()->route('admin.tourLocation.viewEdit', [
+            'id'        => $idTourLocation,
+            'message'   => $message
+        ]);
     }
 
-    public function update(Request $request){
+    public function update(TourLocationRequest $request){
         /* upload image */
         $dataPath           = [];
         if($request->hasFile('image')) {
@@ -94,22 +102,30 @@ class AdminTourLocationController extends Controller {
             $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
         }
         /* update page */
-        $updatePage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $dataPath);
-        $flagUpdatePage     = Seo::updateItem($request->get('seo_id'), $updatePage);
+        $updatePage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'tour_location', $dataPath);
+        Seo::updateItem($request->get('seo_id'), $updatePage);
         /* update TourLocation */
         $updateTourLocation = $this->BuildInsertUpdateModel->buildArrayTableTourLocation($request->all());
-        $flagUpdateCate     = TourLocation::updateItem($request->get('tourLocation_id'), $updateTourLocation);
+        TourLocation::updateItem($request->get('tour_location_id'), $updateTourLocation);
         /* insert slider và lưu CSDL */
         if($request->hasFile('slider')){
             $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
             $params         = [
-                'attachment_id'     => $request->get('tourLocation_id'),
+                'attachment_id'     => $request->get('tour_location_id'),
                 'relation_table'    => 'tour_location',
                 'name'              => $name
             ];
             AdminSliderController::uploadSlider($request->file('slider'), $params);
         }
-        return redirect()->route('admin.tourLocation.list');
+        /* Message */
+        $message        = [
+            'type'      => 'success',
+            'message'   => '<strong>Thành công!</strong> Các thay đổi đã được lưu'
+        ];
+        return redirect()->route('admin.tourLocation.viewEdit', [
+            'id'        => $request->get('tour_location_id'),
+            'message'   => $message
+        ]);
     }
 
     public static function delete(Request $request){

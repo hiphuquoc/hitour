@@ -20,12 +20,12 @@
                             <td style="box-sizing:border-box;text-align:center;line-height:1.68;color:#456;padding:10px 15px 0 15px;">
                                 @php
                                     $dayOfWeekBooking           = DateAndTime::convertMktimeToDayOfWeek(strtotime($item->created_at));
-                                    $bookingAt                  = 'Đặt lúc '.date('H:i', strtotime($item->created_at)).' '.$dayOfWeekBooking.', '.date('d-m-Y', strtotime($item->created_at));
+                                    $bookingAt                  = 'Đặt lúc '.date('H:i', strtotime($item->created_at)).' '.$dayOfWeekBooking.', '.date('d/m/Y', strtotime($item->created_at));
                                     $expirationAt               = null;
                                     if(!empty($item->expiration_at)){
                                         $dayOfWeekExpiration    = DateAndTime::convertMktimeToDayOfWeek(strtotime($item->expiration_at));
                                         $expirationAt           = '<div style="text-align:right;margin-right:10px;font-size:15px;">
-                                                                Hết hạn '.date('H:i', strtotime($item->expiration_at)).' '.$dayOfWeekExpiration.', '.date('d-m-Y', strtotime($item->expiration_at)).'</div>';
+                                                                Hết hạn '.date('H:i', strtotime($item->expiration_at)).' '.$dayOfWeekExpiration.', '.date('d/m/Y', strtotime($item->expiration_at)).'</div>';
                                     }
                                 @endphp
                                 <h1 style="font-size:20px;font-weight:bold;color:#345;">XÁC NHẬN DỊCH VỤ</h1>
@@ -86,7 +86,7 @@
                                         </tr>
                                         <tr style="border-top:1px dotted #d1d1d1">
                                             <td style="width:140px;font-size:15px;padding:5px;">Ngày</td>
-                                            <td style="font-size:15px;padding:5px;">{{ date('d-m-Y', strtotime($item->departure_day)) }} - {{ DateAndTime::calculatorDayEndTour($item->departure_day, $item->tour, 'd-m-Y') }}</td>
+                                            <td style="font-size:15px;padding:5px;">{{ date('d/m/Y', strtotime($item->departure_day)) }} - {{ DateAndTime::calculatorDayEndTour($item->departure_day, $item->tour, 'd/m/Y') }}</td>
                                         </tr>
                                         <tr style="border-top:1px dotted #d1d1d1">
                                             <td style="width:140px;font-size:15px;padding:5px;">Tiêu chuẩn</td>
@@ -95,7 +95,11 @@
                                         <tr style="border-top:1px dotted #d1d1d1;">
                                             <td style="width:140px;font-size:15px;padding:5px;">Lịch trình</td>
                                             <td style="font-size:15px;padding:5px;">
-                                                <a href="#" style="color:rgba(0,123,255,1);text-decoration:none" target="_blank">#</a>
+                                                @php
+                                                    $tmp        = \App\Helpers\Url::buildFullLinkOne($item->tour->seo);
+                                                    $linkTour   = url($tmp->slug_full);
+                                                @endphp
+                                                <a href="{{ $linkTour }}" style="color:rgba(0,123,255,1);text-decoration:none" target="_blank">{{ $linkTour }}</a>
                                             </td>
                                         </tr>
                                         <tr style="border-top:1px dotted #d1d1d1">

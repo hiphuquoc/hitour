@@ -1,10 +1,5 @@
-@if(!empty($item->id))
-    <input type="hidden" name="tourLocation_id" value="{{ $item->id }}" />
-@endif
-@if(!empty($item->seo->id))
-    <input type="hidden" name="seo_id" value="{{ $item->seo->id }}" />
-@endif
-
+<input type="hidden" name="tour_location_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : null }}" />
+<input type="hidden" name="seo_id" value="{{ !empty($item->seo->id)&&$type!='copy' ? $item->seo->id : null }}" />
 <div class="formBox">
     <div class="formBox_full">
         <!-- One Row -->
@@ -94,6 +89,13 @@
                     @endforeach
                 @endif
             </select>
+        </div>
+        <!-- One Row -->
+        <div class="formBox_full_item">
+            <div class="form-check form-check-success">
+                <input type="checkbox" class="form-check-input" id="island" name="island" {{ !empty($item->island)&&($item->island==1) ? 'checked' : null }}>
+                <label class="form-check-label" for="island">Khu vực này được tính là biển đảo</label>
+            </div>
         </div>
     </div>
 </div>

@@ -1,11 +1,11 @@
 @extends('admin.layouts.main')
 @section('content')
     @php
-        $titlePage      = 'Thêm khu vực Tour mới';
+        $titlePage      = 'Thêm điểm đến Tour mới';
         $submit         = 'admin.tourLocation.create';
         $checkImage     = 'required';
         if(!empty($type)&&$type=='edit'){
-            $titlePage  = 'Chỉnh sửa khu vực Tour';
+            $titlePage  = 'Chỉnh sửa điểm đến Tour';
             $submit     = 'admin.tourLocation.update';
             $checkImage = null;
         }
@@ -18,13 +18,19 @@
             <div class="pageAdminWithRightSidebar_header">
                 {{ $titlePage }}
             </div>
-            <!-- START:: Error -->
+            <!-- Error -->
             @if ($errors->any())
                 <ul class="errorList">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
+            @endif
+            <!-- MESSAGE -->
+            @if(!empty($message))
+                <div class="js_message alert alert-{{ $message['type'] }}" style="display:inline-block;">
+                    <div class="alert-body">{!! $message['message'] !!}</div>
+                </div>
             @endif
             <!-- END:: Error -->
             <div class="pageAdminWithRightSidebar_main">

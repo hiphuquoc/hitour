@@ -10,18 +10,14 @@
 <!-- === START:: Body === -->
 <body>
     <!-- === START:: Header === -->
-    {{-- <div class="headerTop">
-        <div class="headerTop_phone"><i class="fa-solid fa-phone"></i>0388.189.089</div>
-        <div class="headerTop_text">Chuyến tàu Văn Học - Học văn không khó vì có Cô Ngọc Anh!</div>
-    </div> --}}
-    @include('main.snippets.menu')
+    @include('main.snippets.headerTop')
+    @include('main.snippets.headerMain')
     <!-- === END:: Header === -->
 
     <!-- === START:: Breadcrumb === -->
     {{-- @if(Route::current()->uri!=='/')
         @include('snippets.breadcrumb')
     @endif --}}
-    
     <!-- === END:: Breadcrumb === -->
 
     <!-- === START:: Content === -->
@@ -31,7 +27,7 @@
     </div>
 
     <!-- === START:: Footer === -->
-    {{-- @include('snippets.footer') --}}
+    @include('main.snippets.footer')
     <!-- === END:: Footer === -->
     
     <!-- === START:: Scripts Default === -->

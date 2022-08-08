@@ -4,7 +4,7 @@
 <div class="card-body">
 
     @if(!empty($item->id))
-        <input type="hidden" name="tourLocation_id" value="{{ $item->id }}" />
+        <input type="hidden" name="tour_location_id" value="{{ $item->id }}" />
     @endif
     @if(!empty($item->seo->id))
         <input type="hidden" name="seo_id" value="{{ $item->seo->id }}" />

@@ -8,5 +8,5 @@
 </div>
 
 @push('scripts-custom')
-    @include('admin.script.tiny', ['id' => 'content'])
+    {{-- @include('admin.script.tiny', ['id' => 'content']) --}}
 @endpush

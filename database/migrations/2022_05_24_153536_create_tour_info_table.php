@@ -16,14 +16,17 @@ class CreateTourInfoTable extends Migration
         Schema::create('tour_info', function (Blueprint $table) {
             $table->id();
             $table->integer('seo_id');         // [ref: > seo.id]
-            $table->integer('departure_id')->nullable();    /* tour khởi hành từ đâu */
+            $table->integer('tour_departure_id');    /* tour khởi hành từ đâu */
             $table->string('pick_up', 255)->nullable();
             $table->string('code', 20);
             $table->text('name');
             $table->integer('price_show');
             $table->integer('price_del')->nullable();
+            $table->string('departure_schedule', 100);
             $table->integer('days');
             $table->integer('nights');
+            $table->string('time_start', 100)->nullable();
+            $table->string('time_end', 100)->nullable();
             $table->boolean('status_show')->default(1);
             $table->boolean('status_sidebar')->default(1);
             $table->longText('content')->nullable();

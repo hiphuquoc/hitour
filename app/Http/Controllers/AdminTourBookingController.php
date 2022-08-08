@@ -19,7 +19,7 @@ use App\Models\VAT;
 
 use App\Services\BuildInsertUpdateModel;
 
-use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests\TourBookingRequest;
 use App\Models\CitizenIdentity;
@@ -72,7 +72,7 @@ class AdminTourBookingController extends Controller {
     public function viewExport($id){
         $item               = TourBooking::select('*')
                                 ->where('id', $id)
-                                ->with('tour', 'customer_contact', 'quantiesAndPrices', 'customer_list', 'costMoreLess', 'status.relationAction.action')
+                                ->with('tour.seo', 'customer_contact', 'quantiesAndPrices', 'customer_list', 'costMoreLess', 'status.relationAction.action')
                                 ->first();
         return view('admin.tourBooking.viewExport', compact('item'));
     }

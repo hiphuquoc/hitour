@@ -26,8 +26,10 @@ class TourRequest extends FormRequest
     public function rules()
     {
         return [
+            'tour_departure_id'         => 'integer|min:1',
             'price_show'                => 'min:0',
             'price_del'                 => 'min:0',
+            'departure_schedule'        => 'required',
             'days'                      => 'min:0',
             'nights'                    => 'min:0',
             'slug'                      => [
@@ -53,8 +55,10 @@ class TourRequest extends FormRequest
     public function messages()
     {
         return [
+            'tour_departure_id.min'     => 'Điểm khởi hành không được để trống!',
             'price_show.min'            => 'Giá hiển thị không được nhỏ hơn 0!',
             'price_del.min'             => 'Giá cũ không được nhỏ hơn 0!',
+            'departure_schedule.min'    => 'Thời gian khởi hành không được để trống!',
             'days.min'                  => 'Số ngày không được nhỏ hơn 0!',
             'nights.min'                => 'Số đêm không được nhỏ hơn 0!',
             'title.required'            => 'Tiêu đề trang không được để trống!',

@@ -22,6 +22,7 @@ class CreateTourLocationTable extends Migration
             $table->integer('district_id')->nullable();
             $table->integer('province_id');
             $table->integer('region_id');
+            $table->boolean('island')->default(0);
             $table->text('note')->nullable();
             $table->timestamps();
         });

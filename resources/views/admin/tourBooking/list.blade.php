@@ -81,7 +81,7 @@
                                     {{ $item->option->option }}
                                 </div>
                                 <div class="oneLine">
-                                    {{ date('d-m-Y', strtotime($item->departure_day)) }} - {{ date('d-m-Y', strtotime($item->departure_day)+(86400*($item->tour->days-1))) }}
+                                    {{ date('d/m/Y', strtotime($item->departure_day)) }} - {{ date('d/m/Y', strtotime($item->departure_day)+(86400*($item->tour->days-1))) }}
                                 </div>
                             </td>
                             <td>
@@ -138,7 +138,7 @@
                                 </div>
                             </td>
                             <td style="text-align:center;vertical-align:middle;">
-                                <div>{{ date('H:i d-m-Y', strtotime($item->created_at)) }}</div>
+                                <div>{{ date('H:i d/m/Y', strtotime($item->created_at)) }}</div>
                                 <div class="badge" style="font-size:0.95rem;background:{{ $item->status->color }}">{{ $item->status->name }}</div>
                             </td>
                             <td style="vertical-align:top;display:flex;">

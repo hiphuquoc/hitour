@@ -11,13 +11,16 @@ class Tour extends Model {
     protected $table        = 'tour_info';
     protected $fillable     = [
         'seo_id', 
-        'departure_id',
+        'tour_departure_id',
         'code',
         'name', 
         'price_show',
         'price_del',
+        'departure_schedule',
         'days',
         'nights',
+        'time_start',
+        'time_end',
         'pick_up',
         'status_show',
         'status_sidebar'
@@ -49,7 +52,9 @@ class Tour extends Model {
                                 $q->where('staff_info_id', $params['search_staff']);
                             });
                         })
-                        ->with('seo', 'files', 'locations.infoLocation', 'staffs.infoStaff', 'partners.infoPartner')
+                        ->with(['files' => function($query){
+                            $query->where('relation_table', 'tour_info');
+                        }], 'seo', 'locations.infoLocation', 'departure', 'staffs.infoStaff', 'partners.infoPartner')
                         ->paginate($paginate);
         return $result;
     }
@@ -108,6 +113,10 @@ class Tour extends Model {
 
     public function locations(){
         return $this->hasMany(\App\Models\RelationTourLocation::class, 'tour_info_id', 'id');
+    }
+
+    public function departure(){
+        return $this->hasOne(\App\Models\TourDeparture::class, 'id', 'tour_departure_id');
     }
 
     public function staffs(){

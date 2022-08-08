@@ -1,0 +1,137 @@
+$color-title            : #345;
+$color-primary          : rgb(0, 123, 255);
+$color-primary-hover    : rgb(0, 90, 180);
+$color-primary-01       : rgba(0, 123, 255, 0.1);
+$color-primary-02       : rgba(0, 123, 255, 0.2);
+$color-primary-03       : rgba(0, 123, 255, 0.3);
+$color-primary-04       : rgba(0, 123, 255, 0.4);
+$color-primary-05       : rgba(0, 123, 255, 0.5);
+$color-primary-06       : rgba(0, 123, 255, 0.6);
+$color-primary-07       : rgba(0, 123, 255, 0.7);
+$color-primary-08       : rgba(0, 123, 255, 0.8);
+$color-primary-09       : rgba(0, 123, 255, 0.9);
+$color-primary-light    : rgb(23, 115, 206);
+
+$color-secondary        : rgb(244, 208, 63);
+$color-secondary-01     : rgba(244, 208, 63, 0.1);
+$color-secondary-02     : rgba(244, 208, 63, 0.2);
+$color-secondary-03     : rgba(244, 208, 63, 0.3);
+$color-secondary-04     : rgba(244, 208, 63, 0.4);
+$color-secondary-05     : rgba(244, 208, 63, 0.5);
+$color-secondary-06     : rgba(244, 208, 63, 0.6);
+$color-secondary-07     : rgba(244, 208, 63, 0.7);
+$color-secondary-08     : rgba(244, 208, 63, 0.8);
+$color-secondary-09     : rgba(244, 208, 63, 0.9);
+$color-secondary-hover  : rgb(241, 196, 15);
+$color-price: #fd5056;
+$color-red: #E74C3C;
+
+$bg-1: 			#212529;
+$bg-09: 		#343a40;
+$bg-08: 		#495057;
+$bg-07: 		#6c757d;
+$bg-06: 		#adb5bd;
+$bg-05: 		#ced4da;
+$bg-04: 		#dee2e6;
+$bg-03: 		#e9ecef;
+$bg-02: 		#f8f9fa;
+$color-link: #3498DB;
+$color-link-dark: #2E86C1;
+$color-des : #567;
+$color-text: #456;
+
+$font-primary-title: "Roboto Slab", serif;
+$font-primary-text: "Roboto", sans-serif;
+
+$background-image: '/images/main/hitour-background.png';
+
+@mixin titleOfBox {
+    font-family: $font-primary-title;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+@mixin slickSliderMain {
+    &:hover {
+        .slick-prev, .slick-next {
+            display: block;
+        }
+    }
+    .slick-prev, .slick-next {
+        display: none;
+        background: #fff;
+        position: absolute;
+        padding: 0.5rem !important;
+        top: 50% !important;
+        bottom: unset !important;
+        transform: translateY(-50%);
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        z-index: 100;
+        font-size: 1.2rem;
+        // @media (min-width: 768px) and (max-width: 1023px){
+        //     padding: 13px !important;
+        // }
+        // @media (max-width: 767px){
+        //     padding: 11px !important;
+        // }
+    }
+    .slick-prev {
+        left: 0 !important;
+        right: unset !important;
+    }
+    .slick-next {
+        left: unset !important;
+        right: 0 !important;
+    }
+    .slick-dots {
+        position: absolute;
+        bottom: 0.75rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        li {
+            list-style-type: none;
+            cursor: pointer;
+            button {
+                padding: 0;
+                height: 6px;
+                width: 35px;
+                background: $color-primary-03;
+                border: none !important;
+                box-shadow: none !important;
+                &::selection {
+                    border: none !important;
+                    outline: none !important;
+                }
+            }
+            &:not(:first-child){
+                margin-left: 0.5rem;
+            }
+        }
+        .slick-active {
+            button {
+                background: $color-primary;
+            }
+        }
+        // @media (max-width: 1023px){
+        //     bottom: 0.25rem !important;
+        //     button {
+        //         width: 55px !important;
+        //         height: 3px !important;
+        //     }
+        // }
+        // @media (max-width: 1023px){
+        //     button {
+        //         width: 50px !important;
+        //     }
+        // }
+    }
+}
+
+@mixin fontAwesome {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+}

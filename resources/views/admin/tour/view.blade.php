@@ -162,7 +162,7 @@
 @endsection
 @push('scripts-custom')
     <script type="text/javascript">
-        $(document).ready(function(){   
+        $(document).ready(function(){
             loadOptionPrice('js_loadOptionPrice');
             closeMessage();
         })

@@ -7,7 +7,7 @@ use App\Models\Seo;
 use Illuminate\Support\Facades\Auth;
 
 class BuildInsertUpdateModel {
-    public static function buildArrayTableSeo($dataForm, $dataImage = null){
+    public static function buildArrayTableSeo($dataForm, $type, $dataImage = null){
         /* update page_info
             + title
             + description
@@ -35,7 +35,7 @@ class BuildInsertUpdateModel {
             $pageLevel                          = 1;
             $pageParent                         = 0;
             if(!empty($dataForm['parent'])){
-                $infoPageParent                 = TourLocation::find($dataForm['parent'])->pages;
+                $infoPageParent                 = Seo::find($dataForm['parent']);
                 $pageLevel                      = !empty($infoPageParent->level) ? ($infoPageParent->level+1) : $pageLevel;
                 $pageParent                     = $infoPageParent->id;
             }
@@ -46,6 +46,7 @@ class BuildInsertUpdateModel {
             $result['seo_title']                = $dataForm['seo_title'] ?? $dataForm['title'] ?? null;
             $result['seo_description']          = $dataForm['seo_description'] ?? $dataForm['description'] ?? null;
             $result['slug']                     = $dataForm['slug'];
+            $result['type']                     = $type;
             $result['rating_author_name']       = 1;
             $result['rating_author_star']       = 5;
             $result['rating_aggregate_count']   = $dataForm['rating_aggregate_count'] ?? 0;
@@ -70,37 +71,62 @@ class BuildInsertUpdateModel {
             $result['content']              = $dataForm['content'] ?? null;
             if(!empty($pageId)) $result['seo_id'] = $pageId;
             $result['region_id']            = $dataForm['region'];
+            $result['island']               = !empty($dataForm['island']) ? 1 : 0;
             $result['province_id']          = $dataForm['province'];
             $result['district_id']          = $dataForm['district'] ?? null;
         }
         return $result;
     }
 
+    public static function buildArrayTableTourDeparture($dataForm, $pageId = null){
+        /* upload tour_departure
+            + name
+            + seo_id
+            + region_id
+            + province_id
+            + district_id
+        */
+        $result                             = [];
+        if(!empty($dataForm)){
+            $result['name']                 = $dataForm['title'] ?? null;
+            $result['description']          = $dataForm['description'] ?? null;
+            $result['content']              = $dataForm['content'] ?? null;
+            if(!empty($pageId)) $result['seo_id'] = $pageId;
+            $result['region_id']            = $dataForm['region'];
+        }
+        return $result;
+    }
+
     public static function buildArrayTableTourInfo($dataForm, $seoId = null){
         /* 
-            seo_id
-            departure_id
-            staff_id
+            tour_departure_id
             code
             name
             price_show
             price_del
+            departure_schedule
             days
             nights
+            time_start
+            time_end
             pick_up
             status_show
             status_sidebar
+            content
         */
         $result     = [];
         if(!empty($dataForm)){
             if(!empty($seoId)) $result['seo_id'] = $seoId;
-            $result['departure_id']         = $dataForm['departure_id'] ?? null;
+            $result['tour_departure_id']    = $dataForm['tour_departure_id'] ?? null;
             $result['code']                 = $dataForm['code'] ?? null;
             $result['name']                 = $dataForm['title'] ?? null;
             $result['price_show']           = $dataForm['price_show'] ?? 0;
             $result['price_del']            = $dataForm['price_del'] ?? 0;
+            $result['departure_schedule']   = $dataForm['departure_schedule'];
             $result['days']                 = $dataForm['days'] ?? 0;
             $result['nights']               = $dataForm['nights'] ?? 0;
+            $result['time_start']           = $dataForm['time_start'] ?? null;
+            $result['time_end']             = $dataForm['time_end'] ?? null;
             $result['pick_up']              = $dataForm['pick_up'] ?? null;
             $result['status_show']          = !empty($dataForm['status_show']) ? 1 : 0;
             $result['status_sidebar']       = !empty($dataForm['status_sidebar']) ? 1 : 0;

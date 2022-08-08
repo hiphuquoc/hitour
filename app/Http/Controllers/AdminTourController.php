@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\AdminGalleryController;
 
 use App\Models\TourLocation;
+use App\Models\TourDeparture;
 use App\Models\Tour;
 use App\Models\RelationTourLocation;
 use App\Models\RelationTourStaff;
@@ -19,6 +20,9 @@ use App\Models\TourPrice;
 use App\Models\TourOption;
 use App\Models\Seo;
 use App\Services\BuildInsertUpdateModel;
+
+use Illuminate\Support\Facades\Storage;
+
 
 use Illuminate\Support\Facades\DB;
 
@@ -56,25 +60,31 @@ class AdminTourController extends Controller {
         if(!empty($id)){
             $item           = Tour::select('*')
                                     ->where('id', $id)
-                                    ->with('seo', 'files')
+                                    ->with(['files' => function($query){
+                                        $query->where('relation_table', 'tour_info');
+                                    }], 'seo')
                                     ->first();
             $tourLocations  = TourLocation::all();
+            $tourDepartures = TourDeparture::all();
             $staffs         = Staff::all();
             $partners       = Partner::all();
+            $allPage        = Seo::all();
             $message        = $request->get('message') ?? null; 
             $type           = 'edit';
             if(!empty($request->get('type'))) $type = $request->get('type');
-            if(!empty($item)) return view('admin.tour.view', compact('tourLocations', 'item', 'type', 'staffs', 'partners', 'message'));
+            if(!empty($item)) return view('admin.tour.view', compact('item', 'type', 'tourLocations', 'tourDepartures', 'staffs', 'partners', 'allPage', 'message'));
         }
         return redirect()->route('admin.tour.list');
     }
 
     public function viewInsert(Request $request){
         $tourLocations      = TourLocation::all();
+        $tourDepartures     = TourDeparture::all();
         $staffs             = Staff::all();
         $partners           = Partner::all();
+        $allPage            = Seo::all();
         $type               = 'create';
-        return view('admin.tour.view', compact('type', 'tourLocations', 'staffs', 'partners'));
+        return view('admin.tour.view', compact('type', 'tourLocations', 'tourDepartures', 'staffs', 'partners', 'allPage'));
     }
 
     public function create(TourRequest $request){
@@ -85,11 +95,13 @@ class AdminTourController extends Controller {
             $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
         }
         /* insert page */
-        $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $dataPath);
+        $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'tour_info', $dataPath);
         $pageId             = Seo::insertItem($insertPage);
         /* insert tour_info */
         $insertTourInfo     = $this->BuildInsertUpdateModel->buildArrayTableTourInfo($request->all(), $pageId);
         $idTour             = Tour::insertItem($insertTourInfo);
+        /* lưu content vào file */
+        file_put_contents('/views/main/tour/data/test.php', $request->get('content'));
         /* insert slider và lưu CSDL */
         if($request->hasFile('slider')&&!empty($idTour)){
             $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
@@ -162,11 +174,13 @@ class AdminTourController extends Controller {
                 $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
             };
             /* update page */
-            $updatePage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $dataPath);
+            $updatePage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'tour_info', $dataPath);
             Seo::updateItem($request->get('seo_id'), $updatePage);
             /* update tour_info */
             $updateTourInfo     = $this->BuildInsertUpdateModel->buildArrayTableTourInfo($request->all());
             Tour::updateItem($idTour, $updateTourInfo);
+            /* lưu content vào file */
+            Storage::put('/public/contents/tours/'.$request->get('slug').'.html', $request->get('content'));
             /* update slider và lưu CSDL */
             if($request->hasFile('slider')&&!empty($idTour)){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();

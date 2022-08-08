@@ -9,14 +9,7 @@ class Region extends Model {
     use HasFactory;
     protected $table        = 'region_info';
 
-    // public static function getItemByIdProvince($idProvince){
-    //     $result         = [];
-    //     if(!empty($idProvince)){
-    //         $result     = District::select('id', 'district_name as name', 'district_type as type', 'district_name_with_type as name_with_type')
-    //                                 ->where('province_id', $idProvince)
-    //                                 ->get()
-    //                                 ->toArray();
-    //     }
-    //     return $result;
-    // }
+    public function tourLocations(){
+        return $this->hasMany(\App\Models\TourLocation::class, 'region_id', 'id');
+    }
 }

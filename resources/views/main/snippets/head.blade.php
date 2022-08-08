@@ -6,7 +6,7 @@
 <title>Trang chủ Hitour.vn</title>
 
 <!-- BEGIN: Custom CSS-->
-<link rel="stylesheet" type="text/css" href="{{ asset('css/admin/style.css?'.time()) }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('sources/main/css/style.css?'.time()) }}">
 <!-- END: Custom CSS-->
 
 <!-- BEGIN: FONT AWESOME -->
@@ -16,7 +16,7 @@
 <!-- BEGIN: Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700;800;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <!-- END: Fonts -->
 
 <!-- BEGIN: SLICK -->

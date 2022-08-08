@@ -135,52 +135,45 @@ return [
     'left-menu-admin'   => [
         [
             'name'      => 'Quản lí Tour',
-            'route'     => 'admin.tourLocation.list',
+            'route'     => '',
             'icon'      => '<i data-feather=\'feather\'></i>',
             'child'     => [
                 [
-                    'name'  => '1. Khu vực Tour',
+                    'name'  => '1. Điểm đến',
                     'route' => 'admin.tourLocation.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '2. Chi tiết Tour',
+                    'name'  => '2. Điểm khởi hành',
+                    'route' => 'admin.tourDeparture.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '3. Chi tiết Tour',
                     'route' => 'admin.tour.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '3. Đối tác Tour',
+                    'name'  => '4. Đối tác Tour',
                     'route' => 'admin.partner.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '4. Nhân viên tư vấn',
+                    'name'  => '5. Nhân viên tư vấn',
                     'route' => 'admin.staff.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '5. Booking Tour',
+                    'name'  => '6. Booking Tour',
                     'route' => 'admin.tourBooking.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ]
             ]
         ],
-        // [
-        //     'name'      => 'Quản lí chuyên mục',
-        //     'route'     => 'admin.category.list',
-        //     'icon'      => '<i data-feather=\'bookmark\'></i>',
-        //     'child'     => [
-        //         [
-        //             'name'  => '1. Danh sách',
-        //             'route' => 'admin.category.list',
-        //             'icon'  => '<i data-feather=\'circle\'></i>'
-        //         ],
-        //         [
-        //             'name'  => '2. Thêm mới',
-        //             'route' => 'admin.category.viewInsert',
-        //             'icon'  => '<i data-feather=\'circle\'></i>'
-        //         ]
-        //     ]
-        // ]
+        [
+            'name'      => 'Quản lí Ảnh',
+            'route'     => 'admin.image.list',
+            'icon'      => '<i data-feather=\'bookmark\'></i>'
+        ]
     ]
 ];

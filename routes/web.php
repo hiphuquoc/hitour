@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\LoginController;
 
 use App\Http\Controllers\AdminTourLocationController;
+use App\Http\Controllers\AdminTourDepartureController;
 use App\Http\Controllers\AdminTourController;
 use App\Http\Controllers\AdminTourBookingController;
 use App\Http\Controllers\AdminTourOptionController;
@@ -12,11 +13,14 @@ use App\Http\Controllers\AdminStaffController;
 use App\Http\Controllers\AdminPartnerController;
 use App\Http\Controllers\AdminPartnerContactController;
 use App\Http\Controllers\AdminCostController;
-
+use App\Http\Controllers\AdminImageController;
 
 use App\Http\Controllers\AdminFormController;
 use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\AdminGalleryController;
+
+use App\Http\Controllers\MainHomeController;
+use App\Http\Controllers\RoutingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,10 +32,6 @@ use App\Http\Controllers\AdminGalleryController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::prefix('admin')->group(function(){
     Route::get('/', [LoginController::class, 'showLoginForm'])->name('admin.showLoginForm');
@@ -48,6 +48,16 @@ Route::prefix('admin')->group(function(){
             Route::post('/update', [AdminTourLocationController::class, 'update'])->name('admin.tourLocation.update');
             /* Delete AJAX */
             Route::get('/delete', [AdminTourLocationController::class, 'delete'])->name('admin.tourLocation.delete');
+        });
+        /* ===== TOUR DEPARTURE ===== */
+        Route::prefix('tourDeparture')->group(function(){
+            Route::get('/', [AdminTourDepartureController::class, 'list'])->name('admin.tourDeparture.list');
+            Route::get('/viewInsert', [AdminTourDepartureController::class, 'viewInsert'])->name('admin.tourDeparture.viewInsert');
+            Route::post('/create', [AdminTourDepartureController::class, 'create'])->name('admin.tourDeparture.create');
+            Route::get('/{id}/viewEdit', [AdminTourDepartureController::class, 'viewEdit'])->name('admin.tourDeparture.viewEdit');
+            Route::post('/update', [AdminTourDepartureController::class, 'update'])->name('admin.tourDeparture.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminTourDepartureController::class, 'delete'])->name('admin.tourDeparture.delete');
         });
         /* ===== TOUR ===== */
         Route::prefix('tour')->group(function(){
@@ -116,6 +126,16 @@ Route::prefix('admin')->group(function(){
             Route::post('/update', [AdminCostController::class, 'update'])->name('admin.cost.update');
             Route::post('/delete', [AdminCostController::class, 'delete'])->name('admin.cost.delete');
         });
+        /* ===== IMAGE ===== */
+        Route::prefix('image')->group(function(){
+            Route::get('/', [AdminImageController::class, 'list'])->name('admin.image.list');
+            Route::post('/uploadImages', [AdminImageController::class, 'uploadImages'])->name('admin.image.uploadImages');
+            Route::post('/loadImage', [AdminImageController::class, 'loadImage'])->name('admin.image.loadImage');
+            Route::post('/loadModal', [AdminImageController::class, 'loadModal'])->name('admin.image.loadModal');
+            Route::post('/changeName', [AdminImageController::class, 'changeName'])->name('admin.image.changeName');
+            Route::post('/changeImage', [AdminImageController::class, 'changeImage'])->name('admin.image.changeImage');
+            Route::post('/removeImage', [AdminImageController::class, 'removeImage'])->name('admin.image.removeImage');
+        });
         /* ===== AJAX ===== */
         Route::post('/loadProvinceByRegion', [AdminFormController::class, 'loadProvinceByRegion'])->name('admin.form.loadProvinceByRegion');
         Route::post('/loadDistrictByProvince', [AdminFormController::class, 'loadDistrictByProvince'])->name('admin.form.loadDistrictByProvince');
@@ -123,3 +143,6 @@ Route::prefix('admin')->group(function(){
         Route::get('/removeGallery', [AdminGalleryController::class, 'removeGallery'])->name('admin.gallery.removeGallery');
     });
 });
+
+Route::get('/', [MainHomeController::class, 'home'])->name('main.home');
+Route::get("/{slug}/{slug2?}/{slug3?}/{slug4?}/{slug5?}", [RoutingController::class, 'routing'])->name('routing');

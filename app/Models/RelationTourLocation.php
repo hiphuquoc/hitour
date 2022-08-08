@@ -50,4 +50,8 @@ class RelationTourLocation extends Model {
     public function infoLocation(){
         return $this->hasOne(\App\Models\TourLocation::class, 'id', 'tour_location_id');
     }
+
+    public function infoTour(){
+        return $this->hasOne(\App\Models\Tour::class, 'id', 'tour_info_id');
+    }
 }

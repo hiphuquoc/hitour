@@ -26,6 +26,7 @@ class CreateSeoTable extends Migration
             $table->text('seo_title')->nullable();
             $table->text('seo_description')->nullable();
             $table->text('slug');
+            $table->string('type', '100');
             $table->string('rating_author_name', 1)->nullable();
             $table->string('rating_author_star', 6)->default(5);
             $table->integer('rating_aggregate_count')->nullable();
