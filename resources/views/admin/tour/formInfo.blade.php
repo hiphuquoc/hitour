@@ -2,121 +2,232 @@
     <div class="formBox_full">
         <!-- One Row -->
         <div class="formBox_full_item">
-            <label class="form-label inputRequired" for="code">Mã Tour</label>
-            <input type="text" class="form-control" id="code" name="code" value="{{ old('code') ?? $item->code ?? '' }}" required>
-            <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
-        </div>
-        <!-- One Row -->
-        <div class="formBox_full_item">
-            <span data-toggle="tooltip" data-placement="top" title="
-                Nhập ngắn gọn điểm đón cụ thể (ví dụ: cảng tàu /sân bay, khách sạn,...)
-            ">
-                <i class="explainInput" data-feather='alert-circle'></i>
-                <label class="form-label inputRequired" for="pick_up">Điểm đón</label>
-            </span>
-            <input type="text" id="pick_up" class="form-control" name="pick_up" value="{{ old('pick_up') ?? $item->pick_up ?? '' }}" required>
-            <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
-        </div>
-        <!-- One Row -->
-        <div class="formBox_full_item">
-            <span data-toggle="tooltip" data-placement="top" title="
-                ví dụ: Khởi hành mỗi ngày, Khởi hành ngày lẻ,...
-            ">
-                <i class="explainInput" data-feather='alert-circle'></i>
-                <label class="form-label inputRequired" for="departure_schedule">Thời gian khởi hành</label>
-            </span>
-            <input type="text" id="departure_schedule" class="form-control" name="departure_schedule" value="{{ old('departure_schedule') ?? $item->departure_schedule ?? '' }}" required>
-            <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
-        </div>
-        <!-- One Row -->
-        <div class="formBox_full_item">
-            <div class="flexBox">
-                <div class="flexBox_item">
-                    <span data-toggle="tooltip" data-placement="top" title="
-                        Nhập số ngày của Tour. Nhập 0 nếu là Tour trong ngày
-                    ">
-                        <i class="explainInput" data-feather='alert-circle'></i>
-                        <label class="form-label inputRequired" for="days">Số ngày</label>
-                    </span>
-                    <input type="number" min="0" id="days" class="form-control" name="days" value="{{ old('days') ?? $item->days ?? 0 }}" required>
-                    <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
-                </div>
-                <div class="flexBox_item" style="margin-left:1rem;">
-                    <span data-toggle="tooltip" data-placement="top" title="
-                        Nhập số đêm của Tour. Nhập 0 nếu là Tour trong ngày
-                    ">
-                        <i class="explainInput" data-feather='alert-circle'></i>
-                        <label class="form-label inputRequired" for="nights">Số đêm</label>
-                    </span>
-                    <input type="number" min="0" id="nights" class="form-control" name="nights" value="{{ old('nights') ?? $item->nights ?? 0 }}" required>
-                    <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
-                </div>
+            <div class="flexBox" style="justify-content:space-between;">
+                <label class="form-label inputRequired" for="special_content">Điểm nổi bật Tour (dạng giới thiệu)</label>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalSpecialContent">Lấy mẫu</a>
             </div>
+            <textarea class="form-control" id="special_content"  name="special_content" rows="5" required>{{ old('special_content') ?? $item->content->special_content ?? '' }}</textarea>
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
-            <div class="flexBox">
-                <div class="flexBox_item">
-                    <span data-toggle="tooltip" data-placement="top" title="
-                        Dùng cho Tour trong ngày
-                    ">
-                        <i class="explainInput" data-feather='alert-circle'></i>
-                        <label class="form-label" for="time_start">Thời gian bắt đầu</label>
-                    </span>
-                    <input type="text" id="time_start" name="time_start" class="form-control flatpickr-time text-start flatpickr-input active" placeholder="HH:MM" value="{{ old('time_start') ?? $item->time_start ?? null }}" readonly="readonly">
-                </div>
-                <div class="flexBox_item" style="margin-left:1rem;">
-                    <span data-toggle="tooltip" data-placement="top" title="
-                        Dùng cho Tour trong ngày
-                    ">
-                        <i class="explainInput" data-feather='alert-circle'></i>
-                        <label class="form-label" for="time_end">Thời gian kết thúc</label>
-                    </span>
-                    <input type="text" id="time_end" name="time_end" class="form-control flatpickr-time text-start flatpickr-input active" placeholder="HH:MM" value="{{ old('time_end') ?? $item->time_end ?? null }}" readonly="readonly">
-                </div>
+            <div class="flexBox" style="justify-content:space-between;">
+                <label class="form-label inputRequired" for="special_list">Điểm nổi bật Tour (dạng danh sách)</label>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalSpecialList">Lấy mẫu</a>
             </div>
+            <textarea class="form-control" id="special_list"  name="special_list" rows="5" required>{{ old('special_list') ?? $item->content->special_list ?? '' }}</textarea>
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
-            <div class="flexBox">
-                <div class="flexBox_item">
-                    <span data-toggle="tooltip" data-placement="top" title="
-                        Giá này sẽ được hiển thị đại diện cho chương trình Tour
-                    ">
-                        <i class="explainInput" data-feather='alert-circle'></i>
-                        <label class="form-label inputRequired" for="price_show">Giá đại diện</label>
-                    </span>
-                    <input type="number" min="0" id="price_show" class="form-control" name="price_show" value="{{ old('price_show') ?? $item->price_show ?? 0 }}" required>
-                    <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
-                </div>
-                <div class="flexBox_item" style="margin-left:1rem;">
-                    <span data-toggle="tooltip" data-placement="top" title="
-                        Giá này là giá cũ được hiển thị kiểu gạch bỏ
-                    ">
-                        <i class="explainInput" data-feather='alert-circle'></i>
-                        <label class="form-label" for="price_del">Giá cũ</label>
-                    </span>
-                    <input type="number" min="0" id="price_del" class="form-control" name="price_del" value="{{ old('price_del') ?? $item->price_del ?? 0 }}">
-                    <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
-                </div>
+            <div class="flexBox" style="justify-content:space-between;">
+                <label class="form-label inputRequired" for="include">Tour bao gồm</label>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalInclude">Lấy mẫu</a>
             </div>
+            <textarea class="form-control" id="include"  name="include" rows="5" required>{{ old('include') ?? $item->content->include ?? '' }}</textarea>
         </div>
-        @php
-            // dd($item);
-        @endphp
         <!-- One Row -->
         <div class="formBox_full_item">
-            <div class="form-check form-check-success">
-                <input type="checkbox" class="form-check-input" id="status_show" name="status_show" {{ !empty($item->status_show)&&($item->status_show==1) ? 'checked' : null }}>
-                <label class="form-check-label" for="status_show">Cho phép hiển thị trong danh sách của khu vực Tour</label>
+            <div class="flexBox" style="justify-content:space-between;">
+                <label class="form-label inputRequired" for="not_include">Tour chưa bao gồm</label>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalNoInclude">Lấy mẫu</a>
             </div>
+            <textarea class="form-control" id="not_include"  name="not_include" rows="5" required>{{ old('not_include') ?? $item->content->not_include ?? '' }}</textarea>
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
-            <div class="form-check form-check-success">
-                <input type="checkbox" class="form-check-input" id="status_sidebar" name="status_sidebar" {{ !empty($item->status_sidebar)&&($item->status_sidebar==1) ? 'checked' : null }}>
-                <label class="form-check-label" for="status_sidebar">Cho phép hiển thị trong sidebar</label>
+            <div class="flexBox" style="justify-content:space-between;">
+                <label class="form-label inputRequired" for="policy_child">Chính sách trẻ em</label>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalPolicyChild">Lấy mẫu</a>
+            </div>
+            <textarea class="form-control" id="policy_child"  name="policy_child" rows="5" required>{{ old('policy_child') ?? $item->content->policy_child ?? '' }}</textarea>
+        </div>
+        <!-- One Row -->
+        <div class="formBox_full_item">
+            <div class="flexBox" style="justify-content:space-between;">
+                <label class="form-label" for="menu">Thực đơn</label>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalMenu">Lấy mẫu</a>
+            </div>
+            <textarea class="form-control" id="menu"  name="menu" rows="5">{{ old('menu') ?? $item->content->menu ?? '' }}</textarea>
+        </div>
+        <!-- One Row -->
+        <div class="formBox_full_item">
+            <div class="flexBox" style="justify-content:space-between;">
+                <label class="form-label" for="hotel">Khách sạn</label>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalHotel">Lấy mẫu</a>
+            </div>
+            <textarea class="form-control" id="hotel"  name="hotel" rows="5">{{ old('hotel') ?? $item->content->hotel ?? '' }}</textarea>
+        </div>
+        <!-- One Row -->
+        <div class="formBox_full_item">
+            <div class="flexBox" style="justify-content:space-between;">
+                <label class="form-label" for="policy_cancel">Chính sách hủy Tour</label>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalPolicyCancel">Lấy mẫu</a>
+            </div>
+            <textarea class="form-control" id="policy_cancel"  name="policy_cancel" rows="5">{{ old('policy_cancel') ?? $item->content->policy_cancel ?? '' }}</textarea>
+        </div>
+    </div>
+</div>
+
+<!-- ===== START:: Modal Điểm nổi bật tour giới thiệu ===== -->
+<div class="modal fade" id="modalSpecialContent" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div id="js_loadFormOption_body" class="modal-body">
+
+                <textarea class="exampleContentBox" rows="1">
+                    <p>Nội dung</p>
+                </textarea>
+
             </div>
         </div>
     </div>
 </div>
+<!-- ===== END:: Modal Điểm nổi bật tour giới thiệu ===== -->
+
+<!-- ===== START:: Modal Điểm nổi bật tour danh sách ===== -->
+<div class="modal fade" id="modalSpecialList" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div id="js_loadFormOption_body" class="modal-body">
+                <textarea class="exampleContentBox" rows="5">
+                    <ul>
+                        <li>Điểm nổi bật 1</li>
+                        <li>Điểm nổi bật 2</li>
+                        <li>Điểm nổi bật 3</li>
+                    </ul>
+                </textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ===== END:: Modal Điểm nổi bật tour danh sách ===== -->
+
+<!-- ===== START:: Modal Tour bao gồm ===== -->
+<div class="modal fade" id="modalInclude" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div id="js_loadFormOption_body" class="modal-body">
+                <textarea class="exampleContentBox" rows="7">
+                    <p>Phương tiện: Xe du lịch đời mới 16 chỗ,...</p>
+                    <ul>
+                        <li>Xe 16 chỗ: Ford Transit,...</li>
+                        <li>Xe 29 chỗ: Samco, Thaco,...</li>
+                        <li>Xe 45 chỗ: Universe,...</li>
+                    </ul>
+                    <p>Tàu câu cá, phao cứu hộ,...</p>
+                </textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ===== END:: Modal Tour bao gồm ===== -->
+
+<!-- ===== START:: Modal Tour chưa bao gồm ===== -->
+<div class="modal fade" id="modalNoInclude" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div id="js_loadFormOption_body" class="modal-body">
+                <textarea class="exampleContentBox" rows="7">
+                    <p>Vé máy bay hoặc Vé tàu cao...</p>
+                    <p>Vé Vinwonders Phú Quốc</p>
+                    <ul>
+                        <li>Khách hàng ... 880,000<sup>đ</sup></li>
+                        <li>Khách hàng ... 660,000<sup>đ</sup></li>
+                        <li>Khách hàng ... Miễn phí</li>
+                    </ul>
+                </textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ===== END:: Modal Tour chưa bao gồm ===== -->
+
+<!-- ===== START:: Modal chính sách trẻ em ===== -->
+<div class="modal fade" id="modalPolicyChild" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div id="js_loadFormOption_body" class="modal-body">
+                <textarea class="exampleContentBox" rows="6">
+                    <ul>
+                        <li>Trẻ em dưới 04 tuổi: ...</li>
+                        <li>Trẻ em từ 05 – 09 tuổi: ...</li>
+                        <li>Trẻ em từ 10 tuổi trở lên: ...</li>
+                    </ul>
+                    <p>Ghi chú: Khách đi tour kèm 2 trẻ em ...</p>
+                </textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ===== END:: Modal chính sách trẻ em ===== -->
+
+<!-- ===== START:: Modal thực đơn ===== -->
+<div class="modal fade" id="modalMenu" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div id="js_loadFormOption_body" class="modal-body">
+                <textarea class="exampleContentBox" rows="18">
+                    <div class="menuTour_item">
+                        <div class="menuTour_item_title">
+                            <div class="menuTour_item_mainTitle">
+                                Thực đơn 1 (150,000<sup>đ</sup>)
+                            </div>
+                            <div class="menuTour_item_subTitle">
+                                Nhà hàng Trùng Dương
+                            </div>
+                        </div>
+                        <div class="menuTour_item_content">
+                            <ul>
+                                <li>Gỏi cá trích</li>
+                                <li>Mực chiên mắm</li>
+                                <li>Hải sản xào thập cẩm</li>
+                                <li>...</li>
+                            </ul>
+                        </div>
+                    </div>
+                </textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ===== END:: Modal thực đơn ===== -->
+
+<!-- ===== START:: Modal khách sạn ===== -->
+<div class="modal fade" id="modalHotel" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div id="js_loadFormOption_body" class="modal-body">
+                <textarea class="exampleContentBox" rows="10">
+                    <div class="hotelTour_item">
+                        <div class="hotelTour_item_title">
+                            <h3>Thiên Thanh (Resort 5*)</h3>
+                        </div>
+                        <div class="hotelTour_item_image">
+                            <img src="" alt="" title="">
+                            <img src="" alt="" title="">
+                            <img src="" alt="" title="">
+                        </div>
+                    </div>
+                </textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ===== END:: Modal khách sạn ===== -->
+
+<!-- ===== START:: Modal chính sách hủy tour ===== -->
+<div class="modal fade" id="modalPolicyCancel" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div id="js_loadFormOption_body" class="modal-body">
+                <textarea class="exampleContentBox" rows="5">
+                    <ul>
+                        <li>Trong vòng 05 (năm) ngày: ...</li>
+                        <li>Trong vòng 03 (ba) ngày: ...</li>
+                        <li>Trong vòng 24 giờ trước ngày: ...</li>
+                    </ul>
+                </textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ===== END:: Modal chính sách hủy tour ===== -->

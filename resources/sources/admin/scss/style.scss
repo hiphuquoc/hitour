@@ -634,6 +634,15 @@ html .content {
     }
 }
 
+.exampleContentBox {
+    border: none;
+    outline: none;
+    width: 100%;
+    background:#f1f1f1;
+    resize: none;
+    overflow: hidden;
+    padding: 1rem;
+}
 /* ===== START: Image */
 .imageBox {
     display: flex;

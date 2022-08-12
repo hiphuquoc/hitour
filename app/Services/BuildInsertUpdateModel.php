@@ -68,7 +68,6 @@ class BuildInsertUpdateModel {
         if(!empty($dataForm)){
             $result['name']                 = $dataForm['title'] ?? null;
             $result['description']          = $dataForm['description'] ?? null;
-            $result['content']              = $dataForm['content'] ?? null;
             if(!empty($pageId)) $result['seo_id'] = $pageId;
             $result['region_id']            = $dataForm['region'];
             $result['island']               = !empty($dataForm['island']) ? 1 : 0;
@@ -90,7 +89,6 @@ class BuildInsertUpdateModel {
         if(!empty($dataForm)){
             $result['name']                 = $dataForm['title'] ?? null;
             $result['description']          = $dataForm['description'] ?? null;
-            $result['content']              = $dataForm['content'] ?? null;
             if(!empty($pageId)) $result['seo_id'] = $pageId;
             $result['region_id']            = $dataForm['region'];
         }
@@ -110,9 +108,9 @@ class BuildInsertUpdateModel {
             time_start
             time_end
             pick_up
+            transport
             status_show
             status_sidebar
-            content
         */
         $result     = [];
         if(!empty($dataForm)){
@@ -128,9 +126,38 @@ class BuildInsertUpdateModel {
             $result['time_start']           = $dataForm['time_start'] ?? null;
             $result['time_end']             = $dataForm['time_end'] ?? null;
             $result['pick_up']              = $dataForm['pick_up'] ?? null;
+            $result['transport']            = $dataForm['transport'] ?? null;
             $result['status_show']          = !empty($dataForm['status_show']) ? 1 : 0;
             $result['status_sidebar']       = !empty($dataForm['status_sidebar']) ? 1 : 0;
-            $result['content']              = $dataForm['content'] ?? null;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableTourContent($dataForm, $tourInfoId){
+        /* 
+            tour_info_id
+            special_content
+            special_list
+            include
+            not_include
+            policy_child
+            policy_cancel
+            menu
+            hotel
+            note
+        */
+        $result     = [];
+        if(!empty($dataForm)&&!empty($tourInfoId)){
+            $result['tour_info_id']         = $dataForm['tour_info_id'];
+            $result['special_content']      = $dataForm['special_content'] ?? null;
+            $result['special_list']         = $dataForm['special_list'] ?? null;
+            $result['include']              = $dataForm['include'] ?? null;
+            $result['not_include']          = $dataForm['not_include'] ?? null;
+            $result['policy_child']         = $dataForm['policy_child'] ?? null;
+            $result['menu']                 = $dataForm['menu'] ?? null;
+            $result['hotel']                = $dataForm['hotel'] ?? null;
+            $result['policy_cancel']        = $dataForm['policy_cancel'] ?? null;
+            $result['note']                 = $dataForm['note'] ?? null;
         }
         return $result;
     }

@@ -17,7 +17,6 @@ class CreateTourLocationTable extends Migration
             $table->id();
             $table->text('name');
             $table->text('description');
-            $table->longText('content');
             $table->integer('seo_id');         // [ref: > seo.id]
             $table->integer('district_id')->nullable();
             $table->integer('province_id');

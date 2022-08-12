@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer('region_id');
             $table->string('name');
             $table->text('description');
-            $table->longText('content');
             $table->timestamps();
         });
     }

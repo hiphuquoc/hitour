@@ -17,7 +17,7 @@ body {
 }
 
 p {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 a {
@@ -28,8 +28,17 @@ a:hover {
   color: rgb(0, 90, 180);
 }
 
+ul, ol {
+  margin-left: 1rem;
+}
+
 img {
   max-width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .customScrollBar-y {
@@ -919,6 +928,7 @@ input {
 }
 
 /* ===== END: Footer */
+/* ===== START: Page Tour Location */
 .tourGrid {
   display: flex;
   flex-wrap: wrap;
@@ -1013,3 +1023,359 @@ input {
   justify-content: space-between;
   align-items: center;
 }
+
+/* ===== END: Page Tour Location */
+/* ===== START: Page Tour */
+.pageBox_body {
+  display: flex;
+}
+.pageBox_body_content {
+  width: calc(100% - 350px - 1.5rem);
+}
+.pageBox_body_sidebar {
+  margin-left: 1.5rem;
+  flex: 0 0 350px;
+}
+.pageBox_body_sidebar > *:not(:first-child) {
+  margin-top: 1.5rem;
+}
+
+.galleryBox {
+  position: relative;
+  height: 490px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.galleryBox_image img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.galleryBox_button {
+  display: flex;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.2);
+  top: 0;
+  right: 0;
+}
+.galleryBox_button_item {
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  color: #456;
+  cursor: pointer;
+}
+.galleryBox_button_item:hover {
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+}
+.galleryBox_button_item:not(:first-child) {
+  border-left: 1px solid #dee2e6;
+}
+
+.detailTourBox {
+  padding: 0 1rem;
+  border: 1px solid #dee2e6;
+}
+.detailTourBox table {
+  line-height: 1.8;
+}
+.detailTourBox table tr:first-child td {
+  color: rgb(0, 123, 255);
+  font-family: "Roboto Slab", serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.detailTourBox table tr:not(:first-child) td {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.25rem;
+  border-top: 1px dotted #ced4da;
+}
+.detailTourBox table tr:not(:first-child) td:first-child {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.detailTourBox table tr:not(:first-child) td:not(:first-child) {
+  padding-left: 0.5rem;
+}
+.detailTourBox table tr td {
+  padding: 0.5rem 0;
+}
+
+.callBookTour {
+  border: 1px solid rgb(0, 123, 255);
+}
+.callBookTour_price {
+  background: linear-gradient(90deg, rgb(0, 123, 255) 0, rgb(0, 90, 180) 100%);
+  padding: 0.5rem 1rem 0.75rem 1rem;
+  color: #fff;
+}
+.callBookTour_price span {
+  font-size: 1.6rem;
+  font-family: "Roboto Slab", serif;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+}
+.callBookTour_content {
+  padding: 0.75rem 1rem;
+  line-height: 1.8;
+}
+.callBookTour_content > div {
+  font-weight: 700;
+}
+.callBookTour_content ul {
+  margin-left: 1rem;
+}
+.callBookTour_button {
+  background: linear-gradient(90deg, rgb(0, 123, 255) 0, rgb(0, 90, 180) 100%);
+  padding: 1rem;
+  color: #fff;
+}
+.callBookTour_button_item:not(:first-child) {
+  margin-top: 1rem;
+}
+.callBookTour_button_item.hotline span {
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+}
+.callBookTour_button_item.bookonline {
+  background: rgb(244, 208, 63);
+  color: #333;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-align: center;
+  cursor: pointer;
+}
+.callBookTour_button_item.bookonline:hover {
+  background: rgb(241, 196, 15);
+}
+
+.tocContentTour_item {
+  display: flex;
+  padding: 0.65rem 1rem;
+  background: #e9ecef;
+  border: 1px solid #dee2e6;
+  color: #456;
+  align-items: center;
+  font-weight: 500;
+  font-size: 0.975rem;
+}
+.tocContentTour_item:hover, .tocContentTour_item.active {
+  color: rgb(0, 123, 255);
+  background: #dee2e6;
+}
+.tocContentTour_item:not(:first-child) {
+  border-top: 1px solid #dee2e6;
+}
+.tocContentTour_item > i {
+  width: 35px;
+  color: #678;
+}
+
+.contentTour_item:not(:first-child) {
+  margin-top: 1.5rem;
+}
+.contentTour_item_title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #ced4da;
+  margin-bottom: 0.75rem;
+}
+.contentTour_item_title.noBorder {
+  border-bottom: none;
+  margin-bottom: 0.25rem;
+}
+.contentTour_item_title h2, .contentTour_item_title h3 {
+  font-size: 1.3rem;
+  font-family: "Roboto Slab", serif;
+  font-weight: 700;
+  color: rgb(0, 90, 180);
+}
+.contentTour_item_title > i {
+  width: 35px;
+  color: #678;
+}
+.contentTour_item_title > div {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  font-size: 0.95rem;
+}
+.contentTour_item_title > div > span:not(:first-child) {
+  margin-left: 0.75rem;
+}
+.contentTour_item_title > div > span.active {
+  color: rgb(0, 90, 180);
+  font-weight: 700;
+}
+.contentTour_item_text table.tableList {
+  width: 100%;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+.contentTour_item_text table.tableList tbody tr:first-child td {
+  border-top: none;
+}
+.contentTour_item_text table.tableList tbody tr td {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.25rem;
+  border-top: 1px dotted #ced4da;
+}
+.contentTour_item_text table.tableList tbody tr td:first-child {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.contentTour_item_text table.tableList tbody tr td:not(:first-child) {
+  padding-left: 0.5rem;
+}
+.contentTour_item ul {
+  margin-bottom: 0.5rem;
+}
+
+.dayTourByList {
+  padding-left: 2rem;
+  position: relative;
+}
+.dayTourByList:before {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  bottom: 0;
+  border-left: 2px dotted #008fea;
+}
+.dayTourByList_item:not(:first-child) {
+  margin-top: 1rem;
+}
+.dayTourByList_item_title {
+  position: relative;
+  background-color: rgb(244, 208, 63);
+  padding: 0.35rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 0.75rem;
+}
+.dayTourByList_item_title:before {
+  content: "";
+  position: absolute;
+  width: 23px;
+  height: 23px;
+  border-radius: 100%;
+  border: solid 1px #E74C3C;
+  background-color: #fff;
+  top: 0.5rem;
+  left: -2.1rem;
+}
+.dayTourByList_item_title:after {
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 100%;
+  background: #E74C3C;
+  top: 16px;
+  left: -26px;
+}
+.dayTourByList_item_title h3, .dayTourByList_item_title h4 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.menuTour {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.menuTour_item {
+  width: calc(33.33% - 0.6666rem);
+  background: #e9ecef;
+  padding: 0.5rem 0.75rem 0.75rem;
+  border-radius: 5px;
+  box-shadow: 0 0 3px #ced4da;
+  border: 1px solid #dee2e6;
+}
+.menuTour_item_mainTitle {
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.menuTour_item_subTitle {
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.menuTour_item:not(:nth-child(3n+1)) {
+  margin-left: 1rem;
+}
+.menuTour_item:nth-child(n+4) {
+  margin-top: 1rem;
+}
+.menuTour_item ul {
+  margin: 0;
+  font-size: 0.95rem;
+}
+.menuTour_item ul li {
+  list-style-type: none;
+}
+
+.hotelTour_item:not(:first-child) {
+  margin-top: 1rem;
+}
+.hotelTour_item_title {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.hotelTour_item_title h3 {
+  font-size: 1rem;
+}
+.hotelTour_item_image {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.hotelTour_item_image img {
+  width: calc(33.33% - 0.6666rem);
+  border-radius: 5px;
+}
+.hotelTour_item_image img:not(:nth-child(3n+1)) {
+  margin-left: 1rem;
+}
+.hotelTour_item_image img:nth-child(n+4) {
+  margin-top: 1rem;
+}
+
+.tableContentBorder {
+  line-height: 1.68 !important;
+  border: 1px solid #dee2e6;
+}
+.tableContentBorder td:not(:first-child), .tableContentBorder th:not(:first-child) {
+  border-left: 1px solid #dee2e6;
+}
+.tableContentBorder thead tr {
+  background: rgba(0, 123, 255, 0.3);
+  font-weight: 700;
+  font-family: "Roboto Slab", serif;
+}
+.tableContentBorder thead tr th {
+  padding: 0.5rem;
+}
+.tableContentBorder tbody tr td {
+  padding: 0.25rem 0.5rem;
+}
+.tableContentBorder tbody tr:not(:first-child) {
+  border-top: 1px solid #dee2e6;
+}
+.tableContentBorder tbody tr:nth-child(even) {
+  background: #e9ecef;
+}
+
+/* ===== START: Page Tour */

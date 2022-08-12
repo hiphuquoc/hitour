@@ -97,7 +97,7 @@ class Tour extends Model {
         if(!empty($id)){
             $result     = Tour::select('*')
                                 ->where('id', $id)
-                                ->with('seo', 'files', 'locations', 'staffs', 'partners.infoPartner', 'options.prices')
+                                ->with('seo', 'files', 'locations', 'staffs', 'partners.infoPartner', 'options.prices', 'content', 'timetables')
                                 ->first();
         }
         return $result;
@@ -129,5 +129,13 @@ class Tour extends Model {
 
     public function options(){
         return $this->hasMany(\App\Models\TourOption::class, 'tour_info_id', 'id');
+    }
+
+    public function content(){
+        return $this->hasOne(\App\Models\TourContent::class, 'tour_info_id', 'id');
+    }
+
+    public function timetables(){
+        return $this->hasMany(\App\Models\TourTimetable::class, 'tour_info_id', 'id');
     }
 }

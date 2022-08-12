@@ -7,7 +7,8 @@ use App\Helpers\Upload;
 
 use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\AdminGalleryController;
-
+use App\Models\TourContent;
+use App\Models\TourTimetable;
 use App\Models\TourLocation;
 use App\Models\TourDeparture;
 use App\Models\Tour;
@@ -62,13 +63,14 @@ class AdminTourController extends Controller {
                                     ->where('id', $id)
                                     ->with(['files' => function($query){
                                         $query->where('relation_table', 'tour_info');
-                                    }], 'seo')
+                                    }], 'seo', 'content', 'timetables')
                                     ->first();
             $tourLocations  = TourLocation::all();
             $tourDepartures = TourDeparture::all();
             $staffs         = Staff::all();
             $partners       = Partner::all();
             $allPage        = Seo::all();
+            // $content        = Storage::get(config('admin.storage.contentTour').$item->seo->slug.'.html');
             $message        = $request->get('message') ?? null; 
             $type           = 'edit';
             if(!empty($request->get('type'))) $type = $request->get('type');
@@ -88,75 +90,104 @@ class AdminTourController extends Controller {
     }
 
     public function create(TourRequest $request){
-        /* upload image */
-        $dataPath           = [];
-        if($request->hasFile('image')) {
-            $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
-            $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
-        }
-        /* insert page */
-        $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'tour_info', $dataPath);
-        $pageId             = Seo::insertItem($insertPage);
-        /* insert tour_info */
-        $insertTourInfo     = $this->BuildInsertUpdateModel->buildArrayTableTourInfo($request->all(), $pageId);
-        $idTour             = Tour::insertItem($insertTourInfo);
-        /* lưu content vào file */
-        file_put_contents('/views/main/tour/data/test.php', $request->get('content'));
-        /* insert slider và lưu CSDL */
-        if($request->hasFile('slider')&&!empty($idTour)){
-            $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
-            $params         = [
-                'attachment_id'     => $idTour,
-                'relation_table'    => 'tour_info',
-                'name'              => $name
+        try {
+            DB::beginTransaction();
+            /* upload image */
+            $dataPath           = [];
+            if($request->hasFile('image')) {
+                $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
+                $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
+            }
+            /* insert page */
+            $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'tour_info', $dataPath);
+            $pageId             = Seo::insertItem($insertPage);
+            /* insert tour_info */
+            $insertTourInfo     = $this->BuildInsertUpdateModel->buildArrayTableTourInfo($request->all(), $pageId);
+            $idTour             = Tour::insertItem($insertTourInfo);
+            /* update tour_content */
+            $insertTourInfo     = $this->BuildInsertUpdateModel->buildArrayTableTourContent($request->all(), $idTour);
+            TourContent::select('*')
+                            ->where('tour_info_id', $idTour)
+                            ->delete();
+            $idTourContent      = TourContent::insertItem($insertTourInfo);
+            // /* lưu content vào file */
+            // Storage::put(config('admin.storage.contentTour').$request->get('slug').'.html', $request->get('content'));
+            /* update tour_timetable */
+            if(!empty($request->get('timetable'))){
+                foreach($request->get('timetable') as $timetable){
+                    $insertTourTimetable    = [
+                        'tour_info_id'  => $idTour,
+                        'title'         => $timetable['tour_timetable_title'],
+                        'content'       => $timetable['tour_timetable_content'],
+                        'content_sort'  => $timetable['tour_timetable_content_sort']
+                    ];
+                    TourTimetable::insertItem($insertTourTimetable);
+                }
+            }
+            /* insert slider và lưu CSDL */
+            if($request->hasFile('slider')&&!empty($idTour)){
+                $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
+                $params         = [
+                    'attachment_id'     => $idTour,
+                    'relation_table'    => 'tour_info',
+                    'name'              => $name
+                ];
+                AdminSliderController::uploadSlider($request->file('slider'), $params);
+            }
+            /* insert gallery và lưu CSDL */
+            if($request->hasFile('gallery')&&!empty($idTour)){
+                $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
+                $params         = [
+                    'attachment_id'     => $idTour,
+                    'relation_table'    => 'tour_info',
+                    'name'              => $name
+                ];
+                AdminGalleryController::uploadGallery($request->file('gallery'), $params);
+            }
+            /* insert relation_tour_location */
+            if(!empty($idTour)&&!empty($request->get('location'))){
+                foreach($request->get('location') as $location){
+                    $params     = [
+                        'tour_info_id'      => $idTour,
+                        'tour_location_id'  => $location
+                    ];
+                    RelationTourLocation::insertItem($params);
+                }
+            }
+            /* insert relation_tour_staff */
+            if(!empty($idTour)&&!empty($request->get('staff'))){
+                foreach($request->get('staff') as $staff){
+                    $params     = [
+                        'tour_info_id'      => $idTour,
+                        'staff_info_id'     => $staff
+                    ];
+                    RelationTourStaff::insertItem($params);
+                }
+            }
+            /* insert relation_tour_partner */
+            if(!empty($idTour)&&!empty($request->get('partner'))){
+                foreach($request->get('partner') as $partner){
+                    $params     = [
+                        'tour_info_id'      => $idTour,
+                        'partner_info_id'   => $partner
+                    ];
+                    RelationTourPartner::insertItem($params);
+                }
+            }
+            DB::commit();
+            /* Message */
+            $message        = [
+                'type'      => 'success',
+                'message'   => '<strong>Thành công!</strong> Dã tạo Tour mới'
             ];
-            AdminSliderController::uploadSlider($request->file('slider'), $params);
-        }
-        /* insert gallery và lưu CSDL */
-        if($request->hasFile('gallery')&&!empty($idTour)){
-            $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
-            $params         = [
-                'attachment_id'     => $idTour,
-                'relation_table'    => 'tour_info',
-                'name'              => $name
+        } catch (\Exception $exception){
+            DB::rollBack();
+            /* Message */
+            $message        = [
+                'type'      => 'danger',
+                'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
-            AdminGalleryController::uploadGallery($request->file('gallery'), $params);
         }
-        /* insert relation_tour_location */
-        if(!empty($idTour)&&!empty($request->get('location'))){
-            foreach($request->get('location') as $location){
-                $params     = [
-                    'tour_info_id'      => $idTour,
-                    'tour_location_id'  => $location
-                ];
-                RelationTourLocation::insertItem($params);
-            }
-        }
-        /* insert relation_tour_staff */
-        if(!empty($idTour)&&!empty($request->get('staff'))){
-            foreach($request->get('staff') as $staff){
-                $params     = [
-                    'tour_info_id'      => $idTour,
-                    'staff_info_id'     => $staff
-                ];
-                RelationTourStaff::insertItem($params);
-            }
-        }
-        /* insert relation_tour_partner */
-        if(!empty($idTour)&&!empty($request->get('partner'))){
-            foreach($request->get('partner') as $partner){
-                $params     = [
-                    'tour_info_id'      => $idTour,
-                    'partner_info_id'   => $partner
-                ];
-                RelationTourPartner::insertItem($params);
-            }
-        }
-        /* Message */
-        $message        = [
-            'type'      => 'success',
-            'message'   => '<strong>Thành công!</strong> Dã tạo Tour mới'
-        ];
         return redirect()->route('admin.tour.viewEdit', [
             'id'        => $idTour,
             'message'   => $message
@@ -166,7 +197,7 @@ class AdminTourController extends Controller {
     public function update(TourRequest $request){
         try {
             DB::beginTransaction();
-            $idTour             = $request->get('tour_id') ?? 0;
+            $idTour             = $request->get('tour_info_id') ?? 0;
             /* upload image */
             $dataPath           = [];
             if($request->hasFile('image')) {
@@ -177,10 +208,33 @@ class AdminTourController extends Controller {
             $updatePage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'tour_info', $dataPath);
             Seo::updateItem($request->get('seo_id'), $updatePage);
             /* update tour_info */
-            $updateTourInfo     = $this->BuildInsertUpdateModel->buildArrayTableTourInfo($request->all());
+            $updateTourInfo     = $this->BuildInsertUpdateModel->buildArrayTableTourInfo($request->all(), $request->get('seo_id'));
             Tour::updateItem($idTour, $updateTourInfo);
-            /* lưu content vào file */
-            Storage::put('/public/contents/tours/'.$request->get('slug').'.html', $request->get('content'));
+            /* update tour_content */
+            $insertTourInfo     = $this->BuildInsertUpdateModel->buildArrayTableTourContent($request->all(), $idTour);
+            TourContent::select('*')
+                            ->where('tour_info_id', $request->get('tour_info_id'))
+                            ->delete();
+            $idTourContent      = TourContent::insertItem($insertTourInfo);
+            // /* lưu content vào file */
+            // Storage::put(config('admin.storage.contentTour').$request->get('slug').'.html', $request->get('content'));
+            /* update tour_timetable */
+            TourTimetable::select('*')
+                            ->where('tour_info_id', $request->get('tour_info_id'))
+                            ->delete();
+            if(!empty($request->get('timetable'))){
+                foreach($request->get('timetable') as $timetable){
+                    $insertTourTimetable    = [
+                        'tour_info_id'  => $idTour,
+                        'title'         => $timetable['tour_timetable_title'],
+                        'content'       => $timetable['tour_timetable_content'],
+                        'content_sort'  => $timetable['tour_timetable_content_sort']
+                    ];
+                    TourTimetable::insertItem($insertTourTimetable);
+                }
+            }
+            /* lưu content vào database */
+            $updateContent      = $this->BuildInsertUpdateModel->buildArrayTableTourContent($request->all(), 'tour_info', $dataPath);
             /* update slider và lưu CSDL */
             if($request->hasFile('slider')&&!empty($idTour)){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
@@ -217,7 +271,7 @@ class AdminTourController extends Controller {
             DB::rollBack();
             /* Message */
             $message        = [
-                'type'      => 'error',
+                'type'      => 'danger',
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
@@ -243,6 +297,14 @@ class AdminTourController extends Controller {
                 /* xóa ảnh đại diện trong thư mục upload */
                 if(!empty($infoTour->seo->image)&&file_exists(public_path($infoTour->seo->image))) unlink(public_path($infoTour->seo->image));
                 if(!empty($infoTour->seo->image_small)&&file_exists(public_path($infoTour->seo->image_small))) unlink(public_path($infoTour->seo->image_small));
+                /* xóa tour_content */
+                TourContent::select('*')
+                            ->where('tour_info_id', $idTour)
+                            ->delete();
+                /* xóa tour_timetable */
+                TourTimetable::select('*')
+                            ->where('tour_info_id', $idTour)
+                            ->delete();
                 /* xóa tour_option và tour_price */
                 $arrayIdOption  = [];
                 $arrayIdPrice   = [];

@@ -25,6 +25,7 @@ class TourDepartureRequest extends FormRequest
     public function rules()
     {
         return [
+            'content'                   => 'required',
             'title'                     => 'required|max:255',
             'description'               => 'required',
             'ordering'                  => 'min:0',
@@ -56,6 +57,7 @@ class TourDepartureRequest extends FormRequest
     public function messages()
     {
         return [
+            'content.required'          => 'Nội dung không được để trống!',
             'title.required'            => 'Tiêu đề trang không được để trống!',
             'title.max'                 => 'Tiêu đề trang không được vượt quá 255 ký tự!',
             'description'               => 'Mô tả trang không được để trống!',

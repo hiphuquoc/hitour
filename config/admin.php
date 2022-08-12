@@ -88,5 +88,11 @@ return [
     'type_add_cost_booking'    => [
         '+'     => 'Tăng',
         '-'     => 'Giảm'
+    ],
+
+    'storage'   => [
+        'contentTour'          => '/public/contents/tours/',
+        'contentTourLocation'  => '/public/contents/tourLocations/',
+        'contentTourDeparture'  => '/public/contents/tourDepartures/'
     ]
 ];

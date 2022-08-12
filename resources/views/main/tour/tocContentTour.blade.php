@@ -1,0 +1,36 @@
+<div class="tocContentTour">
+    <a href="#diem-noi-bat-chuong-trinh-tour" class="tocContentTour_item">
+        <i class="fa-brands fa-diaspora"></i>Điểm nổi bật CT Tour
+    </a>
+    <a href="#bang-gia-tour" class="tocContentTour_item">
+        <i class="fa-brands fa-diaspora"></i>Bảng giá Tour
+    </a>
+    @if($item->timetables->isNotEmpty())
+        <a href="#lich-trinh-tour-du-lich" class="tocContentTour_item">
+            <i class="fa-solid fa-bookmark"></i>Lịch trình Tour
+        </a>
+    @endif
+    @if(!empty($item->content->policy_child))
+        <a href="#chinh-sach-tre-em-tour" class="tocContentTour_item">
+            <i class="fa-solid fa-children"></i>Chính sách trẻ em
+        </a>
+    @endif
+    @if(!empty($item->content->include)||!empty($item->content->not_include))
+        <a href="#tour-bao-gom-va-khong-bao-gom" class="tocContentTour_item">
+            <i class="fa-solid fa-list-check"></i>Tour bao gồm và không bao gồm
+        </a>
+    @endif
+    @if(!empty($item->content->menu))
+        <a href="#thuc-don-theo-chuong-trinh-tour" class="tocContentTour_item">
+            <i class="fa-solid fa-utensils"></i>Thực đơn
+        </a>
+    @endif
+    @if(!empty($item->content->hotel))
+        <a href="#khach-san-tham-khao" class="tocContentTour_item">
+            <i class="fa-solid fa-bed"></i>Khách sạn tham khảo
+        </a>
+    @endif
+    {{-- <a href="#" class="tocContentTour_item">
+        <i class="fa-solid fa-images"></i>Ảnh đẹp Tour
+    </a> --}}
+</div>

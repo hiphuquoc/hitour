@@ -9,27 +9,47 @@
 
     <div class="pageContent">
         <div class="container">
-            <!-- title -->
-            <h1 class="titlePage">{{ $item->name }}</h1>
-            <!-- rating -->
-            <div class="ratingBox" style="margin-bottom:1rem;">
-                <div class="ratingBox_star">
-                    <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                    <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                    <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                    <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                    <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+            <div class="pageBox">
+                
+                <div class="pageBox_head">
+                    <!-- title -->
+                    <h1 class="titlePage">{{ $item->name }}</h1>
+                    <!-- rating -->
+                    <div class="ratingBox" style="margin-bottom:1rem;">
+                        <div class="ratingBox_star">
+                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                        </div>
+                        <div class="ratingBox_text maxLine_1" style="margin-left:2px;font-size:14px;">
+                            {{ $item->seo->rating_aggregate_star }} sao / <a href="/sp/dau-rua-mat-3s#product-reviews">{{  $item->seo->rating_aggregate_count }} đánh giá từ khách du lịch</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="ratingBox_text maxLine_1" style="margin-left:2px;font-size:14px;">
-                        {{ $item->seo->rating_aggregate_star }} sao / <a href="/sp/dau-rua-mat-3s#product-reviews">{{  $item->seo->rating_aggregate_count }} đánh giá từ khách du lịch</a>
+                <div class="pageBox_body">
+                    <div class="pageBox_body_content">
+
+                        <!-- content box -->
+                        @include('main.tour.gallery', compact('item'))
+
+                        <!-- content box -->
+                        @include('main.tour.content', compact('item'))
+
+                    </div>
+                    <div class="pageBox_body_sidebar">
+
+                        @include('main.tour.detailTour', compact('item'))
+
+                        @include('main.tour.callBookTour', compact('item'))
+
+                        @include('main.tour.tocContentTour', compact('item'))
+
+                    </div>
                 </div>
+
             </div>
-            <!-- content box -->
-            <div class="contentBox">
-                {!! $item->content !!}
-            </div>
-            <!-- tour box -->
-            @include('main.tourLocation.tourGrid')
         </div>
     </div>
 
@@ -45,12 +65,12 @@
             })
 
             $('.sliderHome').slick({
-                dots: true,
-                arrows: true,
-                autoplay: true,
                 infinite: true,
                 autoplaySpeed: 5000,
                 lazyLoad: 'ondemand',
+                dots: true,
+                arrows: true,
+                autoplay: true,
                 responsive: [
                     {
                         breakpoint: 567,

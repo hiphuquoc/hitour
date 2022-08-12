@@ -753,6 +753,8 @@ $height_headerMain : 85px;
     }
 }
 /* ===== END: Footer */
+
+/* ===== START: Page Tour Location */
 $tourGrid_radius : 5px;
 .tourGrid {
     display: flex;
@@ -847,3 +849,402 @@ $tourGrid_radius : 5px;
         }
     }
 }
+/* ===== END: Page Tour Location */
+
+/* ===== START: Page Tour */
+.pageBox {
+    &_head {
+
+    }
+    &_body {
+        display: flex;
+        &_content {
+            width: calc(100% - 350px - 1.5rem);
+        }
+        &_sidebar {
+            margin-left: 1.5rem;
+            flex: 0 0 350px;
+            > * {
+                &:not(:first-child){
+                    margin-top: 1.5rem;
+                }
+            }
+        }
+    }
+}
+.galleryBox {
+    position: relative;
+    height: 490px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    &_image {
+        img {
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+    &_button {
+        display: flex;
+        position: absolute;
+        background: rgba(0, 0, 0, 0.2);
+        top: 0;
+        right: 0;
+        &_item {
+            padding: 0.5rem 1rem;
+            font-size: 1.2rem;
+            color: $color-text;
+            cursor: pointer;
+            &:hover {
+                background: rgba(0, 0, 0, 0.2);
+                color: #fff;
+            }
+            &:not(:first-child){
+                border-left: 1px solid $bg-04;
+            }
+        }
+    }
+}
+.detailTourBox {
+    padding: 0 1rem;
+    border: 1px solid $bg-04;
+    table {
+        line-height: 1.8;
+        tr {
+            &:first-child {
+                td {
+                    color: $color-primary;
+                    font-family: $font-primary-title;
+                    font-size: 1.1rem;
+                    font-weight: 700;
+                }
+            }
+            &:not(:first-child){
+                td {
+                    margin-top: 0.5rem;
+                    padding-top: 0.5rem;
+                    padding-bottom: 0.25rem;
+                    border-top: 1px dotted $bg-05;
+                    
+                    &:first-child {
+                        font-weight: 700;
+                        font-size: 0.95rem;
+                    }
+                    &:not(:first-child){
+                        padding-left: 0.5rem;
+                    }
+                }
+            }
+            td {
+                padding: 0.5rem 0;
+            }
+        }
+    }
+}
+.callBookTour {
+    border: 1px solid $color-primary;
+    &_price {
+        background: linear-gradient(90deg, $color-primary 0, $color-primary-hover 100%);
+        padding: 0.5rem 1rem 0.75rem 1rem;
+        color: #fff;
+        span {
+            font-size: 1.6rem;
+            font-family: $font-primary-title;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+    }
+    &_content {
+        padding: 0.75rem 1rem;
+        line-height: 1.8;
+        > div {
+            font-weight: 700;
+        }
+        ul {
+            margin-left: 1rem;
+        }
+    }
+    &_button {
+        background: linear-gradient(90deg, $color-primary 0, $color-primary-hover 100%);
+        padding: 1rem;
+        color: #fff;
+        &_item {
+            &:not(:first-child){
+                margin-top: 1rem;
+            }
+            &.hotline {
+                span {
+                    font-size: 1.2rem;
+                    letter-spacing: 0.5px;
+                    font-weight: 700;
+                }
+            }
+            &.bookonline {
+                background: $color-secondary;
+                color: #333;
+                padding: 0.5rem 1rem;
+                border-radius: 5px;
+                text-transform: uppercase;
+                font-weight: 700;
+                font-size: 1.1rem;
+                text-align: center;
+                cursor: pointer;
+                &:hover {
+                    background: $color-secondary-hover;
+                }
+            }
+        }
+    }
+}
+.tocContentTour {
+    &_item {
+        display: flex;
+        padding: 0.65rem 1rem;
+        background: $bg-03;
+        border: 1px solid $bg-04;
+        color: $color-text;
+        align-items: center;
+        font-weight: 500;
+        font-size: 0.975rem;
+        &:hover, &.active {
+            color: $color-primary;
+            background: $bg-04;
+        }
+        &:not(:first-child){
+            border-top: 1px solid $bg-04;
+        }
+        > i {
+            width: 35px;
+            color: #678;
+        }
+    }
+}
+.contentTour {
+    &_item {
+        &:not(:first-child){
+            margin-top: 1.5rem;
+        }
+        &_title {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid $bg-05;
+            margin-bottom: 0.75rem;
+            &.noBorder {
+                border-bottom: none;
+                margin-bottom: 0.25rem;
+            }
+            h2, h3 {
+                font-size: 1.3rem;
+                font-family: $font-primary-title;
+                font-weight: 700;
+                color: $color-primary-hover;
+            }
+            > i {
+                width: 35px;
+                color: #678;
+            }
+            > div {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 0;
+                font-size: 0.95rem;
+                > span {
+                    &:not(:first-child){
+                        margin-left: 0.75rem;
+                    }
+                    &.active {
+                        color: $color-primary-hover;
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+        &_text {
+            table.tableList {
+                width: 100%;
+                line-height: 1.8;
+                margin-bottom: 1rem;
+                tbody {
+                    tr {
+                        &:first-child {
+                            td {
+                                border-top: none;
+                            }
+                        }
+                        td {
+                            margin-top: 0.5rem;
+                            padding-top: 0.5rem;
+                            padding-bottom: 0.25rem;
+                            border-top: 1px dotted $bg-05;
+                            
+                            &:first-child {
+                                font-weight: 700;
+                                font-size: 0.95rem;
+                            }
+                            &:not(:first-child){
+                                padding-left: 0.5rem;
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+        ul {
+            margin-bottom: 0.5rem;
+        }
+    }
+}
+.dayTourByList {
+    padding-left: 2rem;
+    position: relative;
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0.5rem;
+        left: 0.5rem;
+        bottom: 0;
+        border-left: 2px dotted #008fea;
+    }
+    &_item {
+        &:not(:first-child){
+            margin-top: 1rem;
+        }
+        &_title {
+            position: relative;
+            background-color: $color-secondary;
+            padding: 0.35rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 0.75rem;
+            &:before {
+                content: "";
+                position: absolute;
+                width: 23px;
+                height: 23px;
+                border-radius: 100%;
+                border: solid 1px $color-red;
+                background-color: #fff;
+                top: 0.5rem;
+                left: -2.1rem;
+            }
+            &:after {
+                content: "";
+                position: absolute;
+                width: 7px;
+                height: 7px;
+                border-radius: 100%;
+                background: $color-red;
+                top: 16px;
+                left: -26px;
+            }
+            h3, h4 {
+                font-size: 1rem;
+                font-weight: 700;
+            }   
+        }
+    }
+}
+.menuTour {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    &_item {
+        width: calc(33.33% - 0.6666rem);
+        background: $bg-03;
+        padding: 0.5rem 0.75rem 0.75rem;
+        border-radius: 5px;
+        box-shadow: 0 0 3px $bg-05;
+        border: 1px solid $bg-04;
+        &_mainTitle {
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        &_subTitle {
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        &:not(:nth-child(3n + 1)){
+            margin-left: 1rem;
+        }
+        &:nth-child(n + 4) {
+            margin-top: 1rem;
+        }
+        ul {
+            margin: 0;
+            font-size: 0.95rem;
+            li {
+                list-style-type: none;
+            }
+        }
+    }
+}
+.hotelTour {
+    &_item {
+        &:not(:first-child){
+            margin-top: 1rem;
+        }
+        &_title {
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            h3 {
+                font-size: 1rem;
+            }
+        }
+        &_image {
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            img {
+                width: calc(33.33% - 0.6666rem);
+                border-radius: 5px;
+                &:not(:nth-child(3n + 1)){
+                    margin-left: 1rem;
+                }
+                &:nth-child(n + 4) {
+                    margin-top: 1rem;
+                }
+            }
+        }
+        
+    }
+
+}
+.tableContentBorder {
+    line-height: 1.68 !important;
+    border: 1px solid $bg-04;
+    td, th {
+        &:not(:first-child){
+            border-left: 1px solid $bg-04;
+        }
+    }
+    thead {
+        tr {
+            background: $color-primary-03;
+            font-weight: 700;
+            font-family: $font-primary-title;
+            th {
+                padding: 0.5rem ;
+            }
+        }
+    }
+    tbody {
+        tr {
+            td {
+                padding: 0.25rem 0.5rem;
+            }
+            &:not(:first-child){
+                border-top: 1px solid $bg-04;
+            }
+            &:nth-child(even){
+                background: $bg-03;
+            }
+        }
+    }
+}
+/* ===== START: Page Tour */

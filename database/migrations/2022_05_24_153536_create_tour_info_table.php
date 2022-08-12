@@ -18,6 +18,7 @@ class CreateTourInfoTable extends Migration
             $table->integer('seo_id');         // [ref: > seo.id]
             $table->integer('tour_departure_id');    /* tour khởi hành từ đâu */
             $table->string('pick_up', 255)->nullable();
+            $table->string('transport', 255)->nullable();
             $table->string('code', 20);
             $table->text('name');
             $table->integer('price_show');
@@ -29,7 +30,6 @@ class CreateTourInfoTable extends Migration
             $table->string('time_end', 100)->nullable();
             $table->boolean('status_show')->default(1);
             $table->boolean('status_sidebar')->default(1);
-            $table->longText('content')->nullable();
             $table->timestamps();
         });
     }

@@ -7,6 +7,7 @@ use App\Models\Tour;
 use App\Models\TourLocation;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 use App\Helpers\Url;
 
@@ -50,10 +51,11 @@ class RoutingController extends Controller {
                                         ->whereHas('seo', function($q) use ($checkExists){
                                             $q->where('slug', $checkExists['slug']);
                                         })
-                                        ->with('seo', 'files', 'staffs', 'options')
+                                        ->with('seo', 'files', 'staffs.infoStaff', 'options.prices', 'departure', 'content', 'timetables')
                                         ->first();
+                $content            = Storage::get(config('admin.storage.contentTour').$item->seo->slug.'.html');
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                return view('main.tour.index', compact('item', 'breadcrumb'));
+                return view('main.tour.index', compact('item', 'breadcrumb', 'content'));
             }
         }else {
             /* Error 404 */
