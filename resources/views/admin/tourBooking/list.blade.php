@@ -78,7 +78,10 @@
                                     <span style="font-weight:bold;">{{ $item->tour->name }}</span>
                                 </div>
                                 <div class="oneLine">
-                                    {{ $item->option->option }}
+                                    {{ $item->quantiesAndPrices[0]->option_name }}
+                                    @php
+                                        // dd($list);
+                                    @endphp
                                 </div>
                                 <div class="oneLine">
                                     {{ date('d/m/Y', strtotime($item->departure_day)) }} - {{ date('d/m/Y', strtotime($item->departure_day)+(86400*($item->tour->days-1))) }}

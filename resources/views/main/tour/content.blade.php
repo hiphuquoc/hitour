@@ -2,7 +2,7 @@
     <!-- Điểm nổi bật của Tour -->
 	<div id="diem-noi-bat-chuong-trinh-tour" class="contentTour_item">
 		<div class="contentTour_item_title">
-			<i class="fa-solid fa-bookmark"></i>
+			<i class="fa-solid fa-award"></i>
 			<h2>Điểm nổi bật của Tour</h2>
 		</div>
 		<div class="contentTour_item_text">
@@ -49,7 +49,7 @@
 	@if($item->options->isNotEmpty())
         <div id="bang-gia-tour" class="contentTour_item">
             <div class="contentTour_item_title noBorder">
-                <i class="fa-solid fa-bookmark"></i>
+                <i class="fa-solid fa-hand-holding-dollar"></i>
                 <h2>Bảng giá Tour</h2>
             </div>
             <div class="contentTour_item_text">
@@ -140,7 +140,7 @@
     @endif
     <!-- Tour bao gồm -->
     @if(!empty($item->content->include))
-        <div class="contentTour_item">
+        <div id="tour-bao-gom-va-khong-bao-gom" class="contentTour_item">
             <div class="contentTour_item_title">
                 <i class="fa-solid fa-bookmark"></i>
                 <h2>Tour bao gồm</h2>
@@ -164,7 +164,7 @@
     @endif
     <!-- Thực đơn -->
     @if(!empty($item->content->menu))
-        <div class="contentTour_item">
+        <div id="thuc-don-theo-chuong-trinh-tour" class="contentTour_item">
             <div class="contentTour_item_title noBorder">
                 <i class="fa-solid fa-bookmark"></i>
                 <h2>Thực đơn</h2>
@@ -178,7 +178,7 @@
     @endif
     <!-- Khách sạn tham khảo -->
     @if(!empty($item->content->hotel))
-        <div class="contentTour_item">
+        <div id="khach-san-tham-khao" class="contentTour_item">
             <div class="contentTour_item_title">
                 <i class="fa-solid fa-bookmark"></i>
                 <h2>Khách sạn tham khảo</h2>

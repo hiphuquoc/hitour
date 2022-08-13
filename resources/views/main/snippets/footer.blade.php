@@ -2,7 +2,7 @@
     <div class="container">
         <div class="footerBox">
                 <div class="footerBox_item">
-                    <ul>
+                    <ul style="margin:0;">
                         <li>
                             <b style="font-size:1.05rem;">Cty TNHH du lịch biển đảo Hitour</b>
                         </li>

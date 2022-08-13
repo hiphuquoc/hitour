@@ -42,10 +42,11 @@
 
                         @include('main.tour.detailTour', compact('item'))
 
-                        @include('main.tour.callBookTour', compact('item'))
+                        <div class="js_scrollFixed">
+                            @include('main.tour.callBookTour', compact('item'))
 
-                        @include('main.tour.tocContentTour', compact('item'))
-
+                            @include('main.tour.tocContentTour', compact('item'))
+                        </div>
                     </div>
                 </div>
 
@@ -87,6 +88,19 @@
                     $('.sliderHome .slick-next').html('<i class="fa-solid fa-arrow-right-long"></i>');
                     $('.sliderHome .slick-dots button').html('');
                 }, 0);
+            }
+        });
+
+        /* fixed sidebar khi scroll */
+        const elemt                 = $('.js_scrollFixed');
+        const widthElemt            = elemt.parent().width();
+        const positionTopElemt      = elemt.offset().top;
+        $(window).scroll(function(){
+            const positionScrollbar     = $(window).scrollTop();
+            if(positionScrollbar>positionTopElemt){
+                elemt.addClass('scrollFixedSidebar').css('width', widthElemt);
+            }else {
+                elemt.removeClass('scrollFixedSidebar').css('width', 'unset');
             }
         });
     </script>

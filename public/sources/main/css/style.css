@@ -927,6 +927,31 @@ input {
   background-position: -925px -210px;
 }
 
+.gotoTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  background-color: rgba(0, 123, 255, 0.2);
+  color: #789;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+}
+.gotoTop i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.gotoTop:hover {
+  background: rgba(0, 123, 255, 0.4);
+}
+
 /* ===== END: Footer */
 /* ===== START: Page Tour Location */
 .tourGrid {
@@ -1103,6 +1128,7 @@ input {
 }
 
 .callBookTour {
+  background: #fff;
   border: 1px solid rgb(0, 123, 255);
 }
 .callBookTour_price {
@@ -1119,9 +1145,6 @@ input {
 .callBookTour_content {
   padding: 0.75rem 1rem;
   line-height: 1.8;
-}
-.callBookTour_content > div {
-  font-weight: 700;
 }
 .callBookTour_content ul {
   margin-left: 1rem;
@@ -1154,6 +1177,26 @@ input {
   background: rgb(241, 196, 15);
 }
 
+.js_scrollFixed > *:not(:first-child) {
+  margin-top: inherit;
+}
+
+.contentWithViewMore_content {
+  height: 150;
+  overflow: hidden;
+}
+.contentWithViewMore_btn {
+  font-size: 0.95rem;
+  cursor: pointer;
+  font-weight: 700;
+  padding-top: 0.5rem;
+  color: rgb(0, 90, 180);
+}
+.contentWithViewMore_btn i {
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
 .tocContentTour_item {
   display: flex;
   padding: 0.65rem 1rem;
@@ -1176,6 +1219,9 @@ input {
   color: #678;
 }
 
+.contentTour {
+  text-align: justify;
+}
 .contentTour_item:not(:first-child) {
   margin-top: 1.5rem;
 }
@@ -1237,7 +1283,7 @@ input {
   padding-left: 0.5rem;
 }
 .contentTour_item ul {
-  margin-bottom: 0.5rem;
+  margin: 0.5rem 0 0.5rem 1rem;
 }
 
 .dayTourByList {
@@ -1354,7 +1400,7 @@ input {
 }
 
 .tableContentBorder {
-  line-height: 1.68 !important;
+  line-height: 1.6 !important;
   border: 1px solid #dee2e6;
 }
 .tableContentBorder td:not(:first-child), .tableContentBorder th:not(:first-child) {
@@ -1367,6 +1413,7 @@ input {
 }
 .tableContentBorder thead tr th {
   padding: 0.5rem;
+  text-align: center;
 }
 .tableContentBorder tbody tr td {
   padding: 0.25rem 0.5rem;
@@ -1376,6 +1423,29 @@ input {
 }
 .tableContentBorder tbody tr:nth-child(even) {
   background: #e9ecef;
+}
+
+.imageBox {
+  max-width: 660px;
+  background: #e9ecef;
+  font-size: 0.95rem;
+  border-radius: 5px;
+  margin: 0 auto 1rem auto;
+}
+.imageBox img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 5px;
+}
+.imageBox_note {
+  padding: 0 1rem 0.5rem 1rem;
+  text-align: center;
+}
+
+.scrollFixedSidebar {
+  position: fixed;
+  top: 0;
 }
 
 /* ===== START: Page Tour */

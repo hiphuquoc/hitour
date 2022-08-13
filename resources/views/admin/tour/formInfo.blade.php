@@ -71,7 +71,7 @@
 <div class="modal fade" id="modalSpecialContent" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div id="js_loadFormOption_body" class="modal-body">
+            <div class="modal-body">
 
                 <textarea class="exampleContentBox" rows="1">
                     <p>Nội dung</p>
@@ -87,7 +87,7 @@
 <div class="modal fade" id="modalSpecialList" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div id="js_loadFormOption_body" class="modal-body">
+            <div class="modal-body">
                 <textarea class="exampleContentBox" rows="5">
                     <ul>
                         <li>Điểm nổi bật 1</li>
@@ -105,15 +105,15 @@
 <div class="modal fade" id="modalInclude" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div id="js_loadFormOption_body" class="modal-body">
+            <div class="modal-body">
                 <textarea class="exampleContentBox" rows="7">
-                    <p>Phương tiện: Xe du lịch đời mới 16 chỗ,...</p>
+                    <div>Phương tiện: Xe du lịch đời mới 16 chỗ,...</div>
                     <ul>
                         <li>Xe 16 chỗ: Ford Transit,...</li>
                         <li>Xe 29 chỗ: Samco, Thaco,...</li>
                         <li>Xe 45 chỗ: Universe,...</li>
                     </ul>
-                    <p>Tàu câu cá, phao cứu hộ,...</p>
+                    <div>Tàu câu cá, phao cứu hộ,...</div>
                 </textarea>
             </div>
         </div>
@@ -125,10 +125,10 @@
 <div class="modal fade" id="modalNoInclude" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div id="js_loadFormOption_body" class="modal-body">
+            <div class="modal-body">
                 <textarea class="exampleContentBox" rows="7">
-                    <p>Vé máy bay hoặc Vé tàu cao...</p>
-                    <p>Vé Vinwonders Phú Quốc</p>
+                    <div>Vé máy bay hoặc Vé tàu cao...</div>
+                    <div>Vé Vinwonders Phú Quốc</div>
                     <ul>
                         <li>Khách hàng ... 880,000<sup>đ</sup></li>
                         <li>Khách hàng ... 660,000<sup>đ</sup></li>
@@ -145,14 +145,14 @@
 <div class="modal fade" id="modalPolicyChild" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div id="js_loadFormOption_body" class="modal-body">
+            <div class="modal-body">
                 <textarea class="exampleContentBox" rows="6">
                     <ul>
                         <li>Trẻ em dưới 04 tuổi: ...</li>
                         <li>Trẻ em từ 05 – 09 tuổi: ...</li>
                         <li>Trẻ em từ 10 tuổi trở lên: ...</li>
                     </ul>
-                    <p>Ghi chú: Khách đi tour kèm 2 trẻ em ...</p>
+                    <div>Ghi chú: Khách đi tour kèm 2 trẻ em ...</div>
                 </textarea>
             </div>
         </div>
@@ -164,7 +164,7 @@
 <div class="modal fade" id="modalMenu" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div id="js_loadFormOption_body" class="modal-body">
+            <div class="modal-body">
                 <textarea class="exampleContentBox" rows="18">
                     <div class="menuTour_item">
                         <div class="menuTour_item_title">
@@ -195,7 +195,7 @@
 <div class="modal fade" id="modalHotel" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div id="js_loadFormOption_body" class="modal-body">
+            <div class="modal-body">
                 <textarea class="exampleContentBox" rows="10">
                     <div class="hotelTour_item">
                         <div class="hotelTour_item_title">
@@ -218,7 +218,7 @@
 <div class="modal fade" id="modalPolicyCancel" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div id="js_loadFormOption_body" class="modal-body">
+            <div class="modal-body">
                 <textarea class="exampleContentBox" rows="5">
                     <ul>
                         <li>Trong vòng 05 (năm) ngày: ...</li>

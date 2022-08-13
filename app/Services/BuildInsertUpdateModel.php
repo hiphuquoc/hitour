@@ -148,7 +148,7 @@ class BuildInsertUpdateModel {
         */
         $result     = [];
         if(!empty($dataForm)&&!empty($tourInfoId)){
-            $result['tour_info_id']         = $dataForm['tour_info_id'];
+            $result['tour_info_id']         = $tourInfoId;
             $result['special_content']      = $dataForm['special_content'] ?? null;
             $result['special_list']         = $dataForm['special_list'] ?? null;
             $result['include']              = $dataForm['include'] ?? null;

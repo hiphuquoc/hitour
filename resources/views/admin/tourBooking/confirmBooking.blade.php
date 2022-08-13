@@ -90,7 +90,7 @@
                                         </tr>
                                         <tr style="border-top:1px dotted #d1d1d1">
                                             <td style="width:140px;font-size:15px;padding:5px;">Tiêu chuẩn</td>
-                                            <td style="font-size:15px;padding:5px;">{{ $item->option->option }}</td>
+                                            <td style="font-size:15px;padding:5px;">{{ $item->quantiesAndPrices[0]->option_name }}</td>
                                         </tr>
                                         <tr style="border-top:1px dotted #d1d1d1;">
                                             <td style="width:140px;font-size:15px;padding:5px;">Lịch trình</td>

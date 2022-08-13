@@ -7,7 +7,16 @@
 <!-- END: SLICK -->
 
 <script type="text/javascript">
-    $(window).on('load', function () {
-        
-    });
+        mybutton 					    = document.getElementById("gotoTop");
+        window.onscroll                 = function() {scrollFunction()};
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display 	= "block";
+            } else {
+                mybutton.style.display 	= "none";
+            }
+        }
+        function gotoTop() {
+            document.documentElement.scrollTop          = 0;
+        }
 </script>

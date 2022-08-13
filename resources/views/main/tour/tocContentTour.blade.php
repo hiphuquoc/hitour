@@ -1,9 +1,9 @@
 <div class="tocContentTour">
     <a href="#diem-noi-bat-chuong-trinh-tour" class="tocContentTour_item">
-        <i class="fa-brands fa-diaspora"></i>Điểm nổi bật CT Tour
+        <i class="fa-solid fa-award"></i>Điểm nổi bật CT Tour
     </a>
     <a href="#bang-gia-tour" class="tocContentTour_item">
-        <i class="fa-brands fa-diaspora"></i>Bảng giá Tour
+        <i class="fa-solid fa-hand-holding-dollar"></i>Bảng giá Tour
     </a>
     @if($item->timetables->isNotEmpty())
         <a href="#lich-trinh-tour-du-lich" class="tocContentTour_item">

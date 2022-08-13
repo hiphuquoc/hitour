@@ -30,7 +30,7 @@
                     Đây là Mô tả của Chuyên mục được hiển thị trên website
                 ">
                     <i class="explainInput" data-feather='alert-circle'></i>
-                    <label class="form-label inputRequired" for="description">Mô tả Trang</label>
+                    <label class="form-label inputRequired" for="description">Mô tả hành trình</label>
                 </span>
                 <div class="inputWithNumberChacractor_count" data-charactor="description">
                     {{ !empty($item->seo->description) ? mb_strlen($item->seo->description) : 0 }}

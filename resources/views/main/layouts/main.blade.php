@@ -29,6 +29,10 @@
     <!-- === START:: Footer === -->
     @include('main.snippets.footer')
     <!-- === END:: Footer === -->
+
+    <div id="gotoTop" class="gotoTop" onclick="javascript:gotoTop();" style="display: block;">
+        <i class="fas fa-chevron-up"></i>
+    </div>
     
     <!-- === START:: Scripts Default === -->
     @include('main.snippets.scripts-default')
