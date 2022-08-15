@@ -28,11 +28,7 @@
                 </ul>
             @endif
             <!-- MESSAGE -->
-            @if(!empty($message))
-                <div class="js_message alert alert-{{ $message['type'] }}" style="display:inline-block;">
-                    <div class="alert-body">{!! $message['message'] !!}</div>
-                </div>
-            @endif
+            @include('admin.template.messageAction')
             
             <div class="pageAdminWithRightSidebar_main">
                 <!-- START:: Main content -->
@@ -106,7 +102,7 @@
                     </div>
                     <div class="pageAdminWithRightSidebar_main_content_item">
                         <div data-repeater-list="timetable">
-                            @if($item->timetables->isNotEmpty())
+                            @if(!empty($item->timetables))
                                 @foreach($item->timetables as $timetable)
                                     <div class="card" data-repeater-item="">
                                         <div class="card-header border-bottom">

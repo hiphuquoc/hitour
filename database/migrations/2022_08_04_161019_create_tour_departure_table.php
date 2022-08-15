@@ -15,10 +15,14 @@ return new class extends Migration
     {
         Schema::create('tour_departure', function (Blueprint $table) {
             $table->id();
-            $table->integer('seo_id');
-            $table->integer('region_id');
-            $table->string('name');
+            $table->text('name');
             $table->text('description');
+            $table->integer('seo_id');         // [ref: > seo.id]
+            $table->integer('district_id')->nullable();
+            $table->integer('province_id');
+            $table->integer('region_id');
+            $table->boolean('island')->default(0);
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

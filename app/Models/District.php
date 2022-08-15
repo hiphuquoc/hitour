@@ -14,8 +14,7 @@ class District extends Model {
         if(!empty($idProvince)){
             $result     = District::select('id', 'district_name as name', 'district_type as type', 'district_name_with_type as name_with_type')
                                     ->where('province_id', $idProvince)
-                                    ->get()
-                                    ->toArray();
+                                    ->get();
         }
         return $result;
     }

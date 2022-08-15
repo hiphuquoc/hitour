@@ -1,3 +1,5 @@
+<input type="hidden" name="seo_id" value="{{ $item->seo->id ?? null }}" />
+
 <div class="formBox">
     <div class="formBox_full">
         <!-- One Row -->

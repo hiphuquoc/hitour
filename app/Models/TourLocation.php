@@ -14,7 +14,6 @@ class TourLocation extends Model {
     protected $fillable     = [
         'name', 
         'description',
-        'content',
         'seo_id', 
         'district_id',
         'province_id',

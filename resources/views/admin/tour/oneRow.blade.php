@@ -130,13 +130,13 @@
             </a>
         </div>
         <div class="icon-wrapper iconAction">
-            <a href="{{ route('admin.tour.viewEdit', ['id' => $item->id]) }}">
+            <a href="{{ route('admin.tour.view', ['id' => $item->id, 'type' => 'edit']) }}">
                 <i data-feather='edit'></i>
                 <div>Sửa</div>
             </a>
         </div>
         <div class="icon-wrapper iconAction">
-            <a href="{{ route('admin.tour.viewEdit', ['id' => $item->id, 'type' => 'copy']) }}">
+            <a href="{{ route('admin.tour.view', ['id' => $item->id, 'type' => 'copy']) }}">
                 <i data-feather='copy'></i>
                 <div>Chép</div>
             </a>

@@ -77,13 +77,13 @@
             </div>
         @endif
         <div class="icon-wrapper iconAction">
-            <a href="{{ route('admin.tourDeparture.viewEdit', ['id' => $item->id ?? 0 ]) }}">
+            <a href="{{ route('admin.tourDeparture.view', ['id' => $item->id ?? 0, 'type' => 'edit' ]) }}">
                 <i data-feather='edit'></i>
                 <div>Sửa</div>
             </a>
         </div>
         <div class="icon-wrapper iconAction">
-            <a href="{{ route('admin.tourDeparture.viewEdit', ['id' => $item->id ?? 0, 'type' => 'copy']) }}">
+            <a href="{{ route('admin.tourDeparture.view', ['id' => $item->id ?? 0, 'type' => 'copy']) }}">
                 <i data-feather='copy'></i>
                 <div>Chép</div>
             </a>

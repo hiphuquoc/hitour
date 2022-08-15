@@ -11,8 +11,11 @@ class TourDeparture extends Model {
     protected $fillable     = [
         'name', 
         'description',
-        'content',
-        'seo_id'
+        'seo_id', 
+        'district_id',
+        'province_id',
+        'region_id',
+        'note'
     ];
     public $timestamps      = true;
 
@@ -27,7 +30,9 @@ class TourDeparture extends Model {
                         ->when(!empty($params['search_region']), function($query) use($params){
                             $query->where('region_id', $params['search_region']);
                         })
-                        ->with('seo', 'files')
+                        ->with(['files' => function($query){
+                            $query->where('relation_table', 'tour_departure');
+                        }], 'seo')
                         ->paginate($paginate);
         return $result;
     }
@@ -63,6 +68,14 @@ class TourDeparture extends Model {
 
     public function region(){
         return $this->hasOne(\App\Models\Region::class, 'id', 'region_id');
+    }
+
+    public function province(){
+        return $this->hasOne(\App\Models\Province::class, 'id', 'province_id');
+    }
+
+    public function district(){
+        return $this->hasOne(\App\Models\District::class, 'id', 'district_id');
     }
 
     public function tours(){

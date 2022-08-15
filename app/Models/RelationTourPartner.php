@@ -48,6 +48,6 @@ class RelationTourPartner extends Model {
     }
 
     public function infoPartner(){
-        return $this->hasOne(\App\Models\Partner::class, 'id', 'partner_info_id');
+        return $this->hasOne(\App\Models\TourPartner::class, 'id', 'partner_info_id');
     }
 }

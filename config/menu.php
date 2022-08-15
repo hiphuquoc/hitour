@@ -149,31 +149,69 @@ return [
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '3. Chi tiết Tour',
+                    'name'  => '3. Đối tác Tour',
+                    'route' => 'admin.tourPartner.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '4. Chi tiết Tour',
                     'route' => 'admin.tour.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '4. Đối tác Tour',
-                    'route' => 'admin.partner.list',
-                    'icon'  => '<i data-feather=\'circle\'></i>'
-                ],
-                [
-                    'name'  => '5. Nhân viên tư vấn',
-                    'route' => 'admin.staff.list',
-                    'icon'  => '<i data-feather=\'circle\'></i>'
-                ],
-                [
-                    'name'  => '6. Booking Tour',
+                    'name'  => '5. Booking Tour',
                     'route' => 'admin.tourBooking.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ]
             ]
         ],
         [
+            'name'      => 'Quản lí Tàu',
+            'route'     => '',
+            'icon'      => '<i data-feather=\'bookmark\'></i>',
+            'child'     => [
+                [
+                    'name'  => '1. Điểm đến',
+                    'route' => 'admin.shipLocation.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '2. Điểm khởi hành',
+                    'route' => 'admin.shipDeparture.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '3. Đối tác Tàu',
+                    'route' => 'admin.shipPartner.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                // [
+                //     'name'  => '3. Chi tiết Tour',
+                //     'route' => 'admin.ship.list',
+                //     'icon'  => '<i data-feather=\'circle\'></i>'
+                // ],
+                
+                // [
+                //     'name'  => '5. Nhân viên tư vấn',
+                //     'route' => 'admin.staff.list',
+                //     'icon'  => '<i data-feather=\'circle\'></i>'
+                // ],
+                // [
+                //     'name'  => '6. Booking Tour',
+                //     'route' => 'admin.tourBooking.list',
+                //     'icon'  => '<i data-feather=\'circle\'></i>'
+                // ]
+            ]
+        ],
+        [
+            'name'  => 'Nhân viên tư vấn',
+            'route' => 'admin.staff.list',
+            'icon'  => '<i data-feather=\'bookmark\'></i>'
+        ],
+        [
             'name'      => 'Quản lí Ảnh',
             'route'     => 'admin.image.list',
             'icon'      => '<i data-feather=\'bookmark\'></i>'
-        ]
+        ],
     ]
 ];

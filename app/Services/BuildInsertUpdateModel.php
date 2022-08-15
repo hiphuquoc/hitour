@@ -71,7 +71,7 @@ class BuildInsertUpdateModel {
             if(!empty($pageId)) $result['seo_id'] = $pageId;
             $result['region_id']            = $dataForm['region'];
             $result['island']               = !empty($dataForm['island']) ? 1 : 0;
-            $result['province_id']          = $dataForm['province'];
+            $result['province_id']          = $dataForm['province'] ?? null;
             $result['district_id']          = $dataForm['district'] ?? null;
         }
         return $result;
@@ -91,6 +91,8 @@ class BuildInsertUpdateModel {
             $result['description']          = $dataForm['description'] ?? null;
             if(!empty($pageId)) $result['seo_id'] = $pageId;
             $result['region_id']            = $dataForm['region'];
+            $result['province_id']          = $dataForm['province'] ?? null;
+            $result['district_id']          = $dataForm['district'] ?? null;
         }
         return $result;
     }
@@ -162,6 +164,46 @@ class BuildInsertUpdateModel {
         return $result;
     }
 
+    public static function buildArrayTableShipLocation($dataForm, $pageId = null){
+        /* upload ship_location
+            + name
+            + seo_id
+            + region_id
+            + province_id
+            + district_id
+        */
+        $result                             = [];
+        if(!empty($dataForm)){
+            $result['name']                 = $dataForm['title'] ?? null;
+            $result['description']          = $dataForm['description'] ?? null;
+            if(!empty($pageId)) $result['seo_id'] = $pageId;
+            $result['region_id']            = $dataForm['region'];
+            $result['province_id']          = $dataForm['province'] ?? null;
+            $result['district_id']          = $dataForm['district'] ?? null;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableShipDeparture($dataForm, $pageId = null){
+        /* upload ship_departure
+            + name
+            + seo_id
+            + region_id
+            + province_id
+            + district_id
+        */
+        $result                             = [];
+        if(!empty($dataForm)){
+            $result['name']                 = $dataForm['title'] ?? null;
+            $result['description']          = $dataForm['description'] ?? null;
+            if(!empty($pageId)) $result['seo_id'] = $pageId;
+            $result['region_id']            = $dataForm['region'];
+            $result['province_id']          = $dataForm['province'] ?? null;
+            $result['district_id']          = $dataForm['district'] ?? null;
+        }
+        return $result;
+    }
+
     public static function buildArrayTableStaffInfo($dataForm, $avatarPath = null){
         /*
             fullname
@@ -184,7 +226,7 @@ class BuildInsertUpdateModel {
         return $result;
     }
 
-    public static function buildArrayTablePartnerInfo($dataForm, $logoPath = null){
+    public static function buildArrayTableTourPartner($dataForm, $logoPath = null){
         /*
             name
             company_name
@@ -211,7 +253,7 @@ class BuildInsertUpdateModel {
         return $result;
     }
 
-    public static function buildArrayTablePartnerContact($dataForm){
+    public static function buildArrayTableTourPartnerContact($dataForm){
          /*
             partner_id
             name
@@ -358,6 +400,57 @@ class BuildInsertUpdateModel {
             $result['vat_address']              = $dataForm['vat_code'];
             $result['vat_note']                 = $dataForm['vat_note'];
             if($type=='insert') $result['created_by'] = Auth::id() ?? 0;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableShipPartner($dataForm, $seoId = null, $logoPath = null){
+        /*
+            seo_id
+            name
+            company_name
+            company_code
+            company_address
+            company_website
+            company_hotline
+            company_email
+            company_logo
+            created_by
+        */
+        $result                         = [];
+        if(!empty($dataForm)){
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
+            $result['name']             = $dataForm['name'] ?? null;
+            $result['company_name']     = $dataForm['company_name'] ?? null;
+            $result['company_code']     = $dataForm['company_code'] ?? null;
+            $result['company_address']  = $dataForm['company_address'] ?? null;
+            $result['company_website']  = $dataForm['company_website'] ?? null;
+            $result['company_hotline']  = $dataForm['company_hotline'] ?? null;
+            $result['company_email']    = $dataForm['company_email'] ?? null;
+            $result['created_by']       = Auth::id() ?? 0;
+            if(!empty($logoPath)) $result['company_logo'] = $logoPath;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableShipPartnerContact($dataForm){
+         /*
+            partner_id
+            name
+            address
+            phone
+            zalo
+            email
+            # default
+        */
+        $result                         = [];
+        if(!empty($dataForm)&&!empty($dataForm['partner_id'])){
+            $result['partner_id']       = $dataForm['partner_id'];
+            $result['name']             = $dataForm['name'] ?? null;
+            $result['address']          = $dataForm['address'] ?? null;
+            $result['phone']            = $dataForm['phone'] ?? null;
+            $result['zalo']             = $dataForm['zalo'] ?? null;
+            $result['email']            = $dataForm['email'] ?? null;
         }
         return $result;
     }

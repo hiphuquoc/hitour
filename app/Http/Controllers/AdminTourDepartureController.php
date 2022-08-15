@@ -10,7 +10,8 @@ use App\Http\Controllers\AdminSliderController;
 use App\Models\TourDeparture;
 use App\Models\Seo;
 use App\Services\BuildInsertUpdateModel;
-
+use App\Models\District;
+use App\Models\Province;
 use App\Models\SystemFile;
 use Illuminate\Support\Facades\DB;
 
@@ -25,35 +26,30 @@ class AdminTourDepartureController extends Controller {
     }
 
     public function list(Request $request){
-        $params                         = [];
+        $params         = [];
         /* Search theo tên */
         if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
         /* Search theo vùng miền */
         if(!empty($request->get('search_region'))) $params['search_region'] = $request->get('search_region');
         /* lấy dữ liệu */
-        $list               = TourDeparture::getList($params);
+        $list           = TourDeparture::getList($params);
         return view('admin.tourDeparture.list', compact('list', 'params'));
     }
 
-    public function viewEdit(Request $request, $id){
-        if(!empty($id)){
-            $item           = TourDeparture::select('*')
-                                            ->where('id', $id)
-                                            ->with('seo', 'files')
-                                            ->first();
-            $message        = $request->get('message') ?? null; 
-            $content        = Storage::get(config('admin.storage.contentTourDeparture').$item->seo->slug.'.html');
-            $type           = 'edit';
-            if(!empty($request->get('type'))) $type = $request->get('type');
-            if(!empty($item)) return view('admin.tourDeparture.view', compact('item', 'type', 'content', 'message'));
-
-        }
-        return redirect()->route('admin.tourDeparture.list');
-    }
-
-    public function viewInsert(Request $request){
-        $type               = 'create';
-        return view('admin.tourDeparture.view', compact('type'));
+    public function view(Request $request){
+        $id             = $request->get('id') ?? 0;
+        $item           = TourDeparture::select('*')
+                            ->where('id', $id)
+                            ->with(['files' => function($query){
+                                $query->where('relation_table', 'tour_departure');
+                            }], 'seo')
+                            ->first();
+        $provinces      = Province::getItemByIdRegion($item->region_id ?? 0);
+        $districts      = District::getItemByIdProvince($item->province_id ?? 0);
+        $message        = $request->get('message') ?? null; 
+        $type           = !empty($item) ? 'edit' : 'create';
+        $type           = $request->get('type') ?? $type;
+        return view('admin.tourDeparture.view', compact('item', 'type', 'provinces', 'districts', 'message'));
     }
 
     public function create(TourDepartureRequest $request){
@@ -72,13 +68,13 @@ class AdminTourDepartureController extends Controller {
             $insertTourDeparture    = $this->BuildInsertUpdateModel->buildArrayTableTourDeparture($request->all(), $pageId);
             $idTourDeparture        = TourDeparture::insertItem($insertTourDeparture);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentTourDeparture').$request->get('slug').'.html', $request->get('content'));
+            // Storage::put(config('admin.storage.contentTourDeparture').$request->get('slug').'.html', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
                 $params         = [
                     'attachment_id'     => $idTourDeparture,
-                    'relation_table'    => 'tour_location',
+                    'relation_table'    => 'tour_departure',
                     'name'              => $name
                 ];
                 AdminSliderController::uploadSlider($request->file('slider'), $params);
@@ -97,10 +93,8 @@ class AdminTourDepartureController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
-        return redirect()->route('admin.tourDeparture.viewEdit', [
-            'id'        => $idTourDeparture,
-            'message'   => $message
-        ]);
+        $request->session()->put('message', $message);
+        return redirect()->route('admin.tourDeparture.view', ['id' => $idTourDeparture]);
     }
 
     public function update(TourDepartureRequest $request){
@@ -119,13 +113,13 @@ class AdminTourDepartureController extends Controller {
             $updateTourDeparture    = $this->BuildInsertUpdateModel->buildArrayTableTourDeparture($request->all());
             TourDeparture::updateItem($request->get('tour_departure_id'), $updateTourDeparture);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentTourDeparture').$request->get('slug').'.html', $request->get('content'));
+            // Storage::put(config('admin.storage.contentTourDeparture').$request->get('slug').'.html', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name               = !empty($request->get('slug')) ? $request->get('slug') : time();
                 $params             = [
                     'attachment_id'     => $request->get('tour_departure_id'),
-                    'relation_table'    => 'tour_location',
+                    'relation_table'    => 'tour_departure',
                     'name'              => $name
                 ];
                 AdminSliderController::uploadSlider($request->file('slider'), $params);
@@ -144,31 +138,29 @@ class AdminTourDepartureController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
-        return redirect()->route('admin.tourDeparture.viewEdit', [
-            'id'        => $request->get('tour_departure_id'),
-            'message'   => $message
-        ]);
+        $request->session()->put('message', $message);
+        return redirect()->route('admin.tourDeparture.view', ['id'  => $request->get('tour_departure_id')]);
     }
 
-    public static function delete(Request $request){
+    public function delete(Request $request){
         if(!empty($request->get('id'))){
             try {
                 DB::beginTransaction();
                 $id         = $request->get('id');
                 /* lấy thông tin seo */
                 $infoSeo    = DB::table('seo')
-                                ->join('tour_location', 'tour_location.seo_id', '=', 'seo.id')
+                                ->join('tour_departure', 'tour_departure.seo_id', '=', 'seo.id')
                                 ->select('seo.id')
-                                ->where('tour_location.id', $id)
+                                ->where('tour_departure.id', $id)
                                 ->first();
                 $idSeo      = $infoSeo->id ?? 0;
                 /* lấy thông tin slider */
                 $infoSlider = DB::table('system_file')
-                                ->join('tour_location', 'tour_location.id', '=', 'system_file.attachment_id')
+                                ->join('tour_departure', 'tour_departure.id', '=', 'system_file.attachment_id')
                                 ->select('system_file.id', 'system_file.file_path')
                                 ->where('system_file.attachment_id', $id)
                                 ->get();
-                /* delete bảng tour_location */
+                /* delete bảng tour_departure */
                 TourDeparture::find($id)->delete();
                 /* delete bảng seo */
                 Seo::find($idSeo)->delete();

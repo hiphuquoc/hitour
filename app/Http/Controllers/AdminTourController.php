@@ -16,7 +16,7 @@ use App\Models\RelationTourLocation;
 use App\Models\RelationTourStaff;
 use App\Models\RelationTourPartner;
 use App\Models\Staff;
-use App\Models\Partner;
+use App\Models\TourPartner;
 use App\Models\TourPrice;
 use App\Models\TourOption;
 use App\Models\Seo;
@@ -51,42 +51,33 @@ class AdminTourController extends Controller {
         /* khu vực Tour */
         $tourLocations                  = TourLocation::all();
         /* đối tác */
-        $partners                       = Partner::all();
+        $partners                       = TourPartner::all();
         /* nhân viên */
         $staffs                         = Staff::all();
         return view('admin.tour.list', compact('list', 'params', 'tourLocations', 'partners', 'staffs'));
     }
 
-    public function viewEdit(Request $request, $id){
-        if(!empty($id)){
-            $item           = Tour::select('*')
-                                    ->where('id', $id)
-                                    ->with(['files' => function($query){
-                                        $query->where('relation_table', 'tour_info');
-                                    }], 'seo', 'content', 'timetables')
-                                    ->first();
-            $tourLocations  = TourLocation::all();
-            $tourDepartures = TourDeparture::all();
-            $staffs         = Staff::all();
-            $partners       = Partner::all();
-            $allPage        = Seo::all();
-            // $content        = Storage::get(config('admin.storage.contentTour').$item->seo->slug.'.html');
-            $message        = $request->get('message') ?? null; 
-            $type           = 'edit';
-            if(!empty($request->get('type'))) $type = $request->get('type');
-            if(!empty($item)) return view('admin.tour.view', compact('item', 'type', 'tourLocations', 'tourDepartures', 'staffs', 'partners', 'allPage', 'message'));
-        }
-        return redirect()->route('admin.tour.list');
-    }
-
-    public function viewInsert(Request $request){
+    public function view(Request $request){
         $tourLocations      = TourLocation::all();
         $tourDepartures     = TourDeparture::all();
         $staffs             = Staff::all();
-        $partners           = Partner::all();
+        $partners           = TourPartner::all();
         $allPage            = Seo::all();
-        $type               = 'create';
-        return view('admin.tour.view', compact('type', 'tourLocations', 'tourDepartures', 'staffs', 'partners', 'allPage'));
+        // $content        = Storage::get(config('admin.storage.contentTour').$item->seo->slug.'.html');
+        $message            = $request->get('message') ?? null;
+        $id                 = $request->get('id') ?? 0;
+        $item               = Tour::select('*')
+                                ->where('id', $request->get('id'))
+                                ->with(['files' => function($query){
+                                    $query->where('relation_table', 'tour_info');
+                                }], 'seo', 'content', 'timetables')
+                                ->first();
+        /* type */
+        $type               = !empty($item) ? 'edit' : 'create';
+        $type               = $request->get('type') ?? $type;
+        return view('admin.tour.view', compact('item', 'type', 'tourLocations', 'tourDepartures', 'staffs', 'partners', 'allPage', 'message'));
+
+        // return redirect()->route('admin.tour.list');
     }
 
     public function create(TourRequest $request){
@@ -188,10 +179,8 @@ class AdminTourController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
-        return redirect()->route('admin.tour.viewEdit', [
-            'id'        => $idTour,
-            'message'   => $message
-        ]);
+        $request->session()->put('message', $message);
+        return redirect()->route('admin.tour.view', ['id' => $idTour]);
     }
 
     public function update(TourRequest $request){
@@ -275,10 +264,8 @@ class AdminTourController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
-        return redirect()->route('admin.tour.viewEdit', [
-            'id'        => $idTour,
-            'message'   => $message
-        ]);
+        $request->session()->put('message', $message);
+        return redirect()->route('admin.tour.view', ['id' => $idTour]);
     }
 
     public static function delete(Request $request){

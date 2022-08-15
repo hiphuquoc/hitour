@@ -26,39 +26,30 @@ class AdminTourLocationController extends Controller {
     }
 
     public function list(Request $request){
-        $params                         = [];
+        $params         = [];
         /* Search theo tên */
         if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
         /* Search theo vùng miền */
         if(!empty($request->get('search_region'))) $params['search_region'] = $request->get('search_region');
         /* lấy dữ liệu */
-        $list               = TourLocation::getList($params);
+        $list           = TourLocation::getList($params);
         return view('admin.tourLocation.list', compact('list', 'params'));
     }
 
-    public function viewEdit(Request $request, $id){
-        if(!empty($id)){
-            $item           = TourLocation::select('*')
-                                            ->where('id', $id)
-                                            ->with(['files' => function($query){
-                                                $query->where('relation_table', 'tour_location');
-                                            }], 'seo')
-                                            ->first();
-            $provinces      = Province::getItemByIdRegion($item->region_id);
-            $districts      = District::getItemByIdProvince($item->province_id);
-            $content        = Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.html');
-            $message        = $request->get('message') ?? null; 
-            $type           = 'edit';
-            if(!empty($request->get('type'))) $type = $request->get('type');
-            if(!empty($item)) return view('admin.tourLocation.view', compact('item', 'type', 'provinces', 'districts', 'content', 'message'));
-
-        }
-        return redirect()->route('admin.TourLocation.list');
-    }
-
-    public function viewInsert(Request $request){
-        $type               = 'create';
-        return view('admin.tourLocation.view', compact('type'));
+    public function view(Request $request){
+        $id             = $request->get('id') ?? 0;
+        $item           = TourLocation::select('*')
+                            ->where('id', $id)
+                            ->with(['files' => function($query){
+                                $query->where('relation_table', 'tour_location');
+                            }], 'seo')
+                            ->first();
+        $provinces      = Province::getItemByIdRegion($item->region_id ?? 0);
+        $districts      = District::getItemByIdProvince($item->province_id ?? 0);
+        $message        = $request->get('message') ?? null; 
+        $type           = !empty($item) ? 'edit' : 'create';
+        $type           = $request->get('type') ?? $type;
+        return view('admin.tourLocation.view', compact('item', 'type', 'provinces', 'districts', 'message'));
     }
 
     public function create(TourLocationRequest $request){
@@ -77,7 +68,7 @@ class AdminTourLocationController extends Controller {
             $insertTourLocation = $this->BuildInsertUpdateModel->buildArrayTableTourLocation($request->all(), $pageId);
             $idTourLocation     = TourLocation::insertItem($insertTourLocation);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentTourLocation').$request->get('slug').'.html', $request->get('content'));
+            // Storage::put(config('admin.storage.contentTourLocation').$request->get('slug').'.html', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
@@ -102,10 +93,8 @@ class AdminTourLocationController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
-        return redirect()->route('admin.tourLocation.viewEdit', [
-            'id'        => $idTourLocation,
-            'message'   => $message
-        ]);
+        $request->session()->put('message', $message);
+        return redirect()->route('admin.tourLocation.view', ['id' => $idTourLocation]);
     }
 
     public function update(TourLocationRequest $request){
@@ -124,7 +113,7 @@ class AdminTourLocationController extends Controller {
             $updateTourLocation = $this->BuildInsertUpdateModel->buildArrayTableTourLocation($request->all());
             TourLocation::updateItem($request->get('tour_location_id'), $updateTourLocation);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentTourLocation').$request->get('slug').'.html', $request->get('content'));
+            // Storage::put(config('admin.storage.contentTourLocation').$request->get('slug').'.html', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
@@ -149,10 +138,8 @@ class AdminTourLocationController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
-        return redirect()->route('admin.tourLocation.viewEdit', [
-            'id'        => $request->get('tour_location_id'),
-            'message'   => $message
-        ]);
+        $request->session()->put('message', $message);
+        return redirect()->route('admin.tourLocation.view', ['id' => $request->get('tour_location_id')]);
     }
 
     public static function delete(Request $request){
@@ -194,21 +181,4 @@ class AdminTourLocationController extends Controller {
             }
         }
     }
-
-    // private function updateLevelChild($idPage){
-    //     $child          = Seo::select('id')->where('parent', $idPage)->get();
-    //     if(!empty($child)){
-    //         $infoParent = Seo::select('level')->where('id', $idPage)->firstOrFail();
-    //         $level      = $infoParent->level;
-    //         $levelChild = $level + 1;
-    //         foreach($child as $item){
-    //             /* update level bảng seo */
-    //             Seo::updateItem($item->id, ['level' => $levelChild]);
-    //             /* update level bảng TourLocation_info */
-    //             TourLocation::select('*')->where('page_id', $item->id)->update(['TourLocation_level' => $levelChild]);
-    //             /* update tiếp phẩn tử con */
-    //             $this->updateLevelChild($item->id);
-    //         }
-    //     }
-    // }
 }

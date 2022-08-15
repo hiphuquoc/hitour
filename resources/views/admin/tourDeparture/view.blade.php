@@ -27,11 +27,7 @@
                 </ul>
             @endif
             <!-- MESSAGE -->
-            @if(!empty($message))
-                <div class="js_message alert alert-{{ $message['type'] }}" style="display:inline-block;">
-                    <div class="alert-body">{!! $message['message'] !!}</div>
-                </div>
-            @endif
+            @include('admin.template.messageAction')
             <!-- END:: Error -->
             <div class="pageAdminWithRightSidebar_main">
                 <div class="pageAdminWithRightSidebar_main_content">
@@ -56,18 +52,6 @@
                             <div class="card-body">
 
                                 @include('admin.form.formSeo')
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pageAdminWithRightSidebar_main_content_item width100">
-                        <div class="card">
-                            <div class="card-header border-bottom">
-                                <h4 class="card-title">Nội dung</h4>
-                            </div>
-                            <div class="card-body">
-
-                                @include('admin.form.formContent')
                                 
                             </div>
                         </div>

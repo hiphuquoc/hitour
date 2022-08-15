@@ -6,12 +6,19 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 
 use App\Http\Controllers\AdminTourLocationController;
 use App\Http\Controllers\AdminTourDepartureController;
+use App\Http\Controllers\AdminTourPartnerController;
+use App\Http\Controllers\AdminTourPartnerContactController;
 use App\Http\Controllers\AdminTourController;
 use App\Http\Controllers\AdminTourBookingController;
 use App\Http\Controllers\AdminTourOptionController;
+
+use App\Http\Controllers\AdminShipLocationController;
+use App\Http\Controllers\AdminShipDepartureController;
+use App\Http\Controllers\AdminShipPartnerController;
+use App\Http\Controllers\AdminShipPartnerContactController;
+
 use App\Http\Controllers\AdminStaffController;
-use App\Http\Controllers\AdminPartnerController;
-use App\Http\Controllers\AdminPartnerContactController;
+
 use App\Http\Controllers\AdminCostController;
 use App\Http\Controllers\AdminImageController;
 
@@ -42,9 +49,8 @@ Route::prefix('admin')->group(function(){
         /* ===== TOUR LOCATION ===== */
         Route::prefix('tourLocation')->group(function(){
             Route::get('/', [AdminTourLocationController::class, 'list'])->name('admin.tourLocation.list');
-            Route::get('/viewInsert', [AdminTourLocationController::class, 'viewInsert'])->name('admin.tourLocation.viewInsert');
             Route::post('/create', [AdminTourLocationController::class, 'create'])->name('admin.tourLocation.create');
-            Route::get('/{id}/viewEdit', [AdminTourLocationController::class, 'viewEdit'])->name('admin.tourLocation.viewEdit');
+            Route::get('/view', [AdminTourLocationController::class, 'view'])->name('admin.tourLocation.view');
             Route::post('/update', [AdminTourLocationController::class, 'update'])->name('admin.tourLocation.update');
             /* Delete AJAX */
             Route::get('/delete', [AdminTourLocationController::class, 'delete'])->name('admin.tourLocation.delete');
@@ -52,19 +58,31 @@ Route::prefix('admin')->group(function(){
         /* ===== TOUR DEPARTURE ===== */
         Route::prefix('tourDeparture')->group(function(){
             Route::get('/', [AdminTourDepartureController::class, 'list'])->name('admin.tourDeparture.list');
-            Route::get('/viewInsert', [AdminTourDepartureController::class, 'viewInsert'])->name('admin.tourDeparture.viewInsert');
             Route::post('/create', [AdminTourDepartureController::class, 'create'])->name('admin.tourDeparture.create');
-            Route::get('/{id}/viewEdit', [AdminTourDepartureController::class, 'viewEdit'])->name('admin.tourDeparture.viewEdit');
+            Route::get('/view', [AdminTourDepartureController::class, 'view'])->name('admin.tourDeparture.view');
             Route::post('/update', [AdminTourDepartureController::class, 'update'])->name('admin.tourDeparture.update');
             /* Delete AJAX */
             Route::get('/delete', [AdminTourDepartureController::class, 'delete'])->name('admin.tourDeparture.delete');
         });
+        /* ===== TOUR PARTNER ===== */
+        Route::prefix('tourPartner')->group(function(){
+            Route::get('/', [AdminTourPartnerController::class, 'list'])->name('admin.tourPartner.list');
+            Route::post('/create', [AdminTourPartnerController::class, 'create'])->name('admin.tourPartner.create');
+            Route::get('/view', [AdminTourPartnerController::class, 'view'])->name('admin.tourPartner.view');
+            Route::post('/update', [AdminTourPartnerController::class, 'update'])->name('admin.tourPartner.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminTourPartnerController::class, 'delete'])->name('admin.tourPartner.delete');
+            Route::post('/createContact', [AdminTourPartnerContactController::class, 'create'])->name('admin.tourPartner.createContact');
+            Route::post('/updateContact', [AdminTourPartnerContactController::class, 'update'])->name('admin.tourPartner.updateContact');
+            Route::post('/loadContact', [AdminTourPartnerContactController::class, 'loadContact'])->name('admin.tourPartner.loadContact');
+            Route::post('/loadFormContact', [AdminTourPartnerContactController::class, 'loadFormContact'])->name('admin.tourPartner.loadFormContact');
+            Route::post('/deleteContact', [AdminTourPartnerContactController::class, 'delete'])->name('admin.tourPartner.deleteContact');
+        });
         /* ===== TOUR ===== */
         Route::prefix('tour')->group(function(){
             Route::get('/', [AdminTourController::class, 'list'])->name('admin.tour.list');
-            Route::get('/viewInsert', [AdminTourController::class, 'viewInsert'])->name('admin.tour.viewInsert');
             Route::post('/create', [AdminTourController::class, 'create'])->name('admin.tour.create');
-            Route::get('/{id}/viewEdit', [AdminTourController::class, 'viewEdit'])->name('admin.tour.viewEdit');
+            Route::get('/view', [AdminTourController::class, 'view'])->name('admin.tour.view');
             Route::post('/update', [AdminTourController::class, 'update'])->name('admin.tour.update');
             /* Delete AJAX */
             Route::get('/delete', [AdminTourController::class, 'delete'])->name('admin.tour.delete');
@@ -73,31 +91,6 @@ Route::prefix('admin')->group(function(){
             Route::post('/createOption', [AdminTourOptionController::class, 'create'])->name('admin.tourOption.createOption');
             Route::post('/updateOption', [AdminTourOptionController::class, 'update'])->name('admin.tourOption.updateOption');
             Route::post('/deleteOption', [AdminTourOptionController::class, 'delete'])->name('admin.tourOption.deleteOption');
-        });
-        /* ===== PARTNER ===== */
-        Route::prefix('partner')->group(function(){
-            Route::get('/', [AdminPartnerController::class, 'list'])->name('admin.partner.list');
-            Route::get('/viewInsert', [AdminPartnerController::class, 'viewInsert'])->name('admin.partner.viewInsert');
-            Route::post('/create', [AdminPartnerController::class, 'create'])->name('admin.partner.create');
-            Route::get('/{id}/viewEdit', [AdminPartnerController::class, 'viewEdit'])->name('admin.partner.viewEdit');
-            Route::post('/update', [AdminPartnerController::class, 'update'])->name('admin.partner.update');
-            /* Delete AJAX */
-            Route::get('/delete', [AdminPartnerController::class, 'delete'])->name('admin.partner.delete');
-            Route::post('/createContact', [AdminPartnerContactController::class, 'create'])->name('admin.partner.createContact');
-            Route::post('/updateContact', [AdminPartnerContactController::class, 'update'])->name('admin.partner.updateContact');
-            Route::post('/loadContact', [AdminPartnerContactController::class, 'loadContact'])->name('admin.partner.loadContact');
-            Route::post('/loadFormContact', [AdminPartnerContactController::class, 'loadFormContact'])->name('admin.partner.loadFormContact');
-            Route::post('/deleteContact', [AdminPartnerContactController::class, 'delete'])->name('admin.partner.deleteContact');
-        });
-        /* ===== STAFF ===== */
-        Route::prefix('staff')->group(function(){
-            Route::get('/', [AdminStaffController::class, 'list'])->name('admin.staff.list');
-            Route::get('/viewInsert', [AdminStaffController::class, 'viewInsert'])->name('admin.staff.viewInsert');
-            Route::post('/create', [AdminStaffController::class, 'create'])->name('admin.staff.create');
-            Route::get('/{id}/viewEdit', [AdminStaffController::class, 'viewEdit'])->name('admin.staff.viewEdit');
-            Route::post('/update', [AdminStaffController::class, 'update'])->name('admin.staff.update');
-            /* Delete AJAX */
-            Route::get('/delete', [AdminStaffController::class, 'delete'])->name('admin.staff.delete');
         });
         /* ===== TOUR BOOKING ===== */
         Route::prefix('tour_booking')->group(function(){
@@ -116,6 +109,48 @@ Route::prefix('admin')->group(function(){
             // Route::post('/createOption', [AdminTourOptionController::class, 'create'])->name('admin.tourOption.createOption');
             // Route::post('/updateOption', [AdminTourOptionController::class, 'update'])->name('admin.tourOption.updateOption');
             // Route::post('/deleteOption', [AdminTourOptionController::class, 'delete'])->name('admin.tourOption.deleteOption');
+        });
+        /* ===== SHIP LOCATION ===== */
+        Route::prefix('shipLocation')->group(function(){
+            Route::get('/', [AdminShipLocationController::class, 'list'])->name('admin.shipLocation.list');
+            Route::post('/create', [AdminShipLocationController::class, 'create'])->name('admin.shipLocation.create');
+            Route::get('/view', [AdminShipLocationController::class, 'view'])->name('admin.shipLocation.view');
+            Route::post('/update', [AdminShipLocationController::class, 'update'])->name('admin.shipLocation.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminShipLocationController::class, 'delete'])->name('admin.shipLocation.delete');
+        });
+        /* ===== SHIP DEPARTURE ===== */
+        Route::prefix('shipDeparture')->group(function(){
+            Route::get('/', [AdminShipDepartureController::class, 'list'])->name('admin.shipDeparture.list');
+            Route::post('/create', [AdminShipDepartureController::class, 'create'])->name('admin.shipDeparture.create');
+            Route::get('/view', [AdminShipDepartureController::class, 'view'])->name('admin.shipDeparture.view');
+            Route::post('/update', [AdminShipDepartureController::class, 'update'])->name('admin.shipDeparture.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminShipDepartureController::class, 'delete'])->name('admin.shipDeparture.delete');
+        });
+        /* ===== SHIP PARTNER ===== */
+        Route::prefix('shipPartner')->group(function(){
+            Route::get('/', [AdminShipPartnerController::class, 'list'])->name('admin.shipPartner.list');
+            Route::get('/view', [AdminShipPartnerController::class, 'view'])->name('admin.shipPartner.view');
+            Route::post('/create', [AdminShipPartnerController::class, 'create'])->name('admin.shipPartner.create');
+            Route::post('/update', [AdminShipPartnerController::class, 'update'])->name('admin.shipPartner.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminShipPartnerController::class, 'delete'])->name('admin.shipPartner.delete');
+            Route::post('/createContact', [AdminShipPartnerContactController::class, 'create'])->name('admin.shipPartner.createContact');
+            Route::post('/updateContact', [AdminShipPartnerContactController::class, 'update'])->name('admin.shipPartner.updateContact');
+            Route::post('/loadContact', [AdminShipPartnerContactController::class, 'loadContact'])->name('admin.shipPartner.loadContact');
+            Route::post('/loadFormContact', [AdminShipPartnerContactController::class, 'loadFormContact'])->name('admin.shipPartner.loadFormContact');
+            Route::post('/deleteContact', [AdminShipPartnerContactController::class, 'delete'])->name('admin.shipPartner.deleteContact');
+        });
+        /* ===== STAFF ===== */
+        Route::prefix('staff')->group(function(){
+            Route::get('/', [AdminStaffController::class, 'list'])->name('admin.staff.list');
+            Route::get('/viewInsert', [AdminStaffController::class, 'viewInsert'])->name('admin.staff.viewInsert');
+            Route::post('/create', [AdminStaffController::class, 'create'])->name('admin.staff.create');
+            Route::get('/{id}/viewEdit', [AdminStaffController::class, 'viewEdit'])->name('admin.staff.viewEdit');
+            Route::post('/update', [AdminStaffController::class, 'update'])->name('admin.staff.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminStaffController::class, 'delete'])->name('admin.staff.delete');
         });
         /* ===== COST ===== */
         Route::prefix('cost')->group(function(){

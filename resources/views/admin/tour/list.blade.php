@@ -86,7 +86,7 @@
     </div>
 </div>
 <!-- Nút thêm -->
-<a href="{{ route('admin.tour.viewInsert') }}" class="addItemBox">
+<a href="{{ route('admin.tour.view') }}" class="addItemBox">
     <i class="fa-regular fa-plus"></i>
     <span>Thêm</span>
 </a>

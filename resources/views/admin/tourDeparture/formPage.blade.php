@@ -1,5 +1,4 @@
 <input type="hidden" name="tour_departure_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : null }}" />
-<input type="hidden" name="seo_id" value="{{ !empty($item->seo->id)&&$type!='copy' ? $item->seo->id : null }}" />
 
 <div class="formBox">
     <div class="formBox_full">
@@ -57,6 +56,38 @@
                     @endphp
                     <option value="{{ $region['id'] }}"{{ $selected }}>{{ $region['name'] }}</option>
                 @endforeach
+            </select>
+        </div>
+        <!-- One Row -->
+        <div class="formBox_full_item">
+            <label class="form-label" for="province">Tỉnh</label>
+            <select class="select2 form-select select2-hidden-accessible" id="province" name="province" onChange="javascript:loadDistrictByProvince(this.value, 'district');">
+                <option value="0">- Lựa chọn -</option>
+                @if(!empty($provinces))
+                    @foreach($provinces as $province)
+                        @php
+                            $selected   = null;
+                            if(!empty($item->province_id)&&$item->province_id==$province['id']) $selected = ' selected';
+                        @endphp
+                        <option value="{{ $province['id'] }}"{{ $selected }}>{{ $province['name'] }}</option>
+                    @endforeach
+                @endif
+            </select>
+        </div>
+        <!-- One Row -->
+        <div class="formBox_full_item">
+            <label class="form-label" for="district">Thành phố /Quận</label>
+            <select class="select2 form-select select2-hidden-accessible" id="district" name="district">
+                <option value="0">- Lựa chọn -</option>
+                @if(!empty($districts))
+                    @foreach($districts as $district)
+                        @php
+                            $selected   = null;
+                            if(!empty($item->district_id)&&$item->district_id==$district['id']) $selected = ' selected';
+                        @endphp
+                        <option value="{{ $district['id'] }}"{{ $selected }}>{{ $district['name'] }}</option>
+                    @endforeach
+                @endif
             </select>
         </div>
     </div>
