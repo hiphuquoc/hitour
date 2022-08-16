@@ -29,7 +29,10 @@ class RoutingController extends Controller {
                                         ->whereHas('seo', function($q) use ($checkExists){
                                             $q->where('slug', $checkExists['slug']);
                                         })
-                                        ->with('seo', 'files', 'tours')
+                                        ->with(['files' => function($query){
+                                            $query->where('relation_table', 'tour_location');
+                                        }])
+                                        ->with('seo', 'tours')
                                         ->first();
                 /* lấy danh sách tour */
                 $arrayIdTour        = [];
@@ -51,7 +54,10 @@ class RoutingController extends Controller {
                                         ->whereHas('seo', function($q) use ($checkExists){
                                             $q->where('slug', $checkExists['slug']);
                                         })
-                                        ->with('seo', 'files', 'staffs.infoStaff', 'options.prices', 'departure', 'content', 'timetables')
+                                        ->with(['files' => function($query){
+                                            $query->where('relation_table', 'tour_info');
+                                        }])
+                                        ->with('seo', 'staffs.infoStaff', 'options.prices', 'departure', 'content', 'timetables')
                                         ->first();
                 $content            = Storage::get(config('admin.storage.contentTour').$item->seo->slug.'.html');
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;

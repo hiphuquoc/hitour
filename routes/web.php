@@ -16,6 +16,7 @@ use App\Http\Controllers\AdminShipLocationController;
 use App\Http\Controllers\AdminShipDepartureController;
 use App\Http\Controllers\AdminShipPartnerController;
 use App\Http\Controllers\AdminShipPartnerContactController;
+use App\Http\Controllers\AdminShipController;
 
 use App\Http\Controllers\AdminStaffController;
 
@@ -141,6 +142,15 @@ Route::prefix('admin')->group(function(){
             Route::post('/loadContact', [AdminShipPartnerContactController::class, 'loadContact'])->name('admin.shipPartner.loadContact');
             Route::post('/loadFormContact', [AdminShipPartnerContactController::class, 'loadFormContact'])->name('admin.shipPartner.loadFormContact');
             Route::post('/deleteContact', [AdminShipPartnerContactController::class, 'delete'])->name('admin.shipPartner.deleteContact');
+        });
+        /* ===== SHIP INFO ===== */
+        Route::prefix('ship')->group(function(){
+            Route::get('/', [AdminShipController::class, 'list'])->name('admin.ship.list');
+            Route::post('/create', [AdminShipController::class, 'create'])->name('admin.ship.create');
+            Route::get('/view', [AdminShipController::class, 'view'])->name('admin.ship.view');
+            Route::post('/update', [AdminShipController::class, 'update'])->name('admin.ship.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminShipController::class, 'delete'])->name('admin.ship.delete');
         });
         /* ===== STAFF ===== */
         Route::prefix('staff')->group(function(){

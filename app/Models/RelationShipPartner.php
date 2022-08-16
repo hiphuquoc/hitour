@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RelationTourPartner extends Model {
+class RelationShipPartner extends Model {
     use HasFactory;
-    protected $table        = 'relation_tour_partner';
+    protected $table        = 'relation_ship_partner';
     protected $fillable     = [
-        'tour_info_id', 
+        'ship_info_id', 
         'partner_info_id'
     ];
     public $timestamps      = false;
@@ -17,7 +17,7 @@ class RelationTourPartner extends Model {
     public static function insertItem($params){
         $id             = 0;
         if(!empty($params)){
-            $model      = new RelationTourPartner();
+            $model      = new RelationShipPartner();
             foreach($params as $key => $value) $model->{$key}  = $value;
             $model->save();
             $id         = $model->id;
@@ -25,18 +25,18 @@ class RelationTourPartner extends Model {
         return $id;
     }
 
-    public static function deleteAndInsertItem($idTour, $arrayIdPartner){
+    public static function deleteAndInsertItem($idShip, $arrayIdPartner){
         // delete relation trước đó
         $countDeleted                       = 0;
-        if(!empty($idTour)) {
-            $countDeleted                   = self::select('*')->where('tour_info_id', $idTour)->delete();
+        if(!empty($idShip)) {
+            $countDeleted                   = self::select('*')->where('ship_info_id', $idShip)->delete();
         }
         // insert
         $countInsert                        = 0;
         if(!empty($arrayIdPartner)){
             foreach($arrayIdPartner as $idPartner){
-                $model                      = new RelationTourPartner();
-                $model->tour_info_id        = $idTour;
+                $model                      = new RelationShipPartner();
+                $model->ship_info_id        = $idShip;
                 $model->partner_info_id     = $idPartner;
                 $model->save();
                 $countInsert                += 1;
@@ -48,6 +48,6 @@ class RelationTourPartner extends Model {
     }
 
     public function infoPartner(){
-        return $this->hasOne(\App\Models\TourPartner::class, 'id', 'partner_info_id');
+        return $this->hasOne(\App\Models\ShipPartner::class, 'id', 'partner_info_id');
     }
 }

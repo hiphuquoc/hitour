@@ -268,7 +268,7 @@ class AdminTourController extends Controller {
         return redirect()->route('admin.tour.view', ['id' => $idTour]);
     }
 
-    public static function delete(Request $request){
+    public function delete(Request $request){
         if(!empty($request->get('id'))){
             try {
                 DB::beginTransaction();
@@ -276,11 +276,11 @@ class AdminTourController extends Controller {
                 /* lấy tour_option (with tour_price) */
                 $infoTour   = Tour::select('*')
                                     ->where('id', $idTour)
-                                    ->with('seo', 'files', 'locations', 'staffs', 'partners', 'options.prices')
+                                    ->with(['files' => function($query){
+                                        $query->where('relation_table', 'tour_info');
+                                    }])
+                                    ->with('seo', 'locations', 'staffs', 'partners', 'options.prices')
                                     ->first();
-                /* xóa slider và gallery trong thư mục upload */
-                $files      = $infoTour->files;
-                foreach($files as $file) if(!empty($file->file_path)&&file_exists(public_path($file->file_path))) @unlink(public_path($file->file_path));
                 /* xóa ảnh đại diện trong thư mục upload */
                 if(!empty($infoTour->seo->image)&&file_exists(public_path($infoTour->seo->image))) unlink(public_path($infoTour->seo->image));
                 if(!empty($infoTour->seo->image_small)&&file_exists(public_path($infoTour->seo->image_small))) unlink(public_path($infoTour->seo->image_small));
@@ -319,8 +319,11 @@ class AdminTourController extends Controller {
                 $arrayIdFiles           = [];
                 foreach($infoTour->files as $file) $arrayIdFiles[] = $file->id;
                 SystemFile::select('*')->whereIn('id', $arrayIdFiles)->delete();
+                /* xóa file trong thư mục upload */
+                $files      = $infoTour->files;
+                foreach($files as $file) if(!empty($file->file_path)&&file_exists(public_path($file->file_path))) @unlink(public_path($file->file_path));
                 /* xóa seo */
-                Seo::select('*')->where('id', $infoTour->seo->id)->delete();
+                Seo::find($infoTour->seo->id)->delete();
                 /* xóa tour_info */
                 $infoTour->delete();
                 DB::commit();

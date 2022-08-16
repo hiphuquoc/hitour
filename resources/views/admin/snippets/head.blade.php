@@ -28,6 +28,10 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/css/plugins/forms/form-validation.css') }}">
   {{-- <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/css/plugins/extensions/ext-component-sweet-alerts.min.css') }}"> --}}
   <!-- END: Page CSS-->
+
+  <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/css/pages/app-calendar.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/vendors/css/calendars/fullcalendar.min.css') }}">
+
   <!-- BEGIN: Custom CSS-->
   <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/css/style.css?'.time()) }}">
   <!-- END: Custom CSS-->

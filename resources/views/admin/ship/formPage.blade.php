@@ -1,4 +1,6 @@
-<input type="hidden" name="tour_location_id" value="{{ $item->id ?? null }}" />
+@if(!empty($item->id))
+    <input type="hidden" name="tour_location_id" value="{{ $item->id }}" />
+@endif
 
 <div class="formBox">
     <div class="formBox_full">
@@ -6,7 +8,7 @@
         <div class="formBox_full_item">
             <div class="inputWithNumberChacractor">
                 <span data-toggle="tooltip" data-placement="top" title="
-                    Đây là Tiêu đề của Chuyên mục được hiển thị trên website
+                    Đây là Tiêu đề của Chuyến tàu được hiển thị trên website
                 ">
                     <i class="explainInput" data-feather='alert-circle'></i>
                     <label class="form-label inputRequired" for="title">Tiêu đề Trang</label>
@@ -22,10 +24,10 @@
         <div class="formBox_full_item">
             <div class="inputWithNumberChacractor">
                 <span data-toggle="tooltip" data-placement="top" title="
-                    Đây là Mô tả của Chuyên mục được hiển thị trên website
+                    Đây là Mô tả của Chuyến tàu được hiển thị trên website
                 ">
                     <i class="explainInput" data-feather='alert-circle'></i>
-                    <label class="form-label inputRequired" for="description">Mô tả hành trình</label>
+                    <label class="form-label inputRequired" for="description">Mô tả Trang</label>
                 </span>
                 <div class="inputWithNumberChacractor_count" data-charactor="description">
                     {{ !empty($item->seo->description) ? mb_strlen($item->seo->description) : 0 }}
@@ -36,30 +38,14 @@
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
-            <span data-toggle="tooltip" data-placement="top" title="
-                Nhập vào một số để thể hiện độ ưu tiên khi hiển thị cùng các Category khác (Số càng nhỏ càng ưu tiên cao - Để trống tức là không ưu tiên)
-            ">
-                <i class="explainInput" data-feather='alert-circle'></i>
-                <label class="form-label" for="ordering">Thứ tự</label>
-            </span>
-            <input type="number" min="0" id="ordering" class="form-control" name="ordering" value="{{ old('ordering') ?? $item->seo['ordering'] ?? '' }}">
-        </div>
-        <!-- One Row -->
-        <div class="formBox_full_item">
-            <label class="form-label inputRequired" for="location">Điểm đến Tour</label>
-            <select class="select2 form-select select2-hidden-accessible" id="location" name="location[]" multiple="true">
-                @if(!empty($tourLocations))
-                    @foreach($tourLocations as $location)
+            <label class="form-label inputRequired" for="ship_location_id">Điểm đến Tàu</label>
+            <select class="select2 form-select select2-hidden-accessible" id="ship_location_id" name="ship_location_id">
+                <option value="0">- Lựa chọn -</option>
+                @if(!empty($shipLocations))
+                    @foreach($shipLocations as $location)
                         @php
                             $selected   = null;
-                            if(!empty($item->locations)){
-                                foreach($item->locations as $l) {
-                                    if($location['id']==$l['tour_location_id']) {
-                                        $selected = ' selected';
-                                        break;
-                                    }
-                                }
-                            }
+                            if(!empty($item->ship_location_id)&&$item->ship_location_id==$location->id) $selected = 'selected';
                         @endphp
                         <option value="{{ $location['id'] }}"{{ $selected }}>{{ $location['name'] }}</option>
                     @endforeach
@@ -68,14 +54,14 @@
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
-            <label class="form-label inputRequired" for="tour_departure_id">Điểm khởi hành</label>
-            <select class="select2 form-select select2-hidden-accessible" id="tour_departure_id" name="tour_departure_id">
+            <label class="form-label inputRequired" for="ship_departure_id">Điểm khởi hành</label>
+            <select class="select2 form-select select2-hidden-accessible" id="ship_departure_id" name="ship_departure_id">
                 <option value="0">- Lựa chọn -</option>
-                @if(!empty($tourDepartures))
-                    @foreach($tourDepartures as $departure)
+                @if(!empty($shipDepartures))
+                    @foreach($shipDepartures as $departure)
                         @php
                             $selected   = null;
-                            if(!empty($item->tour_departure_id)&&$item->tour_departure_id==$departure->id) $selected = 'selected';
+                            if(!empty($item->ship_departure_id)&&$item->ship_departure_id==$departure->id) $selected = 'selected';
                         @endphp
                         <option value="{{ $departure['id'] }}"{{ $selected }}>{{ $departure['name'] }}</option>
                     @endforeach
@@ -85,6 +71,9 @@
         <!-- One Row -->
         <div class="formBox_full_item">
             <label class="form-label inputRequired" for="staff">Nhân viên tư vấn</label>
+            @php
+                dd($item->staffs);
+            @endphp
             <select class="select2 form-select select2-hidden-accessible" id="staff" name="staff[]" multiple="true">
                 <option value="0">- Lựa chọn -</option>
                 @if(!empty($staffs))
@@ -107,15 +96,15 @@
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
-            <label class="form-label inputRequired" for="partner">Đối tác cung cấp</label>
+            <label class="form-label inputRequired" for="partner">Đối tác Tàu</label>
             <select class="select2 form-select select2-hidden-accessible" id="partner" name="partner[]" multiple="true">
-                @if(!empty($partners))
-                    @foreach($partners as $partner)
+                @if(!empty($shipPartners))
+                    @foreach($shipPartners as $partner)
                         @php
                             $selected   = null;
                             if(!empty($item->partners)){
                                 foreach($item->partners as $p) {
-                                    if($partner['id']==$p['partner_info_id']) {
+                                    if($partner['id']==$p['ship_partner_id']) {
                                         $selected = ' selected';
                                         break;
                                     }
@@ -131,35 +120,9 @@
 </div>
 
 @push('scripts-custom')
-    <script type="text/javascript">
-        function loadProvinceByRegion(idRegion, idWrite){
-            $.ajax({
-                url         : "{{ route('admin.form.loadProvinceByRegion') }}",
-                type        : "POST",
-                dataType    : "html",
-                data        : {
-                    _token      : "{{ csrf_token() }}",
-                    region_id   : idRegion
-                }
-            }).done(function(data){
-                $('#'+idWrite).html(data);
-            });
-        }
+    {{-- <script type="text/javascript">
+        
 
-        function loadDistrictByProvince(idProvince, idWrite){
-            $.ajax({
-                url         : "{{ route('admin.form.loadDistrictByProvince') }}",
-                type        : "POST",
-                dataType    : "html",
-                data        : {
-                    _token          : "{{ csrf_token() }}",
-                    province_id     : idProvince
-                }
-            }).done(function(data){
-                $('#'+idWrite).html(data);
-            });
-        }
-
-    </script>
+    </script> --}}
 
 @endpush

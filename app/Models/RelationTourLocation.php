@@ -29,7 +29,7 @@ class RelationTourLocation extends Model {
         // delete relation trước đó
         $countDeleted                       = 0;
         if(!empty($idTour)) {
-            $countDeleted                   = RelationTourLocation::select('*')->where('tour_info_id', $idTour)->delete();
+            $countDeleted                   = self::select('*')->where('tour_info_id', $idTour)->delete();
         }
         // insert
         $countInsert                        = 0;

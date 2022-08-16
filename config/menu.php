@@ -186,6 +186,11 @@ return [
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 // [
+                //     'name'  => '4. Chi tiết Tàu',
+                //     'route' => 'admin.ship.list',
+                //     'icon'  => '<i data-feather=\'circle\'></i>'
+                // ],
+                // [
                 //     'name'  => '3. Chi tiết Tour',
                 //     'route' => 'admin.ship.list',
                 //     'icon'  => '<i data-feather=\'circle\'></i>'

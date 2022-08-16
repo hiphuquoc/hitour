@@ -69,24 +69,37 @@
         <!-- One Row -->
         <div class="formBox_full_item">
             <span data-toggle="tooltip" data-placement="top" title="
-                Đây là Số lượt đánh giá này được hiển thị trên trang website và ngoài Google để thể hiện sự uy tín (tự nhập tùy thích)
+                Nhập vào một số để thể hiện độ ưu tiên khi hiển thị cùng các Category khác (Số càng nhỏ càng ưu tiên cao - Để trống tức là không ưu tiên)
             ">
                 <i class="explainInput" data-feather='alert-circle'></i>
-                <label class="form-label inputRequired" for="rating_aggregate_count">Lượt đánh giá</label>
+                <label class="form-label" for="ordering">Thứ tự</label>
             </span>
-            <input type="number" id="rating_aggregate_count" class="form-control" name="rating_aggregate_count" value="{{ old('rating_aggregate_count') ?? $item->seo['rating_aggregate_count'] ?? '' }}" required>
-            <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
+            <input type="number" min="0" id="ordering" class="form-control" name="ordering" value="{{ old('ordering') ?? $item->seo['ordering'] ?? '' }}">
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
-            <span data-toggle="tooltip" data-placement="top" title="
-                Đây là Điểm đánh giá tương ứng này được hiển thị trên trang website và ngoài Google để thể hiện sự uy tín (tự nhập tùy thích)
-            ">
-                <i class="explainInput" data-feather='alert-circle'></i>
-                <label class="form-label inputRequired" for="rating_aggregate_star">Điểm đánh giá</label>
-            </span>
-            <input type="text" id="rating_aggregate_star" class="form-control" name="rating_aggregate_star" value="{{ old('rating_aggregate_star') ?? $item->seo['rating_aggregate_star'] ?? '' }}" required>
-            <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
+            <div class="flexBox">
+                <div class="flexBox_item">
+                    <span data-toggle="tooltip" data-placement="top" title="
+                        Đây là Số lượt đánh giá này được hiển thị trên trang website và ngoài Google để thể hiện sự uy tín (tự nhập tùy thích)
+                    ">
+                        <i class="explainInput" data-feather='alert-circle'></i>
+                        <label class="form-label inputRequired" for="rating_aggregate_count">Lượt đánh giá</label>
+                    </span>
+                    <input type="number" id="rating_aggregate_count" class="form-control" name="rating_aggregate_count" value="{{ old('rating_aggregate_count') ?? $item->seo['rating_aggregate_count'] ?? '' }}" required>
+                    <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
+                </div>
+                <div class="flexBox_item" style="margin-left:1rem;">
+                    <span data-toggle="tooltip" data-placement="top" title="
+                        Đây là Điểm đánh giá tương ứng này được hiển thị trên trang website và ngoài Google để thể hiện sự uy tín (tự nhập tùy thích)
+                    ">
+                        <i class="explainInput" data-feather='alert-circle'></i>
+                        <label class="form-label inputRequired" for="rating_aggregate_star">Điểm đánh giá</label>
+                    </span>
+                    <input type="text" id="rating_aggregate_star" class="form-control" name="rating_aggregate_star" value="{{ old('rating_aggregate_star') ?? $item->seo['rating_aggregate_star'] ?? '' }}" required>
+                    <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
+                </div>
+            </div>
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">

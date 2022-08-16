@@ -140,35 +140,32 @@ class AdminShipLocationController extends Controller {
         return redirect()->route('admin.shipLocation.view', ['id' => $request->get('ship_location_id')]);
     }
 
-    public static function delete(Request $request){
+    public function delete(Request $request){
         if(!empty($request->get('id'))){
             try {
                 DB::beginTransaction();
                 $id         = $request->get('id');
-                /* lấy thông tin seo */
-                $infoSeo    = DB::table('seo')
-                                ->join('ship_location', 'ship_location.seo_id', '=', 'seo.id')
-                                ->select('seo.id')
-                                ->where('ship_location.id', $id)
+                $info       = ShipLocation::select('*')
+                                ->where('id', $id)
+                                ->with(['files' => function($query){
+                                    $query->where('relation_table', 'ship_location');
+                                }])
+                                ->with('seo')
                                 ->first();
-                $idSeo      = $infoSeo->id ?? 0;
-                /* lấy thông tin slider */
-                $infoSlider = DB::table('system_file')
-                                ->join('ship_location', 'ship_location.id', '=', 'system_file.attachment_id')
-                                ->select('system_file.id', 'system_file.file_path')
-                                ->where('system_file.attachment_id', $id)
-                                ->get();
                 /* delete bảng ship_location */
                 ShipLocation::find($id)->delete();
                 /* delete bảng seo */
-                Seo::find($idSeo)->delete();
-                
-                if(!empty($infoSlider)){
-                    foreach($infoSlider as $slider) {
+                Seo::find($info->seo->id)->delete();
+                /* xóa ảnh đại diện trong thư mục */
+                if(!empty($info->seo->image)&&file_exists(public_path($info->seo->image))) @unlink(public_path($info->seo->image));
+                if(!empty($info->seo->image_small)&&file_exists(public_path($info->seo->image_small))) @unlink(public_path($info->seo->image_small));
+                /* delete files */
+                if(!empty($info->files)){
+                    foreach($info->files as $file){
                         /* delete image slider bảng system_file */
-                        SystemFile::find($slider->id)->delete();
-                        /* xóa ảnh slider trong thư mục upload */
-                        if(!empty($slider->file_path)&&file_exists(public_path($slider->file_path))) unlink(public_path($slider->file_path));
+                        SystemFile::find($file->id)->delete();
+                        /* delete trong thư mục */
+                        if(!empty($file->file_path)&&file_exists(public_path($file->file_path))) unlink(public_path($file->file_path));
                     }
                 }
                 DB::commit();

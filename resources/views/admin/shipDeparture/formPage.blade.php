@@ -36,16 +36,6 @@
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
-            <span data-toggle="tooltip" data-placement="top" title="
-                Nhập vào một số để thể hiện độ ưu tiên khi hiển thị cùng các Category khác (Số càng nhỏ càng ưu tiên cao - Để trống tức là không ưu tiên)
-            ">
-                <i class="explainInput" data-feather='alert-circle'></i>
-                <label class="form-label" for="ordering">Thứ tự</label>
-            </span>
-            <input type="number" min="0" id="ordering" class="form-control" name="ordering" value="{{ old('ordering') ?? $item->seo['ordering'] ?? '' }}">
-        </div>
-        <!-- One Row -->
-        <div class="formBox_full_item">
             <label class="form-label" for="region">Vùng miền</label>
             <select class="select2 form-select select2-hidden-accessible" id="region" name="region" onChange="javascript:loadProvinceByRegion(this.value, 'province');">
                 <option value="0">- Lựa chọn -</option>

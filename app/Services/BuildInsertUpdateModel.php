@@ -454,4 +454,25 @@ class BuildInsertUpdateModel {
         }
         return $result;
     }
+
+    public static function buildArrayTableShipInfo($dataForm, $seoId = null){
+        /* 
+            seo_id
+            name
+            ship_location_id
+            ship_departure_id
+            note
+            created_by
+        */
+        $result     = [];
+        if(!empty($dataForm)){
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
+            $result['name']                 = $dataForm['title'] ?? null;
+            $result['ship_location_id']     = $dataForm['ship_location_id'] ?? 0;
+            $result['ship_departure_id']    = $dataForm['ship_departure_id'] ?? 0;
+            $result['note']                 = $dataForm['note'] ?? null;
+            $result['created_by']           = Auth::id() ?? 0;
+        }
+        return $result;
+    }
 }
