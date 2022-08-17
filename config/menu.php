@@ -195,7 +195,6 @@ return [
                 //     'route' => 'admin.ship.list',
                 //     'icon'  => '<i data-feather=\'circle\'></i>'
                 // ],
-                
                 // [
                 //     'name'  => '5. Nhân viên tư vấn',
                 //     'route' => 'admin.staff.list',
