@@ -13,7 +13,7 @@
 
     <div class="pageHome">
         <div class="container">
-            Nội dung test
+            Nội dung test 1
         </div>
 
         @include('main.home.blogListNoImage')
