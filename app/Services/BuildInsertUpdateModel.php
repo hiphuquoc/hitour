@@ -475,4 +475,40 @@ class BuildInsertUpdateModel {
         }
         return $result;
     }
+
+    public static function buildArrayTableShipPrice($dataForm){
+        /* 
+            ship_info_id
+            ship_partner_id
+            time_departure
+            time_arrive
+            time_move *********
+            date_start *********
+            date_end *********
+            price_adult
+            price_child
+            price_old
+            price_vip
+            profit_percent
+        */
+        $result     = [];
+        if(!empty($dataForm)){
+            $result['ship_info_id']         = $dataForm['ship_info_id'];
+            $result['ship_partner_id']      = $dataForm['ship_partner_id'];
+            // $result['time_departure']       = date('H:i', strtotime($dataForm['time_departure']));
+            // $result['time_arrive']          = date('H:i', strtotime($dataForm['time_arrive']));
+            // /* time_move */
+            // $result['time_move']            = \App\Helpers\Time::calcTimeMove($dataForm['time_departure'], $dataForm['time_arrive']);
+            /* date_start and date_end */
+            $arrDate                        = explode('to', $dataForm['date_range']);
+            $result['date_start']           = $arrDate[0];
+            $result['date_end']             = !empty($arrDate[1]) ? $arrDate[1] : $arrDate[0];
+            $result['price_adult']          = $dataForm['price_adult'];
+            $result['price_child']          = $dataForm['price_child'];
+            $result['price_old']            = $dataForm['price_old'];
+            $result['price_vip']            = $dataForm['price_vip'];
+            $result['profit_percent']       = $dataForm['profit_percent'];
+        }
+        return $result;
+    }
 }

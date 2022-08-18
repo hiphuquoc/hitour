@@ -19,6 +19,38 @@ class Ship extends Model {
     ];
     public $timestamps      = true;
 
+    public static function getList($params = null){
+        $paginate   = $params['paginate'] ?? null;
+        $result     = self::select('*')
+                        /* tìm theo tên */
+                        ->when(!empty($params['search_name']), function($query) use($params){
+                            $query->where('name', 'like', '%'.$params['search_name'].'%');
+                        })
+                        /* tìm theo khu vực */
+                        ->when(!empty($params['search_location']), function($query) use($params){
+                            $query->whereHas('location', function($q) use ($params){
+                                $q->where('id', $params['search_location']);
+                            });
+                        })
+                        /* tìm theo đối tác */
+                        ->when(!empty($params['search_partner']), function($query) use($params){
+                            $query->whereHas('partners', function($q) use ($params){
+                                $q->where('partner_info_id', $params['search_partner']);
+                            });
+                        })
+                        /* tìm theo nhân viên */
+                        ->when(!empty($params['search_staff']), function($query) use($params){
+                            $query->whereHas('staffs', function($q) use ($params){
+                                $q->where('staff_info_id', $params['search_staff']);
+                            });
+                        })
+                        ->with(['files' => function($query){
+                            $query->where('relation_table', 'ship_info');
+                        }], 'seo', 'location', 'departure', 'staffs.infoStaff', 'partners.infoPartner')
+                        ->paginate($paginate);
+        return $result;
+    }
+
     public static function insertItem($params){
         $id                 = 0;
         if(!empty($params)){
@@ -65,6 +97,6 @@ class Ship extends Model {
     }
 
     public function partners(){
-        return $this->hasMany(\App\Models\RelationShipPartner::class, 'partner_info_id', 'id');
+        return $this->hasMany(\App\Models\RelationShipPartner::class, 'ship_info_id', 'id');
     }
 }

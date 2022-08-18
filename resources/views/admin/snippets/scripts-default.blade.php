@@ -23,8 +23,8 @@
 <script src="{{ asset('sources/admin/app-assets/js/scripts/forms/form-repeater.min.js') }}"></script>
 
 
-<script src="{{ asset('sources/admin/app-assets/js/scripts/pages/app-calendar-events.min.js') }}"></script>
-<script src="{{ asset('sources/admin/app-assets/js/scripts/pages/app-calendar.min.js') }}"></script>
+{{-- <script src="{{ asset('sources/admin/app-assets/js/scripts/pages/app-calendar-events.min.js') }}"></script>
+<script src="{{ asset('sources/admin/app-assets/js/scripts/pages/app-calendar.min.js') }}"></script> --}}
 
 <!-- BEGIN: SLICK -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

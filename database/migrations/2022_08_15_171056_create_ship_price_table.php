@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ship_time_and_price', function (Blueprint $table) {
+        Schema::create('ship_price', function (Blueprint $table) {
             $table->id();
             $table->integer('ship_info_id');
             $table->integer('ship_partner_id');
-            // $table->string('time_departure', 20);
-            // $table->string('time_arrive', 20);
-            // $table->integer('time_move');
-            $table->date('date');
+            $table->date('date_start');
             $table->integer('price_adult');
             $table->integer('price_child');
             $table->integer('price_old');
@@ -37,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('ship_time');
+        // Schema::dropIfExists('ship_price');
     }
 };

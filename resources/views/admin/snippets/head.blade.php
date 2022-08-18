@@ -29,8 +29,8 @@
   {{-- <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/css/plugins/extensions/ext-component-sweet-alerts.min.css') }}"> --}}
   <!-- END: Page CSS-->
 
-  <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/css/pages/app-calendar.min.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/vendors/css/calendars/fullcalendar.min.css') }}">
+  {{-- <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/css/pages/app-calendar.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/vendors/css/calendars/fullcalendar.min.css') }}"> --}}
 
   <!-- BEGIN: Custom CSS-->
   <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/css/style.css?'.time()) }}">
@@ -39,9 +39,6 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <!-- END: FONT AWESOME -->
   <!-- BEGIN: Custom CSS-->
-  {{-- <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet"> --}}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">

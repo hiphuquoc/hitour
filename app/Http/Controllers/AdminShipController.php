@@ -34,26 +34,24 @@ class AdminShipController extends Controller {
     }
 
     public function list(Request $request){
-        // $params                         = [];
-        // /* Search theo tên */
-        // if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
-        // /* Search theo vùng miền */
-        // if(!empty($request->get('search_location'))) $params['search_location'] = $request->get('search_location');
-        // /* Search theo đối tác */
-        // if(!empty($request->get('search_partner'))) $params['search_partner'] = $request->get('search_partner');
-        // /* Search theo nhân viên */
-        // if(!empty($request->get('search_staff'))) $params['search_staff'] = $request->get('search_staff');
-        // /* lấy dữ liệu */
-        // $list                           = Tour::getList($params);
-        // /* khu vực Tour */
-        // $tourLocations                  = TourLocation::all();
-        // /* đối tác */
-        // $partners                       = Partner::all();
-        // /* nhân viên */
-        // $staffs                         = Staff::all();
-        // return view('admin.tour.list', compact('list', 'params', 'tourLocations', 'partners', 'staffs'));
-
-        return view('admin.ship.test');
+        $params                         = [];
+        /* Search theo tên */
+        if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
+        /* Search theo vùng miền */
+        if(!empty($request->get('search_location'))) $params['search_location'] = $request->get('search_location');
+        /* Search theo đối tác */
+        if(!empty($request->get('search_partner'))) $params['search_partner'] = $request->get('search_partner');
+        /* Search theo nhân viên */
+        if(!empty($request->get('search_staff'))) $params['search_staff'] = $request->get('search_staff');
+        /* lấy dữ liệu */
+        $list                           = Ship::getList($params);
+        /* khu vực Tàu */
+        $shipLocations                  = ShipLocation::all();
+        /* đối tác */
+        $partners                       = ShipPartner::all();
+        /* nhân viên */
+        $staffs                         = Staff::all();
+        return view('admin.ship.list', compact('list', 'params', 'shipLocations', 'partners', 'staffs'));
     }
 
     public function view(Request $request){

@@ -56,32 +56,94 @@
                                 
                             </div>
                         </div>
-                    </div>
-                    {{-- <div class="pageAdminWithRightSidebar_main_content_item">
-                        <div class="card">
-                            <div class="card-header border-bottom">
-                                <h4 class="card-title">Th</h4>
-                            </div>
-                            <div class="card-body">
-
-                            </div>
-                        </div>
-                    </div> --}}
-                    <div class="pageAdminWithRightSidebar_main_content_item">
                         <div class="card">
                             <div class="card-header border-bottom">
                                 <h4 class="card-title">
                                     Lịch khởi hành và giá chi tiết
-                                    <i class="fa-regular fa-circle-plus" data-bs-toggle="modal" data-bs-target="#modalContact" onclick="loadFormOption();"></i>
+                                    <i class="fa-regular fa-circle-plus" data-bs-toggle="modal" data-bs-target="#modalContact" onclick="loadFormModal();"></i>
                                 </h4>
                             </div>
                             <div class="card-body">
                                 <div id="js_showMessage">
                                     <!-- javascript:showMessage -->
                                 </div>
-                                <div id="js_loadOptionPrice">
-                                    <!-- javascript:loadOptionPrice -->
-                                    Không có dữ liệu phù hợp!
+                                <div id="js_loadTimeAndPrice">
+                                    <!-- javascript:loadTimeAndPrice -->
+                                    {{-- Không có dữ liệu phù hợp! --}}
+                                    {{-- <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="oneLine">Phú Quốc Express</div>
+                                                    <div class="oneLine">
+                                                        Áp dụng: 13/08 - 30/08
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="oneLine">
+                                                        08:20 - 10:20 (2h30p)
+                                                    </div>
+                                                    <div class="oneLine">
+                                                        08:20 - 10:20 (2h30p)
+                                                    </div>
+                                                    <div class="oneLine">
+                                                        08:20 - 10:20 (2h30p)
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="oneLine">
+                                                        Người lớn: 340,000đ
+                                                    </div>
+                                                    <div class="oneLine">
+                                                        Trẻ em: 270,000đ
+                                                    </div>
+                                                    <div class="oneLine">
+                                                        Cao tuổi: 270,000đ
+                                                    </div>
+                                                    <div class="oneLine">
+                                                        Vé VIP: 500,000đ
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table> --}}
+
+                                    <div class="flexBox">
+                                        <div class="flexBox_item">
+                                            <div class="oneLine">Phú Quốc Express</div>
+                                            <div class="oneLine">
+                                                Áp dụng: <span style="font-weight:700;">13/08 - 30/08</span>
+                                            </div>
+                                        </div>
+                                        <div class="flexBox_item">
+                                            <div class="oneLine">
+                                                08:20 - 10:20 (2h30p)
+                                            </div>
+                                            <div class="oneLine">
+                                                08:20 - 10:20 (2h30p)
+                                            </div>
+                                            <div class="oneLine">
+                                                08:20 - 10:20 (2h30p)
+                                            </div>
+                                        </div>
+                                        <div class="flexBox_item">
+                                            <div class="oneLine">
+                                                340,000đ /người lớn
+                                            </div>
+                                            <div class="oneLine">
+                                                270,000đ /trẻ em
+                                            </div>
+                                            <div class="oneLine">
+                                                270,000đ /cao tuổi
+                                            </div>
+                                            <div class="oneLine">
+                                                500,000đ /vé VIP
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +179,7 @@
 
     </form>
     <!-- ===== START:: Modal ===== -->
-    <form id="formTourOption" method="POST" action="{{ route('admin.tourOption.createOption') }}">
+    <form id="formModal" method="POST">
     @csrf
         <!-- Input Hidden -->
         <input type="hidden" id="tour_info_id" name="tour_info_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : 0 }}" />
@@ -125,10 +187,10 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header bg-transparent">
-                        <h4 id="js_loadFormOption_header">Thêm Option & Giá</h4>
+                        <h4 id="js_loadFormModal_header">Thêm giờ tàu và giá</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div id="js_loadFormOption_body" class="modal-body">
+                    <div id="js_loadFormModal_body" class="modal-body">
                         <!-- load Ajax -->
                     </div>
                     <div class="modal-footer">
@@ -145,7 +207,7 @@
 @push('scripts-custom')
     <script type="text/javascript">
         $(document).ready(function(){
-            loadOptionPrice('js_loadOptionPrice');
+            // loadTimeAndPrice('js_loadTimeAndPrice');
             closeMessage();
             
         })
@@ -164,38 +226,40 @@
         }
 
         function addAndUpdateTourOption(){
-            /* data apply_age */
-            let apply_age           = [];
-            $('#formTourOption').find('input[name*=apply_age]').each(function(){
-                apply_age.push($(this).val());
+            /* data time_departure */
+            var time_departure      = [];
+            $('#formModal').find('input[name*=time_departure]').each(function(){
+                time_departure.push($(this).val());
+                console.log(time_departure);
             });
-            /* data price */
-            let price               = [];
-            $('#formTourOption').find('input[name*=price]').each(function(){
-                price.push($(this).val());
+            /* data time_arrive */
+            var time_arrive         = [];
+            $('#formModal').find('input[name*=time_arrive]').each(function(){
+                time_arrive.push($(this).val());
             });
-            /* data profit */
-            let profit              = [];
-            $('#formTourOption').find('input[name*=profit]').each(function(){
-                profit.push($(this).val());
-            });
-            /* gộp dataForm đầy đủ */
-            let dataForm            = {
-                tour_info_id    : $('#tour_info_id').val(),
-                tour_option_id  : $('#tour_option_id').val(),
-                option          : $('#tour_option').val(),
-                apply_day       : $('#tour_apply_day').val(),
-                apply_age,
-                price,
-                profit
+            /* dataForm */
+            var dataForm            = {
+                ship_info_id    : $('#ship_info_id').val(),
+                ship_partner_id : $('#ship_partner_id').val(),
+                time_departure  : $('#time_departure').val(),
+                time_arrive     : $('#time_arrive').val(),
+                date_range      : $('#date_range').val(),
+                price_adult     : $('#price_adult').val(),
+                price_child     : $('#price_child').val(),
+                price_old       : $('#price_old').val(),
+                price_vip       : $('#price_vip').val(),
+                profit_percent  : $('#profit_percent').val(),
+                time_departure,
+                time_arrive
             };
+            console.log(dataForm);
             const tmp               = validateFormModal();
+            /* không có trường required bỏ trống */
             if(tmp==''){
-                /* không có trường required bỏ trống */
-                if(dataForm['tour_option_id']==null||dataForm['tour_option_id']==''){
+                if(dataForm['ship_time_id']==null){
                     /* insert */
                     $.ajax({
-                        url         : '{{ route("admin.tourOption.createOption") }}',
+                        url         : '{{ route("admin.shipPrice.createPrice") }}',
                         type        : 'post',
                         dataType    : 'html',
                         data        : {
@@ -203,39 +267,39 @@
                             dataForm    : dataForm
                         },
                         success     : function(data){
-                            if(data==true){
-                                /* thành công */
-                                loadOptionPrice('js_loadOptionPrice');
-                                showMessage('js_showMessage', 'Thêm mới Option & Giá thành công!', 'success');
-                            }else {
-                                /* thất bại */
-                                showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
-                            }
+                            // if(data==true){
+                            //     /* thành công */
+                            //     loadTimeAndPrice('js_loadTimeAndPrice');
+                            //     showMessage('js_showMessage', 'Thêm mới Option & Giá thành công!', 'success');
+                            // }else {
+                            //     /* thất bại */
+                            //     showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
+                            // }
                         }
                     });
                 }else {
                     /* update */
-                    $.ajax({
-                        url         : '{{ route("admin.tourOption.updateOption") }}',
-                        type        : 'post',
-                        dataType    : 'html',
-                        data        : {
-                            '_token'    : '{{ csrf_token() }}',
-                            dataForm    : dataForm
-                        },
-                        success     : function(data){
-                            if(data==true){
-                                /* thành công */
-                                loadOptionPrice('js_loadOptionPrice');
-                                showMessage('js_showMessage', 'Cập nhật Option & Giá thành công!', 'success');
-                            }else {
-                                /* thất bại */
-                                showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
-                            }
-                        }
-                    });
+                    // $.ajax({
+                    //     url         : '{{ route("admin.shipPrice.updatePrice") }}',
+                    //     type        : 'post',
+                    //     dataType    : 'html',
+                    //     data        : {
+                    //         '_token'    : '{{ csrf_token() }}',
+                    //         dataForm    : dataForm
+                    //     },
+                    //     success     : function(data){
+                    //         if(data==true){
+                    //             /* thành công */
+                    //             loadTimeAndPrice('js_loadTimeAndPrice');
+                    //             showMessage('js_showMessage', 'Cập nhật Option & Giá thành công!', 'success');
+                    //         }else {
+                    //             /* thất bại */
+                    //             showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
+                    //         }
+                    //     }
+                    // });
                 }
-                $('#modalContact').modal('hide');
+                // $('#modalContact').modal('hide');
             }else {
                 /* có 1 vài trường required bị bỏ trống */
                 let messageError        = 'Các trường bắt buộc không được để trống!';
@@ -253,36 +317,35 @@
             }
         }
 
-        function loadOptionPrice(idWrite){
-            $.ajax({
-                url         : '{{ route("admin.tourOption.loadOptionPrice") }}',
-                type        : 'post',
-                dataType    : 'html',
-                data        : {
-                    '_token'        : '{{ csrf_token() }}',
-                    tour_info_id    : '{{ !empty($item->id)&&$type!="copy" ? $item->id : 0 }}'
-                },
-                success     : function(data){
-                    $('#'+idWrite).html(data);
-                }
-            });
-        }
+        // function loadTimeAndPrice(idWrite){
+        //     $.ajax({
+        //         url         : '{{ route("admin.shipPrice.loadList") }}',
+        //         type        : 'post',
+        //         dataType    : 'html',
+        //         data        : {
+        //             '_token'        : '{{ csrf_token() }}',
+        //             tour_info_id    : '{{ !empty($item->id)&&$type!="copy" ? $item->id : 0 }}'
+        //         },
+        //         success     : function(data){
+        //             $('#'+idWrite).html(data);
+        //         }
+        //     });
+        // }
 
-        function loadFormOption(tourOption = 0){
-            const tourId    = $('#tour_info_id').val();
-            const type      = '{{ $type }}';
+        function loadFormModal(shipPriceId = 0){
+            const shipId    = $('#ship_info_id').val();
             $.ajax({
-                url         : '{{ route("admin.tourOption.loadFormOption") }}',
+                url         : '{{ route("admin.shipPrice.loadFormModal") }}',
                 type        : 'post',
                 dataType    : 'json',
                 data        : {
                     '_token'        : '{{ csrf_token() }}',
-                    tour_info_id    : tourId,
-                    tour_option_id  : tourOption
+                    ship_info_id    : shipId,
+                    ship_time_id    : shipPriceId
                 },
                 success     : function(data){
-                    $('#js_loadFormOption_header').html(data.header);
-                    $('#js_loadFormOption_body').html(data.body);
+                    $('#js_loadFormModal_header').html(data.header);
+                    $('#js_loadFormModal_body').html(data.body);
                 }
             });
         }
@@ -300,7 +363,7 @@
                     if(data==true){
                         /* thành công */
                         $('#optionPrice_'+id).remove();
-                        loadOptionPrice('js_loadOptionPrice');
+                        loadTimeAndPrice('js_loadTimeAndPrice');
                         showMessage('js_showMessage', 'Xóa Option & Giá thành công!', 'success');
                     }else {
                         /* thất bại */
@@ -312,7 +375,7 @@
 
         function validateFormModal(){
             let error       = [];
-            $('#formTourOption').find('input[required').each(function(){
+            $('#formModal').find('input[required]').each(function(){
                 if($(this).val()==''){
                     error.push($(this).attr('name'));
                 }

@@ -17,6 +17,7 @@ use App\Http\Controllers\AdminShipDepartureController;
 use App\Http\Controllers\AdminShipPartnerController;
 use App\Http\Controllers\AdminShipPartnerContactController;
 use App\Http\Controllers\AdminShipController;
+use App\Http\Controllers\AdminShipPriceController;
 
 use App\Http\Controllers\AdminStaffController;
 
@@ -151,6 +152,10 @@ Route::prefix('admin')->group(function(){
             Route::post('/update', [AdminShipController::class, 'update'])->name('admin.ship.update');
             /* Delete AJAX */
             Route::get('/delete', [AdminShipController::class, 'delete'])->name('admin.ship.delete');
+            Route::post('/loadFormModal', [AdminShipPriceController::class, 'loadFormModal'])->name('admin.shipPrice.loadFormModal');
+            Route::post('/loadList', [AdminShipPriceController::class, 'loadList'])->name('admin.shipPrice.loadList');
+            Route::post('/createPrice', [AdminShipPriceController::class, 'createPrice'])->name('admin.shipPrice.createPrice');
+            Route::post('/updatePrice', [AdminShipPriceController::class, 'updatePrice'])->name('admin.shipPrice.updatePrice');
         });
         /* ===== STAFF ===== */
         Route::prefix('staff')->group(function(){
