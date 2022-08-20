@@ -30,6 +30,7 @@ use App\Http\Controllers\AdminGalleryController;
 
 use App\Http\Controllers\MainHomeController;
 use App\Http\Controllers\RoutingController;
+use App\Http\Controllers\ShipController;
 
 /*
 |--------------------------------------------------------------------------
@@ -156,6 +157,7 @@ Route::prefix('admin')->group(function(){
             Route::post('/loadList', [AdminShipPriceController::class, 'loadList'])->name('admin.shipPrice.loadList');
             Route::post('/createPrice', [AdminShipPriceController::class, 'createPrice'])->name('admin.shipPrice.createPrice');
             Route::post('/updatePrice', [AdminShipPriceController::class, 'updatePrice'])->name('admin.shipPrice.updatePrice');
+            Route::post('/deletePrice', [AdminShipPriceController::class, 'deletePrice'])->name('admin.shipPrice.deletePrice');
         });
         /* ===== STAFF ===== */
         Route::prefix('staff')->group(function(){
@@ -195,4 +197,8 @@ Route::prefix('admin')->group(function(){
 });
 
 Route::get('/', [MainHomeController::class, 'home'])->name('main.home');
+
+Route::post('/loadTocContent', [ShipController::class, 'loadTocContent'])->name('main.ship.loadTocContent');
+
+
 Route::get("/{slug}/{slug2?}/{slug3?}/{slug4?}/{slug5?}", [RoutingController::class, 'routing'])->name('routing');

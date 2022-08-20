@@ -62,6 +62,12 @@ class RoutingController extends Controller {
                 $content            = Storage::get(config('admin.storage.contentTour').$item->seo->slug.'.html');
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
                 return view('main.tour.index', compact('item', 'breadcrumb', 'content'));
+            }else if($checkExists['type']==='ship_location'){ // ====== Ship Location =============================
+                
+
+                return view('main.shipLocation.index');
+            }else if($checkExists['type']==='ship_info'){ // ====== Ship =============================
+
             }
         }else {
             /* Error 404 */

@@ -5,26 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ShipPrice extends Model {
+class ShipTime extends Model {
     use HasFactory;
-    protected $table        = 'ship_price';
+    protected $table        = 'ship_time';
     protected $fillable     = [
-        'ship_info_id', 
-        'ship_partner_id',
-        'date_start',
-        'date_end',
-        'price_adult',
-        'price_child',
-        'price_old',
-        'price_vip',
-        'profit_percent'
+        'ship_price_id', 
+        'time_departure',
+        'time_arrive',
+        'time_move'
     ];
-    public $timestamps      = true;
+    public $timestamps      = false;
 
     public static function insertItem($params){
         $id                 = 0;
         if(!empty($params)){
-            $model          = new ShipPrice();
+            $model          = new ShipTime();
             foreach($params as $key => $value) $model->{$key}  = $value;
             $model->save();
             $id             = $model->id;
@@ -40,13 +35,5 @@ class ShipPrice extends Model {
             $flag           = $model->update();
         }
         return $flag;
-    }
-
-    public function partner() {
-        return $this->hasOne(\App\Models\ShipPartner::class, 'id', 'ship_partner_id');
-    }
-
-    public function times() {
-        return $this->hasMany(\App\Models\ShipTime::class, 'ship_price_id', 'id');
     }
 }

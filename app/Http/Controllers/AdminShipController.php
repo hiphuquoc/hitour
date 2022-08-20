@@ -68,10 +68,11 @@ class AdminShipController extends Controller {
                                 }])
                                 ->with('seo', 'location', 'departure', 'partners.infoPartner', 'staffs')
                                 ->first();
+        $content            = Storage::get(config('admin.storage.contentShip').$item->seo->slug.'.html');
         /* type */
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.ship.view', compact('item', 'type', 'shipLocations', 'shipDepartures', 'staffs', 'shipPartners'));
+        return view('admin.ship.view', compact('item', 'content', 'type', 'shipLocations', 'shipDepartures', 'staffs', 'shipPartners'));
     }
 
     public function create(ShipRequest $request){
@@ -89,6 +90,8 @@ class AdminShipController extends Controller {
             /* insert ship_info */
             $insertShipInfo     = $this->BuildInsertUpdateModel->buildArrayTableShipInfo($request->all(), $seoId);
             $idShip             = Ship::insertItem($insertShipInfo);
+            /* lưu content vào file */
+            Storage::put(config('admin.storage.contentShip').$request->get('slug').'.html', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')&&!empty($idShip)){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
@@ -163,6 +166,8 @@ class AdminShipController extends Controller {
             /* update ship_info */
             $updateTourInfo     = $this->BuildInsertUpdateModel->buildArrayTableShipInfo($request->all(), $request->get('seo_id'));
             Ship::updateItem($idShip, $updateTourInfo);
+            /* lưu content vào file */
+            Storage::put(config('admin.storage.contentShip').$request->get('slug').'.html', $request->get('content'));
             /* update slider và lưu CSDL */
             if($request->hasFile('slider')&&!empty($idShip)){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();

@@ -91,8 +91,9 @@ return [
     ],
 
     'storage'   => [
-        'contentTour'          => '/public/contents/tours/',
-        'contentTourLocation'  => '/public/contents/tourLocations/',
-        'contentTourDeparture'  => '/public/contents/tourDepartures/'
+        'contentTour'           => '/public/contents/tours/',
+        'contentTourLocation'   => '/public/contents/tourLocations/',
+        'contentTourDeparture'  => '/public/contents/tourDepartures/',
+        'contentShip'           => '/public/contents/ships/'
     ]
 ];

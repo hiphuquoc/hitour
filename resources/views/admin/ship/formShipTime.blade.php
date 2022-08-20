@@ -1,6 +1,7 @@
 <div id="js_validateFormModal_message" class="error" style="margin-bottom:1rem;display:none;">
     <!-- Load Ajax -->
 </div>
+<input type="hidden" id="ship_price_id" name="ship_price_id" value="{{ !empty($item->id)&&$type=='update' ? $item->id : null }}" />
 <div class="formBox">
     <div class="formBox_full">
         <!-- One Row -->
@@ -10,7 +11,11 @@
                 <option value="0">- Lựa chọn -</option>
                 @if(!empty($partners))
                     @foreach($partners as $partner)
-                        <option value="{{ $partner->id }}">{{ $partner->name }}</option>
+                        @php
+                            $selected   = null;
+                            if(!empty($item->partner->id)&&$partner->id==$item->partner->id) $selected   = 'selected';
+                        @endphp
+                        <option value="{{ $partner->id }}" {{ $selected }}>{{ $partner->name }}</option>
                     @endforeach
                 @endif
             </select>
@@ -18,7 +23,11 @@
         <!-- One Row -->
         <div class="formBox_full_item">
             <label class="form-label inputRequired" for="date_range">Khoảng ngày</label>
-            <input type="text" class="form-control flatpickr-disabled-range flatpickr-input active" id="date_range" name="date_range" value="{{ null }}" placeholder="YYYY-MM-DD" required>
+            @php
+                $dateRange  = null;
+                if(!empty($item->date_start)&&!empty($item->date_end)) $dateRange = date('Y-m-d', strtotime($item->date_start)).' to '.date('Y-m-d', strtotime($item->date_end))
+            @endphp
+            <input type="text" class="form-control flatpickr-disabled-range flatpickr-input active" id="date_range" name="date_range" value="{{ $dateRange }}" placeholder="YYYY-MM-DD" required>
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
@@ -53,19 +62,37 @@
         </div>
         <!-- One Row -->
         <div class="formBox_full_item" data-repeater-list="time">
+        @if(!empty($item->times))
+            @foreach($item->times as $time)
+                <div class="flexBox" {{ $loop->last ? 'data-repeater-item' : null}}>
+                    <div class="flexBox_item">
+                        <label class="form-label inputRequired" for="time_departure">Thời gian khởi hành</label>
+                        <input type="text" class="form-control" name="time_departure" value="{{ $time->time_departure ?? null }}" required>
+                    </div>
+                    <div class="flexBox_item">
+                        <label class="form-label inputRequired" for="time_arrive">Thời gian đến</label>
+                        <input type="text" class="form-control" name="time_arrive" value="{{ $time->time_arrive ?? null }}" required>
+                    </div>
+                    <div class="flexBox_item btnRemoveRepeater" data-repeater-delete>
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                </div>
+            @endforeach
+        @else
             <div class="flexBox" data-repeater-item>
                 <div class="flexBox_item">
                     <label class="form-label inputRequired" for="time_departure">Thời gian khởi hành</label>
-                    <input type="text" class="form-control" name="time_departure" value="{{ old('time_departure') ?? $item->time_departure ?? '' }}" required>
+                    <input type="text" class="form-control" name="time_departure" value="" required>
                 </div>
                 <div class="flexBox_item">
                     <label class="form-label inputRequired" for="time_arrive">Thời gian đến</label>
-                    <input type="text" class="form-control" name="time_arrive" value="{{ old('time_arrive') ?? $item->time_arrive ?? '' }}" required>
+                    <input type="text" class="form-control" name="time_arrive" value="" required>
                 </div>
                 <div class="flexBox_item btnRemoveRepeater" data-repeater-delete>
                     <i class="fa-solid fa-xmark"></i>
                 </div>
             </div>
+        @endif
         </div>
         <!-- One Row -->
         <div class="formBox_full_item" style="text-align:right;">

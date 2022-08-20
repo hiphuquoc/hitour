@@ -88,8 +88,8 @@ class Ship extends Model {
         return $this->hasOne(\App\Models\ShipDeparture::class, 'id', 'ship_departure_id');
     }
 
-    public function timesAndPrices(){
-        return $this->hasMany(\App\Models\ShipTimeAndPrice::class, 'ship_info_id', 'id');
+    public function prices(){
+        return $this->hasMany(\App\Models\ShipPrice::class, 'ship_info_id', 'id');
     }
 
     public function staffs(){

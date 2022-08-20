@@ -1,3 +1,4 @@
+@charset "UTF-8";
 *, ::after, ::before {
   padding: 0;
   margin: 0;
@@ -17,7 +18,7 @@ body {
 }
 
 p {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 a {
@@ -29,7 +30,7 @@ a:hover {
 }
 
 ul, ol {
-  margin-left: 1rem;
+  margin: 0.75rem 0 0.75rem 1rem;
 }
 
 img {
@@ -52,10 +53,10 @@ table {
 .customScrollBar-y::-webkit-scrollbar-thumb {
   background-color: #adb5bd;
   border-radius: 1000px;
-  -webkit-box-shadow: inset 0 0 6px #fff;
+  -webkit-box-shadow: inset 0 0 6px #dee2e6;
 }
 .customScrollBar-y::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px #fff;
+  -webkit-box-shadow: inset 0 0 6px #dee2e6;
   border-radius: 10px;
   background: transparent;
 }
@@ -98,6 +99,10 @@ table {
   .container {
     padding: 0 0.75rem !important;
   }
+}
+
+.spaceBetweenBox {
+  margin-top: 3rem;
 }
 
 .width100 {
@@ -1203,7 +1208,7 @@ input {
   background: #e9ecef;
   border: 1px solid #dee2e6;
   color: #456;
-  align-items: center;
+  align-items: flex-start;
   font-weight: 500;
   font-size: 0.975rem;
 }
@@ -1215,7 +1220,8 @@ input {
   border-top: 1px solid #dee2e6;
 }
 .tocContentTour_item > i {
-  width: 35px;
+  margin-top: 0.4rem;
+  flex: 0 0 27px;
   color: #678;
 }
 
@@ -1244,7 +1250,7 @@ input {
   color: rgb(0, 90, 180);
 }
 .contentTour_item_title > i {
-  width: 35px;
+  flex: 0 0 30px;
   color: #678;
 }
 .contentTour_item_title > div {
@@ -1281,9 +1287,6 @@ input {
 }
 .contentTour_item_text table.tableList tbody tr td:not(:first-child) {
   padding-left: 0.5rem;
-}
-.contentTour_item ul {
-  margin: 0.5rem 0 0.5rem 1rem;
 }
 
 .dayTourByList {
@@ -1430,7 +1433,7 @@ input {
   background: #e9ecef;
   font-size: 0.95rem;
   border-radius: 5px;
-  margin: 0 auto 1rem auto;
+  margin: 1rem auto;
 }
 .imageBox img {
   width: 100%;
@@ -1448,4 +1451,212 @@ input {
   top: 0;
 }
 
-/* ===== START: Page Tour */
+/* ===== END: Page Tour */
+/* ===== START: Page Ship */
+blockquote {
+  display: block;
+  background: rgba(244, 208, 63, 0.2);
+  padding: 0.5rem 0.5rem 0.5rem 2.75rem;
+  margin: 0 0 0.75rem 0;
+  position: relative;
+  font-size: inherit;
+  text-align: justify;
+  border-left: 5px solid rgba(0, 123, 255, 0.6);
+}
+blockquote::before {
+  content: "“";
+  font-size: 4rem;
+  font-weight: bold;
+  color: #adb5bd;
+  position: absolute;
+  left: 0.5rem;
+  top: 1.5rem;
+}
+blockquote::after {
+  /*Reset to make sure*/
+  content: "";
+}
+blockquote em {
+  font-style: italic;
+}
+
+.shipGrid {
+  margin: 1rem 0;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.shipGrid_item {
+  width: calc(33.33% - 1rem);
+  transition: 500ms ease-in-out all;
+  border: 1px solid rgba(0, 123, 255, 0.2);
+  border-radius: 5px;
+  box-shadow: 0 0 10px #dee2e6;
+}
+.shipGrid_item:not(:nth-child(3n+1)) {
+  margin-left: 1rem;
+}
+.shipGrid_item:nth-child(n+4) {
+  margin-top: 1rem;
+}
+.shipGrid_item_image {
+  position: relative;
+}
+.shipGrid_item_image a {
+  display: flex;
+}
+.shipGrid_item_image a img {
+  border-radius: 5px 5px 0 0;
+  width: 100%;
+  margin-bottom: 0;
+}
+.shipGrid_item_image_left {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0, 123, 255, 0.5);
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.9rem;
+  border-radius: 3px;
+}
+.shipGrid_item_image_bottom {
+  position: absolute;
+  bottom: 0;
+  padding: 1rem 0.5rem 0.5rem;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.01), #1b1b1b);
+  width: 100%;
+  color: rgb(244, 208, 63);
+  font-size: 0.9rem;
+}
+.shipGrid_item_content_title {
+  padding: 0.75rem 0.75rem 0 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.shipGrid_item_content_title a {
+  color: rgb(0, 123, 255);
+}
+.shipGrid_item_content_title a:hover {
+  color: rgb(0, 90, 180);
+}
+.shipGrid_item_content_table {
+  font-size: 1rem;
+  padding: 0 0.75rem;
+}
+.shipGrid_item_content_table_row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+}
+.shipGrid_item_content_table_row > div:first-child {
+  flex: 0 0 125px;
+}
+.shipGrid_item_content_table_row > div {
+  width: 100%;
+}
+.shipGrid_item_content_table_row__dp {
+  font-family: "Roboto Slab", serif;
+  text-align: center;
+  background: #dee2e6;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 0.925rem;
+  font-weight: 500;
+  margin: 0.25rem 0;
+}
+.shipGrid_item_content_btn {
+  display: flex;
+  justify-content: space-between;
+}
+.shipGrid_item_content_btn > * {
+  width: 100%;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 123, 255, 0.8);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.shipGrid_item_content_btn > *:hover {
+  background: rgb(0, 123, 255);
+  color: #fff;
+}
+.shipGrid_item_content_btn > *:not(:last-child) {
+  box-shadow: 3px 0 5px -5px black;
+  border-right: 1.5px solid rgba(255, 255, 255, 0.2);
+}
+.shipGrid_item_content_btn > * i {
+  margin-right: 0.5rem;
+}
+.shipGrid_item h2 {
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.contentShip_item:not(:first-child) {
+  margin-top: 1.5rem;
+}
+.contentShip_item_title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #ced4da;
+  margin-bottom: 0.75rem;
+}
+.contentShip_item_title.noBorder {
+  border-bottom: none;
+  margin-bottom: 0.25rem;
+}
+.contentShip_item_title h2, .contentShip_item_title h3 {
+  font-size: 1.3rem;
+  font-family: "Roboto Slab", serif;
+  font-weight: 700;
+  color: rgb(0, 90, 180);
+}
+.contentShip_item_title > i {
+  flex: 0 0 30px;
+  color: #678;
+}
+.contentShip_item_title > div {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  font-size: 0.95rem;
+}
+.contentShip_item_title > div > span:not(:first-child) {
+  margin-left: 0.75rem;
+}
+.contentShip_item_title > div > span.active {
+  color: rgb(0, 90, 180);
+  font-weight: 700;
+}
+.contentShip_item_text table.tableList {
+  width: 100%;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+.contentShip_item_text table.tableList tbody tr:first-child td {
+  border-top: none;
+}
+.contentShip_item_text table.tableList tbody tr td {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.25rem;
+  border-top: 1px dotted #ced4da;
+}
+.contentShip_item_text table.tableList tbody tr td:first-child {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.contentShip_item_text table.tableList tbody tr td:not(:first-child) {
+  padding-left: 0.5rem;
+}
+
+/* ===== END: Page Ship */
