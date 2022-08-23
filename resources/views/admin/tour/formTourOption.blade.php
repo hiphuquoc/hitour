@@ -1,6 +1,3 @@
-<div id="js_validateFormModal_message" class="error" style="margin-bottom:1rem;display:none;">
-    <!-- Load Ajax -->
-</div>
 <!-- Input hidden -->
 <input type="hidden" id="tour_option_id" name="tour_option_id" value="{{ $option->id ?? null }}" />
 <div class="formBox">

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-use App\Models\Tour;
+use App\Models\Ship;
 
 class ShipRequest extends FormRequest
 {
@@ -30,9 +30,14 @@ class ShipRequest extends FormRequest
                 'required',
                 function($attribute, $value, $fail){
                     $slug           = !empty(request('slug')) ? request('slug') : null;
+                    // dd($slug);
                     if(!empty($slug)){
-                        $dataCheck  = Tour::getItemBySlug($slug);
-                        if(!empty($dataCheck)&&$dataCheck->id_tour!=request('tour_info_id')) $fail('Dường dẫn tĩnh đã trùng với một Tour khác trên hệ thống!');
+                        $dataCheck  = Ship::select('id')
+                                        ->whereHas('seo', function($query) use($slug){
+                                            $query->where('slug', $slug);
+                                        })
+                                        ->first();
+                        if(!empty($dataCheck)&&$dataCheck->id!=request('ship_info_id')) $fail('Dường dẫn tĩnh đã trùng với một Chuyến tàu khác trên hệ thống!');
                     }
                 }
             ],

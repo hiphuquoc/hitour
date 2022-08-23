@@ -17,5 +17,16 @@ class Time {
         return $mkDistance;
     }
 
+    public static function convertMkToTimeMove($mkTime){
+        $result             = null;
+        if(!empty($mkTime)){
+            $hours          = number_format(floor($mkTime/3600), 0);
+            $minutes        = ($mkTime%3600)/60;
+            $result         = $hours.' giờ';
+            if(!empty($minutes)) $result  .= ' '.$minutes.' phút';
+        }
+        return $result;
+    }
+
     
 }

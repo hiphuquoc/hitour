@@ -12,6 +12,8 @@ use App\Models\ShipTime;
 
 use App\Services\BuildInsertUpdateModel;
 
+use Illuminate\Support\Facades\Input;
+
 class AdminShipPriceController extends Controller {
 
     public function __construct(BuildInsertUpdateModel $BuildInsertUpdateModel){
@@ -21,13 +23,12 @@ class AdminShipPriceController extends Controller {
     public function loadList(Request $request){
         $result             = 'Không có dữ liệu phù hợp!';
         if(!empty($request->get('ship_info_id'))){
-            $result         = null;
             $infoShipPrice  = Ship::select('*')
                                 ->where('id', $request->get('ship_info_id'))
                                 ->with('prices.times', 'prices.partner')
                                 ->first();
             if($infoShipPrice->prices->isNotEmpty()){
-                $result     .= view('admin.ship.oneRowPriceAndTime', ['item' => $infoShipPrice->prices])->render();
+                $result     = view('admin.ship.oneRowPriceAndTime', ['item' => $infoShipPrice->prices])->render();
             }
         }
         echo $result;
@@ -41,43 +42,29 @@ class AdminShipPriceController extends Controller {
             $insertPrice    = $this->BuildInsertUpdateModel->buildArrayTableShipPrice($dataForm);
             $idShipPrice    = ShipPrice::insertItem($insertPrice);
             /* insert ship_time */
-            for($i=0;$i<count($dataForm['time_departure']);++$i){
-                $insertTime = [];
-                $insertTime['shiP_price_id']    = $idShipPrice;
-                $insertTime['time_departure']   = date('H:i', strtotime($dataForm['time_departure'][$i]));
-                $insertTime['time_arrive']      = date('H:i', strtotime($dataForm['time_arrive'][$i]));
-                /* time_move */
-                $insertTime['time_move']        = Time::calcTimeMove($dataForm['time_departure'][$i], $dataForm['time_arrive'][$i]);
-                ShipTime::insertItem($insertTime);
-            }
+            $arrayInsertTime    = $this->BuildInsertUpdateModel->buildArrayTableShipTime($idShipPrice, $dataForm);
+            for($i=0;$i<count($arrayInsertTime);++$i) ShipTime::insertItem($arrayInsertTime[$i]);
             $flag           = !empty($idShipPrice) ? true : false;
         }
         echo $flag;
     }
 
     public function updatePrice(Request $request){
-        $flag               = false;
+        $flag                   = false;
         if(!empty($request->get('dataForm'))){
-            $dataForm       = $request->get('dataForm');
-            $idShipPrice    = $dataForm['ship_price_id'];
+            $dataForm           = $request->get('dataForm');
+            $idShipPrice        = $dataForm['ship_price_id'];
             /* update ship_price */
-            $updatePrice    = $this->BuildInsertUpdateModel->buildArrayTableShipPrice($dataForm);
+            $updatePrice        = $this->BuildInsertUpdateModel->buildArrayTableShipPrice($dataForm);
             ShipPrice::updateItem($idShipPrice, $updatePrice);
             /* delete ship_time old */
             ShipTime::select('*')
                 ->where('ship_price_id', $idShipPrice)
                 ->delete();
             /* insert ship_time */
-            for($i=0;$i<count($dataForm['time_departure']);++$i){
-                $insertTime = [];
-                $insertTime['ship_price_id']    = $idShipPrice;
-                $insertTime['time_departure']   = date('H:i', strtotime($dataForm['time_departure'][$i]));
-                $insertTime['time_arrive']      = date('H:i', strtotime($dataForm['time_arrive'][$i]));
-                /* time_move */
-                $insertTime['time_move']        = Time::calcTimeMove($dataForm['time_departure'][$i], $dataForm['time_arrive'][$i]);
-                ShipTime::insertItem($insertTime);
-            }
-            $flag           = true;
+            $arrayInsertTime    = $this->BuildInsertUpdateModel->buildArrayTableShipTime($idShipPrice, $dataForm);
+            for($i=0;$i<count($arrayInsertTime);++$i) ShipTime::insertItem($arrayInsertTime[$i]);
+            $flag               = true;
         }
         echo $flag;
     }
@@ -96,38 +83,48 @@ class AdminShipPriceController extends Controller {
         if(!empty($request->get('ship_info_id'))){
             if(!empty($request->get('ship_price_id'))&&$request->get('type')=='update'){
                 /* trường hợp update */
-                $idShip     = $request->get('ship_price_id');
-                $type       = $request->get('type');
-                $header     = 'Chỉnh sửa giờ tàu và giá';
-                $item       = ShipPrice::select('*')
-                                ->where('id', $idShip)
-                                ->with('times')
-                                ->first();
-                $partners   = ShipPartner::all();
+                $idShipInfo     = $request->get('ship_info_id');
+                $idShipPrice    = $request->get('ship_price_id');
+                $type           = $request->get('type');
+                $header         = 'Chỉnh sửa giờ tàu và giá';
+                $shipInfo       = Ship::select('*')
+                                    ->where('id', $idShipInfo)
+                                    ->with('location.district', 'location.province', 'departure.district', 'departure.province')
+                                    ->first();
+                $item           = ShipPrice::select('*')
+                                    ->where('id', $idShipPrice)
+                                    ->with('times')
+                                    ->first();
+                $partners       = ShipPartner::all();
                 if(!empty($item)){
-                    $body   = view('admin.ship.formShipTime', compact('item', 'type', 'partners'))->render();
+                    $body       = view('admin.ship.formShipTime', compact('shipInfo', 'item', 'type', 'partners'))->render();
                 }else {
-                    $body   = '<div style="margin-top:1rem;font-weight:600;">Có lỗi xảy ra, không tải được dữ liệu!</div>';
+                    $body       = '<div style="margin-top:1rem;font-weight:600;">Có lỗi xảy ra, không tải được dữ liệu!</div>';
                 }
                 
             }else {
                 /* trường hợp create và copy */
-                $idShip     = $request->get('ship_price_id') ?? 0;
-                $type       = $request->get('type');
-                $item       = ShipPrice::select('*')
-                                ->where('id', $idShip)
-                                ->with('times')
-                                ->first();
-                $header     = 'Thêm giờ tàu và giá';
-                $partners   = ShipPartner::all();
-                $body       = view('admin.ship.formShipTime', compact('item', 'type', 'partners'))->render();
+                $idShipInfo     = $request->get('ship_info_id') ?? 0;   
+                $idShipPrice    = $request->get('ship_price_id') ?? 0;
+                $type           = $request->get('type');
+                $shipInfo       = Ship::select('*')
+                                    ->where('id', $idShipInfo)
+                                    ->with('location.district', 'location.province', 'departure.district', 'departure.province')
+                                    ->first();
+                $item           = ShipPrice::select('*')
+                                    ->where('id', $idShipPrice)
+                                    ->with('times')
+                                    ->first();
+                $header         = 'Thêm giờ tàu và giá';
+                $partners       = ShipPartner::all();
+                $body           = view('admin.ship.formShipTime', compact('shipInfo', 'item', 'type', 'partners'))->render();
             }
         }else {
-            $header         = 'Thêm giờ tàu và giá';
-            $body           = '<div style="margin-top:1rem;font-weight:600;">Vui lòng tạo và lưu Chuyến tàu trước khi tạo giờ tàu và giá!</div>';
+            $header             = 'Thêm giờ tàu và giá';
+            $body               = '<div style="margin-top:1rem;font-weight:600;">Vui lòng tạo và lưu Chuyến tàu trước khi tạo giờ tàu và giá!</div>';
         }
-        $result['header']   = $header;
-        $result['body']     = $body;
+        $result['header']       = $header;
+        $result['body']         = $body;
         return json_encode($result);
     }
 }

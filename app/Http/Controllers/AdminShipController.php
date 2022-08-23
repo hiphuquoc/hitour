@@ -59,6 +59,9 @@ class AdminShipController extends Controller {
         $shipDepartures     = ShipDeparture::all();
         $staffs             = Staff::all();
         $shipPartners       = ShipPartner::all();
+        $parents            = ShipLocation::select('*')
+                                ->with('seo')
+                                ->get();
         $message            = $request->get('message') ?? null;
         $id                 = $request->get('id') ?? 0;
         $item               = Ship::select('*')
@@ -72,7 +75,7 @@ class AdminShipController extends Controller {
         /* type */
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.ship.view', compact('item', 'content', 'type', 'shipLocations', 'shipDepartures', 'staffs', 'shipPartners'));
+        return view('admin.ship.view', compact('parents', 'item', 'content', 'type', 'shipLocations', 'shipDepartures', 'staffs', 'shipPartners'));
     }
 
     public function create(ShipRequest $request){

@@ -1,17 +1,18 @@
 @if(!empty($item))
     @php
-        $infoSize       = getimagesize(public_path($item));
+        $infoSize       = getimagesize($item);
         $infoImage      = pathinfo($item);
+        $urlImage       = Storage::url(config('admin.images.folderUpload')).basename($item);
         /* phân loại ảnh */
         $arrayAction    = \App\Helpers\Image::getActionImageByType($item);
     @endphp
     <div id="{{ $infoImage['filename'] }}" class="imageBox_item" style="{{ $style ?? null }}">
         <div class="imageBox_item_image">
-            <img src="{{ $item }}?{{ time() }}" alt="" title="" />
+            <img src="{{ $urlImage }}?{{ time() }}" alt="" title="" />
         </div>
         <div class="imageBox_item_content">
             <div class="imageBox_item_content_text">
-                <div style="margin-bottom:0.5rem;">{{ $item }}</div>
+                <div style="margin-bottom:0.5rem;">{{ $urlImage }}</div>
                 <div>width: {{ !empty($infoSize[0]) ? $infoSize[0].'px' : '-' }}</div>
                 <div>height: {{ !empty($infoSize[1]) ? $infoSize[1].'px' : '-' }}</div>
                 <div>size: 19.4kb</div>

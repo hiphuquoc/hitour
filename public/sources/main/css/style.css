@@ -41,6 +41,9 @@ table {
   width: 100%;
   border-collapse: collapse;
 }
+table h3 {
+  font-size: 1rem;
+}
 
 .customScrollBar-y {
   width: 100%;
@@ -568,6 +571,7 @@ input {
 }
 .megaMenu_title ul, .megaMenu_content ul {
   line-height: 2;
+  margin: 0;
 }
 .megaMenu_title ul > li, .megaMenu_content ul > li {
   list-style: none;
@@ -1434,6 +1438,7 @@ input {
   font-size: 0.95rem;
   border-radius: 5px;
   margin: 1rem auto;
+  border: 1px solid #e9ecef;
 }
 .imageBox img {
   width: 100%;
@@ -1455,7 +1460,7 @@ input {
 /* ===== START: Page Ship */
 blockquote {
   display: block;
-  background: rgba(244, 208, 63, 0.2);
+  background: #e9ecef;
   padding: 0.5rem 0.5rem 0.5rem 2.75rem;
   margin: 0 0 0.75rem 0;
   position: relative;
@@ -1488,7 +1493,7 @@ blockquote em {
   flex-wrap: wrap;
 }
 .shipGrid_item {
-  width: calc(33.33% - 1rem);
+  width: calc(33.33% - 0.6666rem);
   transition: 500ms ease-in-out all;
   border: 1px solid rgba(0, 123, 255, 0.2);
   border-radius: 5px;
@@ -1524,15 +1529,15 @@ blockquote em {
 .shipGrid_item_image_bottom {
   position: absolute;
   bottom: 0;
-  padding: 1rem 0.5rem 0.5rem;
+  padding: 1rem 0.5rem 0.25rem 0.5rem;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.01), #1b1b1b);
   width: 100%;
   color: rgb(244, 208, 63);
   font-size: 0.9rem;
 }
 .shipGrid_item_content_title {
-  padding: 0.75rem 0.75rem 0 0.75rem;
-  margin-bottom: 0.75rem;
+  padding: 0.6rem 0.75rem 0 0.75rem;
+  margin-bottom: 0.4rem;
 }
 .shipGrid_item_content_title a {
   color: rgb(0, 123, 255);
@@ -1543,12 +1548,13 @@ blockquote em {
 .shipGrid_item_content_table {
   font-size: 1rem;
   padding: 0 0.75rem;
+  margin-bottom: 0.5rem;
 }
 .shipGrid_item_content_table_row {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin: 0.5rem 0;
+  margin: 0;
   font-size: 0.95rem;
 }
 .shipGrid_item_content_table_row > div:first-child {
@@ -1657,6 +1663,44 @@ blockquote em {
 }
 .contentShip_item_text table.tableList tbody tr td:not(:first-child) {
   padding-left: 0.5rem;
+}
+.contentShip .highLight {
+  font-weight: 700;
+  color: #fd5056;
+}
+
+.shipPartnerBox {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 1rem 0;
+}
+.shipPartnerBox_item {
+  width: calc(33.33% - 0.6666rem);
+  box-shadow: 0 0 5px #ced4da;
+  border-radius: 5px;
+}
+.shipPartnerBox_item_image {
+  display: flex;
+  border-radius: inherit;
+}
+.shipPartnerBox_item_image img {
+  border-radius: 5px 5px 0 0;
+}
+.shipPartnerBox_item_content {
+  padding: 0.5rem 0.75rem;
+}
+.shipPartnerBox_item_content a {
+  display: flex;
+}
+.shipPartnerBox_item_content a h3 {
+  font-size: 1.05rem;
+  font-weight: 1rem;
+  margin-bottom: 0.25rem;
+}
+.shipPartnerBox_item_content_desc {
+  font-size: 0.95rem;
+  color: #567;
 }
 
 /* ===== END: Page Ship */

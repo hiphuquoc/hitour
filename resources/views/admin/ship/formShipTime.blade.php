@@ -1,6 +1,3 @@
-<div id="js_validateFormModal_message" class="error" style="margin-bottom:1rem;display:none;">
-    <!-- Load Ajax -->
-</div>
 <input type="hidden" id="ship_price_id" name="ship_price_id" value="{{ !empty($item->id)&&$type=='update' ? $item->id : null }}" />
 <div class="formBox">
     <div class="formBox_full">
@@ -66,6 +63,22 @@
             @foreach($item->times as $time)
                 <div class="flexBox" {{ $loop->last ? 'data-repeater-item' : null}}>
                     <div class="flexBox_item">
+                        <label class="form-label inputRequired" for="string_from_to">Khởi hành - Cập bến</label>
+                        <select class="form-select" name="string_from_to" aria-hidden="true">
+                            <option value="0">- Lựa chọn -</option>
+                            @if(!empty($shipInfo->location))
+                                @php
+                                    $locationName   = $shipInfo->location->district->district_name ?? $shipInfo->location->province->province_name;
+                                    $departureName  = $shipInfo->departure->district->district_name ?? $shipInfo->departure->province->province_name;
+                                    $nameTrip       = $departureName.' - '.$locationName;
+                                    $nameRound      = $locationName.' - '.$departureName;
+                                @endphp
+                                <option value="{{ $nameTrip }}" {{ ($nameTrip===$time->name) ? 'selected' : null }}>{{ $nameTrip }}</option>
+                                <option value="{{ $nameRound }}" {{ ($nameRound===$time->name) ? 'selected' : null }}>{{ $nameRound }}</option>
+                            @endif
+                        </select>
+                    </div>
+                    <div class="flexBox_item">
                         <label class="form-label inputRequired" for="time_departure">Thời gian khởi hành</label>
                         <input type="text" class="form-control" name="time_departure" value="{{ $time->time_departure ?? null }}" required>
                     </div>
@@ -80,6 +93,22 @@
             @endforeach
         @else
             <div class="flexBox" data-repeater-item>
+                <div class="flexBox_item">
+                    <label class="form-label inputRequired" for="string_from_to">Khởi hành - Cập bến</label>
+                    <select class="form-select" name="string_from_to" aria-hidden="true">
+                        <option value="0">- Lựa chọn -</option>
+                            @if(!empty($shipInfo->location))
+                                @php
+                                    $locationName   = $shipInfo->location->district->district_name ?? $shipInfo->location->province->province_name;
+                                    $departureName  = $shipInfo->departure->district->district_name ?? $shipInfo->departure->province->province_name;
+                                    $nameTrip       = $departureName.' - '.$locationName;
+                                    $nameRound      = $locationName.' - '.$departureName;
+                                @endphp
+                                <option value="{{ $nameTrip }}">{{ $nameTrip }}</option>
+                                <option value="{{ $nameRound }}">{{ $nameRound }}</option>
+                            @endif
+                    </select>
+                </div>
                 <div class="flexBox_item">
                     <label class="form-label inputRequired" for="time_departure">Thời gian khởi hành</label>
                     <input type="text" class="form-control" name="time_departure" value="" required>

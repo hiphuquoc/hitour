@@ -46,7 +46,7 @@
             <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
         </div>
         <!-- One Row -->
-        @if(!empty($allPage))
+        @if(!empty($parents))
         <div class="formBox_full_item">
             <span data-toggle="tooltip" data-placement="top" title="
                 Là trang cha chứa trang hiện tại... URL cũng sẽ được hiển thị theo cấp cha - con
@@ -56,12 +56,12 @@
             </span>
             <select class="select2 form-select select2-hidden-accessible" id="parent" name="parent">
                 <option value="0">- Lựa chọn -</option>
-                @foreach($allPage as $page)
+                @foreach($parents as $page)
                     @php
                         $selected   = null;
-                        if(!empty($item->seo->parent)&&$item->seo->parent==$page->id) $selected = 'selected';
+                        if(!empty($item->seo->parent)&&$item->seo->parent==$page->seo->id) $selected = 'selected';
                     @endphp
-                    <option value="{{ $page->id }}" {{ $selected }}>{{ $page->title }}</option>
+                    <option value="{{ $page->seo->id }}" {{ $selected }}>{{ $page->seo->title }}</option>
                 @endforeach
             </select>
         </div>

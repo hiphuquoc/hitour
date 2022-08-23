@@ -124,7 +124,7 @@
         <!-- Input Hidden -->
         <input type="hidden" id="tour_info_id" name="tour_info_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : 0 }}" />
         <div class="modal fade" id="modalContact" tabindex="-1" aria-labelledby="addNewCardTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header bg-transparent">
                         <h4 id="js_loadFormModal_header">Thêm giờ tàu và giá</h4>
@@ -134,6 +134,7 @@
                         <!-- load Ajax -->
                     </div>
                     <div class="modal-footer">
+                        <div id="js_validateFormModal_message" class="error" style="display:none;"><!-- Load Ajax --></div>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                         <button type="button" class="btn btn-primary" onClick="addAndUpdateShipPriceAndTime();">Xác nhận</button>
                     </div>
@@ -166,36 +167,41 @@
         }
 
         function addAndUpdateShipPriceAndTime(){
-            /* data time_departure */
-            var time_departure      = [];
-            $('#formModal').find('input[name*=time_departure]').each(function(){
-                time_departure.push($(this).val());
-            });
-            /* data time_arrive */
-            var time_arrive         = [];
-            $('#formModal').find('input[name*=time_arrive]').each(function(){
-                time_arrive.push($(this).val());
-            });
-            /* dataForm */
-            var dataForm            = {
-                ship_price_id   : $('#ship_price_id').val(),
-                ship_info_id    : $('#ship_info_id').val(),
-                ship_partner_id : $('#ship_partner_id').val(),
-                time_departure  : $('#time_departure').val(),
-                time_arrive     : $('#time_arrive').val(),
-                date_range      : $('#date_range').val(),
-                price_adult     : $('#price_adult').val(),
-                price_child     : $('#price_child').val(),
-                price_old       : $('#price_old').val(),
-                price_vip       : $('#price_vip').val(),
-                profit_percent  : $('#profit_percent').val(),
-                time_departure,
-                time_arrive
-            };
-            console.log(dataForm['ship_price_id']);
-            const tmp               = validateFormModal();
+            const tmp                   = validateFormModal();
             /* không có trường required bỏ trống */
             if(tmp==''){
+                /* data from_to */
+                var string_from_to      = [];
+                $('#formModal').find('[name*=string_from_to]').each(function(){
+                    string_from_to.push($(this).val());
+                });
+                /* data time_departure */
+                var time_departure      = [];
+                $('#formModal').find('[name*=time_departure]').each(function(){
+                    time_departure.push($(this).val());
+                });
+                /* data time_arrive */
+                var time_arrive         = [];
+                $('#formModal').find('[name*=time_arrive]').each(function(){
+                    time_arrive.push($(this).val());
+                });
+                /* dataForm */
+                var dataForm            = {
+                    ship_price_id   : $('#ship_price_id').val(),
+                    ship_info_id    : $('#ship_info_id').val(),
+                    ship_partner_id : $('#ship_partner_id').val(),
+                    time_departure  : $('#time_departure').val(),
+                    time_arrive     : $('#time_arrive').val(),
+                    date_range      : $('#date_range').val(),
+                    price_adult     : $('#price_adult').val(),
+                    price_child     : $('#price_child').val(),
+                    price_old       : $('#price_old').val(),
+                    price_vip       : $('#price_vip').val(),
+                    profit_percent  : $('#profit_percent').val(),
+                    string_from_to,
+                    time_departure,
+                    time_arrive
+                };            
                 if(typeof dataForm['ship_price_id']=='undefined' || dataForm['ship_price_id']==''){
                     /* insert */
                     $.ajax({
@@ -287,6 +293,7 @@
                 success     : function(data){
                     $('#js_loadFormModal_header').html(data.header);
                     $('#js_loadFormModal_body').html(data.body);
+                    console.log(data);
                 }
             });
         }
@@ -317,8 +324,15 @@
 
         function validateFormModal(){
             let error       = [];
+            /* input required không được bỏ trống */
             $('#formModal').find('input[required]').each(function(){
                 if($(this).val()==''){
+                    error.push($(this).attr('name'));
+                }
+            })
+            /* select không được bỏ trống */
+            $('#formModal').find('select').each(function(){
+                if($(this).val()==''||$(this).val()=='0'){
                     error.push($(this).attr('name'));
                 }
             })

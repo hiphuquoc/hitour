@@ -328,17 +328,16 @@ $height_headerMain : 85px;
     width: 100%;
     display: none;
     justify-content: space-between;
-    font-family: 'Roboto', sans-serif;
+    font-family: $font-primary-text;
     box-shadow: 1px 1px 10px rgba(0,0,0,0.4);
     border-top: 4px solid $color-secondary;
     top: $height_headerMain;
     z-index: 100;
     &_title, &_content {
         width: 100%;
-
         ul {
             line-height: 2;
-
+            margin: 0;
             > li {
                 list-style: none;
             }
@@ -1300,6 +1299,7 @@ $tourGrid_radius : 5px;
     font-size: 0.95rem;
     border-radius: 5px;
     margin: 1rem auto;
+    border: 1px solid $bg-03;
     img {
         width: 100%;
         object-fit: cover;
@@ -1318,7 +1318,7 @@ $tourGrid_radius : 5px;
 /* ===== START: Page Ship */
 blockquote{
 	display:block;
-	background: $color-secondary-02;
+	background: $bg-03;
 	padding: 0.5rem 0.5rem 0.5rem 2.75rem;
 	margin: 0 0 0.75rem 0;
 	position: relative;
@@ -1351,7 +1351,7 @@ blockquote{
     flex-wrap: wrap;
 		
     &_item {
-        width: calc(33.33% - 1rem);
+        width: calc(33.33% - 0.6666rem);
         -webkit-transition: 500ms ease-in-out all;
         -o-transition: 500ms ease-in-out all;
         transition: 500ms ease-in-out all;
@@ -1393,7 +1393,7 @@ blockquote{
             &_bottom {
                 position: absolute;
                 bottom: 0;
-                padding: 1rem 0.5rem 0.5rem;
+                padding: 1rem 0.5rem 0.25rem 0.5rem;
                 background: linear-gradient(to bottom,rgba(0,0,0,.01),#1b1b1b);
                 width: 100%;
                 color: $color-secondary;
@@ -1405,8 +1405,8 @@ blockquote{
             // background: $color-primary-01;
             
             &_title {
-                padding: 0.75rem 0.75rem 0 0.75rem;
-                margin-bottom: 0.75rem;
+                padding: 0.6rem 0.75rem 0 0.75rem;
+                margin-bottom: 0.4rem;
                 
                 a {
                     color: $color-primary;
@@ -1418,12 +1418,12 @@ blockquote{
             &_table {
                 font-size: 1rem;
                 padding: 0 0.75rem;
-                
+                margin-bottom: 0.5rem;
                 &_row {
                     display: flex;
                     justify-content: space-between;
                     align-items: flex-end;
-                    margin: 0.5rem 0;
+                    margin: 0;
                     font-size: 0.95rem;
 
                     > div:first-child {
@@ -1553,6 +1553,43 @@ blockquote{
                 }
             }
             
+        }
+    }
+    .highLight {
+        font-weight: 700;
+        color: $color-price;
+    }
+}
+.shipPartnerBox {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 1rem 0;
+    &_item {
+        width: calc(33.33% - 0.6666rem);
+        box-shadow: 0 0 5px $bg-05;
+        border-radius: 5px;
+        &_image {
+            display: flex;
+            border-radius: inherit;
+            img {
+                border-radius: 5px 5px 0 0;
+            }
+        }
+        &_content {
+            padding: 0.5rem 0.75rem;
+            a {
+                display: flex;
+                h3 {
+                    font-size: 1.05rem;
+                    font-weight: 1rem;
+                    margin-bottom: 0.25rem;
+                }
+            }
+            &_desc {
+                font-size: 0.95rem;
+                color: $color-des;
+            }
         }
     }
 }

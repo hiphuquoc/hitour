@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Seo extends Model {
     use HasFactory;
@@ -41,9 +42,20 @@ class Seo extends Model {
     public static function updateItem($id, $params){
         $flag           = false;
         if(!empty($id)&&!empty($params)){
-            $model      = Seo::find($id);
+            $model      = self::find($id);
             foreach($params as $key => $value) $model->{$key}  = $value;
             $flag       = $model->update();
+            /* mỗi lần cập nhật lại slug thì phải build lại slug_full của toàn bộ children */
+            if($flag==true){
+                $childs = self::select('id', 'level', 'parent', 'slug')
+                            ->where('parent', $id)
+                            ->get();
+                foreach($childs as $child){
+                    $urlNew         = self::buildFullUrl($child->slug, $child->level, $child->parent);
+                    $paramsUpdate   = ['slug_full' => $urlNew];
+                    self::updateItem($child->id, $paramsUpdate);
+                }
+            }
         }
         return $flag;
     }
@@ -51,10 +63,29 @@ class Seo extends Model {
     public static function getItemBySlug($slug = null){
         $result = null;
         if(!empty($slug)){
-            $result = Seo::select('*')
+            $result = self::select('*')
                         ->where('slug', $slug)
                         ->first();
         }
         return $result;
+    }
+
+    public static function buildFullUrl($slug, $level, $parent){
+        $url    = null;
+        if(!empty($slug)){
+            $infoSeo    = self::select('id', 'slug', 'parent')
+                            ->get();
+            $url        = $slug;
+            for($i=1;$i<$level;++$i){
+                foreach($infoSeo as $item){
+                    if($item->id==$parent) {
+                        $url    = $item->slug.'/'.$url;
+                        $parent = $item->parent;
+                        break;
+                    }
+                }
+            }
+        }
+        return $url;
     }
 }

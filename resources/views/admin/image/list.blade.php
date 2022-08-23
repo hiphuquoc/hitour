@@ -147,7 +147,6 @@
                 success         : function(data){
                     setTimeout(() => {
                         if(data.flag==true){
-                            console.log(filenameImage);
                             /* tải lại imageBox */
                             loadImageBox(filenameImage);
                             /* tắt modal */

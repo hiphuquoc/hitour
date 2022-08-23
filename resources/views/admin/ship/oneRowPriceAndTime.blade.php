@@ -5,8 +5,7 @@
             $styleHeadTable     = 'background:none !important;color:#345 !important;text-align:center;';
         @endphp
         <tr>
-            <th style="{{ $styleHeadTable }}">Hãng tàu</th>
-            <th style="{{ $styleHeadTable }}">Ngày áp dụng</th>
+            <th style="{{ $styleHeadTable }}">Hãng tàu /Áp dụng</th>
             <th style="{{ $styleHeadTable }}">Lịch trình</th>
             <th style="{{ $styleHeadTable }}">Giá vé</th>
             <th style="{{ $styleHeadTable }}width:60px;">-</th>
@@ -15,20 +14,29 @@
     <tbody>
         @foreach($item as $price)
             <tr id="priceAndTime_{{ $price->id }}">
-                <td style="text-align:center;">
-                    <div class="oneLine"><img src="{{ $price->partner->company_logo }}" style="width:100px;" /></div>
-                    <div class="oneLine">{{ $price->partner->name }}</div>
-                </td>
                 <td>
-                    <div class="oneLine">
+                    <div class="oneLine" style="color:rgb(0, 123, 255);">
                         <span style="font-weight:700;">{{ date('d/m/Y', strtotime($price->date_start)) }} - {{ date('d/m/Y', strtotime($price->date_end)) }}</span>
                     </div>
+                    <div class="oneLine">{{ $price->partner->name }}</div>
+                    <div class="oneLine"><img src="{{ $price->partner->company_logo }}" style="width:100px;" /></div>
+                    
+                    
                 </td>
                 <td>
                     @if(!empty($price->times))
-                        @foreach($price->times as $time)
+                        @php
+                            $dataConvert        = [];
+                            foreach($price->times as $time){
+                                $dataConvert[$time->ship_from_sort][] = $time->toArray(); 
+                            }
+                        @endphp
+                        @foreach($dataConvert as $key => $value)
                             <div class="oneLine">
-                                {{ $time->time_departure }} - {{ $time->time_arrive }} (2h30p)
+                                <div style="font-weight:700;">{{ $value[0]['name'] }}</div>
+                                @foreach($value as $time)
+                                    <div>{{ $time['time_departure'] }} - {{ $time['time_arrive'] }}</div>
+                                @endforeach
                             </div>
                         @endforeach
                     @endif

@@ -40,7 +40,6 @@
                         <td>{{ $item->pick_up }} {{ $item->departure->name }}</td>
                     </tr>
 				</tbody>
-	
 			</table>
 			{!! $item->content->special_content ?? null !!}
 		</div>

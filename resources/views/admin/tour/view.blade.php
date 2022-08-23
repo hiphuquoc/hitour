@@ -187,6 +187,7 @@
                         <!-- load Ajax -->
                     </div>
                     <div class="modal-footer">
+                        <div id="js_validateFormModal_message" class="error" style="display:none;"><!-- Load Ajax --></div>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                         <button type="button" class="btn btn-primary" onClick="addAndUpdateTourOption();">Xác nhận</button>
                     </div>
@@ -219,33 +220,33 @@
         }
 
         function addAndUpdateTourOption(){
-            /* data apply_age */
-            let apply_age           = [];
-            $('#formTourOption').find('input[name*=apply_age]').each(function(){
-                apply_age.push($(this).val());
-            });
-            /* data price */
-            let price               = [];
-            $('#formTourOption').find('input[name*=price]').each(function(){
-                price.push($(this).val());
-            });
-            /* data profit */
-            let profit              = [];
-            $('#formTourOption').find('input[name*=profit]').each(function(){
-                profit.push($(this).val());
-            });
-            /* gộp dataForm đầy đủ */
-            let dataForm            = {
-                tour_info_id    : $('#tour_info_id').val(),
-                tour_option_id  : $('#tour_option_id').val(),
-                option          : $('#tour_option').val(),
-                apply_day       : $('#tour_apply_day').val(),
-                apply_age,
-                price,
-                profit
-            };
             const tmp               = validateFormModal();
             if(tmp==''){
+                /* data apply_age */
+                let apply_age           = [];
+                $('#formTourOption').find('input[name*=apply_age]').each(function(){
+                    apply_age.push($(this).val());
+                });
+                /* data price */
+                let price               = [];
+                $('#formTourOption').find('input[name*=price]').each(function(){
+                    price.push($(this).val());
+                });
+                /* data profit */
+                let profit              = [];
+                $('#formTourOption').find('input[name*=profit]').each(function(){
+                    profit.push($(this).val());
+                });
+                /* gộp dataForm đầy đủ */
+                let dataForm            = {
+                    tour_info_id    : $('#tour_info_id').val(),
+                    tour_option_id  : $('#tour_option_id').val(),
+                    option          : $('#tour_option').val(),
+                    apply_day       : $('#tour_apply_day').val(),
+                    apply_age,
+                    price,
+                    profit
+                };
                 /* không có trường required bỏ trống */
                 if(dataForm['tour_option_id']==null||dataForm['tour_option_id']==''){
                     /* insert */

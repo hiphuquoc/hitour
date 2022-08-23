@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Services;
-
-use App\Models\TourLocation;
 use App\Models\Seo;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,6 +44,9 @@ class BuildInsertUpdateModel {
             $result['seo_title']                = $dataForm['seo_title'] ?? $dataForm['title'] ?? null;
             $result['seo_description']          = $dataForm['seo_description'] ?? $dataForm['description'] ?? null;
             $result['slug']                     = $dataForm['slug'];
+            /* slug full */
+            $result['slug_full']                = Seo::buildFullUrl($dataForm['slug'], $pageLevel, $pageParent);
+            /* type */
             $result['type']                     = $type;
             $result['rating_author_name']       = 1;
             $result['rating_author_star']       = 5;
@@ -501,6 +502,36 @@ class BuildInsertUpdateModel {
             $result['price_old']            = $dataForm['price_old'];
             $result['price_vip']            = $dataForm['price_vip'];
             $result['profit_percent']       = $dataForm['profit_percent'];
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableShipTime($idShipPrice, $dataForm){
+        /* này khác những cái trên => trả về 1 mảng nhiều phần tử insert */
+        $result                                 = [];
+        if(!empty($idShipPrice)&&!empty($dataForm)){
+            for($i=0;$i<count($dataForm['time_departure']);++$i){
+                $result[$i]['ship_price_id']    = $idShipPrice;
+                $result[$i]['time_departure']   = date('H:i', strtotime($dataForm['time_departure'][$i]));
+                $result[$i]['time_arrive']      = date('H:i', strtotime($dataForm['time_arrive'][$i]));
+                /* time_move */
+                $result[$i]['time_move']        = \App\Helpers\Time::calcTimeMove($dataForm['time_departure'][$i], $dataForm['time_arrive'][$i]);
+                /* from and to */
+                $result[$i]['name']             = $dataForm['string_from_to'][$i];
+                $arrFromTo                      = explode('-', $dataForm['string_from_to'][$i]);
+                $from                           = trim($arrFromTo[0]);
+                $result[$i]['ship_from']            = $from;
+                $fromSort                       = null;
+                $tmp                            = explode(' ', $from);
+                foreach($tmp as $t) $fromSort   .= strtoupper(substr($t, 0, 1));
+                $result[$i]['ship_from_sort']   = $fromSort;
+                $to                             = trim($arrFromTo[1]);
+                $result[$i]['ship_to']          = $to;
+                $toSort                         = null;
+                $tmp                            = explode(' ', $to);
+                foreach($tmp as $t) $toSort     .= strtoupper(substr($t, 0, 1));
+                $result[$i]['ship_to_sort']     = $toSort;
+            }
         }
         return $result;
     }

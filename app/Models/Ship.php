@@ -89,7 +89,7 @@ class Ship extends Model {
     }
 
     public function prices(){
-        return $this->hasMany(\App\Models\ShipPrice::class, 'ship_info_id', 'id');
+        return $this->hasMany(\App\Models\ShipPrice::class, 'ship_info_id', 'id')->orderBy('date_start', 'asc')->orderBy('date_end', 'asc');
     }
 
     public function staffs(){

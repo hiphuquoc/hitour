@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SystemFile;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic;
+use Illuminate\Support\Facades\Storage;
 
 use App\Services\BuildInsertUpdateModel;
 
@@ -16,28 +17,22 @@ class AdminImageController extends Controller {
 
     public function list(Request $request){
         $params['search_name']  = $request->get('search_name') ?? null;
-        $tmp                    = glob(public_path(config('admin.images.folderUpload')).'*'.$params['search_name'].'*');
-        $list                   = [];
-        foreach($tmp as $item){
-            $list[]             = config('admin.images.folderUpload').basename($item);
-        }
+        $list                   = glob(Storage::path(config('admin.images.folderUpload')).'*'.$params['search_name'].'*');
         return view('admin.image.list', compact('list', 'params'));
     }
 
     public function loadImage(Request $request){
         if(!empty($request->get('image_name'))){
-            $tmp        = glob(public_path(config('admin.images.folderUpload').$request->get('image_name').'*'));
-            if(!empty($tmp)){
-                $item   = config('admin.images.folderUpload').basename($tmp[0]);
-                return view('admin.image.oneRow', compact('item'));
-            }
+            $tmp                = glob(Storage::path(config('admin.images.folderUpload').$request->get('image_name').'*'));
+            $item               = $tmp[0];
+            return view('admin.image.oneRow', compact('item'));
         }
     }
 
     public function loadModal(Request $request){
         $result             = [];
         if(!empty($request->get('type'))&&!empty($request->get('basename'))){
-            $image          = config('admin.images.folderUpload').$request->get('basename');
+            $image          = Storage::url(config('admin.images.folderUpload')).$request->get('basename');
             if($request->get('type')==='changeName'){
                 $head       = 'Sửa tên ảnh';
                 $body       = view('admin.image.formModalChangeName', compact('image'))->render();
@@ -57,15 +52,15 @@ class AdminImageController extends Controller {
     public function removeImage(Request $request){
         $flag               = false;
         if(!empty($request->get('basename_image'))){
-            $imagPath       = config('admin.images.folderUpload').$request->get('basename_image');
-            $imageSource    = public_path($imagPath);
+            $imagePath      = Storage::path(config('admin.images.folderUpload')).$request->get('basename_image');
             /* remove folder */
-            if(file_exists($imageSource)) {
-                if(unlink($imageSource)) $flag = true;
+            if(file_exists($imagePath)) {
+                if(unlink($imagePath)) $flag = true;
             }
             /* remove database */
+            $imageUrl       = Storage::url(config('admin.images.folderUpload')).$request->get('basename_image');
             SystemFile::select('*')
-                    ->where('file_path', $imagPath)
+                    ->where('file_path', $imageUrl)
                     ->delete();
         }
         return $flag;
@@ -78,7 +73,7 @@ class AdminImageController extends Controller {
             $typeImageOld   = null;
             if(key_exists(end($tmp), config('admin.images.type'))) $typeImageOld = config('admin.images.keyType').end($tmp);
             /* thông tin image cũ */
-            $imageOld       = public_path(config('admin.images.folderUpload')).$filenameOld;
+            $imageOld       = Storage::path(config('admin.images.folderUpload')).$filenameOld;
             $infoImageOld   = pathinfo($imageOld);
             $extension      = $infoImageOld['extension'];
             /* thông tin image mới */
@@ -87,7 +82,7 @@ class AdminImageController extends Controller {
             /* rename */
             if($arrayFlag['flag']==true){
                 /* thay trong folder */
-                rename(public_path(config('admin.images.folderUpload').$filenameOld), public_path(config('admin.images.folderUpload').$filenameNew));
+                rename(Storage::path(config('admin.images.folderUpload')).$filenameOld, Storage::path(config('admin.images.folderUpload')).$filenameNew);
                 /* trả kết quả */
                 $result['flag']     = true;
                 $result['message']  = 'Thay tên ảnh thành công!';
@@ -107,20 +102,9 @@ class AdminImageController extends Controller {
         $message                    = '';
         if(!empty($request->get('basename_image'))&&!empty($request->file('image_new'))){
             /* thông tin ảnh cũ */
-            $imageOld               = config('admin.images.folderUpload').$request->get('basename_image');
-            $infoImageOld           = pathinfo($imageOld);
-            $extensionImageOld      = $infoImageOld['extension'];
-            /* thông tin ảnh mới */
-            $extensionImageNew      = $request->file('image_new')->getClientOriginalExtension();
-            // dd($request->file('image_new'));
-            if($extensionImageOld==$extensionImageNew){
-                /* upload đè ảnh mới */
-                $fileSaved          = self::uploadImage($request->file('image_new'), $imageOld);
-                if(!empty($fileSaved)) $flag = true;
-            }else {
-                $flag               = false;
-                $message            = 'Phần mở rộng ảnh cũ và mới không giống nhau!';
-            }
+            $imagePathOld           = Storage::path(config('admin.images.folderUpload')).$request->get('basename_image');
+            $fileSaved              = self::uploadImage($request->file('image_new'), $imagePathOld);
+            if(!empty($fileSaved)) $flag = true;
         }
         $result['flag']             = $flag;
         $result['message']          = $message;
@@ -163,8 +147,11 @@ class AdminImageController extends Controller {
         $content                = '';
         if(!empty($request->file('image_upload'))){
             foreach($request->file('image_upload') as $image){
-                $filePathTmp    = config('admin.images.folderUpload').$image->getClientOriginalName();
-                $fileSaved      = self::uploadImage($image, $filePathTmp, 'copy', '-type-manager-upload');
+                $imageName      = $image->getClientOriginalName();
+                $imageFileName  = \App\Helpers\Charactor::convertStrToUrl(pathinfo($imageName)['filename']);
+                $extension      = config('admin.images.extension');
+                $filePathUpload = Storage::path(config('admin.images.folderUpload')).$imageFileName.'.'.$extension;
+                $fileSaved      = self::uploadImage($image, $filePathUpload, 'copy', '-type-manager-upload');
                 $content        .= view('admin.image.oneRow', [
                     'item'  => $fileSaved,
                     'style' => 'box-shadow: 0 0 5px rgb(0, 123, 255)'
@@ -177,38 +164,28 @@ class AdminImageController extends Controller {
         return json_encode($result);
     }
 
-    public static function uploadImage($requestImage, $filePath = null, $action = 'rewrite', $addType = null){
+    public static function uploadImage($requestImage, $filePathUpload, $action = 'rewrite', $addType = null){
         $fileSaved          = null;
-        if(!empty($requestImage)&&!empty($filePath)){
-            $image          = $requestImage;
+        if(!empty($requestImage)){
             /* thêm type cho filePath */
-            $infoImage      = pathinfo($filePath);
-            $dirname        = $infoImage['dirname'];
-            $filename       = $infoImage['filename'];
-            $extension      = $infoImage['extension'];
-            $filePath       = $dirname.'/'.$filename.$addType.'.'.$extension;
-            /* kiểm tra nếu trùng thì thêm thời gian giữ tên và type */
-            if($action=='copy') $filePath = self::renameNameImageSame($filePath, $addType);  
-            /* thêm ảnh */          
-            $imageSmall     = ImageManagerStatic::make($image->getRealPath());
-            $imageSmall->save(public_path($filePath));
-            $fileSaved      = $filePath;
+            $imageFileName  = pathinfo($filePathUpload)['filename'];
+            $extension      = config('admin.images.extension');
+            $fileNameUpload = $imageFileName.$addType.'.'.$extension;
+            $filePathUpload = Storage::path(config('admin.images.folderUpload')).$fileNameUpload;
+            /* trường hợp copy */
+            if($action=='copy') {
+                if(file_exists($filePathUpload)){
+                    $fileNameUpload = $imageFileName.'-'.time().$addType.'.'.$extension;
+                    $filePathUpload = Storage::path(config('admin.images.folderUpload')).$fileNameUpload;
+                }
+            }
+            /* thêm ảnh */     
+            // dd($filePathUpload);     
+            ImageManagerStatic::make($requestImage->getRealPath())
+                ->save($filePathUpload);
+            $fileSaved      = $filePathUpload;
         }
         return $fileSaved;
-    }
-
-    private static function renameNameImageSame($filePath, $type){
-        $filePathNew            = $filePath;
-        if(!empty($filePath)){
-            if(file_exists(public_path($filePath))){
-                $infoImage      = pathinfo($filePath);
-                $dirname        = $infoImage['dirname'];
-                $extension      = $infoImage['extension'];
-                $filename       = preg_replace('#'.$type.'$#imsU', '', $infoImage['filename']);
-                $filePathNew    = $dirname.'/'.$filename.'-'.time().$type.'.'.$extension;
-            }
-        }
-        return $filePathNew;
     }
 
 }

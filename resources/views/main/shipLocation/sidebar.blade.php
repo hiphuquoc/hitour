@@ -12,7 +12,7 @@
             </div>
          </div>
          <div class="callBookTour_button_item bookonline">
-            Đặt Tour
+            Đặt vé Tàu
          </div>
       </div>
    </div>

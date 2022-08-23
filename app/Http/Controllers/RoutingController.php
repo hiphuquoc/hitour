@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-// use App\Services\UrlService;
-use App\Models\Tour;
 use App\Models\TourLocation;
+use App\Models\Tour;
+use App\Models\ShipLocation;
+use App\Models\Ship;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -12,9 +13,6 @@ use Illuminate\Support\Facades\Storage;
 use App\Helpers\Url;
 
 class RoutingController extends Controller {
-    // public function __construct(UrlService $UrlService){
-    //     $this->UrlService  = $UrlService;
-    // }
 
     public function routing($slug, $slug2 = null, $slug3 = null, $slug4 = null, $slug5 = null){
         $tmpSlug        = [$slug, $slug2, $slug3, $slug4, $slug5];
@@ -63,11 +61,31 @@ class RoutingController extends Controller {
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
                 return view('main.tour.index', compact('item', 'breadcrumb', 'content'));
             }else if($checkExists['type']==='ship_location'){ // ====== Ship Location =============================
-                
-
-                return view('main.shipLocation.index');
+                $item               = ShipLocation::select('*')
+                                        ->whereHas('seo', function($query) use($checkExists){
+                                            $query->where('slug', $checkExists['slug']);
+                                        })
+                                        ->with(['files' => function($query){
+                                            $query->where('relation_table', 'ship_location');
+                                        }])
+                                        ->with('seo', 'ships.seo', 'ships.location.district', 'ships.location.province', 'ships.departure', 'ships.prices.times', 'ships.prices.partner', 'ships.partners.infoPartner.seo')
+                                        ->first();
+                $content            = Storage::get(config('admin.storage.contentShipLocation').$item->seo->slug.'.html');
+                $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
+                return view('main.shipLocation.index', compact('item', 'content', 'breadcrumb'));
             }else if($checkExists['type']==='ship_info'){ // ====== Ship =============================
-
+                $item               = Ship::select('*')
+                                        ->whereHas('seo', function($query) use($checkExists){
+                                            $query->where('slug', $checkExists['slug']);
+                                        })
+                                        ->with(['files' => function($query){
+                                            $query->where('relation_table', 'ship_info');
+                                        }])
+                                        ->with('seo', 'partners.infoPartner.seo')
+                                        ->first();
+                $content            = Storage::get(config('admin.storage.contentShip').$item->seo->slug.'.html');
+                $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
+                return view('main.ship.index', compact('item', 'content', 'breadcrumb'));
             }
         }else {
             /* Error 404 */

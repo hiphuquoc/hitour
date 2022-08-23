@@ -60,6 +60,7 @@ class Url {
                         if($item->id==$parent) {
                             $url    = $item->slug.'/'.$url;
                             $parent = $item->parent;
+                            break;
                         }
                     }
                 }
@@ -82,6 +83,7 @@ class Url {
                     if($item->id==$parent) {
                         $url    = $item->slug.'/'.$url;
                         $parent = $item->parent;
+                        break;
                     }
                 }
             }

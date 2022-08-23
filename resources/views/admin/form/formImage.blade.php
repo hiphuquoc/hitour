@@ -16,7 +16,7 @@
                 $extension  = pathinfo(public_path($image))['extension'];
                 $infoSize   = round(filesize(public_path($image))/1024, 2);
             @endphp
-            <img id="imageUpload" src="{{ $image }}" />
+            <img id="imageUpload" src="{{ $image }}?{{ time() }}" />
             <div style="margin-top:0.25rem;color:#789;display:flex;justify-content:space-between;">
                 <span>.{{ $extension }}</span>
                 <span>{{ $infoPixel[0] }}*{{ $infoPixel[1] }} px</span>

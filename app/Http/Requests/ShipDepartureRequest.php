@@ -3,7 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\DB;
+
+use App\Models\ShipDeparture;
 
 class ShipDepartureRequest extends FormRequest
 {
@@ -35,16 +36,12 @@ class ShipDepartureRequest extends FormRequest
                 function($attribute, $value, $fail){
                     $slug           = !empty(request('slug')) ? request('slug') : null;
                     if(!empty($slug)){
-                        $dataCheck  = DB::table('seo')
-                                        ->join('ship_departure', 'ship_departure.seo_id', '=', 'seo.id')
-                                        ->select('seo.slug', 'ship_departure.id')
-                                        ->where('slug', $slug)
+                        $dataCheck  = ShipDeparture::select('id')
+                                        ->whereHas('seo', function($query) use($slug){
+                                            $query->where('slug', $slug);
+                                        })
                                         ->first();
-                        if(!empty(request('ship_departure_id'))){
-                            if(request('ship_departure_id')!=$dataCheck->id&&!empty($dataCheck)) $fail('Dường dẫn tĩnh đã trùng với một Khu vực Tour khác trên hệ thống!');
-                        }else {
-                            if(!empty($dataCheck)) $fail('Dường dẫn tĩnh đã trùng với một Khu vực Tour khác trên hệ thống!');
-                        }
+                        if(!empty($dataCheck)&&$dataCheck->id!=request('ship_departure_id')) $fail('Dường dẫn tĩnh đã trùng với một Điểm khởi hành Tàu khác trên hệ thống!');
                     }
                 }
             ],

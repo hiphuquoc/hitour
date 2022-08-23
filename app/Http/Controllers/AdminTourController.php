@@ -62,8 +62,9 @@ class AdminTourController extends Controller {
         $tourDepartures     = TourDeparture::all();
         $staffs             = Staff::all();
         $partners           = TourPartner::all();
-        $allPage            = Seo::all();
-        // $content        = Storage::get(config('admin.storage.contentTour').$item->seo->slug.'.html');
+        $parents            = TourLocation::select('*')
+                                ->with('seo')
+                                ->get();
         $message            = $request->get('message') ?? null;
         $id                 = $request->get('id') ?? 0;
         $item               = Tour::select('*')
@@ -75,7 +76,7 @@ class AdminTourController extends Controller {
         /* type */
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.tour.view', compact('item', 'type', 'tourLocations', 'tourDepartures', 'staffs', 'partners', 'allPage', 'message'));
+        return view('admin.tour.view', compact('item', 'type', 'tourLocations', 'tourDepartures', 'staffs', 'partners', 'parents', 'message'));
 
         // return redirect()->route('admin.tour.list');
     }

@@ -8,7 +8,8 @@ return [
 
     /* Định dạng hình ảnh Upload */
     'images'    => [
-        'folderUpload'          => '/upload/images/',
+        // 'folderUpload'          => '/upload/images/',
+        'folderUpload'          => 'public/images/upload/',
         'normalResize_width'    => 750,
         'normalResize_height'   => 460,
         'smallResize_width'     => 400,
@@ -20,7 +21,9 @@ return [
         'type'                  => [
             'default'           => ['copy_url', 'change_image'],
             'manager-upload'    => ['copy_url', 'change_name', 'change_image', 'delete']
-        ]
+        ],
+        'extension'             => 'webp',
+        'quality'               => '90'
     ],
     
     /* Vùng miền trong bảng region_info */
@@ -91,9 +94,10 @@ return [
     ],
 
     'storage'   => [
-        'contentTour'           => '/public/contents/tours/',
-        'contentTourLocation'   => '/public/contents/tourLocations/',
-        'contentTourDeparture'  => '/public/contents/tourDepartures/',
-        'contentShip'           => '/public/contents/ships/'
+        'contentTour'           => 'public/contents/tours/',
+        'contentTourLocation'   => 'public/contents/tourLocations/',
+        'contentTourDeparture'  => 'public/contents/tourDepartures/',
+        'contentShip'           => 'public/contents/ships/',
+        'contentShipLocation'   => 'public/contents/shipLocations/'
     ]
 ];
