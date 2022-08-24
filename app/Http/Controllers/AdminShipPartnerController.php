@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ShipPartnerRequest;
 use App\Helpers\Upload;
 use App\Services\BuildInsertUpdateModel;
 use App\Models\ShipPartner;
 use App\Models\Seo;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AdminShipPartnerController extends Controller {
 
@@ -32,7 +34,7 @@ class AdminShipPartnerController extends Controller {
         return view('admin.shipPartner.view', compact('item', 'type'));
     }
 
-    public function create(Request $request){
+    public function create(ShipPartnerRequest $request){
         try {
             DB::beginTransaction();
             /* upload image */
@@ -66,7 +68,7 @@ class AdminShipPartnerController extends Controller {
         return redirect()->route('admin.shipPartner.view', ['id' => $idPartner]);
     }
 
-    public function update(Request $request){
+    public function update(ShipPartnerRequest $request){
         try {
             DB::beginTransaction();
             /* upload image */
@@ -104,12 +106,18 @@ class AdminShipPartnerController extends Controller {
         if(!empty($request->get('id'))){
             try {
                 DB::beginTransaction();
-                $id             = $request->get('id');
+                $id                 = $request->get('id');
                 /* lấy thông tin */
-                $infoPartner    = ShipPartner::find($id);
-                /* delete ảnh */
-                if(!empty($infoPartner->company_logo)&&file_exists(public_path($infoPartner->company_logo))) @unlink(public_path($infoPartner->company_logo));
-                /* delete bảng tour_location */
+                $infoPartner        = ShipPartner::select('*')
+                                    ->where('id', $id)
+                                    ->with('seo')
+                                    ->first();
+                /* xóa ảnh đại diện trong thư mục */
+                $imageSmallPath     = Storage::path(config('admin.images.folderUpload').basename($infoPartner->seo->image_small));
+                if(file_exists($imageSmallPath)) @unlink($imageSmallPath);
+                $imagePath          = Storage::path(config('admin.images.folderUpload').basename($infoPartner->seo->image));
+                if(file_exists($imagePath)) @unlink($imagePath);
+                /* delete bảng ship_partner */
                 $infoPartner->delete();
                 DB::commit();
                 return true;

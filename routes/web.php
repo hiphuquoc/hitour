@@ -191,7 +191,7 @@ Route::prefix('admin')->group(function(){
         /* ===== AJAX ===== */
         Route::post('/loadProvinceByRegion', [AdminFormController::class, 'loadProvinceByRegion'])->name('admin.form.loadProvinceByRegion');
         Route::post('/loadDistrictByProvince', [AdminFormController::class, 'loadDistrictByProvince'])->name('admin.form.loadDistrictByProvince');
-        Route::get('/removeSlider', [AdminSliderController::class, 'removeSlider'])->name('admin.slider.removeSlider');
+        Route::post('/removeSlider', [AdminSliderController::class, 'removeSlider'])->name('admin.slider.removeSlider');
         Route::get('/removeGallery', [AdminGalleryController::class, 'removeGallery'])->name('admin.gallery.removeGallery');
     });
 });

@@ -1,14 +1,8 @@
+<input type="hidden" name="ship_partner_id" value="{{ $item->id ?? null }}" />
 <div class="card-header border-bottom">
     <h4 class="card-title">Thông tin Đối tác</h4>
 </div>
 <div class="card-body">
-    {{-- @if(!empty($item->id))
-    <input type="hidden" name="tour_location_id" value="{{ $item->id }}" />
-    @endif
-    @if(!empty($item->seo->id))
-        <input type="hidden" name="seo_id" value="{{ $item->seo->id }}" />
-    @endif --}}
-    
     <div class="formBox">
         <div class="formBox_full">
             <!-- One Row -->

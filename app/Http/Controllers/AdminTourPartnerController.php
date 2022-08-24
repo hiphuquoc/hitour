@@ -7,6 +7,7 @@ use App\Helpers\Upload;
 use App\Services\BuildInsertUpdateModel;
 use App\Models\TourPartner;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AdminTourPartnerController extends Controller {
 
@@ -90,12 +91,13 @@ class AdminTourPartnerController extends Controller {
         if(!empty($request->get('id'))){
             try {
                 DB::beginTransaction();
-                $id             = $request->get('id');
+                $id                 = $request->get('id');
                 /* lấy thông tin */
-                $infoPartner    = TourPartner::find($id);
-                /* delete ảnh */
-                if(!empty($infoPartner->company_logo)&&file_exists(public_path($infoPartner->company_logo))) @unlink(public_path($infoPartner->company_logo));
-                /* delete bảng tour_location */
+                $infoPartner        = TourPartner::find($id);
+                /* xóa ảnh đại diện trong thư mục */
+                $imageSmallPath     = Storage::path(config('admin.images.folderUpload').basename($infoPartner->company_logo));
+                if(file_exists($imageSmallPath)) @unlink($imageSmallPath);
+                /* delete bảng tour_partner */
                 $infoPartner->delete();
                 DB::commit();
                 return true;

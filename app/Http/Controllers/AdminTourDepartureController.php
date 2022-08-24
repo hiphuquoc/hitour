@@ -159,16 +159,13 @@ class AdminTourDepartureController extends Controller {
                 /* delete bảng seo */
                 Seo::find($info->seo->id)->delete();
                 /* xóa ảnh đại diện trong thư mục */
-                if(!empty($info->seo->image)&&file_exists(public_path($info->seo->image))) @unlink(public_path($info->seo->image));
-                if(!empty($info->seo->image_small)&&file_exists(public_path($info->seo->image_small))) @unlink(public_path($info->seo->image_small));
+                $imageSmallPath     = Storage::path(config('admin.images.folderUpload').basename($info->seo->image_small));
+                if(file_exists($imageSmallPath)) @unlink($imageSmallPath);
+                $imagePath          = Storage::path(config('admin.images.folderUpload').basename($info->seo->image));
+                if(file_exists($imagePath)) @unlink($imagePath);
                 /* delete files */
                 if(!empty($info->files)){
-                    foreach($info->files as $file){
-                        /* delete image slider bảng system_file */
-                        SystemFile::find($file->id)->delete();
-                        /* delete trong thư mục */
-                        if(!empty($file->file_path)&&file_exists(public_path($file->file_path))) unlink(public_path($file->file_path));
-                    }
+                    foreach($info->files as $file) AdminSliderController::removeSliderById($file->id);
                 }
                 DB::commit();
                 return true;

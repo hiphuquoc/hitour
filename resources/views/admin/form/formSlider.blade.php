@@ -56,9 +56,12 @@
         function removeSlider(id){
             $.ajax({
                 url         : "{{ route('admin.slider.removeSlider') }}",
-                type        : "GET",
+                type        : "post",
                 dataType    : "html",
-                data        : { id : id }
+                data        : {
+                    '_token'    : '{{ csrf_token() }}',
+                    id : id
+                }
             }).done(function(data){
                 if(data==true) $('#slider-'+id).remove();
             });

@@ -226,9 +226,15 @@ class AdminShipController extends Controller {
                                     }])
                                     ->with('seo', 'staffs', 'partners')
                                     ->first();
-                /* xóa ảnh đại diện trong thư mục upload */
-                if(!empty($infoShip->seo->image)&&file_exists(public_path($infoShip->seo->image))) unlink(public_path($infoShip->seo->image));
-                if(!empty($infoShip->seo->image_small)&&file_exists(public_path($infoShip->seo->image_small))) unlink(public_path($infoShip->seo->image_small));
+                /* xóa ảnh đại diện trong thư mục */
+                $imageSmallPath     = Storage::path(config('admin.images.folderUpload').basename($infoShip->seo->image_small));
+                if(file_exists($imageSmallPath)) @unlink($imageSmallPath);
+                $imagePath          = Storage::path(config('admin.images.folderUpload').basename($infoShip->seo->image));
+                if(file_exists($imagePath)) @unlink($imagePath);
+                /* delete files - dùng removeSliderById cũng remove luôn cả gallery */
+                if(!empty($infoShip->files)){
+                    foreach($infoShip->files as $file) AdminSliderController::removeSliderById($file->id);
+                }
                 /* xóa tour_staff */
                 $arrayIdStaff           = [];
                 foreach($infoShip->staffs as $staff) $arrayIdStaff[] = $staff->id;
@@ -237,13 +243,6 @@ class AdminShipController extends Controller {
                 $arrayIdPartner         = [];
                 foreach($infoShip->partners as $partner) $arrayIdPartner[] = $partner->id;
                 RelationShipPartner::select('*')->whereIn('id', $arrayIdPartner)->delete();
-                /* xóa file trên system_file */
-                $arrayIdFiles           = [];
-                foreach($infoShip->files as $file) $arrayIdFiles[] = $file->id;
-                SystemFile::select('*')->whereIn('id', $arrayIdFiles)->delete();
-                /* xóa file trong thư mục upload */
-                $files      = $infoShip->files;
-                foreach($files as $file) if(!empty($file->file_path)&&file_exists(public_path($file->file_path))) @unlink(public_path($file->file_path));
                 /* xóa seo */
                 Seo::find($infoShip->seo->id)->delete();
                 /* xóa ship_info */

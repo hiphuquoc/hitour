@@ -316,13 +316,10 @@ class AdminTourController extends Controller {
                 $arrayIdPartner         = [];
                 foreach($infoTour->partners as $partner) $arrayIdPartner[] = $partner->id;
                 RelationTourPartner::select('*')->whereIn('id', $arrayIdPartner)->delete();
-                /* xóa slider và gallery trên system_file */
-                $arrayIdFiles           = [];
-                foreach($infoTour->files as $file) $arrayIdFiles[] = $file->id;
-                SystemFile::select('*')->whereIn('id', $arrayIdFiles)->delete();
-                /* xóa file trong thư mục upload */
-                $files      = $infoTour->files;
-                foreach($files as $file) if(!empty($file->file_path)&&file_exists(public_path($file->file_path))) @unlink(public_path($file->file_path));
+                /* delete files - dùng removeSliderById cũng remove luôn cả gallery */
+                if(!empty($infoTour->files)){
+                    foreach($infoTour->files as $file) AdminSliderController::removeSliderById($file->id);
+                }
                 /* xóa seo */
                 Seo::find($infoTour->seo->id)->delete();
                 /* xóa tour_info */
