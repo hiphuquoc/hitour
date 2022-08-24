@@ -1,0 +1,20 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/rhawgejx/chophuquoc.net/
+    - /bin/cp * $DEPLOYPATH
+    # - /bin/cp app $DEPLOYPATH
+    # - /bin/cp bootstrap $DEPLOYPATH
+    # - /bin/cp config $DEPLOYPATH
+    # - /bin/cp database $DEPLOYPATH
+    # - /bin/cp lang $DEPLOYPATH
+    # - /bin/cp resources $DEPLOYPATH
+    # - /bin/cp routes $DEPLOYPATH
+    # - /bin/cp tests $DEPLOYPATH
+    # - /bin/cp composer.json $DEPLOYPATH
+    # - /bin/cp composer.lock $DEPLOYPATH
+    # - /bin/cp package-lock.json $DEPLOYPATH
+    # - /bin/cp package.json $DEPLOYPATH
+    # - /bin/cp phpunit.xml $DEPLOYPATH
+    # - /bin/cp vite.config.js $DEPLOYPATH
+    # - /bin/cp webpack.mix.js $DEPLOYPATH
