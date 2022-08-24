@@ -19,4 +19,15 @@
         function gotoTop() {
             document.documentElement.scrollTop          = 0;
         }
+        function loadImage(){
+            $(document).find('img[data-src]').each(function(){
+                $(this).attr('src', $(this).attr('data-src'));
+            });
+        }
+
+        $(window).ready(function(){
+            $(window).ready(function(){
+                loadImage();
+            });
+        });
 </script>
