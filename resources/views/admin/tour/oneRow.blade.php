@@ -7,7 +7,7 @@
         {{ $no }}
     </td>
     <td style="width:210px;">
-        <img src="{{ $item->seo->image_small }}" />
+        <img src="{{ $item->seo->image_small }}?{{ time() }}" />
         @if(!empty($item->locations))
             <div class="oneLine">
                 Điểm đến: 

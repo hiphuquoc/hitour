@@ -36,7 +36,7 @@
                         </td>
                         <td style="vertical-align:top;text-align:center;">
                             @if(!empty($item->company_logo))
-                                <img src="{{ $item->company_logo }}" style="width:50px;border-radius:3px;" />
+                                <img src="{{ $item->company_logo }}?{{ time() }}" style="width:50px;border-radius:3px;" />
                             @endif
                         </td>
                         <td style="vertical-align:top;">

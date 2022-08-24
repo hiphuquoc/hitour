@@ -7,7 +7,7 @@
         {{ $no }}
     </td>
     <td style="width:200px;text-align:right;">
-        <img src="{{ $item->seo->image_small ?? config('default_750x460') }}" />
+        <img src="{{ $item->seo->image_small ?? config('default_750x460') }}?{{ time() }}" />
     </td>
     <td style="vertical-align:top;">
         <div class="oneLine">

@@ -28,7 +28,7 @@
                         </td>
                         <td style="vertical-align:top;text-align:center;">
                             @if(!empty($item->avatar))
-                                <img src="{{ $item->avatar }}" style="width:50px;border-radius:3px;" />
+                                <img src="{{ $item->avatar }}?{{ time() }}" style="width:50px;border-radius:3px;" />
                             @endif
                         </td>
                         <td style="vertical-align:top;">
