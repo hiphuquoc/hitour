@@ -9,6 +9,7 @@ use App\Models\Ship;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Blade;
 
 use App\Helpers\Url;
 
@@ -57,7 +58,7 @@ class RoutingController extends Controller {
                                         }])
                                         ->with('seo', 'staffs.infoStaff', 'options.prices', 'departure', 'content', 'timetables')
                                         ->first();
-                $content            = Storage::get(config('admin.storage.contentTour').$item->seo->slug.'.html');
+                $content            = Blade::render(Storage::get(config('admin.storage.contentTour').$item->seo->slug.'.blade.php'));
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
                 return view('main.tour.index', compact('item', 'breadcrumb', 'content'));
             }else if($checkExists['type']==='ship_location'){ // ====== Ship Location =============================
@@ -70,7 +71,7 @@ class RoutingController extends Controller {
                                         }])
                                         ->with('seo', 'ships.seo', 'ships.location.district', 'ships.location.province', 'ships.departure', 'ships.prices.times', 'ships.prices.partner', 'ships.partners.infoPartner.seo')
                                         ->first();
-                $content            = Storage::get(config('admin.storage.contentShipLocation').$item->seo->slug.'.html');
+                $content            = Blade::render(Storage::get(config('admin.storage.contentShipLocation').$item->seo->slug.'.blade.php'));
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
                 return view('main.shipLocation.index', compact('item', 'content', 'breadcrumb'));
             }else if($checkExists['type']==='ship_info'){ // ====== Ship =============================
@@ -83,7 +84,7 @@ class RoutingController extends Controller {
                                         }])
                                         ->with('seo', 'partners.infoPartner.seo')
                                         ->first();
-                $content            = Storage::get(config('admin.storage.contentShip').$item->seo->slug.'.html');
+                $content            = Blade::render(Storage::get(config('admin.storage.contentShip').$item->seo->slug.'.blade.php'));
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
                 return view('main.ship.index', compact('item', 'content', 'breadcrumb'));
             }

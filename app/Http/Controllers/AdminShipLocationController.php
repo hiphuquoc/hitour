@@ -45,7 +45,7 @@ class AdminShipLocationController extends Controller {
                             ->first();
         $provinces      = Province::getItemByIdRegion($item->region_id ?? 0);
         $districts      = District::getItemByIdProvince($item->province_id ?? 0);
-        $content        = Storage::get(config('admin.storage.contentShipLocation').$item->seo->slug.'.html');
+        $content        = Storage::get(config('admin.storage.contentShipLocation').$item->seo->slug.'.blade.php');
         $message        = $request->get('message') ?? null; 
         $type           = !empty($item) ? 'edit' : 'create';
         $type           = $request->get('type') ?? $type;
@@ -68,7 +68,7 @@ class AdminShipLocationController extends Controller {
             $insertShipLocation = $this->BuildInsertUpdateModel->buildArrayTableShipLocation($request->all(), $pageId);
             $idShipLocation     = ShipLocation::insertItem($insertShipLocation);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentShipLocation').$request->get('slug').'.html', $request->get('content'));
+            Storage::put(config('admin.storage.contentShipLocation').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
@@ -113,7 +113,7 @@ class AdminShipLocationController extends Controller {
             $updateShipLocation = $this->BuildInsertUpdateModel->buildArrayTableShipLocation($request->all());
             ShipLocation::updateItem($request->get('ship_location_id'), $updateShipLocation);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentShipLocation').$request->get('slug').'.html', $request->get('content'));
+            Storage::put(config('admin.storage.contentShipLocation').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();

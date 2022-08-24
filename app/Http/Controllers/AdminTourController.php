@@ -103,7 +103,7 @@ class AdminTourController extends Controller {
                             ->delete();
             $idTourContent      = TourContent::insertItem($insertTourInfo);
             // /* lưu content vào file */
-            // Storage::put(config('admin.storage.contentTour').$request->get('slug').'.html', $request->get('content'));
+            // Storage::put(config('admin.storage.contentTour').$request->get('slug').'.blade.php', $request->get('content'));
             /* update tour_timetable */
             if(!empty($request->get('timetable'))){
                 foreach($request->get('timetable') as $timetable){
@@ -207,7 +207,7 @@ class AdminTourController extends Controller {
                             ->delete();
             $idTourContent      = TourContent::insertItem($insertTourInfo);
             // /* lưu content vào file */
-            // Storage::put(config('admin.storage.contentTour').$request->get('slug').'.html', $request->get('content'));
+            // Storage::put(config('admin.storage.contentTour').$request->get('slug').'.blade.php', $request->get('content'));
             /* update tour_timetable */
             TourTimetable::select('*')
                             ->where('tour_info_id', $request->get('tour_info_id'))

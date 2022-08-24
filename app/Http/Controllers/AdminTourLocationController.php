@@ -67,7 +67,7 @@ class AdminTourLocationController extends Controller {
             $insertTourLocation = $this->BuildInsertUpdateModel->buildArrayTableTourLocation($request->all(), $pageId);
             $idTourLocation     = TourLocation::insertItem($insertTourLocation);
             /* lưu content vào file */
-            // Storage::put(config('admin.storage.contentTourLocation').$request->get('slug').'.html', $request->get('content'));
+            // Storage::put(config('admin.storage.contentTourLocation').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
@@ -112,7 +112,7 @@ class AdminTourLocationController extends Controller {
             $updateTourLocation = $this->BuildInsertUpdateModel->buildArrayTableTourLocation($request->all());
             TourLocation::updateItem($request->get('tour_location_id'), $updateTourLocation);
             /* lưu content vào file */
-            // Storage::put(config('admin.storage.contentTourLocation').$request->get('slug').'.html', $request->get('content'));
+            // Storage::put(config('admin.storage.contentTourLocation').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
