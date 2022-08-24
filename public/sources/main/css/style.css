@@ -29,6 +29,10 @@ a:hover {
   color: rgb(0, 90, 180);
 }
 
+h3 {
+  margin-bottom: 0.5rem;
+}
+
 ul, ol {
   margin: 0.75rem 0 0.75rem 1rem;
 }
