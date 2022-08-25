@@ -1569,6 +1569,9 @@ blockquote{
         width: calc(33.33% - 0.6666rem);
         box-shadow: 0 0 5px $bg-05;
         border-radius: 5px;
+        &:not(:first-child){
+            margin-left: 1rem;
+        }
         &_image {
             display: flex;
             border-radius: inherit;

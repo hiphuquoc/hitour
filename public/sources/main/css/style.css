@@ -47,6 +47,7 @@ table {
 }
 table h3 {
   font-size: 1rem;
+  margin-bottom: 0;
 }
 
 .customScrollBar-y {
@@ -1683,6 +1684,9 @@ blockquote em {
   width: calc(33.33% - 0.6666rem);
   box-shadow: 0 0 5px #ced4da;
   border-radius: 5px;
+}
+.shipPartnerBox_item:not(:first-child) {
+  margin-left: 1rem;
 }
 .shipPartnerBox_item_image {
   display: flex;
