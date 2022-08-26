@@ -10,7 +10,7 @@
 				<tbody>
 					<tr>
 						<td>Hành trình</td>
-						<td>Nong Nooch - Đảo Coral - Baiyoke Sky - Dạo Thuyền Chao Phraya</td>
+						<td>{{ $item->seo->description }}</td>
 					</tr>
 					@if(!empty($item->days))
                         @if($item->days>1)
@@ -33,7 +33,7 @@
                     @endif
                     <tr>
                         <td>Vận chuyển</td>
-                        <td>Xe du lịch, máy bay</td>
+                        <td>{{ $item->transport }}</td>
                     </tr>
                     <tr>
                         <td>Xuất phát</td>
