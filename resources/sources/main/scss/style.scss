@@ -131,7 +131,7 @@ $height_headerMain : 85px;
     height: 70px;
 }
 .breadcrumbBox {
-    padding: 0.5rem 0;
+    margin-top: 0.5rem;
     .container {
         font-size: 0.95rem;
         overflow: hidden;
@@ -164,14 +164,15 @@ $height_headerMain : 85px;
     }
 }
 .titlePage {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 800;
     font-family: $font-primary-title;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 .ratingBox {
 	font-size: 13px;
     display:flex;
+    margin-bottom: 0.75rem;
 	&_star {
         min-width: 95px;
 		&_on {
@@ -563,9 +564,32 @@ $height_headerMain : 85px;
     }
 }
 .pageContent {
-    padding-top: 1.5rem;
+    padding-top: 2rem;
     > * {
-        padding-bottom: 2rem;
+        &:not(:last-child){
+            padding-bottom: 2.5rem;
+        }
+        &:last-child {
+            padding-bottom: 3rem;
+        }
+    }
+    &_head {
+
+    }
+    &_body {
+        display: flex;
+        &_content {
+            width: calc(100% - 350px - 1.5rem);
+        }
+        &_sidebar {
+            margin-left: 1.5rem;
+            flex: 0 0 350px;
+            > * {
+                &:not(:first-child){
+                    margin-top: 1.5rem;
+                }
+            }
+        }
     }
 }
 /* ===== START: Footer */
@@ -1194,7 +1218,6 @@ $tourGrid_radius : 5px;
 }
 .menuTour {
     display: flex;
-    align-items: flex-start;
     flex-wrap: wrap;
     &_item {
         width: calc(33.33% - 0.6666rem);
@@ -1352,6 +1375,7 @@ blockquote{
 		
     &_item {
         width: calc(33.33% - 0.6666rem);
+        height: max-content;
         -webkit-transition: 500ms ease-in-out all;
         -o-transition: 500ms ease-in-out all;
         transition: 500ms ease-in-out all;

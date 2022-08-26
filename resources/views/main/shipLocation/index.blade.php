@@ -8,7 +8,7 @@
             <!-- title -->
             <h1 class="titlePage">Tàu cao tốc Phú Quốc - Vé tàu Phú Quốc</h1>
             <!-- rating -->
-            <div class="ratingBox" style="margin-bottom:1rem;">
+            <div class="ratingBox">
                 <div class="ratingBox_star">
                     <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
                     <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
@@ -23,9 +23,9 @@
             <!-- ship box -->
             @include('main.shipLocation.shipGrid', ['list' => $item->ships])
 
-            <div class="pageBox spaceBetweenBox">
-                <div class="pageBox_body">
-                    <div class="pageBox_body_content">
+            <div class="spaceBetweenBox">
+                <div class="pageContent_body">
+                    <div class="pageContent_body_content">
                         <div class="contentShip">
                             <!-- Lịch tàu và Hãng tàu -->
                             @include('main.shipLocation.headContent', ['keyWord' => $item->name])
@@ -33,7 +33,7 @@
                             {!! $content ?? null !!}
                         </div>
                     </div>
-                    <div class="pageBox_body_sidebar">
+                    <div class="pageContent_body_sidebar">
                         @include('main.shipLocation.sidebar')
                     </div>
                 </div>

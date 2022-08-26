@@ -8,7 +8,7 @@
             <!-- title -->
             <h1 class="titlePage">Du lịch Côn Đảo - Tour du lịch Côn Đảo</h1>
             <!-- rating -->
-            <div class="ratingBox" style="margin-bottom:1rem;">
+            <div class="ratingBox">
                 <div class="ratingBox_star">
                     <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
                     <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>

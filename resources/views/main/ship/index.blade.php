@@ -6,36 +6,34 @@
     <div class="pageContent">
         <div class="container">
             <!-- content -->
-            <div class="pageBox">
-                <div class="pageBox_header">
-                    <!-- title -->
-                    <h1 class="titlePage">Tàu cao tốc {{ $item->name ?? null }}</h1>
-                    <!-- rating -->
-                    <div class="ratingBox" style="margin-bottom:1rem;">
-                        <div class="ratingBox_star">
-                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                        </div>
-                        <div class="ratingBox_text maxLine_1" style="margin-left:2px;font-size:14px;">
-                            {{ $item->seo->rating_aggregate_star }} sao / <a href="{{ URL::current() }}">{{ $item->seo->rating_aggregate_count }} đánh giá từ khách du lịch</a>
-                        </div>
+            <div class="pageContent_header">
+                <!-- title -->
+                <h1 class="titlePage">Tàu cao tốc {{ $item->name ?? null }}</h1>
+                <!-- rating -->
+                <div class="ratingBox">
+                    <div class="ratingBox_star">
+                        <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                        <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                        <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                        <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                        <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                    </div>
+                    <div class="ratingBox_text maxLine_1" style="margin-left:2px;font-size:14px;">
+                        {{ $item->seo->rating_aggregate_star }} sao / <a href="{{ URL::current() }}">{{ $item->seo->rating_aggregate_count }} đánh giá từ khách du lịch</a>
                     </div>
                 </div>
-                <div class="pageBox_body">
-                    <div class="pageBox_body_content">
-                        <div class="contentShip">
-                            <!-- Lịch tàu và Hãng tàu -->
-                            @include('main.ship.headContent', ['keyWord' => $item->name])
-                            <!-- Nội dung tùy biến -->
-                            {!! $content ?? null !!}
-                        </div>
+            </div>
+            <div class="pageContent_body">
+                <div class="pageContent_body_content">
+                    <div class="contentShip">
+                        <!-- Lịch tàu và Hãng tàu -->
+                        @include('main.ship.headContent', ['keyWord' => $item->name])
+                        <!-- Nội dung tùy biến -->
+                        {!! $content ?? null !!}
                     </div>
-                    <div class="pageBox_body_sidebar">
-                        @include('main.shipLocation.sidebar')
-                    </div>
+                </div>
+                <div class="pageContent_body_sidebar">
+                    @include('main.shipLocation.sidebar')
                 </div>
             </div>
         </div>

@@ -1,11 +1,12 @@
 <div class="shipGrid">
     @foreach($list as $item)
+        @if(!empty($item->prices[0]->price_adult))
         <div class="shipGrid_item">
             <div class="shipGrid_item_image">
                 <a href="/{{ $item->seo->slug_full }}">
                     <img src="{{ $item->seo->image_small ?? $item->seo->image }}" title="{{ $item->name }}" alt="{{ $item->name }}">
                 </a>
-                <div class="shipGrid_item_image_left">{{ \App\Helpers\Time::convertMkToTimeMove($item->prices[0]->times[0]->time_move) }}</div>
+                <div class="shipGrid_item_image_left">{{ !empty($item->prices[0]->times[0]->time_move) ? \App\Helpers\Time::convertMkToTimeMove($item->prices[0]->times[0]->time_move) : null }}</div>
                 <div class="shipGrid_item_image_bottom">Phú Quốc Express</div>
             </div>
             <div class="shipGrid_item_content">
@@ -81,7 +82,7 @@
                         @if(count($arrayPrice['price_adult'])>1)
                             <span class="text-price_500">{{ number_format($arrayPrice['price_adult'][0]) }} - {{ number_format(end($arrayPrice['price_adult'])) }}<sup>đ</sup></span> /vé
                         @else
-                            <span class="text-price_500">{{ number_format($arrayPrice['price_adult'][0]) }}<sup>đ</sup></span> /vé
+                            <span class="text-price_500">{!! !empty($arrayPrice['price_adult'][0]) ? number_format($arrayPrice['price_adult'][0]).'<sup>đ</sup></span> /vé' : '-' !!}
                         @endif
                     </div>
                 </div>
@@ -93,7 +94,7 @@
                         @if(count($arrayPrice['price_child'])>1)
                             <span class="text-price_500">{{ number_format($arrayPrice['price_child'][0]) }} - {{ number_format(end($arrayPrice['price_child'])) }}<sup>đ</sup></span> /vé
                         @else
-                            <span class="text-price_500">{{ number_format($arrayPrice['price_child'][0]) }}<sup>đ</sup></span> /vé
+                            <span class="text-price_500">{!! !empty($arrayPrice['price_child'][0]) ? number_format($arrayPrice['price_child'][0]).'<sup>đ</sup></span> /vé' : '-' !!}
                         @endif
                     </div>
                 </div>
@@ -105,7 +106,7 @@
                         @if(count($arrayPrice['price_old'])>1)
                             <span class="text-price_500">{{ number_format($arrayPrice['price_old'][0]) }} - {{ number_format(end($arrayPrice['price_old'])) }}<sup>đ</sup></span> /vé
                         @else
-                            <span class="text-price_500">{{ number_format($arrayPrice['price_old'][0]) }}<sup>đ</sup></span> /vé
+                            <span class="text-price_500">{!! !empty($arrayPrice['price_old'][0]) ? number_format($arrayPrice['price_old'][0]).'<sup>đ</sup></span> /vé' : '-' !!}
                         @endif
                     </div>
                 </div>
@@ -117,7 +118,7 @@
                         @if(count($arrayPrice['price_vip'])>1)
                             <span class="text-price_500">{{ number_format($arrayPrice['price_vip'][0]) }} - {{ number_format(end($arrayPrice['price_vip'])) }}<sup>đ</sup></span> /vé
                         @else
-                            <span class="text-price_500">{{ number_format($arrayPrice['price_vip'][0]) }}<sup>đ</sup></span> /vé
+                            <span class="text-price_500">{!! !empty($arrayPrice['price_vip'][0]) ? number_format($arrayPrice['price_vip'][0]).'<sup>đ</sup></span> /vé' : '-' !!}
                         @endif
                     </div>
                 </div>
@@ -132,5 +133,6 @@
                 </div>
             </div>
         </div>
+        @endif
     @endforeach
  </div>

@@ -110,7 +110,7 @@ table h3 {
 }
 
 .spaceBetweenBox {
-  margin-top: 3rem;
+  margin-top: 2.5rem;
 }
 
 .width100 {
@@ -318,7 +318,7 @@ input {
 }
 
 .breadcrumbBox {
-  padding: 0.5rem 0;
+  margin-top: 0.5rem;
 }
 .breadcrumbBox .container {
   font-size: 0.95rem;
@@ -361,15 +361,16 @@ input {
 }
 
 .titlePage {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 800;
   font-family: "Roboto Slab", serif;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .ratingBox {
   font-size: 13px;
   display: flex;
+  margin-bottom: 0.75rem;
 }
 .ratingBox_star {
   min-width: 95px;
@@ -758,10 +759,26 @@ input {
 }
 
 .pageContent {
-  padding-top: 1.5rem;
+  padding-top: 2rem;
 }
-.pageContent > * {
-  padding-bottom: 2rem;
+.pageContent > *:not(:last-child) {
+  padding-bottom: 2.5rem;
+}
+.pageContent > *:last-child {
+  padding-bottom: 3rem;
+}
+.pageContent_body {
+  display: flex;
+}
+.pageContent_body_content {
+  width: calc(100% - 350px - 1.5rem);
+}
+.pageContent_body_sidebar {
+  margin-left: 1.5rem;
+  flex: 0 0 350px;
+}
+.pageContent_body_sidebar > *:not(:first-child) {
+  margin-top: 1.5rem;
 }
 
 /* ===== START: Footer */
@@ -1349,7 +1366,6 @@ input {
 
 .menuTour {
   display: flex;
-  align-items: flex-start;
   flex-wrap: wrap;
 }
 .menuTour_item {
@@ -1499,6 +1515,9 @@ blockquote em {
 }
 .shipGrid_item {
   width: calc(33.33% - 0.6666rem);
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   transition: 500ms ease-in-out all;
   border: 1px solid rgba(0, 123, 255, 0.2);
   border-radius: 5px;
