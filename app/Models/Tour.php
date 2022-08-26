@@ -52,6 +52,7 @@ class Tour extends Model {
                                 $q->where('staff_info_id', $params['search_staff']);
                             });
                         })
+                        ->orderBy('created_at', 'DESC')
                         ->with(['files' => function($query){
                             $query->where('relation_table', 'tour_info');
                         }], 'seo', 'locations.infoLocation', 'departure', 'staffs.infoStaff', 'partners.infoPartner')
