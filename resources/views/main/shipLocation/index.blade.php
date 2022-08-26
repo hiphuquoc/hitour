@@ -21,21 +21,21 @@
                 </div>
             </div>
             <!-- ship box -->
-            @include('main.shipLocation.shipGrid', ['list' => $item->ships])
-
             <div class="spaceBetweenBox">
-                <div class="pageContent_body">
-                    <div class="pageContent_body_content">
-                        <div class="contentShip">
-                            <!-- Lịch tàu và Hãng tàu -->
-                            @include('main.shipLocation.headContent', ['keyWord' => $item->name])
-                            <!-- Nội dung tùy biến -->
-                            {!! $content ?? null !!}
-                        </div>
+                @include('main.shipLocation.shipGrid', ['list' => $item->ships])
+            </div>
+            
+            <div class="pageContent_body">
+                <div class="pageContent_body_content">
+                    <div class="contentShip">
+                        <!-- Lịch tàu và Hãng tàu -->
+                        @include('main.shipLocation.headContent', ['keyWord' => $item->name])
+                        <!-- Nội dung tùy biến -->
+                        {!! $content ?? null !!}
                     </div>
-                    <div class="pageContent_body_sidebar">
-                        @include('main.shipLocation.sidebar')
-                    </div>
+                </div>
+                <div class="pageContent_body_sidebar">
+                    @include('main.shipLocation.sidebar')
                 </div>
             </div>
 
