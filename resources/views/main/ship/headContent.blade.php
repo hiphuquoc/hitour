@@ -79,7 +79,7 @@
                 <tr>
                     <td>
                         <div>
-                            Phú Quốc Express
+                            {{ $data['partner_name'] }}
                         </div>
                         <div>
                             Ngày áp dụng:<br/>
