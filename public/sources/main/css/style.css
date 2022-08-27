@@ -597,6 +597,7 @@ input {
 .megaMenu_title > ul > li i {
   float: right;
   margin-top: 8px;
+  font-size: 0.85rem;
 }
 .megaMenu_title > ul > li:hover {
   background: rgba(0, 123, 255, 0.1);
@@ -655,12 +656,12 @@ input {
   font-family: "Roboto", sans-serif;
   background: #fff;
   box-shadow: 1px 1px 3px #adb5bd;
-  border-top: 5px solid rgba(244, 208, 63, 0.4);
+  border-top: 5px solid rgb(244, 208, 63);
   position: absolute;
-  width: 240px;
+  width: 250px;
   z-index: 1;
   display: none;
-  top: 100px;
+  top: 85px;
 }
 .normalMenu.right {
   right: 0;
@@ -672,6 +673,7 @@ input {
 .normalMenu > ul {
   line-height: 2;
   margin: 0;
+  width: 100%;
 }
 .normalMenu > ul > li {
   list-style: none;
@@ -694,18 +696,20 @@ input {
   font-weight: 500;
 }
 .normalMenu > ul > li > a i, .normalMenu > ul > li > div i {
+  font-size: 0.85rem;
   float: right;
   margin-top: 8px;
 }
 .normalMenu > ul > li ul {
   position: absolute;
   top: -5px;
-  left: 240px;
-  width: 320px;
+  left: 250px;
+  width: 310px;
+  margin: 0;
   background: #fff;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   display: none;
-  border-top: 5px solid rgba(244, 208, 63, 0.4);
+  border-top: 5px solid rgb(244, 208, 63);
 }
 .normalMenu > ul > li ul li {
   list-style: none;
@@ -1362,6 +1366,7 @@ input {
 .dayTourByList_item_title h3, .dayTourByList_item_title h4 {
   font-size: 1rem;
   font-weight: 700;
+  margin-bottom: 0;
 }
 
 .menuTour {

@@ -1,3 +1,8 @@
+@php
+    $dataShipMenu   = \App\Models\ShipLocation::select('*')
+                        ->with('seo', 'ships.seo')
+                        ->get();
+@endphp
 <div class="headerMain">
     <div class="container">
         <div class="headerMain_item">
@@ -17,6 +22,28 @@
                     <div>
                         <div>Tàu cao tốc</div>
                     </div>
+                    @if($dataShipMenu->isNotEmpty())
+                    <div class="normalMenu">
+                        <ul>
+                            @foreach($dataShipMenu as $shipLocation)
+                            <li>
+                                <a class="max-line_1" href="/{{ $shipLocation->seo->slug_full }}">{{ $shipLocation->name }}<i class="fas fa-angle-right"></i></a>
+                                @if(!empty($shipLocation->ships))
+                                    <ul>
+                                    @foreach($shipLocation->ships as $ship)
+                                        <li class="max-line_1">
+                                            <a href="/{{ $ship->seo->slug_full }}">
+                                                <div>{{ $ship->name }}</div>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                    </ul>
+                                @endif
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                 </li>
             </ul>
         </div>

@@ -367,6 +367,7 @@ $height_headerMain : 85px;
                 i {
                     float: right;
                     margin-top: 8px;
+                    font-size: 0.85rem;
                 }
 
                 &:hover {
@@ -440,16 +441,18 @@ $height_headerMain : 85px;
         }
     }
 }
+$width_normalMenu : 250px;
 .normalMenu {
-    font-family: 'Roboto', sans-serif;
+    font-family: $font-primary-text;
     background: #fff;
     box-shadow: 1px 1px 3px $bg-06;
-    border-top: 5px solid $color-secondary-04;
+    border-top: 5px solid $color-secondary;
     position: absolute;
-    width: 240px;
+    width: $width_normalMenu;
     z-index: 1;
+    // display: flex;
     display: none;
-    top: 100px;
+    top: $height_headerMain;
     
     &.right {
         right: 0;
@@ -467,7 +470,7 @@ $height_headerMain : 85px;
     > ul {
         line-height: 2;
         margin: 0;
-        
+        width: 100%;
         > li {
             list-style: none;
             cursor: pointer;
@@ -479,7 +482,6 @@ $height_headerMain : 85px;
             
             &:hover {
                 background: $color-primary-01;
-                
                 ul {
                     display: block;
                 }
@@ -490,9 +492,8 @@ $height_headerMain : 85px;
                 padding: 8px 10px;
                 color: $color-text;
                 font-weight: 500;
-                
-                
                 i {
+                    font-size: 0.85rem;
                     float: right;
                     margin-top: 8px;
                 }
@@ -501,12 +502,13 @@ $height_headerMain : 85px;
             ul {
                 position: absolute;
                 top: -5px;
-                left: 240px;
-                width: 320px;
+                left: $width_normalMenu;
+                width: 310px;
+                margin: 0;
                 background: #fff;
                 box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
                 display: none;
-                border-top: 5px solid $color-secondary-04;
+                border-top: 5px solid $color-secondary;
                 
                 li {
                     list-style: none;
@@ -1212,6 +1214,7 @@ $tourGrid_radius : 5px;
             h3, h4 {
                 font-size: 1rem;
                 font-weight: 700;
+                margin-bottom: 0;
             }   
         }
     }
