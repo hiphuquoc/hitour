@@ -28,7 +28,6 @@ class Tour extends Model {
     public $timestamps      = true;
 
     public static function getList($params = null){
-        $paginate   = $params['paginate'] ?? null;
         $result     = self::select('*')
                         /* tìm theo tên */
                         ->when(!empty($params['search_name']), function($query) use($params){
@@ -56,7 +55,7 @@ class Tour extends Model {
                         ->with(['files' => function($query){
                             $query->where('relation_table', 'tour_info');
                         }], 'seo', 'locations.infoLocation', 'departure', 'staffs.infoStaff', 'partners.infoPartner')
-                        ->paginate($paginate);
+                        ->get();
         return $result;
     }
 

@@ -51,9 +51,11 @@
                     <div class="oneLine">
                         {{ number_format($price->price_old) }}<sup>đ</sup> /cao tuổi
                     </div>
-                    <div class="oneLine">
-                        {{ number_format($price->price_vip) }}<sup>đ</sup> /vé VIP
-                    </div>
+                    @if(!empty($price->price_vip))
+                        <div class="oneLine">
+                            {{ number_format($price->price_vip) }}<sup>đ</sup> /vé VIP
+                        </div>
+                    @endif
                 </td>
                 <td style="display:flex;justify-content:space-between;">
                     <div class="icon-wrapper iconAction">

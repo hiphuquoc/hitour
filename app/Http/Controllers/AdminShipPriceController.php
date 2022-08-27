@@ -97,11 +97,10 @@ class AdminShipPriceController extends Controller {
                                     ->first();
                 $partners       = ShipPartner::all();
                 if(!empty($item)){
-                    $body       = view('admin.ship.formShipTime', compact('shipInfo', 'item', 'type', 'partners'))->render();
+                    $body       = view('admin.ship.formShipPrice', compact('shipInfo', 'item', 'type', 'partners'))->render();
                 }else {
                     $body       = '<div style="margin-top:1rem;font-weight:600;">Có lỗi xảy ra, không tải được dữ liệu!</div>';
                 }
-                
             }else {
                 /* trường hợp create và copy */
                 $idShipInfo     = $request->get('ship_info_id') ?? 0;   
@@ -117,7 +116,7 @@ class AdminShipPriceController extends Controller {
                                     ->first();
                 $header         = 'Thêm giờ tàu và giá';
                 $partners       = ShipPartner::all();
-                $body           = view('admin.ship.formShipTime', compact('shipInfo', 'item', 'type', 'partners'))->render();
+                $body           = view('admin.ship.formShipPrice', compact('shipInfo', 'item', 'type', 'partners'))->render();
             }
         }else {
             $header             = 'Thêm giờ tàu và giá';

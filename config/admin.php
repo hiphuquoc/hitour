@@ -8,7 +8,6 @@ return [
 
     /* Định dạng hình ảnh Upload */
     'images'    => [
-        // 'folderUpload'          => '/upload/images/',
         'folderUpload'          => 'public/images/upload/',
         'normalResize_width'    => 750,
         'normalResize_height'   => 460,
@@ -98,6 +97,7 @@ return [
         'contentTourLocation'   => 'public/contents/tourLocations/',
         'contentTourDeparture'  => 'public/contents/tourDepartures/',
         'contentShip'           => 'public/contents/ships/',
-        'contentShipLocation'   => 'public/contents/shipLocations/'
+        'contentShipLocation'   => 'public/contents/shipLocations/',
+        'contentShipPartner'    => 'public/contents/shipPartners/'
     ]
 ];

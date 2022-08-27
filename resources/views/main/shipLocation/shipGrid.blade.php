@@ -51,7 +51,7 @@
                             sort($arrayPrice['price_old']);
                         }
                         if(!in_array($price->price_vip, $arrayPrice['price_vip'])) {
-                            $arrayPrice['price_vip'][] = $price->price_vip;
+                            if(!empty($price->price_vip)) $arrayPrice['price_vip'][] = $price->price_vip;
                             sort($arrayPrice['price_vip']);
                         }
                         /* xây dựng mảng time */
@@ -118,7 +118,7 @@
                         @if(count($arrayPrice['price_vip'])>1)
                             <span class="text-price_500">{{ number_format($arrayPrice['price_vip'][0]) }} - {{ number_format(end($arrayPrice['price_vip'])) }}<sup>đ</sup></span> /vé
                         @else
-                            <span class="text-price_500">{!! !empty($arrayPrice['price_vip'][0]) ? number_format($arrayPrice['price_vip'][0]).'<sup>đ</sup></span> /vé' : '-' !!}
+                            <span class="text-price_500">{!! !empty($arrayPrice['price_vip'][0]) ? number_format($arrayPrice['price_vip'][0]).'<sup>đ</sup></span> /vé' : 'Không có<sup></sup>' !!}
                         @endif
                     </div>
                 </div>

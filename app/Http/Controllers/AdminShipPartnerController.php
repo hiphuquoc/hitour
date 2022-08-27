@@ -28,10 +28,11 @@ class AdminShipPartnerController extends Controller {
                             ->where('id', $id)
                             ->with('seo')
                             ->first();
+        $content            = Storage::get(config('admin.storage.contentShipPartner').$item->seo->slug.'.blade.php');
         /* type */
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.shipPartner.view', compact('item', 'type'));
+        return view('admin.shipPartner.view', compact('item', 'type', 'content'));
     }
 
     public function create(ShipPartnerRequest $request){
@@ -50,6 +51,8 @@ class AdminShipPartnerController extends Controller {
             /* insert ship_partner */
             $insertPartnerInfo  = $this->BuildInsertUpdateModel->buildArrayTableShipPartner($request->all(), $seoId, $dataPath['filePathNormal']);
             $idPartner          = ShipPartner::insertItem($insertPartnerInfo);
+            /* lưu content vào file */
+            Storage::put(config('admin.storage.contentShipPartner').$request->get('slug').'.blade.php', $request->get('content'));
             DB::commit();
             /* Message */
             $message            = [
@@ -84,6 +87,8 @@ class AdminShipPartnerController extends Controller {
             /* update partner_info */
             $updatePartnerInfo  = $this->BuildInsertUpdateModel->buildArrayTableShipPartner($request->all(), null, $dataPath['filePathNormal'] ?? null);
             ShipPartner::updateItem($request->get('id'), $updatePartnerInfo);
+            /* lưu content vào file */
+            Storage::put(config('admin.storage.contentShipPartner').$request->get('slug').'.blade.php', $request->get('content'));
             DB::commit();
             /* Message */
             $message            = [

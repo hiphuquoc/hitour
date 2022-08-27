@@ -500,7 +500,7 @@ class BuildInsertUpdateModel {
             $result['price_adult']          = $dataForm['price_adult'];
             $result['price_child']          = $dataForm['price_child'];
             $result['price_old']            = $dataForm['price_old'];
-            $result['price_vip']            = $dataForm['price_vip'];
+            $result['price_vip']            = $dataForm['price_vip'] ?? null;
             $result['profit_percent']       = $dataForm['profit_percent'];
         }
         return $result;

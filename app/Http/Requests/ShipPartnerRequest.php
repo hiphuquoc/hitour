@@ -29,6 +29,7 @@ class ShipPartnerRequest extends FormRequest
             'ordering'                  => 'min:0',
             'seo_title'                 => 'required',
             'seo_description'           => 'required',
+            'content'                   => 'required',
             'slug'                      => [
                 'required',
                 function($attribute, $value, $fail){
@@ -54,6 +55,7 @@ class ShipPartnerRequest extends FormRequest
             'ordering.min'              => 'Giá trị không được nhỏ hơn 0!',
             'seo_title.required'        => 'Tiêu đề SEO không được để trống!',
             'seo_description.required'  => 'Mô tả SEO không được để trống!',
+            'content.required'          => 'Nội dung trang không được để trống!',
             'slug.required'             => 'Đường dẫn tĩnh không được để trống!',
             'rating_aggregate_count'    => 'Số lượt đánh giá không được để trống!',
             'rating_aggregate_star'     => 'Điểm đánh giá không được để trống!'

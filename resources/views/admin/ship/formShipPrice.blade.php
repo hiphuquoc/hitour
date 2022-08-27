@@ -47,8 +47,8 @@
                     <input type="number" class="form-control" id="price_old" name="price_old" value="{{ old('price_old') ?? $item->price_old ?? null }}" required>
                 </div>
                 <div class="flexBox_item">
-                    <label class="form-label inputRequired" for="price_vip">Giá vé VIP</label>
-                    <input type="text" class="form-control" id="price_vip" name="price_vip" value="{{ old('price_vip') ?? $item->price_vip ?? null }}" required>
+                    <label class="form-label" for="price_vip">Giá vé VIP</label>
+                    <input type="text" class="form-control" id="price_vip" name="price_vip" value="{{ old('price_vip') ?? $item->price_vip ?? null }}">
                 </div>
             </div>
         </div>

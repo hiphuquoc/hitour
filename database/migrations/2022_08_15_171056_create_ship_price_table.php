@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('price_adult');
             $table->integer('price_child');
             $table->integer('price_old');
-            $table->integer('price_vip');
+            $table->integer('price_vip')->nullable();
             $table->integer('profit_percent');
             $table->timestamps();
         });
