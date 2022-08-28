@@ -36,35 +36,75 @@
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
-            <label class="form-label inputRequired" for="ship_location_id">Điểm đến Tàu</label>
-            <select class="select2 form-select select2-hidden-accessible" name="ship_location_id">
-                <option value="0">- Lựa chọn -</option>
-                @if(!empty($shipLocations))
-                    @foreach($shipLocations as $location)
-                        @php
-                            $selected   = null;
-                            if(!empty($item->ship_location_id)&&$item->ship_location_id==$location->id) $selected = 'selected';
-                        @endphp
-                        <option value="{{ $location['id'] }}"{{ $selected }}>{{ $location['name'] }}</option>
-                    @endforeach
-                @endif
-            </select>
+            <div class="flexBox">
+                <div class="flexBox_item">
+                    <label class="form-label inputRequired" for="ship_departure_id">Điểm khởi hành</label>
+                    <select class="select2 form-select select2-hidden-accessible" name="ship_departure_id" onChange="loadSelectBoxShipPort(this.value, 'departure', 
+                    'js_loadSelectBoxShipPort_idWrite_departure');">
+                        <option value="0">- Lựa chọn -</option>
+                        @if(!empty($shipDepartures))
+                            @foreach($shipDepartures as $departure)
+                                @php
+                                    $selected   = null;
+                                    if(!empty($item->ship_departure_id)&&$item->ship_departure_id==$departure->id) $selected = 'selected';
+                                @endphp
+                                <option value="{{ $departure['id'] }}"{{ $selected }}>{{ $departure['name'] }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
+                <div class="flexBox_item">
+                    <label class="form-label inputRequired" for="ship_port_departure_id">Cảng khởi hành</label>
+                    <select id="js_loadSelectBoxShipPort_idWrite_departure" class="form-select" name="ship_port_departure_id">
+                        <option value="0">- Lựa chọn -</option>
+                        @if(!empty($shipPortDepartures))
+                            @foreach($shipPortDepartures as $shipDeparture)
+                                @php
+                                    $selected   = null;
+                                    if(!empty($item->ship_port_departure_id)&&$item->ship_port_departure_id==$shipDeparture->id) $selected = 'selected';
+                                @endphp
+                                <option value="{{ $shipDeparture->id }}"{{ $selected }}>{{ $shipDeparture->name }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
+            </div>
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
-            <label class="form-label inputRequired" for="ship_departure_id">Điểm khởi hành</label>
-            <select class="select2 form-select select2-hidden-accessible" name="ship_departure_id">
-                <option value="0">- Lựa chọn -</option>
-                @if(!empty($shipDepartures))
-                    @foreach($shipDepartures as $departure)
-                        @php
-                            $selected   = null;
-                            if(!empty($item->ship_departure_id)&&$item->ship_departure_id==$departure->id) $selected = 'selected';
-                        @endphp
-                        <option value="{{ $departure['id'] }}"{{ $selected }}>{{ $departure['name'] }}</option>
-                    @endforeach
-                @endif
-            </select>
+            <div class="flexBox">
+                <div class="flexBox_item">
+                    <label class="form-label inputRequired" for="ship_location_id">Điểm đến Tàu</label>
+                    <select class="select2 form-select select2-hidden-accessible" name="ship_location_id" onChange="loadSelectBoxShipPort(this.value, 'location', 
+                    'js_loadSelectBoxShipPort_idWrite_location');">
+                        <option value="0">- Lựa chọn -</option>
+                        @if(!empty($shipLocations))
+                            @foreach($shipLocations as $location)
+                                @php
+                                    $selected   = null;
+                                    if(!empty($item->ship_location_id)&&$item->ship_location_id==$location->id) $selected = 'selected';
+                                @endphp
+                                <option value="{{ $location['id'] }}"{{ $selected }}>{{ $location['name'] }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
+                <div class="flexBox_item">
+                    <label class="form-label inputRequired" for="ship_port_location_id">Cảng cập bến</label>
+                    <select id="js_loadSelectBoxShipPort_idWrite_location" class="form-select" name="ship_port_location_id">
+                        <option value="0">- Lựa chọn -</option>
+                        @if(!empty($shipPortLocations))
+                            @foreach($shipPortLocations as $shipLocation)
+                                @php
+                                    $selected   = null;
+                                    if(!empty($item->ship_port_location_id)&&$item->ship_port_location_id==$shipLocation->id) $selected = 'selected';
+                                @endphp
+                                <option value="{{ $shipLocation->id }}"{{ $selected }}>{{ $shipLocation->name }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
+            </div>
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
@@ -115,9 +155,19 @@
 </div>
 
 @push('scripts-custom')
-    {{-- <script type="text/javascript">
-        
-
-    </script> --}}
-
+    <script type="text/javascript">
+        function loadSelectBoxShipPort(value, type, idWrite){
+            $.ajax({
+                url         : "{{ route('admin.shipPort.loadSelectBoxShipPort') }}",
+                type        : "GET",
+                dataType    : "html",
+                data        : {
+                    id      : value,
+                    type
+                }
+            }).done(function(data){
+                $('#'+idWrite).html(data);
+            });
+        }
+    </script>
 @endpush

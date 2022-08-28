@@ -15,7 +15,7 @@ class AdminFormController extends Controller {
         if(!empty($request->get('region_id'))){
             $data   = Province::getItemByIdRegion($request->get('region_id'));
         }
-        $xhtml  = view('admin.ajax.loadOptionLocal', compact('data'));
+        $xhtml  = view('admin.ajax.selectBox', compact('data'));
         echo $xhtml;
     }
 
@@ -24,7 +24,7 @@ class AdminFormController extends Controller {
         if(!empty($request->get('province_id'))){
             $data   = District::getItemByIdProvince($request->get('province_id'));
         }
-        $xhtml  = view('admin.ajax.loadOptionLocal', compact('data'));
+        $xhtml  = view('admin.ajax.selectBox', compact('data'));
         echo $xhtml;
     }
 }

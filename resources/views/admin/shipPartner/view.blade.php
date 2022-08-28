@@ -265,26 +265,28 @@
         }
 
         function deletePartnerContact(id){
-            $.ajax({
-                url         : '{{ route("admin.shipPartner.deleteContact") }}',
-                type        : 'post',
-                dataType    : 'html',
-                data        : {
-                    '_token'    : '{{ csrf_token() }}',
-                    id      : id
-                },
-                success     : function(data){
-                    if(data==true){
-                        /* thành công */
-                        $('#partnerContact_'+id).remove();
-                        loadContactOfPartner('js_loadPartnerContact');
-                        showMessage('js_showMessage', 'Xóa Liên hệ thành công!', 'success');
-                    }else {
-                        /* thất bại */
-                        showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
+            if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
+                $.ajax({
+                    url         : '{{ route("admin.shipPartner.deleteContact") }}',
+                    type        : 'post',
+                    dataType    : 'html',
+                    data        : {
+                        '_token'    : '{{ csrf_token() }}',
+                        id      : id
+                    },
+                    success     : function(data){
+                        if(data==true){
+                            /* thành công */
+                            $('#partnerContact_'+id).remove();
+                            loadContactOfPartner('js_loadPartnerContact');
+                            showMessage('js_showMessage', 'Xóa Liên hệ thành công!', 'success');
+                        }else {
+                            /* thất bại */
+                            showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
+                        }
                     }
-                }
-            });
+                });
+            }
         }
 
         function validateFormModal(){

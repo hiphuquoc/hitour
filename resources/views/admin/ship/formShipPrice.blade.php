@@ -66,12 +66,10 @@
                         <label class="form-label inputRequired" for="string_from_to">Khởi hành - Cập bến</label>
                         <select class="form-select" name="string_from_to" aria-hidden="true">
                             <option value="0">- Lựa chọn -</option>
-                            @if(!empty($shipInfo->location))
+                            @if(!empty($shipInfo->portDeparture&&$shipInfo->portLocation))
                                 @php
-                                    $locationName   = $shipInfo->location->district->district_name ?? $shipInfo->location->province->province_name;
-                                    $departureName  = $shipInfo->departure->district->district_name ?? $shipInfo->departure->province->province_name;
-                                    $nameTrip       = $departureName.' - '.$locationName;
-                                    $nameRound      = $locationName.' - '.$departureName;
+                                    $nameTrip       = $shipInfo->portDeparture->name.' - '.$shipInfo->portLocation->name;
+                                    $nameRound      = $shipInfo->portLocation->name.' - '.$shipInfo->portDeparture->name;
                                 @endphp
                                 <option value="{{ $nameTrip }}" {{ ($nameTrip===$time->name) ? 'selected' : null }}>{{ $nameTrip }}</option>
                                 <option value="{{ $nameRound }}" {{ ($nameRound===$time->name) ? 'selected' : null }}>{{ $nameRound }}</option>

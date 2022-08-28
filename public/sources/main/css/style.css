@@ -1639,7 +1639,7 @@ blockquote em {
 .contentShip_item_title {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   padding-bottom: 0.75rem;
   border-bottom: 1px solid #ced4da;
   margin-bottom: 0.75rem;
@@ -1657,6 +1657,7 @@ blockquote em {
 .contentShip_item_title > i {
   flex: 0 0 30px;
   color: #678;
+  margin-top: 0.3rem;
 }
 .contentShip_item_title > div {
   position: absolute;

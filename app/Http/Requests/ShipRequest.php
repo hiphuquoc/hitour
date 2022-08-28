@@ -48,7 +48,11 @@ class ShipRequest extends FormRequest
             'seo_title'                 => 'required',
             'seo_description'           => 'required',
             'rating_aggregate_count'    => 'required',
-            'rating_aggregate_star'     => 'required'
+            'rating_aggregate_star'     => 'required',
+            'ship_departure_id'         => 'integer|min:1',
+            'ship_location_id'          => 'integer|min:1',
+            'ship_port_departure_id'    => 'integer|min:1',
+            'ship_port_location_id'     => 'integer|min:1'
         ];
     }
 
@@ -64,7 +68,11 @@ class ShipRequest extends FormRequest
             'seo_description.required'          => 'Mô tả SEO không được để trống!',
             'slug.required'                     => 'Đường dẫn tĩnh không được để trống!',
             'rating_aggregate_count.required'   => 'Số lượt đánh giá không được để trống!',
-            'rating_aggregate_star.required'    => 'Điểm đánh giá không được để trống!'
+            'rating_aggregate_star.required'    => 'Điểm đánh giá không được để trống!',
+            'ship_departure_id.min'             => 'Điểm khởi hành không được để trống',
+            'ship_location_id.min'              => 'Điểm đến Tàu không được để trống',
+            'ship_port_departure_id.min'        => 'Cảng khởi hành không được để trống',
+            'ship_port_location_id.min'         => 'Cảng cập bến không được để trống'
         ];
     }
 }

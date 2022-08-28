@@ -262,25 +262,27 @@
         }
 
         function deleteCostMoreLess(idCost){
-            $.ajax({
-                        url         : '{{ route("admin.cost.delete") }}',
-                        type        : 'post',
-                        dataType    : 'html',
-                        data        : {
-                            '_token'            : '{{ csrf_token() }}',
-                            cost_more_less_id   : idCost
-                        },
-                        success     : function(data){
-                            if(data==true){
-                                /* thành công */
-                                loadCostMoreLess();
-                                showMessage('js_showMessage', 'Xóa Chi phí thành công!', 'success');
-                            }else {
-                                /* thất bại */
-                                showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
-                            }
+            if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
+                $.ajax({
+                    url         : '{{ route("admin.cost.delete") }}',
+                    type        : 'post',
+                    dataType    : 'html',
+                    data        : {
+                        '_token'            : '{{ csrf_token() }}',
+                        cost_more_less_id   : idCost
+                    },
+                    success     : function(data){
+                        if(data==true){
+                            /* thành công */
+                            loadCostMoreLess();
+                            showMessage('js_showMessage', 'Xóa Chi phí thành công!', 'success');
+                        }else {
+                            /* thất bại */
+                            showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
                         }
-                    });
+                    }
+                });
+            }
         }
 
         function showMessage(idWrite, message, type = 'success'){

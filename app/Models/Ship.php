@@ -12,8 +12,10 @@ class Ship extends Model {
         'seo_id', 
         'name',
         'name_round',
-        'ship_location_id',
+        'ship_port_departure_id',
         'ship_departure_id',
+        'ship_port_location_id',
+        'ship_location_id',
         'note',
         'created_by'
     ];
@@ -80,12 +82,20 @@ class Ship extends Model {
         return $this->hasMany(\App\Models\SystemFile::class, 'attachment_id', 'id');
     }
 
+    public function departure(){
+        return $this->hasOne(\App\Models\ShipDeparture::class, 'id', 'ship_departure_id');
+    }
+
+    public function portDeparture(){
+        return $this->hasOne(\App\Models\ShipPort::class, 'id', 'ship_port_departure_id');
+    }
+
     public function location(){
         return $this->hasOne(\App\Models\ShipLocation::class, 'id', 'ship_location_id');
     }
 
-    public function departure(){
-        return $this->hasOne(\App\Models\ShipDeparture::class, 'id', 'ship_departure_id');
+    public function portLocation(){
+        return $this->hasOne(\App\Models\ShipPort::class, 'id', 'ship_port_location_id');
     }
 
     public function prices(){

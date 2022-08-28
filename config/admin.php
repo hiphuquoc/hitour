@@ -99,5 +99,9 @@ return [
         'contentShip'           => 'public/contents/ships/',
         'contentShipLocation'   => 'public/contents/shipLocations/',
         'contentShipPartner'    => 'public/contents/shipPartners/'
+    ],
+
+    'alert'     => [
+        'confirmRemove'     => 'Bạn có chắc muốn thực hiện thao tác này!'
     ]
 ];

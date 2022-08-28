@@ -18,9 +18,9 @@ use App\Http\Controllers\AdminShipPartnerController;
 use App\Http\Controllers\AdminShipPartnerContactController;
 use App\Http\Controllers\AdminShipController;
 use App\Http\Controllers\AdminShipPriceController;
+use App\Http\Controllers\AdminShipPortController;
 
 use App\Http\Controllers\AdminStaffController;
-
 use App\Http\Controllers\AdminCostController;
 use App\Http\Controllers\AdminImageController;
 
@@ -144,6 +144,16 @@ Route::prefix('admin')->group(function(){
             Route::post('/loadContact', [AdminShipPartnerContactController::class, 'loadContact'])->name('admin.shipPartner.loadContact');
             Route::post('/loadFormContact', [AdminShipPartnerContactController::class, 'loadFormContact'])->name('admin.shipPartner.loadFormContact');
             Route::post('/deleteContact', [AdminShipPartnerContactController::class, 'delete'])->name('admin.shipPartner.deleteContact');
+        });
+        /* ===== SHIP PORT ===== */
+        Route::prefix('shipPort')->group(function(){
+            Route::get('/', [AdminShipPortController::class, 'list'])->name('admin.shipPort.list');
+            Route::post('/create', [AdminShipPortController::class, 'create'])->name('admin.shipPort.create');
+            Route::get('/view', [AdminShipPortController::class, 'view'])->name('admin.shipPort.view');
+            Route::post('/update', [AdminShipPortController::class, 'update'])->name('admin.shipPort.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminShipPortController::class, 'delete'])->name('admin.shipPort.delete');
+            Route::get('/loadSelectBoxShipPort', [AdminShipPortController::class, 'loadSelectBoxShipPort'])->name('admin.shipPort.loadSelectBoxShipPort');
         });
         /* ===== SHIP INFO ===== */
         Route::prefix('ship')->group(function(){

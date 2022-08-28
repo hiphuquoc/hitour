@@ -299,27 +299,29 @@
         }
 
         function deletePriceAndTime(id){
-            $.ajax({
-                url         : '{{ route("admin.shipPrice.deletePrice") }}',
-                type        : 'post',
-                dataType    : 'html',
-                data        : {
-                    '_token'    : '{{ csrf_token() }}',
-                    ship_price_id   : id
-                },
-                success     : function(data){
-                    console.log(data);
-                    if(data==true){
-                        /* thành công */
-                        $('#priceAndTime_'+id).remove();
-                        loadTimeAndPrice('js_loadTimeAndPrice');
-                        showMessage('js_showMessage', 'Xóa Giá và Thời gian thành công!', 'success');
-                    }else {
-                        /* thất bại */
-                        showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
+            if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
+                $.ajax({
+                    url         : '{{ route("admin.shipPrice.deletePrice") }}',
+                    type        : 'post',
+                    dataType    : 'html',
+                    data        : {
+                        '_token'    : '{{ csrf_token() }}',
+                        ship_price_id   : id
+                    },
+                    success     : function(data){
+                        console.log(data);
+                        if(data==true){
+                            /* thành công */
+                            $('#priceAndTime_'+id).remove();
+                            loadTimeAndPrice('js_loadTimeAndPrice');
+                            showMessage('js_showMessage', 'Xóa Giá và Thời gian thành công!', 'success');
+                        }else {
+                            /* thất bại */
+                            showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
+                        }
                     }
-                }
-            });
+                });
+            }
         }
 
         function validateFormModal(){

@@ -99,14 +99,16 @@
 @push('scripts-custom')
     <script type="text/javascript">
         function deleteItem(id){
-            $.ajax({
-                url         : "{{ route('admin.shipPartner.delete') }}",
-                type        : "GET",
-                dataType    : "html",
-                data        : { id : id }
-            }).done(function(data){
-                if(data==true) $('#item-'+id).remove();
-            });
+            if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
+                $.ajax({
+                    url         : "{{ route('admin.shipPartner.delete') }}",
+                    type        : "GET",
+                    dataType    : "html",
+                    data        : { id : id }
+                }).done(function(data){
+                    if(data==true) $('#item-'+id).remove();
+                });
+            }
         }
     </script>
 @endpush

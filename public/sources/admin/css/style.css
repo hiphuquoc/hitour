@@ -327,7 +327,7 @@ html .content {
 .addItemBox {
   font-size: 1.05rem;
   position: absolute;
-  bottom: 2rem;
+  top: 2rem;
   right: 2rem;
   background: rgb(105, 103, 240);
   color: #fff;

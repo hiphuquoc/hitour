@@ -89,7 +89,7 @@ class AdminShipPriceController extends Controller {
                 $header         = 'Chỉnh sửa giờ tàu và giá';
                 $shipInfo       = Ship::select('*')
                                     ->where('id', $idShipInfo)
-                                    ->with('location.district', 'location.province', 'departure.district', 'departure.province')
+                                    ->with('portDeparture', 'portLocation')
                                     ->first();
                 $item           = ShipPrice::select('*')
                                     ->where('id', $idShipPrice)
@@ -108,7 +108,7 @@ class AdminShipPriceController extends Controller {
                 $type           = $request->get('type');
                 $shipInfo       = Ship::select('*')
                                     ->where('id', $idShipInfo)
-                                    ->with('location.district', 'location.province', 'departure.district', 'departure.province')
+                                    ->with('portDeparture', 'portLocation')
                                     ->first();
                 $item           = ShipPrice::select('*')
                                     ->where('id', $idShipPrice)

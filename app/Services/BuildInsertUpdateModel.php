@@ -468,11 +468,13 @@ class BuildInsertUpdateModel {
         $result     = [];
         if(!empty($dataForm)){
             if(!empty($seoId)) $result['seo_id'] = $seoId;
-            $result['name']                 = $dataForm['title'] ?? null;
-            $result['ship_location_id']     = $dataForm['ship_location_id'] ?? 0;
-            $result['ship_departure_id']    = $dataForm['ship_departure_id'] ?? 0;
-            $result['note']                 = $dataForm['note'] ?? null;
-            $result['created_by']           = Auth::id() ?? 0;
+            $result['name']                     = $dataForm['title'];
+            $result['ship_departure_id']        = $dataForm['ship_departure_id'];
+            $result['ship_port_departure_id']   = $dataForm['ship_port_departure_id'];
+            $result['ship_location_id']         = $dataForm['ship_location_id'];
+            $result['ship_port_location_id']    = $dataForm['ship_port_location_id'];
+            $result['note']                     = $dataForm['note'] ?? null;
+            $result['created_by']               = Auth::id() ?? 0;
         }
         return $result;
     }
@@ -532,6 +534,25 @@ class BuildInsertUpdateModel {
                 foreach($tmp as $t) $toSort     .= strtoupper(substr($t, 0, 1));
                 $result[$i]['ship_to_sort']     = $toSort;
             }
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableShipPort($dataForm){
+        /* 
+            name
+            address
+            district_id
+            province_id
+            region_id
+        */
+        $result                     = [];
+        if(!empty($dataForm)){
+            $result['name']         = $dataForm['name'];
+            $result['address']      = $dataForm['address'];
+            $result['district_id']  = $dataForm['district'];
+            $result['province_id']  = $dataForm['province'];
+            $result['region_id']    = $dataForm['region'];
         }
         return $result;
     }

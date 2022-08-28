@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests\ShipRequest;
+use App\Models\ShipPort;
 use App\Models\SystemFile;
 
 class AdminShipController extends Controller {
@@ -55,15 +56,6 @@ class AdminShipController extends Controller {
     }
 
     public function view(Request $request){
-        $shipLocations      = ShipLocation::all();
-        $shipDepartures     = ShipDeparture::all();
-        $staffs             = Staff::all();
-        $shipPartners       = ShipPartner::all();
-        $parents            = ShipLocation::select('*')
-                                ->with('seo')
-                                ->get();
-        $message            = $request->get('message') ?? null;
-        $id                 = $request->get('id') ?? 0;
         $item               = Ship::select('*')
                                 ->where('id', $request->get('id'))
                                 ->with(['files' => function($query){
@@ -71,11 +63,22 @@ class AdminShipController extends Controller {
                                 }])
                                 ->with('seo', 'location', 'departure', 'partners.infoPartner', 'staffs')
                                 ->first();
+        $shipDepartures     = ShipDeparture::all();
+        $shipPortDepartures = ShipPort::getShipPortByShipDepartureId($item->departure->id);
+        $shipLocations      = ShipLocation::all();
+        $shipPortLocations  = ShipPort::getShipPortByShipLocationId($item->location->id);
+        $staffs             = Staff::all();
+        $shipPartners       = ShipPartner::all();
+        $parents            = ShipLocation::select('*')
+                                ->with('seo')
+                                ->get();
+        $message            = $request->get('message') ?? null;
+        $id                 = $request->get('id') ?? 0;
         $content            = Storage::get(config('admin.storage.contentShip').$item->seo->slug.'.blade.php');
         /* type */
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.ship.view', compact('parents', 'item', 'content', 'type', 'shipLocations', 'shipDepartures', 'staffs', 'shipPartners'));
+        return view('admin.ship.view', compact('parents', 'item', 'content', 'type', 'shipDepartures', 'shipPortDepartures', 'shipLocations', 'shipPortLocations', 'staffs', 'shipPartners'));
     }
 
     public function create(ShipRequest $request){

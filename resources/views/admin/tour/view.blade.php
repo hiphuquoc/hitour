@@ -344,26 +344,28 @@
         }
 
         function deleteOptionPrice(id){
-            $.ajax({
-                url         : '{{ route("admin.tourOption.deleteOption") }}',
-                type        : 'post',
-                dataType    : 'html',
-                data        : {
-                    '_token'    : '{{ csrf_token() }}',
-                    id      : id
-                },
-                success     : function(data){
-                    if(data==true){
-                        /* thành công */
-                        $('#optionPrice_'+id).remove();
-                        loadOptionPrice('js_loadOptionPrice');
-                        showMessage('js_showMessage', 'Xóa Option & Giá thành công!', 'success');
-                    }else {
-                        /* thất bại */
-                        showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
+            if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
+                $.ajax({
+                    url         : '{{ route("admin.tourOption.deleteOption") }}',
+                    type        : 'post',
+                    dataType    : 'html',
+                    data        : {
+                        '_token'    : '{{ csrf_token() }}',
+                        id      : id
+                    },
+                    success     : function(data){
+                        if(data==true){
+                            /* thành công */
+                            $('#optionPrice_'+id).remove();
+                            loadOptionPrice('js_loadOptionPrice');
+                            showMessage('js_showMessage', 'Xóa Option & Giá thành công!', 'success');
+                        }else {
+                            /* thất bại */
+                            showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
+                        }
                     }
-                }
-            });
+                });
+            }
         }
 
         function validateFormModal(){

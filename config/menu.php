@@ -139,13 +139,13 @@ return [
             'icon'      => '<i data-feather=\'feather\'></i>',
             'child'     => [
                 [
-                    'name'  => '1. Điểm đến',
-                    'route' => 'admin.tourLocation.list',
+                    'name'  => '1. Điểm khởi hành',
+                    'route' => 'admin.tourDeparture.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '2. Điểm khởi hành',
-                    'route' => 'admin.tourDeparture.list',
+                    'name'  => '2. Điểm đến',
+                    'route' => 'admin.tourLocation.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
@@ -171,22 +171,28 @@ return [
             'icon'      => '<i data-feather=\'bookmark\'></i>',
             'child'     => [
                 [
-                    'name'  => '1. Điểm đến',
-                    'route' => 'admin.shipLocation.list',
+                    'name'  => '1. Bến cảng',
+                    'route' => 'admin.shipPort.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
+                
                 [
                     'name'  => '2. Điểm khởi hành',
                     'route' => 'admin.shipDeparture.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '3. Đối tác Tàu',
+                    'name'  => '3. Điểm đến',
+                    'route' => 'admin.shipLocation.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '4. Đối tác Tàu',
                     'route' => 'admin.shipPartner.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '4. Chi tiết Tàu',
+                    'name'  => '5. Chi tiết Tàu',
                     'route' => 'admin.ship.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
