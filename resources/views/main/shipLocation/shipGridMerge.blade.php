@@ -1,13 +1,19 @@
 <div class="shipGrid">
     @foreach($list as $item)
-        @foreach($item->prices as $price)
+        @php
+            $arrayBrandShip         = [];
+            foreach($item->prices as $price){
+                if(!in_array($price->partner->name, $arrayBrandShip)) $arrayBrandShip[] = $price->partner->name;
+            }
+        @endphp
+        @if(!empty($item->prices[0]->price_adult))
         <div class="shipGrid_item">
             <div class="shipGrid_item_image">
                 <a href="/{{ $item->seo->slug_full }}">
                     <img src="{{ $item->seo->image_small ?? $item->seo->image }}" title="{{ $item->name }}" alt="{{ $item->name }}">
                 </a>
-                <div class="shipGrid_item_image_left">{{ !empty($price->times[0]->time_move) ? \App\Helpers\Time::convertMkToTimeMove($price->times[0]->time_move) : null }}</div>
-                <div class="shipGrid_item_image_bottom">{{ $price->partner->name }}</div>
+                <div class="shipGrid_item_image_left">{{ !empty($item->prices[0]->times[0]->time_move) ? \App\Helpers\Time::convertMkToTimeMove($item->prices[0]->times[0]->time_move) : null }}</div>
+                <div class="shipGrid_item_image_bottom">{{ implode(', ', $arrayBrandShip) }}</div>
             </div>
             <div class="shipGrid_item_content">
                 <div class="shipGrid_item_content_title maxLine_1">
@@ -28,23 +34,38 @@
                     </div>
                 </div>
                 @php
-                    /* xây dựng mảng price */
+                    /* filter */
+                    $arrayDeparture     = [];
                     $arrayPrice         = [
                         'price_adult'   => [], 
                         'price_child'   => [], 
                         'price_old'     => [], 
                         'price_vip'     => []
                     ];
-                    $arrayPrice['price_adult'][] = $price->price_adult;
-                    $arrayPrice['price_child'][] = $price->price_child;
-                    $arrayPrice['price_old'][] = $price->price_old;
-                    if(!empty($price->price_vip)) $arrayPrice['price_vip'][] = $price->price_vip;
-                    /* xây dựng mảng time */
-                    $arrayDeparture     = [];
-                    foreach($price->times as $time){
-                        $arrayDeparture[$time->ship_from_sort.'-'.$time->ship_to_sort][] = $time->time_departure;
-                        /* sắp xếp mỗi lần thêm vào mảng */
-                        sort($arrayDeparture[$time->ship_from_sort.'-'.$time->ship_to_sort]);
+                    foreach($item->prices as $price){
+                        /* xây dựng mảng price */
+                        if(!in_array($price->price_adult, $arrayPrice['price_adult'])) {
+                            $arrayPrice['price_adult'][] = $price->price_adult;
+                            sort($arrayPrice['price_adult']);
+                        }
+                        if(!in_array($price->price_child, $arrayPrice['price_child'])) {
+                            $arrayPrice['price_child'][] = $price->price_child;
+                            sort($arrayPrice['price_child']);
+                        }
+                        if(!in_array($price->price_old, $arrayPrice['price_old'])) {
+                            $arrayPrice['price_old'][] = $price->price_old;
+                            sort($arrayPrice['price_old']);
+                        }
+                        if(!in_array($price->price_vip, $arrayPrice['price_vip'])) {
+                            if(!empty($price->price_vip)) $arrayPrice['price_vip'][] = $price->price_vip;
+                            sort($arrayPrice['price_vip']);
+                        }
+                        /* xây dựng mảng time */
+                        foreach($price->times as $time){
+                            $arrayDeparture[$time->ship_from_sort.'-'.$time->ship_to_sort][] = $time->time_departure;
+                            /* sắp xếp mỗi lần thêm vào mảng */
+                            sort($arrayDeparture[$time->ship_from_sort.'-'.$time->ship_to_sort]);
+                        }
                     }
                 @endphp
                 @foreach($arrayDeparture as $key => $value)
@@ -118,6 +139,6 @@
                 </div>
             </div>
         </div>
-        @endforeach
+        @endif
     @endforeach
  </div>

@@ -6,7 +6,7 @@
     <div class="pageContent">
         <div class="container">
             <!-- title -->
-            <h1 class="titlePage">Tàu cao tốc Phú Quốc - Vé tàu Phú Quốc</h1>
+            <h1 class="titlePage">{{ $item->name }}{{ !empty($item->district->district_name) ? ' - Vé tàu '.$item->district->district_name : null}}</h1>
             <!-- rating -->
             <div class="ratingBox">
                 <div class="ratingBox_star">
@@ -22,7 +22,7 @@
             </div>
             <!-- ship box -->
             <div class="spaceBetweenBox">
-                @include('main.shipLocation.shipGrid', ['list' => $item->ships])
+                @include('main.shipLocation.shipGridMerge', ['list' => $item->ships])
             </div>
             
             <div class="pageContent_body">
