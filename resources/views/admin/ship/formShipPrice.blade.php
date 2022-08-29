@@ -97,10 +97,8 @@
                         <option value="0">- Lựa chọn -</option>
                             @if(!empty($shipInfo->location))
                                 @php
-                                    $locationName   = $shipInfo->location->district->district_name ?? $shipInfo->location->province->province_name;
-                                    $departureName  = $shipInfo->departure->district->district_name ?? $shipInfo->departure->province->province_name;
-                                    $nameTrip       = $departureName.' - '.$locationName;
-                                    $nameRound      = $locationName.' - '.$departureName;
+                                    $nameTrip       = $shipInfo->portDeparture->name.' - '.$shipInfo->portLocation->name;
+                                    $nameRound      = $shipInfo->portLocation->name.' - '.$shipInfo->portDeparture->name;
                                 @endphp
                                 <option value="{{ $nameTrip }}">{{ $nameTrip }}</option>
                                 <option value="{{ $nameRound }}">{{ $nameRound }}</option>
