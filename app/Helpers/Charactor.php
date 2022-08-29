@@ -8,7 +8,7 @@ class Charactor {
         $arr    = array_merge(range(0,9),range('A','Z'));
         $str    = implode('', $arr);
         $str    = str_shuffle($str);
-        $result = substr($str, 0, $length);
+        $result = mb_substr($str, 0, $length);
         return $result;
     }
 

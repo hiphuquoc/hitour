@@ -522,16 +522,16 @@ class BuildInsertUpdateModel {
                 $result[$i]['name']             = $dataForm['string_from_to'][$i];
                 $arrFromTo                      = explode('-', $dataForm['string_from_to'][$i]);
                 $from                           = trim($arrFromTo[0]);
-                $result[$i]['ship_from']            = $from;
+                $result[$i]['ship_from']        = $from;
                 $fromSort                       = null;
                 $tmp                            = explode(' ', $from);
-                foreach($tmp as $t) $fromSort   .= strtoupper(substr($t, 0, 1));
+                foreach($tmp as $t) $fromSort   .= strtoupper(mb_substr($t, 0, 1));
                 $result[$i]['ship_from_sort']   = $fromSort;
                 $to                             = trim($arrFromTo[1]);
                 $result[$i]['ship_to']          = $to;
                 $toSort                         = null;
                 $tmp                            = explode(' ', $to);
-                foreach($tmp as $t) $toSort     .= strtoupper(substr($t, 0, 1));
+                foreach($tmp as $t) $toSort     .= strtoupper(mb_substr($t, 0, 1));
                 $result[$i]['ship_to_sort']     = $toSort;
             }
         }
