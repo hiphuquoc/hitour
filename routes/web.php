@@ -31,6 +31,7 @@ use App\Http\Controllers\AdminGalleryController;
 use App\Http\Controllers\MainHomeController;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\ShipController;
+use App\Http\Controllers\BookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -169,6 +170,10 @@ Route::prefix('admin')->group(function(){
             Route::post('/updatePrice', [AdminShipPriceController::class, 'updatePrice'])->name('admin.shipPrice.updatePrice');
             Route::post('/deletePrice', [AdminShipPriceController::class, 'deletePrice'])->name('admin.shipPrice.deletePrice');
         });
+        // /* ===== SHIP BOOKING ===== */
+        // Route::prefix('shipBooking')->group(function(){
+        //     Route::get('/', [AdminShipController::class, 'list'])->name('admin.ship.index');
+        // });
         /* ===== STAFF ===== */
         Route::prefix('staff')->group(function(){
             Route::get('/', [AdminStaffController::class, 'list'])->name('admin.staff.list');
@@ -207,8 +212,12 @@ Route::prefix('admin')->group(function(){
 });
 
 Route::get('/', [MainHomeController::class, 'home'])->name('main.home');
-
+/* ===== SHIP BOOKING ===== */
+Route::prefix('booking')->group(function(){
+    Route::get('/shipBookingForm', [BookingController::class, 'shipBookingForm'])->name('main.booking.shipBookingForm');
+    Route::post('/handleShipBookingForm', [BookingController::class, 'handleShipBookingForm'])->name('main.booking.handleShipBookingForm');
+});
+/* ===== TOC CONTENT ===== */
 Route::post('/loadTocContent', [ShipController::class, 'loadTocContent'])->name('main.ship.loadTocContent');
-
-
+/* ===== ROUTING ALL ===== */
 Route::get("/{slug}/{slug2?}/{slug3?}/{slug4?}/{slug5?}", [RoutingController::class, 'routing'])->name('routing');

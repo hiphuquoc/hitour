@@ -1624,4 +1624,292 @@ blockquote{
         }
     }
 }
+.bookingForm {
+    display: flex;
+    flex-direction: column;
+    &_item {
+        width: 100%;
+        &:not(:first-child){
+            margin-top: 2rem;
+        }
+        &_head {
+            font-size: 1.2rem;
+            font-family: $font-primary-title;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        &_body {
+            
+        }
+    }
+    .chooseTripBox {
+        margin-top: 0.5rem;
+        display: flex;
+        &_item {
+            width: 100%;
+            max-width: 120px;
+            border: 1px solid $bg-04;
+            padding: 0.25rem 1rem;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            &:not(:first-child){
+                border-left: 1px solid $bg-04;
+            }
+            &:hover {
+                background: $color-primary-03;
+            }
+            &.active {
+                background: linear-gradient(90deg, $color-primary 0, $color-primary-hover 100%);
+                color: #fff;
+            }
+        }
+    }
+}
+.formBox {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    &_full {
+        width: 100%;
+        &_item {
+            width: inherit;
+            &:not(:first-child){
+                margin-top: 0.75rem;
+            }
+        }
+    }
+}
+.inputRequired {
+    &:after {
+        margin-left: 0.5rem;
+        content: '*';
+        color: $color-price;
+        font-weight: bold;
+    }
+}
+.flexBox {
+    display: flex;
+    &:not(:first-child){
+        margin-top: 1.2rem;
+    }
+    &_item {
+        width: 100%;
+        &:not(:first-child){
+            margin-left: 1rem;
+        }
+    }
+}
+.inputWithIcon {
+    position: relative;
+    &:after {
+        @include fontAwesome;
+        position: absolute;
+        right: 0.25rem;
+        top: 50%;
+        transform: translateX(-50%);
+        color: $color-primary-06;
+        font-size: 0.95rem;
+    }
+    &.email {
+        &:after {
+            content: "\f0e0";
+        }
+    }
+    &.phone {
+        &:after {
+            content: "\f095";
+        }
+    }
+    &.location {
+        &:after {
+            content: "\f3c5";
+        }
+    }
+    &.date {
+        &:after {
+            content: "\f073";
+        }
+    }  
+    &.adult {
+        &:after {
+            content: "\f183";
+            font-size: 1.1rem;
+        }
+    }  
+    &.child {
+        &:after {
+            content: "\f1ae";
+            font-size: 1.1rem;
+        }
+    } 
+    &.old {
+        &:after {
+            content: "\e53c";
+            font-size: 1.1rem;
+        }
+    } 
+    &.message {
+        &:after {
+            content: "\f4ad";
+            font-size: 1.1rem;
+        }
+    }
+}
+.chooseDepartureShipBox {
+    margin-top: 0.75rem;
+    &_head {
+        &_month {
+            width: 100%;
+            border-bottom: 1px solid $bg-05;
+            position: relative;
+            margin-bottom: 1rem;
+            &:before, &:after {
+                content: "|";
+                position: absolute;
+                top: -5px;
+                color: $bg-05;
+            }
+            &:before {
+                left: -2px;
+            }
+            &:after {
+                right: -2px;
+            }
+            > span {
+                font-weight: 700;
+                margin: 0 auto;
+                position: absolute;
+                top: -1rem;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #fff;
+                padding: 0 1rem;
+            }
+        }
+        &_listDay {
+            display: flex;
+            font-size: 0.9rem;
+            &_item {
+                width: 100%;
+                text-align: center;
+                padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+                border-radius: 5px 5px 0 0;
+                &.active {
+                    background: $color-secondary-04;
+                }
+                &_price {
+                    font-weight: 500;
+                    color: $color-red;
+                }
+            }
+        }
+        &_detailDay {
+            width: 100%;
+            background: $color-secondary-04;
+            font-weight: 700;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+    }
+    &_body {
+        font-size: 0.95rem;
+        &_item {
+            display: flex;
+            border: 1px solid $bg-04;
+            margin-top: 0.75rem;
+            border-radius: 5px;
+            > * {
+                padding: 0.25rem 1rem;
+                &:not(:first-child){
+                    border-left: 1px solid $bg-04;
+                }
+            }
+            &_departure {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                > * {
+                    text-align: center;
+                }
+                &_time {
+                    flex: 0 0 50px;
+                    .highLight {
+                        font-weight: 700;
+                        font-size: 1.2rem;
+                        color: $color-primary-hover;
+
+                    }
+                }
+                &_brand {
+                    width: 100%;
+                    min-width: 150px;
+                    i {
+                        font-size: 0.9rem;
+                    }
+                    .highLight {
+                        font-weight: 700;
+                    }
+                }
+            }
+            &_typeEco, &_typeVip {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                line-height: 1.5;
+                &:hover, &.active {
+                    background: $color-primary-03;
+                }
+                > input {
+                    width: 15px;
+                    margin-right: 1rem;
+                }
+                .highLight {
+                    font-weight: 700;
+                }
+            }
+            &_typeVip {
+                
+            }
+        }
+    }
+}
+.shipBookingTotalBox {
+    font-size: 0.95rem;
+    &_row {
+        &:not(:first-child){
+            margin-top: 0.3rem;
+            padding-top: 0.3rem;
+            border-top: 1px solid $bg-04;
+        }
+        table {
+            width: 100%;
+            tr {
+                th, td {
+                    padding: 0.25rem 0;
+                }
+                &:not(:first-child){
+                    th, td {
+                        border-top: 1px dashed $bg-04;
+                    }
+                }
+            }
+        }
+        i {
+            margin-right: 0.25rem;
+            color: $bg-07;
+        }
+        .highLight {
+            font-family: $font-primary-title;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: $bg-08;
+            letter-spacing: 0.3px;
+        }
+    }
+}
 /* ===== END: Page Ship */

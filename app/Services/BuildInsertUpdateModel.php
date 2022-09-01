@@ -69,6 +69,7 @@ class BuildInsertUpdateModel {
         if(!empty($dataForm)){
             $result['name']                 = $dataForm['title'] ?? null;
             $result['description']          = $dataForm['description'] ?? null;
+            $result['display_name']         = $dataForm['display_name'] ?? null;
             if(!empty($pageId)) $result['seo_id'] = $pageId;
             $result['region_id']            = $dataForm['region'];
             $result['island']               = !empty($dataForm['island']) ? 1 : 0;
@@ -90,6 +91,7 @@ class BuildInsertUpdateModel {
         if(!empty($dataForm)){
             $result['name']                 = $dataForm['title'] ?? null;
             $result['description']          = $dataForm['description'] ?? null;
+            $result['display_name']         = $dataForm['display_name'] ?? null;
             if(!empty($pageId)) $result['seo_id'] = $pageId;
             $result['region_id']            = $dataForm['region'];
             $result['province_id']          = $dataForm['province'] ?? null;
@@ -177,6 +179,7 @@ class BuildInsertUpdateModel {
         if(!empty($dataForm)){
             $result['name']                 = $dataForm['title'] ?? null;
             $result['description']          = $dataForm['description'] ?? null;
+            $result['display_name']         = $dataForm['display_name'] ?? null;
             if(!empty($pageId)) $result['seo_id'] = $pageId;
             $result['region_id']            = $dataForm['region'];
             $result['province_id']          = $dataForm['province'] ?? null;
@@ -197,6 +200,7 @@ class BuildInsertUpdateModel {
         if(!empty($dataForm)){
             $result['name']                 = $dataForm['title'] ?? null;
             $result['description']          = $dataForm['description'] ?? null;
+            $result['display_name']         = $dataForm['display_name'] ?? null;
             if(!empty($pageId)) $result['seo_id'] = $pageId;
             $result['region_id']            = $dataForm['region'];
             $result['province_id']          = $dataForm['province'] ?? null;

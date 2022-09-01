@@ -46,10 +46,11 @@ class AdminShipDepartureController extends Controller {
                             ->first();
         $provinces      = Province::getItemByIdRegion($item->region_id ?? 0);
         $districts      = District::getItemByIdProvince($item->province_id ?? 0);
+        $content        = Storage::get(config('admin.storage.contentShipDeparture').$item->seo->slug.'.blade.php');
         $message        = $request->get('message') ?? null; 
         $type           = !empty($item) ? 'edit' : 'create';
         $type           = $request->get('type') ?? $type;
-        return view('admin.shipDeparture.view', compact('item', 'type', 'provinces', 'districts', 'message'));
+        return view('admin.shipDeparture.view', compact('item', 'type', 'content', 'provinces', 'districts', 'message'));
     }
 
     public function create(ShipDepartureRequest $request){
@@ -68,7 +69,7 @@ class AdminShipDepartureController extends Controller {
             $insertShipDeparture    = $this->BuildInsertUpdateModel->buildArrayTableShipDeparture($request->all(), $pageId);
             $idShipDeparture        = ShipDeparture::insertItem($insertShipDeparture);
             /* lưu content vào file */
-            // Storage::put(config('admin.storage.contentShipDeparture').$request->get('slug').'.blade.php', $request->get('content'));
+            Storage::put(config('admin.storage.contentShipDeparture').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
@@ -113,7 +114,7 @@ class AdminShipDepartureController extends Controller {
             $updateShipDeparture    = $this->BuildInsertUpdateModel->buildArrayTableShipDeparture($request->all());
             ShipDeparture::updateItem($request->get('ship_departure_id'), $updateShipDeparture);
             /* lưu content vào file */
-            // Storage::put(config('admin.storage.contentShipDeparture').$request->get('slug').'.blade.php', $request->get('content'));
+            Storage::put(config('admin.storage.contentShipDeparture').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name               = !empty($request->get('slug')) ? $request->get('slug') : time();

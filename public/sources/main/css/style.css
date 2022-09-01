@@ -192,8 +192,54 @@ button i {
   }
 }
 
-input {
+label {
+  font-size: 0.95rem;
+}
+
+input, textarea {
+  font-size: 1rem;
   font-family: "Roboto", sans-serif;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 123, 255, 0.4);
+  padding: 0.6rem 1rem;
+  outline: none;
+}
+
+.select2-container--default .select2-selection--single {
+  border: 1px solid rgba(0, 123, 255, 0.4) !important;
+  border-radius: 5px !important;
+  height: 40px !important;
+  padding: 0.3rem 0.5rem !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  display: none;
+}
+.select2-container--default .select2-results > .select2-results__options {
+  width: 100%;
+  overflow-y: scroll;
+  font-size: 0.95rem;
+}
+.select2-container--default .select2-results > .select2-results__options::-webkit-scrollbar {
+  background-color: transparent;
+  width: 7px;
+}
+.select2-container--default .select2-results > .select2-results__options::-webkit-scrollbar-thumb {
+  background-color: #adb5bd;
+  border-radius: 1000px;
+  -webkit-box-shadow: inset 0 0 6px #dee2e6;
+}
+.select2-container--default .select2-results > .select2-results__options::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #dee2e6;
+  border-radius: 10px;
+  background: transparent;
+}
+
+.select2-search--dropdown {
+  padding: 0.6rem !important;
+}
+.select2-search--dropdown .select2-search__field {
+  padding: 0.5rem !important;
 }
 
 .headerTop {
@@ -1734,6 +1780,268 @@ blockquote em {
 .shipPartnerBox_item_content_desc {
   font-size: 0.95rem;
   color: #567;
+}
+
+.bookingForm {
+  display: flex;
+  flex-direction: column;
+}
+.bookingForm_item {
+  width: 100%;
+}
+.bookingForm_item:not(:first-child) {
+  margin-top: 2rem;
+}
+.bookingForm_item_head {
+  font-size: 1.2rem;
+  font-family: "Roboto Slab", serif;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.bookingForm .chooseTripBox {
+  margin-top: 0.5rem;
+  display: flex;
+}
+.bookingForm .chooseTripBox_item {
+  width: 100%;
+  max-width: 120px;
+  border: 1px solid #dee2e6;
+  padding: 0.25rem 1rem;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.bookingForm .chooseTripBox_item:not(:first-child) {
+  border-left: 1px solid #dee2e6;
+}
+.bookingForm .chooseTripBox_item:hover {
+  background: rgba(0, 123, 255, 0.3);
+}
+.bookingForm .chooseTripBox_item.active {
+  background: linear-gradient(90deg, rgb(0, 123, 255) 0, rgb(0, 90, 180) 100%);
+  color: #fff;
+}
+
+.formBox {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.formBox_full {
+  width: 100%;
+}
+.formBox_full_item {
+  width: inherit;
+}
+.formBox_full_item:not(:first-child) {
+  margin-top: 0.75rem;
+}
+
+.inputRequired:after {
+  margin-left: 0.5rem;
+  content: "*";
+  color: #fd5056;
+  font-weight: bold;
+}
+
+.flexBox {
+  display: flex;
+}
+.flexBox:not(:first-child) {
+  margin-top: 1.2rem;
+}
+.flexBox_item {
+  width: 100%;
+}
+.flexBox_item:not(:first-child) {
+  margin-left: 1rem;
+}
+
+.inputWithIcon {
+  position: relative;
+}
+.inputWithIcon:after {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  right: 0.25rem;
+  top: 50%;
+  transform: translateX(-50%);
+  color: rgba(0, 123, 255, 0.6);
+  font-size: 0.95rem;
+}
+.inputWithIcon.email:after {
+  content: "\f0e0";
+}
+.inputWithIcon.phone:after {
+  content: "\f095";
+}
+.inputWithIcon.location:after {
+  content: "\f3c5";
+}
+.inputWithIcon.date:after {
+  content: "\f073";
+}
+.inputWithIcon.adult:after {
+  content: "\f183";
+  font-size: 1.1rem;
+}
+.inputWithIcon.child:after {
+  content: "\f1ae";
+  font-size: 1.1rem;
+}
+.inputWithIcon.old:after {
+  content: "\e53c";
+  font-size: 1.1rem;
+}
+.inputWithIcon.message:after {
+  content: "\f4ad";
+  font-size: 1.1rem;
+}
+
+.chooseDepartureShipBox {
+  margin-top: 0.75rem;
+}
+.chooseDepartureShipBox_head_month {
+  width: 100%;
+  border-bottom: 1px solid #ced4da;
+  position: relative;
+  margin-bottom: 1rem;
+}
+.chooseDepartureShipBox_head_month:before, .chooseDepartureShipBox_head_month:after {
+  content: "|";
+  position: absolute;
+  top: -5px;
+  color: #ced4da;
+}
+.chooseDepartureShipBox_head_month:before {
+  left: -2px;
+}
+.chooseDepartureShipBox_head_month:after {
+  right: -2px;
+}
+.chooseDepartureShipBox_head_month > span {
+  font-weight: 700;
+  margin: 0 auto;
+  position: absolute;
+  top: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  padding: 0 1rem;
+}
+.chooseDepartureShipBox_head_listDay {
+  display: flex;
+  font-size: 0.9rem;
+}
+.chooseDepartureShipBox_head_listDay_item {
+  width: 100%;
+  text-align: center;
+  padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+  border-radius: 5px 5px 0 0;
+}
+.chooseDepartureShipBox_head_listDay_item.active {
+  background: rgba(244, 208, 63, 0.4);
+}
+.chooseDepartureShipBox_head_listDay_item_price {
+  font-weight: 500;
+  color: #E74C3C;
+}
+.chooseDepartureShipBox_head_detailDay {
+  width: 100%;
+  background: rgba(244, 208, 63, 0.4);
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+.chooseDepartureShipBox_body {
+  font-size: 0.95rem;
+}
+.chooseDepartureShipBox_body_item {
+  display: flex;
+  border: 1px solid #dee2e6;
+  margin-top: 0.75rem;
+  border-radius: 5px;
+}
+.chooseDepartureShipBox_body_item > * {
+  padding: 0.25rem 1rem;
+}
+.chooseDepartureShipBox_body_item > *:not(:first-child) {
+  border-left: 1px solid #dee2e6;
+}
+.chooseDepartureShipBox_body_item_departure {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.chooseDepartureShipBox_body_item_departure > * {
+  text-align: center;
+}
+.chooseDepartureShipBox_body_item_departure_time {
+  flex: 0 0 50px;
+}
+.chooseDepartureShipBox_body_item_departure_time .highLight {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: rgb(0, 90, 180);
+}
+.chooseDepartureShipBox_body_item_departure_brand {
+  width: 100%;
+  min-width: 150px;
+}
+.chooseDepartureShipBox_body_item_departure_brand i {
+  font-size: 0.9rem;
+}
+.chooseDepartureShipBox_body_item_departure_brand .highLight {
+  font-weight: 700;
+}
+.chooseDepartureShipBox_body_item_typeEco, .chooseDepartureShipBox_body_item_typeVip {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  line-height: 1.5;
+}
+.chooseDepartureShipBox_body_item_typeEco:hover, .chooseDepartureShipBox_body_item_typeEco.active, .chooseDepartureShipBox_body_item_typeVip:hover, .chooseDepartureShipBox_body_item_typeVip.active {
+  background: rgba(0, 123, 255, 0.3);
+}
+.chooseDepartureShipBox_body_item_typeEco > input, .chooseDepartureShipBox_body_item_typeVip > input {
+  width: 15px;
+  margin-right: 1rem;
+}
+.chooseDepartureShipBox_body_item_typeEco .highLight, .chooseDepartureShipBox_body_item_typeVip .highLight {
+  font-weight: 700;
+}
+.shipBookingTotalBox {
+  font-size: 0.95rem;
+}
+.shipBookingTotalBox_row:not(:first-child) {
+  margin-top: 0.3rem;
+  padding-top: 0.3rem;
+  border-top: 1px solid #dee2e6;
+}
+.shipBookingTotalBox_row table {
+  width: 100%;
+}
+.shipBookingTotalBox_row table tr th, .shipBookingTotalBox_row table tr td {
+  padding: 0.25rem 0;
+}
+.shipBookingTotalBox_row table tr:not(:first-child) th, .shipBookingTotalBox_row table tr:not(:first-child) td {
+  border-top: 1px dashed #dee2e6;
+}
+.shipBookingTotalBox_row i {
+  margin-right: 0.25rem;
+  color: #6c757d;
+}
+.shipBookingTotalBox_row .highLight {
+  font-family: "Roboto Slab", serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #495057;
+  letter-spacing: 0.3px;
 }
 
 /* ===== END: Page Ship */

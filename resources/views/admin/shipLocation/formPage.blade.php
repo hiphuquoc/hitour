@@ -80,6 +80,12 @@
                 @endif
             </select>
         </div>
+        <!-- One Row -->
+        <div class="formBox_full_item">
+            <label class="form-label inputRequired" for="display_name">Tên hiển thị</label>
+            <input type="text" class="form-control" id="display_name" name="display_name" value="{{ old('display_name') ?? $item->display_name ?? '' }}" required>
+            <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
+        </div>
     </div>
 </div>
 
