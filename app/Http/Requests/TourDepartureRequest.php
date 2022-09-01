@@ -30,6 +30,7 @@ class TourDepartureRequest extends FormRequest
             'ordering'                  => 'min:0',
             'seo_title'                 => 'required',
             'seo_description'           => 'required',
+            'display_name'              => 'required',
             'slug'                      => [
                 'required',
                 function($attribute, $value, $fail){
@@ -58,7 +59,8 @@ class TourDepartureRequest extends FormRequest
         return [
             'title.required'            => 'Tiêu đề trang không được để trống!',
             'title.max'                 => 'Tiêu đề trang không được vượt quá 255 ký tự!',
-            'description'               => 'Mô tả trang không được để trống!',
+            'description.required'      => 'Mô tả trang không được để trống!',
+            'display_name.required'     => 'Tên hiển thị không được để trống!',
             'ordering.min'              => 'Giá trị không được nhỏ hơn 0!',
             'seo_title.required'        => 'Tiêu đề SEO không được để trống!',
             'seo_description.required'  => 'Mô tả SEO không được để trống!',
