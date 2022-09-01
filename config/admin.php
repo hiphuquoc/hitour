@@ -98,6 +98,7 @@ return [
         'contentTourDeparture'  => 'public/contents/tourDepartures/',
         'contentShip'           => 'public/contents/ships/',
         'contentShipLocation'   => 'public/contents/shipLocations/',
+        'contentShipDeparture'  => 'public/contents/shipDepartures/',
         'contentShipPartner'    => 'public/contents/shipPartners/'
     ],
 
