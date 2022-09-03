@@ -11,7 +11,7 @@
 
     @include('main.snippets.breadcrumb')
 
-    <form id="formBooking" action="{{ route('main.booking.handleShipBookingForm') }}" method="POST">
+    <form id="formBooking" action="{{ route('main.shipBooking.handle') }}" method="POST">
     @csrf
     <div class="pageContent">
         <div class="container">
@@ -72,25 +72,25 @@
                                     <div class="formBox_full_item">
                                         <div class="flexBox">
                                             <div class="flexBox_item inputWithIcon location">
-                                                <label class="form-label inputRequired" for="ship_departure_id">Điểm đi</label>
-                                                <select class="select2 form-select select2-hidden-accessible" name="ship_departure_id">
+                                                <label class="form-label inputRequired" for="ship_port_departure_id">Điểm khởi hành</label>
+                                                <select class="select2 form-select select2-hidden-accessible" name="ship_port_departure_id" onChange="loadShipLocationByShipDeparture(this, 'js_loadShipLocationByShipDeparture_idWrite');">
                                                     <option value="0">- Lựa chọn -</option>
-                                                    @if(!empty($locations))
-                                                        @foreach($locations as $location)
+                                                    @if(!empty($ports))
+                                                        @foreach($ports as $port)
                                                             @php
                                                                 $selected   = null;
-                                                                // if(!empty($item->ship_port_departure_id)&&$item->ship_port_departure_id==$shipDeparture->id) $selected = 'selected';
+                                                                $portFull   = \App\Helpers\Build::buildFullShipPort($port);
                                                             @endphp
-                                                            <option value="{{ $location->id }}"{{ $selected }}>
-                                                                {{ $location->district->district_name ?? '-' }}, {{ $location->province->province_name ?? '-' }}
+                                                            <option value="{{ $port->id }}"{{ $selected }}>
+                                                                {!! $portFull !!}
                                                             </option>
                                                         @endforeach
                                                     @endif
                                                 </select>
                                             </div>
                                             <div class="flexBox_item inputWithIcon location">
-                                                <label class="form-label inputRequired" for="ship_location_id">Điểm đến</label>
-                                                <select class="select2 form-select select2-hidden-accessible" name="ship_location_id">
+                                                <label class="form-label inputRequired" for="ship_port_location_id">Điểm đến</label>
+                                                <select id="js_loadShipLocationByShipDeparture_idWrite" class="select2 form-select select2-hidden-accessible" name="ship_port_location_id">
                                                     <option value="0">- Lựa chọn -</option>
                                                 </select>
                                             </div>
@@ -115,9 +115,13 @@
                                                 <label class="form-label inputRequired" for="date">Ngày đi</label>
                                                 <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date" placeholder="YYYY-MM-DD" readonly="readonly">
                                             </div>
-                                            <div class="flexBox_item inputWithIcon date">
-                                                <label class="form-label inputRequired" for="date_round">Ngày về</label>
-                                                <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date_round" placeholder="YYYY-MM-DD" readonly="readonly">
+                                            <div class="flexBox_item">
+                                                <div id="js_filterForm_dateRound">
+                                                    <div class="inputWithIcon date">
+                                                        <label class="form-label inputRequired" for="date_round">Ngày về</label>
+                                                        <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date_round" placeholder="YYYY-MM-DD" readonly="readonly">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -138,80 +142,22 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        @for($k=0;$k<2;++$k)
-                        <div class="bookingForm_item">
-                            <div class="bookingForm_item_head">
-                                Chuyến Rạch Giá - Phú Quốc
-                            </div>
-                            <div class="bookingForm_item_body">
-                                <div class="formBox">
-                                    <div class="formBox_full">
-                                        <!-- One Row -->
-                                        <div class="formBox_full_item">
-                                            <div class="chooseDepartureShipBox">
-                                                <div class="chooseDepartureShipBox_head">
-                                                    <div class="chooseDepartureShipBox_head_month">
-                                                        <span>Tháng 9/2022</span>
-                                                    </div>
-                                                    <div class="chooseDepartureShipBox_head_listDay">
-                                                        @for($i=0;$i<7;++$i)
-                                                            @php
-                                                                $active = $i==3 ? ' active' : '';
-                                                            @endphp
-                                                            <div class="chooseDepartureShipBox_head_listDay_item{{ $active }}">
-                                                                <div class="chooseDepartureShipBox_head_listDay_item_day">Thứ Ba, 20/09</div>
-                                                                <div class="chooseDepartureShipBox_head_listDay_item_price">340,000<sup>đ</sup></div>
-                                                            </div>
-                                                        @endfor
-                                                    </div>
-                                                    <div class="chooseDepartureShipBox_head_detailDay">
-                                                        Thứ 3, ngày 20/09/2022
-                                                    </div>
-                                                </div>
-                                                <div id="js_checkedInput_idSearch" class="chooseDepartureShipBox_body">
-                                                    @for($i=0;$i<4;++$i)
-                                                    <div class="chooseDepartureShipBox_body_item">
-                                                        <div class="chooseDepartureShipBox_body_item_departure">
-                                                            <div class="chooseDepartureShipBox_body_item_departure_time">
-                                                                <div class="highLight">17:30</div>
-                                                                <div>RG</div>
-                                                            </div>
-                                                            <div class="chooseDepartureShipBox_body_item_departure_brand">
-                                                                <div class="highLight">Phú Quốc Express</div>
-                                                                <div><i class="fa-solid fa-arrow-right-long"></i> 2h 30m</div>
-                                                            </div>
-                                                            <div class="chooseDepartureShipBox_body_item_departure_time">
-                                                                <div class="highLight">19:30</div>
-                                                                <div>PQ</div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="chooseDepartureShipBox_body_item_typeEco" onClick="checkedInput('js_checkedInput_idSearch', this);">
-                                                            <input type="radio" name="test" />
-                                                            <div>
-                                                                <div><span class="highLight">340,000<sup>đ</sup></span> /Người lớn</div>
-                                                                <div><span class="highLight">270,000<sup>đ</sup></span> /Trẻ em</div>
-                                                                <div><span class="highLight">270,000<sup>đ</sup></span> /Cao tuổi</div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="chooseDepartureShipBox_body_item_typeVip" onClick="checkedInput('js_checkedInput_idSearch', this);">
-                                                            <input type="radio" name="test" />
-                                                            <div><span class="highLight">540,000<sup>đ</sup></span> /Vip</div>
-                                                        </div>
-                                                    </div>
-                                                    @endfor
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <!-- One Row -->
+                                    <div class="formBox_full_item">
+                                        <div onClick="loadDeparture();">text function</div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
-                        @endfor
+                        <!-- Departture 1 -->
+                        <div id="js_loadDeparture_dp1" class="bookingForm_item">
+
+                        </div>
+                        <!-- Departture 2 -->
+                        <div id="js_loadDeparture_dp2" class="bookingForm_item">
+                            
+                        </div>
                     </div>
 
                 </div>
@@ -258,6 +204,12 @@
             $('#'+idForm).submit();
         }
 
+        function chooseDeparture(elemt, code, time, typeTicket){
+            $('#js_chooseDeparture_dp'+code).val(time+'-'+typeTicket);
+            $(document).find('.option').removeClass('active');
+            $(elemt).addClass('active');
+        }
+
         function checkedInput(idSearch, elemt){
             $('#'+idSearch).find('input[type=radio]').each(function(){
                 $(this).prop('checked', false);
@@ -265,6 +217,14 @@
             });
             $(elemt).find('input[type=radio]').prop('checked', true);
             $(elemt).addClass('active');
+        }
+
+        function filterForm(typeBooking){
+            if(typeBooking=='oneTrip'){
+                $('#js_filterForm_dateRound').hide();
+            }else {
+                $('#js_filterForm_dateRound').show();
+            }
         }
 
         function changeValueTypeBooking(elemtBtn, valueNew){
@@ -276,6 +236,60 @@
             /* thêm lại checked và class active cho button được chọn */
             $(elemtBtn).addClass('active');
             $('#type_booking').val(valueNew);
+            
+            if(valueNew==1){
+                /* filter form */
+                filterForm('oneTrip');
+                /* loadDeparture */
+            }else {
+                /* filter form */
+                filterForm('roundTrip');
+            }
+        }
+
+        function loadDeparture(){
+            const typeBooking           = $(document).find('[name=type_booking]').val();
+            const idPortShipDeparture   = $(document).find('[name=ship_port_departure_id]').val();
+            const idPortShipLocation    = $(document).find('[name=ship_port_location_id]').val();
+            const date                  = $(document).find('[name=date]').val();
+            const dateRound             = $(document).find('[name=date_round]').val();
+            if(date!=''&&idPortShipDeparture!=0&&idPortShipLocation!=0){
+                $.ajax({
+                    url         : '{{ route("main.shipBooking.loadDeparture") }}',
+                    type        : 'post',
+                    dataType    : 'json',
+                    data        : {
+                        '_token'        : '{{ csrf_token() }}',
+                        type_booking            : typeBooking,
+                        ship_port_departure_id  : idPortShipDeparture,
+                        ship_port_location_id   : idPortShipLocation,
+                        date                    : date,
+                        date_round              : dateRound
+                    },
+                    success     : function(data){
+                        const elemtDp1  = $('#js_loadDeparture_dp1');
+                        // console.log(elemtDp1);
+                        $('#js_loadDeparture_dp1').html(data.dp1);
+                    }
+                });
+            }
+            
+        }
+
+        function loadShipLocationByShipDeparture(element, idWrite){
+            const idShipPort = $(element).val();
+            $.ajax({
+                url         : '{{ route("main.shipBooking.loadShipLocation") }}',
+                type        : 'post',
+                dataType    : 'html',
+                data        : {
+                    '_token'        : '{{ csrf_token() }}',
+                    ship_port_id    : idShipPort
+                },
+                success     : function(data){
+                    $('#'+idWrite).html(data);
+                }
+            });
         }
     </script>
 @endpush

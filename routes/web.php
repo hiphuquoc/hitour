@@ -31,7 +31,7 @@ use App\Http\Controllers\AdminGalleryController;
 use App\Http\Controllers\MainHomeController;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\ShipController;
-use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ShipBookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -213,9 +213,11 @@ Route::prefix('admin')->group(function(){
 
 Route::get('/', [MainHomeController::class, 'home'])->name('main.home');
 /* ===== SHIP BOOKING ===== */
-Route::prefix('booking')->group(function(){
-    Route::get('/shipBookingForm', [BookingController::class, 'shipBookingForm'])->name('main.booking.shipBookingForm');
-    Route::post('/handleShipBookingForm', [BookingController::class, 'handleShipBookingForm'])->name('main.booking.handleShipBookingForm');
+Route::prefix('shipBooking')->group(function(){
+    Route::get('/form', [ShipBookingController::class, 'form'])->name('main.shipBooking.form');
+    Route::post('/handle', [ShipBookingController::class, 'handle'])->name('main.shipBooking.handle');
+    Route::post('/loadShipLocation', [ShipBookingController::class, 'loadShipLocation'])->name('main.shipBooking.loadShipLocation');
+    Route::post('/loadDeparture', [ShipBookingController::class, 'loadDeparture'])->name('main.shipBooking.loadDeparture');
 });
 /* ===== TOC CONTENT ===== */
 Route::post('/loadTocContent', [ShipController::class, 'loadTocContent'])->name('main.ship.loadTocContent');

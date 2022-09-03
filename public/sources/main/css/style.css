@@ -204,6 +204,7 @@ input, textarea {
   border: 1px solid rgba(0, 123, 255, 0.4);
   padding: 0.6rem 1rem;
   outline: none;
+  background: #fff !important;
 }
 
 .select2-container--default .select2-selection--single {
@@ -271,7 +272,7 @@ input, textarea {
   font-size: 1.6rem;
   margin-left: 0.5rem;
   letter-spacing: 0.5px;
-  color: #fcb000;
+  color: rgb(244, 208, 63);
   text-shadow: 1px 0.1px #333;
 }
 .headerTop_item_list {
@@ -1796,7 +1797,13 @@ blockquote em {
   font-size: 1.2rem;
   font-family: "Roboto Slab", serif;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+.bookingForm_item_body {
+  padding: 1rem;
+  background: #f8f9fa;
+  box-shadow: 0 0 5px #e9ecef;
+  border: 1px solid #e9ecef;
 }
 .bookingForm .chooseTripBox {
   margin-top: 0.5rem;
@@ -1902,125 +1909,88 @@ blockquote em {
   font-size: 1.1rem;
 }
 
-.chooseDepartureShipBox {
-  margin-top: 0.75rem;
-}
-.chooseDepartureShipBox_head_month {
-  width: 100%;
-  border-bottom: 1px solid #ced4da;
-  position: relative;
-  margin-bottom: 1rem;
-}
-.chooseDepartureShipBox_head_month:before, .chooseDepartureShipBox_head_month:after {
-  content: "|";
-  position: absolute;
-  top: -5px;
-  color: #ced4da;
-}
-.chooseDepartureShipBox_head_month:before {
-  left: -2px;
-}
-.chooseDepartureShipBox_head_month:after {
-  right: -2px;
-}
-.chooseDepartureShipBox_head_month > span {
-  font-weight: 700;
-  margin: 0 auto;
-  position: absolute;
-  top: -1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #fff;
-  padding: 0 1rem;
-}
-.chooseDepartureShipBox_head_listDay {
+.chooseDepartureShipBox_head {
   display: flex;
-  font-size: 0.9rem;
+  align-items: center;
+  background: #f8f9fa;
+  line-height: 1.5;
+  border: 1px solid #e9ecef;
+  border-radius: 5px;
 }
-.chooseDepartureShipBox_head_listDay_item {
+.chooseDepartureShipBox_head_item {
   width: 100%;
   text-align: center;
-  padding: 0.25rem 0.5rem 0.5rem 0.5rem;
-  border-radius: 5px 5px 0 0;
+  padding: 0.5rem;
 }
-.chooseDepartureShipBox_head_listDay_item.active {
-  background: rgba(244, 208, 63, 0.4);
-}
-.chooseDepartureShipBox_head_listDay_item_price {
-  font-weight: 500;
-  color: #E74C3C;
-}
-.chooseDepartureShipBox_head_detailDay {
-  width: 100%;
-  background: rgba(244, 208, 63, 0.4);
-  font-weight: 700;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-}
-.chooseDepartureShipBox_body {
-  font-size: 0.95rem;
-}
-.chooseDepartureShipBox_body_item {
-  display: flex;
-  border: 1px solid #dee2e6;
-  margin-top: 0.75rem;
-  border-radius: 5px;
-}
-.chooseDepartureShipBox_body_item > * {
-  padding: 0.25rem 1rem;
-}
-.chooseDepartureShipBox_body_item > *:not(:first-child) {
+.chooseDepartureShipBox_head_item:not(:first-child) {
   border-left: 1px solid #dee2e6;
 }
-.chooseDepartureShipBox_body_item_departure {
-  width: 100%;
+.chooseDepartureShipBox_head_item.active {
+  background: linear-gradient(90deg, rgb(0, 123, 255) 0, rgb(0, 90, 180) 100%);
+  color: #fff;
+}
+.chooseDepartureShipBox_head_item.active .chooseDepartureShipBox_head_item_price {
+  color: rgb(244, 208, 63);
+}
+.chooseDepartureShipBox_head_item_day {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.chooseDepartureShipBox_head_item_price {
+  color: rgb(0, 90, 180);
+  font-weight: 500;
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
+}
+.chooseDepartureShipBox_body_row {
   display: flex;
+  border-bottom: 1px solid #dee2e6;
   align-items: center;
 }
-.chooseDepartureShipBox_body_item_departure > * {
+.chooseDepartureShipBox_body_row_item {
+  width: 100%;
   text-align: center;
+  padding: 1.25rem 0.75rem;
 }
-.chooseDepartureShipBox_body_item_departure_time {
-  flex: 0 0 50px;
+.chooseDepartureShipBox_body_row_item .option {
+  line-height: 1.4;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid #dee2e6;
+  background: #f8f9fa;
+  border-radius: 5px;
+  cursor: pointer;
 }
-.chooseDepartureShipBox_body_item_departure_time .highLight {
-  font-weight: 700;
+.chooseDepartureShipBox_body_row_item .option.active, .chooseDepartureShipBox_body_row_item .option:hover {
+  background: linear-gradient(90deg, rgb(0, 123, 255) 0, rgb(0, 90, 180) 100%);
+  color: #fff;
+}
+.chooseDepartureShipBox_body_row_item .option.active .price, .chooseDepartureShipBox_body_row_item .option:hover .price {
+  color: rgb(244, 208, 63) !important;
+}
+.chooseDepartureShipBox_body_row_item .option .price {
+  color: rgb(0, 90, 180);
+  font-weight: 500;
   font-size: 1.2rem;
+  letter-spacing: 0.5px;
+}
+.chooseDepartureShipBox_body_row_item .highLight {
+  font-size: 1.2rem;
+  font-weight: 500;
   color: rgb(0, 90, 180);
 }
-.chooseDepartureShipBox_body_item_departure_brand {
-  width: 100%;
-  min-width: 150px;
+.chooseDepartureShipBox_body_row_item:first-child {
+  padding-left: 0 !important;
 }
-.chooseDepartureShipBox_body_item_departure_brand i {
-  font-size: 0.9rem;
+.chooseDepartureShipBox_body_row_item:last-child {
+  padding-right: 0 !important;
 }
-.chooseDepartureShipBox_body_item_departure_brand .highLight {
-  font-weight: 700;
-}
-.chooseDepartureShipBox_body_item_typeEco, .chooseDepartureShipBox_body_item_typeVip {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  line-height: 1.5;
-}
-.chooseDepartureShipBox_body_item_typeEco:hover, .chooseDepartureShipBox_body_item_typeEco.active, .chooseDepartureShipBox_body_item_typeVip:hover, .chooseDepartureShipBox_body_item_typeVip.active {
-  background: rgba(0, 123, 255, 0.3);
-}
-.chooseDepartureShipBox_body_item_typeEco > input, .chooseDepartureShipBox_body_item_typeVip > input {
-  width: 15px;
-  margin-right: 1rem;
-}
-.chooseDepartureShipBox_body_item_typeEco .highLight, .chooseDepartureShipBox_body_item_typeVip .highLight {
-  font-weight: 700;
-}
+
 .shipBookingTotalBox {
   font-size: 0.95rem;
 }
 .shipBookingTotalBox_row:not(:first-child) {
-  margin-top: 0.3rem;
-  padding-top: 0.3rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
   border-top: 1px solid #dee2e6;
 }
 .shipBookingTotalBox_row table {
