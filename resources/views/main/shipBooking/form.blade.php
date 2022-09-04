@@ -11,7 +11,7 @@
 
     @include('main.snippets.breadcrumb')
 
-    <form id="formBooking" action="{{ route('main.shipBooking.handle') }}" method="POST">
+    <form id="formBooking" action="{{ route('main.shipBooking.create') }}" method="POST">
     @csrf
     <div class="pageContent">
         <div class="container">
@@ -34,12 +34,12 @@
                                         <div class="formBox_full_item">
                                             <div class="flexBox">
                                                 <div class="flexBox_item">
-                                                    <label class="form-label inputRequired" for="customer_name">Họ và Tên</label>
-                                                    <input type="text" class="form-control" name="customer_name" value="" required>
+                                                    <label class="form-label inputRequired" for="name">Họ và Tên</label>
+                                                    <input type="text" class="form-control" name="name" value="" required>
                                                 </div>
                                                 <div class="flexBox_item inputWithIcon email">
-                                                    <label class="form-label" for="customer_email">Email (nếu có)</label>
-                                                    <input type="text" class="form-control" name="customer_email" value="">
+                                                    <label class="form-label" for="email">Email (nếu có)</label>
+                                                    <input type="text" class="form-control" name="email" value="">
                                                 </div>
                                             </div>
                                         </div>
@@ -47,12 +47,12 @@
                                         <div class="formBox_full_item">
                                             <div class="flexBox">
                                                 <div class="flexBox_item inputWithIcon phone">
-                                                    <label class="form-label inputRequired" for="customer_phone">Điện thoại</label>
-                                                    <input type="text" class="form-control" name="customer_phone" value="" required>
+                                                    <label class="form-label inputRequired" for="phone">Điện thoại</label>
+                                                    <input type="text" class="form-control" name="phone" value="" required>
                                                 </div>
                                                 <div class="flexBox_item inputWithIcon message">
-                                                    <label class="form-label" for="customer_zalo">Zalo (nếu có)</label>
-                                                    <input type="text" class="form-control" name="customer_zalo" value="">
+                                                    <label class="form-label" for="zalo">Zalo (nếu có)</label>
+                                                    <input type="text" class="form-control" name="zalo" value="">
                                                 </div>
                                             </div>
                                         </div>
@@ -113,13 +113,13 @@
                                         <div class="flexBox">
                                             <div class="flexBox_item inputWithIcon date">
                                                 <label class="form-label inputRequired" for="date">Ngày đi</label>
-                                                <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date" placeholder="YYYY-MM-DD" readonly="readonly">
+                                                <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date" placeholder="YYYY-MM-DD" readonly="readonly" onChange="loadDeparture(1);" required>
                                             </div>
                                             <div class="flexBox_item">
                                                 <div id="js_filterForm_dateRound">
                                                     <div class="inputWithIcon date">
                                                         <label class="form-label inputRequired" for="date_round">Ngày về</label>
-                                                        <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date_round" placeholder="YYYY-MM-DD" readonly="readonly">
+                                                        <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date_round" placeholder="YYYY-MM-DD" readonly="readonly" onChange="loadDeparture(2);" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -141,10 +141,6 @@
                                                 <input type="text" class="form-control" name="quantity_old" value="">
                                             </div>
                                         </div>
-                                    </div>
-                                    <!-- One Row -->
-                                    <div class="formBox_full_item">
-                                        <div onClick="loadDeparture();">text function</div>
                                     </div>
                                 </div>
 
@@ -201,12 +197,16 @@
         });
 
         function submitForm(idForm){
+            // event.preventDefault();
+            const error     = validateFormModal();
+            
+            console.log(error);
             $('#'+idForm).submit();
         }
 
         function chooseDeparture(elemt, code, time, typeTicket){
             $('#js_chooseDeparture_dp'+code).val(time+'-'+typeTicket);
-            $(document).find('.option').removeClass('active');
+            $(elemt).parent().parent().parent().find('.option').removeClass('active');
             $(elemt).addClass('active');
         }
 
@@ -222,8 +222,10 @@
         function filterForm(typeBooking){
             if(typeBooking=='oneTrip'){
                 $('#js_filterForm_dateRound').hide();
+                $('#js_loadDeparture_dp2').hide();
             }else {
                 $('#js_filterForm_dateRound').show();
+                $('#js_loadDeparture_dp2').show();
             }
         }
 
@@ -240,40 +242,47 @@
             if(valueNew==1){
                 /* filter form */
                 filterForm('oneTrip');
+                loadDeparture(1);
                 /* loadDeparture */
             }else {
                 /* filter form */
                 filterForm('roundTrip');
+                loadTwoDeparture();
             }
         }
 
-        function loadDeparture(){
+        function loadTwoDeparture(){
+            loadDeparture(1);
+            loadDeparture(2);
+        }
+
+        function loadDeparture(code){
             const typeBooking           = $(document).find('[name=type_booking]').val();
             const idPortShipDeparture   = $(document).find('[name=ship_port_departure_id]').val();
             const idPortShipLocation    = $(document).find('[name=ship_port_location_id]').val();
-            const date                  = $(document).find('[name=date]').val();
-            const dateRound             = $(document).find('[name=date_round]').val();
+            var date                    = '';
+            if(code==1){
+                date                    = $(document).find('[name=date]').val();
+            }else {
+                date                    = $(document).find('[name=date_round]').val();
+            }
             if(date!=''&&idPortShipDeparture!=0&&idPortShipLocation!=0){
                 $.ajax({
                     url         : '{{ route("main.shipBooking.loadDeparture") }}',
                     type        : 'post',
                     dataType    : 'json',
                     data        : {
-                        '_token'        : '{{ csrf_token() }}',
-                        type_booking            : typeBooking,
+                        '_token'                : '{{ csrf_token() }}',
+                        code                    : code,
                         ship_port_departure_id  : idPortShipDeparture,
                         ship_port_location_id   : idPortShipLocation,
-                        date                    : date,
-                        date_round              : dateRound
+                        date                    : date
                     },
                     success     : function(data){
-                        const elemtDp1  = $('#js_loadDeparture_dp1');
-                        // console.log(elemtDp1);
-                        $('#js_loadDeparture_dp1').html(data.dp1);
+                        $('#js_loadDeparture_dp'+code).html(data);
                     }
                 });
             }
-            
         }
 
         function loadShipLocationByShipDeparture(element, idWrite){
@@ -288,8 +297,26 @@
                 },
                 success     : function(data){
                     $('#'+idWrite).html(data);
+                    loadTwoDeparture();
                 }
             });
+        }
+
+        function validateFormModal(){
+            let error       = [];
+            /* input required không được bỏ trống */
+            $('#formBooking').find('input[required]').each(function(){
+                if($(this).val()==''){
+                    error.push($(this).attr('name'));
+                }
+            })
+            /* select không được bỏ trống */
+            $('#formBooking').find('select').each(function(){
+                if($(this).val()==''||$(this).val()=='0'){
+                    error.push($(this).attr('name'));
+                }
+            })
+            return error;
         }
     </script>
 @endpush

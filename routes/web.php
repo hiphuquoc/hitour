@@ -215,7 +215,7 @@ Route::get('/', [MainHomeController::class, 'home'])->name('main.home');
 /* ===== SHIP BOOKING ===== */
 Route::prefix('shipBooking')->group(function(){
     Route::get('/form', [ShipBookingController::class, 'form'])->name('main.shipBooking.form');
-    Route::post('/handle', [ShipBookingController::class, 'handle'])->name('main.shipBooking.handle');
+    Route::post('/create', [ShipBookingController::class, 'create'])->name('main.shipBooking.create');
     Route::post('/loadShipLocation', [ShipBookingController::class, 'loadShipLocation'])->name('main.shipBooking.loadShipLocation');
     Route::post('/loadDeparture', [ShipBookingController::class, 'loadDeparture'])->name('main.shipBooking.loadDeparture');
 });

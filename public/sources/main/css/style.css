@@ -1961,7 +1961,7 @@ blockquote em {
   cursor: pointer;
 }
 .chooseDepartureShipBox_body_row_item .option.active, .chooseDepartureShipBox_body_row_item .option:hover {
-  background: linear-gradient(90deg, rgb(0, 123, 255) 0, rgb(0, 90, 180) 100%);
+  background: #495057;
   color: #fff;
 }
 .chooseDepartureShipBox_body_row_item .option.active .price, .chooseDepartureShipBox_body_row_item .option:hover .price {

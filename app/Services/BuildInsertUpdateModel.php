@@ -560,4 +560,14 @@ class BuildInsertUpdateModel {
         }
         return $result;
     }
+
+    public static function buildArrayTableShipBooking($idCustomer, $dataForm){
+        $result = [];
+        if(!empty($dataForm)){
+            $result['no']                       = \App\Helpers\Charactor::randomString(10);
+            if(!empty($idCustomer)) $result['customer_info_id'] = $idCustomer;
+            $result['ship_booking_status_id']   = \App\Helpers\Charactor::randomString(10);
+        }
+        return $result;
+    }
 }

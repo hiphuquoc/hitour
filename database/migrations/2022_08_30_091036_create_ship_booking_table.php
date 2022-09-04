@@ -17,12 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('no', 20);
             $table->integer('customer_info_id');
-            $table->integer('ship_info_id');
+            // $table->integer('ship_info_id');
             $table->integer('ship_booking_status_id');
-            $table->integer('paid');
-            $table->text('note_customer');
-            $table->integer('created_by');
-            $table->dateTime('expiration_at');
+            $table->integer('paid')->nullable();
+            $table->text('note_customer')->nullable();
+            $table->integer('created_by')->nullable();
+            $table->dateTime('expiration_at')->nullable();
             $table->timestamps();
         });
     }

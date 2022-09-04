@@ -4,20 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Models\Ship;
 use App\Models\ShipPort;
-use App\Models\ShipDeparture;
-use App\Models\ShipLocation;
+use App\Models\Customer;
+// use App\Models\ShipLocation;
 use Illuminate\Http\Request;
+
+use App\Services\BuildInsertUpdateModel;
 
 class ShipBookingController extends Controller {
 
-    public static function form(Request $request){
+    public function __construct(BuildInsertUpdateModel $BuildInsertUpdateModel){
+        $this->BuildInsertUpdateModel  = $BuildInsertUpdateModel;
+    }
+
+    public function form(Request $request){
         $ports = ShipPort::select('*')
                     ->with('district', 'province')
                     ->get();
         return view('main.shipBooking.form', compact('ports'));
     }
 
-    public static function handle(Request $request){
+    public function create(Request $request){
+        /* insert customer_inf0 */
+        $insertCustomer             = $this->BuildInsertUpdateModel->buildArrayTableCustomerInfo($request->all());
+        // $idCustomer                 = Customer::insertItem($insertCustomer);
+        /* insert ship_booking */
+        $idCustomer                 = 1;
+        $insertShipBooking          = $this->BuildInsertUpdateModel->buildArrayTableShipBooking($idCustomer, $request->all());
 
         dd($request->all());
     }
@@ -46,24 +58,27 @@ class ShipBookingController extends Controller {
     }
 
     public static function loadDeparture(Request $request){
-        $xhtmlDp1               = null;
-        $xhtmlDp2               = null;
+        $result                 = null;
         if(!empty($request->get('date')&&!empty($request->get('ship_port_departure_id')&&!empty($request->get('ship_port_location_id'))))){
+            $code               = $request->get('code');
             $date               = $request->get('date');
-            $portShipDeparture  = ShipPort::find($request->get('ship_port_departure_id'));
-            $portShipLocation   = ShipPort::find($request->get('ship_port_location_id'));
-            
+            if($code==1){
+                $portShipDeparture  = ShipPort::find($request->get('ship_port_departure_id'));
+                $portShipLocation   = ShipPort::find($request->get('ship_port_location_id'));
+            }else {
+                $portShipDeparture  = ShipPort::find($request->get('ship_port_location_id'));
+                $portShipLocation   = ShipPort::find($request->get('ship_port_departure_id'));
+            }
             /* date rage to array */
             $datePast           = strtotime($date) - (86400*2);
             $dateFuture         = strtotime($date) + (86400*2);
             $arrayDate          = \App\Helpers\Time::createDateRangeArray(date('Y-m-d', $datePast), date('Y-m-d', $dateFuture));
+            $data               = [];
             foreach($arrayDate as $day){
                 $data[$day]     = self::getShipPricesAndTimeByDate($day, $portShipDeparture->name, $portShipLocation->name);
             }
-            $xhtmlDp1           = view('main.shipBooking.formChooseShip', compact('data', 'date'))->render();
+            $result             = view('main.shipBooking.formChooseShip', compact('data', 'date', 'code'))->render();
         }
-        $result['dp1']          = $xhtmlDp1;
-        $result['dp2']          = $xhtmlDp2;
         return json_encode($result);
     }
 
@@ -73,7 +88,7 @@ class ShipBookingController extends Controller {
                                     $query->where('ship_from', $namePortDeparture)
                                             ->where('ship_to', $namePortLocation);
                                 })
-                                ->with('prices.times', 'prices.partner')
+                                ->with('portDeparture', 'portLocation', 'departure', 'location', 'prices.times', 'prices.partner')
                                 ->first();
         $result             = [];
         foreach($collectionShip->prices as $price){
@@ -81,6 +96,13 @@ class ShipBookingController extends Controller {
             $mkDateStart    = strtotime($price->date_start);
             $mkDateEnd      = strtotime($price->date_end);
             if($mkDate>$mkDateStart&&$mkDate<$mkDateEnd){
+                if($namePortDeparture==$collectionShip->portDeparture->name&&$namePortLocation==$collectionShip->portLocation->name){
+                    $result['departure']    = $collectionShip->departure->display_name;
+                    $result['location']     = $collectionShip->location->display_name;
+                }else {
+                    $result['departure']    = $collectionShip->location->display_name;
+                    $result['location']     = $collectionShip->departure->display_name;
+                }
                 $result['partner']      = $price->partner->name;
                 $result['date_start']   = $price->date_start;
                 $result['date_end']     = $price->date_end;
