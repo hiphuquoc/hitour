@@ -176,7 +176,10 @@
                                         </div>
                                         <div class="shipDepartureConfirmBox_item_body_item">
                                             @php
-                                                $typeTicket     = $departure->type ?? '-';
+                                                $typeTicket     = '-';
+                                                if(!empty($departure->type)){
+                                                    $typeTicket = strtoupper($departure->type);
+                                                }
                                             @endphp
                                             @if(!empty($departure->quantity_adult))
                                                 <div><span class="highLight">{{ $departure->quantity_adult }}</span> người lớn ({{ $typeTicket }})</div>

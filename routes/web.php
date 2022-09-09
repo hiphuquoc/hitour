@@ -28,6 +28,8 @@ use App\Http\Controllers\AdminFormController;
 use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\AdminGalleryController;
 
+use App\Http\Controllers\AdminShipBookingController;
+
 use App\Http\Controllers\MainHomeController;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\ShipController;
@@ -170,10 +172,18 @@ Route::prefix('admin')->group(function(){
             Route::post('/updatePrice', [AdminShipPriceController::class, 'updatePrice'])->name('admin.shipPrice.updatePrice');
             Route::post('/deletePrice', [AdminShipPriceController::class, 'deletePrice'])->name('admin.shipPrice.deletePrice');
         });
-        // /* ===== SHIP BOOKING ===== */
-        // Route::prefix('shipBooking')->group(function(){
-        //     Route::get('/', [AdminShipController::class, 'list'])->name('admin.ship.index');
-        // });
+        /* ===== SHIP BOOKING ===== */
+        Route::prefix('ship_booking')->group(function(){
+            Route::get('/', [AdminShipBookingController::class, 'list'])->name('admin.shipBooking.list');
+            Route::get('/viewInsert', [AdminShipBookingController::class, 'viewInsert'])->name('admin.shipBooking.viewInsert');
+            // Route::post('/create', [AdminTourBookingController::class, 'create'])->name('admin.tourBooking.create');
+            Route::get('/{id}/viewEdit', [AdminShipBookingController::class, 'viewEdit'])->name('admin.shipBooking.viewEdit');
+            // Route::post('/update', [AdminTourBookingController::class, 'update'])->name('admin.tourBooking.update');
+            Route::get('/{id}/viewExport', [AdminShipBookingController::class, 'viewExport'])->name('admin.shipBooking.viewExport');
+            // /* Delete AJAX */
+            // Route::get('/loadOptionTourList', [AdminTourBookingController::class, 'loadOptionTourList'])->name('admin.tourBooking.loadOptionTourList');
+            // Route::get('/loadFormPriceQuantity', [AdminTourBookingController::class, 'loadFormPriceQuantity'])->name('admin.tourBooking.loadFormPriceQuantity');
+        });
         /* ===== STAFF ===== */
         Route::prefix('staff')->group(function(){
             Route::get('/', [AdminStaffController::class, 'list'])->name('admin.staff.list');

@@ -2052,7 +2052,7 @@ blockquote em {
   line-height: 1.7;
 }
 .shipDepartureConfirmBox_item {
-  width: 100%;
+  width: 50%;
   border: 1px solid #dee2e6;
 }
 .shipDepartureConfirmBox_item_title {

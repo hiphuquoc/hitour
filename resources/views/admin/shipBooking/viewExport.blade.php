@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 @section('content')
 
-    @include('admin.tourBooking.confirmBooking', compact('item'))
+    @include('admin.shipBooking.confirmBooking', compact('item'))
 
     @if(!empty($item->status->relationAction))
     <div class="actionBookingBox">
@@ -24,7 +24,6 @@
             loadCostMoreLess();
             $('.formBox_full').repeater();
         })
-        
 
         function loadFormCostMoreLess(idCost = 0){
             $.ajax({

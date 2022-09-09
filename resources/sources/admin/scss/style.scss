@@ -409,7 +409,7 @@ html .content {
 .addItemBox {
     font-size: 1.05rem;
     position: absolute;
-    top: 2rem;
+    top: 1.25rem;
     right: 2rem;
     background: $color-primary;
     color: #fff;
@@ -567,6 +567,9 @@ html .content {
 }
 
 .columnBox {
+    &:not(:first-child){
+        margin-top: 0.5rem;
+    }
     &_item {
         display: flex;
         &_column {

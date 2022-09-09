@@ -196,21 +196,11 @@ return [
                     'route' => 'admin.ship.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
-                // [
-                //     'name'  => '3. Chi tiết Tour',
-                //     'route' => 'admin.ship.list',
-                //     'icon'  => '<i data-feather=\'circle\'></i>'
-                // ],
-                // [
-                //     'name'  => '5. Nhân viên tư vấn',
-                //     'route' => 'admin.staff.list',
-                //     'icon'  => '<i data-feather=\'circle\'></i>'
-                // ],
-                // [
-                //     'name'  => '6. Booking Tour',
-                //     'route' => 'admin.tourBooking.list',
-                //     'icon'  => '<i data-feather=\'circle\'></i>'
-                // ]
+                [
+                    'name'  => '6. Booking Tàu',
+                    'route' => 'admin.shipBooking.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ]
             ]
         ],
         [

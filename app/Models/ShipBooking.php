@@ -19,6 +19,42 @@ class ShipBooking extends Model {
     ];
     public $timestamps      = true;
 
+    public static function getList($params = null){
+        $paginate       = $params['paginate'] ?? null;
+        $result         = self::select('*')
+                            /* tìm theo khách hàng */
+                            ->when(!empty($params['search_customer']), function($query) use($params){
+                                $query->whereHas('customer_contact', function($q) use ($params){
+                                    $q->where('name', 'like', '%'.$params['search_customer'].'%')
+                                    ->orwhere('phone', 'like', '%'.$params['search_customer'].'%')
+                                    ->orwhere('zalo', 'like', '%'.$params['search_customer'].'%')
+                                    ->orwhere('email', 'like', '%'.$params['search_customer'].'%');
+                                });
+                            })
+                            /* tìm theo cảng đi */
+                            ->when(!empty($params['search_departure']), function($query) use($params){
+                                $query->whereHas('infoDeparture', function($q) use ($params){
+                                    $q->where('port_departure', $params['search_departure']);
+                                });
+                            })
+                            /* tìm theo cảng đến */
+                            ->when(!empty($params['search_location']), function($query) use($params){
+                                $query->whereHas('infoDeparture', function($q) use ($params){
+                                    $q->where('port_location', $params['search_location']);
+                                });
+                            })
+                            /* tìm theo trạng thái */
+                            ->when(!empty($params['search_status']), function($query) use($params){
+                                $query->whereHas('status', function($q) use ($params){
+                                    $q->where('id', $params['search_status']);
+                                });
+                            })
+                            ->with('customer', 'infoDeparture')
+                            ->orderBy('created_at', 'DESC')
+                            ->paginate($paginate);
+        return $result;
+    }
+
     public static function insertItem($params){
         $id                 = 0;
         if(!empty($params)){
@@ -46,5 +82,13 @@ class ShipBooking extends Model {
 
     public function customer() {
         return $this->hasOne(\App\Models\Customer::class, 'id', 'customer_info_id');
+    }
+
+    public function status(){
+        return $this->hasOne(\App\Models\ShipBookingStatus::class, 'id', 'ship_booking_status_id');
+    }
+
+    public function customer_list(){
+        return $this->hasMany(\App\Models\CitizenIdentity::class, 'ship_booking_id', 'id');
     }
 }
