@@ -45,22 +45,18 @@
                                             <td style="font-size:15px;padding:5px;">Tên khách hàng</td>
                                             <td style="font-weight:bold;font-size:15px;padding:5px;">{{ $item->customer->name }}</td>
                                         </tr>
-                                        @php
-                                            $afterPhone     = null;
-                                            $xhtmlZalo      = '<tr>
-                                                                    <td style="font-size:15px;padding:5px;">Zalo</td>
-                                                                    <td style="font-weight:bold;font-size:15px;padding:5px;">'.$item->customer->zalo.'</td>
-                                                                </tr>';
-                                            if($item->customer->phone===$item->customer->zalo) {
-                                                $afterPhone = ' (Zalo)';
-                                                $xhtmlZalo  = null;
-                                            }
-                                            $xhtmlPhone     = '<tr>
-                                                                    <td style="font-size:15px;padding:5px;">Điện thoại</td>
-                                                                    <td style="font-weight:bold;font-size:15px;padding:5px;">'.$item->customer->phone.$afterPhone.'</td>
-                                                                </tr>';
-                                        @endphp
-                                        {!! $xhtmlPhone.$xhtmlZalo !!}
+                                        @if(!empty($item->customer->phone))
+                                            <tr>
+                                                <td style="font-size:15px;padding:5px;">Điện thoại</td>
+                                                <td style="font-weight:bold;font-size:15px;padding:5px;">{{ $item->customer->phone }}</td>
+                                            </tr>
+                                        @endif
+                                        @if(!empty($item->customer->zalo))
+                                            <tr>
+                                                <td style="font-size:15px;padding:5px;">Zalo</td>
+                                                <td style="font-weight:bold;font-size:15px;padding:5px;">{{ $item->customer->zalo }}</td>
+                                            </tr>
+                                        @endif
                                         @if(!empty($item->customer->email))
                                             <tr>
                                                 <td style="font-size:15px;padding:5px;">Email</td>

@@ -45,22 +45,18 @@
                                             <td style="font-size:15px;padding:5px;">Tên khách hàng</td>
                                             <td style="font-weight:bold;font-size:15px;padding:5px;">{{ $item->customer_contact->name }}</td>
                                         </tr>
-                                        @php
-                                            $afterPhone     = null;
-                                            $xhtmlZalo      = '<tr>
-                                                                    <td style="font-size:15px;padding:5px;">Zalo</td>
-                                                                    <td style="font-weight:bold;font-size:15px;padding:5px;">'.$item->customer_contact->zalo.'</td>
-                                                                </tr>';
-                                            if($item->customer_contact->phone===$item->customer_contact->zalo) {
-                                                $afterPhone = ' (Zalo)';
-                                                $xhtmlZalo  = null;
-                                            }
-                                            $xhtmlPhone     = '<tr>
-                                                                    <td style="font-size:15px;padding:5px;">Điện thoại</td>
-                                                                    <td style="font-weight:bold;font-size:15px;padding:5px;">'.$item->customer_contact->phone.$afterPhone.'</td>
-                                                                </tr>';
-                                        @endphp
-                                        {!! $xhtmlPhone.$xhtmlZalo !!}
+                                        @if(!empty($item->customer_contact->phone))
+                                            <tr>
+                                                <td style="font-size:15px;padding:5px;">Điện thoại</td>
+                                                <td style="font-weight:bold;font-size:15px;padding:5px;">{{ $item->customer_contact->phone }}</td>
+                                            </tr>
+                                        @endif
+                                        @if(!empty($item->customer_contact->zalo))
+                                            <tr>
+                                                <td style="font-size:15px;padding:5px;">Zalo</td>
+                                                <td style="font-weight:bold;font-size:15px;padding:5px;">{{ $item->customer_contact->zalo }}</td>
+                                            </tr>
+                                        @endif
                                         @if(!empty($item->customer_contact->email))
                                             <tr>
                                                 <td style="font-size:15px;padding:5px;">Email</td>
@@ -237,22 +233,26 @@
                                     <tbody>
                                         <tr style="border-bottom:1px dotted #d1d1d1;color:#456;">
                                             <td style="padding:5px;">
+                                                @php
+                                                    $deadline       = '...';
+                                                    if(!empty($item->expiration_at)){
+                                                        $hour       = date('H:i', strtotime($item->expiration_at));
+                                                        $dayOfWeek  = \App\Helpers\DateAndTime::convertMktimeToDayOfWeek(strtotime($item->expiration_at));
+                                                        $date       = date('d/m/Y', strtotime($item->expiration_at));
+                                                        $deadline   = 'trước '.$hour.' '.$dayOfWeek.', ngày '.$date;
+                                                    }
+                                                @endphp
                                                 <div>
-                                                    1. Quý khách chuyển khoản cọc số tiền <span style="font-weight:bold;color:#E74C3C;font-size:17px;">{{ !empty($item->require_deposit) ? number_format($item->require_deposit) : number_format($total) }}<sup>đ</sup></span> (<span style="font-weight:bold;font-size:16px;">trước 18:00 Chủ nhật, ngày 31-07-2022</span>), trong nội dung chuyển khoản ghi
-                                                    <span style="font-weight:bold;font-size:16px;">0909449924</span>
+                                                    1. Quý khách chuyển khoản cọc số tiền <span style="font-weight:bold;color:#E74C3C;font-size:17px;">{{ !empty($item->require_deposit) ? number_format($item->require_deposit) : number_format($total) }}<sup>đ</sup></span> {{ $deadline }}, trong nội dung chuyển khoản ghi <span style="font-weight:bold;font-size:16px;">{{ $item->customer_contact->phone }}</span>
                                                 </div>
-                                                <div>
-                                                    <div><b>- Tài khoản giám đốc:</b></div>
-                                                    <div>Tên TK: PHAM VAN PHU</div>
-                                                    <div>Số TK: 19036101422017</div>
-                                                    <div>Chi nhánh: Techcombank Kiên Giang</div>
-                                                </div>
-                                                <div>
-                                                    <div><b>- Tài khoản công ty:</b></div>
-                                                    <div>Tên TK: CONG TY TNHH DU LICH BIEN DAO HITOUR</div>
-                                                    <div>Số TK: 1016376662</div>
-                                                    <div>Chi nhánh: Vietcombank Kiên Giang</div>
-                                                </div>
+                                                @foreach(config('company.bank') as $bank)
+                                                    <div>
+                                                        <div><b>{{ $bank['title'] }}</b></div>
+                                                        <div>Tên TK: {{ $bank['name'] }}</div>
+                                                        <div>Số TK: {{ $bank['number'] }}</div>
+                                                        <div>Chi nhánh: {{ $bank['department'] }}</div>
+                                                    </div>
+                                                @endforeach
                                             </td>
                                         </tr>
                                         <tr style="color:#456;">
@@ -263,7 +263,6 @@
                                     </tbody>
                                 </table>
                             </td>
-
                         </tr>
                         {{-- <tr>
                             <td style="box-sizing:border-box;padding:5px 15px;line-height:1.58;font-size:15px;text-align:center">
