@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Customer;
 use App\Models\Ship;
 use App\Models\ShipPort;
-use App\Models\Customer;
-// use App\Models\ShipLocation;
+use App\Models\ShipBooking;
+use App\Models\ShipBookingQuantityAndPrice;
 use Illuminate\Http\Request;
 
 use App\Services\BuildInsertUpdateModel;
@@ -26,12 +26,16 @@ class ShipBookingController extends Controller {
     public function create(Request $request){
         /* insert customer_inf0 */
         $insertCustomer             = $this->BuildInsertUpdateModel->buildArrayTableCustomerInfo($request->all());
-        // $idCustomer                 = Customer::insertItem($insertCustomer);
+        $idCustomer                 = Customer::insertItem($insertCustomer);
         /* insert ship_booking */
-        $idCustomer                 = 1;
         $insertShipBooking          = $this->BuildInsertUpdateModel->buildArrayTableShipBooking($idCustomer, $request->all());
-
-        dd($request->all());
+        $idBooking                  = ShipBooking::insertItem($insertShipBooking);
+        /* insert ship_booking_quantity_and_price */
+        $arrayInsertShipQuantity    = $this->BuildInsertUpdateModel->buildArrayTableShipQuantityAndPrice($idBooking, $request->all());
+        foreach($arrayInsertShipQuantity as $insertShipQuantity){
+            ShipBookingQuantityAndPrice::insertItem($insertShipQuantity);
+        }
+        return redirect()->route('main.shipBooking.confirm', ['ship_booking_id' => $idBooking]);
     }
 
     public static function loadShipLocation(Request $request){
@@ -103,13 +107,15 @@ class ShipBookingController extends Controller {
                     $result['departure']    = $collectionShip->location->display_name;
                     $result['location']     = $collectionShip->departure->display_name;
                 }
-                $result['partner']      = $price->partner->name;
-                $result['date_start']   = $price->date_start;
-                $result['date_end']     = $price->date_end;
-                $result['price_adult']  = $price->price_adult;
-                $result['price_child']  = $price->price_child;
-                $result['price_old']    = $price->price_old;
-                $result['price_vip']    = $price->price_vip;
+                $result['ship_price_id']    = $price->id;
+                $result['ship_info_id']     = $collectionShip->id;
+                $result['partner']          = $price->partner->name;
+                $result['date_start']       = $price->date_start;
+                $result['date_end']         = $price->date_end;
+                $result['price_adult']      = $price->price_adult;
+                $result['price_child']      = $price->price_child;
+                $result['price_old']        = $price->price_old;
+                $result['price_vip']        = $price->price_vip;
                 foreach($price->times as $time){
                     if($time->ship_from==$namePortDeparture&&$time->ship_to==$namePortLocation) $result['times'][] = $time->toArray();
                 }
@@ -118,5 +124,30 @@ class ShipBookingController extends Controller {
             }
         }
         return $result;
+    }
+
+    public static function loadBookingSummary(Request $request){
+        $result             = null;
+        if(!empty($request->get('dataForm'))){
+            $dataForm       = [];
+            foreach($request->get('dataForm') as $value){
+                $dataForm[$value['name']]   = $value['value'];
+            }
+            $result         = view('main.shipBooking.summary', ['data' => $dataForm]);
+        }
+        echo $result;
+    }
+
+    public static function confirm(Request $request){
+        $idShipBooking  = $request->get('ship_booking_id') ?? 0;
+        $item           = ShipBooking::select('*')
+                            ->where('id', $idShipBooking)
+                            ->with('infoDeparture', 'customer')
+                            ->first();
+        if(!empty($item)){
+            return view('main.shipBooking.confirmBooking', compact('item'));
+        }else {
+            return redirect()->route('main.home');
+        }
     }
 }

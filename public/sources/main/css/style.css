@@ -10,6 +10,7 @@ body {
   line-height: 1.6rem;
   font-weight: 400;
   font-family: "Roboto", sans-serif;
+  color: #444;
 }
 @media (max-width: 577px) {
   body {
@@ -194,6 +195,8 @@ button i {
 
 label {
   font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+  display: flex;
 }
 
 input, textarea {
@@ -1805,6 +1808,11 @@ blockquote em {
   box-shadow: 0 0 5px #e9ecef;
   border: 1px solid #e9ecef;
 }
+.bookingForm_item_body ul li:not(:first-child) {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed #dee2e6;
+}
 .bookingForm .chooseTripBox {
   margin-top: 0.5rem;
   display: flex;
@@ -1852,6 +1860,14 @@ blockquote em {
   content: "*";
   color: #fd5056;
   font-weight: bold;
+}
+
+.messageValidate_error {
+  display: none;
+  margin-top: 0.25rem;
+  font-size: 0.95rem;
+  color: #E74C3C;
+  font-style: italic;
 }
 
 .flexBox {
@@ -2003,7 +2019,7 @@ blockquote em {
   border-top: 1px dashed #dee2e6;
 }
 .shipBookingTotalBox_row i {
-  margin-right: 0.25rem;
+  margin-right: 0.5rem;
   color: #6c757d;
 }
 .shipBookingTotalBox_row .highLight {
@@ -2012,6 +2028,81 @@ blockquote em {
   font-size: 1.2rem;
   color: #495057;
   letter-spacing: 0.3px;
+}
+
+.tableDetailShipBooking .head td {
+  background: rgba(0, 123, 255, 0.3);
+  font-weight: 500;
+  font-family: "Roboto Slab", serif;
+}
+.tableDetailShipBooking .head td i {
+  margin-right: 0.5rem;
+  color: #495057;
+}
+.tableDetailShipBooking tr td {
+  padding: 0.5rem;
+}
+.tableDetailShipBooking tr:not(:first-child) td {
+  margin-top: 0.5rem;
+  border-top: 1px dashed #dee2e6;
+}
+
+.shipDepartureConfirmBox {
+  display: flex;
+  line-height: 1.7;
+}
+.shipDepartureConfirmBox_item {
+  width: 100%;
+  border: 1px solid #dee2e6;
+}
+.shipDepartureConfirmBox_item_title {
+  padding: 0.5rem 1rem;
+  background: #e9ecef;
+}
+.shipDepartureConfirmBox_item_title .highLight {
+  color: rgb(0, 90, 180);
+  font-weight: 700;
+  font-family: "Roboto Slab", serif;
+  font-size: 1.2rem;
+}
+.shipDepartureConfirmBox_item_body {
+  padding: 0.5rem 1rem;
+}
+.shipDepartureConfirmBox_item_body_item:not(:first-child) {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed #dee2e6;
+}
+.shipDepartureConfirmBox_item_body .highLight {
+  color: rgb(0, 90, 180);
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: "Roboto Slab", serif;
+}
+
+.timeShipDepartureBox {
+  display: flex;
+  align-items: flex-start;
+}
+.timeShipDepartureBox_departure {
+  width: 100%;
+}
+.timeShipDepartureBox_icon {
+  flex: 0 0 80px;
+  text-align: center;
+  align-self: center;
+}
+
+.buttonBox {
+  margin: 1rem 0;
+  text-align: right;
+}
+
+.buttonSecondary {
+  background: #dee2e6;
+}
+.buttonSecondary:hover {
+  background: #ced4da;
 }
 
 /* ===== END: Page Ship */

@@ -4,6 +4,10 @@ namespace App\Services;
 use App\Models\Seo;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\Ship;
+use App\Models\ShipPort;
+use App\Models\ShipPrice;
+
 class BuildInsertUpdateModel {
     public static function buildArrayTableSeo($dataForm, $type, $dataImage = null){
         /* update page_info
@@ -564,9 +568,89 @@ class BuildInsertUpdateModel {
     public static function buildArrayTableShipBooking($idCustomer, $dataForm){
         $result = [];
         if(!empty($dataForm)){
-            $result['no']                       = \App\Helpers\Charactor::randomString(10);
+            $result['no']                   = \App\Helpers\Charactor::randomString(10);
             if(!empty($idCustomer)) $result['customer_info_id'] = $idCustomer;
-            $result['ship_booking_status_id']   = \App\Helpers\Charactor::randomString(10);
+            if(!empty($dataForm['ship_booking_status_id'])) $result['ship_booking_status_id'] = $dataForm['ship_booking_status_id'];
+            $result['note_customer']        = $dataForm['note_customer'] ?? null;
+            $result['created_by']           = Auth::id() ?? 0;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableShipQuantityAndPrice($idBooking, $dataForm){
+        $result = [];
+        if(!empty($dataForm)){
+            /* chỗ này cần lấy departure->display_name và location->display_name nên chỉ cần lấy 1 chuyến đi (chuyến về đảo lại) */
+            $infoShip                       = Ship::select('*')
+                                                ->where('id', $dataForm['ship_info_id_1'])
+                                                ->with('departure', 'location')
+                                                ->first();
+            $infoPortDeparture              = ShipPort::select('*')
+                                                ->where('id', $dataForm['ship_port_departure_id'])
+                                                ->with('district', 'province')
+                                                ->first();
+            $infoPortLocation               = ShipPort::select('*')
+                                                ->where('id', $dataForm['ship_port_location_id'])
+                                                ->with('district', 'province')
+                                                ->first();
+            /* chuyến đi */
+            if(!empty($idBooking)) $result[0]['ship_booking_id'] = $idBooking;
+            $result[0]['date']              = $dataForm['date'];
+            $result[0]['port_departure']    = $infoPortDeparture->name;
+            $result[0]['port_departure_address']    = $infoPortDeparture->address;
+            $result[0]['port_departure_district']   = $infoPortDeparture->district->district_name;
+            $result[0]['port_departure_province']   = $infoPortDeparture->province->province_name;
+            $result[0]['port_location']     = $infoPortLocation->name;
+            $result[0]['port_location_address']     = $infoPortLocation->address;
+            $result[0]['port_location_district']    = $infoPortLocation->district->district_name;
+            $result[0]['port_location_province']    = $infoPortLocation->province->province_name;
+            $result[0]['departure']         = $infoShip->departure->display_name;
+            $result[0]['location']          = $infoShip->location->display_name;
+            $result[0]['quantity_adult']    = $dataForm['quantity_adult'] ?? 0;
+            $result[0]['quantity_child']    = $dataForm['quantity_child'] ?? 0;
+            $result[0]['quantity_old']      = $dataForm['quantity_old'] ?? 0;
+            $tmp                            = explode('|', $dataForm['dp1']);
+            $infoShipPrice                  = ShipPrice::select('*')
+                                                ->where('id', $tmp[0])
+                                                ->with('partner')
+                                                ->first();
+            $result[0]['partner_name']      = $infoShipPrice->partner->name;
+            $result[0]['price_adult']       = $infoShipPrice->price_adult;
+            $result[0]['price_child']       = $infoShipPrice->price_child;
+            $result[0]['price_old']         = $infoShipPrice->price_old;
+            $result[0]['time_departure']    = $tmp[1] ?? null;
+            $result[0]['time_arrive']       = $tmp[2] ?? null;
+            $result[0]['type']              = $tmp[3] ?? null;
+            /* chuyến về */
+            if(!empty($dataForm['date_round'])&&!empty($dataForm['dp2'])&&$dataForm['type_booking']=='2'){
+                if(!empty($idBooking)) $result[1]['ship_booking_id'] = $idBooking;
+                $result[1]['date']              = $dataForm['date_round'];
+                $result[1]['port_departure']    = $infoPortLocation->name;
+                $result[1]['port_departure_address']    = $infoPortLocation->address;
+                $result[1]['port_departure_district']   = $infoPortLocation->district->district_name;
+                $result[1]['port_departure_province']   = $infoPortLocation->province->province_name;
+                $result[1]['port_location']     = $infoPortDeparture->name;
+                $result[1]['port_location_address']     = $infoPortDeparture->address;
+                $result[1]['port_location_district']    = $infoPortDeparture->district->district_name;
+                $result[1]['port_location_province']    = $infoPortDeparture->province->province_name;
+                $result[1]['departure']         = $infoShip->location->display_name;
+                $result[1]['location']          = $infoShip->departure->display_name;
+                $result[1]['quantity_adult']    = $dataForm['quantity_adult'] ?? 0;
+                $result[1]['quantity_child']    = $dataForm['quantity_child'] ?? 0;
+                $result[1]['quantity_old']      = $dataForm['quantity_old'] ?? 0;
+                $tmp                            = explode('|', $dataForm['dp2']);
+                $infoShipPrice                  = ShipPrice::select('*')
+                                                ->where('id', $tmp[0])
+                                                ->with('partner')
+                                                ->first();
+                $result[1]['partner_name']      = $infoShipPrice->partner->name;
+                $result[1]['price_adult']       = $infoShipPrice->price_adult;
+                $result[1]['price_child']       = $infoShipPrice->price_child;
+                $result[1]['price_old']         = $infoShipPrice->price_old;
+                $result[1]['time_departure']    = $tmp[1] ?? null;
+                $result[1]['time_arrive']       = $tmp[2] ?? null;
+                $result[1]['type']              = $tmp[3] ?? null;
+            }
         }
         return $result;
     }

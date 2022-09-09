@@ -218,6 +218,8 @@ Route::prefix('shipBooking')->group(function(){
     Route::post('/create', [ShipBookingController::class, 'create'])->name('main.shipBooking.create');
     Route::post('/loadShipLocation', [ShipBookingController::class, 'loadShipLocation'])->name('main.shipBooking.loadShipLocation');
     Route::post('/loadDeparture', [ShipBookingController::class, 'loadDeparture'])->name('main.shipBooking.loadDeparture');
+    Route::post('/loadBookingSummary', [ShipBookingController::class, 'loadBookingSummary'])->name('main.shipBooking.loadBookingSummary');
+    Route::get('/confirm', [ShipBookingController::class, 'confirm'])->name('main.shipBooking.confirm');
 });
 /* ===== TOC CONTENT ===== */
 Route::post('/loadTocContent', [ShipController::class, 'loadTocContent'])->name('main.ship.loadTocContent');
