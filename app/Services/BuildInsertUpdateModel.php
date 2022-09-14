@@ -622,7 +622,7 @@ class BuildInsertUpdateModel {
             $result[0]['time_arrive']       = $tmp[2] ?? null;
             $result[0]['type']              = $tmp[3] ?? null;
             /* chuyến về */
-            if(!empty($dataForm['ship_info_id_2'])&&$dataForm['type_booking']==2&&!empty($dataForm['ship_port_departure_id_2'])&&!empty($dataForm['ship_port_location_id_2'])&&!empty($dataForm['name_dp2'])){
+            if(!empty($dataForm['ship_info_id_2'])&&$dataForm['type_booking']==2&&!empty($dataForm['ship_port_departure_id_2'])&&!empty($dataForm['ship_port_location_id_2'])){
                 /* chỗ này cần lấy departure->display_name và location->display_name nên chỉ cần lấy 1 chuyến đi (chuyến về đảo lại) */
                 $infoShip2                      = Ship::select('*')
                                                     ->where('id', $dataForm['ship_info_id_2'])

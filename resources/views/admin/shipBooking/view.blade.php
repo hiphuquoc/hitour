@@ -28,11 +28,7 @@
                 </ul>
             @endif
             <!-- MESSAGE -->
-            @if(!empty($message))
-                <div class="js_message alert alert-{{ $message['type'] }}" style="display:inline-block;">
-                    <div class="alert-body">{!! $message['message'] !!}</div>
-                </div>
-            @endif
+            @include('admin.template.messageAction')
             
             <div class="pageAdminWithRightSidebar_main">
                 <!-- START:: Main content -->
@@ -83,7 +79,7 @@
                         <button type="button" class="btn btn-secondary waves-effect waves-float waves-light" onClick="history.back();">Quay lại</button>
                         <button type="submit" class="btn btn-success waves-effect waves-float waves-light" onClick="javascript:submitForm('formAction');" style="width:100px;">Lưu</button>
                     </div>
-                    <div class="customScrollBar-y" style="height: calc(100% - 70px);border-top: 1px dashed #adb5bd;">
+                    <div class="customScrollBar-y" style="height: calc(100% - 70px);border-top:1px dashed #adb5bd;">
                         {{-- <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
                             
                         </div> --}}
@@ -94,30 +90,6 @@
         </div>
 
     </form>
-    <!-- ===== START:: Modal ===== -->
-    <form id="formCostMoreLess" method="POST" action="{{ route('admin.tourOption.createOption') }}">
-    @csrf
-        <!-- Input Hidden -->
-        {{-- <input type="hidden" id="tour_info_id" name="tour_info_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : 0 }}" /> --}}
-        <div class="modal fade" id="modalContact" tabindex="-1" aria-labelledby="addNewCardTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header bg-transparent">
-                        <h4 id="js_loadFormOption_header">Thêm /Bớt chi phí</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div id="js_loadFormOption_body" class="modal-body">
-                        <!-- load Ajax -->
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <button type="button" class="btn btn-primary" onClick="addAndUpdateCostMoreLess();">Xác nhận</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-    <!-- ===== END:: Modal ===== -->
 </div>
 @endsection
 @push('scripts-custom')

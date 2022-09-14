@@ -179,6 +179,7 @@ Route::prefix('admin')->group(function(){
             Route::get('/view', [AdminShipBookingController::class, 'view'])->name('admin.shipBooking.view');
             Route::post('/update', [AdminShipBookingController::class, 'update'])->name('admin.shipBooking.update');
             Route::get('/{id}/viewExport', [AdminShipBookingController::class, 'viewExport'])->name('admin.shipBooking.viewExport');
+            Route::post('/delete', [AdminShipBookingController::class, 'delete'])->name('admin.shipBooking.delete');
             // /* Delete AJAX */
             // Route::get('/loadDeparture', [AdminShipBookingController::class, 'loadDeparture'])->name('admin.shipBooking.loadDeparture');
             // Route::get('/loadFormPriceQuantity', [AdminTourBookingController::class, 'loadFormPriceQuantity'])->name('admin.tourBooking.loadFormPriceQuantity');

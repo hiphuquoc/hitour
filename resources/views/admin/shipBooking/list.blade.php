@@ -74,11 +74,11 @@
             <tbody>
                 @if(!empty($list))
                     @foreach($list as $item)
-                        <tr>
+                        <tr id="ship_booking_{{ $item->id }}">
                             <td class="text-center">{{ $loop->index+1 }}</td>
                             <td>
                                 <div class="oneLine">
-                                    {{ $item->customer_contact->prefix_name ?? null }} {{ $item->customer_contact->name ?? null }}
+                                    {{ !empty($item->customer_contact->prefix_name) ? $item->customer_contact->prefix_name.' ' : null }}{{ $item->customer_contact->name ?? null }}
                                 </div>
                                 <div class="oneLine">
                                     {{ $item->customer_contact->phone ?? null }} - Zalo: {{ $item->customer_contact->zalo ?? null }}
@@ -202,7 +202,7 @@
                                     </a>
                                 </div>
                                 <div class="icon-wrapper iconAction">
-                                    <div class="actionDelete" onClick="deleteItem('{{ 0 }}');">
+                                    <div class="actionDelete" onClick="deleteItem('{{ $item->id }}');">
                                         <i data-feather='x-square'></i>
                                         <div>Xóa</div>
                                     </div>
@@ -225,16 +225,19 @@
 @push('scripts-custom')
     <script type="text/javascript">
         function deleteItem(id){
-            // if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
-            //     $.ajax({
-            //         url         : "{{ route('admin.tour.delete') }}",
-            //         type        : "GET",
-            //         dataType    : "html",
-            //         data        : { id : id }
-            //     }).done(function(data){
-            //         if(data==true) $('#tour_'+id).remove();
-            //     });
-            // }
+            if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
+                $.ajax({
+                    url         : "{{ route('admin.shipBooking.delete') }}",
+                    type        : "POST",
+                    dataType    : "html",
+                    data        : { 
+                        '_token'    : '{{ csrf_token() }}',
+                        id : id 
+                    }
+                }).done(function(data){
+                    if(data==true) $('#ship_booking_'+id).remove();
+                });
+            }
         }
 
         function submitForm(idForm){

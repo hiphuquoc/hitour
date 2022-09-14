@@ -6,7 +6,7 @@
     <div class="formBox_full">
         <!-- One Row -->
         <div class="formBox_full_item">
-            <label class="form-label inputRequired" for="prefix_name">Danh xưng</label>
+            <label class="form-label" for="prefix_name">Danh xưng</label>
             <select class="form-select" id="prefix_name" name="prefix_name">
                 <option value="0">- Lựa chọn -</option>
                 @foreach(config('admin.prefix_name_customer') as $prefix)
