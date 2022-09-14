@@ -32,6 +32,7 @@ class ShipBookingController extends Controller {
         $idBooking                  = ShipBooking::insertItem($insertShipBooking);
         /* insert ship_booking_quantity_and_price */
         $arrayInsertShipQuantity    = $this->BuildInsertUpdateModel->buildArrayTableShipQuantityAndPrice($idBooking, $request->all());
+        // dd($arrayInsertShipQuantity);
         foreach($arrayInsertShipQuantity as $insertShipQuantity){
             ShipBookingQuantityAndPrice::insertItem($insertShipQuantity);
         }
@@ -47,7 +48,7 @@ class ShipBookingController extends Controller {
                                 ->orWhere('ship_port_location_id', $idPortStart)
                                 ->with('portDeparture.district', 'portDeparture.province', 'portLocation.district', 'portLocation.province')
                                 ->get();
-            /* lấy cảng đói lập với cảng đưa vào */
+            /* lấy cảng đối lập với cảng đưa vào */
             $data           = [];
             foreach($tmp as $ship){
                 if($idPortStart==$ship->portDeparture->id) {
@@ -56,32 +57,35 @@ class ShipBookingController extends Controller {
                     $data[] = $ship->portDeparture;
                 }
             }
-            $result         = view('main.shipBooking.selectboxLocation', compact('data'));
+            /* id cảng active */
+            $namePortActive = $request->get('name_port_active') ?? null;
+            $result         = view('main.shipBooking.selectboxLocation', compact('data', 'namePortActive'));
         }
         return $result;
     }
 
     public static function loadDeparture(Request $request){
-        $result                 = null;
+        $result                     = null;
+        
         if(!empty($request->get('date')&&!empty($request->get('ship_port_departure_id')&&!empty($request->get('ship_port_location_id'))))){
-            $code               = $request->get('code');
-            $date               = $request->get('date');
-            if($code==1){
-                $portShipDeparture  = ShipPort::find($request->get('ship_port_departure_id'));
-                $portShipLocation   = ShipPort::find($request->get('ship_port_location_id'));
+            $code                   = $request->get('code');
+            $date                   = $request->get('date');
+            $portShipDeparture      = ShipPort::find($request->get('ship_port_departure_id'));
+            $portShipLocation       = ShipPort::find($request->get('ship_port_location_id'));
+            $data                   = self::getShipPricesAndTimeByDate($date, $portShipDeparture->name, $portShipLocation->name);
+            if(!empty($request->get('theme'))&&$request->get('theme')=='admin'){
+                /* thông tin booking (nếu có) => dùng đề active chuyến được chọn */
+                $booking                = [];
+                if(!empty($request->get('ship_booking_id'))){
+                    $booking            = ShipBooking::select('*')
+                                            ->where('id', $request->get('ship_booking_id'))
+                                            ->with('infoDeparture')
+                                            ->first();
+                }
+                $result             = view('admin.shipBooking.formChooseShip', compact('data', 'date', 'code', 'booking'))->render();
             }else {
-                $portShipDeparture  = ShipPort::find($request->get('ship_port_location_id'));
-                $portShipLocation   = ShipPort::find($request->get('ship_port_departure_id'));
+                $result             = view('main.shipBooking.formChooseShip', compact('data', 'date', 'code'))->render();
             }
-            /* date rage to array */
-            $datePast           = strtotime($date) - (86400*2);
-            $dateFuture         = strtotime($date) + (86400*2);
-            $arrayDate          = \App\Helpers\Time::createDateRangeArray(date('Y-m-d', $datePast), date('Y-m-d', $dateFuture));
-            $data               = [];
-            foreach($arrayDate as $day){
-                $data[$day]     = self::getShipPricesAndTimeByDate($day, $portShipDeparture->name, $portShipLocation->name);
-            }
-            $result             = view('main.shipBooking.formChooseShip', compact('data', 'date', 'code'))->render();
         }
         return json_encode($result);
     }
@@ -142,7 +146,7 @@ class ShipBookingController extends Controller {
         $idShipBooking  = $request->get('ship_booking_id') ?? 0;
         $item           = ShipBooking::select('*')
                             ->where('id', $idShipBooking)
-                            ->with('infoDeparture', 'customer')
+                            ->with('infoDeparture', 'customer_contact')
                             ->first();
         if(!empty($item)){
             return view('main.shipBooking.confirmBooking', compact('item'));

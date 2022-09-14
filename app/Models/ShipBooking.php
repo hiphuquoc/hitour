@@ -49,7 +49,7 @@ class ShipBooking extends Model {
                                     $q->where('id', $params['search_status']);
                                 });
                             })
-                            ->with('customer', 'infoDeparture')
+                            ->with('customer_contact', 'infoDeparture')
                             ->orderBy('created_at', 'DESC')
                             ->paginate($paginate);
         return $result;
@@ -80,7 +80,7 @@ class ShipBooking extends Model {
         return $this->hasMany(\App\Models\ShipBookingQuantityAndPrice::class, 'ship_booking_id', 'id');
     }
 
-    public function customer() {
+    public function customer_contact() {
         return $this->hasOne(\App\Models\Customer::class, 'id', 'customer_info_id');
     }
 

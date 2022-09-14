@@ -1814,20 +1814,24 @@ blockquote{
         }
     }
     &_body {
-        // border: 1px solid $bg-04;
+        border: 1px solid $bg-04;
         &_row {
             display: flex;
             border-bottom: 1px solid $bg-04;
             align-items: center;
+            background: #fff;
+            &:nth-child(even){
+                background: #fff;
+            }
             &_item {
                 width: 100%;
                 text-align: center;
-                padding: 1.25rem 0.75rem;
+                padding: 1rem 0.5rem;
                 .option {
                     line-height: 1.4;
                     padding: 0.35rem 0.5rem;
                     border: 1px solid $bg-04;
-                    background: $bg-02;
+                    background: $bg-03;
                     border-radius: 5px;
                     cursor: pointer;
                     &.active, &:hover {
@@ -1851,10 +1855,10 @@ blockquote{
                     color: $color-primary-hover;
                 }
                 &:first-child {
-                    padding-left: 0 !important;
+                    padding-left: 1rem !important;
                 }
                 &:last-child {
-                    padding-right: 0 !important;
+                    padding-right: 1rem !important;
                 }
             }
         }

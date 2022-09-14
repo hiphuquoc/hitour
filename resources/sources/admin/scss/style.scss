@@ -713,3 +713,59 @@ html .content {
     }
 }
 /* ===== END: Image */
+.chooseDepartureShipBox {
+    border: 1px solid $bg-03;
+    &_row {
+        display: flex;
+        &:nth-child(even){
+            background: $bg-02;
+        }
+        &_item {
+            width: 100%;
+            text-align: center;
+            padding: 1rem;
+            &_choose {
+                background: $bg-03;
+                border-radius: 5px;
+                border: 1px solid $bg-04;
+                padding: 0.25rem;
+                cursor: pointer;
+                &:hover, &.active {
+                    background: $color-secondary;
+                }
+            }
+            .highLight {
+                font-weight: bold;
+                font-size: 1.1rem;
+            }
+        }
+        &:not(:first-child){
+            border-top: 1px solid $bg-03;
+        }
+    }
+}
+.chooseTripBox {
+    margin-top: 0.5rem;
+    display: flex;
+    &_item {
+        width: 100%;
+        max-width: 100px;
+        border: 1px solid $bg-04;
+        padding: 0.5rem;
+        text-align: center;
+        border-radius: 5px;
+        font-size: 0.95rem;
+        font-weight: bold;
+        cursor: pointer;
+        &:not(:first-child){
+            border-left: 1px solid $bg-04;
+        }
+        &:hover {
+            background: $color-primary-03;
+        }
+        &.active {
+            background: linear-gradient(90deg, $color-primary 0, $color-primary-hover 100%);
+            color: #fff;
+        }
+    }
+}

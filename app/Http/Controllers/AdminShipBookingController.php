@@ -9,13 +9,9 @@ use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\AdminGalleryController;
 
 use App\Models\ShipPort;
-use App\Models\Tour;
-use App\Models\TourPrice;
-use App\Models\TourOption;
 use App\Models\Customer;
 use App\Models\ShipBooking;
-use App\Models\TourBookingQuantityAndPrice;
-use App\Models\VAT;
+use App\Models\ShipBookingQuantityAndPrice;
 
 use App\Services\BuildInsertUpdateModel;
 
@@ -49,30 +45,28 @@ class AdminShipBookingController extends Controller {
         return view('admin.shipBooking.list', compact('list', 'params', 'shipPorts', 'status'));
     }
 
-    // public function viewEdit(Request $request, $id){
-    //     if(!empty($id)){
-    //         $item           = TourBooking::select('*')
-    //                             ->where('id', $id)
-    //                             ->with('customer_contact', 'quantiesAndPrices', 'customer_list', 'costMoreLess', 'vat')
-    //                             ->first();
-    //         $tourList       = Tour::all();
-    //         $message        = $request->get('message') ?? null;
-    //         $type           = 'edit';
-    //         if(!empty($item)) return view('admin.shipBooking.view', compact('item', 'tourList', 'type', 'message'));
-    //     }
-    //     return redirect()->route('admin.shipBooking.list');
-    // }
-
-    // public function viewInsert(Request $request){
-    //     $tourList           = Tour::all();
-    //     $type               = 'create';
-    //     return view('admin.shipBooking.view', compact('type', 'tourList'));
-    // }
+    public function view(Request $request){
+        if(!empty($request->get('id'))){
+            $item           = ShipBooking::select('*')
+                                ->where('id', $request->get('id'))
+                                ->with('customer_contact', 'customer_list', 'infoDeparture')
+                                ->first();
+            $ports          = ShipPort::select('*')
+                                ->with('district', 'province')
+                                ->get();
+            /* type */
+            $type               = !empty($item) ? 'edit' : 'create';
+            $type               = $request->get('type') ?? $type;
+            return view('admin.shipBooking.view', compact('item', 'type', 'ports'));
+        }else {
+            return redirect()->route('admin.shipBooking.list');
+        }
+    }
 
     public function viewExport($id){
         $item               = ShipBooking::select('*')
                                 ->where('id', $id)
-                                ->with('customer', 'infoDeparture', 'status', 'customer_list')
+                                ->with('customer_contact', 'infoDeparture', 'status', 'customer_list')
                                 ->first();
         return view('admin.shipBooking.viewExport', compact('item'));
     }
@@ -131,101 +125,31 @@ class AdminShipBookingController extends Controller {
     //     ]);
     // }
 
-    // public function update(TourBookingRequest $request){
-    //     /* update customer_info */
-    //     $idCustomer         = $request->get('customer_info_id');
-    //     $updateCustomer     = $this->BuildInsertUpdateModel->buildArrayTableCustomerInfo($request->all());
-    //     Customer::updateItem($request->get('customer_info_id'), $updateCustomer);
-    //     /* update tour_booking */
-    //     $idTourBooking      = $request->get('tour_booking_id');
-    //     $updateTourBooking  = $this->BuildInsertUpdateModel->buildArrayTableTourBooking($idCustomer, $request->all());
-    //     TourBooking::updateItem($idTourBooking, $updateTourBooking);
-    //     /* update citizen_identity_info */
-    //     if(!empty($request->get('customer_list'))){
-    //         /* xóa dữ liệu cũ */
-    //         CitizenIdentity::select('*')
-    //                         ->where('tour_booking_id', $idTourBooking)
-    //                         ->delete();
-    //         /* insert lại */
-    //         $updateCitizenIdentity  = $this->BuildInsertUpdateModel->buildArrayTableCitizenIdentityInfoTable($idTourBooking, 'tour_booking_id', $request->all());
-    //         if(!empty($updateCitizenIdentity)){
-    //             foreach($updateCitizenIdentity as $itemInsert) CitizenIdentity::insertItem($itemInsert);
-    //         }
-    //     }
-    //     /* update tour_booking_quantity_and_price */
-    //     if(!empty($request->get('tour_option_id'))&&!empty($request->get('quantity'))){
-    //         /* xóa bỏ quantity cũ */
-    //         TourBookingQuantityAndPrice::select('*')
-    //             ->where('tour_booking_id', $idTourBooking)
-    //             ->delete();
-    //         /* insert quantity mới */
-    //         foreach($request->get('quantity') as $key => $value){
-    //             /*
-    //                 tour_booking_id
-    //                 option_name
-    //                 option_age
-    //                 price
-    //                 quantity
-    //             */
-    //             if(!empty($value)){
-    //                 $dataInsert                     = [];
-    //                 $dataInsert['tour_booking_id']  = $idTourBooking;
-    //                 $infoOption                     = TourOption::find($request->get('tour_option_id'));
-    //                 $dataInsert['option_name']      = $infoOption->option;
-    //                 $infoPrice                      = TourPrice::find($key);
-    //                 $dataInsert['option_age']       = $infoPrice->apply_age;
-    //                 $dataInsert['price']            = $infoPrice->price;
-    //                 $dataInsert['quantity']         = $value;
-    //                 TourBookingQuantityAndPrice::insertItem($dataInsert);
-    //             }
-    //         }
-    //     }
-    //     /* delete && insert vat_info (nếu có) */
-    //     if(!empty($request->get('vat_info_id'))) VAT::find($request->get('vat_info_id'))->delete();
-    //     if(!empty($request->get('vat_name'))&&!empty($request->get('vat_code'))&&!empty($request->get('vat_address'))){
-    //         $insertVat  = $this->BuildInsertUpdateModel->buildArrayTableVatInfo($idTourBooking, 'tour_booking_id', $request->all());
-    //         VAT::insertItem($insertVat);
-    //     }
-    //     /* Message */
-    //     $message        = [
-    //         'type'      => 'success',
-    //         'message'   => '<strong>Thành công!</strong> Đã cập nhật Booking'
-    //     ];
-    //     return redirect()->route('admin.shipBooking.viewEdit', [
-    //         'id'        => $idTourBooking,
-    //         'message'   => $message
-    //     ]);
-    // }
-
-    // public function loadOptionTourList(Request $request){
-    //     $optionChecked              = 0;
-    //     $content                    = '<div>Vui lòng chọn chương trình Tour trước!</div>';
-    //     if(!empty($request->get('tour_info_id'))){
-    //         $options                = TourOption::select('*')
-    //                                     ->where('tour_info_id', $request->get('tour_info_id'))
-    //                                     ->with('prices')
-    //                                     ->get();
-    //         if($options->isNotEmpty()) {
-    //             /* checked */
-    //             $optionChecked      = $options[0]->id;
-    //             $content            = view('admin.shipBooking.optionTourList', compact('options', 'optionChecked'))->render();
-    //         }
-    //     }
-    //     $result['tour_option_id']   = $optionChecked;
-    //     $result['content']          = $content;
-    //     return json_encode($result);
-    // }
-
-    // public function loadFormPriceQuantity(Request $request){
-    //     $result         = null;
-    //     if(!empty($request->get('tour_option_id'))){
-    //         $prices     = TourPrice::select('*')
-    //                         ->where('tour_option_id', $request->get('tour_option_id'))
-    //                         ->get();
-    //         $quantity   = [];
-    //         if(!empty($request->get('tour_booking_id'))) $quantity  = TourBookingQuantityAndPrice::getListByTourBookingId($request->get('tour_booking_id'));
-    //         $result     = view('admin.shipBooking.formPriceQuantity', compact('prices', 'quantity'))->render();
-    //     }
-    //     echo $result;
-    // }
+    public function update(Request $request){
+        if(!empty($request->get('ship_booking_id'))){
+            $idShipBooking              = $request->get('ship_booking_id');
+            /* update customer_inf0 */
+            $updateCustomer             = $this->BuildInsertUpdateModel->buildArrayTableCustomerInfo($request->all());
+            Customer::updateItem($request->get('customer_info_id'), $updateCustomer);
+            /* update ship_booking => không có dữ liệu thay đổi */
+            /* delete ship_booking_quantity_and_price */
+            ShipBookingQuantityAndPrice::select('*')
+                ->where('ship_booking_id', $idShipBooking)
+                ->delete();
+            /* insert lại ship_booking_quantity_and_price */
+            $arrayInsertShipQuantity    = $this->BuildInsertUpdateModel->buildArrayTableShipQuantityAndPrice($idShipBooking, $request->all());
+            foreach($arrayInsertShipQuantity as $insertShipQuantity){
+                ShipBookingQuantityAndPrice::insertItem($insertShipQuantity);
+            }
+            /* Message */
+            $message        = [
+                'type'      => 'success',
+                'message'   => '<strong>Thành công!</strong> Đã cập nhật Booking'
+            ];
+            return redirect()->route('admin.shipBooking.view', [
+                'id'        => $idShipBooking,
+                'message'   => $message
+            ]);
+        }
+    }
 }

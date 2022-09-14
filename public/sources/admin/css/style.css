@@ -622,3 +622,60 @@ html .content {
 }
 
 /* ===== END: Image */
+.chooseDepartureShipBox {
+  border: 1px solid #e9ecef;
+}
+.chooseDepartureShipBox_row {
+  display: flex;
+}
+.chooseDepartureShipBox_row:nth-child(even) {
+  background: #f8f9fa;
+}
+.chooseDepartureShipBox_row_item {
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+}
+.chooseDepartureShipBox_row_item_choose {
+  background: #e9ecef;
+  border-radius: 5px;
+  border: 1px solid #dee2e6;
+  padding: 0.25rem;
+  cursor: pointer;
+}
+.chooseDepartureShipBox_row_item_choose:hover, .chooseDepartureShipBox_row_item_choose.active {
+  background: rgb(244, 208, 63);
+}
+.chooseDepartureShipBox_row_item .highLight {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.chooseDepartureShipBox_row:not(:first-child) {
+  border-top: 1px solid #e9ecef;
+}
+
+.chooseTripBox {
+  margin-top: 0.5rem;
+  display: flex;
+}
+.chooseTripBox_item {
+  width: 100%;
+  max-width: 100px;
+  border: 1px solid #dee2e6;
+  padding: 0.5rem;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.chooseTripBox_item:not(:first-child) {
+  border-left: 1px solid #dee2e6;
+}
+.chooseTripBox_item:hover {
+  background: rgba(105, 103, 240, 0.3);
+}
+.chooseTripBox_item.active {
+  background: linear-gradient(90deg, rgb(105, 103, 240) 0, rgb(90, 88, 225) 100%);
+  color: #fff;
+}

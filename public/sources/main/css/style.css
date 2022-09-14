@@ -1958,21 +1958,28 @@ blockquote em {
   font-size: 1.2rem;
   letter-spacing: 0.5px;
 }
+.chooseDepartureShipBox_body {
+  border: 1px solid #dee2e6;
+}
 .chooseDepartureShipBox_body_row {
   display: flex;
   border-bottom: 1px solid #dee2e6;
   align-items: center;
+  background: #fff;
+}
+.chooseDepartureShipBox_body_row:nth-child(even) {
+  background: #fff;
 }
 .chooseDepartureShipBox_body_row_item {
   width: 100%;
   text-align: center;
-  padding: 1.25rem 0.75rem;
+  padding: 1rem 0.5rem;
 }
 .chooseDepartureShipBox_body_row_item .option {
   line-height: 1.4;
   padding: 0.35rem 0.5rem;
   border: 1px solid #dee2e6;
-  background: #f8f9fa;
+  background: #e9ecef;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -1995,10 +2002,10 @@ blockquote em {
   color: rgb(0, 90, 180);
 }
 .chooseDepartureShipBox_body_row_item:first-child {
-  padding-left: 0 !important;
+  padding-left: 1rem !important;
 }
 .chooseDepartureShipBox_body_row_item:last-child {
-  padding-right: 0 !important;
+  padding-right: 1rem !important;
 }
 
 .shipBookingTotalBox {

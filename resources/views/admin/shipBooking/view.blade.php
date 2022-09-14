@@ -1,12 +1,12 @@
 @extends('admin.layouts.main')
 @section('content')
     @php
-        $titlePage      = 'Thêm Booking Tour mới';
-        $submit         = 'admin.tourBooking.create';
+        $titlePage      = 'Thêm Booking Tàu mới';
+        $submit         = 'main.shipBooking.create';
         $checkImage     = 'required';
         if(!empty($type)&&$type=='edit'){
-            $titlePage  = 'Chỉnh sửa Booking Tour';
-            $submit     = 'admin.tourBooking.update';
+            $titlePage  = 'Chỉnh sửa Booking Tàu';
+            $submit     = 'admin.shipBooking.update';
             $checkImage = null;
         }
     @endphp
@@ -14,7 +14,7 @@
     <form id="formAction" class="needs-validation invalid" action="{{ route($submit) }}" method="POST" novalidate="" enctype="multipart/form-data">
     @csrf
         <!-- input hidden -->
-        <input type="hidden" id="tour_booking_id" name="tour_booking_id" value="{{ $item->id ?? null }}" />
+        <input type="hidden" id="ship_booking_id" name="ship_booking_id" value="{{ $item->id ?? null }}" />
         <div class="pageAdminWithRightSidebar withRightSidebar">
             <div class="pageAdminWithRightSidebar_header">
                 {{ $titlePage }}
@@ -71,32 +71,7 @@
                         </div>
                     </div>
                     <div class="pageAdminWithRightSidebar_main_content_item">
-                        <div class="card">
-                            <div class="card-header border-bottom">
-                                <h4 class="card-title">Thông tin tour và số lượng</h4>
-                            </div>
-                            <div class="card-body">
-
-                                @include('admin.tourBooking.formBookingTour')
-
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header border-bottom">
-                                <h4 class="card-title">
-                                    Phát sinh hoặc trừ lại
-                                    <i class="fa-regular fa-circle-plus" data-bs-toggle="modal" data-bs-target="#modalContact" onClick="loadFormCostMoreLess();"></i>
-                                </h4>
-                            </div>
-                            <div class="card-body">
-                                <div id="js_showMessage">
-                                    <!-- javascript: showMessage -->
-                                </div>
-                                <div id="js_loadCostMoreLess_idWrite">
-                                    <!-- javascript: loadCostMoreLess -->
-                                </div>
-                            </div>
-                        </div>
+                        @include('admin.shipBooking.formBookingTicket')
                     </div>
                 </div>
                 <!-- END:: Main content -->
@@ -148,27 +123,9 @@
 @push('scripts-custom')
     <script type="text/javascript">
         $(document).ready(function(){
-            loadCostMoreLess();
+            // loadCostMoreLess();
             $('.formBox_full').repeater();
         })
-        
-
-        function loadFormCostMoreLess(idCost = 0){
-            $.ajax({
-                url         : '{{ route("admin.cost.loadFormCostMoreLess") }}',
-                type        : 'post',
-                dataType    : 'json',
-                data        : {
-                    '_token'            : '{{ csrf_token() }}',
-                    tour_booking_id     : $('#tour_booking_id').val(),
-                    cost_more_less_id   : idCost
-                },
-                success     : function(data){
-                    $('#js_loadFormOption_header').html(data.header);
-                    $('#js_loadFormOption_body').html(data.body);
-                }
-            });
-        }
 
         function validateFormModal(){
             let error       = [];
@@ -180,110 +137,127 @@
             return error;
         }
 
-        function loadCostMoreLess(){
-            $.ajax({
-                url         : '{{ route("admin.cost.loadCostMoreLess") }}',
-                type        : 'post',
-                dataType    : 'html',
-                data        : {
-                    '_token'            : '{{ csrf_token() }}',
-                    tour_booking_id     : '{{ $item->id ?? 0 }}'
-                },
-                success     : function(data){
-                    $('#js_loadCostMoreLess_idWrite').html(data);
-                }
-            });
-        }
+        // function loadFormCostMoreLess(idCost = 0){
+        //     $.ajax({
+        //         url         : '{{ route("admin.cost.loadFormCostMoreLess") }}',
+        //         type        : 'post',
+        //         dataType    : 'json',
+        //         data        : {
+        //             '_token'            : '{{ csrf_token() }}',
+        //             tour_booking_id     : $('#tour_booking_id').val(),
+        //             cost_more_less_id   : idCost
+        //         },
+        //         success     : function(data){
+        //             $('#js_loadFormOption_header').html(data.header);
+        //             $('#js_loadFormOption_body').html(data.body);
+        //         }
+        //     });
+        // }
 
-        function addAndUpdateCostMoreLess(){
-            /* dataForm */
-            let dataForm            = {
-                type                : $('#cost_type').val(),
-                name                : $('#cost_name').val(),
-                quantity            : $('#cost_quantity').val(),
-                unit_price          : $('#cost_unit_price').val()
-            };
-            let costMoreLessId      = $('#cost_more_less_id').val();
-            const tmp               = validateFormModal();
-            if(tmp==''){
-                /* không có trường required bỏ trống */
-                if(costMoreLessId==null||costMoreLessId==''){
-                    /* insert */
-                    $.ajax({
-                        url         : '{{ route("admin.cost.create") }}',
-                        type        : 'post',
-                        dataType    : 'html',
-                        data        : {
-                            '_token'    : '{{ csrf_token() }}',
-                            tour_booking_id : $('#tour_booking_id').val(),
-                            dataForm        : dataForm
-                        },
-                        success     : function(data){
-                            if(data==true){
-                                /* thành công */
-                                loadCostMoreLess();
-                                showMessage('js_showMessage', 'Thêm mới Chi phí thành công!', 'success');
-                            }else {
-                                /* thất bại */
-                                showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
-                            }
-                        }
-                    });
-                }else {
-                    /* update */
-                    $.ajax({
-                        url         : '{{ route("admin.cost.update") }}',
-                        type        : 'post',
-                        dataType    : 'html',
-                        data        : {
-                            '_token'            : '{{ csrf_token() }}',
-                            tour_booking_id     : $('#tour_booking_id').val(),
-                            cost_more_less_id   : costMoreLessId,
-                            dataForm            : dataForm
-                        },
-                        success     : function(data){
-                            if(data==true){
-                                /* thành công */
-                                loadCostMoreLess();
-                                showMessage('js_showMessage', 'Cập nhật Chi phí thành công!', 'success');
-                            }else {
-                                /* thất bại */
-                                showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
-                            }
-                        }
-                    });
-                }
-                $('#modalContact').modal('hide');
-            }else {
-                /* có 1 vài trường required bị bỏ trống */
-                let messageError        = 'Các trường bắt buộc không được để trống!';
-                $('#js_validateFormModal_message').css('display', 'block').html(messageError);
-            }
-        }
+        // function loadCostMoreLess(){
+        //     $.ajax({
+        //         url         : '{{ route("admin.cost.loadCostMoreLess") }}',
+        //         type        : 'post',
+        //         dataType    : 'html',
+        //         data        : {
+        //             '_token'            : '{{ csrf_token() }}',
+        //             tour_booking_id     : '{{ $item->id ?? 0 }}'
+        //         },
+        //         success     : function(data){
+        //             $('#js_loadCostMoreLess_idWrite').html(data);
+        //         }
+        //     });
+        // }
 
-        function deleteCostMoreLess(idCost){
-            if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
-                $.ajax({
-                    url         : '{{ route("admin.cost.delete") }}',
-                    type        : 'post',
-                    dataType    : 'html',
-                    data        : {
-                        '_token'            : '{{ csrf_token() }}',
-                        cost_more_less_id   : idCost
-                    },
-                    success     : function(data){
-                        if(data==true){
-                            /* thành công */
-                            loadCostMoreLess();
-                            showMessage('js_showMessage', 'Xóa Chi phí thành công!', 'success');
-                        }else {
-                            /* thất bại */
-                            showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
-                        }
-                    }
-                });
-            }
-        }
+        // function addAndUpdateCostMoreLess(){
+        //     /* dataForm */
+        //     let dataForm            = {
+        //         type                : $('#cost_type').val(),
+        //         name                : $('#cost_name').val(),
+        //         quantity            : $('#cost_quantity').val(),
+        //         unit_price          : $('#cost_unit_price').val()
+        //     };
+        //     let costMoreLessId      = $('#cost_more_less_id').val();
+        //     const tmp               = validateFormModal();
+        //     if(tmp==''){
+        //         /* không có trường required bỏ trống */
+        //         if(costMoreLessId==null||costMoreLessId==''){
+        //             /* insert */
+        //             $.ajax({
+        //                 url         : '{{ route("admin.cost.create") }}',
+        //                 type        : 'post',
+        //                 dataType    : 'html',
+        //                 data        : {
+        //                     '_token'    : '{{ csrf_token() }}',
+        //                     tour_booking_id : $('#tour_booking_id').val(),
+        //                     dataForm        : dataForm
+        //                 },
+        //                 success     : function(data){
+        //                     if(data==true){
+        //                         /* thành công */
+        //                         loadCostMoreLess();
+        //                         showMessage('js_showMessage', 'Thêm mới Chi phí thành công!', 'success');
+        //                     }else {
+        //                         /* thất bại */
+        //                         showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
+        //                     }
+        //                 }
+        //             });
+        //         }else {
+        //             /* update */
+        //             $.ajax({
+        //                 url         : '{{ route("admin.cost.update") }}',
+        //                 type        : 'post',
+        //                 dataType    : 'html',
+        //                 data        : {
+        //                     '_token'            : '{{ csrf_token() }}',
+        //                     tour_booking_id     : $('#tour_booking_id').val(),
+        //                     cost_more_less_id   : costMoreLessId,
+        //                     dataForm            : dataForm
+        //                 },
+        //                 success     : function(data){
+        //                     if(data==true){
+        //                         /* thành công */
+        //                         loadCostMoreLess();
+        //                         showMessage('js_showMessage', 'Cập nhật Chi phí thành công!', 'success');
+        //                     }else {
+        //                         /* thất bại */
+        //                         showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
+        //                     }
+        //                 }
+        //             });
+        //         }
+        //         $('#modalContact').modal('hide');
+        //     }else {
+        //         /* có 1 vài trường required bị bỏ trống */
+        //         let messageError        = 'Các trường bắt buộc không được để trống!';
+        //         $('#js_validateFormModal_message').css('display', 'block').html(messageError);
+        //     }
+        // }
+
+        // function deleteCostMoreLess(idCost){
+        //     if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
+        //         $.ajax({
+        //             url         : '{{ route("admin.cost.delete") }}',
+        //             type        : 'post',
+        //             dataType    : 'html',
+        //             data        : {
+        //                 '_token'            : '{{ csrf_token() }}',
+        //                 cost_more_less_id   : idCost
+        //             },
+        //             success     : function(data){
+        //                 if(data==true){
+        //                     /* thành công */
+        //                     loadCostMoreLess();
+        //                     showMessage('js_showMessage', 'Xóa Chi phí thành công!', 'success');
+        //                 }else {
+        //                     /* thất bại */
+        //                     showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
+        //                 }
+        //             }
+        //         });
+        //     }
+        // }
 
         function showMessage(idWrite, message, type = 'success'){
             if(message!=''||message!=null){

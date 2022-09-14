@@ -78,13 +78,13 @@
                             <td class="text-center">{{ $loop->index+1 }}</td>
                             <td>
                                 <div class="oneLine">
-                                    {{ $item->customer->prefix_name ?? null }} {{ $item->customer->name ?? null }}
+                                    {{ $item->customer_contact->prefix_name ?? null }} {{ $item->customer_contact->name ?? null }}
                                 </div>
                                 <div class="oneLine">
-                                    {{ $item->customer->phone ?? null }} - Zalo: {{ $item->customer->zalo ?? null }}
+                                    {{ $item->customer_contact->phone ?? null }} - Zalo: {{ $item->customer_contact->zalo ?? null }}
                                 </div>
                                 <div class="oneLine">
-                                    {{ $item->customer->email ?? null }}
+                                    {{ $item->customer_contact->email ?? null }}
                                 </div>
                             </td>
                             <td>
@@ -196,7 +196,7 @@
                                     </a>
                                 </div>
                                 <div class="icon-wrapper iconAction">
-                                    <a href="#">
+                                    <a href="{{ route('admin.shipBooking.view', ['id' => $item->id]) }}">
                                         <i data-feather='edit'></i>
                                         <div>Sửa</div>
                                     </a>
@@ -216,7 +216,7 @@
     </div>
 </div>
 <!-- Nút thêm -->
-<a href="{{ route('admin.shipBooking.viewInsert') }}" class="addItemBox">
+<a href="{{ route('admin.shipBooking.view') }}" class="addItemBox">
     <i class="fa-regular fa-plus"></i>
     <span>Thêm</span>
 </a>
