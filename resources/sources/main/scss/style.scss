@@ -2,6 +2,8 @@
 @import 'base.scss';
 
 .headerTop {
+    position: relative;
+    z-index: 102;
     background: $color-primary-08;
     color: #fff;
     font-size: 0.975rem;
@@ -39,6 +41,7 @@
             &_item {
                 padding: 0.1rem 0;
                 color: #f1f1f1;
+                font-size: 0.95rem;
                 &:hover {
                     color: #fff;
                 }
@@ -71,6 +74,8 @@
 
 $height_headerMain : 85px;
 .headerMain {
+    position: relative;
+    z-index: 102;
     background: $color-primary;
     color: #fff;
     font-family: $font-primary-title;
@@ -86,7 +91,8 @@ $height_headerMain : 85px;
         > ul {
             display: flex;
             font-weight: 500;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
             > li {
                 display: flex;
                 align-items: center;
@@ -131,7 +137,7 @@ $height_headerMain : 85px;
     height: 70px;
 }
 .breadcrumbBox {
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
     .container {
         font-size: 0.95rem;
         overflow: hidden;
@@ -329,6 +335,7 @@ $height_headerMain : 85px;
     width: 100%;
     display: none;
     justify-content: space-between;
+    font-size: 1rem;
     font-family: $font-primary-text;
     box-shadow: 1px 1px 10px rgba(0,0,0,0.4);
     border-top: 4px solid $color-secondary;
@@ -443,6 +450,7 @@ $height_headerMain : 85px;
 }
 $width_normalMenu : 250px;
 .normalMenu {
+    font-size: 1rem;
     font-family: $font-primary-text;
     background: #fff;
     box-shadow: 1px 1px 3px $bg-06;
@@ -1412,7 +1420,7 @@ blockquote{
                 left: 10px;
                 background: $color-primary-05;
                 color: #fff;
-                padding: 0.25rem 0.5rem;
+                padding: 0.1rem 0.5rem;
                 font-size: 0.9rem;
                 border-radius: 3px;
             }
@@ -1655,29 +1663,29 @@ blockquote{
             }
         }
     }
-    .chooseTripBox {
-        margin-top: 0.5rem;
-        display: flex;
-        &_item {
-            width: 100%;
-            max-width: 120px;
-            border: 1px solid $bg-04;
-            padding: 0.25rem 1rem;
-            text-align: center;
-            border-radius: 5px;
-            font-size: 0.95rem;
-            font-weight: bold;
-            cursor: pointer;
-            &:not(:first-child){
-                border-left: 1px solid $bg-04;
-            }
-            &:hover {
-                background: $color-primary-03;
-            }
-            &.active {
-                background: linear-gradient(90deg, $color-primary 0, $color-primary-hover 100%);
-                color: #fff;
-            }
+}
+.chooseTripBox {
+    margin-top: 0.5rem;
+    display: flex;
+    &_item {
+        width: 100%;
+        max-width: 120px;
+        border: 1px solid $bg-04;
+        padding: 0.25rem 1rem;
+        text-align: center;
+        border-radius: 5px;
+        font-size: 0.95rem;
+        font-weight: bold;
+        cursor: pointer;
+        &:not(:first-child){
+            border-left: 1px solid $bg-04;
+        }
+        &:hover {
+            background: $color-primary-03;
+        }
+        &.active {
+            background: linear-gradient(90deg, $color-primary 0, $color-primary-hover 100%);
+            color: #fff;
         }
     }
 }
@@ -1731,7 +1739,7 @@ blockquote{
         right: 0.25rem;
         top: 50%;
         transform: translateX(-50%);
-        color: $color-primary-06;
+        color: $bg-06;
         font-size: 0.95rem;
     }
     &.email {
@@ -1973,12 +1981,282 @@ blockquote{
     text-align: right;
 }
 .buttonPrimary {
-
+    background: $color-primary;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    display: inline-block;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    i {
+        margin-right: 0.5rem;
+    }
+    &:hover {
+        background: $color-primary-hover;
+    }
 }
 .buttonSecondary {
     background: $bg-04;
     &:hover {
         background: $bg-05;
     }
+    background: $color-secondary;
+    padding: 0.5rem 1rem;
+    display: inline-block;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    i {
+        margin-right: 0.5rem;
+    }
+    &:hover {
+        background: $color-secondary-hover;
+    }
 }
+.bookOnline {
+	width: 100%;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	padding: 15px 0 35px 0;
+	
+	&_main {
+		
+		&_title {
+			color: #000;
+			font-size: 30px;
+			font-weight: bold;
+			font-family: $font-primary-title;
+			margin-bottom: 10px;
+		}
+	}
+
+    @media (min-width: 767px){
+        height: 300px;
+    }
+}
+.bookFormSort {
+    position: relative;
+    margin-top: -3.5rem;
+    z-index: 101;
+    &_head {
+        display: flex;
+        > * {
+            background: #fff;
+            padding: 0.25rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 3px 3px 0 0;
+            &:not(:first-child){
+                margin-left: 0.25rem;
+            }
+            &.active {
+                background: $color-primary;
+                color: #fff;
+            }
+            i {
+                margin-right: 0.5rem;
+            }
+        }
+    }
+	
+    &_body {
+        width: 100%;
+        background: #fff;
+        border: 1px solid $bg-04;
+        box-shadow: 0px 0px 5px $bg-04;
+        border-top: 2px solid $color-primary;
+        padding: 1rem 1rem 2rem 1rem;
+        &_item {
+            display: flex;
+            align-items: flex-end;
+            &:not(:first-child){
+                margin-top: 1rem;
+            }
+            > * {
+                width: 100%;
+                &:not(:first-child){
+                    margin-left: 1rem;
+                }
+            }
+        }
+        label {
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+    }
+}
+// .bookTourSort {
+// 	padding: 0;
+// 	display: flex;
+// 	justify-content: space-between;
+// 	flex-wrap: wrap;
+	
+// 	&_date, &_local, &_btn {
+// 		display: flex;
+// 		justify-content: space-between;
+		
+// 		> * {
+// 			width: 100%;
+// 		}
+// 	}
+// 	&_local {
+// 		width: 100%;
+// 	}
+
+// 	&_name {
+// 		width: 100%;
+// 		margin-top: 15px;
+// 	}
+
+// 	&_date {
+// 		width: 100%;
+// 		margin-top: 15px;
+// 	}
+	
+// 	&_btn {
+// 		width: 100%;
+// 		margin-top: 15px;
+		
+// 		> * {
+// 			padding: 12px 15px;
+// 			font-size: 1rem;
+// 			font-family: 'Roboto Slab', sans-serif;
+// 			font-weight: 500;
+// 			background: $color-primary-08;
+// 			border: none;
+// 			outline: none;
+// 			color: #fff;
+// 			cursor: pointer;
+// 			border-radius: 5px;
+			
+// 			&:hover {
+// 				background: $color-primary;
+// 			}
+// 		}
+// 	}
+
+//     @media (min-width: 577px){
+//         flex-wrap: nowrap;
+// 		> * {
+// 			&:not(:first-child){
+// 				margin-left: 15px;
+// 			}
+// 		}
+// 		&_local {
+// 			width: 20%;
+// 		}
+// 		&_name {
+// 			width: 35%;
+// 		}
+// 		&_date {
+// 			width: 25%;
+// 			margin-top: 0;
+// 		}
+// 		&_btn {
+// 			width: 20%;
+// 			margin-top: 0;
+// 		}
+//     }
+
+//     @media (min-width: 767px){
+//         flex-wrap: nowrap;
+// 		> * {
+// 			&:not(:first-child){
+// 				margin-left: 15px;
+// 			}
+// 		}
+// 		&_local {
+// 			width: 20%;
+// 		}
+// 		&_name {
+// 			width: 35%;
+// 		}
+// 		&_date {
+// 			width: 25%;
+// 			margin-top: 0;
+// 		}
+// 		&_btn {
+// 			width: 20%;
+// 			margin-top: 0;
+// 		}
+//     }
+// }
+// .doubleSelectbox {
+// 	display: flex;
+// 	justify-content: space-between;
+// 	position: relative;
+// 	align-items: center;
+// 	background: $bg-03;
+// 	font-weight: 500;
+// 	border-radius: 5px;
+	
+// 	&_item {
+// 		width: 100%;
+// 		padding: 5px 15px 12px 15px;
+// 		cursor: pointer;
+		
+// 		label {
+// 			font-weight: normal;
+// 			font-size: 0.95rem;
+// 		}
+		
+// 		&:last-child {
+// 			padding-left: 40px;
+// 		}
+// 	}
+	
+// 	&_icon {
+// 		width: 40px;
+// 		position: absolute;
+// 		left: calc(50% - 20px);
+// 		top: calc(50% - 20px);
+// 	}
+// }
+// .inputWithLabel {
+// 	display: flex;
+// 	flex-direction: column;
+// 	justify-content: space-between;
+// 	padding: 5px 15px 12px 15px;
+// 	background: $bg-03;
+// 	border-radius: 5px;
+	
+// 	label {
+// 		font-size: 0.95rem;
+// 		font-weight: normal;
+// 	}
+	
+// 	input, select {
+// 		background: none;
+// 		width: 100%;
+// 		border: none;
+// 		font-size: 1rem;
+// 		font-family: 'Roboto', sans-serif;
+// 		font-weight: 500;
+		
+// 		&:focus {
+// 			border: none;
+// 			outline: none;
+// 		}
+// 	}
+	
+// 	input {
+// 		padding: 0;
+// 	}
+	
+// 	select {
+// 		padding: 0 15px 0 0;
+// 	}
+// }
 /* ===== END: Page Ship */
+.backgroundAround {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    z-index: 100;
+}

@@ -195,7 +195,6 @@ button i {
 
 label {
   font-size: 0.95rem;
-  margin-bottom: 0.2rem;
   display: flex;
 }
 
@@ -204,14 +203,14 @@ input, textarea {
   font-family: "Roboto", sans-serif;
   width: 100%;
   border-radius: 5px;
-  border: 1px solid rgba(0, 123, 255, 0.4);
+  border: 1px solid #ced4da;
   padding: 0.6rem 1rem;
   outline: none;
   background: #fff !important;
 }
 
 .select2-container--default .select2-selection--single {
-  border: 1px solid rgba(0, 123, 255, 0.4) !important;
+  border: 1px solid #ced4da !important;
   border-radius: 5px !important;
   height: 40px !important;
   padding: 0.3rem 0.5rem !important;
@@ -247,6 +246,8 @@ input, textarea {
 }
 
 .headerTop {
+  position: relative;
+  z-index: 102;
   background: rgba(0, 123, 255, 0.8);
   color: #fff;
   font-size: 0.975rem;
@@ -284,6 +285,7 @@ input, textarea {
 .headerTop_item_list_item {
   padding: 0.1rem 0;
   color: #f1f1f1;
+  font-size: 0.95rem;
 }
 .headerTop_item_list_item:hover {
   color: #fff;
@@ -312,6 +314,8 @@ input, textarea {
 }
 
 .headerMain {
+  position: relative;
+  z-index: 102;
   background: rgb(0, 123, 255);
   color: #fff;
   font-family: "Roboto Slab", serif;
@@ -329,7 +333,8 @@ input, textarea {
 .headerMain_item > ul {
   display: flex;
   font-weight: 500;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
 }
 .headerMain_item > ul > li {
   display: flex;
@@ -368,7 +373,7 @@ input, textarea {
 }
 
 .breadcrumbBox {
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
 }
 .breadcrumbBox .container {
   font-size: 0.95rem;
@@ -616,6 +621,7 @@ input, textarea {
   width: 100%;
   display: none;
   justify-content: space-between;
+  font-size: 1rem;
   font-family: "Roboto", sans-serif;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);
   border-top: 4px solid rgb(244, 208, 63);
@@ -703,6 +709,7 @@ input, textarea {
 }
 
 .normalMenu {
+  font-size: 1rem;
   font-family: "Roboto", sans-serif;
   background: #fff;
   box-shadow: 1px 1px 3px #adb5bd;
@@ -1601,7 +1608,7 @@ blockquote em {
   left: 10px;
   background: rgba(0, 123, 255, 0.5);
   color: #fff;
-  padding: 0.25rem 0.5rem;
+  padding: 0.1rem 0.5rem;
   font-size: 0.9rem;
   border-radius: 3px;
 }
@@ -1813,11 +1820,12 @@ blockquote em {
   padding-top: 0.5rem;
   border-top: 1px dashed #dee2e6;
 }
-.bookingForm .chooseTripBox {
+
+.chooseTripBox {
   margin-top: 0.5rem;
   display: flex;
 }
-.bookingForm .chooseTripBox_item {
+.chooseTripBox_item {
   width: 100%;
   max-width: 120px;
   border: 1px solid #dee2e6;
@@ -1828,13 +1836,13 @@ blockquote em {
   font-weight: bold;
   cursor: pointer;
 }
-.bookingForm .chooseTripBox_item:not(:first-child) {
+.chooseTripBox_item:not(:first-child) {
   border-left: 1px solid #dee2e6;
 }
-.bookingForm .chooseTripBox_item:hover {
+.chooseTripBox_item:hover {
   background: rgba(0, 123, 255, 0.3);
 }
-.bookingForm .chooseTripBox_item.active {
+.chooseTripBox_item.active {
   background: linear-gradient(90deg, rgb(0, 123, 255) 0, rgb(0, 90, 180) 100%);
   color: #fff;
 }
@@ -1893,7 +1901,7 @@ blockquote em {
   right: 0.25rem;
   top: 50%;
   transform: translateX(-50%);
-  color: rgba(0, 123, 255, 0.6);
+  color: #adb5bd;
   font-size: 0.95rem;
 }
 .inputWithIcon.email:after {
@@ -2105,11 +2113,121 @@ blockquote em {
   text-align: right;
 }
 
+.buttonPrimary {
+  background: rgb(0, 123, 255);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  display: inline-block;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.buttonPrimary i {
+  margin-right: 0.5rem;
+}
+.buttonPrimary:hover {
+  background: rgb(0, 90, 180);
+}
+
 .buttonSecondary {
   background: #dee2e6;
+  background: rgb(244, 208, 63);
+  padding: 0.5rem 1rem;
+  display: inline-block;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
 }
 .buttonSecondary:hover {
   background: #ced4da;
 }
+.buttonSecondary i {
+  margin-right: 0.5rem;
+}
+.buttonSecondary:hover {
+  background: rgb(241, 196, 15);
+}
+
+.bookOnline {
+  width: 100%;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding: 15px 0 35px 0;
+}
+.bookOnline_main_title {
+  color: #000;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: "Roboto Slab", serif;
+  margin-bottom: 10px;
+}
+@media (min-width: 767px) {
+  .bookOnline {
+    height: 300px;
+  }
+}
+
+.bookFormSort {
+  position: relative;
+  margin-top: -3.5rem;
+  z-index: 101;
+}
+.bookFormSort_head {
+  display: flex;
+}
+.bookFormSort_head > * {
+  background: #fff;
+  padding: 0.25rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 3px 3px 0 0;
+}
+.bookFormSort_head > *:not(:first-child) {
+  margin-left: 0.25rem;
+}
+.bookFormSort_head > *.active {
+  background: rgb(0, 123, 255);
+  color: #fff;
+}
+.bookFormSort_head > * i {
+  margin-right: 0.5rem;
+}
+.bookFormSort_body {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #dee2e6;
+  box-shadow: 0px 0px 5px #dee2e6;
+  border-top: 2px solid rgb(0, 123, 255);
+  padding: 1rem 1rem 2rem 1rem;
+}
+.bookFormSort_body_item {
+  display: flex;
+  align-items: flex-end;
+}
+.bookFormSort_body_item:not(:first-child) {
+  margin-top: 1rem;
+}
+.bookFormSort_body_item > * {
+  width: 100%;
+}
+.bookFormSort_body_item > *:not(:first-child) {
+  margin-left: 1rem;
+}
+.bookFormSort_body label {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
 
 /* ===== END: Page Ship */
+.backgroundAround {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  z-index: 100;
+}

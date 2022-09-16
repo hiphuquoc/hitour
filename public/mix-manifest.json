@@ -1,6 +1,6 @@
 {
     "/js/bootstrap.js": "/js/bootstrap.js?id=b4112070cb22221e6e5b423fb99d5dce",
-    "/sources/main/css/style.css": "/sources/main/css/style.css?id=3bcb10369e8a57258dc1e6640d11d213",
+    "/sources/main/css/style.css": "/sources/main/css/style.css?id=7bc02aabf5a6f69d8202388b0f5f592d",
     "/sources/admin/css/style.css": "/sources/admin/css/style.css?id=8f9869053913898fcab19a01be58b945",
     "/sources/admin/app-assets/css/bootstrap-extended.css": "/sources/admin/app-assets/css/bootstrap-extended.css?id=aa5e4c4e7f5ce9186b8379474b1ead5b",
     "/sources/admin/app-assets/css/bootstrap-extended.min.css": "/sources/admin/app-assets/css/bootstrap-extended.min.css?id=f50e71c841cfb4bb45d1609fd5d73c01",
@@ -816,5 +816,6 @@
     "/images/admin/slider-tour-1.jpg": "/images/admin/slider-tour-1.jpg?id=f01f103b8460e79abe6b57d1e5afa50a",
     "/images/main/du-lich-bien-dao-hitour-1.webp": "/images/main/du-lich-bien-dao-hitour-1.webp?id=b83bc1a309aa062844dd15a4919277ed",
     "/images/main/hitour-background.png": "/images/main/hitour-background.png?id=0177ff6c58e7583aadcd5b0c3eda8851",
-    "/images/main/svg/home-fff.svg": "/images/main/svg/home-fff.svg?id=dda46c0a49822f27e8a4148e1222e81f"
+    "/images/main/svg/home-fff.svg": "/images/main/svg/home-fff.svg?id=dda46c0a49822f27e8a4148e1222e81f",
+    "/fonts/svn_segoe_ui.ttf": "/fonts/svn_segoe_ui.ttf?id=f430fe00af2edcc5cf39a7fbd79739d4"
 }
