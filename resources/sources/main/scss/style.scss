@@ -1652,7 +1652,7 @@ blockquote{
             background: $bg-02;
             box-shadow: 0 0 5px $bg-03;
             border: 1px solid $bg-03;
-            ul {
+            ul:not(.select2-results__options) {
                 li {
                     &:not(:first-child){
                         margin-top: 0.5rem;
@@ -1700,6 +1700,21 @@ blockquote{
             width: inherit;
             &:not(:first-child){
                 margin-top: 0.75rem;
+            }
+        }
+    }
+    &_labelOneRow {
+        width: 100%;
+        &_item {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            line-height: 1.4;
+            &:not(:first-child){
+                margin-top: 1rem;
+            }
+            > * {
+                width: 100%;
             }
         }
     }
@@ -1784,6 +1799,38 @@ blockquote{
         &:after {
             content: "\f4ad";
             font-size: 1.1rem;
+        }
+    }
+}
+.inputNumberCustom {
+    display: flex;
+    width: 220px;
+    &_button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        background: $bg-02;
+        border: 1px solid $bg-04;
+        font-size: 0.9rem;
+        border-radius: 5px;
+        color: $color-primary;
+    }
+    &_input {
+        flex: 0 0 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 500;
+        border: 1px solid $bg-04;
+        border-radius: 5px;
+        padding-left: 0.65rem;
+        padding-right: 0.65rem;
+        text-align: center;
+    }
+    > * {
+        &:not(:first-child){
+            margin-left: 0.5rem;
         }
     }
 }
@@ -2048,6 +2095,7 @@ blockquote{
             font-size: 0.9rem;
             font-weight: 500;
             border-radius: 3px 3px 0 0;
+            cursor: pointer;
             &:not(:first-child){
                 margin-left: 0.25rem;
             }
@@ -2068,6 +2116,7 @@ blockquote{
         box-shadow: 0px 0px 5px $bg-04;
         border-top: 2px solid $color-primary;
         padding: 1rem 1rem 2rem 1rem;
+        border-radius: 0 5px 5px 5px;
         &_item {
             display: flex;
             align-items: flex-end;
@@ -2259,4 +2308,26 @@ blockquote{
     top: 0;
     left: 0;
     z-index: 100;
+}
+.inputWithForm {
+    position: relative;
+    &:hover {
+        .inputWithForm_form {
+            display: block;
+        }
+    }
+    &_input {
+        
+    }
+    &_form {
+        display: none;
+        position: absolute;
+        top: 39px;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        padding: 1rem;
+        border: 1px solid $bg-04;
+        border-radius: 0 0 5px 5px;
+    }
 }

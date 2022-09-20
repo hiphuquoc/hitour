@@ -69,7 +69,7 @@ class RoutingController extends Controller {
                                         ->with(['files' => function($query){
                                             $query->where('relation_table', 'ship_location');
                                         }])
-                                        ->with('seo', 'district', 'ships.seo', 'ships.location.district', 'ships.location.province', 'ships.departure', 'ships.prices.times', 'ships.prices.partner', 'ships.partners.infoPartner.seo')
+                                        ->with('seo', 'district', 'ships.seo', 'ships.location.district', 'ships.location.province', 'ships.departure', 'ships.prices.times', 'ships.prices.partner', 'ships.partners.infoPartner.seo', 'ships.portDeparture', 'ships.portLocation')
                                         ->first();
                 $content            = Blade::render(Storage::get(config('admin.storage.contentShipLocation').$item->seo->slug.'.blade.php'));
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
@@ -82,7 +82,7 @@ class RoutingController extends Controller {
                                         ->with(['files' => function($query){
                                             $query->where('relation_table', 'ship_info');
                                         }])
-                                        ->with('seo', 'partners.infoPartner.seo')
+                                        ->with('seo', 'partners.infoPartner.seo', 'portDeparture', 'portLocation')
                                         ->first();
                 $content            = Blade::render(Storage::get(config('admin.storage.contentShip').$item->seo->slug.'.blade.php'));
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;

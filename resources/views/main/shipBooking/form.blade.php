@@ -86,6 +86,22 @@
                             </div>
                         </div>
                         <!-- Departture 1 & 2 -->
+                        @php
+                            /* value mặc định ngày khởi hành */
+                            $valueDate_1        = null;
+                            $valueDate_2        = null;
+                            if(!empty(request('date_1'))) {
+                                $valueDate_1    = date('Y-m-d', strtotime(request('date_1')));
+                                $valueDate_2    = date('Y-m-d', strtotime(request('date_1')) + 86400);
+                            }
+                            /* lấy tên của cảng khởi hành - cảng đến để tải Ajax */
+                            $namePortDeparture  = null;
+                            $namePortLocation   = null;
+                            foreach($ports as $port){
+                                if(!empty(request('ship_port_departure_id'))&&request('ship_port_departure_id')==$port->id) $namePortDeparture  = $port->name;
+                                if(!empty(request('ship_port_location_id'))&&request('ship_port_location_id')==$port->id) $namePortLocation     = $port->name;
+                            }
+                        @endphp
                         @for($i=1;$i<=2;++$i)
                         @php
                             $required       = $i==1 ? 'required' : null;
@@ -101,7 +117,7 @@
                                         <!-- One Row -->
                                         <div class="formBox_full_item">
                                             <label class="form-label {{ $requiredClass }}" for="date_{{ $i }}">Ngày khởi hành</label>
-                                            <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date_{{ $i }}" placeholder="YYYY-MM-DD" value="" readonly="readonly" onChange="loadDeparture({{ $i }});" {{ $required }} />
+                                            <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date_{{ $i }}" placeholder="YYYY-MM-DD" value="{{ $i==1 ? $valueDate_1 : $valueDate_2 }}" readonly="readonly" onChange="loadDeparture({{ $i }});" {{ $required }} />
                                             <div class="messageValidate_error" data-validate="date_{{ $i }}">{{ config('main.message_validate.not_empty') }}</div>
                                         </div>
                                         <!-- One Row -->
@@ -110,12 +126,14 @@
                                                 <div class="flexBox_item">
                                                     <div class="inputWithIcon location">
                                                         <label class="form-label {{ $requiredClass }}" for="ship_port_departure_id_{{ $i }}">Điểm khởi hành</label>
-                                                        <select class="select2 form-select select2-hidden-accessible" name="ship_port_departure_id_{{ $i }}" onChange="loadShipLocationByShipDeparture(this, 'js_loadShipLocationByShipDeparture_idWrite_{{ $i }}');">
+                                                        <select id="js_loadShipLocationByShipDeparture_element_{{ $i }}" class="select2 form-select select2-hidden-accessible" name="ship_port_departure_id_{{ $i }}" onChange="loadShipLocationByShipDeparture(this, 'js_loadShipLocationByShipDeparture_idWrite_{{ $i }}', {{ $i }});">
                                                             <option value="">- Lựa chọn -</option>
                                                             @if(!empty($ports))
                                                                 @foreach($ports as $port)
                                                                     @php
                                                                         $selected   = null;
+                                                                        if(!empty(request('ship_port_departure_id'))&&$i==1&&request('ship_port_departure_id')==$port->id) $selected = 'selected';
+                                                                        if(!empty(request('ship_port_location_id'))&&$i==2&&request('ship_port_location_id')==$port->id) $selected = 'selected';
                                                                         $portFull   = \App\Helpers\Build::buildFullShipPort($port);
                                                                     @endphp
                                                                     <option value="{{ $port->id }}"{{ $selected }}>
@@ -144,19 +162,19 @@
                                                 <div class="flexBox_item">
                                                     <div class="inputWithIcon adult">
                                                         <label class="form-label" for="quantity_adult_{{ $i }}">Người lớn</label>
-                                                        <input type="text" class="form-control" name="quantity_adult_{{ $i }}" value="">
+                                                        <input type="text" class="form-control" name="quantity_adult_{{ $i }}" value="{{ !empty(request('adult')) ? request('adult') : null }}">
                                                     </div>
                                                 </div>
                                                 <div class="flexBox_item">
                                                     <div class="inputWithIcon child">
                                                         <label class="form-label" for="quantity_child_{{ $i }}">Trẻ em (6 - 11 tuổi)</label>
-                                                        <input type="text" class="form-control" name="quantity_child_{{ $i }}" value="">
+                                                        <input type="text" class="form-control" name="quantity_child_{{ $i }}" value="{{ !empty(request('child')) ?  request('child') : null }}">
                                                     </div>
                                                 </div>
                                                 <div class="flexBox_item">
                                                     <div class="inputWithIcon old">
                                                         <label class="form-label" for="quantity_old_{{ $i }}">Cao tuổi (trên 60 tuổi)</label>
-                                                        <input type="text" class="form-control" name="quantity_old_{{ $i }}" value="">
+                                                        <input type="text" class="form-control" name="quantity_old_{{ $i }}" value="{{ !empty(request('old')) ? request('old') : null }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -213,9 +231,10 @@
                     });
                 }
             });
+            /* tải selectbox điểm đến (nếu có điểm khởi hành) */
+            loadShipLocationByShipDeparture($('#js_loadShipLocationByShipDeparture_element_1'), 'js_loadShipLocationByShipDeparture_idWrite_1', 1, '{{ $namePortDeparture }}');
+            loadShipLocationByShipDeparture($('#js_loadShipLocationByShipDeparture_element_2'), 'js_loadShipLocationByShipDeparture_idWrite_2', 2, '{{ $namePortLocation }}');
         });
-
-        
 
         $('#formBooking').find('input, select').each(function(){
             $(this).on('change', () => {
@@ -246,7 +265,6 @@
                     showHideMessageValidate(nameInput, 'show');
                 });
             }
-            
         }
 
         function chooseDeparture(elemt, code, idShipPrice, timeDeparture, timeArrive, typeTicket, partner){
@@ -333,19 +351,20 @@
             }
         }
 
-        function loadShipLocationByShipDeparture(element, idWrite){
+        function loadShipLocationByShipDeparture(element, idWrite, code, namePortActive = null){
             const idShipPort = $(element).val();
             $.ajax({
                 url         : '{{ route("main.shipBooking.loadShipLocation") }}',
                 type        : 'post',
                 dataType    : 'html',
                 data        : {
-                    '_token'        : '{{ csrf_token() }}',
-                    ship_port_id    : idShipPort
+                    '_token'            : '{{ csrf_token() }}',
+                    ship_port_id        : idShipPort,
+                    name_port_active    : namePortActive
                 },
                 success     : function(data){
                     $('#'+idWrite).html(data);
-                    loadTwoDeparture();
+                    loadDeparture(code);
                 }
             });
         }

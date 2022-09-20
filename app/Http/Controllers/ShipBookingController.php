@@ -145,11 +145,11 @@ class ShipBookingController extends Controller {
     }
 
     public static function confirm(Request $request){
-        $idShipBooking  = $request->get('ship_booking_id') ?? 0;
-        $item           = ShipBooking::select('*')
-                            ->where('id', $idShipBooking)
-                            ->with('infoDeparture', 'customer_contact')
-                            ->first();
+        $idShipBooking      = $request->get('ship_booking_id') ?? 0;
+        $item               = ShipBooking::select('*')
+                                ->where('id', $idShipBooking)
+                                ->with('infoDeparture', 'customer_contact')
+                                ->first();
         if(!empty($item)){
             return view('main.shipBooking.confirmBooking', compact('item'));
         }else {

@@ -1,6 +1,8 @@
 @extends('main.layouts.main')
 @section('content')
 
+    @include('main.shipLocation.sortBooking', compact('item'))
+
     @include('main.snippets.breadcrumb')
 
     <div class="pageContent">
