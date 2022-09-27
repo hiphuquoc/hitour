@@ -99,7 +99,8 @@ return [
         'contentShip'           => 'public/contents/ships/',
         'contentShipLocation'   => 'public/contents/shipLocations/',
         'contentShipDeparture'  => 'public/contents/shipDepartures/',
-        'contentShipPartner'    => 'public/contents/shipPartners/'
+        'contentShipPartner'    => 'public/contents/shipPartners/',
+        'contentGuide'          => 'public/contents/guides/'
     ],
 
     'alert'     => [
