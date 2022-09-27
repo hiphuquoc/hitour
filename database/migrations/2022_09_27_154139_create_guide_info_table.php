@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTourLocationTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTourLocationTable extends Migration
      */
     public function up()
     {
-        Schema::create('tour_location', function (Blueprint $table) {
+        Schema::create('guide_info', function (Blueprint $table) {
             $table->id();
             $table->text('name');
             $table->text('display_name');
@@ -22,7 +22,7 @@ class CreateTourLocationTable extends Migration
             $table->integer('district_id')->nullable();
             $table->integer('province_id');
             $table->integer('region_id');
-            $table->boolean('island')->default(0);
+            // $table->boolean('island')->default(0);
             $table->text('note')->nullable();
             $table->timestamps();
         });
@@ -35,6 +35,6 @@ class CreateTourLocationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('locations_info');
+        // Schema::dropIfExists('guide_info');
     }
-}
+};

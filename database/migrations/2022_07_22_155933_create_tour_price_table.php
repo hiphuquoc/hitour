@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('apply_age');
             $table->integer('price');
             $table->integer('profit')->nullable();
+            $table->date('date_start');
+            $table->date('date_end');
         });
     }
 

@@ -32,7 +32,10 @@
             <div id="jd_loadOptionTourList_idWrite">
                 <!-- load Ajax -->
                 @if(!empty($item->tour->options))
-                    @include('admin.tourBooking.optionTourList', ['options' => $item->tour->options, 'optionChecked' => $item->tour_option_id])
+                    @php
+                        $options = \App\Http\Controllers\AdminTourOptionController::margeTourPriceByDate($item->tour->options);
+                    @endphp
+                    @include('admin.tourBooking.optionTourList', ['options' => $options, 'optionChecked' => $item->tour_option_id])
                 @endif
             </div>
         </div>

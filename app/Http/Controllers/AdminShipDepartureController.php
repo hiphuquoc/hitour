@@ -46,7 +46,10 @@ class AdminShipDepartureController extends Controller {
                             ->first();
         $provinces      = Province::getItemByIdRegion($item->region_id ?? 0);
         $districts      = District::getItemByIdProvince($item->province_id ?? 0);
-        $content        = Storage::get(config('admin.storage.contentShipDeparture').$item->seo->slug.'.blade.php');
+        $content        = null;
+        if(!empty($item->seo->slug)){
+            $content    = Storage::get(config('admin.storage.contentShipDeparture').$item->seo->slug.'.blade.php');
+        }
         $message        = $request->get('message') ?? null; 
         $type           = !empty($item) ? 'edit' : 'create';
         $type           = $request->get('type') ?? $type;

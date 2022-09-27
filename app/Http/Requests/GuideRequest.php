@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
 
-class TourLocationRequest extends FormRequest
+class GuideRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -38,14 +38,14 @@ class TourLocationRequest extends FormRequest
                     $slug           = !empty(request('slug')) ? request('slug') : null;
                     if(!empty($slug)){
                         $dataCheck  = DB::table('seo')
-                                        ->join('tour_location', 'tour_location.seo_id', '=', 'seo.id')
-                                        ->select('seo.slug', 'tour_location.id')
+                                        ->join('guide_info', 'guide_info.seo_id', '=', 'seo.id')
+                                        ->select('seo.slug', 'guide_info.id')
                                         ->where('slug', $slug)
                                         ->first();
-                        if(!empty(request('tour_location_id'))){
-                            if(request('tour_location_id')!=$dataCheck->id&&!empty($dataCheck)) $fail('Dường dẫn tĩnh đã trùng với một Khu vực Tour khác trên hệ thống!');
+                        if(!empty(request('guide_info_id'))){
+                            if(request('guide_info_id')!=$dataCheck->id&&!empty($dataCheck)) $fail('Dường dẫn tĩnh đã trùng với một Cẩm nang khác trên hệ thống!');
                         }else {
-                            if(!empty($dataCheck)) $fail('Dường dẫn tĩnh đã trùng với một Khu vực Tour khác trên hệ thống!');
+                            if(!empty($dataCheck)) $fail('Dường dẫn tĩnh đã trùng với một Cẩm nang khác trên hệ thống!');
                         }
                     }
                 }

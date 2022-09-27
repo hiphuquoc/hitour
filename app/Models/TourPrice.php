@@ -12,7 +12,9 @@ class TourPrice extends Model {
         'tour_option_id',
         'apply_age', 
         'price',
-        'profit'
+        'profit',
+        'date_start',
+        'date_end'
     ];
     public $timestamps      = false;
 
@@ -26,32 +28,4 @@ class TourPrice extends Model {
         }
         return $id;
     }
-
-    public static function deleteAndInsertItem($idOption, $data){
-        /* delete relation trước đó */
-        $countDeleted                       = 0;
-        if(!empty($idOption)) {
-            $countDeleted                   = TourPrice::select('*')->where('tour_option_id', $idOption)->delete();
-        }
-        /* insert */
-        $countInsert                        = 0;
-        if(!empty($data)){
-            for($i=0;$i<count($data['apply_age']);++$i){
-                $flag                       = self::insertItem([
-                    'tour_option_id'    => $idOption,
-                    'apply_age'         => $data['apply_age'][$i],
-                    'price'             => $data['price'][$i],
-                    'profit'            => $data['profit'][$i]
-                ]);
-                if(!empty($flag)) $countInsert  += 1;
-            }
-        }
-        $result['delete']                   = $countDeleted;
-        $result['insert']                   = $countInsert;
-        return $result;
-    }
-
-    // public function infoLocation(){
-    //     return $this->hasOne(\App\Models\TourLocation::class, 'id', 'tour_location_id');
-    // }
 }

@@ -10,8 +10,7 @@ class TourOption extends Model {
     protected $table        = 'tour_option';
     protected $fillable     = [
         'tour_info_id',
-        'option', 
-        'apply_day'
+        'option'
     ];
     public $timestamps      = false;
 

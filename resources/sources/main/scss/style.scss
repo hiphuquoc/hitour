@@ -584,7 +584,12 @@ $width_normalMenu : 250px;
         }
     }
     &_head {
-
+        h2, h3 {
+            font-size: 1.6rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-family: $font-primary-title;
+        }
     }
     &_body {
         display: flex;
@@ -817,6 +822,7 @@ $tourGrid_radius : 5px;
 .tourGrid {
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 2.5rem;
     &_item {
         width: calc(33.33% - 1rem);
         border: 1px solid $bg-04;
@@ -1110,8 +1116,8 @@ $tourGrid_radius : 5px;
             position: relative;
             display: flex;
             align-items: center;
-            padding-bottom: 0.75rem;
-            border-bottom: 1px solid $bg-05;
+            // padding-bottom: 0.75rem;
+            // border-bottom: 1px solid $bg-05;
             margin-bottom: 0.75rem;
             &.noBorder {
                 border-bottom: none;
@@ -1121,7 +1127,7 @@ $tourGrid_radius : 5px;
                 font-size: 1.3rem;
                 font-family: $font-primary-title;
                 font-weight: 700;
-                color: $color-primary-hover;
+                // color: $color-primary-hover;
             }
             > i {
                 flex: 0 0 30px;
@@ -2136,168 +2142,6 @@ blockquote{
         }
     }
 }
-// .bookTourSort {
-// 	padding: 0;
-// 	display: flex;
-// 	justify-content: space-between;
-// 	flex-wrap: wrap;
-	
-// 	&_date, &_local, &_btn {
-// 		display: flex;
-// 		justify-content: space-between;
-		
-// 		> * {
-// 			width: 100%;
-// 		}
-// 	}
-// 	&_local {
-// 		width: 100%;
-// 	}
-
-// 	&_name {
-// 		width: 100%;
-// 		margin-top: 15px;
-// 	}
-
-// 	&_date {
-// 		width: 100%;
-// 		margin-top: 15px;
-// 	}
-	
-// 	&_btn {
-// 		width: 100%;
-// 		margin-top: 15px;
-		
-// 		> * {
-// 			padding: 12px 15px;
-// 			font-size: 1rem;
-// 			font-family: 'Roboto Slab', sans-serif;
-// 			font-weight: 500;
-// 			background: $color-primary-08;
-// 			border: none;
-// 			outline: none;
-// 			color: #fff;
-// 			cursor: pointer;
-// 			border-radius: 5px;
-			
-// 			&:hover {
-// 				background: $color-primary;
-// 			}
-// 		}
-// 	}
-
-//     @media (min-width: 577px){
-//         flex-wrap: nowrap;
-// 		> * {
-// 			&:not(:first-child){
-// 				margin-left: 15px;
-// 			}
-// 		}
-// 		&_local {
-// 			width: 20%;
-// 		}
-// 		&_name {
-// 			width: 35%;
-// 		}
-// 		&_date {
-// 			width: 25%;
-// 			margin-top: 0;
-// 		}
-// 		&_btn {
-// 			width: 20%;
-// 			margin-top: 0;
-// 		}
-//     }
-
-//     @media (min-width: 767px){
-//         flex-wrap: nowrap;
-// 		> * {
-// 			&:not(:first-child){
-// 				margin-left: 15px;
-// 			}
-// 		}
-// 		&_local {
-// 			width: 20%;
-// 		}
-// 		&_name {
-// 			width: 35%;
-// 		}
-// 		&_date {
-// 			width: 25%;
-// 			margin-top: 0;
-// 		}
-// 		&_btn {
-// 			width: 20%;
-// 			margin-top: 0;
-// 		}
-//     }
-// }
-// .doubleSelectbox {
-// 	display: flex;
-// 	justify-content: space-between;
-// 	position: relative;
-// 	align-items: center;
-// 	background: $bg-03;
-// 	font-weight: 500;
-// 	border-radius: 5px;
-	
-// 	&_item {
-// 		width: 100%;
-// 		padding: 5px 15px 12px 15px;
-// 		cursor: pointer;
-		
-// 		label {
-// 			font-weight: normal;
-// 			font-size: 0.95rem;
-// 		}
-		
-// 		&:last-child {
-// 			padding-left: 40px;
-// 		}
-// 	}
-	
-// 	&_icon {
-// 		width: 40px;
-// 		position: absolute;
-// 		left: calc(50% - 20px);
-// 		top: calc(50% - 20px);
-// 	}
-// }
-// .inputWithLabel {
-// 	display: flex;
-// 	flex-direction: column;
-// 	justify-content: space-between;
-// 	padding: 5px 15px 12px 15px;
-// 	background: $bg-03;
-// 	border-radius: 5px;
-	
-// 	label {
-// 		font-size: 0.95rem;
-// 		font-weight: normal;
-// 	}
-	
-// 	input, select {
-// 		background: none;
-// 		width: 100%;
-// 		border: none;
-// 		font-size: 1rem;
-// 		font-family: 'Roboto', sans-serif;
-// 		font-weight: 500;
-		
-// 		&:focus {
-// 			border: none;
-// 			outline: none;
-// 		}
-// 	}
-	
-// 	input {
-// 		padding: 0;
-// 	}
-	
-// 	select {
-// 		padding: 0 15px 0 0;
-// 	}
-// }
 /* ===== END: Page Ship */
 .backgroundAround {
     display: none;
@@ -2329,5 +2173,46 @@ blockquote{
         padding: 1rem;
         border: 1px solid $bg-04;
         border-radius: 0 0 5px 5px;
+    }
+}
+.chooseOptionTour {
+    line-height: 1.5;
+    // background: #fff;
+    // border: 1px solid $bg-04;
+    &_item {
+        display: flex;
+        padding: 0.75rem;
+        cursor: pointer;
+        &:not(:first-child){
+            border-top: 1px dashed $bg-05;
+        }
+        &:hover, &.active {
+            background: $color-secondary-03;
+        }
+        > * {
+            width: 100%;
+        }
+        &_option {
+            .highLight {
+                font-weight: 700;
+                font-size: 1.05rem;
+                color: $color-primary-hover;
+            }
+        }
+        &_price {
+            .highLight {
+                font-weight: 700;
+                font-size: 1.05rem;
+                color: $color-primary-hover;
+            }
+        }
+        &_radio {
+            flex: 0 0 50px;
+            text-align: left;
+            input {
+                width: auto;
+            }
+        }
+        
     }
 }

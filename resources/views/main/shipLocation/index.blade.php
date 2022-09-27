@@ -1,7 +1,10 @@
 @extends('main.layouts.main')
 @section('content')
 
-    @include('main.shipLocation.sortBooking', compact('item'))
+    @php
+        $active = 'ship';
+    @endphp
+    @include('main.form.sortBooking', compact('item', 'active'))
 
     @include('main.snippets.breadcrumb')
 

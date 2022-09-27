@@ -1,6 +1,11 @@
 @extends('main.layouts.main')
 @section('content')
 
+    @php
+        $active = 'tour';
+    @endphp
+    @include('main.form.sortBooking', compact('item', 'active'))
+
     @include('main.snippets.breadcrumb')
 
     <div class="pageContent">
@@ -8,26 +13,43 @@
             <!-- title -->
             <h1 class="titlePage">Du lịch Côn Đảo - Tour du lịch Côn Đảo</h1>
             <!-- rating -->
-            <div class="ratingBox">
-                <div class="ratingBox_star">
-                    <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                    <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                    <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                    <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                    <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+            @if(!empty($item->seo->rating_aggregate_star)&&!empty($item->seo->rating_aggregate_count))
+                <div class="ratingBox">
+                    <div class="ratingBox_star">
+                        <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                        <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                        <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                        <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                        <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                    </div>
+                    <div class="ratingBox_text maxLine_1" style="margin-left:2px;font-size:14px;">
+                            {{ $item->seo->rating_aggregate_star }} sao / <a href="/sp/dau-rua-mat-3s#product-reviews">{{ $item->seo->rating_aggregate_count }} đánh giá từ khách du lịch</a>
+                    </div>
                 </div>
-                <div class="ratingBox_text maxLine_1" style="margin-left:2px;font-size:14px;">
-                        4.5 sao / <a href="/sp/dau-rua-mat-3s#product-reviews">213 đánh giá từ khách du lịch</a>
-                </div>
-            </div>
+            @endif
+
             <!-- content box -->
-            <div class="contentBox">
-                <p>
-                    Du lịch Hà Nội - Kinh đô Thăng Long một thời, là vùng đất được nhiều Triều đại phong kiến chọn làm kinh đô, lập ấp đắp đê trị vì đất nước. Hà Nội ngày nay nổi tiếng với 36 phố phường cùng nhiều danh lam thắng cảnh và nhiều di tích lịch sử lâu đời trở thành điểm đến của nhiều tour du lịch trong nước được du khách lựa chọn. Đến với tour du lịch Hà Nội, du khách được tìm hiểu quá trình hình thành ngàn năm Văn Hiến, được du ngoạn quanh 36 phố phường Hà Nội cổ kính. Hứa hẹn đây sẽ là một chuyến du lịch thú vị cho quý khách trong kỳ nghỉ của mình. Để tìm được cho mình một tour Hà Nội phù hợp nhất, du khách vui lòng đăng ký tour trực tuyến tại Website của Du Lịch Việt để chọn được tour với giá tốt nhất nhé!
-                </p>
-            </div>
+            @if(!empty($item->description))
+                <div class="contentBox">
+                    <p>{{ $item->description }}</p>
+                </div>
+            @endif
             <!-- tour box -->
             @include('main.tourLocation.tourGrid')
+            <!-- content box -->
+            <div class="pageContent_head">
+                <h2>Cẩm nang du lịch Phú Quốc từ A-Z</h2>
+            </div>
+            <div class="pageContent_body">
+                <div class="pageContent_body_content">
+                    {{-- @include('main.tourLocation.content') --}}
+                    {!! $content ?? null !!}
+                </div>
+                <div class="pageContent_body_sidebar">
+                    @include('main.tourLocation.sidebar')
+                </div>
+            </div>
+            
         </div>
     </div>
 

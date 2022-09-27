@@ -46,8 +46,9 @@ class RoutingController extends Controller {
                                         ->where('ti.status_show', 1)
                                         ->get();
                 $list               = Url::buildFullLinkArray($list);
+                $content            = Blade::render(Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php'));
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                return view('main.tourLocation.index', compact('item', 'list', 'breadcrumb'));
+                return view('main.tourLocation.index', compact('item', 'list', 'breadcrumb', 'content'));
             }else if($checkExists['type']==='tour_info'){ // ====== Tour =============================
                 $item               = Tour::select('*')
                                         ->whereHas('seo', function($q) use ($checkExists){

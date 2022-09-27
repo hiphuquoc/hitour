@@ -2,11 +2,11 @@
 @section('content')
     @php
         $titlePage      = 'Thêm điểm đến Tour mới';
-        $submit         = 'admin.tourLocation.create';
+        $submit         = 'admin.guide.create';
         $checkImage     = 'required';
         if(!empty($type)&&$type=='edit'){
             $titlePage  = 'Chỉnh sửa điểm đến Tour';
-            $submit     = 'admin.tourLocation.update';
+            $submit     = 'admin.guide.update';
             $checkImage = null;
         }
     @endphp
@@ -39,7 +39,7 @@
                             </div>
                             <div class="card-body">
 
-                                @include('admin.tourLocation.formPage')
+                                @include('admin.guide.formPage')
 
                             </div>
                         </div>

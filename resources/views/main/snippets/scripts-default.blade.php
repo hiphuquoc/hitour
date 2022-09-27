@@ -27,7 +27,7 @@
 
         $(window).ready(function(){
             $(window).ready(function(){
-                loadImage();
+                // loadImage();
             });
         });
 </script>

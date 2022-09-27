@@ -30,10 +30,13 @@ use App\Http\Controllers\AdminGalleryController;
 
 use App\Http\Controllers\AdminShipBookingController;
 
+use App\Http\Controllers\AdminGuideController;
+
 use App\Http\Controllers\MainHomeController;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\ShipController;
 use App\Http\Controllers\ShipBookingController;
+use App\Http\Controllers\TourBookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -115,6 +118,15 @@ Route::prefix('admin')->group(function(){
             // Route::post('/createOption', [AdminTourOptionController::class, 'create'])->name('admin.tourOption.createOption');
             // Route::post('/updateOption', [AdminTourOptionController::class, 'update'])->name('admin.tourOption.updateOption');
             // Route::post('/deleteOption', [AdminTourOptionController::class, 'delete'])->name('admin.tourOption.deleteOption');
+        });
+        /* ===== GUIDE ===== */
+        Route::prefix('guide')->group(function(){
+            Route::get('/', [AdminGuideController::class, 'list'])->name('admin.guide.list');
+            Route::post('/create', [AdminGuideController::class, 'create'])->name('admin.guide.create');
+            Route::get('/view', [AdminGuideController::class, 'view'])->name('admin.guide.view');
+            Route::post('/update', [AdminGuideController::class, 'update'])->name('admin.guide.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminGuideController::class, 'delete'])->name('admin.guide.delete');
         });
         /* ===== SHIP LOCATION ===== */
         Route::prefix('shipLocation')->group(function(){
@@ -230,6 +242,11 @@ Route::prefix('shipBooking')->group(function(){
     Route::post('/loadDeparture', [ShipBookingController::class, 'loadDeparture'])->name('main.shipBooking.loadDeparture');
     Route::post('/loadBookingSummary', [ShipBookingController::class, 'loadBookingSummary'])->name('main.shipBooking.loadBookingSummary');
     Route::get('/confirm', [ShipBookingController::class, 'confirm'])->name('main.shipBooking.confirm');
+});
+/* ===== TOUR BOOKING ===== */
+Route::prefix('tourBooking')->group(function(){
+    Route::get('/form', [TourBookingController::class, 'form'])->name('main.tourBooking.form');
+    Route::get('/loadTour', [TourBookingController::class, 'loadTour'])->name('main.tourBooking.loadTour');
 });
 /* ===== TOC CONTENT ===== */
 Route::post('/loadTocContent', [ShipController::class, 'loadTocContent'])->name('main.ship.loadTocContent');

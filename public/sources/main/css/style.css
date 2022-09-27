@@ -828,6 +828,12 @@ input, textarea {
 .pageContent > *:last-child {
   padding-bottom: 3rem;
 }
+.pageContent_head h2, .pageContent_head h3 {
+  font-size: 1.6rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-family: "Roboto Slab", serif;
+}
 .pageContent_body {
   display: flex;
 }
@@ -1049,6 +1055,7 @@ input, textarea {
 .tourGrid {
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 2.5rem;
 }
 .tourGrid_item {
   width: calc(33.33% - 1rem);
@@ -1322,8 +1329,6 @@ input, textarea {
   position: relative;
   display: flex;
   align-items: center;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid #ced4da;
   margin-bottom: 0.75rem;
 }
 .contentTour_item_title.noBorder {
@@ -1334,7 +1339,6 @@ input, textarea {
   font-size: 1.3rem;
   font-family: "Roboto Slab", serif;
   font-weight: 700;
-  color: rgb(0, 90, 180);
 }
 .contentTour_item_title > i {
   flex: 0 0 30px;
@@ -2296,4 +2300,39 @@ blockquote em {
   padding: 1rem;
   border: 1px solid #dee2e6;
   border-radius: 0 0 5px 5px;
+}
+
+.chooseOptionTour {
+  line-height: 1.5;
+}
+.chooseOptionTour_item {
+  display: flex;
+  padding: 0.75rem;
+  cursor: pointer;
+}
+.chooseOptionTour_item:not(:first-child) {
+  border-top: 1px dashed #ced4da;
+}
+.chooseOptionTour_item:hover, .chooseOptionTour_item.active {
+  background: rgba(244, 208, 63, 0.3);
+}
+.chooseOptionTour_item > * {
+  width: 100%;
+}
+.chooseOptionTour_item_option .highLight {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: rgb(0, 90, 180);
+}
+.chooseOptionTour_item_price .highLight {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: rgb(0, 90, 180);
+}
+.chooseOptionTour_item_radio {
+  flex: 0 0 50px;
+  text-align: left;
+}
+.chooseOptionTour_item_radio input {
+  width: auto;
 }

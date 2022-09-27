@@ -130,9 +130,9 @@
                 </div>
                 </div>
                 <div class="shipGrid_item_content_btn">
-                    <div onclick="javascript:openCloseModal('myModal')" style="border-radius:0 0 0 5px;">
+                    <a href="{{ route('main.shipBooking.form', ['ship_port_departure_id' => $item->portDeparture->id, 'ship_port_location_id' => $item->portLocation->id]) }}" style="border-radius:0 0 0 5px;">
                         <i class="far fa-edit"></i>Đặt vé
-                    </div>
+                    </a>
                     <a href="/{{ $item->seo->slug_full }}" style="border-radius:0 0 5px 0;">
                         <i class="fas fa-external-link-alt"></i>Xem chi tiết
                     </a>

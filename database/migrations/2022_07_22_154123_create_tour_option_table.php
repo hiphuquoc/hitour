@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('tour_info_id');
             $table->string('option');
-            $table->text('apply_day');
+            // $table->date('date_start');
+            // $table->date('date_end');
         });
     }
 

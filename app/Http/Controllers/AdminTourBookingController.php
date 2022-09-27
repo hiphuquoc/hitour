@@ -197,7 +197,7 @@ class AdminTourBookingController extends Controller {
         ]);
     }
 
-    public function loadOptionTourList(Request $request){
+    public static function loadOptionTourList(Request $request){
         $optionChecked              = 0;
         $content                    = '<div>Vui lòng chọn chương trình Tour trước!</div>';
         if(!empty($request->get('tour_info_id'))){
@@ -206,9 +206,16 @@ class AdminTourBookingController extends Controller {
                                         ->with('prices')
                                         ->get();
             if($options->isNotEmpty()) {
-                /* checked */
-                $optionChecked      = $options[0]->id;
-                $content            = view('admin.tourBooking.optionTourList', compact('options', 'optionChecked'))->render();
+                if(!empty($request->get('type'))&&$request->get('type')=='admin'){
+                    /* checked */
+                    $optionChecked  = $options[0]->id;
+                    $content        = view('admin.tourBooking.optionTourList', compact('options', 'optionChecked'))->render();
+                }else {
+                    /* lọc lại theo ngày khởi hành */
+                    $options        = self::filterOptionByDate($request->get('date'), $options);
+                    /* lấy content */
+                    $content        = view('main.tourBooking.optionTourList', compact('options'))->render();
+                }
             }
         }
         $result['tour_option_id']   = $optionChecked;
@@ -216,7 +223,7 @@ class AdminTourBookingController extends Controller {
         return json_encode($result);
     }
 
-    public function loadFormPriceQuantity(Request $request){
+    public static function loadFormPriceQuantity(Request $request){
         $result         = null;
         if(!empty($request->get('tour_option_id'))){
             $prices     = TourPrice::select('*')
@@ -227,5 +234,22 @@ class AdminTourBookingController extends Controller {
             $result     = view('admin.tourBooking.formPriceQuantity', compact('prices', 'quantity'))->render();
         }
         echo $result;
+    }
+
+    public static function filterOptionByDate($date, $tourOptions){
+        $result         = new \Illuminate\Database\Eloquent\Collection;
+        if(!empty($date)&&!empty($tourOptions)){
+            $dataCheck  = config('admin.tour_option_apply_day');
+            foreach($tourOptions as $option){
+                foreach($dataCheck as $checker){
+                    if($option->apply_day==$checker['name']){
+                        $checked    = in_array(date('w', strtotime($date)), $checker['apply_day']);
+                        if($checked==true) $result[] = $option;
+                        break;
+                    }
+                }
+            }
+        }
+        return $result;
     }
 }

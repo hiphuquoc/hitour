@@ -175,7 +175,7 @@
     <form id="formTourOption" method="POST" action="{{ route('admin.tourOption.createOption') }}">
     @csrf
         <!-- Input Hidden -->
-        <input type="hidden" id="tour_info_id" name="tour_info_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : 0 }}" />
+        {{-- <input type="hidden" id="tour_info_id" name="tour_info_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : 0 }}" /> --}}
         <div class="modal fade" id="modalContact" tabindex="-1" aria-labelledby="addNewCardTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -203,7 +203,6 @@
         $(document).ready(function(){
             loadOptionPrice('js_loadOptionPrice');
             closeMessage();
-            
         })
 
         $('.pageAdminWithRightSidebar_main_content').repeater();
@@ -220,8 +219,13 @@
         }
 
         function addAndUpdateTourOption(){
-            const tmp               = validateFormModal();
+            const tmp                   = validateFormModal();
             if(tmp==''){
+                /* date range */
+                let date_range          = [];
+                $('#formTourOption').find('input[name*=date_range]').each(function(){
+                    date_range.push($(this).val());
+                });
                 /* data apply_age */
                 let apply_age           = [];
                 $('#formTourOption').find('input[name*=apply_age]').each(function(){
@@ -242,7 +246,7 @@
                     tour_info_id    : $('#tour_info_id').val(),
                     tour_option_id  : $('#tour_option_id').val(),
                     option          : $('#tour_option').val(),
-                    apply_day       : $('#tour_apply_day').val(),
+                    date_range,
                     apply_age,
                     price,
                     profit

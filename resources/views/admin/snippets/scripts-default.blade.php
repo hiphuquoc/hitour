@@ -12,20 +12,9 @@
 <script src="{{ asset('sources/admin/app-assets/js/scripts/forms/pickers/form-pickers.js') }}"></script>
 <script src="{{ asset('sources/admin/app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
 <script src="{{ asset('sources/admin/app-assets/js/scripts/forms/form-select2.min.js') }}"></script>
-{{-- <script src="{{ asset('sources/admin/app-assets/js/scripts/components/components-tooltips.min.js') }}"></script> --}}
-
-{{-- <script src="{{ asset('sources/admin/app-assets/js/scripts/forms/form-validation.js') }}"></script> --}}
-{{-- <script src="{{ asset('sources/admin/app-assets/vendors/js/forms/validation/jquery.validate.min.js') }}"></script> --}}
-
 <script src="{{ asset('sources/admin/app-assets/vendors/js/extensions/sweetalert2.all.min.js') }}"></script>
-
 <script src="{{ asset('sources/admin/app-assets/vendors/js/forms/repeater/jquery.repeater.min.js') }}"></script>
 <script src="{{ asset('sources/admin/app-assets/js/scripts/forms/form-repeater.min.js') }}"></script>
-
-
-{{-- <script src="{{ asset('sources/admin/app-assets/js/scripts/pages/app-calendar-events.min.js') }}"></script>
-<script src="{{ asset('sources/admin/app-assets/js/scripts/pages/app-calendar.min.js') }}"></script> --}}
-
 <!-- BEGIN: SLICK -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <!-- BEGIN: SLICK -->

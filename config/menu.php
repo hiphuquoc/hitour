@@ -136,7 +136,7 @@ return [
         [
             'name'      => 'Quản lí Tour',
             'route'     => '',
-            'icon'      => '<i data-feather=\'feather\'></i>',
+            'icon'      => '<i data-feather=\'briefcase\'></i>',
             'child'     => [
                 [
                     'name'  => '1. Điểm khởi hành',
@@ -168,7 +168,7 @@ return [
         [
             'name'      => 'Quản lí Tàu',
             'route'     => '',
-            'icon'      => '<i data-feather=\'bookmark\'></i>',
+            'icon'      => '<i data-feather=\'anchor\'></i>',
             'child'     => [
                 [
                     'name'  => '1. Bến cảng',
@@ -204,14 +204,19 @@ return [
             ]
         ],
         [
+            'name'      => 'Cảm nang du lịch',
+            'route'     => 'admin.guide.list',
+            'icon'      => '<i data-feather=\'book-open\'></i>',    
+        ],
+        [
             'name'  => 'Nhân viên tư vấn',
             'route' => 'admin.staff.list',
-            'icon'  => '<i data-feather=\'bookmark\'></i>'
+            'icon'  => '<i data-feather=\'user\'></i>'
         ],
         [
             'name'      => 'Quản lí Ảnh',
             'route'     => 'admin.image.list',
-            'icon'      => '<i data-feather=\'bookmark\'></i>'
+            'icon'      => '<i data-feather=\'image\'></i>'
         ],
     ]
 ];

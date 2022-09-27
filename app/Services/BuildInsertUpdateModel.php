@@ -288,13 +288,11 @@ class BuildInsertUpdateModel {
         /*
             tour_info_id
             option
-            apply_day
         */
         $result     = [];
         if(!empty($dataForm)&&!empty($dataForm['tour_info_id'])){
             $result['tour_info_id']     = $dataForm['tour_info_id'];
             $result['option']           = $dataForm['option'] ?? null;
-            $result['apply_day']        = $dataForm['apply_day'] ?? null;
         }
         return $result;
     }
@@ -670,6 +668,29 @@ class BuildInsertUpdateModel {
                 $result[1]['time_arrive']       = $tmp[2] ?? null;
                 $result[1]['type']              = $tmp[3] ?? null;
             }
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableGuideInfo($dataForm, $pageId = null){
+        /* upload guide_info
+            + name
+            + description
+            + display_name
+            + seo_id
+            + region_id
+            + province_id
+            + district_id
+        */
+        $result                             = [];
+        if(!empty($dataForm)){
+            $result['name']                 = $dataForm['title'] ?? null;
+            $result['description']          = $dataForm['description'] ?? null;
+            $result['display_name']         = $dataForm['display_name'] ?? null;
+            if(!empty($pageId)) $result['seo_id'] = $pageId;
+            $result['region_id']            = $dataForm['region'];
+            $result['province_id']          = $dataForm['province'] ?? null;
+            $result['district_id']          = $dataForm['district'] ?? null;
         }
         return $result;
     }
