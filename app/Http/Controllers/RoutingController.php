@@ -6,6 +6,7 @@ use App\Models\TourLocation;
 use App\Models\Tour;
 use App\Models\ShipLocation;
 use App\Models\Ship;
+use App\Models\Guide;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -31,7 +32,7 @@ class RoutingController extends Controller {
                                         ->with(['files' => function($query){
                                             $query->where('relation_table', 'tour_location');
                                         }])
-                                        ->with('seo', 'tours')
+                                        ->with('seo', 'tours', 'guides.infoGuide.seo')
                                         ->first();
                 /* lấy danh sách tour */
                 $arrayIdTour        = [];
@@ -88,6 +89,19 @@ class RoutingController extends Controller {
                 $content            = Blade::render(Storage::get(config('admin.storage.contentShip').$item->seo->slug.'.blade.php'));
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
                 return view('main.ship.index', compact('item', 'content', 'breadcrumb'));
+            }else if($checkExists['type']==='guide_info'){
+                $item               = Guide::select('*')
+                                        ->whereHas('seo', function($query) use($checkExists){
+                                            $query->where('slug', $checkExists['slug']);
+                                        })
+                                        ->with(['files' => function($query){
+                                            $query->where('relation_table', 'guide_info');
+                                        }])
+                                        ->with('seo')
+                                        ->first();
+                $content            = Blade::render(Storage::get(config('admin.storage.contentGuide').$item->seo->slug.'.blade.php'));
+                $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
+                return view('main.guide.index', compact('item', 'content', 'breadcrumb'));
             }
         }else {
             /* Error 404 */

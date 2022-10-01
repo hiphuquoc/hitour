@@ -90,8 +90,28 @@
         <div class="formBox_full_item">
             <div class="form-check form-check-success">
                 <input type="checkbox" class="form-check-input" id="island" name="island" {{ !empty($item->island)&&($item->island==1) ? 'checked' : null }}>
-                <label class="form-check-label" for="island">Khu vực này được tính là biển đảo</label>
+                <label class="form-check-label" for="island">Khu vực này là biển đảo</label>
             </div>
+        </div>
+         <!-- One Row -->
+         <div class="formBox_full_item">
+            <label class="form-label" for="guide_info_id">Cẩm nang du lịch</label>
+            <select class="select2 form-select select2-hidden-accessible" id="guide_info_id" name="guide_info_id" multiple>
+                @if(!empty($guides))
+                    @foreach($guides as $guide)
+                        @php
+                            $selected           = null;
+                            foreach($item->guides as $g){
+                                if($g->guide_info_id==$guide->id){
+                                    $selected   = ' selected';
+                                    break;
+                                }
+                            }
+                        @endphp
+                        <option value="{{ $guide->id }}"{{ $selected }}>{{ $guide->name }}</option>
+                    @endforeach
+                @endif
+            </select>
         </div>
     </div>
 </div>

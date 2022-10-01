@@ -26,9 +26,11 @@
 
 <!-- ===== END: SEARCH FORM ===== -->
 <div id="js_uploadImage_idWrite" class="imageBox" style="padding-bottom:2rem;">
+    @if(!empty($list))
     @foreach($list as $item)
         @include('admin.image.oneRow', compact('item'))
     @endforeach
+    @endif
 </div>
 
 <!-- ===== START: MODAL ===== -->

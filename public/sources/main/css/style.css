@@ -30,7 +30,11 @@ a:hover {
   color: rgb(0, 90, 180);
 }
 
-h3 {
+h2 {
+  margin-bottom: 0.75rem;
+}
+
+h3, h4, h5, h6 {
   margin-bottom: 0.5rem;
 }
 
@@ -419,13 +423,13 @@ input, textarea {
   font-size: 1.6rem;
   font-weight: 800;
   font-family: "Roboto Slab", serif;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .ratingBox {
   font-size: 13px;
   display: flex;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 .ratingBox_star {
   min-width: 95px;
@@ -840,12 +844,34 @@ input, textarea {
 .pageContent_body_content {
   width: calc(100% - 350px - 1.5rem);
 }
+.pageContent_body_content img {
+  display: flex;
+  margin: 1rem 0 1.75rem 0;
+}
+.pageContent_body_content h2 {
+  margin: 1.5rem 0 0.5rem 0;
+}
+.pageContent_body_content ul li:not(:first-child) {
+  margin-top: 0.5rem;
+}
 .pageContent_body_sidebar {
   margin-left: 1.5rem;
   flex: 0 0 350px;
 }
 .pageContent_body_sidebar > *:not(:first-child) {
   margin-top: 1.5rem;
+}
+
+.guideList_item {
+  font-weight: 700;
+  font-style: italic;
+}
+.guideList_item i {
+  font-size: 0.8rem;
+  margin-right: 0.5rem;
+}
+.guideList_item:not(:first-child) {
+  margin-top: 0.5rem;
 }
 
 /* ===== START: Footer */
@@ -1099,6 +1125,7 @@ input, textarea {
   font-weight: 800;
   font-size: 1rem;
   color: rgb(0, 123, 255);
+  margin: 0;
 }
 .tourGrid_item_desc {
   display: flex;
@@ -1110,6 +1137,7 @@ input, textarea {
   font-weight: 500;
   font-family: "Roboto Slab", serif;
   color: #003B7B;
+  margin: 0;
 }
 .tourGrid_item_departureFrom {
   padding: 0 0.75rem;
@@ -1333,12 +1361,13 @@ input, textarea {
 }
 .contentTour_item_title.noBorder {
   border-bottom: none;
-  margin-bottom: 0.25rem;
 }
 .contentTour_item_title h2, .contentTour_item_title h3 {
   font-size: 1.3rem;
   font-family: "Roboto Slab", serif;
   font-weight: 700;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 .contentTour_item_title > i {
   flex: 0 0 30px;
@@ -1496,16 +1525,20 @@ input, textarea {
 .tableContentBorder {
   line-height: 1.6 !important;
   border: 1px solid #dee2e6;
+  margin-bottom: 1rem;
 }
 .tableContentBorder td:not(:first-child), .tableContentBorder th:not(:first-child) {
   border-left: 1px solid #dee2e6;
 }
+.tableContentBorder thead {
+  font-size: 0.95rem;
+}
 .tableContentBorder thead tr {
-  background: rgba(0, 123, 255, 0.3);
+  background: #e9ecef;
   font-weight: 700;
   font-family: "Roboto Slab", serif;
 }
-.tableContentBorder thead tr th {
+.tableContentBorder thead tr td, .tableContentBorder thead tr th {
   padding: 0.5rem;
   text-align: center;
 }
@@ -1524,7 +1557,7 @@ input, textarea {
   background: #e9ecef;
   font-size: 0.95rem;
   border-radius: 5px;
-  margin: 1rem auto;
+  margin: 1rem auto 1.25rem auto;
   border: 1px solid #e9ecef;
 }
 .imageBox img {
@@ -1532,9 +1565,10 @@ input, textarea {
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 5px;
+  margin: 0;
 }
 .imageBox_note {
-  padding: 0 1rem 0.5rem 1rem;
+  padding: 0.5rem 1rem;
   text-align: center;
 }
 
@@ -1707,13 +1741,13 @@ blockquote em {
 }
 .contentShip_item_title.noBorder {
   border-bottom: none;
-  margin-bottom: 0.25rem;
 }
 .contentShip_item_title h2, .contentShip_item_title h3 {
   font-size: 1.3rem;
   font-family: "Roboto Slab", serif;
   font-weight: 700;
   color: rgb(0, 90, 180);
+  margin: 0;
 }
 .contentShip_item_title > i {
   flex: 0 0 30px;

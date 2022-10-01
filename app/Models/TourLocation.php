@@ -84,4 +84,8 @@ class TourLocation extends Model {
         return $this->hasMany(\App\Models\RelationTourLocation::class, 'tour_location_id', 'id');
     }
 
+    public function guides() {
+        return $this->hasMany(\App\Models\RelationTourGuide::class, 'tour_location_id', 'id');
+    }
+
 }

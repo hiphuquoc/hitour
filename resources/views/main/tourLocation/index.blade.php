@@ -27,7 +27,6 @@
                     </div>
                 </div>
             @endif
-
             <!-- content box -->
             @if(!empty($item->description))
                 <div class="contentBox">
@@ -37,19 +36,19 @@
             <!-- tour box -->
             @include('main.tourLocation.tourGrid')
             <!-- content box -->
-            <div class="pageContent_head">
-                <h2>Cẩm nang du lịch Phú Quốc từ A-Z</h2>
-            </div>
-            <div class="pageContent_body">
-                <div class="pageContent_body_content">
-                    {{-- @include('main.tourLocation.content') --}}
-                    {!! $content ?? null !!}
+            @if(!empty($item->guides->isNotEmpty()))
+                <div class="contentBox">
+                    <h2>Cẩm nang du lịch {{ $item->display_name ?? null }}</h2>
+                    <p>Nếu các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> của Hitour không đáp ứng được nhu cầu của bạn, hoặc là người ưu thích du lịch tự túc,... Hitour cung cấp thêm cho bạn <strong>Cẩm nang du lịch từ A-Z</strong> để bạn có thể tự do tham khảo thông tin chi tiết về <strong>du lịch {{ $item->display_name ?? null }}</strong> để có thể lên kế hoạch, sắp xếp cho chuyến đi du lịch của mình được chu đáo nhất</p>
+                    <div class="guideList">
+                        @foreach($item->guides as $guide)
+                            <div class="guideList_item">
+                                <i class="fa-solid fa-angles-right"></i>Xem thêm <a href="{{ $guide->infoGuide->seo->slug_full }}">{{ $guide->infoGuide->name }}</a>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
-                <div class="pageContent_body_sidebar">
-                    @include('main.tourLocation.sidebar')
-                </div>
-            </div>
-            
+            @endif
         </div>
     </div>
 

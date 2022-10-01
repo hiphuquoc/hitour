@@ -224,6 +224,8 @@ Route::prefix('admin')->group(function(){
             Route::post('/changeName', [AdminImageController::class, 'changeName'])->name('admin.image.changeName');
             Route::post('/changeImage', [AdminImageController::class, 'changeImage'])->name('admin.image.changeImage');
             Route::post('/removeImage', [AdminImageController::class, 'removeImage'])->name('admin.image.removeImage');
+
+            // Route::get('/toolRename', [AdminImageController::class, 'toolRename'])->name('admin.image.toolRename');
         });
         /* ===== AJAX ===== */
         Route::post('/loadProvinceByRegion', [AdminFormController::class, 'loadProvinceByRegion'])->name('admin.form.loadProvinceByRegion');

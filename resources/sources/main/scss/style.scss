@@ -173,12 +173,12 @@ $height_headerMain : 85px;
     font-size: 1.6rem;
     font-weight: 800;
     font-family: $font-primary-title;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
 }
 .ratingBox {
 	font-size: 13px;
     display:flex;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
 	&_star {
         min-width: 95px;
 		&_on {
@@ -595,6 +595,20 @@ $width_normalMenu : 250px;
         display: flex;
         &_content {
             width: calc(100% - 350px - 1.5rem);
+            img {
+                display: flex;
+                margin: 1rem 0 1.75rem 0;
+            }
+            h2 {
+                margin: 1.5rem 0 0.5rem 0;
+            }
+            ul {
+                li {
+                    &:not(:first-child){
+                        margin-top: 0.5rem;
+                    }
+                }
+            }
         }
         &_sidebar {
             margin-left: 1.5rem;
@@ -604,6 +618,19 @@ $width_normalMenu : 250px;
                     margin-top: 1.5rem;
                 }
             }
+        }
+    }
+}
+.guideList {
+    &_item {
+        font-weight: 700;
+        font-style: italic;
+        i {
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
+        &:not(:first-child){
+            margin-top: 0.5rem;
         }
     }
 }
@@ -862,6 +889,7 @@ $tourGrid_radius : 5px;
                 font-weight: 800;
                 font-size: 1rem;
                 color: $color-primary;
+                margin: 0;
             }
         }
         &_desc {
@@ -873,6 +901,7 @@ $tourGrid_radius : 5px;
                 font-weight: 500;
                 font-family: $font-primary-title;
                 color: #003B7B;
+                margin: 0;
             }
         }
         &_departureFrom {
@@ -1121,12 +1150,13 @@ $tourGrid_radius : 5px;
             margin-bottom: 0.75rem;
             &.noBorder {
                 border-bottom: none;
-                margin-bottom: 0.25rem;
             }
             h2, h3 {
                 font-size: 1.3rem;
                 font-family: $font-primary-title;
                 font-weight: 700;
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
                 // color: $color-primary-hover;
             }
             > i {
@@ -1303,17 +1333,19 @@ $tourGrid_radius : 5px;
 .tableContentBorder {
     line-height: 1.6 !important;
     border: 1px solid $bg-04;
+    margin-bottom: 1rem;
     td, th {
         &:not(:first-child){
             border-left: 1px solid $bg-04;
         }
     }
     thead {
+        font-size: 0.95rem;
         tr {
-            background: $color-primary-03;
+            background: $bg-03;
             font-weight: 700;
             font-family: $font-primary-title;
-            th {
+            td, th {
                 padding: 0.5rem ;
                 text-align: center;
             }
@@ -1338,15 +1370,16 @@ $tourGrid_radius : 5px;
     background: $bg-03;
     font-size: 0.95rem;
     border-radius: 5px;
-    margin: 1rem auto;
+    margin: 1rem auto 1.25rem auto;
     border: 1px solid $bg-03;
     img {
         width: 100%;
         object-fit: cover;
         border-radius: 5px;
+        margin: 0;
     }
     &_note {
-        padding: 0 1rem 0.5rem 1rem;
+        padding: 0.5rem 1rem;
         text-align: center;
     }
 }
@@ -1535,13 +1568,13 @@ blockquote{
             margin-bottom: 0.75rem;
             &.noBorder {
                 border-bottom: none;
-                margin-bottom: 0.25rem;
             }
             h2, h3 {
                 font-size: 1.3rem;
                 font-family: $font-primary-title;
                 font-weight: 700;
                 color: $color-primary-hover;
+                margin: 0;
             }
             > i {
                 flex: 0 0 30px;

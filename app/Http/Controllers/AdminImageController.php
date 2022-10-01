@@ -17,7 +17,10 @@ class AdminImageController extends Controller {
 
     public function list(Request $request){
         $params['search_name']  = $request->get('search_name') ?? null;
-        $list                   = glob(Storage::path(config('admin.images.folderUpload')).'*'.$params['search_name'].'*');
+        $list                   = null;
+        if(!empty($params['search_name'])){
+            $list               = glob(Storage::path(config('admin.images.folderUpload')).'*'.$params['search_name'].'*');
+        }
         return view('admin.image.list', compact('list', 'params'));
     }
 
@@ -187,5 +190,15 @@ class AdminImageController extends Controller {
         }
         return $fileSaved;
     }
+
+    // public static function toolRename(){
+    //     ini_set('max_execution_time', '0');
+    //     $data           = glob(Storage::path('public/images/backup/'.'*'));
+    //     foreach($data as $image){
+    //         $tmp        = pathinfo($image);
+    //         $newName    = $tmp['dirname'].'/'.$tmp['filename'].'-type-manager-upload'.'.'.$tmp['extension'];
+    //         rename($image, $newName);
+    //     }
+    // }
 
 }

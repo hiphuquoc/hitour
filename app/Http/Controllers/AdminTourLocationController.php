@@ -11,6 +11,8 @@ use App\Models\Seo;
 use App\Services\BuildInsertUpdateModel;
 use App\Models\District;
 use App\Models\Province;
+use App\Models\Guide;
+use App\Models\RelationTourGuide;
 use App\Models\SystemFile;
 use Illuminate\Support\Facades\DB;
 
@@ -41,18 +43,19 @@ class AdminTourLocationController extends Controller {
                             ->where('id', $id)
                             ->with(['files' => function($query){
                                 $query->where('relation_table', 'tour_location');
-                            }], 'seo')
+                            }], 'seo', 'guides')
                             ->first();
         $provinces      = Province::getItemByIdRegion($item->region_id ?? 0);
         $districts      = District::getItemByIdProvince($item->province_id ?? 0);
-        $content        = null;
-        if(!empty($item->seo->slug)){
-            $content    = Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php');
-        }
+        $guides         = Guide::all();
+        // $content        = null;
+        // if(!empty($item->seo->slug)){
+        //     $content    = Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php');
+        // }
         $message        = $request->get('message') ?? null; 
         $type           = !empty($item) ? 'edit' : 'create';
         $type           = $request->get('type') ?? $type;
-        return view('admin.tourLocation.view', compact('item', 'type', 'provinces', 'districts', 'content', 'message'));
+        return view('admin.tourLocation.view', compact('item', 'type', 'provinces', 'districts', 'guides', 'message'));
     }
 
     public function create(TourLocationRequest $request){
@@ -70,8 +73,16 @@ class AdminTourLocationController extends Controller {
             /* insert tour_location */
             $insertTourLocation = $this->BuildInsertUpdateModel->buildArrayTableTourLocation($request->all(), $pageId);
             $idTourLocation     = TourLocation::insertItem($insertTourLocation);
+            /* relateion tour và guide (cẩm nang du lịch) */
+            if(!empty($request->get('guide_info_id'))){
+                $insertRelationTourGuide    = [
+                    'tour_location_id'  => $idTourLocation,
+                    'guide_info_id'     => $request->get('guide_info_id')
+                ];
+                RelationTourGuide::insertItem($insertRelationTourGuide);
+            }
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentTourLocation').$request->get('slug').'.blade.php', $request->get('content'));
+            // Storage::put(config('admin.storage.contentTourLocation').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
@@ -113,28 +124,41 @@ class AdminTourLocationController extends Controller {
             $updatePage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'tour_location', $dataPath);
             Seo::updateItem($request->get('seo_id'), $updatePage);
             /* update TourLocation */
+            $idTourLocation     = $request->get('tour_location_id');
             $updateTourLocation = $this->BuildInsertUpdateModel->buildArrayTableTourLocation($request->all());
-            TourLocation::updateItem($request->get('tour_location_id'), $updateTourLocation);
+            TourLocation::updateItem($idTourLocation, $updateTourLocation);
             /* lưu content vào file */
-            /* convert content */
-            $tmp = explode(PHP_EOL, $request->get('content'));
-            for($i=0;$i<count($tmp);++$i){
-                if(!empty(preg_match('/<img src="/', $tmp[$i]))&&!empty(preg_match('/<div class="imgNote">/', $tmp[$i+1]))) {
-                    $tmp[$i] = '<div class="imageBox">'.$tmp[$i];
-                }
-                if(!empty(preg_match('/<div class="imgNote">/', $tmp[$i]))) {
-                    $tmp[$i] = str_replace('<div class="imgNote">', '<div class="imageBox_note">', $tmp[$i]).'</div>';
-                }
+            // /* tính năng convert content từ website cũ */
+            // $tmp = explode(PHP_EOL, $request->get('content'));
+            // for($i=0;$i<count($tmp);++$i){
+            //     if(!empty(preg_match('/<img src="/', $tmp[$i]))&&!empty(preg_match('/<div class="imgNote">/', $tmp[$i+1]))) {
+            //         $tmp[$i] = '<div class="imageBox">'.$tmp[$i];
+            //     }
+            //     if(!empty(preg_match('/<div class="imgNote">/', $tmp[$i]))) {
+            //         $tmp[$i] = str_replace('<div class="imgNote">', '<div class="imageBox_note">', $tmp[$i]).'</div>';
+            //     }
+            // }
+            // $tmp = implode(PHP_EOL, $tmp);
+            // $tmp = str_replace('public/svg/loading_plane_e9ecef.svg', '{{ config("admin.images.default_750x460") }}', $tmp);
+            // Storage::put(config('admin.storage.contentTourLocation').$request->get('slug').'.blade.php', $tmp);
+            /* relateion tour và guide (cẩm nang du lịch) */
+            RelationTourGuide::select('*')
+                                ->where('tour_location_id', $idTourLocation)
+                                ->delete();
+            if(!empty($request->get('guide_info_id'))){
+                $insertRelationTourGuide    = [
+                    'tour_location_id'  => $idTourLocation,
+                    'guide_info_id'     => $request->get('guide_info_id')
+                ];
+                RelationTourGuide::insertItem($insertRelationTourGuide);
             }
-            $tmp = implode(PHP_EOL, $tmp);
-            $tmp = str_replace('public/svg/loading_plane_e9ecef.svg', '{{ config("admin.images.default_750x460") }}', $tmp);
-            Storage::put(config('admin.storage.contentTourLocation').$request->get('slug').'.blade.php', $tmp);
+            /* lưu content vào file */
             // Storage::put(config('admin.storage.contentTourLocation').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
                 $params         = [
-                    'attachment_id'     => $request->get('tour_location_id'),
+                    'attachment_id'     => $idTourLocation,
                     'relation_table'    => 'tour_location',
                     'name'              => $name
                 ];
@@ -155,7 +179,7 @@ class AdminTourLocationController extends Controller {
             ];
         }
         $request->session()->put('message', $message);
-        return redirect()->route('admin.tourLocation.view', ['id' => $request->get('tour_location_id')]);
+        return redirect()->route('admin.tourLocation.view', ['id' => $idTourLocation]);
     }
 
     public function delete(Request $request){
