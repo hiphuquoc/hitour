@@ -42,7 +42,7 @@ class TourLocationRequest extends FormRequest
                                         ->select('seo.slug', 'tour_location.id')
                                         ->where('slug', $slug)
                                         ->first();
-                        if(!empty(request('tour_location_id'))){
+                        if(!empty(request('tour_location_id'))&&!empty($dataCheck)){
                             if(request('tour_location_id')!=$dataCheck->id&&!empty($dataCheck)) $fail('Dường dẫn tĩnh đã trùng với một Khu vực Tour khác trên hệ thống!');
                         }else {
                             if(!empty($dataCheck)) $fail('Dường dẫn tĩnh đã trùng với một Khu vực Tour khác trên hệ thống!');
