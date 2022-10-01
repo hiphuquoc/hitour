@@ -4,9 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
-
-// use App\Helpers\Url;
 
 class Guide extends Model {
     use HasFactory;
@@ -35,6 +32,7 @@ class Guide extends Model {
                         ->with(['files' => function($query){
                             $query->where('relation_table', 'guide_info');
                         }], 'seo')
+                        ->orderBy('id', 'DESC')
                         ->get();
         return $result;
     }
@@ -79,9 +77,5 @@ class Guide extends Model {
     public function district(){
         return $this->hasOne(\App\Models\District::class, 'id', 'district_id');
     }
-
-    // public function tours(){
-    //     return $this->hasMany(\App\Models\RelationTourLocation::class, 'guide_info_id', 'id');
-    // }
 
 }

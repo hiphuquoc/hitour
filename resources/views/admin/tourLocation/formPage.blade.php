@@ -96,7 +96,7 @@
          <!-- One Row -->
          <div class="formBox_full_item">
             <label class="form-label" for="guide_info_id">Cẩm nang du lịch</label>
-            <select class="select2 form-select select2-hidden-accessible" id="guide_info_id" name="guide_info_id" multiple>
+            <select class="select2 form-select select2-hidden-accessible" id="guide_info_id" name="guide_info_id" tabindex="-1" aria-hidden="true" multiple>
                 @if(!empty($guides))
                     @foreach($guides as $guide)
                         @php
