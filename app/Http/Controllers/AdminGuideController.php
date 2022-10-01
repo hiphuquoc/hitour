@@ -119,20 +119,7 @@ class AdminGuideController extends Controller {
             $updateGuide = $this->BuildInsertUpdateModel->buildArrayTableGuideInfo($request->all());
             Guide::updateItem($request->get('guide_info_id'), $updateGuide);
             /* lưu content vào file */
-            /* convert content */
-            $tmp = explode(PHP_EOL, $request->get('content'));
-            for($i=0;$i<count($tmp);++$i){
-                if(!empty(preg_match('/<img src="/', $tmp[$i]))&&!empty(preg_match('/<div class="imgNote">/', $tmp[$i+1]))) {
-                    $tmp[$i] = '<div class="imageBox">'.$tmp[$i];
-                }
-                if(!empty(preg_match('/<div class="imgNote">/', $tmp[$i]))) {
-                    $tmp[$i] = str_replace('<div class="imgNote">', '<div class="imageBox_note">', $tmp[$i]).'</div>';
-                }
-            }
-            $tmp = implode(PHP_EOL, $tmp);
-            $tmp = str_replace('public/svg/loading_plane_e9ecef.svg', '{{ config("admin.images.default_750x460") }}', $tmp);
-            Storage::put(config('admin.storage.contentGuide').$request->get('slug').'.blade.php', $tmp);
-            // Storage::put(config('admin.storage.contentGuide').$request->get('slug').'.blade.php', $request->get('content'));
+            Storage::put(config('admin.storage.contentGuide').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
