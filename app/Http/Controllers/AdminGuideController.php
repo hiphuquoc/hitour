@@ -74,6 +74,7 @@ class AdminGuideController extends Controller {
             $content            = $request->get('content');
             $content            = str_replace('public/image/', '/storage/images/upload/', $content);
             $content            = str_replace('.webp', '-type-manager-upload.webp', $content);
+            $content            = str_replace('autoTable', 'tableContentBorder', $content);
             Storage::put(config('admin.storage.contentGuide').$request->get('slug').'.blade.php', $content);
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
