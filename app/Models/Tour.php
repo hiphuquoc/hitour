@@ -138,4 +138,8 @@ class Tour extends Model {
     public function timetables(){
         return $this->hasMany(\App\Models\TourTimetable::class, 'tour_info_id', 'id');
     }
+
+    public function questions(){
+        return $this->hasMany(\App\Models\QuestionAnswer::class, 'reference_id', 'id');
+    }
 }

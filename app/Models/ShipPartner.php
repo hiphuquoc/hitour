@@ -57,4 +57,8 @@ class ShipPartner extends Model {
         return $this->hasMany(\App\Models\ShipPartnerContact::class, 'partner_id', 'id');
     }
 
+    public function questions(){
+        return $this->hasMany(\App\Models\QuestionAnswer::class, 'reference_id', 'id');
+    }
+
 }

@@ -1215,15 +1215,15 @@ input, textarea {
 .galleryBox_button_item {
   padding: 0.5rem 1rem;
   font-size: 1.2rem;
-  color: #456;
+  color: #fff;
   cursor: pointer;
 }
 .galleryBox_button_item:hover {
-  background: rgba(0, 0, 0, 0.2);
-  color: #fff;
+  background: rgba(0, 0, 0, 0.3);
+  color: rgb(244, 208, 63);
 }
 .galleryBox_button_item:not(:first-child) {
-  border-left: 1px solid #dee2e6;
+  border-left: 1px solid #adb5bd;
 }
 
 .detailTourBox {

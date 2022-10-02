@@ -11,7 +11,7 @@
         }
     @endphp
 
-    <form id="formAction" class="needs-validation invalid" action="{{ route($submit) }}" method="POST" novalidate="" enctype="multipart/form-data">
+    <form id="formAction" class="needs-validation invalid" action="{{ route($submit) }}" method="POST" novalidate enctype="multipart/form-data">
     @csrf
         <!-- input hidden -->
         <input type="hidden" id="tour_info_id" name="tour_info_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : null }}" />
@@ -100,15 +100,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="pageAdminWithRightSidebar_main_content_item">
+                    <div class="pageAdminWithRightSidebar_main_content_item repeater">
                         <div data-repeater-list="timetable">
                             @if(!empty($item->timetables))
                                 @foreach($item->timetables as $timetable)
-                                    <div class="card" data-repeater-item="">
+                                    <div class="card" data-repeater-item>
                                         <div class="card-header border-bottom">
                                             <h4 class="card-title">
                                                 Lịch trình Tour
-                                                <i class="fa-solid fa-circle-xmark" data-repeater-delete=""></i>
+                                                <i class="fa-solid fa-circle-xmark" data-repeater-delete></i>
                                             </h4>
                                         </div>
                                         <div class="card-body">
@@ -119,11 +119,11 @@
                                     </div>
                                 @endforeach
                             @else
-                                <div class="card" data-repeater-item="">
+                                <div class="card" data-repeater-item>
                                     <div class="card-header border-bottom">
                                         <h4 class="card-title">
                                             Lịch trình Tour
-                                            <i class="fa-solid fa-circle-xmark" data-repeater-delete=""></i>
+                                            <i class="fa-solid fa-circle-xmark" data-repeater-delete></i>
                                         </h4>
                                     </div>
                                     <div class="card-body">
@@ -139,6 +139,18 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus me-25"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                                 <span>Thêm</span>
                             </button>
+                        </div>
+                    </div>
+                    <div class="pageAdminWithRightSidebar_main_content_item width100">
+                        <div class="card">
+                            <div class="card-header border-bottom">
+                                <h4 class="card-title">Câu hỏi thường gặp</h4>
+                            </div>
+                            <div class="card-body">
+                                
+                                @include('admin.form.formAnswer', compact('item'))
+                                
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -205,7 +217,7 @@
             closeMessage();
         })
 
-        $('.pageAdminWithRightSidebar_main_content').repeater();
+        $('.repeater').repeater();
 
         function closeMessage(){
             setTimeout(() => {

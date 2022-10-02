@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ShipRequest;
 use App\Models\ShipPort;
 use App\Models\SystemFile;
+use App\Models\QuestionAnswer;
 
 class AdminShipController extends Controller {
 
@@ -59,6 +60,9 @@ class AdminShipController extends Controller {
         $item               = Ship::select('*')
                                 ->where('id', $request->get('id'))
                                 ->with(['files' => function($query){
+                                    $query->where('relation_table', 'ship_info');
+                                }])
+                                ->with(['questions' => function($query){
                                     $query->where('relation_table', 'ship_info');
                                 }])
                                 ->with('seo', 'location', 'departure', 'partners.infoPartner', 'staffs')
@@ -98,6 +102,19 @@ class AdminShipController extends Controller {
             $idShip             = Ship::insertItem($insertShipInfo);
             /* lưu content vào file */
             Storage::put(config('admin.storage.contentShip').$request->get('slug').'.blade.php', $request->get('content'));
+            /* insert câu hỏi thường gặp */
+            if(!empty($request->get('question_answer'))){
+                foreach($request->get('question_answer') as $itemQues){
+                    if(!empty($itemQues['question'])&&!empty($itemQues['answer'])){
+                        QuestionAnswer::insertItem([
+                            'question'          => $itemQues['question'],
+                            'answer'            => $itemQues['answer'],
+                            'relation_table'    => 'ship_info',
+                            'reference_id'      => $idShip
+                        ]);
+                    }
+                }
+            }
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')&&!empty($idShip)){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
@@ -174,6 +191,23 @@ class AdminShipController extends Controller {
             Ship::updateItem($idShip, $updateTourInfo);
             /* lưu content vào file */
             Storage::put(config('admin.storage.contentShip').$request->get('slug').'.blade.php', $request->get('content'));
+            /* update câu hỏi thường gặp */
+            QuestionAnswer::select('*')
+                            ->where('relation_table', 'ship_info')
+                            ->where('reference_id', $idShip)
+                            ->delete();
+            if(!empty($request->get('question_answer'))){
+                foreach($request->get('question_answer') as $itemQues){
+                    if(!empty($itemQues['question'])&&!empty($itemQues['answer'])){
+                        QuestionAnswer::insertItem([
+                            'question'          => $itemQues['question'],
+                            'answer'            => $itemQues['answer'],
+                            'relation_table'    => 'ship_info',
+                            'reference_id'      => $idShip
+                        ]);
+                    }
+                }
+            }
             /* update slider và lưu CSDL */
             if($request->hasFile('slider')&&!empty($idShip)){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();

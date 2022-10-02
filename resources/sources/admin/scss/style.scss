@@ -70,6 +70,23 @@ body {
     font-family: $font-primary-text;
 }
 
+textarea {
+    &::-webkit-scrollbar {
+        background-color: transparent;
+        width: 7px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: $bg-06;
+        border-radius: 1000px;
+        -webkit-box-shadow: inset 0 0 6px $bg-04;
+    }
+    &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px $bg-04;
+        border-radius: 10px;
+        background: transparent;
+    }
+}
+
 .highLight_700 {
     font-weight: 700;
     color: $color-primary;

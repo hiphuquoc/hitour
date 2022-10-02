@@ -8,6 +8,7 @@ use App\Helpers\Upload;
 use App\Services\BuildInsertUpdateModel;
 use App\Models\ShipPartner;
 use App\Models\Seo;
+use App\Models\QuestionAnswer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -26,6 +27,9 @@ class AdminShipPartnerController extends Controller {
         $id                 = $request->get('id') ?? 0;
         $item               = ShipPartner::select('*')
                             ->where('id', $id)
+                            ->with(['questions' => function($query){
+                                $query->where('relation_table', 'ship_partner');
+                            }])
                             ->with('seo')
                             ->first();
         $content            = Storage::get(config('admin.storage.contentShipPartner').$item->seo->slug.'.blade.php');
@@ -50,9 +54,22 @@ class AdminShipPartnerController extends Controller {
             $seoId              = Seo::insertItem($insertPage);
             /* insert ship_partner */
             $insertPartnerInfo  = $this->BuildInsertUpdateModel->buildArrayTableShipPartner($request->all(), $seoId, $dataPath['filePathNormal']);
-            $idPartner          = ShipPartner::insertItem($insertPartnerInfo);
+            $idShipPartner      = ShipPartner::insertItem($insertPartnerInfo);
             /* lưu content vào file */
             Storage::put(config('admin.storage.contentShipPartner').$request->get('slug').'.blade.php', $request->get('content'));
+            /* insert câu hỏi thường gặp */
+            if(!empty($request->get('question_answer'))){
+                foreach($request->get('question_answer') as $itemQues){
+                    if(!empty($itemQues['question'])&&!empty($itemQues['answer'])){
+                        QuestionAnswer::insertItem([
+                            'question'          => $itemQues['question'],
+                            'answer'            => $itemQues['answer'],
+                            'relation_table'    => 'ship_partner',
+                            'reference_id'      => $idShipPartner
+                        ]);
+                    }
+                }
+            }
             DB::commit();
             /* Message */
             $message            = [
@@ -68,12 +85,13 @@ class AdminShipPartnerController extends Controller {
             ];
         }
         $request->session()->put('message', $message);
-        return redirect()->route('admin.shipPartner.view', ['id' => $idPartner]);
+        return redirect()->route('admin.shipPartner.view', ['id' => $idShipPartner]);
     }
 
     public function update(ShipPartnerRequest $request){
         try {
             DB::beginTransaction();
+            $idShipPartner      = $request->get('id') ?? 0;
             /* upload image */
             $dataPath           = null;
             if($request->hasFile('image')) {
@@ -86,9 +104,26 @@ class AdminShipPartnerController extends Controller {
             Seo::updateItem($request->get('seo_id'), $updatePage);
             /* update partner_info */
             $updatePartnerInfo  = $this->BuildInsertUpdateModel->buildArrayTableShipPartner($request->all(), null, $dataPath['filePathNormal'] ?? null);
-            ShipPartner::updateItem($request->get('id'), $updatePartnerInfo);
+            ShipPartner::updateItem($idShipPartner, $updatePartnerInfo);
             /* lưu content vào file */
             Storage::put(config('admin.storage.contentShipPartner').$request->get('slug').'.blade.php', $request->get('content'));
+            /* update câu hỏi thường gặp */
+            QuestionAnswer::select('*')
+                            ->where('relation_table', 'ship_partner')
+                            ->where('reference_id', $idShipPartner)
+                            ->delete();
+            if(!empty($request->get('question_answer'))){
+                foreach($request->get('question_answer') as $itemQues){
+                    if(!empty($itemQues['question'])&&!empty($itemQues['answer'])){
+                        QuestionAnswer::insertItem([
+                            'question'          => $itemQues['question'],
+                            'answer'            => $itemQues['answer'],
+                            'relation_table'    => 'ship_partner',
+                            'reference_id'      => $idShipPartner
+                        ]);
+                    }
+                }
+            }
             DB::commit();
             /* Message */
             $message            = [
@@ -104,7 +139,7 @@ class AdminShipPartnerController extends Controller {
             ];
         }
         $request->session()->put('message', $message);
-        return redirect()->route('admin.shipPartner.view', ['id' => $request->get('id')]);
+        return redirect()->route('admin.shipPartner.view', ['id' => $idShipPartner]);
     }
 
     public static function delete(Request $request){

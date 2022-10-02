@@ -14,6 +14,7 @@ use App\Models\Province;
 use App\Models\Guide;
 use App\Models\RelationTourGuide;
 use App\Models\SystemFile;
+use App\Models\QuestionAnswer;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Storage;
@@ -41,9 +42,14 @@ class AdminTourLocationController extends Controller {
         $id             = $request->get('id') ?? 0;
         $item           = TourLocation::select('*')
                             ->where('id', $id)
-                            ->with(['files' => function($query){
-                                $query->where('relation_table', 'tour_location');
-                            }], 'seo', 'guides')
+                            ->with(
+                                ['files' => function($query){
+                                    $query->where('relation_table', 'tour_location');
+                                }], 
+                                ['questions' => function($query){
+                                    $query->where('relation_table', 'tour_location');
+                                }],
+                                'seo', 'guides')
                             ->first();
         $provinces      = Province::getItemByIdRegion($item->region_id ?? 0);
         $districts      = District::getItemByIdProvince($item->province_id ?? 0);
@@ -73,13 +79,26 @@ class AdminTourLocationController extends Controller {
             /* insert tour_location */
             $insertTourLocation = $this->BuildInsertUpdateModel->buildArrayTableTourLocation($request->all(), $pageId);
             $idTourLocation     = TourLocation::insertItem($insertTourLocation);
-            /* relateion tour và guide (cẩm nang du lịch) */
+            /* relation tour và guide (cẩm nang du lịch) */
             if(!empty($request->get('guide_info_id'))){
                 $insertRelationTourGuide    = [
                     'tour_location_id'  => $idTourLocation,
                     'guide_info_id'     => $request->get('guide_info_id')
                 ];
                 RelationTourGuide::insertItem($insertRelationTourGuide);
+            }
+            /* insert câu hỏi thường gặp */
+            if(!empty($request->get('question_answer'))){
+                foreach($request->get('question_answer') as $itemQues){
+                    if(!empty($itemQues['question'])&&!empty($itemQues['answer'])){
+                        QuestionAnswer::insertItem([
+                            'question'          => $itemQues['question'],
+                            'answer'            => $itemQues['answer'],
+                            'relation_table'    => 'tour_location',
+                            'reference_id'      => $idTourLocation
+                        ]);
+                    }
+                }
             }
             /* lưu content vào file */
             // Storage::put(config('admin.storage.contentTourLocation').$request->get('slug').'.blade.php', $request->get('content'));
@@ -112,8 +131,8 @@ class AdminTourLocationController extends Controller {
     }
 
     public function update(TourLocationRequest $request){
-        try {
-            DB::beginTransaction();
+        // try {
+        //     DB::beginTransaction();
             /* upload image */
             $dataPath           = [];
             if($request->hasFile('image')) {
@@ -141,7 +160,7 @@ class AdminTourLocationController extends Controller {
             // $tmp = implode(PHP_EOL, $tmp);
             // $tmp = str_replace('public/svg/loading_plane_e9ecef.svg', '{{ config("admin.images.default_750x460") }}', $tmp);
             // Storage::put(config('admin.storage.contentTourLocation').$request->get('slug').'.blade.php', $tmp);
-            /* relateion tour và guide (cẩm nang du lịch) */
+            /* relation tour và guide (cẩm nang du lịch) */
             RelationTourGuide::select('*')
                                 ->where('tour_location_id', $idTourLocation)
                                 ->delete();
@@ -151,6 +170,23 @@ class AdminTourLocationController extends Controller {
                     'guide_info_id'     => $request->get('guide_info_id')
                 ];
                 RelationTourGuide::insertItem($insertRelationTourGuide);
+            }
+            /* update câu hỏi thường gặp */
+            QuestionAnswer::select('*')
+                        ->where('relation_table', 'tour_location')
+                        ->where('reference_id', $idTourLocation)
+                        ->delete();
+            if(!empty($request->get('question_answer'))){
+                foreach($request->get('question_answer') as $itemQues){
+                    if(!empty($itemQues['question'])&&!empty($itemQues['answer'])){
+                        QuestionAnswer::insertItem([
+                            'question'          => $itemQues['question'],
+                            'answer'            => $itemQues['answer'],
+                            'relation_table'    => 'tour_location',
+                            'reference_id'      => $idTourLocation
+                        ]);
+                    }
+                }
             }
             /* lưu content vào file */
             // Storage::put(config('admin.storage.contentTourLocation').$request->get('slug').'.blade.php', $request->get('content'));
@@ -164,22 +200,22 @@ class AdminTourLocationController extends Controller {
                 ];
                 AdminSliderController::uploadSlider($request->file('slider'), $params);
             }
-            DB::commit();
-            /* Message */
-            $message        = [
-                'type'      => 'success',
-                'message'   => '<strong>Thành công!</strong> Các thay đổi đã được lưu'
-            ];
-        } catch (\Exception $exception){
-            DB::rollBack();
-            /* Message */
-            $message        = [
-                'type'      => 'danger',
-                'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
-            ];
-        }
-        $request->session()->put('message', $message);
-        return redirect()->route('admin.tourLocation.view', ['id' => $idTourLocation]);
+        //     DB::commit();
+        //     /* Message */
+        //     $message        = [
+        //         'type'      => 'success',
+        //         'message'   => '<strong>Thành công!</strong> Các thay đổi đã được lưu'
+        //     ];
+        // } catch (\Exception $exception){
+        //     DB::rollBack();
+        //     /* Message */
+        //     $message        = [
+        //         'type'      => 'danger',
+        //         'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
+        //     ];
+        // }
+        // $request->session()->put('message', $message);
+        // return redirect()->route('admin.tourLocation.view', ['id' => $idTourLocation]);
     }
 
     public function delete(Request $request){

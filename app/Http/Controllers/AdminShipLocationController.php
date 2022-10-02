@@ -13,6 +13,7 @@ use App\Services\BuildInsertUpdateModel;
 use App\Models\District;
 use App\Models\Province;
 use App\Models\SystemFile;
+use App\Models\QuestionAnswer;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests\ShipLocationRequest;
@@ -41,7 +42,11 @@ class AdminShipLocationController extends Controller {
                             ->where('id', $id)
                             ->with(['files' => function($query){
                                 $query->where('relation_table', 'ship_location');
-                            }], 'seo')
+                            }])
+                            ->with(['questions' => function($query){
+                                $query->where('relation_table', 'ship_location');
+                            }])
+                            ->with('seo')
                             ->first();
         $provinces      = Province::getItemByIdRegion($item->region_id ?? 0);
         $districts      = District::getItemByIdProvince($item->province_id ?? 0);
@@ -72,6 +77,19 @@ class AdminShipLocationController extends Controller {
             $idShipLocation     = ShipLocation::insertItem($insertShipLocation);
             /* lưu content vào file */
             Storage::put(config('admin.storage.contentShipLocation').$request->get('slug').'.blade.php', $request->get('content'));
+            /* insert câu hỏi thường gặp */
+            if(!empty($request->get('question_answer'))){
+                foreach($request->get('question_answer') as $itemQues){
+                    if(!empty($itemQues['question'])&&!empty($itemQues['answer'])){
+                        QuestionAnswer::insertItem([
+                            'question'          => $itemQues['question'],
+                            'answer'            => $itemQues['answer'],
+                            'relation_table'    => 'ship_location',
+                            'reference_id'      => $idShipLocation
+                        ]);
+                    }
+                }
+            }
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
@@ -103,6 +121,7 @@ class AdminShipLocationController extends Controller {
     public function update(ShipLocationRequest $request){
         try {
             DB::beginTransaction();
+            $idShipLocation     = $request->get('ship_location_id') ?? 0;
             /* upload image */
             $dataPath           = [];
             if($request->hasFile('image')) {
@@ -114,14 +133,31 @@ class AdminShipLocationController extends Controller {
             Seo::updateItem($request->get('seo_id'), $updatePage);
             /* update ShipLocation */
             $updateShipLocation = $this->BuildInsertUpdateModel->buildArrayTableShipLocation($request->all());
-            ShipLocation::updateItem($request->get('ship_location_id'), $updateShipLocation);
+            ShipLocation::updateItem($idShipLocation, $updateShipLocation);
             /* lưu content vào file */
             Storage::put(config('admin.storage.contentShipLocation').$request->get('slug').'.blade.php', $request->get('content'));
+            /* update câu hỏi thường gặp */
+            QuestionAnswer::select('*')
+                            ->where('relation_table', 'ship_location')
+                            ->where('reference_id', $idShipLocation)
+                            ->delete();
+            if(!empty($request->get('question_answer'))){
+                foreach($request->get('question_answer') as $itemQues){
+                    if(!empty($itemQues['question'])&&!empty($itemQues['answer'])){
+                        QuestionAnswer::insertItem([
+                            'question'          => $itemQues['question'],
+                            'answer'            => $itemQues['answer'],
+                            'relation_table'    => 'ship_location',
+                            'reference_id'      => $idShipLocation
+                        ]);
+                    }
+                }
+            }
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
                 $params         = [
-                    'attachment_id'     => $request->get('ship_location_id'),
+                    'attachment_id'     => $idShipLocation,
                     'relation_table'    => 'ship_location',
                     'name'              => $name
                 ];
@@ -142,7 +178,7 @@ class AdminShipLocationController extends Controller {
             ];
         }
         $request->session()->put('message', $message);
-        return redirect()->route('admin.shipLocation.view', ['id' => $request->get('ship_location_id')]);
+        return redirect()->route('admin.shipLocation.view', ['id' => $idShipLocation]);
     }
 
     public function delete(Request $request){

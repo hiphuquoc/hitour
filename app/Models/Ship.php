@@ -109,4 +109,8 @@ class Ship extends Model {
     public function partners(){
         return $this->hasMany(\App\Models\RelationShipPartner::class, 'ship_info_id', 'id');
     }
+
+    public function questions(){
+        return $this->hasMany(\App\Models\QuestionAnswer::class, 'reference_id', 'id');
+    }
 }

@@ -20,6 +20,7 @@ use App\Models\TourPartner;
 use App\Models\TourPrice;
 use App\Models\TourOption;
 use App\Models\Seo;
+use App\Models\QuestionAnswer;
 use App\Services\BuildInsertUpdateModel;
 
 use Illuminate\Support\Facades\Storage;
@@ -69,9 +70,14 @@ class AdminTourController extends Controller {
         $id                 = $request->get('id') ?? 0;
         $item               = Tour::select('*')
                                 ->where('id', $request->get('id'))
-                                ->with(['files' => function($query){
-                                    $query->where('relation_table', 'tour_info');
-                                }], 'seo', 'content', 'timetables')
+                                ->with(
+                                    ['files' => function($query){
+                                        $query->where('relation_table', 'tour_info');
+                                    }], 
+                                    ['questions' => function($query){
+                                        $query->where('relation_table', 'tour_info');
+                                    }], 
+                                    'seo', 'content', 'timetables')
                                 ->first();
         /* type */
         $type               = !empty($item) ? 'edit' : 'create';
@@ -102,9 +108,22 @@ class AdminTourController extends Controller {
                             ->where('tour_info_id', $idTour)
                             ->delete();
             $idTourContent      = TourContent::insertItem($insertTourInfo);
+            /* insert câu hỏi thường gặp */
+            if(!empty($request->get('question_answer'))){
+                foreach($request->get('question_answer') as $itemQues){
+                    if(!empty($itemQues['question'])&&!empty($itemQues['answer'])){
+                        QuestionAnswer::insertItem([
+                            'question'          => $itemQues['question'],
+                            'answer'            => $itemQues['answer'],
+                            'relation_table'    => 'tour_info',
+                            'reference_id'      => $idTour
+                        ]);
+                    }
+                }
+            }
             // /* lưu content vào file */
             // Storage::put(config('admin.storage.contentTour').$request->get('slug').'.blade.php', $request->get('content'));
-            /* update tour_timetable */
+            /* insert tour_timetable */
             if(!empty($request->get('timetable'))){
                 foreach($request->get('timetable') as $timetable){
                     $insertTourTimetable    = [
@@ -203,14 +222,14 @@ class AdminTourController extends Controller {
             /* update tour_content */
             $insertTourInfo     = $this->BuildInsertUpdateModel->buildArrayTableTourContent($request->all(), $idTour);
             TourContent::select('*')
-                            ->where('tour_info_id', $request->get('tour_info_id'))
+                            ->where('tour_info_id', $idTour)
                             ->delete();
             $idTourContent      = TourContent::insertItem($insertTourInfo);
             // /* lưu content vào file */
             // Storage::put(config('admin.storage.contentTour').$request->get('slug').'.blade.php', $request->get('content'));
             /* update tour_timetable */
             TourTimetable::select('*')
-                            ->where('tour_info_id', $request->get('tour_info_id'))
+                            ->where('tour_info_id', $idTour)
                             ->delete();
             if(!empty($request->get('timetable'))){
                 foreach($request->get('timetable') as $timetable){
@@ -225,6 +244,23 @@ class AdminTourController extends Controller {
             }
             /* lưu content vào database */
             $updateContent      = $this->BuildInsertUpdateModel->buildArrayTableTourContent($request->all(), 'tour_info', $dataPath);
+            /* update câu hỏi thường gặp */
+            QuestionAnswer::select('*')
+                            ->where('relation_table', 'tour_info')
+                            ->where('reference_id', $idTour)
+                            ->delete();
+            if(!empty($request->get('question_answer'))){
+                foreach($request->get('question_answer') as $itemQues){
+                    if(!empty($itemQues['question'])&&!empty($itemQues['answer'])){
+                        QuestionAnswer::insertItem([
+                            'question'          => $itemQues['question'],
+                            'answer'            => $itemQues['answer'],
+                            'relation_table'    => 'tour_info',
+                            'reference_id'      => $idTour
+                        ]);
+                    }
+                }
+            }
             /* update slider và lưu CSDL */
             if($request->hasFile('slider')&&!empty($idTour)){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
