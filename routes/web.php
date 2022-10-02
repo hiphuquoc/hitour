@@ -20,6 +20,8 @@ use App\Http\Controllers\AdminShipController;
 use App\Http\Controllers\AdminShipPriceController;
 use App\Http\Controllers\AdminShipPortController;
 
+use App\Http\Controllers\AdminServiceController;
+
 use App\Http\Controllers\AdminStaffController;
 use App\Http\Controllers\AdminCostController;
 use App\Http\Controllers\AdminImageController;
@@ -195,6 +197,20 @@ Route::prefix('admin')->group(function(){
             // /* Delete AJAX */
             // Route::get('/loadDeparture', [AdminShipBookingController::class, 'loadDeparture'])->name('admin.shipBooking.loadDeparture');
             // Route::get('/loadFormPriceQuantity', [AdminTourBookingController::class, 'loadFormPriceQuantity'])->name('admin.tourBooking.loadFormPriceQuantity');
+        });
+        /* ===== SERVICE ===== */
+        Route::prefix('service')->group(function(){
+            Route::get('/', [AdminServiceController::class, 'list'])->name('admin.service.list');
+            Route::post('/create', [AdminServiceController::class, 'create'])->name('admin.service.create');
+            Route::get('/view', [AdminServiceController::class, 'view'])->name('admin.service.view');
+            Route::post('/update', [AdminServiceController::class, 'update'])->name('admin.service.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminServiceController::class, 'delete'])->name('admin.service.delete');
+            // Route::post('/loadOptionPrice', [AdminTourOptionController::class, 'loadOptionPrice'])->name('admin.tourOption.loadOptionPrice');
+            // Route::post('/loadFormOption', [AdminTourOptionController::class, 'loadFormOption'])->name('admin.tourOption.loadFormOption');
+            // Route::post('/createOption', [AdminTourOptionController::class, 'create'])->name('admin.tourOption.createOption');
+            // Route::post('/updateOption', [AdminTourOptionController::class, 'update'])->name('admin.tourOption.updateOption');
+            // Route::post('/deleteOption', [AdminTourOptionController::class, 'delete'])->name('admin.tourOption.deleteOption');
         });
         /* ===== STAFF ===== */
         Route::prefix('staff')->group(function(){

@@ -38,8 +38,8 @@ class TourLocationRequest extends FormRequest
                     $slug           = !empty(request('slug')) ? request('slug') : null;
                     if(!empty($slug)){
                         $dataCheck  = DB::table('seo')
-                                        ->join('tour_location', 'tour_location.seo_id', '=', 'seo.id')
-                                        ->select('seo.slug', 'tour_location.id')
+                                        ->join('service_info', 'service_info.seo_id', '=', 'seo.id')
+                                        ->select('seo.slug', 'service_info.id')
                                         ->where('slug', $slug)
                                         ->first();
                         if(!empty(request('tour_location_id'))&&!empty($dataCheck)){

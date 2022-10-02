@@ -7,6 +7,7 @@ use App\Models\Tour;
 use App\Models\ShipLocation;
 use App\Models\Ship;
 use App\Models\Guide;
+use App\Models\Service;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -32,24 +33,11 @@ class RoutingController extends Controller {
                                         ->with(['files' => function($query){
                                             $query->where('relation_table', 'tour_location');
                                         }])
-                                        ->with('seo', 'tours', 'guides.infoGuide.seo')
+                                        ->with('seo', 'tours.infoTour.seo', 'guides.infoGuide.seo', 'services.seo')
                                         ->first();
-                /* lấy danh sách tour */
-                $arrayIdTour        = [];
-                foreach($item->tours as $tmp) $arrayIdTour[]  = $tmp->tour_info_id;
-                $list               = DB::table('seo')
-                                        ->join('tour_info as ti', 'ti.seo_id', '=', 'seo.id')
-                                        ->join('relation_tour_location as rtl', 'rtl.tour_info_id', '=', 'ti.id')
-                                        ->join('tour_location as tl', 'tl.id', '=', 'rtl.tour_location_id')
-                                        ->join('tour_departure as td', 'td.id', '=', 'ti.tour_departure_id')
-                                        ->select('seo.id', 'seo.slug', 'seo.level', 'seo.parent', 'seo.description', 'seo.image', 'seo.image_small', 'ti.id as tour_info_id', 'ti.pick_up', 'ti.code', 'ti.name', 'ti.price_show', 'ti.price_del', 'ti.days', 'ti.nights', 'ti.departure_schedule', 'td.name as tour_departure_name', 'tl.name as tour_location_name')
-                                        ->where('rtl.tour_location_id', $item->id)
-                                        ->where('ti.status_show', 1)
-                                        ->get();
-                $list               = Url::buildFullLinkArray($list);
                 $content            = Blade::render(Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php'));
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                return view('main.tourLocation.index', compact('item', 'list', 'breadcrumb', 'content'));
+                return view('main.tourLocation.index', compact('item', 'breadcrumb', 'content'));
             }else if($checkExists['type']==='tour_info'){ // ====== Tour =============================
                 $item               = Tour::select('*')
                                         ->whereHas('seo', function($q) use ($checkExists){
@@ -102,6 +90,19 @@ class RoutingController extends Controller {
                 $content            = Blade::render(Storage::get(config('admin.storage.contentGuide').$item->seo->slug.'.blade.php'));
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
                 return view('main.guide.index', compact('item', 'content', 'breadcrumb'));
+            }else if($checkExists['type']==='service_info'){
+                $item               = Service::select('*')
+                                        ->whereHas('seo', function($query) use($checkExists){
+                                            $query->where('slug', $checkExists['slug']);
+                                        })
+                                        ->with(['files' => function($query){
+                                            $query->where('relation_table', 'service_info');
+                                        }])
+                                        ->with('seo')
+                                        ->first();
+                $content            = Blade::render(Storage::get(config('admin.storage.contentService').$item->seo->slug.'.blade.php'));
+                $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
+                return view('main.service.index', compact('item', 'content', 'breadcrumb'));
             }
         }else {
             /* Error 404 */

@@ -61,7 +61,7 @@ class BuildInsertUpdateModel {
         return $result;
     }
 
-    public static function buildArrayTableTourLocation($dataForm, $pageId = null){
+    public static function buildArrayTableTourLocation($dataForm, $seoId = null){
         /* upload tour_location
             + name
             + seo_id
@@ -74,7 +74,7 @@ class BuildInsertUpdateModel {
             $result['name']                 = $dataForm['title'] ?? null;
             $result['description']          = $dataForm['description'] ?? null;
             $result['display_name']         = $dataForm['display_name'] ?? null;
-            if(!empty($pageId)) $result['seo_id'] = $pageId;
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
             $result['region_id']            = $dataForm['region'];
             $result['island']               = !empty($dataForm['island']) ? 1 : 0;
             $result['province_id']          = $dataForm['province'] ?? null;
@@ -83,7 +83,7 @@ class BuildInsertUpdateModel {
         return $result;
     }
 
-    public static function buildArrayTableTourDeparture($dataForm, $pageId = null){
+    public static function buildArrayTableTourDeparture($dataForm, $seoId = null){
         /* upload tour_departure
             + name
             + seo_id
@@ -96,7 +96,7 @@ class BuildInsertUpdateModel {
             $result['name']                 = $dataForm['title'] ?? null;
             $result['description']          = $dataForm['description'] ?? null;
             $result['display_name']         = $dataForm['display_name'] ?? null;
-            if(!empty($pageId)) $result['seo_id'] = $pageId;
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
             $result['region_id']            = $dataForm['region'];
             $result['province_id']          = $dataForm['province'] ?? null;
             $result['district_id']          = $dataForm['district'] ?? null;
@@ -171,7 +171,7 @@ class BuildInsertUpdateModel {
         return $result;
     }
 
-    public static function buildArrayTableShipLocation($dataForm, $pageId = null){
+    public static function buildArrayTableShipLocation($dataForm, $seoId = null){
         /* upload ship_location
             + name
             + seo_id
@@ -184,7 +184,7 @@ class BuildInsertUpdateModel {
             $result['name']                 = $dataForm['title'] ?? null;
             $result['description']          = $dataForm['description'] ?? null;
             $result['display_name']         = $dataForm['display_name'] ?? null;
-            if(!empty($pageId)) $result['seo_id'] = $pageId;
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
             $result['region_id']            = $dataForm['region'];
             $result['province_id']          = $dataForm['province'] ?? null;
             $result['district_id']          = $dataForm['district'] ?? null;
@@ -192,7 +192,7 @@ class BuildInsertUpdateModel {
         return $result;
     }
 
-    public static function buildArrayTableShipDeparture($dataForm, $pageId = null){
+    public static function buildArrayTableShipDeparture($dataForm, $seoId = null){
         /* upload ship_departure
             + name
             + seo_id
@@ -205,7 +205,7 @@ class BuildInsertUpdateModel {
             $result['name']                 = $dataForm['title'] ?? null;
             $result['description']          = $dataForm['description'] ?? null;
             $result['display_name']         = $dataForm['display_name'] ?? null;
-            if(!empty($pageId)) $result['seo_id'] = $pageId;
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
             $result['region_id']            = $dataForm['region'];
             $result['province_id']          = $dataForm['province'] ?? null;
             $result['district_id']          = $dataForm['district'] ?? null;
@@ -672,7 +672,7 @@ class BuildInsertUpdateModel {
         return $result;
     }
 
-    public static function buildArrayTableGuideInfo($dataForm, $pageId = null){
+    public static function buildArrayTableGuideInfo($dataForm, $seoId = null){
         /* upload guide_info
             + name
             + description
@@ -687,10 +687,35 @@ class BuildInsertUpdateModel {
             $result['name']                 = $dataForm['title'] ?? null;
             $result['description']          = $dataForm['description'] ?? null;
             $result['display_name']         = $dataForm['display_name'] ?? null;
-            if(!empty($pageId)) $result['seo_id'] = $pageId;
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
             $result['region_id']            = $dataForm['region'];
             $result['province_id']          = $dataForm['province'] ?? null;
             $result['district_id']          = $dataForm['district'] ?? null;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableServiceInfo($dataForm, $seoId = null){
+        /* 
+            seo_id
+            tour_location_id
+            code
+            name
+            price_show
+            price_del
+            time_start
+            time_end
+        */
+        $result     = [];
+        if(!empty($dataForm)){
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
+            $result['tour_location_id']     = $dataForm['tour_location_id'] ?? null;
+            $result['code']                 = $dataForm['code'] ?? null;
+            $result['name']                 = $dataForm['title'] ?? null;
+            $result['price_show']           = $dataForm['price_show'] ?? 0;
+            $result['price_del']            = $dataForm['price_del'] ?? 0;
+            $result['time_start']           = $dataForm['time_start'] ?? null;
+            $result['time_end']             = $dataForm['time_end'] ?? null;
         }
         return $result;
     }

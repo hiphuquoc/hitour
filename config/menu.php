@@ -209,6 +209,11 @@ return [
             'icon'      => '<i data-feather=\'book-open\'></i>',    
         ],
         [
+            'name'      => 'Hoạt động vui chơi',
+            'route'     => 'admin.service.list',
+            'icon'      => '<i data-feather=\'star\'></i>',    
+        ],
+        [
             'name'  => 'Nhân viên tư vấn',
             'route' => 'admin.staff.list',
             'icon'  => '<i data-feather=\'user\'></i>'

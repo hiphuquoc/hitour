@@ -1158,6 +1158,7 @@ input, textarea {
   color: #fd5056;
   font-family: "Roboto Slab", serif;
   letter-spacing: 0.5px;
+  margin-bottom: 0.75rem;
 }
 .tourGrid_item_location {
   padding: 0.4rem 1rem;
@@ -1202,6 +1203,7 @@ input, textarea {
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  margin: 0;
 }
 .galleryBox_button {
   display: flex;
@@ -1366,8 +1368,8 @@ input, textarea {
   font-size: 1.3rem;
   font-family: "Roboto Slab", serif;
   font-weight: 700;
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
+  margin-top: 0.25rem !important;
+  margin-bottom: 0.25rem !important;
 }
 .contentTour_item_title > i {
   flex: 0 0 30px;
@@ -2369,4 +2371,103 @@ blockquote em {
 }
 .chooseOptionTour_item_radio input {
   width: auto;
+}
+
+.serviceGrid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+.serviceGrid_item {
+  width: calc(33.33% - 1rem);
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #e9ecef;
+}
+.serviceGrid_item:not(:nth-child(3n+1)) {
+  margin-left: 1.5rem;
+}
+.serviceGrid_item:nth-child(n+4) {
+  margin-top: 1.5rem;
+}
+.serviceGrid_item_image {
+  position: relative;
+  display: flex;
+  margin-bottom: 0.75rem;
+}
+.serviceGrid_item_image img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 5px 5px 0 0;
+}
+.serviceGrid_item_image_time {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #456;
+  font-weight: 500;
+  font-size: 0.9rem;
+  background: rgb(244, 208, 63);
+  padding: 0.1rem 1rem;
+}
+.serviceGrid_item_title {
+  display: flex;
+  margin-bottom: 0.45rem;
+  padding: 0 0.75rem;
+}
+.serviceGrid_item_title h2, .serviceGrid_item_title h3 {
+  font-weight: 800;
+  font-size: 1rem;
+  color: rgb(0, 123, 255);
+  margin: 0;
+}
+.serviceGrid_item_desc {
+  display: flex;
+  margin-bottom: 0.75rem;
+  padding: 0 0.75rem;
+}
+.serviceGrid_item_desc h2, .serviceGrid_item_desc h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  font-family: "Roboto Slab", serif;
+  color: #003B7B;
+  margin: 0;
+}
+.serviceGrid_item_departureFrom {
+  padding: 0 0.75rem;
+  color: #567;
+  margin-bottom: 0.1rem;
+  font-size: 0.95rem;
+}
+.serviceGrid_item_departureSchedule {
+  margin-bottom: 0.75rem;
+  padding: 0 0.75rem;
+  color: #567;
+  font-size: 0.95rem;
+}
+.serviceGrid_item_price {
+  padding: 0 0.75rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #fd5056;
+  font-family: "Roboto Slab", serif;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.75rem;
+}
+.serviceGrid_item_location {
+  padding: 0.4rem 1rem;
+  font-size: 0.95rem;
+  background: #e9ecef;
+  text-align: center;
+  color: #456;
+}
+.serviceGrid_item_location i {
+  color: #789;
+  margin-right: 0.5rem;
+}
+.serviceGrid_item .column {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

@@ -923,6 +923,7 @@ $tourGrid_radius : 5px;
             color: $color-price;
             font-family: $font-primary-title;
             letter-spacing: 0.5px;
+            margin-bottom: 0.75rem;
         }
         &_location {
             padding: 0.4rem 1rem;
@@ -974,6 +975,7 @@ $tourGrid_radius : 5px;
         img {
             width: 100%;
             object-fit: cover;
+            margin: 0;
         }
     }
     &_button {
@@ -1155,8 +1157,8 @@ $tourGrid_radius : 5px;
                 font-size: 1.3rem;
                 font-family: $font-primary-title;
                 font-weight: 700;
-                margin-top: 0 !important;
-                margin-bottom: 0 !important;
+                margin-top: 0.25rem !important;
+                margin-bottom: 0.25rem !important;
                 // color: $color-primary-hover;
             }
             > i {
@@ -2247,5 +2249,103 @@ blockquote{
             }
         }
         
+    }
+}
+$tourGrid_radius : 5px;
+.serviceGrid {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+    &_item {
+        width: calc(33.33% - 1rem);
+        border: 1px solid $bg-04;
+        border-radius: $tourGrid_radius;
+        box-shadow: 0 0 5px $bg-03;
+        &:not(:nth-child(3n + 1)){
+            margin-left: 1.5rem;
+        }
+        &:nth-child(n + 4){
+            margin-top: 1.5rem;
+        }
+        &_image {
+            position: relative;
+            display: flex;
+            margin-bottom: 0.75rem;
+            img {
+                width: 100%;
+                object-fit: cover;
+                border-radius: $tourGrid_radius $tourGrid_radius 0 0;
+            }
+            &_time {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                color: $color-text;
+                font-weight: 500;
+                font-size: 0.9rem;
+                background: $color-secondary; 
+                padding: 0.1rem 1rem;
+            }
+        }
+        &_title {
+            display: flex;
+            margin-bottom: 0.45rem;
+            padding: 0 0.75rem;
+            h2, h3 {
+                font-weight: 800;
+                font-size: 1rem;
+                color: $color-primary;
+                margin: 0;
+            }
+        }
+        &_desc {
+            display: flex;
+            margin-bottom: 0.75rem;
+            padding: 0 0.75rem;
+            h2, h3 {
+                font-size: 1.1rem;
+                font-weight: 500;
+                font-family: $font-primary-title;
+                color: #003B7B;
+                margin: 0;
+            }
+        }
+        &_departureFrom {
+            padding: 0 0.75rem;
+            color: #567;
+            margin-bottom: 0.1rem;
+            font-size: 0.95rem;
+        }
+        &_departureSchedule {
+            margin-bottom: 0.75rem;
+            padding: 0 0.75rem;
+            color: #567;
+            font-size: 0.95rem;
+        }
+        &_price {
+            padding: 0 0.75rem;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: $color-price;
+            font-family: $font-primary-title;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.75rem;
+        }
+        &_location {
+            padding: 0.4rem 1rem;
+            font-size: 0.95rem;
+            background: $bg-03;
+            text-align: center;
+            color: #456;
+            i {
+                color: #789;
+                margin-right: 0.5rem;
+            }
+        }
+        .column {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
     }
 }

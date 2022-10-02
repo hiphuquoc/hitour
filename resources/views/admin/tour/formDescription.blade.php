@@ -112,9 +112,6 @@
                 </div>
             </div>
         </div>
-        @php
-            // dd($item);
-        @endphp
         <!-- One Row -->
         <div class="formBox_full_item">
             <div class="form-check form-check-success">

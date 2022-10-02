@@ -11,7 +11,7 @@
     <div class="pageContent">
         <div class="container">
             <!-- title -->
-            <h1 class="titlePage">Du lịch Côn Đảo - Tour du lịch Côn Đảo</h1>
+            <h1 class="titlePage">Du lịch {{ $item->display_name }} - Tour du lịch {{ $item->display_name }}</h1>
             <!-- rating -->
             @if(!empty($item->seo->rating_aggregate_star)&&!empty($item->seo->rating_aggregate_count))
                 <div class="ratingBox">
@@ -27,26 +27,33 @@
                     </div>
                 </div>
             @endif
-            <!-- content box -->
+            <!-- Mô tả Tour du lịch -->
             @if(!empty($item->description))
                 <div class="contentBox">
-                    <p>{{ $item->description }}</p>
+                    <p>{!! $item->description !!}</p>
                 </div>
             @endif
-            <!-- tour box -->
-            @include('main.tourLocation.tourGrid')
-            <!-- content box -->
+            <!-- Tour box -->
+            @php
+                // dd($item);
+            @endphp
+            @include('main.tourLocation.tourGrid', ['list' => $item->tours])
+            <!-- Hoạt động vui chơi & giải trí -->
+            @if($item->services->isNotEmpty())
+                <h2>Hoạt động vui chơi tại {{ $item->display_name ?? null }}</h2>
+                <p>Nếu các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> của Hitour không đáp ứng được nhu cầu của bạn, hoặc là người ưu thích du lịch tự túc,... Hitour cung cấp thêm cho bạn <strong>Cẩm nang du lịch từ A-Z</strong> để bạn có thể tự do tham khảo thông tin chi tiết về <strong>du lịch {{ $item->display_name ?? null }}</strong> để có thể lên kế hoạch, sắp xếp cho chuyến đi du lịch của mình được chu đáo nhất</p>
+                @include('main.tourLocation.serviceGrid', ['list' => $item->services])
+            @endif
+            <!-- Cẩm nang du lịch -->
             @if(!empty($item->guides->isNotEmpty()))
-                <div class="contentBox">
-                    <h2>Cẩm nang du lịch {{ $item->display_name ?? null }}</h2>
-                    <p>Nếu các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> của Hitour không đáp ứng được nhu cầu của bạn, hoặc là người ưu thích du lịch tự túc,... Hitour cung cấp thêm cho bạn <strong>Cẩm nang du lịch từ A-Z</strong> để bạn có thể tự do tham khảo thông tin chi tiết về <strong>du lịch {{ $item->display_name ?? null }}</strong> để có thể lên kế hoạch, sắp xếp cho chuyến đi du lịch của mình được chu đáo nhất</p>
-                    <div class="guideList">
-                        @foreach($item->guides as $guide)
-                            <div class="guideList_item">
-                                <i class="fa-solid fa-angles-right"></i>Xem thêm <a href="{{ $guide->infoGuide->seo->slug_full }}">{{ $guide->infoGuide->name }}</a>
-                            </div>
-                        @endforeach
-                    </div>
+                <h2>Cẩm nang du lịch {{ $item->display_name ?? null }}</h2>
+                <p>Nếu các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> của Hitour không đáp ứng được nhu cầu của bạn, hoặc là người ưu thích du lịch tự túc,... Hitour cung cấp thêm cho bạn <strong>Cẩm nang du lịch từ A-Z</strong> để bạn có thể tự do tham khảo thông tin chi tiết về <strong>du lịch {{ $item->display_name ?? null }}</strong> để có thể lên kế hoạch, sắp xếp cho chuyến đi du lịch của mình được chu đáo nhất</p>
+                <div class="guideList">
+                    @foreach($item->guides as $guide)
+                        <div class="guideList_item">
+                            <i class="fa-solid fa-angles-right"></i>Xem thêm <a href="{{ $guide->infoGuide->seo->slug_full }}">{{ $guide->infoGuide->name }}</a>
+                        </div>
+                    @endforeach
                 </div>
             @endif
         </div>
