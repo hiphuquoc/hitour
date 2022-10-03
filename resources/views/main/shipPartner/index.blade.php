@@ -28,7 +28,7 @@
             
             <div class="pageContent_body">
                 <div class="pageContent_body_content">
-                    <div class="contentShip">
+                    <div id="js_autoLoadTocContentWithIcon_element" class="contentShip">
                         {{-- <!-- Lịch tàu và Hãng tàu -->
                         @include('main.shipPartner.headContent', ['keyWord' => $item->name]) --}}
                         <!-- Nội dung tùy biến -->
@@ -50,7 +50,7 @@
     <script type="text/javascript">
         $(window).on('load', function () {
             
-            autoLoadTocContentWithIcon();
+            autoLoadTocContentWithIcon('js_autoLoadTocContentWithIcon_element');
 
             /* fixed sidebar khi scroll */
             const elemt                 = $('.js_scrollFixed');
@@ -75,16 +75,16 @@
             });
         });
 
-        function autoLoadTocContentWithIcon(){
+        function autoLoadTocContentWithIcon(idElement){
             var dataTocContent      = {};
             var i                   = 0;
-            $('body').find('[data-tocContent]').each(function(){
+            $('#'+idElement).find('h2, h3').each(function(){
                 const dataId        = $(this).attr('id');
-                const dataIcon      = $('<div />').append($(this).find('i').clone()).html();
-                const dataTitle     = $(this).find('h2').html();
+                const name          = $(this)[0].localName;
+                const dataTitle     = $(this).html();
                 dataTocContent[i]   = {
                     id      : dataId,
-                    icon    : dataIcon,
+                    name    : name,
                     title   : dataTitle
                 };
                 ++i;
@@ -99,7 +99,7 @@
                 },
                 success     : function(data){
                     /* tính toán chiều cao sidebar */
-                    const heightW       = $(window).outerHeight();
+                    const heightW       = $(window).height();
                     const heightUsed    = $('#js_autoLoadTocContentWithIcon_idWrite').parent().outerHeight();
                     const height        = parseInt(heightW - heightUsed);
                     $('#js_autoLoadTocContentWithIcon_idWrite').css('max-height', 'calc('+height+'px - 3rem)').html(data);
