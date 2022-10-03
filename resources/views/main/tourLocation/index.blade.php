@@ -34,9 +34,6 @@
                 </div>
             @endif
             <!-- Tour box -->
-            @php
-                // dd($item);
-            @endphp
             @include('main.tourLocation.tourGrid', ['list' => $item->tours])
             <!-- Hoạt động vui chơi & giải trí -->
             @if($item->services->isNotEmpty())
@@ -56,6 +53,9 @@
                     @endforeach
                 </div>
             @endif
+
+            <!-- faq -->
+            @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
         </div>
     </div>
 

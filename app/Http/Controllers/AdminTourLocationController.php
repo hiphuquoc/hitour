@@ -131,8 +131,8 @@ class AdminTourLocationController extends Controller {
     }
 
     public function update(TourLocationRequest $request){
-        // try {
-        //     DB::beginTransaction();
+        try {
+            DB::beginTransaction();
             /* upload image */
             $dataPath           = [];
             if($request->hasFile('image')) {
@@ -200,22 +200,22 @@ class AdminTourLocationController extends Controller {
                 ];
                 AdminSliderController::uploadSlider($request->file('slider'), $params);
             }
-        //     DB::commit();
-        //     /* Message */
-        //     $message        = [
-        //         'type'      => 'success',
-        //         'message'   => '<strong>Thành công!</strong> Các thay đổi đã được lưu'
-        //     ];
-        // } catch (\Exception $exception){
-        //     DB::rollBack();
-        //     /* Message */
-        //     $message        = [
-        //         'type'      => 'danger',
-        //         'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
-        //     ];
-        // }
-        // $request->session()->put('message', $message);
-        // return redirect()->route('admin.tourLocation.view', ['id' => $idTourLocation]);
+            DB::commit();
+            /* Message */
+            $message        = [
+                'type'      => 'success',
+                'message'   => '<strong>Thành công!</strong> Các thay đổi đã được lưu'
+            ];
+        } catch (\Exception $exception){
+            DB::rollBack();
+            /* Message */
+            $message        = [
+                'type'      => 'danger',
+                'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
+            ];
+        }
+        $request->session()->put('message', $message);
+        return redirect()->route('admin.tourLocation.view', ['id' => $idTourLocation]);
     }
 
     public function delete(Request $request){

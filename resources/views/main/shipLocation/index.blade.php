@@ -37,6 +37,9 @@
                         @include('main.shipLocation.headContent', ['keyWord' => $item->name])
                         <!-- Nội dung tùy biến -->
                         {!! $content ?? null !!}
+
+                        @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
+
                     </div>
                 </div>
                 <div class="pageContent_body_sidebar">

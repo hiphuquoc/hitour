@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TourLocation;
 use App\Models\Tour;
 use App\Models\ShipLocation;
+use App\Models\ShipPartner;
 use App\Models\Ship;
 use App\Models\Guide;
 use App\Models\Service;
@@ -64,6 +65,16 @@ class RoutingController extends Controller {
                 $content            = Blade::render(Storage::get(config('admin.storage.contentShipLocation').$item->seo->slug.'.blade.php'));
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
                 return view('main.shipLocation.index', compact('item', 'content', 'breadcrumb'));
+            }else if($checkExists['type']==='ship_partner'){ // ====== Ship Partner =============================
+                $item               = ShipPartner::select('*')
+                                        ->whereHas('seo', function($query) use($checkExists){
+                                            $query->where('slug', $checkExists['slug']);
+                                        })
+                                        ->with('seo', 'questions')
+                                        ->first();
+                $content            = Blade::render(Storage::get(config('admin.storage.contentShipPartner').$item->seo->slug.'.blade.php'));
+                $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
+                return view('main.shipPartner.index', compact('item', 'content', 'breadcrumb'));
             }else if($checkExists['type']==='ship_info'){ // ====== Ship =============================
                 $item               = Ship::select('*')
                                         ->whereHas('seo', function($query) use($checkExists){

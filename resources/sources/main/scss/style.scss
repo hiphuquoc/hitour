@@ -1393,9 +1393,9 @@ $tourGrid_radius : 5px;
 /* ===== START: Page Ship */
 blockquote{
 	display:block;
-	background: $bg-03;
+	// background: $bg-03;
 	padding: 0.5rem 0.5rem 0.5rem 2.75rem;
-	margin: 0 0 0.75rem 0;
+	margin: 0 0 1rem 0;
 	position: relative;
 	font-size: inherit;
 	text-align: justify;
@@ -2346,6 +2346,46 @@ $tourGrid_radius : 5px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+    }
+}
+.faqBox {
+    margin-top: 2.5rem;
+    &_title {
+        h2, h3 {
+            margin-bottom: 1.25rem;
+        }
+    }
+	&_content {
+        &_item {
+            &:not(:first-child) {
+                margin-top: 1.25rem;
+            }
+            &_question {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 0.75rem;
+                align-items: center;
+                &__icon {
+                    background: url($background-image);
+                    background-position: -269px -234px;
+                    background-size: 1165.5px;
+                    width: 45px;
+                    height: 45px;
+                }
+                
+                h3 {
+                    width: calc(100% - 60px);
+                    margin-bottom: 0;
+                    letter-spacing: 0.3px;
+                    font-size: 1.05rem;
+                    font-weight: 500;
+                    background: $bg-03;
+                    padding: 8px 18px;
+                    border-radius: 20px;
+                    min-height: 45px;
+                }
+            }
         }
     }
 }
