@@ -19,8 +19,6 @@
 </div>
 
 <div class="container">
-	<form id="formBookingSort" method="get" action="{{ route('main.shipBooking.form') }}">
-	@csrf
 	<div class="bookFormSort" onClick="hideShowAround();">
 		<div class="bookFormSort_head">
 			<div {{ !empty($active)&&$active=='ship' ? 'class=active' : null }} data-tab="shipBookingForm" onClick="changeTab(this);">
@@ -54,9 +52,7 @@
 				@include('main.form.sortBooking.ticket')
 			</div> --}}
 		</div>
-		
 	</div>
-	</form>
 </div>
 @push('scripts-custom')
     <script src="{{ asset('sources/admin/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js') }}"></script>

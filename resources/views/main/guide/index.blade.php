@@ -1,10 +1,10 @@
 @extends('main.layouts.main')
 @section('content')
 
-    @php
+    {{-- @php
         $active = 'tour';
     @endphp
-    @include('main.form.sortBooking', compact('item', 'active'))
+    @include('main.form.sortBooking', compact('item', 'active')) --}}
 
     @include('main.snippets.breadcrumb')
 

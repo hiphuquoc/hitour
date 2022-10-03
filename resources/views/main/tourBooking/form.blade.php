@@ -99,7 +99,7 @@
                                         <!-- One Row -->
                                         <div class="formBox_full_item">
                                             <label class="form-label" for="date">Ngày khởi hành</label>
-                                            <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date" placeholder="YYYY-MM-DD" value="" readonly="readonly" onChange="loadOptionTour();" />
+                                            <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date" placeholder="YYYY-MM-DD" value="{{ request('date') ?? null }}" readonly="readonly" onChange="loadOptionTour();" />
                                             <div class="messageValidate_error" data-validate="date">{{ config('main.message_validate.not_empty') }}</div>
                                         </div>
                                         <!-- One Row -->
