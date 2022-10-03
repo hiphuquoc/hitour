@@ -96,4 +96,8 @@ class TourLocation extends Model {
         return $this->hasMany(\App\Models\QuestionAnswer::class, 'reference_id', 'id');
     }
 
+    public function shipLocations(){
+        return $this->hasMany(\App\Models\RelationTourLocationShipLocation::class, 'tour_location_id', 'id');
+    }
+
 }

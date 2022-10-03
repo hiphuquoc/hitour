@@ -93,10 +93,10 @@
                 <label class="form-check-label" for="island">Khu vực này là biển đảo</label>
             </div>
         </div>
-         <!-- One Row -->
-         <div class="formBox_full_item">
+        <!-- One Row -->
+        <div class="formBox_full_item">
             <label class="form-label" for="guide_info_id">Cẩm nang du lịch</label>
-            <select class="select2 form-select select2-hidden-accessible" id="guide_info_id" name="guide_info_id" tabindex="-1" aria-hidden="true" multiple>
+            <select class="select2 form-select select2-hidden-accessible" id="guide_info_id" name="guide_info_id[]" tabindex="-1" aria-hidden="true" multiple>
                 @if(!empty($guides))
                     @foreach($guides as $guide)
                         @php
@@ -109,6 +109,26 @@
                             }
                         @endphp
                         <option value="{{ $guide->id }}"{{ $selected }}>{{ $guide->name }}</option>
+                    @endforeach
+                @endif
+            </select>
+        </div>
+        <!-- One Row -->
+        <div class="formBox_full_item">
+            <label class="form-label" for="guide_info_id">Liên kết tàu</label>
+            <select class="select2 form-select select2-hidden-accessible" id="ship_location_id" name="ship_location_id[]" tabindex="-1" aria-hidden="true" multiple>
+                @if(!empty($shipLocations))
+                    @foreach($shipLocations as $shipLocation)
+                        @php
+                            $selected           = null;
+                            foreach($item->shipLocations as $s){
+                                if($s->infoShipLocation->id==$shipLocation->id){
+                                    $selected   = ' selected';
+                                    break;
+                                }
+                            }
+                        @endphp
+                        <option value="{{ $shipLocation->id }}"{{ $selected }}>{{ $shipLocation->name }}</option>
                     @endforeach
                 @endif
             </select>

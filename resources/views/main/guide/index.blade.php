@@ -74,8 +74,14 @@
         function autoLoadTocContentWithIcon(idElement){
             var dataTocContent      = {};
             var i                   = 0;
+            var indexToc            = 0;
             $('#'+idElement).find('h2, h3').each(function(){
                 const dataId        = $(this).attr('id');
+                if(typeof dataId=='undefined'){
+                    dataId          = 'randomIdTocContent_'+i;
+                    $(this).attr('id', dataId);
+                    ++indexToc;
+                }
                 const name          = $(this)[0].localName;
                 const dataTitle     = $(this).html();
                 dataTocContent[i]   = {

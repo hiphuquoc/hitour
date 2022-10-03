@@ -114,10 +114,6 @@ table h3 {
   }
 }
 
-.spaceBetweenBox {
-  margin-bottom: 2.5rem;
-}
-
 .width100 {
   width: 100% !important;
 }
@@ -1566,7 +1562,7 @@ input, textarea {
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
-  border-radius: 5px;
+  border-radius: 5px 5px 0 0;
   margin: 0;
 }
 .imageBox_note {
@@ -1613,6 +1609,7 @@ blockquote em {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 2.5rem;
 }
 .shipGrid_item {
   width: calc(33.33% - 0.6666rem);
@@ -2503,4 +2500,37 @@ blockquote em {
   padding: 8px 18px;
   border-radius: 20px;
   min-height: 45px;
+}
+
+.serviceRelatedSidebarBox_title h2, .serviceRelatedSidebarBox_title h3 {
+  font-size: 1.3rem;
+  font-family: "Roboto Slab", serif;
+  margin-bottom: 1rem;
+}
+.serviceRelatedSidebarBox_box {
+  border: 1px solid #e9ecef;
+  border-radius: 5px;
+}
+.serviceRelatedSidebarBox_box_item {
+  display: flex;
+  padding: 0.65rem 1rem;
+}
+.serviceRelatedSidebarBox_box_item:not(:first-child) {
+  border-top: 1px dashed #dee2e6;
+}
+.serviceRelatedSidebarBox_box_item:hover {
+  background: #e9ecef;
+}
+.serviceRelatedSidebarBox_box_item h2, .serviceRelatedSidebarBox_box_item h3, .serviceRelatedSidebarBox_box_item h4 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #345;
+  margin: 0;
+}
+.serviceRelatedSidebarBox_box_item i {
+  width: 25px;
+  margin-right: 1rem;
+  font-size: 1.2rem;
+  color: rgb(0, 90, 180);
+  text-align: center;
 }

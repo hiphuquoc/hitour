@@ -26,13 +26,11 @@
                 </div>
             </div>
             <!-- ship box -->
-            <div class="spaceBetweenBox">
-                @include('main.shipLocation.shipGridMerge', ['list' => $item->ships])
-            </div>
+            @include('main.shipLocation.shipGridMerge', ['list' => $item->ships])
             
             <div class="pageContent_body">
                 <div class="pageContent_body_content">
-                    <div class="contentShip">
+                    <div id="js_autoLoadTocContentWithIcon_element" class="contentShip">
                         <!-- Lịch tàu và Hãng tàu -->
                         @include('main.shipLocation.headContent', ['keyWord' => $item->name])
                         <!-- Nội dung tùy biến -->
@@ -54,7 +52,7 @@
     <script type="text/javascript">
         $(window).on('load', function () {
             
-            autoLoadTocContentWithIcon();
+            autoLoadTocContentWithIcon('js_autoLoadTocContentWithIcon_element');
 
             /* fixed sidebar khi scroll */
             const elemt                 = $('.js_scrollFixed');
@@ -79,15 +77,23 @@
             });
         });
 
-        function autoLoadTocContentWithIcon(){
+        function autoLoadTocContentWithIcon(idElement){
             var dataTocContent      = {};
             var i                   = 0;
-            $('body').find('[data-tocContent]').each(function(){
-                const dataId        = $(this).attr('id');
-                const dataIcon      = $('<div />').append($(this).find('i').clone()).html();
-                const dataTitle     = $(this).find('h2').html();
+            var indexToc            = 0;
+            $('#'+idElement).find('h2').each(function(){
+                let dataId          = $(this).attr('id');
+                if(typeof dataId=='undefined'){
+                    dataId          = 'randomIdTocContent_'+i;
+                    $(this).attr('id', dataId);
+                    ++indexToc;
+                }
+                const dataIcon      = $('<div />').append($(this).parent().find('i').clone()).html();
+                const name          = $(this)[0].localName;
+                const dataTitle     = $(this).html();
                 dataTocContent[i]   = {
                     id      : dataId,
+                    name    : name,
                     icon    : dataIcon,
                     title   : dataTitle
                 };
@@ -103,7 +109,7 @@
                 },
                 success     : function(data){
                     /* tính toán chiều cao sidebar */
-                    const heightW       = $(window).outerHeight();
+                    const heightW       = $(window).height();
                     const heightUsed    = $('#js_autoLoadTocContentWithIcon_idWrite').parent().outerHeight();
                     const height        = parseInt(heightW - heightUsed);
                     $('#js_autoLoadTocContentWithIcon_idWrite').css('max-height', 'calc('+height+'px - 3rem)').html(data);
