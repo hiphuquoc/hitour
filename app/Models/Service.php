@@ -48,7 +48,8 @@ class Service extends Model {
                         ->orderBy('id', 'DESC')
                         ->with(['files' => function($query){
                             $query->where('relation_table', 'service_info');
-                        }], 'seo', 'tourLocation', 'staffs.infoStaff')
+                        }])
+                        ->with('seo', 'tourLocation', 'staffs.infoStaff')
                         ->get();
         return $result;
     }
@@ -83,7 +84,7 @@ class Service extends Model {
     }
 
     public function tourLocation() {
-        return $this->hasOne(\App\Models\tourLocation::class, 'id', 'tour_location_id');
+        return $this->hasOne(\App\Models\TourLocation::class, 'id', 'tour_location_id');
     }
 
     public function staffs(){

@@ -96,7 +96,7 @@ class RoutingController extends Controller {
                                         ->with(['files' => function($query){
                                             $query->where('relation_table', 'guide_info');
                                         }])
-                                        ->with('seo')
+                                        ->with('seo', 'tourLocations.infoTourLocation.seo', 'tourLocations.infoTourLocation.shipLocations.infoShipLocation.seo', 'tourLocations.infoTourLocation.services.seo')
                                         ->first();
                 $content            = Blade::render(Storage::get(config('admin.storage.contentGuide').$item->seo->slug.'.blade.php'));
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
@@ -109,7 +109,7 @@ class RoutingController extends Controller {
                                         ->with(['files' => function($query){
                                             $query->where('relation_table', 'service_info');
                                         }])
-                                        ->with('seo')
+                                        ->with('seo', 'tourLocation.shipLocations.infoShipLocation.seo', 'tourLocation.services.seo')
                                         ->first();
                 $content            = Blade::render(Storage::get(config('admin.storage.contentService').$item->seo->slug.'.blade.php'));
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;

@@ -78,4 +78,8 @@ class Guide extends Model {
         return $this->hasOne(\App\Models\District::class, 'id', 'district_id');
     }
 
+    public function tourLocations(){
+        return $this->hasMany(\App\Models\RelationTourLocationGuide::class, 'guide_info_id', 'id');
+    }
+
 }

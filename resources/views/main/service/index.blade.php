@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="pageContent_body_sidebar">
-                    @include('main.guide.sidebar')
+                    @include('main.service.sidebar')
                 </div>
             </div>
         </div>

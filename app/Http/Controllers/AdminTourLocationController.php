@@ -13,7 +13,7 @@ use App\Services\BuildInsertUpdateModel;
 use App\Models\District;
 use App\Models\Province;
 use App\Models\Guide;
-use App\Models\RelationTourGuide;
+use App\Models\RelationTourLocationGuide;
 use App\Models\SystemFile;
 use App\Models\QuestionAnswer;
 use Illuminate\Support\Facades\DB;
@@ -89,7 +89,7 @@ class AdminTourLocationController extends Controller {
                         'tour_location_id'  => $idTourLocation,
                         'guide_info_id'     => $idGuideInfo
                     ];
-                    RelationTourGuide::insertItem($insertRelationTourLocationGuide);
+                    RelationTourLocationGuide::insertItem($insertRelationTourLocationGuide);
                 }
             }
             /* relation tour_location và ship_location */
@@ -176,7 +176,7 @@ class AdminTourLocationController extends Controller {
             // $tmp = str_replace('public/svg/loading_plane_e9ecef.svg', '{{ config("admin.images.default_750x460") }}', $tmp);
             // Storage::put(config('admin.storage.contentTourLocation').$request->get('slug').'.blade.php', $tmp);
             /* relation tour và guide (cẩm nang du lịch) */
-            RelationTourGuide::select('*')
+            RelationTourLocationGuide::select('*')
                                 ->where('tour_location_id', $idTourLocation)
                                 ->delete();
             if(!empty($request->get('guide_info_id'))){
@@ -185,7 +185,7 @@ class AdminTourLocationController extends Controller {
                         'tour_location_id'  => $idTourLocation,
                         'guide_info_id'     => $idGuideInfo
                     ];
-                    RelationTourGuide::insertItem($insertRelationTourLocationGuide);
+                    RelationTourLocationGuide::insertItem($insertRelationTourLocationGuide);
                 }
             }
             /* relation tour_location và ship_location */
