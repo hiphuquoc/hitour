@@ -153,7 +153,7 @@ table h3 {
 }
 @media (max-width: 567px) {
   .container {
-    padding: 0 0.75rem !important;
+    padding: 0 0.75rem;
   }
 }
 
@@ -936,6 +936,9 @@ input, textarea {
   .pageContent {
     padding-top: 1.25rem;
   }
+  .pageContent > *:last-child {
+    padding-bottom: 2.5rem;
+  }
   .pageContent_body_content {
     width: calc(100% - 320px - 1.25rem);
   }
@@ -964,6 +967,9 @@ input, textarea {
   }
 }
 @media (max-width: 767px) {
+  .pageContent > *:last-child {
+    padding-bottom: 2rem;
+  }
   .pageContent_body_content img {
     margin: 0.5rem 0 1rem 0;
   }

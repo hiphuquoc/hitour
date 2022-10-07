@@ -676,6 +676,11 @@ $width_normalMenu : 250px;
     }
     @media (max-width: 1023px){
         padding-top: 1.25rem;
+        > * {
+            &:last-child {
+                padding-bottom: 2.5rem;
+            }
+        }
         &_body {
             &_content {
                 width: calc(100% - 320px - 1.25rem);
@@ -706,6 +711,11 @@ $width_normalMenu : 250px;
         }
     }
     @media (max-width: 767px){
+        > * {
+            &:last-child {
+                padding-bottom: 2rem;
+            }
+        }
         &_body {
             &_content {
                 img {
