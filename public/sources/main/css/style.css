@@ -936,12 +936,18 @@ input, textarea {
   .pageContent {
     padding-top: 1.25rem;
   }
+  .pageContent_body_content {
+    width: calc(100% - 320px - 1.25rem);
+  }
   .pageContent_body_content img {
     margin: 0.75rem 0 1.25rem 0;
   }
   .pageContent_body_content h2 {
     font-size: 1.35rem;
     margin: 1.25rem 0 0.5rem 0;
+  }
+  .pageContent_body_sidebar {
+    flex: 0 0 320px;
   }
 }
 @media (max-width: 990px) {
@@ -1399,7 +1405,6 @@ input, textarea {
 
 .galleryBox {
   position: relative;
-  height: 490px;
   overflow: hidden;
   margin-bottom: 1.5rem;
 }
@@ -1437,16 +1442,17 @@ input, textarea {
 .detailTourBox table {
   line-height: 1.8;
 }
-.detailTourBox table tr:first-child td {
+.detailTourBox table tr:first-child td h2 {
   color: rgb(0, 123, 255);
   font-family: "SVN-Gilroy Bold", serif;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 700;
+  margin: 0;
 }
 .detailTourBox table tr:not(:first-child) td {
   margin-top: 0.5rem;
   padding-top: 0.5rem;
-  padding-bottom: 0.25rem;
+  padding-bottom: 0.5rem;
   border-top: 1px dotted #ced4da;
 }
 .detailTourBox table tr:not(:first-child) td:first-child {

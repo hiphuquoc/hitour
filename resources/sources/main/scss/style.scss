@@ -678,6 +678,7 @@ $width_normalMenu : 250px;
         padding-top: 1.25rem;
         &_body {
             &_content {
+                width: calc(100% - 320px - 1.25rem);
                 img {
                     margin: 0.75rem 0 1.25rem 0;
                 }
@@ -685,6 +686,9 @@ $width_normalMenu : 250px;
                     font-size: 1.35rem;
                     margin: 1.25rem 0 0.5rem 0;
                 }
+            }
+            &_sidebar {
+                flex: 0 0 320px;
             }
         }
     }
@@ -1155,7 +1159,6 @@ $tourGrid_radius : 5px;
 }
 .galleryBox {
     position: relative;
-    height: 490px;
     overflow: hidden;
     margin-bottom: 1.5rem;
     &_image {
@@ -1194,17 +1197,20 @@ $tourGrid_radius : 5px;
         tr {
             &:first-child {
                 td {
-                    color: $color-primary;
-                    font-family: $font-primary-title;
-                    font-size: 1.1rem;
-                    font-weight: 700;
+                    h2 {
+                        color: $color-primary;
+                        font-family: $font-primary-title;
+                        font-size: 1.2rem;
+                        font-weight: 700;
+                        margin: 0;
+                    }
                 }
             }
             &:not(:first-child){
                 td {
                     margin-top: 0.5rem;
                     padding-top: 0.5rem;
-                    padding-bottom: 0.25rem;
+                    padding-bottom: 0.5rem;
                     border-top: 1px dotted $bg-05;
                     
                     &:first-child {

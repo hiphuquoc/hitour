@@ -2,7 +2,7 @@
     <table>
         <tbody>
             <tr>
-                <td colspan="2">{{ $item->name }}</td>
+                <td colspan="2"><h2>{{ $item->name }}</h2></td>
             </tr>
             @if(!empty($item->code))
                 <tr>
