@@ -23,7 +23,7 @@
                     <div class="optionListBox_item_detail">
                         @foreach($item->prices as $price)
                             <div class="oneLine">
-                                <span>{!! !empty($price->price) ? number_format($price->price).'<sup>đ</sup>' : '-' !!}</span> /{{ $price->apply_age ?? '-' }}
+                                <span>{!! !empty($price->price) ? number_format($price->price).config('main.unit_currency') : '-' !!}</span> /{{ $price->apply_age ?? '-' }}
                             </div>
                         @endforeach
                     </div>

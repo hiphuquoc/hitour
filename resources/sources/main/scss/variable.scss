@@ -40,11 +40,54 @@ $color-link-dark: #2E86C1;
 $color-des : #567;
 $color-text: #456;
 
-$font-primary-title: "Roboto Slab", serif;
-// $font-primary-title: "Open Sans", serif;
-$font-primary-text: "Roboto", sans-serif;
+$font-primary-title: "SVN-Gilroy Bold", serif;
+$font-primary-text: "SVN-Gilroy", sans-serif;
 
 $background-image: '/images/main/hitour-background.png';
+
+// font Gilroy
+$folderFont : '/fonts/';
+@font-face{
+	font-family:'SVN-Gilroy Thin';
+	font-style:normal;
+	font-weight:400;
+	src:url($folderFont+"svn-gilroy_regular.ttf")
+}
+
+@font-face{
+	font-family:'SVN-Gilroy Light';
+	font-style:normal;
+	font-weight:400;
+	src:url($folderFont+"svn-gilroy_regular.ttf")
+}
+
+@font-face{
+	font-family:'SVN-Gilroy';
+	font-style:normal;
+	font-weight:500;
+	src:url($folderFont+"svn-gilroy_medium.ttf")
+}
+
+@font-face{
+	font-family:'SVN-Gilroy Med';
+	font-style:normal;
+	font-weight:700;
+	src:url($folderFont+"svn-gilroy_med.ttf")
+}
+
+@font-face{
+	font-family:'SVN-Gilroy Semi';
+	font-style:normal;
+	font-weight:700;
+	src:url($folderFont+"svn-gilroy_semibold.ttf")
+}
+
+@font-face{
+	font-family:'SVN-Gilroy Bold';
+	font-style:normal;
+	font-weight:700;
+	src:url($folderFont+"svn-gilroy_semibold.ttf")
+}
 
 @mixin titleOfBox {
     font-family: $font-primary-title;

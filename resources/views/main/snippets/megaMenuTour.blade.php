@@ -1,35 +1,3 @@
-@php
-    $infoMenuByRegion   = \Illuminate\Support\Facades\DB::table('tour_location as tl')
-                            ->join('region_info as ri', 'ri.id', '=', 'tl.region_id')
-                            ->join('seo', 'seo.id', '=', 'tl.seo_id')
-                            ->select('ri.id as region_id', 'ri.name as region', 'tl.name', 'tl.island', 'seo.slug', 'seo.level', 'seo.parent')
-                            ->get()
-                            ->toArray();
-    $infoMenuByRegion   = \App\Helpers\Url::buildFullLinkArray($infoMenuByRegion);
-    $dataMB             = [];
-    $dataMT             = [];
-    $dataMN             = [];
-    $dataBD             = [];
-    foreach($infoMenuByRegion as $item){
-        /* vùng miền */
-        switch($item->region_id){
-            case 1:
-                $dataMB[]   = $item;
-                break;
-            case 2:
-                $dataMT[]   = $item;
-                break;
-            case 3:
-                $dataMN[]   = $item;
-                break;
-            default:
-                break;
-        }
-        /* biển đảo */
-        if($item->island==true) $dataBD[] = $item;
-    }
-@endphp
-
 <div class="megaMenu">
     <div class="megaMenu_title" style="max-width:240px;">
     <ul>

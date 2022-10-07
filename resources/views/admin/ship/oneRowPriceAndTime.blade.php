@@ -43,17 +43,17 @@
                 </td>
                 <td>
                     <div class="oneLine">
-                        {{ number_format($price->price_adult) }}<sup>đ</sup> /người lớn
+                        {{ number_format($price->price_adult).config('main.unit_currency') }} /người lớn
                     </div>
                     <div class="oneLine">
-                        {{ number_format($price->price_child) }}<sup>đ</sup> /trẻ em
+                        {{ number_format($price->price_child).config('main.unit_currency') }} /trẻ em
                     </div>
                     <div class="oneLine">
-                        {{ number_format($price->price_old) }}<sup>đ</sup> /cao tuổi
+                        {{ number_format($price->price_old).config('main.unit_currency') }} /cao tuổi
                     </div>
                     @if(!empty($price->price_vip))
                         <div class="oneLine">
-                            {{ number_format($price->price_vip) }}<sup>đ</sup> /vé VIP
+                            {{ number_format($price->price_vip).config('main.unit_currency') }} /vé VIP
                         </div>
                     @endif
                 </td>

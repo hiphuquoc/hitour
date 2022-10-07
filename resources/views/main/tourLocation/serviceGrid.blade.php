@@ -29,7 +29,7 @@
                         </div> --}}
                     </div>
                     <div class="column_item serviceGrid_item_price">
-                        {{ number_format($service->price_show) }}<sup>đ</sup>
+                        {{ number_format($service->price_show).config('main.unit_currency') }}
                     </div>
                 </div>
                 {{-- <div class="serviceGrid_item_info">

@@ -71,7 +71,7 @@
                                 </td>
                                 <td>
                                     @foreach($option->prices as $price)
-                                        <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{!! !empty($price->price) ? number_format($price->price).'<sup>đ</sup>' : '-' !!}</span> /{{ $price->apply_age ?? '-' }}</div>
+                                        <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{!! !empty($price->price) ? number_format($price->price).config('main.unit_currency') : '-' !!}</span> /{{ $price->apply_age ?? '-' }}</div>
                                     @endforeach
                                 </td>
                             </tr>

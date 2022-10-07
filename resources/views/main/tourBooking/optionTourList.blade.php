@@ -12,7 +12,7 @@
             <div class="chooseOptionTour_item_price">
                 @foreach($option->prices as $price)
                     <div>
-                        <span class="highLight">{{ number_format($price->price) }}<sup>đ</sup></span> /{{ $price->apply_age }}
+                        <span class="highLight">{{ number_format($price->price).config('main.unit_currency') }}</span> /{{ $price->apply_age }}
                     </div>
                 @endforeach
             </div>

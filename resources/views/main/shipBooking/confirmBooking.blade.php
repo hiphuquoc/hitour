@@ -109,7 +109,7 @@
                                                 <div style="font-weight:500;">Tổng tiền:</div>
                                             </td>
                                             <td style="text-align:right;">
-                                                <div style="font-weight:700;font-size:1.2rem;color:#E74C3C;letter-spacing:0.5px;">{{ number_format($total) }}<sup>đ</sup></div>
+                                                <div style="font-weight:700;font-size:1.2rem;color:#E74C3C;letter-spacing:0.5px;">{{ number_format($total).config('main.unit_currency') }}</div>
                                             </td>
                                         </tr>
                                     @endif

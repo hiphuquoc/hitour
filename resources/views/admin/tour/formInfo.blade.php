@@ -130,8 +130,8 @@
                     <div>Vé máy bay hoặc Vé tàu cao...</div>
                     <div>Vé Vinwonders Phú Quốc</div>
                     <ul>
-                        <li>Khách hàng ... 880,000<sup>đ</sup></li>
-                        <li>Khách hàng ... 660,000<sup>đ</sup></li>
+                        <li>Khách hàng ... 880,000{{ config('main.unit_currency') }}</li>
+                        <li>Khách hàng ... 660,000{{ config('main.unit_currency') }}</li>
                         <li>Khách hàng ... Miễn phí</li>
                     </ul>
                 </textarea>
@@ -169,7 +169,7 @@
                     <div class="menuTour_item">
                         <div class="menuTour_item_title">
                             <div class="menuTour_item_mainTitle">
-                                Thực đơn 1 (150,000<sup>đ</sup>)
+                                Thực đơn 1 (150,000{{ config('main.unit_currency') }})
                             </div>
                             <div class="menuTour_item_subTitle">
                                 Nhà hàng Trùng Dương

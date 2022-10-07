@@ -57,7 +57,7 @@
                                         </tr>
                                         <tr style="border-top:2px solid #d1d1d1;border-bottom:2px solid #d1d1d1;vertical-align:middle;font-weight:bold;font-size:16px;">
                                             <td colspan="2" style="font-weight:bold;">Tổng:</td>
-                                            <td width="120px" align="right"><span style="color:#e74c3c;font-weight:bold;letter-spacing:1px;">680,000<sup>đ</sup></span></td>
+                                            <td width="120px" align="right"><span style="color:#e74c3c;font-weight:bold;letter-spacing:1px;">680,000{{ config('main.unit_currency') }}</span></td>
                                         </tr>
                                     </tbody>
                                 </table>

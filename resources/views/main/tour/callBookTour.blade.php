@@ -1,6 +1,6 @@
 <div class="callBookTour">
     <div class="callBookTour_price">
-        <div>giá từ: <span>{{ !empty($item->price_show) ? number_format($item->price_show) : 'Liên hệ' }}<sup>đ</sup></span></div>
+        <div>giá từ: <span>{{ !empty($item->price_show) ? number_format($item->price_show) : 'Liên hệ' }}{{ config('main.unit_currency') }}</span></div>
     </div>
     <div class="callBookTour_content">
         <b>Điểm Nổi Bật Chương Trình:</b>

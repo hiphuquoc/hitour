@@ -65,9 +65,9 @@
                     </div>
                     <div>
                         @if(count($arrayPrice['price_adult'])>1)
-                            <span class="text-price_500">{{ number_format($arrayPrice['price_adult'][0]) }} - {{ number_format(end($arrayPrice['price_adult'])) }}<sup>đ</sup></span> /vé
+                            <span class="text-price_500">{{ number_format($arrayPrice['price_adult'][0]) }} - {{ number_format(end($arrayPrice['price_adult'])).config('main.unit_currency') }}</span> /vé
                         @else
-                            <span class="text-price_500">{!! !empty($arrayPrice['price_adult'][0]) ? number_format($arrayPrice['price_adult'][0]).'<sup>đ</sup></span> /vé' : '-' !!}
+                            <span class="text-price_500">{!! !empty($arrayPrice['price_adult'][0]) ? number_format($arrayPrice['price_adult'][0]).config('main.unit_currency').'</span> /vé' : '-' !!}
                         @endif
                     </div>
                 </div>
@@ -77,9 +77,9 @@
                     </div>
                     <div>
                         @if(count($arrayPrice['price_child'])>1)
-                            <span class="text-price_500">{{ number_format($arrayPrice['price_child'][0]) }} - {{ number_format(end($arrayPrice['price_child'])) }}<sup>đ</sup></span> /vé
+                            <span class="text-price_500">{{ number_format($arrayPrice['price_child'][0]) }} - {{ number_format(end($arrayPrice['price_child'])).config('main.unit_currency') }}</span> /vé
                         @else
-                            <span class="text-price_500">{!! !empty($arrayPrice['price_child'][0]) ? number_format($arrayPrice['price_child'][0]).'<sup>đ</sup></span> /vé' : '-' !!}
+                            <span class="text-price_500">{!! !empty($arrayPrice['price_child'][0]) ? number_format($arrayPrice['price_child'][0]).config('main.unit_currency').'</span> /vé' : '-' !!}
                         @endif
                     </div>
                 </div>
@@ -89,9 +89,9 @@
                     </div>
                     <div>
                         @if(count($arrayPrice['price_old'])>1)
-                            <span class="text-price_500">{{ number_format($arrayPrice['price_old'][0]) }} - {{ number_format(end($arrayPrice['price_old'])) }}<sup>đ</sup></span> /vé
+                            <span class="text-price_500">{{ number_format($arrayPrice['price_old'][0]) }} - {{ number_format(end($arrayPrice['price_old'])).config('main.unit_currency') }}</span> /vé
                         @else
-                            <span class="text-price_500">{!! !empty($arrayPrice['price_old'][0]) ? number_format($arrayPrice['price_old'][0]).'<sup>đ</sup></span> /vé' : '-' !!}
+                            <span class="text-price_500">{!! !empty($arrayPrice['price_old'][0]) ? number_format($arrayPrice['price_old'][0]).config('main.unit_currency').'</span> /vé' : '-' !!}
                         @endif
                     </div>
                 </div>
@@ -101,9 +101,9 @@
                     </div>
                     <div>
                         @if(count($arrayPrice['price_vip'])>1)
-                            <span class="text-price_500">{{ number_format($arrayPrice['price_vip'][0]) }} - {{ number_format(end($arrayPrice['price_vip'])) }}<sup>đ</sup></span> /vé
+                            <span class="text-price_500">{{ number_format($arrayPrice['price_vip'][0]) }} - {{ number_format(end($arrayPrice['price_vip'])).config('main.unit_currency') }}</span> /vé
                         @else
-                            <span class="text-price_500">{!! !empty($arrayPrice['price_vip'][0]) ? number_format($arrayPrice['price_vip'][0]).'<sup>đ</sup></span> /vé' : 'Không có<sup></sup>' !!}
+                            <span class="text-price_500">{!! !empty($arrayPrice['price_vip'][0]) ? number_format($arrayPrice['price_vip'][0]).config('main.unit_currency').'</span> /vé' : 'Không có<sup></sup>' !!}
                         @endif
                     </div>
                 </div>

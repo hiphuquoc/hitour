@@ -74,7 +74,7 @@
                             </tr>
                             <tr style="border-top:1px dotted #d1d1d1">
                                 <td style="width:140px;font-size:15px;padding:5px;">Ăn uống</td>
-                                <td style="font-size:15px;padding:5px;">1 bữa ăn sáng (50,000<sup>đ</sup> /suát) và 3 bữa ăn chính (150,000<sup>đ</sup> /suát)</td>
+                                <td style="font-size:15px;padding:5px;">1 bữa ăn sáng (50,000{{ config('main.unit_currency') }} /suát) và 3 bữa ăn chính (150,000{{ config('main.unit_currency') }} /suát)</td>
                             </tr>
                             <tr style="border-top:1px dotted #d1d1d1">
                                 <td style="width:140px;font-size:15px;padding:5px;">Khách sạn</td>
@@ -121,7 +121,7 @@
                             <!-- Tổng -->
                             <tr>
                                 <td colspan="2" style="font-size:15px;padding:5px 10px;text-align:center;border-top:1px dashed #d1d1d1;">Tổng</td>
-                                <td style="font-size:15px;padding:5px 10px;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;color:#E74C3C;font-weight:bold;">23,900,000<sup>đ</sup></td>
+                                <td style="font-size:15px;padding:5px 10px;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;color:#E74C3C;font-weight:bold;">23,900,000{{ config('main.unit_currency') }}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -182,7 +182,7 @@
                             <tr style="border-bottom:1px dotted #d1d1d1;color:#456;">
                                 <td style="padding:5px;">
                                     <div>
-                                        1. Quý khách chuyển khoản cọc số tiền <span style="font-weight:bold;color:#E74C3C;font-size:17px;">23,900,000<sup>đ</sup></span> (<span style="font-weight:bold;font-size:16px;">trước 18:00 Chủ nhật, ngày 31-07-2022</span>), trong nội dung chuyển khoản ghi
+                                        1. Quý khách chuyển khoản cọc số tiền <span style="font-weight:bold;color:#E74C3C;font-size:17px;">23,900,000{{ config('main.unit_currency') }}</span> (<span style="font-weight:bold;font-size:16px;">trước 18:00 Chủ nhật, ngày 31-07-2022</span>), trong nội dung chuyển khoản ghi
                                         <span style="font-weight:bold;font-size:16px;">0909449924</span>
                                     </div>
                                     <div>

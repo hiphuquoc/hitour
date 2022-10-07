@@ -25,14 +25,14 @@
                     <div class="chooseDepartureShipBox_body_row_item">
                         <div class="option" onClick="chooseDeparture(this, {{ $code }}, '{{ $time['ship_price_id'] }}', '{{ $time['time_departure'] }}', '{{ $time['time_arrive'] }}', 'eco', '{{ $data['partner'] }}');">
                             <div>ECO</div>
-                            <div class="price">{{ number_format($data['price_adult']) }}<sup>đ</sup></div>
+                            <div class="price">{{ number_format($data['price_adult']).config('main.unit_currency') }}</div>
                         </div>
                     </div>
                     <div class="chooseDepartureShipBox_body_row_item">
                         @if(!empty($data['price_vip']))
                         <div class="option" onClick="chooseDeparture(this, {{ $code }}, '{{ $time['ship_price_id'] }}', '{{ $time['time_departure'] }}', '{{ $time['time_arrive'] }}', 'vip', '{{ $data['partner'] }}');">
                             <div>VIP</div>
-                            <div class="price">{{ number_format($data['price_vip']) }}<sup>đ</sup></div>
+                            <div class="price">{{ number_format($data['price_vip']).config('main.unit_currency') }}</div>
                         </div>
                         @endif
                     </div>

@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <div class="column_item tourGrid_item_price">
-                        {{ number_format($tour->price_show) }}<sup>đ</sup>
+                        {{ number_format($tour->price_show).config('main.unit_currency') }}
                     </div>
                 </div>
                 <div class="tourGrid_item_info">

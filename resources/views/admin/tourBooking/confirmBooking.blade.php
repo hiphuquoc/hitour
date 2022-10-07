@@ -104,7 +104,7 @@
                                         </tr>
                                         <tr style="border-top:1px dotted #d1d1d1">
                                             <td style="width:140px;font-size:15px;padding:5px;">Ăn uống</td>
-                                            <td style="font-size:15px;padding:5px;">1 bữa ăn sáng (50,000<sup>đ</sup> /suát) và 3 bữa ăn chính (150,000<sup>đ</sup> /suát)</td>
+                                            <td style="font-size:15px;padding:5px;">1 bữa ăn sáng (50,000{{ config('main.unit_currency') }} /suát) và 3 bữa ăn chính (150,000{{ config('main.unit_currency') }} /suát)</td>
                                         </tr>
                                         <tr style="border-top:1px dotted #d1d1d1">
                                             <td style="width:140px;font-size:15px;padding:5px;">Khách sạn</td>
@@ -164,7 +164,7 @@
                                         <!-- Tổng -->
                                         <tr>
                                             <td colspan="2" style="font-size:15px;padding:5px 10px;text-align:center;border-top:1px dashed #d1d1d1;">Tổng</td>
-                                            <td style="font-size:15px;padding:5px 10px;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;color:#E74C3C;font-weight:bold;">{{ number_format($total) }}<sup>đ</sup></td>
+                                            <td style="font-size:15px;padding:5px 10px;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;color:#E74C3C;font-weight:bold;">{{ number_format($total).config('main.unit_currency') }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -243,7 +243,7 @@
                                                     }
                                                 @endphp
                                                 <div>
-                                                    1. Quý khách chuyển khoản cọc số tiền <span style="font-weight:bold;color:#E74C3C;font-size:17px;">{{ !empty($item->require_deposit) ? number_format($item->require_deposit) : number_format($total) }}<sup>đ</sup></span> {{ $deadline }}, trong nội dung chuyển khoản ghi <span style="font-weight:bold;font-size:16px;">{{ $item->customer_contact->phone }}</span>
+                                                    1. Quý khách chuyển khoản cọc số tiền <span style="font-weight:bold;color:#E74C3C;font-size:17px;">{{ !empty($item->require_deposit) ? number_format($item->require_deposit) : number_format($total).config('main.unit_currency') }}</span> {{ $deadline }}, trong nội dung chuyển khoản ghi <span style="font-weight:bold;font-size:16px;">{{ $item->customer_contact->phone }}</span>
                                                 </div>
                                                 @foreach(config('company.bank') as $bank)
                                                     <div>

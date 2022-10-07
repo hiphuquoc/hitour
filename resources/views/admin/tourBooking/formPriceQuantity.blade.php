@@ -1,7 +1,7 @@
 @if(!empty($prices))
     @foreach($prices as $item)
         <div class="formBox_full_item">
-            <label class="form-label">{{ $item->apply_age ?? 'Không xác định' }} * {!! !empty($item->price) ? '<span style="font-weight:bold;">'.number_format($item->price).'<sup>đ</sup></span>' : '-' !!}</label>
+            <label class="form-label">{{ $item->apply_age ?? 'Không xác định' }} * {!! !empty($item->price) ? '<span style="font-weight:bold;">'.number_format($item->price).config('main.unit_currency').'</span>' : '-' !!}</label>
             @php
                 $value          = '';
                 foreach($quantity as $q){

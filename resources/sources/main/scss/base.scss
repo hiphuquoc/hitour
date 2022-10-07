@@ -17,6 +17,9 @@ body {
 
 p {
     margin-bottom: 0.75rem;
+    @media (max-width: 577px) {
+        margin-bottom: 0.5rem;
+    }
 }
 
 a {
@@ -29,10 +32,12 @@ a {
 
 h2 {
     margin-bottom: 0.75rem;
+    font-family: $font-primary-title;
 }
 
 h3, h4, h5, h6 {
     margin-bottom: 0.5rem;
+    font-family: $font-primary-title;
 }
 
 ul, ol {

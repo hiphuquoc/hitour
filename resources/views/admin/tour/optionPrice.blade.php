@@ -20,7 +20,7 @@
         @if(!empty($dataPrice))
             @foreach($dataPrice as $price)
                 <div class="oneLine">
-                    {{ number_format($price['price']) }}<sup>đ</sup> /{{ $price['apply_age'] }}<br/>(HH: {{ number_format($price['profit']) }}<sup>đ</sup>)
+                    {{ number_format($price['price']).config('main.unit_currency') }} /{{ $price['apply_age'] }}<br/>(HH: {{ number_format($price['profit']).config('main.unit_currency') }})
                 </div>
             @endforeach
         @endif

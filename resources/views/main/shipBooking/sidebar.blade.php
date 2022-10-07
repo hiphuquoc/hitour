@@ -1,7 +1,7 @@
 <div class="js_scrollFixed" style="width: unset; margin-top: 0px;">
    <div class="callBookTour">
       {{-- <div class="callBookTour_price">
-         <div>giá từ: <span>1,250,000<sup>đ</sup></span></div>
+         <div>giá từ: <span>1,250,000{{ config('main.unit_currency') }}</span></div>
       </div> --}}
       <div class="callBookTour_content" style="padding:0.5rem 1rem;">
          <b style="font-size:1.2rem;font-family:'Roboto Slab', serif;font-weight:700;margin-bottom:0.4rem;display:block;">Tóm tắt booking</b>

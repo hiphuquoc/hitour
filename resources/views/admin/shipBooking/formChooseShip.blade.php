@@ -41,7 +41,7 @@
                         @endphp
                         <div class="chooseDepartureShipBox_row_item_choose option {{ $active }}" onClick="chooseDeparture(this, '{{ $code }}', '{{ $data['ship_price_id'] }}', '{{ $time['time_departure'] }}', '{{ $time['time_arrive'] }}', 'eco', '{{ $data['partner'] }}');">
                             <div class="highLight">ECO</div>
-                            <div>{{ number_format($data['price_adult']) }}<sup>đ</sup></div>
+                            <div>{{ number_format($data['price_adult']).config('main.unit_currency') }}</div>
                         </div>
                     </div>
                     <div class="chooseDepartureShipBox_row_item">
@@ -64,7 +64,7 @@
                             @endphp
                             <div class="chooseDepartureShipBox_row_item_choose option {{ $active }}" onClick="chooseDeparture(this, '{{ $code }}', '{{ $data['ship_price_id'] }}', '{{ $time['time_departure'] }}', '{{ $time['time_arrive'] }}', 'vip', '{{ $data['partner'] }}');">
                                 <div class="highLight">VIP</div>
-                                <div>{{ number_format($data['price_vip']) }}<sup>đ</sup></div>
+                                <div>{{ number_format($data['price_vip']).config('main.unit_currency') }}</div>
                             </div>
                         @endif
                     </div>

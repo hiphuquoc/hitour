@@ -129,7 +129,7 @@
                                         <!-- Tổng -->
                                         <tr>
                                             <td colspan="2" style="font-size:15px;padding:5px 10px;text-align:center;border-top:1px dashed #d1d1d1;">Tổng</td>
-                                            <td style="font-size:15px;padding:5px 10px;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;color:#E74C3C;font-weight:bold;">{{ number_format($total) }}<sup>đ</sup></td>
+                                            <td style="font-size:15px;padding:5px 10px;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;color:#E74C3C;font-weight:bold;">{{ number_format($total).config('main.unit_currency') }}</td>
                                         </tr>
                                     </tbody>
                                 </table>

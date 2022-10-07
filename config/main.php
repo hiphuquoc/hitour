@@ -9,5 +9,5 @@ return [
         'not_empty' => 'Không để trống trường này!',
     ],
 
-
+    'unit_currency' => 'đ'
 ];

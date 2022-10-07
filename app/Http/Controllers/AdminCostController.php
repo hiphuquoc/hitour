@@ -68,7 +68,7 @@ class AdminCostController extends Controller {
                 $total  += $cost->quantity*$cost->unit_price;
             }
             if($dataCost->isNotEmpty()) $result .= '<div class="flexBox">
-                                                        <div class="flexBox_item">Tổng: <span style="font-weight:bold;color:#E74C3C;">'.number_format($total).'<sup>đ</sup></span></div>
+                                                        <div class="flexBox_item">Tổng: <span style="font-weight:bold;color:#E74C3C;">'.number_format($total).config('main.unit_currency').'</span></div>
                                                     </div>';
         }
         if(empty($result)) $result = config('admin.message_data_empty');

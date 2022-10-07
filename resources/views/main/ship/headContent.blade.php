@@ -99,11 +99,11 @@
                         @endforeach
                     </td>
                     <td>
-                        <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{{ number_format($data['price_adult']) }}<sup>đ</sup></span> /Người lớn</div>
-                        <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{{ number_format($data['price_child']) }}<sup>đ</sup></span> /Trẻ em 6-11</div>
-                        <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{{ number_format($data['price_old']) }}<sup>đ</sup></span> /Trên 60</div>
+                        <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{{ number_format($data['price_adult']).config('main.unit_currency') }}</span> /Người lớn</div>
+                        <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{{ number_format($data['price_child']).config('main.unit_currency') }}</span> /Trẻ em 6-11</div>
+                        <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{{ number_format($data['price_old']).config('main.unit_currency') }}</span> /Trên 60</div>
                         @if(!empty($data['price_vip']))
-                            <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{{ number_format($data['price_vip']) }}<sup>đ</sup></span> /Vé VIP</div>
+                            <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{{ number_format($data['price_vip']).config('main.unit_currency') }}</span> /Vé VIP</div>
                         @endif
                     </td>
                 </tr>
