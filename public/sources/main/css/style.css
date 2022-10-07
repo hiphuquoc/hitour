@@ -1371,6 +1371,9 @@ input, textarea {
   .tourGrid_item:not(:first-child) {
     margin-top: 1rem;
   }
+  .tourGrid_item_desc h2, .tourGrid_item_desc h3 {
+    font-size: 1.15rem;
+  }
 }
 @media (max-width: 419px) {
   .tourGrid_item_image {

@@ -1115,6 +1115,11 @@ $tourGrid_radius : 5px;
             &:not(:first-child){
                 margin-top: 1rem;
             }
+            &_desc {
+                h2, h3 {
+                    font-size: 1.15rem;
+                }
+            }
         }
     }
     @media (max-width: 419px){
