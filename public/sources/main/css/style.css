@@ -916,10 +916,11 @@ input, textarea {
 }
 .pageContent_body_content img {
   display: flex;
-  margin: 1rem 0 1.75rem 0;
+  margin: 1rem 0 1.5rem 0;
 }
 .pageContent_body_content h2 {
-  margin: 1.5rem 0 0.5rem 0;
+  font-size: 1.4rem;
+  margin: 1.5rem 0 0.75rem 0;
 }
 .pageContent_body_content ul li:not(:first-child) {
   margin-top: 0.5rem;
@@ -935,6 +936,13 @@ input, textarea {
   .pageContent {
     padding-top: 1.25rem;
   }
+  .pageContent_body_content img {
+    margin: 0.75rem 0 1.25rem 0;
+  }
+  .pageContent_body_content h2 {
+    font-size: 1.35rem;
+    margin: 1.25rem 0 0.5rem 0;
+  }
 }
 @media (max-width: 990px) {
   .pageContent_body {
@@ -949,9 +957,13 @@ input, textarea {
     margin-top: 1.5rem;
   }
 }
-@media (max-width: 577px) {
-  .pageContent {
-    padding-top: 1rem;
+@media (max-width: 767px) {
+  .pageContent_body_content img {
+    margin: 0.5rem 0 1rem 0;
+  }
+  .pageContent_body_content h2 {
+    font-size: 1.3rem;
+    margin: 1rem 0 0.5rem 0;
   }
 }
 
@@ -1602,6 +1614,24 @@ input, textarea {
 .contentTour_item_text table.tableList tbody tr td:not(:first-child) {
   padding-left: 0.5rem;
 }
+@media (max-width: 1023px) {
+  .contentTour_item:not(:first-child) {
+    margin-top: 1.25rem;
+  }
+  .contentTour_item_title h2, .contentTour_item_title h3 {
+    font-size: 1.275rem;
+  }
+}
+@media (max-width: 577px) {
+  .contentTour_item:not(:first-child) {
+    margin-top: 1rem;
+  }
+  .contentTour_item_title h2, .contentTour_item_title h3 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    font-size: 1.25rem;
+  }
+}
 
 .dayTourByList {
   padding-left: 2rem;
@@ -1761,7 +1791,7 @@ input, textarea {
   background: #e9ecef;
   font-size: 0.95rem;
   border-radius: 5px;
-  margin: 1rem auto 1.25rem auto;
+  margin: 1rem auto;
   border: 1px solid #e9ecef;
 }
 .imageBox img {
@@ -1774,6 +1804,16 @@ input, textarea {
 .imageBox_note {
   padding: 0.5rem 1rem;
   text-align: center;
+}
+@media (max-width: 1023px) {
+  .imageBox {
+    margin: 0.75rem auto;
+  }
+}
+@media (max-width: 577px) {
+  .imageBox {
+    margin: 0.5rem auto;
+  }
 }
 
 .scrollFixedSidebar {
