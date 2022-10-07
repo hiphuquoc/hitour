@@ -1616,7 +1616,7 @@ $tourGrid_radius : 5px;
 blockquote{
 	display:block;
 	// background: $bg-03;
-	padding: 0.5rem 0.5rem 0.5rem 2.75rem;
+	padding: 0 0 0 2.5rem;
 	margin: 0 0 1rem 0;
 	position: relative;
 	font-size: inherit;
@@ -1625,12 +1625,12 @@ blockquote{
 	
 	&::before{
 		content: "\201C";
-        font-size: 4rem;
+        font-size: 3rem;
         font-weight: bold;
         color: $bg-06;
         position: absolute;
         left: 0.5rem;
-        top: 1.5rem;
+        top: 1.25rem;
 	}
 	&::after{
 		/*Reset to make sure*/
@@ -1639,6 +1639,20 @@ blockquote{
 	em {
 		font-style: italic;
 	}
+    @media (max-width: 1023px){
+        padding: 0 0 0 2rem;
+        &::before{
+            font-size: 2.5rem;
+            top: 1rem;
+        }
+    }
+    @media (max-width: 1023px){
+        padding: 0 0 0 1.75rem;
+        &::before{
+            font-size: 2rem;
+            top: 0.5rem;
+        }
+    }
 }
 .shipGrid {
 	margin: 1rem 0 2.5rem 0;
@@ -1942,6 +1956,7 @@ blockquote{
             border-radius: inherit;
             img {
                 border-radius: 5px 5px 0 0;
+                margin: 0;
             }
         }
         &_content {
