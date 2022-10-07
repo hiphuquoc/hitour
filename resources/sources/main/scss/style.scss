@@ -755,7 +755,7 @@ $width_normalMenu : 250px;
         &_title {
             font-size: 1.05rem;
             font-weight: 700;
-            margin-bottom: 0.75rem !important;
+            margin-bottom: 0.5rem !important;
         }
         &_list {
             li {
@@ -1509,6 +1509,43 @@ $tourGrid_radius : 5px;
             }
         }
     }
+    @media (max-width: 1023px){
+        &_item {
+            width: calc(50% - 0.5rem);
+            &:not(:nth-child(2n + 1)){
+                margin-left: 1rem;
+            }
+            &:nth-child(2n + 1){
+                margin-left: 0;
+            }
+            &:not(:nth-child(n + 3)){
+                margin-top: 0;
+            }
+            &:nth-child(n + 3){
+                margin-top: 1rem;
+            }
+        }
+    }
+    @media (max-width: 577px){
+        &_item {
+            width: calc(50% - 0.5rem);
+            &:not(:nth-child(2n + 1)){
+                margin-left: 0.75rem;
+            }
+            &:nth-child(n + 3){
+                margin-top: 0.75rem;
+            }
+        }
+    }
+    @media (max-width: 419px){
+        &_item {
+            width: 100%;
+            margin-left: 0 !important;
+            &:not(:first-child){
+                margin-top: 0.75rem;
+            }
+        }
+    }
 }
 .hotelTour {
     &_item {
@@ -1520,7 +1557,7 @@ $tourGrid_radius : 5px;
             font-weight: 700;
             margin-bottom: 0.25rem;
             h3 {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
         }
         &_image {
@@ -1530,6 +1567,7 @@ $tourGrid_radius : 5px;
             img {
                 width: calc(33.33% - 0.6666rem);
                 border-radius: 5px;
+                margin: 0;
                 &:not(:nth-child(3n + 1)){
                     margin-left: 1rem;
                 }
@@ -1538,9 +1576,56 @@ $tourGrid_radius : 5px;
                 }
             }
         }
-        
     }
-
+    @media (max-width: 1023px){
+        &_item {
+            &_image {
+                img {
+                    width: calc(50% - 0.5rem);
+                    &:not(:nth-child(2n + 1)){
+                        margin-left: 1rem;
+                    }
+                    &:nth-child(2n + 1){
+                        margin-left: 0;
+                    }
+                    &:not(:nth-child(n + 3)){
+                        margin-top: 0;
+                    }
+                    &:nth-child(n + 3){
+                        margin-top: 1rem;
+                    }
+                }
+            }
+        }
+    }
+    @media (max-width: 577px){
+        &_item {
+            &_image {
+                img {
+                    width: calc(50% - 0.5rem);
+                    &:not(:nth-child(2n + 1)){
+                        margin-left: 0.75rem;
+                    }
+                    &:nth-child(n + 3){
+                        margin-top: 0.75rem;
+                    }
+                }
+            }
+        }
+    }
+    @media (max-width: 419px){
+        &_item {
+            &_image {
+                img {
+                    width: 100%;
+                    margin-left: 0 !important;
+                    &:not(:first-child){
+                        margin-top: 0.75rem;
+                    }
+                }
+            }
+        }
+    }
 }
 .tableContentBorder {
     line-height: 1.6 !important;
@@ -1630,7 +1715,7 @@ blockquote{
         color: $bg-06;
         position: absolute;
         left: 0.5rem;
-        top: 1.25rem;
+        top: 0.75rem;
 	}
 	&::after{
 		/*Reset to make sure*/

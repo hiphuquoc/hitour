@@ -1013,7 +1013,7 @@ input, textarea {
 .footerBox_item_title {
   font-size: 1.05rem;
   font-weight: 700;
-  margin-bottom: 0.75rem !important;
+  margin-bottom: 0.5rem !important;
 }
 .footerBox_item_list li a {
   display: flex;
@@ -1718,6 +1718,43 @@ input, textarea {
 .menuTour_item ul li {
   list-style-type: none;
 }
+@media (max-width: 1023px) {
+  .menuTour_item {
+    width: calc(50% - 0.5rem);
+  }
+  .menuTour_item:not(:nth-child(2n+1)) {
+    margin-left: 1rem;
+  }
+  .menuTour_item:nth-child(2n+1) {
+    margin-left: 0;
+  }
+  .menuTour_item:not(:nth-child(n+3)) {
+    margin-top: 0;
+  }
+  .menuTour_item:nth-child(n+3) {
+    margin-top: 1rem;
+  }
+}
+@media (max-width: 577px) {
+  .menuTour_item {
+    width: calc(50% - 0.5rem);
+  }
+  .menuTour_item:not(:nth-child(2n+1)) {
+    margin-left: 0.75rem;
+  }
+  .menuTour_item:nth-child(n+3) {
+    margin-top: 0.75rem;
+  }
+}
+@media (max-width: 419px) {
+  .menuTour_item {
+    width: 100%;
+    margin-left: 0 !important;
+  }
+  .menuTour_item:not(:first-child) {
+    margin-top: 0.75rem;
+  }
+}
 
 .hotelTour_item:not(:first-child) {
   margin-top: 1rem;
@@ -1728,7 +1765,7 @@ input, textarea {
   margin-bottom: 0.25rem;
 }
 .hotelTour_item_title h3 {
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 .hotelTour_item_image {
   display: flex;
@@ -1738,12 +1775,50 @@ input, textarea {
 .hotelTour_item_image img {
   width: calc(33.33% - 0.6666rem);
   border-radius: 5px;
+  margin: 0;
 }
 .hotelTour_item_image img:not(:nth-child(3n+1)) {
   margin-left: 1rem;
 }
 .hotelTour_item_image img:nth-child(n+4) {
   margin-top: 1rem;
+}
+@media (max-width: 1023px) {
+  .hotelTour_item_image img {
+    width: calc(50% - 0.5rem);
+  }
+  .hotelTour_item_image img:not(:nth-child(2n+1)) {
+    margin-left: 1rem;
+  }
+  .hotelTour_item_image img:nth-child(2n+1) {
+    margin-left: 0;
+  }
+  .hotelTour_item_image img:not(:nth-child(n+3)) {
+    margin-top: 0;
+  }
+  .hotelTour_item_image img:nth-child(n+3) {
+    margin-top: 1rem;
+  }
+}
+@media (max-width: 577px) {
+  .hotelTour_item_image img {
+    width: calc(50% - 0.5rem);
+  }
+  .hotelTour_item_image img:not(:nth-child(2n+1)) {
+    margin-left: 0.75rem;
+  }
+  .hotelTour_item_image img:nth-child(n+3) {
+    margin-top: 0.75rem;
+  }
+}
+@media (max-width: 419px) {
+  .hotelTour_item_image img {
+    width: 100%;
+    margin-left: 0 !important;
+  }
+  .hotelTour_item_image img:not(:first-child) {
+    margin-top: 0.75rem;
+  }
 }
 
 .tableContentBorder {
@@ -1839,7 +1914,7 @@ blockquote::before {
   color: #adb5bd;
   position: absolute;
   left: 0.5rem;
-  top: 1.25rem;
+  top: 0.75rem;
 }
 blockquote::after {
   /*Reset to make sure*/

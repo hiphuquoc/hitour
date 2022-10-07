@@ -82,11 +82,13 @@
             var i                   = 0;
             $('body').find('[data-tocContent]').each(function(){
                 const dataId        = $(this).attr('id');
+                const name          = $(this)[0].localName;
                 const dataIcon      = $('<div />').append($(this).find('i').clone()).html();
                 const dataTitle     = $(this).find('h2').html();
                 dataTocContent[i]   = {
                     id      : dataId,
                     icon    : dataIcon,
+                    name    : name,
                     title   : dataTitle
                 };
                 ++i;
