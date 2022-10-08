@@ -1,7 +1,3 @@
-{{-- @php
-    dd($option);
-@endphp --}}
-
 <div id="optionPrice_{{ $option['tour_option_id'] }}" class="flexBox">
     <div class="flexBox_item">
         <div><b>{{ $option['option'] }}</b></div>
@@ -12,6 +8,7 @@
                     $dataPrice              = [];
                     foreach($dateApply as $price) $dataPrice[] = $price;
                 }
+                dd($option);
             @endphp
             <div>{{ date('d-m-Y', strtotime($dateApply[0]['date_start'])) }} - {{ date('d-m-Y', strtotime($dateApply[0]['date_end'])) }}</div>
         @endforeach

@@ -34,6 +34,8 @@ use App\Http\Controllers\AdminShipBookingController;
 
 use App\Http\Controllers\AdminGuideController;
 
+use App\Http\Controllers\AdminCarrentalLocationController;
+
 use App\Http\Controllers\MainHomeController;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\ShipController;
@@ -242,6 +244,15 @@ Route::prefix('admin')->group(function(){
             Route::post('/removeImage', [AdminImageController::class, 'removeImage'])->name('admin.image.removeImage');
 
             // Route::get('/toolRename', [AdminImageController::class, 'toolRename'])->name('admin.image.toolRename');
+        });
+        /* ===== CARRENTAL LOCATION ===== */
+        Route::prefix('carrentalLocation')->group(function(){
+            Route::get('/', [AdminCarrentalLocationController::class, 'list'])->name('admin.carrentalLocation.list');
+            Route::post('/create', [AdminCarrentalLocationController::class, 'create'])->name('admin.carrentalLocation.create');
+            Route::get('/view', [AdminCarrentalLocationController::class, 'view'])->name('admin.carrentalLocation.view');
+            Route::post('/update', [AdminCarrentalLocationController::class, 'update'])->name('admin.carrentalLocation.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminCarrentalLocationController::class, 'delete'])->name('admin.carrentalLocation.delete');
         });
         /* ===== AJAX ===== */
         Route::post('/loadProvinceByRegion', [AdminFormController::class, 'loadProvinceByRegion'])->name('admin.form.loadProvinceByRegion');

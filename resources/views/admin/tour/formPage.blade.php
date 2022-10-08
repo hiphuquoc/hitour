@@ -1,4 +1,4 @@
-<input type="hidden" name="tour_location_id" value="{{ $item->id ?? null }}" />
+<input type="hidden" name="tour_location_id" value="{{ !empty($item->id)&&$type=='edit' ? $item->id : null }}" />
 
 <div class="formBox">
     <div class="formBox_full">

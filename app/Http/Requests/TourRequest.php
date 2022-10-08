@@ -3,8 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
-use App\Models\Tour;
+use Illuminate\Support\Facades\DB;
 
 class TourRequest extends FormRequest
 {
@@ -37,8 +36,14 @@ class TourRequest extends FormRequest
                 function($attribute, $value, $fail){
                     $slug           = !empty(request('slug')) ? request('slug') : null;
                     if(!empty($slug)){
-                        $dataCheck  = Tour::getItemBySlug($slug);
-                        if(!empty($dataCheck)&&$dataCheck->id_tour!=request('tour_info_id')) $fail('Dường dẫn tĩnh đã trùng với một Tour khác trên hệ thống!');
+                        $dataCheck  = DB::table('seo')
+                                        ->join('tour_info', 'tour_info.seo_id', '=', 'seo.id')
+                                        ->select('seo.slug', 'tour_info.id')
+                                        ->where('slug', $slug)
+                                        ->first();
+                        if(!empty($dataCheck)){
+                            if(empty(request('tour_info_id'))) $fail('Dường dẫn tĩnh đã trùng với một Chi tiết tour khác trên hệ thống!');
+                        }
                     }
                 }
             ],

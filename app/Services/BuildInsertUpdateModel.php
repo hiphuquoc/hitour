@@ -719,4 +719,29 @@ class BuildInsertUpdateModel {
         }
         return $result;
     }
+
+    public static function buildArrayTableCarrentalLocation($dataForm, $seoId = null){
+        /* upload carrental_location
+            + name
+            + location_name
+            + description
+            + seo_id
+            + region_id
+            + province_id
+            + district_id
+            + note
+        */
+        $result                             = [];
+        if(!empty($dataForm)){
+            $result['name']                 = $dataForm['title'] ?? null;
+            $result['location_name']        = $dataForm['location_name'] ?? null;
+            $result['description']          = $dataForm['description'] ?? null;
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
+            $result['region_id']            = $dataForm['region'];
+            $result['province_id']          = $dataForm['province'] ?? null;
+            $result['district_id']          = $dataForm['district'] ?? null;
+            $result['note']                 = $dataForm['note'] ?? null;
+        }
+        return $result;
+    }
 }

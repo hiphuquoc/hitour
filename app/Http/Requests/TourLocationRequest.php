@@ -38,14 +38,12 @@ class TourLocationRequest extends FormRequest
                     $slug           = !empty(request('slug')) ? request('slug') : null;
                     if(!empty($slug)){
                         $dataCheck  = DB::table('seo')
-                                        ->join('service_info', 'service_info.seo_id', '=', 'seo.id')
-                                        ->select('seo.slug', 'service_info.id')
+                                        ->join('tour_location', 'tour_location.seo_id', '=', 'seo.id')
+                                        ->select('seo.slug', 'tour_location.id')
                                         ->where('slug', $slug)
                                         ->first();
-                        if(!empty(request('tour_location_id'))&&!empty($dataCheck)){
-                            if(request('tour_location_id')!=$dataCheck->id&&!empty($dataCheck)) $fail('Dường dẫn tĩnh đã trùng với một Khu vực Tour khác trên hệ thống!');
-                        }else {
-                            if(!empty($dataCheck)) $fail('Dường dẫn tĩnh đã trùng với một Khu vực Tour khác trên hệ thống!');
+                        if(!empty($dataCheck)){
+                            if(empty(request('tour_location_id'))) $fail('Dường dẫn tĩnh đã trùng với một Điểm đến tour khác trên hệ thống!');
                         }
                     }
                 }

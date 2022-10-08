@@ -40,7 +40,9 @@ class ServiceRequest extends FormRequest
                                         ->select('seo.slug', 'service_info.id')
                                         ->where('slug', $slug)
                                         ->first();
-                        if(!empty($dataCheck)&&$dataCheck->id!=request('service_info_id')) $fail('Dường dẫn tĩnh đã trùng với một Dịch vụ khác trên hệ thống!');
+                        if(!empty($dataCheck)){
+                            if(empty(request('service_info_id'))) $fail('Dường dẫn tĩnh đã trùng với một Dịch vụ khác trên hệ thống!');
+                        }
                     }
                 }
             ],

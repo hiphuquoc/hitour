@@ -93,15 +93,16 @@ return [
     ],
 
     'storage'   => [
-        'contentTour'           => 'public/contents/tours/',
-        'contentTourLocation'   => 'public/contents/tourLocations/',
-        'contentTourDeparture'  => 'public/contents/tourDepartures/',
-        'contentShip'           => 'public/contents/ships/',
-        'contentShipLocation'   => 'public/contents/shipLocations/',
-        'contentShipDeparture'  => 'public/contents/shipDepartures/',
-        'contentShipPartner'    => 'public/contents/shipPartners/',
-        'contentGuide'          => 'public/contents/guides/',
-        'contentService'        => 'public/contents/services/'
+        'contentTour'               => 'public/contents/tours/',
+        'contentTourLocation'       => 'public/contents/tourLocations/',
+        'contentTourDeparture'      => 'public/contents/tourDepartures/',
+        'contentShip'               => 'public/contents/ships/',
+        'contentShipLocation'       > 'public/contents/shipLocations/',
+        'contentShipDeparture'      => 'public/contents/shipDepartures/',
+        'contentShipPartner'        => 'public/contents/shipPartners/',
+        'contentGuide'              => 'public/contents/guides/',
+        'contentService'            => 'public/contents/services/',
+        'contentCarrentalLocation'  => 'public/contents/carrentalLocations/'
     ],
 
     'alert'     => [

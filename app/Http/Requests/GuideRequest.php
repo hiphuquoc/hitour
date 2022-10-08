@@ -42,10 +42,8 @@ class GuideRequest extends FormRequest
                                         ->select('seo.slug', 'guide_info.id')
                                         ->where('slug', $slug)
                                         ->first();
-                        if(!empty(request('guide_info_id'))&&!empty($dataCheck)){
-                            if(request('guide_info_id')!=$dataCheck->id&&!empty($dataCheck)) $fail('Dường dẫn tĩnh đã trùng với một Cẩm nang khác trên hệ thống!');
-                        }else {
-                            if(!empty($dataCheck)) $fail('Dường dẫn tĩnh đã trùng với một Cẩm nang khác trên hệ thống!');
+                        if(!empty($dataCheck)){
+                            if(empty(request('guide_info_id'))) $fail('Dường dẫn tĩnh đã trùng với một Cẩm nang khác trên hệ thống!');
                         }
                     }
                 }

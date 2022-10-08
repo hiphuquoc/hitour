@@ -1,4 +1,5 @@
-<input type="hidden" name="ship_partner_id" value="{{ $item->id ?? null }}" />
+<input type="hidden" name="ship_partner_id" value="{{ !empty($item->id)&&$type=='edit' ? $item->id : null }}" />
+
 <div class="card-header border-bottom">
     <h4 class="card-title">Thông tin Đối tác</h4>
 </div>

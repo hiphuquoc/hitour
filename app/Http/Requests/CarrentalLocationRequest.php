@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
 
-class ShipPartnerRequest extends FormRequest
+class CarrentalLocationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,22 +25,25 @@ class ShipPartnerRequest extends FormRequest
     public function rules()
     {
         return [
+            'title'                     => 'required|max:255',
+            'description'               => 'required',
+            'content'                   => 'required',
             'ordering'                  => 'min:0',
             'seo_title'                 => 'required',
             'seo_description'           => 'required',
-            'content'                   => 'required',
+            'location_name'             => 'required',
             'slug'                      => [
                 'required',
                 function($attribute, $value, $fail){
                     $slug           = !empty(request('slug')) ? request('slug') : null;
                     if(!empty($slug)){
                         $dataCheck  = DB::table('seo')
-                                        ->join('ship_partner', 'ship_partner.seo_id', '=', 'seo.id')
-                                        ->select('seo.slug', 'ship_partner.id')
+                                        ->join('carrental_location', 'carrental_location.seo_id', '=', 'seo.id')
+                                        ->select('seo.slug', 'carrental_location.id')
                                         ->where('slug', $slug)
                                         ->first();
                         if(!empty($dataCheck)){
-                            if(empty(request('ship_partner_id'))) $fail('Dường dẫn tĩnh đã trùng với một Đối tác tàu khác trên hệ thống!');
+                            if(empty(request('carrental_location_id'))) $fail('Dường dẫn tĩnh đã trùng với một bài Cho thuê xe khác trên hệ thống!');
                         }
                     }
                 }
@@ -53,10 +56,14 @@ class ShipPartnerRequest extends FormRequest
     public function messages()
     {
         return [
+            'title.required'            => 'Tiêu đề trang không được để trống!',
+            'title.max'                 => 'Tiêu đề trang không được vượt quá 255 ký tự!',
+            'description.required'      => 'Mô tả trang không được để trống!',
+            'content.required'          => 'Nội dung không được để trống!',
+            'location_name.required'    => 'Tên khu vực hiển thị không được để trống!',
             'ordering.min'              => 'Giá trị không được nhỏ hơn 0!',
             'seo_title.required'        => 'Tiêu đề SEO không được để trống!',
             'seo_description.required'  => 'Mô tả SEO không được để trống!',
-            'content.required'          => 'Nội dung trang không được để trống!',
             'slug.required'             => 'Đường dẫn tĩnh không được để trống!',
             'rating_aggregate_count'    => 'Số lượt đánh giá không được để trống!',
             'rating_aggregate_star'     => 'Điểm đánh giá không được để trống!'
