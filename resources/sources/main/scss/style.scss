@@ -1495,6 +1495,26 @@ $tourGrid_radius : 5px;
             }   
         }
     }
+    @media (max-width: 577px){
+        padding-left: 0.75rem;
+        &:before {
+            left: 0;
+        }
+        &_item {
+            &_title {
+                &:before {
+                    width: 15px;
+                    height: 15px;
+                    left: -1.4rem;
+                    top: 0;
+                }
+                &:after {
+                    top: 4px;
+                    left: -18px;
+                }
+            }
+        }
+    }
 }
 .menuTour {
     display: flex;

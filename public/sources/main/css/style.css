@@ -1697,6 +1697,24 @@ input, textarea {
   font-weight: 700;
   margin-bottom: 0;
 }
+@media (max-width: 577px) {
+  .dayTourByList {
+    padding-left: 0.75rem;
+  }
+  .dayTourByList:before {
+    left: 0;
+  }
+  .dayTourByList_item_title:before {
+    width: 15px;
+    height: 15px;
+    left: -1.4rem;
+    top: 0;
+  }
+  .dayTourByList_item_title:after {
+    top: 4px;
+    left: -18px;
+  }
+}
 
 .menuTour {
   display: flex;
