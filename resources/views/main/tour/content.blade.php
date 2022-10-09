@@ -9,34 +9,34 @@
 			<table class="tableList">
 				<tbody>
 					<tr>
-						<td>Hành trình</td>
+						<td style="width:90px;vertical-align:top;">Hành trình</td>
 						<td>{{ $item->seo->description }}</td>
 					</tr>
 					@if(!empty($item->days))
                         @if($item->days>1)
                             <tr>
-                                <td>Thời gian</td>
+                                <td style="width:90px;vertical-align:top;">Thời gian</td>
                                 <td>{{ $item->days }} ngày {{ $item->nights }} đêm</td>
                             </tr>
                         @else 
                             <tr>
-                                <td>Thời gian</td>
+                                <td style="width:90px;vertical-align:top;">Thời gian</td>
                                 <td>{{ $item->time_start }} - {{ $item->time_end }}</td>
                             </tr>
                         @endif
                     @endif
                     @if(!empty($item->departure_schedule))
                         <tr>
-                            <td>Lịch tour</td>
+                            <td style="width:90px;vertical-align:top;">Lịch tour</td>
                             <td>{{ $item->departure_schedule }}</td>
                         </tr>
                     @endif
                     <tr>
-                        <td>Vận chuyển</td>
+                        <td style="width:90px;vertical-align:top;">Vận chuyển</td>
                         <td>{{ $item->transport }}</td>
                     </tr>
                     <tr>
-                        <td>Xuất phát</td>
+                        <td style="width:90px;vertical-align:top;">Xuất phát</td>
                         <td>{{ $item->pick_up }} {{ $item->departure->name }}</td>
                     </tr>
 				</tbody>
