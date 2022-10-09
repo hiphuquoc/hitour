@@ -8,6 +8,7 @@ use App\Helpers\Upload;
 use App\Http\Controllers\AdminSliderController;
 use App\Models\TourLocation;
 use App\Models\ShipLocation;
+use App\Models\CarrentalLocation;
 use App\Models\Seo;
 use App\Services\BuildInsertUpdateModel;
 use App\Models\District;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\TourLocationRequest;
 use App\Models\RelationTourLocationShipLocation;
+use App\Models\RelationTourLocationCarrentalLocation;
 
 class AdminTourLocationController extends Controller {
 
@@ -41,30 +43,31 @@ class AdminTourLocationController extends Controller {
     }
 
     public function view(Request $request){
-        $id             = $request->get('id') ?? 0;
-        $item           = TourLocation::select('*')
-                            ->where('id', $id)
-                            ->with(
-                                ['files' => function($query){
-                                    $query->where('relation_table', 'tour_location');
-                                }], 
-                                ['questions' => function($query){
-                                    $query->where('relation_table', 'tour_location');
-                                }],
-                                'seo', 'guides', 'shipLocations.infoShipLocation')
-                            ->first();
-        $provinces      = Province::getItemByIdRegion($item->region_id ?? 0);
-        $districts      = District::getItemByIdProvince($item->province_id ?? 0);
-        $guides         = Guide::all();
-        $shipLocations  = ShipLocation::all();
+        $id                 = $request->get('id') ?? 0;
+        $item               = TourLocation::select('*')
+                                ->where('id', $id)
+                                ->with(
+                                    ['files' => function($query){
+                                        $query->where('relation_table', 'tour_location');
+                                    }], 
+                                    ['questions' => function($query){
+                                        $query->where('relation_table', 'tour_location');
+                                    }],
+                                    'seo', 'guides', 'shipLocations.infoShipLocation', 'carrentalLocations.infoCarrentalLocation')
+                                ->first();
+        $provinces          = Province::getItemByIdRegion($item->region_id ?? 0);
+        $districts          = District::getItemByIdProvince($item->province_id ?? 0);
+        $guides             = Guide::all();
+        $shipLocations      = ShipLocation::all();
+        $carrentalLocations = CarrentalLocation::all();
         // $content        = null;
         // if(!empty($item->seo->slug)){
         //     $content    = Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php');
         // }
-        $message        = $request->get('message') ?? null; 
-        $type           = !empty($item) ? 'edit' : 'create';
-        $type           = $request->get('type') ?? $type;
-        return view('admin.tourLocation.view', compact('item', 'type', 'provinces', 'districts', 'guides', 'shipLocations', 'message'));
+        $message            = $request->get('message') ?? null; 
+        $type               = !empty($item) ? 'edit' : 'create';
+        $type               = $request->get('type') ?? $type;
+        return view('admin.tourLocation.view', compact('item', 'type', 'provinces', 'districts', 'guides', 'shipLocations', 'carrentalLocations', 'message'));
     }
 
     public function create(TourLocationRequest $request){
@@ -113,6 +116,16 @@ class AdminTourLocationController extends Controller {
                             'reference_id'      => $idTourLocation
                         ]);
                     }
+                }
+            }
+            /* relation tour_location và carrental_location */
+            if(!empty($request->get('carrental_location_id'))){
+                foreach($request->get('carrental_location_id') as $idCarrentalLocation){
+                    $insertRelationTourLocationCarrentalLocation    = [
+                        'tour_location_id'      => $idTourLocation,
+                        'carrental_location_id' => $idCarrentalLocation
+                    ];
+                    RelationTourLocationCarrentalLocation::insertItem($insertRelationTourLocationCarrentalLocation);
                 }
             }
             /* lưu content vào file */
@@ -216,6 +229,19 @@ class AdminTourLocationController extends Controller {
                             'reference_id'      => $idTourLocation
                         ]);
                     }
+                }
+            }
+            /* relation tour_location và carrental_location */
+            RelationTourLocationCarrentalLocation::select('*')
+                                ->where('tour_location_id', $idTourLocation)
+                                ->delete();
+            if(!empty($request->get('carrental_location_id'))){
+                foreach($request->get('carrental_location_id') as $idCarrentalLocation){
+                    $insertRelationTourLocationCarrentalLocation    = [
+                        'tour_location_id'      => $idTourLocation,
+                        'carrental_location_id' => $idCarrentalLocation
+                    ];
+                    RelationTourLocationCarrentalLocation::insertItem($insertRelationTourLocationCarrentalLocation);
                 }
             }
             /* lưu content vào file */

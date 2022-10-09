@@ -100,4 +100,8 @@ class TourLocation extends Model {
         return $this->hasMany(\App\Models\RelationTourLocationShipLocation::class, 'tour_location_id', 'id');
     }
 
+    public function carrentalLocations(){
+        return $this->hasMany(\App\Models\RelationTourLocationCarrentalLocation::class, 'tour_location_id', 'id');
+    }
+
 }

@@ -68,11 +68,24 @@
             <!-- Cẩm nang du lịch -->
             @if(!empty($item->guides->isNotEmpty()))
                 <h2 class="titlePage">Cẩm nang du lịch {{ $item->display_name ?? null }}</h2>
-                <p>Nếu các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> của Hitour không đáp ứng được nhu cầu của bạn, hoặc bạn là người ưu thích du lịch tự túc,... Hitour cung cấp thêm cho bạn <strong>Cẩm nang du lịch từ A-Z</strong> để bạn có thể tự do tham khảo thông tin chi tiết về <strong>du lịch {{ $item->display_name ?? null }}</strong>, lên kế hoạch, sắp xếp cho chuyến đi du lịch của mình được chu đáo nhất.</p>
+                <p>Nếu các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> của Hitour không đáp ứng được nhu cầu của bạn, hoặc bạn là người ưu thích du lịch tự túc,... Hitour cung cấp thêm cho bạn <strong>Cẩm nang du lịch {{ $item->display_name ?? null }} từ A-Z</strong> để bạn có thể tự do tham khảo thông tin chi tiết về <strong>du lịch {{ $item->display_name ?? null }}</strong>, lên kế hoạch, sắp xếp cho chuyến đi du lịch của mình được chu đáo nhất.</p>
                 <div class="guideList">
                     @foreach($item->guides as $guide)
                         <div class="guideList_item">
                             <i class="fa-solid fa-angles-right"></i>Xem thêm <a href="{{ $guide->infoGuide->seo->slug_full }}">{{ $guide->infoGuide->name }}</a>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
+            <!-- Cho thuê xe -->
+            @if(!empty($item->carrentalLocations->isNotEmpty()))
+                <h2 class="titlePage">Cho thuê xe {{ $item->display_name ?? null }}</h2>
+                <p>Nếu cần phương tiện di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ <strong>Cho thuê xe tại {{ $item->display_name ?? null }}</strong> của Hitour với đầy đủ lựa chọn (tự lái hoặc có tài xế), xe mới, nhiều loại phù hợp yêu cầu và mức giá hợp lí.</p>
+                <div class="guideList">
+                    @foreach($item->carrentalLocations as $carrentalLocation)
+                        <div class="guideList_item">
+                            <i class="fa-solid fa-angles-right"></i>Xem thêm <a href="{{ $carrentalLocation->infoCarrentalLocation->seo->slug_full }}">{{ $carrentalLocation->infoCarrentalLocation->name }}</a>
                         </div>
                     @endforeach
                 </div>

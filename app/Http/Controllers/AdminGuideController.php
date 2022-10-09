@@ -44,9 +44,6 @@ class AdminGuideController extends Controller {
                                 $query->where('relation_table', 'guide_info');
                             }], 'seo')
                             ->first();
-        $parents        = TourLocation::select('*')
-                            ->with('seo')
-                            ->get();
         $provinces      = Province::getItemByIdRegion($item->region_id ?? 0);
         $districts      = District::getItemByIdProvince($item->province_id ?? 0);
         $content        = null;
@@ -56,7 +53,7 @@ class AdminGuideController extends Controller {
         $message        = $request->get('message') ?? null; 
         $type           = !empty($item) ? 'edit' : 'create';
         $type           = $request->get('type') ?? $type;
-        return view('admin.guide.view', compact('item', 'type', 'parents', 'provinces', 'districts', 'content', 'message'));
+        return view('admin.guide.view', compact('item', 'type', 'provinces', 'districts', 'content', 'message'));
     }
 
     public function create(GuideRequest $request){

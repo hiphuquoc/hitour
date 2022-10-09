@@ -573,17 +573,20 @@ input, textarea {
   font-weight: 800;
   font-family: "SVN-Gilroy Bold", serif;
   margin-bottom: 1rem;
+  margin-top: 2.5rem;
 }
 @media (max-width: 1023px) {
   .titlePage {
     font-size: 1.45rem;
     margin-bottom: 0.75rem;
+    margin-top: 2rem;
   }
 }
 @media (max-width: 577px) {
   .titlePage {
     font-size: 1.4rem;
     margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
   }
 }
 
@@ -894,7 +897,7 @@ input, textarea {
 }
 
 .pageContent {
-  padding-top: 1.5rem;
+  margin-top: 2.5rem;
 }
 .pageContent > *:not(:last-child) {
   padding-bottom: 2.5rem;
@@ -934,7 +937,7 @@ input, textarea {
 }
 @media (max-width: 1023px) {
   .pageContent {
-    padding-top: 1.25rem;
+    margin-top: 2rem;
   }
   .pageContent > *:last-child {
     padding-bottom: 2.5rem;
@@ -976,6 +979,11 @@ input, textarea {
   .pageContent_body_content h2 {
     font-size: 1.3rem;
     margin: 1rem 0 0.5rem 0;
+  }
+}
+@media (max-width: 577px) {
+  .pageContent {
+    margin-top: 1.5rem;
   }
 }
 
@@ -3058,7 +3066,7 @@ blockquote em {
 }
 @media (max-width: 1023px) {
   .faqBox {
-    margin-top: 2.25rem;
+    margin-top: 2rem;
   }
   .faqBox_title h2, .faqBox_title h3 {
     font-size: 1.45rem;
@@ -3067,7 +3075,7 @@ blockquote em {
 }
 @media (max-width: 577px) {
   .faqBox {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
   }
   .faqBox_title h2, .faqBox_title h3 {
     font-size: 1.4rem;
