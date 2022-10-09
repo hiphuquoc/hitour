@@ -307,7 +307,7 @@
                         }
                     });
                 }
-                $('#modalContact').modal('hide');
+                // $('#modalContact').modal('hide');
             }else {
                 /* có 1 vài trường required bị bỏ trống */
                 let messageError        = 'Các trường bắt buộc không được để trống!';

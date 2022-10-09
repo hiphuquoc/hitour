@@ -134,7 +134,6 @@ class AdminTourOptionController extends Controller {
                 $result[$option->option]['tour_option_id']  = $option->id;
                 $result[$option->option]['option']          = $option->option;
                 foreach($option->prices as $price){
-                    dd($price);
                     $result[$option->option]['date_apply'][$price->date_start.'-'.$price->date_end][]    = $price->toArray();
                 }
             }

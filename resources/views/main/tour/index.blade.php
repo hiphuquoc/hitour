@@ -3,10 +3,6 @@
 
     @include('main.snippets.breadcrumb')
 
-    @php
-        // dd($item);
-    @endphp
-
     <div class="pageContent">
         <div class="container">
 

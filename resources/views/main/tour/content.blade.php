@@ -52,9 +52,9 @@
                 <h2>Bảng giá Tour</h2>
             </div>
             <div class="contentTour_item_text">
-                {{-- @php
-                    dd($item->options);
-                @endphp --}}
+                @php
+                    $options    = \App\Http\Controllers\AdminTourOptionController::margeTourPriceByDate($item->options);
+                @endphp
                 <table class="tableContentBorder">
                     <thead>
                         <tr>
@@ -63,15 +63,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($item->options as $option)
+                        @foreach($options as $option)
                             <tr>
                                 <td>
-                                    <div style="font-weight:700;">{{ $option->option }}</div>
-                                    <div><em style="font-weight:400;">{{ $option->apply_day }}</em></div>
+                                    <div style="font-weight:700;">{{ $option['option'] }}</div>
+                                    @foreach($option['date_apply'] as $price)
+                                        @foreach($price as $applyAge)
+                                            <div style="font-size:0.95rem;">từ <b>{{ !empty($applyAge['date_start']) ? date('d/m/Y', strtotime($applyAge['date_start'])) : '...' }}</b> đến <b>{{ !empty($applyAge['date_end']) ? date('d/m/Y', strtotime($applyAge['date_end'])) : '...' }}</b></div>
+                                            @break;
+                                        @endforeach
+                                        
+                                    @endforeach
                                 </td>
-                                <td>
-                                    @foreach($option->prices as $price)
-                                        <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{!! !empty($price->price) ? number_format($price->price).config('main.unit_currency') : '-' !!}</span> /{{ $price->apply_age ?? '-' }}</div>
+                                <td style="vertical-align:top;">
+                                    @foreach($option['date_apply'] as $price)
+                                        @foreach($price as $applyAge)
+                                            <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{!! !empty($applyAge['price']) ? number_format($applyAge['price']).config('main.unit_currency') : '-' !!}</span> /{{ $applyAge['apply_age'] ?? '-' }}</div>
+                                        @endforeach
+                                        @break
                                     @endforeach
                                 </td>
                             </tr>

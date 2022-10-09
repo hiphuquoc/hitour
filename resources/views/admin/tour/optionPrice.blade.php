@@ -8,7 +8,6 @@
                     $dataPrice              = [];
                     foreach($dateApply as $price) $dataPrice[] = $price;
                 }
-                dd($option);
             @endphp
             <div>{{ date('d-m-Y', strtotime($dateApply[0]['date_start'])) }} - {{ date('d-m-Y', strtotime($dateApply[0]['date_end'])) }}</div>
         @endforeach
