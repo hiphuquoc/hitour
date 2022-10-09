@@ -21,10 +21,11 @@ class TourPartner extends Model {
     public $timestamps      = true;
 
     public static function getList($params = null){
-        $paginate   = $params['paginate'] ?? null;
+        $paginate   = $params['paginate'] ?? 0;
         $result     = self::select('*')
                         ->with('contacts')
-                        ->paginate($paginate);
+                        ->orderBy('id', 'DESC')
+                        ->get();
         return $result;
     }
 

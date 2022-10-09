@@ -1,4 +1,4 @@
-<div class="callBookTour">
+<div class="callBookTour" style="margin-top:1.5rem;">
     <div class="callBookTour_price">
         <div>giá từ: <span>{{ !empty($item->price_show) ? number_format($item->price_show) : 'Liên hệ' }}{{ config('main.unit_currency') }}</span></div>
     </div>

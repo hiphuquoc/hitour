@@ -1,4 +1,4 @@
-<div class="tocContentTour">
+<div class="tocContentTour" style="margin-top:1.5rem;">
     <a href="#diem-noi-bat-chuong-trinh-tour" class="tocContentTour_item">
         <i class="fa-solid fa-award"></i>Điểm nổi bật CT Tour
     </a>
