@@ -3136,7 +3136,7 @@ blockquote em {
   font-size: 1.5rem;
 }
 .header_logo {
-  flex: 0 0 90px;
+  flex: 0 0 50px;
   height: 45px;
   position: relative;
 }
