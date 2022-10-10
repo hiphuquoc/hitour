@@ -90,4 +90,8 @@ class Service extends Model {
     public function staffs(){
         return $this->hasMany(\App\Models\RelationServiceStaff::class, 'service_info_id', 'id');
     }
+
+    public function questions(){
+        return $this->hasMany(\App\Models\QuestionAnswer::class, 'reference_id', 'id');
+    }
 }

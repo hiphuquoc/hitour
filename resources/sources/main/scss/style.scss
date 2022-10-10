@@ -3305,11 +3305,20 @@ $width-single-menu  : 260px;
     }
 }
 .sectionBox {
-    margin-bottom: 2.5rem;
+    margin-bottom: 3.5rem;
+    &:not(:first-child){
+        margin-top: 3.5rem;
+    }
     @media (max-width: 1023px){
-        margin-bottom: 2rem;
+        margin-bottom: 3rem;
+        &:not(:first-child){
+            margin-top: 3rem;
+        }
     }
     @media (max-width: 577px){
-        margin-bottom: 1.5rem;
+        margin-bottom: 2.5rem;
+        &:not(:first-child){
+            margin-top: 2.5rem;
+        }
     }
 }

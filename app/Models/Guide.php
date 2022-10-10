@@ -83,4 +83,8 @@ class Guide extends Model {
         return $this->hasMany(\App\Models\RelationTourLocationGuide::class, 'guide_info_id', 'id');
     }
 
+    public function questions(){
+        return $this->hasMany(\App\Models\QuestionAnswer::class, 'reference_id', 'id');
+    }
+
 }

@@ -9,6 +9,7 @@ use App\Models\ShipPartner;
 use App\Models\Ship;
 use App\Models\Guide;
 use App\Models\Service;
+use App\Models\ServiceLocation;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -34,6 +35,9 @@ class RoutingController extends Controller {
                                         ->with(['files' => function($query){
                                             $query->where('relation_table', 'tour_location');
                                         }])
+                                        ->with(['questions' => function($q){
+                                            $q->where('relation_table', 'tour_location');
+                                        }])
                                         ->with('seo', 'tours.infoTour.seo', 'guides.infoGuide.seo', 'shipLocations.infoShipLocation.ships.seo', 'shipLocations.infoShipLocation.ships.location.district', 'shipLocations.infoShipLocation.ships.location.province', 'shipLocations.infoShipLocation.ships.departure', 'shipLocations.infoShipLocation.ships.prices.times', 'shipLocations.infoShipLocation.ships.prices.partner', 'shipLocations.infoShipLocation.ships.partners.infoPartner.seo', 'shipLocations.infoShipLocation.ships.portDeparture', 'shipLocations.infoShipLocation.ships.portLocation', 'carrentalLocations.infoCarrentalLocation.seo', 'serviceLocations.infoServiceLocation.seo', 'serviceLocations.infoServiceLocation.services.seo')
                                         ->first();
                 $content            = Blade::render(Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php'));
@@ -46,6 +50,9 @@ class RoutingController extends Controller {
                                         })
                                         ->with(['files' => function($query){
                                             $query->where('relation_table', 'tour_info');
+                                        }])
+                                        ->with(['questions' => function($q){
+                                            $q->where('relation_table', 'tour_info');
                                         }])
                                         ->with('seo', 'staffs.infoStaff', 'options.prices', 'departure', 'content', 'timetables')
                                         ->first();
@@ -60,6 +67,9 @@ class RoutingController extends Controller {
                                         ->with(['files' => function($query){
                                             $query->where('relation_table', 'ship_location');
                                         }])
+                                        ->with(['questions' => function($q){
+                                            $q->where('relation_table', 'ship_location');
+                                        }])
                                         ->with('seo', 'district', 'ships.seo', 'ships.location.district', 'ships.location.province', 'ships.departure', 'ships.prices.times', 'ships.prices.partner', 'ships.partners.infoPartner.seo', 'ships.portDeparture', 'ships.portLocation')
                                         ->first();
                 $content            = Blade::render(Storage::get(config('admin.storage.contentShipLocation').$item->seo->slug.'.blade.php'));
@@ -70,7 +80,10 @@ class RoutingController extends Controller {
                                         ->whereHas('seo', function($query) use($checkExists){
                                             $query->where('slug', $checkExists['slug']);
                                         })
-                                        ->with('seo', 'questions')
+                                        ->with(['questions' => function($q){
+                                            $q->where('relation_table', 'ship_partner');
+                                        }])
+                                        ->with('seo')
                                         ->first();
                 $content            = Blade::render(Storage::get(config('admin.storage.contentShipPartner').$item->seo->slug.'.blade.php'));
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
@@ -82,6 +95,9 @@ class RoutingController extends Controller {
                                         })
                                         ->with(['files' => function($query){
                                             $query->where('relation_table', 'ship_info');
+                                        }])
+                                        ->with(['questions' => function($q){
+                                            $q->where('relation_table', 'ship_info');
                                         }])
                                         ->with('seo', 'partners.infoPartner.seo', 'portDeparture', 'portLocation')
                                         ->first();
@@ -96,6 +112,9 @@ class RoutingController extends Controller {
                                         ->with(['files' => function($query){
                                             $query->where('relation_table', 'guide_info');
                                         }])
+                                        ->with(['questions' => function($q){
+                                            $q->where('relation_table', 'guide_info');
+                                        }])
                                         ->with('seo', 'tourLocations.infoTourLocation.seo', 'tourLocations.infoTourLocation.shipLocations.infoShipLocation.seo', 'tourLocations.infoTourLocation.serviceLocations.infoServiceLocation.seo', 'tourLocations.infoTourLocation.carrentalLocations.infoCarrentalLocation.seo')
                                         ->first();
                 $content            = Blade::render(Storage::get(config('admin.storage.contentGuide').$item->seo->slug.'.blade.php'));
@@ -109,11 +128,29 @@ class RoutingController extends Controller {
                                         ->with(['files' => function($query){
                                             $query->where('relation_table', 'service_info');
                                         }])
+                                        ->with(['questions' => function($q){
+                                            $q->where('relation_table', 'service_info');
+                                        }])
                                         ->with('seo', 'serviceLocation.seo', 'serviceLocation.tourLocations.infoTourLocation.seo', 'serviceLocation.tourLocations.infoTourLocation.shipLocations.infoShipLocation.seo', 'serviceLocation.tourLocations.infoTourLocation.carrentalLocations.infoCarrentalLocation.seo')
                                         ->first();
                 $content            = Blade::render(Storage::get(config('admin.storage.contentService').$item->seo->slug.'.blade.php'));
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
                 return view('main.service.index', compact('item', 'content', 'breadcrumb'));
+            }else if($checkExists['type']==='service_location'){
+                $item               = ServiceLocation::select('*')
+                                        ->whereHas('seo', function($query) use($checkExists){
+                                            $query->where('slug', $checkExists['slug']);
+                                        })
+                                        ->with(['files' => function($query){
+                                            $query->where('relation_table', 'service_location');
+                                        }])
+                                        ->with(['questions' => function($q){
+                                            $q->where('relation_table', 'service_location');
+                                        }])
+                                        ->with('seo', 'services.seo', 'tourLocations.infoTourLocation.tours.infoTour.seo', 'tourLocations.infoTourLocation.shipLocations.infoShipLocation.ships.seo', 'tourLocations.infoTourLocation.carrentalLocations.infoCarrentalLocation.seo', 'tourLocations.infoTourLocation.guides.infoGuide.seo')
+                                        ->first();
+                $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
+                return view('main.serviceLocation.index', compact('item', 'breadcrumb'));
             }
         }else {
             /* Error 404 */

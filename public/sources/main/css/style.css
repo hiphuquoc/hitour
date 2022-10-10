@@ -3417,15 +3417,24 @@ blockquote em {
 }
 
 .sectionBox {
-  margin-bottom: 2.5rem;
+  margin-bottom: 3.5rem;
+}
+.sectionBox:not(:first-child) {
+  margin-top: 3.5rem;
 }
 @media (max-width: 1023px) {
   .sectionBox {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+  }
+  .sectionBox:not(:first-child) {
+    margin-top: 3rem;
   }
 }
 @media (max-width: 577px) {
   .sectionBox {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .sectionBox:not(:first-child) {
+    margin-top: 2.5rem;
   }
 }
