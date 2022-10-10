@@ -94,10 +94,11 @@
             @endif
 
             <!-- faq -->
-            <div class="sectionBox">
-                @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
-            </div>
-
+            @if(!empty($item->questions)&&$item->questions->isNotEmpty())
+                <div class="sectionBox">
+                    @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
+                </div>
+            @endif
         </div>
     </div>
 
