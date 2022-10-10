@@ -81,6 +81,18 @@ h3, h4, h5, h6 {
   font-family: "SVN-Gilroy Bold", serif;
 }
 
+h3 {
+  font-size: 1.2rem;
+}
+
+h4 {
+  font-size: 1.1rem;
+}
+
+h5 {
+  font-size: 1.05rem;
+}
+
 ul, ol {
   margin: 0.75rem 0 0.75rem 1rem;
 }
@@ -573,20 +585,17 @@ input, textarea {
   font-weight: 800;
   font-family: "SVN-Gilroy Bold", serif;
   margin-bottom: 1rem;
-  margin-top: 2.5rem;
 }
 @media (max-width: 1023px) {
   .titlePage {
     font-size: 1.45rem;
     margin-bottom: 0.75rem;
-    margin-top: 2rem;
   }
 }
 @media (max-width: 577px) {
   .titlePage {
     font-size: 1.4rem;
     margin-bottom: 0.5rem;
-    margin-top: 1.5rem;
   }
 }
 
@@ -900,10 +909,10 @@ input, textarea {
   margin-top: 2.5rem;
 }
 .pageContent > *:not(:last-child) {
-  padding-bottom: 2.5rem;
+  margin-bottom: 2.5rem;
 }
 .pageContent > *:last-child {
-  padding-bottom: 3rem;
+  margin-bottom: 3rem;
 }
 .pageContent_head h2, .pageContent_head h3 {
   font-size: 1.6rem;
@@ -939,8 +948,11 @@ input, textarea {
   .pageContent {
     margin-top: 2rem;
   }
+  .pageContent > *:not(:last-child) {
+    margin-bottom: 2rem;
+  }
   .pageContent > *:last-child {
-    padding-bottom: 2.5rem;
+    margin-bottom: 2.5rem;
   }
   .pageContent_body_content {
     width: calc(100% - 320px - 1.25rem);
@@ -984,6 +996,12 @@ input, textarea {
 @media (max-width: 577px) {
   .pageContent {
     margin-top: 1.5rem;
+  }
+  .pageContent > *:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+  .pageContent > *:last-child {
+    margin-bottom: 2rem;
   }
 }
 
@@ -3034,8 +3052,8 @@ blockquote em {
   margin-top: 2.5rem;
 }
 .faqBox_title h2, .faqBox_title h3 {
-  margin-bottom: 1.25rem;
   font-size: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 .faqBox_content_item:not(:first-child) {
   margin-top: 1.25rem;
@@ -3070,7 +3088,7 @@ blockquote em {
   }
   .faqBox_title h2, .faqBox_title h3 {
     font-size: 1.45rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1.25rem;
   }
 }
 @media (max-width: 577px) {
@@ -3079,7 +3097,7 @@ blockquote em {
   }
   .faqBox_title h2, .faqBox_title h3 {
     font-size: 1.4rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
   }
 }
 @media (max-width: 419px) {
@@ -3095,7 +3113,7 @@ blockquote em {
 }
 
 .serviceRelatedSidebarBox_title h2, .serviceRelatedSidebarBox_title h3 {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-family: "SVN-Gilroy Bold", serif;
   margin-bottom: 1rem;
 }
@@ -3396,4 +3414,18 @@ blockquote em {
 .nav-mobile_main > ul > li > ul > li ul {
   display: none;
   margin-left: 0 !important;
+}
+
+.sectionBox {
+  margin-bottom: 2.5rem;
+}
+@media (max-width: 1023px) {
+  .sectionBox {
+    margin-bottom: 2rem;
+  }
+}
+@media (max-width: 577px) {
+  .sectionBox {
+    margin-bottom: 1.5rem;
+  }
 }

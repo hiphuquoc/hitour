@@ -25,7 +25,7 @@ class ServiceRequest extends FormRequest
     public function rules()
     {
         return [
-            'tour_location_id'          => 'required',
+            'service_location_id'       => 'required',
             'staff'                     => 'required',
             'price_show'                => 'required|min:0',
             'price_del'                 => 'min:0',
@@ -59,7 +59,7 @@ class ServiceRequest extends FormRequest
     public function messages()
     {
         return [
-            'tour_location_id.required'         => 'Điểm đến không được để trống!',
+            'service_location_id.required'      => 'Điểm đến không được để trống!',
             'staff.required'                    => 'Nhân viên tư vấn không được để trống!',
             'price_show.required'               => 'Giá hiển thị không được để trống!',
             'price_show.min'                    => 'Giá hiển thị không được nhỏ hơn 0!',

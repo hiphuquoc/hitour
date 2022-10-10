@@ -331,16 +331,13 @@ $height_headerMain : 80px;
     font-weight: 800;
     font-family: $font-primary-title;
     margin-bottom: 1rem;
-    margin-top: 2.5rem;
     @media (max-width: 1023px){
         font-size: 1.45rem;
         margin-bottom: 0.75rem;
-        margin-top: 2rem;
     }
     @media (max-width: 577px){
         font-size: 1.4rem;
         margin-bottom: 0.5rem;
-        margin-top: 1.5rem;
     }
 }
 .ratingBox {
@@ -633,10 +630,10 @@ $width_normalMenu : 250px;
     margin-top: 2.5rem;
     > * {
         &:not(:last-child){
-            padding-bottom: 2.5rem;
+            margin-bottom: 2.5rem;
         }
         &:last-child {
-            padding-bottom: 3rem;
+            margin-bottom: 3rem;
         }
     }
     &_head {
@@ -680,8 +677,11 @@ $width_normalMenu : 250px;
     @media (max-width: 1023px){
         margin-top: 2rem;
         > * {
+            &:not(:last-child){
+                margin-bottom: 2rem;
+            }
             &:last-child {
-                padding-bottom: 2.5rem;
+                margin-bottom: 2.5rem;
             }
         }
         &_body {
@@ -733,6 +733,14 @@ $width_normalMenu : 250px;
     }
     @media (max-width: 577px){
         margin-top: 1.5rem;
+        > * {
+            &:not(:last-child){
+                margin-bottom: 1.5rem;
+            }
+            &:last-child {
+                margin-bottom: 2rem;
+            }
+        }
     }
 }
 .guideList {
@@ -2898,8 +2906,8 @@ $tourGrid_radius : 5px;
     margin-top: 2.5rem;
     &_title {
         h2, h3 {
-            margin-bottom: 1.25rem;
             font-size: 1.5rem;
+            margin-bottom: 1.5rem;
         }
     }
 	&_content {
@@ -2938,7 +2946,7 @@ $tourGrid_radius : 5px;
         &_title {
             h2, h3 {
                 font-size: 1.45rem;
-                margin-bottom: 0.75rem;
+                margin-bottom: 1.25rem;
             }
         }
     }
@@ -2947,7 +2955,7 @@ $tourGrid_radius : 5px;
         &_title {
             h2, h3 {
                 font-size: 1.4rem;
-                margin-bottom: 0.5rem;
+                margin-bottom: 1rem;
             }
         }
     }
@@ -2970,7 +2978,7 @@ $tourGrid_radius : 5px;
 .serviceRelatedSidebarBox {
     &_title {
         h2, h3 {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-family: $font-primary-title;
             margin-bottom: 1rem;
         }
@@ -3294,5 +3302,14 @@ $width-single-menu  : 260px;
                 }
             }
         }
+    }
+}
+.sectionBox {
+    margin-bottom: 2.5rem;
+    @media (max-width: 1023px){
+        margin-bottom: 2rem;
+    }
+    @media (max-width: 577px){
+        margin-bottom: 1.5rem;
     }
 }

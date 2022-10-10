@@ -204,14 +204,27 @@ return [
             ]
         ],
         [
+            'name'      => 'Vé vui chơi',
+            'route'     => '',
+            'icon'      => '<i data-feather=\'star\'></i>',
+            'child'     => [
+                [
+                    'name'  => '1. Điểm đến',
+                    'route' => 'admin.serviceLocation.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                
+                [
+                    'name'  => '2. Chi tiết dịch vụ',
+                    'route'     => 'admin.service.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ]
+            ]
+        ],
+        [
             'name'      => 'Cảm nang du lịch',
             'route'     => 'admin.guide.list',
             'icon'      => '<i data-feather=\'book-open\'></i>',    
-        ],
-        [
-            'name'      => 'Hoạt động vui chơi',
-            'route'     => 'admin.service.list',
-            'icon'      => '<i data-feather=\'star\'></i>',    
         ],
         [
             'name'      => 'Cho thuê xe',

@@ -70,14 +70,13 @@ class AdminTourController extends Controller {
         $id                 = $request->get('id') ?? 0;
         $item               = Tour::select('*')
                                 ->where('id', $request->get('id'))
-                                ->with(
-                                    ['files' => function($query){
-                                        $query->where('relation_table', 'tour_info');
-                                    }], 
-                                    ['questions' => function($query){
-                                        $query->where('relation_table', 'tour_info');
-                                    }], 
-                                    'seo', 'content', 'timetables')
+                                ->with(['files' => function($query){
+                                    $query->where('relation_table', 'tour_info');
+                                }])
+                                ->with(['questions' => function($query){
+                                    $query->where('relation_table', 'tour_info');
+                                }])
+                                ->with('seo', 'content', 'timetables')
                                 ->first();
         /* type */
         $type               = !empty($item) ? 'edit' : 'create';

@@ -1,4 +1,4 @@
-<input type="hidden" name="tour_location_id" value="{{ $item->id ?? null }}" />
+<input type="hidden" name="service_info_id" value="{{ !empty($item->id)&&$type=='edit' ? $item->id : null }}" />
 
 <div class="formBox">
     <div class="formBox_full">
@@ -42,14 +42,14 @@
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
-            <label class="form-label inputRequired" for="tour_location_id">Thuộc khu vực Tour</label>
-            <select class="select2 form-select select2-hidden-accessible" id="tour_location_id" name="tour_location_id">
+            <label class="form-label inputRequired" for="service_location_id">Thuộc khu vực</label>
+            <select class="select2 form-select select2-hidden-accessible" id="service_location_id" name="service_location_id">
                 <option value="">- Lựa chọn -</option>
-                @if(!empty($tourLocations))
-                    @foreach($tourLocations as $location)
+                @if(!empty($serviceLocations))
+                    @foreach($serviceLocations as $location)
                         @php
                             $selected   = null;
-                            if(!empty($item->tourLocation->id)&&$item->tourLocation->id==$location['id']) $selected = ' selected';
+                            if(!empty($item->serviceLocation->id)&&$item->serviceLocation->id==$location['id']) $selected = ' selected';
                         @endphp
                         <option value="{{ $location['id'] }}"{{ $selected }}>{{ $location['name'] }}</option>
                     @endforeach
@@ -59,7 +59,7 @@
         <!-- One Row -->
         <div class="formBox_full_item">
             <label class="form-label inputRequired" for="staff">Nhân viên tư vấn</label>
-            <select class="select2 form-select select2-hidden-accessible" id="staff" name="staff[]" multiple="true">
+            <select class="select2 form-select select2-hidden-accessible" id="staff" name="staff[]" multiple>
                 <option value="">- Lựa chọn -</option>
                 @if(!empty($staffs))
                     @foreach($staffs as $staff)

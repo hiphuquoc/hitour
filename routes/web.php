@@ -21,6 +21,7 @@ use App\Http\Controllers\AdminShipPriceController;
 use App\Http\Controllers\AdminShipPortController;
 
 use App\Http\Controllers\AdminServiceController;
+use App\Http\Controllers\AdminServiceLocationController;
 
 use App\Http\Controllers\AdminStaffController;
 use App\Http\Controllers\AdminCostController;
@@ -199,6 +200,15 @@ Route::prefix('admin')->group(function(){
             // /* Delete AJAX */
             // Route::get('/loadDeparture', [AdminShipBookingController::class, 'loadDeparture'])->name('admin.shipBooking.loadDeparture');
             // Route::get('/loadFormPriceQuantity', [AdminTourBookingController::class, 'loadFormPriceQuantity'])->name('admin.tourBooking.loadFormPriceQuantity');
+        });
+        /* ===== SERVICE LOCATION ===== */
+        Route::prefix('serviceLocation')->group(function(){
+            Route::get('/', [AdminServiceLocationController::class, 'list'])->name('admin.serviceLocation.list');
+            Route::post('/create', [AdminServiceLocationController::class, 'create'])->name('admin.serviceLocation.create');
+            Route::get('/view', [AdminServiceLocationController::class, 'view'])->name('admin.serviceLocation.view');
+            Route::post('/update', [AdminServiceLocationController::class, 'update'])->name('admin.serviceLocation.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminServiceLocationController::class, 'delete'])->name('admin.serviceLocation.delete');
         });
         /* ===== SERVICE ===== */
         Route::prefix('service')->group(function(){

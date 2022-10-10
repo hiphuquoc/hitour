@@ -8,7 +8,7 @@ use App\Helpers\Upload;
 use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\AdminGalleryController;
 use App\Models\Staff;
-use App\Models\TourLocation;
+use App\Models\ServiceLocation;
 use App\Models\Service;
 use App\Models\RelationServiceStaff;
 use App\Models\Seo;
@@ -37,12 +37,12 @@ class AdminServiceController extends Controller {
         /* lấy dữ liệu */
         $list                           = Service::getList($params);
         /* khu vực Service */
-        $tourLocations                  = TourLocation::all();
-        return view('admin.service.list', compact('list', 'params', 'tourLocations'));
+        $serviceLocations               = ServiceLocation::all();
+        return view('admin.service.list', compact('list', 'params', 'serviceLocations'));
     }
 
     public function view(Request $request){
-        $tourLocations      = TourLocation::all();
+        $serviceLocations   = ServiceLocation::all();
         $staffs             = Staff::all();
         $message            = $request->get('message') ?? null;
         $id                 = $request->get('id') ?? 0;
@@ -50,9 +50,10 @@ class AdminServiceController extends Controller {
                                 ->where('id', $request->get('id'))
                                 ->with(['files' => function($query){
                                     $query->where('relation_table', 'service_info');
-                                }], 'seo', 'tourLocation', 'staffs.infoStaff')
+                                }])
+                                ->with('seo', 'serviceLocation', 'staffs.infoStaff')
                                 ->first();
-        $parents            = TourLocation::select('*')
+        $parents            = ServiceLocation::select('*')
                                 ->with('seo')
                                 ->get();
         $content            = null;
@@ -62,7 +63,7 @@ class AdminServiceController extends Controller {
         /* type */
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.service.view', compact('item', 'type', 'parents', 'staffs', 'tourLocations', 'content', 'message'));
+        return view('admin.service.view', compact('item', 'type', 'parents', 'staffs', 'serviceLocations', 'content', 'message'));
     }
 
     public function create(ServiceRequest $request){
@@ -168,11 +169,10 @@ class AdminServiceController extends Controller {
                 ];
                 AdminGalleryController::uploadGallery($request->file('gallery'), $params);
             }
-            /* delete relation_Service_staff */
+            /* insert relation_Service_staff */
             RelationServiceStaff::select('*')
                                     ->where('service_info_id', $idService)
                                     ->delete();
-            /* insert relation_Service_staff */
             if(!empty($idService)&&!empty($request->get('staff'))){
                 foreach($request->get('staff') as $staff){
                     $params     = [

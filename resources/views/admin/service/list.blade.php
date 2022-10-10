@@ -15,11 +15,11 @@
             <button class="btn btn-primary waves-effect" id="button-addon2" type="submit">Tìm</button>
         </div>
     </div>
-    @if(!empty($tourLocations))
+    @if(!empty($serviceLocations))
         <div class="searchBox_item">
             <select class="form-select select2" name="search_location" onChange="submitForm('formSearch');">
                 <option value="0">- Tìm theo Khu vực -</option>
-                @foreach($tourLocations as $location)
+                @foreach($serviceLocations as $location)
                     @php
                         $selected   = null;
                         if(!empty($params['search_location'])&&$params['search_location']==$location->id) $selected = 'selected';

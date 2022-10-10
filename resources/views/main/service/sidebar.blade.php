@@ -2,17 +2,45 @@
 
    <div class="serviceRelatedSidebarBox">
       <div class="serviceRelatedSidebarBox_title">
-         <h2>Dịch vụ Phú Quốc liên quan</h2>
+         <h2>Chuyên mục liên quan</h2>
       </div>
       <div class="serviceRelatedSidebarBox_box">
-         <a href="#" class="serviceRelatedSidebarBox_box_item">
-            <i class="fa-solid fa-person-hiking"></i><h3>Tour du lịch Phú Quốc</h3>
-         </a>
-         @if($item->tourLocation->shipLocations->isNotEmpty())
-            @foreach($item->tourLocation->shipLocations as $shipLocation)
-               <a href="/{{ $shipLocation->infoShipLocation->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">
-                  <i class="fa-solid fa-ship"></i><h3>{{ $shipLocation->infoShipLocation->name }}</h3>
+         <!-- tour du lịch -->
+         @if($item->serviceLocation->tourLocations->isNotEmpty())
+            @foreach($item->serviceLocation->tourLocations as $tourLocation)
+               <a href="/{{ $tourLocation->infoTourLocation->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">
+                  <i class="fa-solid fa-person-hiking"></i><h3>{{ $tourLocation->infoTourLocation->name }}</h3>
                </a>
+            @endforeach
+         @endif
+         <!-- tàu cao tốc -->
+         @if($item->serviceLocation->tourLocations->isNotEmpty())
+            @foreach($item->serviceLocation->tourLocations as $tourLocation)
+               @if($tourLocation->infoTourLocation->shipLocations->isNotEmpty())
+                  @foreach($tourLocation->infoTourLocation->shipLocations as $shipLocation)
+                     <a href="/{{ $shipLocation->infoShipLocation->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">
+                        <i class="fa-solid fa-ship"></i><h3>{{ $shipLocation->infoShipLocation->name }}</h3>
+                     </a>
+                  @endforeach
+               @endif
+            @endforeach
+         @endif
+         <!-- vé vui chơi -->
+         @if(!empty($item->serviceLocation))
+            <a href="/{{ $item->serviceLocation->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">
+               <i class="fa-solid fa-star"></i><h3>{{ $item->serviceLocation->name }}</h3>
+            </a>
+         @endif
+         <!-- cho thuê xe -->
+         @if($item->serviceLocation->tourLocations->isNotEmpty())
+            @foreach($item->serviceLocation->tourLocations as $tourLocation)
+               @if($tourLocation->infoTourLocation->carrentalLocations->isNotEmpty())
+                  @foreach($tourLocation->infoTourLocation->carrentalLocations as $carrentalLocation)
+                     <a href="/{{ $carrentalLocation->infoCarrentalLocation->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">
+                        <i class="fa-solid fa-car-side"></i><h3>{{ $carrentalLocation->infoCarrentalLocation->name }}</h3>
+                     </a>
+                  @endforeach
+               @endif
             @endforeach
          @endif
          {{-- <a href="#" class="serviceRelatedSidebarBox_box_item">
@@ -21,13 +49,6 @@
          <a href="#" class="serviceRelatedSidebarBox_box_item">
             <i class="fa-solid fa-plane-departure"></i><h3>Vé máy bay</h3>
          </a> --}}
-         @if($item->tourLocation->services->isNotEmpty())
-            @foreach($item->tourLocation->services as $service)
-               <a href="/{{ $service->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">
-                  <i class="fa-solid fa-star"></i><h3>{{ $service->name }}</h3>
-               </a>
-            @endforeach
-         @endif
       </div>
    </div>
 

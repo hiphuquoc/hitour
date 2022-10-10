@@ -48,7 +48,8 @@ class Ship extends Model {
                         ->orderBy('created_at', 'DESC')
                         ->with(['files' => function($query){
                             $query->where('relation_table', 'ship_info');
-                        }], 'seo', 'location', 'departure', 'staffs.infoStaff', 'partners.infoPartner')
+                        }])
+                        ->with('seo', 'location', 'departure', 'staffs.infoStaff', 'partners.infoPartner')
                         ->get();
         return $result;
     }

@@ -59,6 +59,24 @@ table:not(.sendEmail) tr th {
   font-size: 1rem !important;
 }
 
+.main-menu .main-menu-content {
+  overflow-y: scroll !important;
+}
+.main-menu .main-menu-content::-webkit-scrollbar {
+  background-color: transparent;
+  width: 5px;
+}
+.main-menu .main-menu-content::-webkit-scrollbar-thumb {
+  background-color: #ced4da;
+  border-radius: 1000px;
+  -webkit-box-shadow: inset 0 0 6px #e9ecef;
+}
+.main-menu .main-menu-content::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #e9ecef;
+  border-radius: 10px;
+  background: transparent;
+}
+
 .iconAction {
   width: 40px;
   text-align: center;

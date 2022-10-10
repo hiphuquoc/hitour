@@ -49,7 +49,7 @@ class Service extends Model {
                         ->with(['files' => function($query){
                             $query->where('relation_table', 'service_info');
                         }])
-                        ->with('seo', 'tourLocation', 'staffs.infoStaff')
+                        ->with('seo', 'serviceLocation', 'staffs.infoStaff')
                         ->get();
         return $result;
     }
@@ -83,8 +83,8 @@ class Service extends Model {
         return $this->hasMany(\App\Models\SystemFile::class, 'attachment_id', 'id');
     }
 
-    public function tourLocation() {
-        return $this->hasOne(\App\Models\TourLocation::class, 'id', 'tour_location_id');
+    public function serviceLocation() {
+        return $this->hasOne(\App\Models\ServiceLocation::class, 'id', 'service_location_id');
     }
 
     public function staffs(){

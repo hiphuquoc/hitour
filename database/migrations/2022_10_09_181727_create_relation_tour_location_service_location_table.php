@@ -13,17 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('service_info', function (Blueprint $table) {
+        Schema::create('relation_tour_location_service_location', function (Blueprint $table) {
             $table->id();
-            $table->integer('seo_id');
+            $table->integer('tour_location_id');
             $table->integer('service_location_id');
-            $table->string('code', 20);
-            $table->text('name');
-            $table->integer('price_show');
-            $table->integer('price_del')->nullable();
-            $table->string('time_start', 100)->nullable();
-            $table->string('time_end', 100)->nullable();
-            $table->timestamps();
         });
     }
 
@@ -34,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('service_info');
+        // Schema::dropIfExists('relation_tour_location_service_location');
     }
 };

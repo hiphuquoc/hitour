@@ -31,7 +31,8 @@ class TourDeparture extends Model {
                         })
                         ->with(['files' => function($query){
                             $query->where('relation_table', 'tour_departure');
-                        }], 'seo')
+                        }])
+                        ->with('seo')
                         ->get();
         return $result;
     }

@@ -3,7 +3,8 @@
         // dd($list);
     @endphp
     @if(!empty($list))
-        @foreach($list as $service)
+        @foreach($list as $listItem)
+            @foreach($listItem->infoServiceLocation->services as $service)
             <div class="serviceGrid_item">
                 <a href="{{ $service->seo->slug_full }}" class="serviceGrid_item_image">
                     <img src="{{ $service->seo->image }}" alt="{{ $service->name }}" title="{{ $service->name }}" />
@@ -36,6 +37,7 @@
 
                 </div> --}}
             </div>
+            @endforeach
         @endforeach
     @endif
 </div>

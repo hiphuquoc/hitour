@@ -34,7 +34,8 @@ class ShipLocation extends Model {
                         })
                         ->with(['files' => function($query){
                             $query->where('relation_table', 'ship_location');
-                        }], 'seo')
+                        }])
+                        ->with('seo')
                         ->get();
         return $result;
     }

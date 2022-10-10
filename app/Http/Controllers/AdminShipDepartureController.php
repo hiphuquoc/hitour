@@ -42,7 +42,8 @@ class AdminShipDepartureController extends Controller {
                             ->where('id', $id)
                             ->with(['files' => function($query){
                                 $query->where('relation_table', 'ship_departure');
-                            }], 'seo')
+                            }])
+                            ->with('seo')
                             ->first();
         $provinces      = Province::getItemByIdRegion($item->region_id ?? 0);
         $districts      = District::getItemByIdProvince($item->province_id ?? 0);

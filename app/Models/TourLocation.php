@@ -4,20 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
-
-use App\Helpers\Url;
 
 class TourLocation extends Model {
     use HasFactory;
     protected $table        = 'tour_location';
     protected $fillable     = [
         'name', 
+        'display_name',
         'description',
         'seo_id', 
         'district_id',
         'province_id',
         'region_id',
+        'island',
         'note'
     ];
     public $timestamps      = true;
@@ -34,7 +33,8 @@ class TourLocation extends Model {
                         })
                         ->with(['files' => function($query){
                             $query->where('relation_table', 'tour_location');
-                        }], 'seo')
+                        }])
+                        ->with('seo')
                         ->get();
         return $result;
     }
@@ -88,10 +88,6 @@ class TourLocation extends Model {
         return $this->hasMany(\App\Models\RelationTourLocationGuide::class, 'tour_location_id', 'id');
     }
 
-    public function services() {
-        return $this->hasMany(\App\Models\Service::class, 'tour_location_id', 'id');
-    }
-
     public function questions(){
         return $this->hasMany(\App\Models\QuestionAnswer::class, 'reference_id', 'id');
     }
@@ -102,6 +98,10 @@ class TourLocation extends Model {
 
     public function carrentalLocations(){
         return $this->hasMany(\App\Models\RelationTourLocationCarrentalLocation::class, 'tour_location_id', 'id');
+    }
+
+    public function serviceLocations() {
+        return $this->hasMany(\App\Models\RelationTourLocationServiceLocation::class, 'tour_location_id', 'id');
     }
 
 }

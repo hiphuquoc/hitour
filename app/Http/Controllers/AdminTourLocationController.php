@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminSliderController;
 use App\Models\TourLocation;
 use App\Models\ShipLocation;
 use App\Models\CarrentalLocation;
+use App\Models\ServiceLocation;
 use App\Models\Seo;
 use App\Services\BuildInsertUpdateModel;
 use App\Models\District;
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\TourLocationRequest;
 use App\Models\RelationTourLocationShipLocation;
 use App\Models\RelationTourLocationCarrentalLocation;
+use App\Models\RelationTourLocationServiceLocation;
 
 class AdminTourLocationController extends Controller {
 
@@ -46,20 +48,20 @@ class AdminTourLocationController extends Controller {
         $id                 = $request->get('id') ?? 0;
         $item               = TourLocation::select('*')
                                 ->where('id', $id)
-                                ->with(
-                                    ['files' => function($query){
-                                        $query->where('relation_table', 'tour_location');
-                                    }], 
-                                    ['questions' => function($query){
-                                        $query->where('relation_table', 'tour_location');
-                                    }],
-                                    'seo', 'guides', 'shipLocations.infoShipLocation', 'carrentalLocations.infoCarrentalLocation')
+                                ->with(['files' => function($query){
+                                    $query->where('relation_table', 'tour_location');
+                                }])
+                                ->with(['questions' => function($query){
+                                    $query->where('relation_table', 'tour_location');
+                                }])
+                                ->with('seo', 'guides', 'shipLocations.infoShipLocation', 'carrentalLocations.infoCarrentalLocation')
                                 ->first();
         $provinces          = Province::getItemByIdRegion($item->region_id ?? 0);
         $districts          = District::getItemByIdProvince($item->province_id ?? 0);
         $guides             = Guide::all();
         $shipLocations      = ShipLocation::all();
         $carrentalLocations = CarrentalLocation::all();
+        $serviceLocations   = ServiceLocation::all();
         // $content        = null;
         // if(!empty($item->seo->slug)){
         //     $content    = Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php');
@@ -67,7 +69,7 @@ class AdminTourLocationController extends Controller {
         $message            = $request->get('message') ?? null; 
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.tourLocation.view', compact('item', 'type', 'provinces', 'districts', 'guides', 'shipLocations', 'carrentalLocations', 'message'));
+        return view('admin.tourLocation.view', compact('item', 'type', 'provinces', 'districts', 'guides', 'shipLocations', 'carrentalLocations', 'serviceLocations', 'message'));
     }
 
     public function create(TourLocationRequest $request){
@@ -85,6 +87,19 @@ class AdminTourLocationController extends Controller {
             /* insert tour_location */
             $insertTourLocation = $this->BuildInsertUpdateModel->buildArrayTableTourLocation($request->all(), $pageId);
             $idTourLocation     = TourLocation::insertItem($insertTourLocation);
+            /* insert câu hỏi thường gặp */
+            if(!empty($request->get('question_answer'))){
+                foreach($request->get('question_answer') as $itemQues){
+                    if(!empty($itemQues['question'])&&!empty($itemQues['answer'])){
+                        QuestionAnswer::insertItem([
+                            'question'          => $itemQues['question'],
+                            'answer'            => $itemQues['answer'],
+                            'relation_table'    => 'tour_location',
+                            'reference_id'      => $idTourLocation
+                        ]);
+                    }
+                }
+            }
             /* relation tour và guide (cẩm nang du lịch) */
             if(!empty($request->get('guide_info_id'))){
                 foreach($request->get('guide_info_id') as $idGuideInfo){
@@ -105,19 +120,6 @@ class AdminTourLocationController extends Controller {
                     RelationTourLocationShipLocation::insertItem($insertRelationTourLocationShipLocation);
                 }
             }
-            /* insert câu hỏi thường gặp */
-            if(!empty($request->get('question_answer'))){
-                foreach($request->get('question_answer') as $itemQues){
-                    if(!empty($itemQues['question'])&&!empty($itemQues['answer'])){
-                        QuestionAnswer::insertItem([
-                            'question'          => $itemQues['question'],
-                            'answer'            => $itemQues['answer'],
-                            'relation_table'    => 'tour_location',
-                            'reference_id'      => $idTourLocation
-                        ]);
-                    }
-                }
-            }
             /* relation tour_location và carrental_location */
             if(!empty($request->get('carrental_location_id'))){
                 foreach($request->get('carrental_location_id') as $idCarrentalLocation){
@@ -126,6 +128,16 @@ class AdminTourLocationController extends Controller {
                         'carrental_location_id' => $idCarrentalLocation
                     ];
                     RelationTourLocationCarrentalLocation::insertItem($insertRelationTourLocationCarrentalLocation);
+                }
+            }
+            /* relation tour_location và service_location */
+            if(!empty($request->get('service_location_id'))){
+                foreach($request->get('service_location_id') as $idServiceLocation){
+                    $insertRelationTourLocationServiceLocation    = [
+                        'tour_location_id'      => $idTourLocation,
+                        'service_location_id'   => $idServiceLocation
+                    ];
+                    RelationTourLocationServiceLocation::insertItem($insertRelationTourLocationServiceLocation);
                 }
             }
             /* lưu content vào file */
@@ -201,19 +213,6 @@ class AdminTourLocationController extends Controller {
                     RelationTourLocationGuide::insertItem($insertRelationTourLocationGuide);
                 }
             }
-            /* relation tour_location và ship_location */
-            RelationTourLocationShipLocation::select('*')
-                                ->where('tour_location_id', $idTourLocation)
-                                ->delete();
-            if(!empty($request->get('ship_location_id'))){
-                foreach($request->get('ship_location_id') as $idShipLocation){
-                    $insertRelationTourLocationShipLocation    = [
-                        'tour_location_id'  => $idTourLocation,
-                        'ship_location_id'  => $idShipLocation
-                    ];
-                    RelationTourLocationShipLocation::insertItem($insertRelationTourLocationShipLocation);
-                }
-            }
             /* update câu hỏi thường gặp */
             QuestionAnswer::select('*')
                         ->where('relation_table', 'tour_location')
@@ -231,6 +230,19 @@ class AdminTourLocationController extends Controller {
                     }
                 }
             }
+            /* relation tour_location và ship_location */
+            RelationTourLocationShipLocation::select('*')
+                                ->where('tour_location_id', $idTourLocation)
+                                ->delete();
+            if(!empty($request->get('ship_location_id'))){
+                foreach($request->get('ship_location_id') as $idShipLocation){
+                    $insertRelationTourLocationShipLocation    = [
+                        'tour_location_id'  => $idTourLocation,
+                        'ship_location_id'  => $idShipLocation
+                    ];
+                    RelationTourLocationShipLocation::insertItem($insertRelationTourLocationShipLocation);
+                }
+            }
             /* relation tour_location và carrental_location */
             RelationTourLocationCarrentalLocation::select('*')
                                 ->where('tour_location_id', $idTourLocation)
@@ -242,6 +254,19 @@ class AdminTourLocationController extends Controller {
                         'carrental_location_id' => $idCarrentalLocation
                     ];
                     RelationTourLocationCarrentalLocation::insertItem($insertRelationTourLocationCarrentalLocation);
+                }
+            }
+            /* relation tour_location và service_location */
+            RelationTourLocationServiceLocation::select('*')
+                                ->where('tour_location_id', $idTourLocation)
+                                ->delete();
+            if(!empty($request->get('service_location_id'))){
+                foreach($request->get('service_location_id') as $idServiceLocation){
+                    $insertRelationTourLocationServiceLocation    = [
+                        'tour_location_id'      => $idTourLocation,
+                        'service_location_id'   => $idServiceLocation
+                    ];
+                    RelationTourLocationServiceLocation::insertItem($insertRelationTourLocationServiceLocation);
                 }
             }
             /* lưu content vào file */

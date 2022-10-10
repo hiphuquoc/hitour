@@ -1,7 +1,7 @@
 <div class="repeater formBox">
     <div class="formBox_full">
         <div data-repeater-list="question_answer">
-            @if($item->questions->isNotEmpty())
+            @if(!empty($item->questions)&&$item->questions->isNotEmpty())
                 @foreach($item->questions as $question)
                 <div class="flexBox" style="flex-wrap:unset;align-items:flex-start;" data-repeater-item>
                     <div class="flexBox_item">

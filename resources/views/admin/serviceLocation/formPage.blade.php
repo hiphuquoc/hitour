@@ -1,4 +1,4 @@
-<input type="hidden" name="tour_location_id" value="{{ !empty($item->id)&&$type=='edit' ? $item->id : null }}" />
+<input type="hidden" name="service_location_id" value="{{ !empty($item->id)&&$type=='edit' ? $item->id : null }}" />
 
 <div class="formBox">
     <div class="formBox_full">
@@ -85,93 +85,6 @@
             <label class="form-label inputRequired" for="display_name">Tên hiển thị</label>
             <input type="text" class="form-control" id="display_name" name="display_name" value="{{ old('display_name') ?? $item->display_name ?? '' }}" required>
             <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
-        </div>
-        <!-- One Row -->
-        <div class="formBox_full_item">
-            <div class="form-check form-check-success">
-                <input type="checkbox" class="form-check-input" id="island" name="island" {{ !empty($item->island)&&($item->island==1) ? 'checked' : null }}>
-                <label class="form-check-label" for="island">Khu vực này là biển đảo</label>
-            </div>
-        </div>
-        <!-- One Row -->
-        <div class="formBox_full_item">
-            <label class="form-label" for="guide_info_id">Liên kết cẩm nang du lịch</label>
-            <select class="select2 form-select select2-hidden-accessible" id="guide_info_id" name="guide_info_id[]" tabindex="-1" aria-hidden="true" multiple>
-                @if(!empty($guides))
-                    @foreach($guides as $guide)
-                        @php
-                            $selected           = null;
-                            foreach($item->guides as $g){
-                                if($g->guide_info_id==$guide->id){
-                                    $selected   = ' selected';
-                                    break;
-                                }
-                            }
-                        @endphp
-                        <option value="{{ $guide->id }}"{{ $selected }}>{{ $guide->name }}</option>
-                    @endforeach
-                @endif
-            </select>
-        </div>
-        <!-- One Row -->
-        <div class="formBox_full_item">
-            <label class="form-label" for="guide_info_id">Liên kết vé tàu</label>
-            <select class="select2 form-select select2-hidden-accessible" id="ship_location_id" name="ship_location_id[]" tabindex="-1" aria-hidden="true" multiple>
-                @if(!empty($shipLocations))
-                    @foreach($shipLocations as $shipLocation)
-                        @php
-                            $selected           = null;
-                            foreach($item->shipLocations as $s){
-                                if($s->infoShipLocation->id==$shipLocation->id){
-                                    $selected   = ' selected';
-                                    break;
-                                }
-                            }
-                        @endphp
-                        <option value="{{ $shipLocation->id }}"{{ $selected }}>{{ $shipLocation->name }}</option>
-                    @endforeach
-                @endif
-            </select>
-        </div>
-        <!-- One Row -->
-        <div class="formBox_full_item">
-            <label class="form-label" for="service_location_id">Liên kết vé vui chơi giải trí</label>
-            <select class="select2 form-select select2-hidden-accessible" id="service_location_id" name="service_location_id[]" tabindex="-1" aria-hidden="true" multiple>
-                @if(!empty($serviceLocations))
-                    @foreach($serviceLocations as $serviceLocation)
-                        @php
-                            $selected           = null;
-                            foreach($item->serviceLocations as $s){
-                                if($s->infoServiceLocation->id==$serviceLocation->id){
-                                    $selected   = ' selected';
-                                    break;
-                                }
-                            }
-                        @endphp
-                        <option value="{{ $serviceLocation->id }}"{{ $selected }}>{{ $serviceLocation->name }}</option>
-                    @endforeach
-                @endif
-            </select>
-        </div>
-        <!-- One Row -->
-        <div class="formBox_full_item">
-            <label class="form-label" for="carrental_location_id">Liên kết Cho thuê xe</label>
-            <select class="select2 form-select select2-hidden-accessible" id="carrental_location_id" name="carrental_location_id[]" tabindex="-1" aria-hidden="true" multiple>
-                @if(!empty($carrentalLocations))
-                    @foreach($carrentalLocations as $carrentalLocation)
-                        @php
-                            $selected           = null;
-                            foreach($item->carrentalLocations as $c){
-                                if($c->infoCarrentalLocation->id==$carrentalLocation->id){
-                                    $selected   = ' selected';
-                                    break;
-                                }
-                            }
-                        @endphp
-                        <option value="{{ $carrentalLocation->id }}"{{ $selected }}>{{ $carrentalLocation->name }}</option>
-                    @endforeach
-                @endif
-            </select>
         </div>
     </div>
 </div>

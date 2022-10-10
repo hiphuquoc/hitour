@@ -34,7 +34,7 @@ class RoutingController extends Controller {
                                         ->with(['files' => function($query){
                                             $query->where('relation_table', 'tour_location');
                                         }])
-                                        ->with('seo', 'tours.infoTour.seo', 'guides.infoGuide.seo', 'services.seo', 'shipLocations.infoShipLocation.ships.seo', 'shipLocations.infoShipLocation.ships.location.district', 'shipLocations.infoShipLocation.ships.location.province', 'shipLocations.infoShipLocation.ships.departure', 'shipLocations.infoShipLocation.ships.prices.times', 'shipLocations.infoShipLocation.ships.prices.partner', 'shipLocations.infoShipLocation.ships.partners.infoPartner.seo', 'shipLocations.infoShipLocation.ships.portDeparture', 'shipLocations.infoShipLocation.ships.portLocation', 'carrentalLocations.infoCarrentalLocation.seo')
+                                        ->with('seo', 'tours.infoTour.seo', 'guides.infoGuide.seo', 'shipLocations.infoShipLocation.ships.seo', 'shipLocations.infoShipLocation.ships.location.district', 'shipLocations.infoShipLocation.ships.location.province', 'shipLocations.infoShipLocation.ships.departure', 'shipLocations.infoShipLocation.ships.prices.times', 'shipLocations.infoShipLocation.ships.prices.partner', 'shipLocations.infoShipLocation.ships.partners.infoPartner.seo', 'shipLocations.infoShipLocation.ships.portDeparture', 'shipLocations.infoShipLocation.ships.portLocation', 'carrentalLocations.infoCarrentalLocation.seo', 'serviceLocations.infoServiceLocation.seo', 'serviceLocations.infoServiceLocation.services.seo')
                                         ->first();
                 $content            = Blade::render(Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php'));
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
@@ -96,7 +96,7 @@ class RoutingController extends Controller {
                                         ->with(['files' => function($query){
                                             $query->where('relation_table', 'guide_info');
                                         }])
-                                        ->with('seo', 'tourLocations.infoTourLocation.seo', 'tourLocations.infoTourLocation.shipLocations.infoShipLocation.seo', 'tourLocations.infoTourLocation.services.seo')
+                                        ->with('seo', 'tourLocations.infoTourLocation.seo', 'tourLocations.infoTourLocation.shipLocations.infoShipLocation.seo', 'tourLocations.infoTourLocation.serviceLocations.infoServiceLocation.seo', 'tourLocations.infoTourLocation.carrentalLocations.infoCarrentalLocation.seo')
                                         ->first();
                 $content            = Blade::render(Storage::get(config('admin.storage.contentGuide').$item->seo->slug.'.blade.php'));
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
@@ -109,7 +109,7 @@ class RoutingController extends Controller {
                                         ->with(['files' => function($query){
                                             $query->where('relation_table', 'service_info');
                                         }])
-                                        ->with('seo', 'tourLocation.shipLocations.infoShipLocation.seo', 'tourLocation.services.seo')
+                                        ->with('seo', 'serviceLocation.seo', 'serviceLocation.tourLocations.infoTourLocation.seo', 'serviceLocation.tourLocations.infoTourLocation.shipLocations.infoShipLocation.seo', 'serviceLocation.tourLocations.infoTourLocation.carrentalLocations.infoCarrentalLocation.seo')
                                         ->first();
                 $content            = Blade::render(Storage::get(config('admin.storage.contentService').$item->seo->slug.'.blade.php'));
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;

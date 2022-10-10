@@ -4,15 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
-use App\Helpers\Url;
-
-class CarrentalLocation extends Model {
+class ServiceLocation extends Model {
     use HasFactory;
-    protected $table        = 'carrental_location';
+    protected $table        = 'service_location';
     protected $fillable     = [
         'name', 
+        'display_name',
         'description',
         'seo_id', 
         'district_id',
@@ -33,7 +31,7 @@ class CarrentalLocation extends Model {
                             $query->where('region_id', $params['search_region']);
                         })
                         ->with(['files' => function($query){
-                            $query->where('relation_table', 'carrental_location');
+                            $query->where('relation_table', 'service_location');
                         }])
                         ->with('seo')
                         ->get();
@@ -43,7 +41,7 @@ class CarrentalLocation extends Model {
     public static function insertItem($params){
         $id             = 0;
         if(!empty($params)){
-            $model      = new CarrentalLocation();
+            $model      = new ServiceLocation();
             foreach($params as $key => $value) $model->{$key}  = $value;
             $model->save();
             $id         = $model->id;
@@ -81,24 +79,15 @@ class CarrentalLocation extends Model {
         return $this->hasOne(\App\Models\District::class, 'id', 'district_id');
     }
 
-    // public function tours(){
-    //     return $this->hasMany(\App\Models\RelationTourLocation::class, 'tour_location_id', 'id');
-    // }
+    public function services(){
+        return $this->hasMany(\App\Models\Service::class, 'service_location_id', 'id');
+    }
 
-    // public function guides() {
-    //     return $this->hasMany(\App\Models\RelationTourLocationGuide::class, 'tour_location_id', 'id');
-    // }
+    public function questions(){
+        return $this->hasMany(\App\Models\QuestionAnswer::class, 'reference_id', 'id');
+    }
 
-    // public function services() {
-    //     return $this->hasMany(\App\Models\Service::class, 'tour_location_id', 'id');
-    // }
-
-    // public function questions(){
-    //     return $this->hasMany(\App\Models\QuestionAnswer::class, 'reference_id', 'id');
-    // }
-
-    // public function shipLocations(){
-    //     return $this->hasMany(\App\Models\RelationTourLocationShipLocation::class, 'tour_location_id', 'id');
-    // }
-
+    public function tourLocations(){
+        return $this->hasMany(\App\Models\RelationTourLocationServiceLocation::class, 'service_location_id', 'id');
+    }
 }

@@ -698,7 +698,7 @@ class BuildInsertUpdateModel {
     public static function buildArrayTableServiceInfo($dataForm, $seoId = null){
         /* 
             seo_id
-            tour_location_id
+            service_location_id
             code
             name
             price_show
@@ -709,7 +709,7 @@ class BuildInsertUpdateModel {
         $result     = [];
         if(!empty($dataForm)){
             if(!empty($seoId)) $result['seo_id'] = $seoId;
-            $result['tour_location_id']     = $dataForm['tour_location_id'] ?? null;
+            $result['service_location_id']  = $dataForm['service_location_id'] ?? null;
             $result['code']                 = $dataForm['code'] ?? null;
             $result['name']                 = $dataForm['title'] ?? null;
             $result['price_show']           = $dataForm['price_show'] ?? 0;
@@ -735,6 +735,31 @@ class BuildInsertUpdateModel {
         if(!empty($dataForm)){
             $result['name']                 = $dataForm['title'] ?? null;
             $result['location_name']        = $dataForm['location_name'] ?? null;
+            $result['description']          = $dataForm['description'] ?? null;
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
+            $result['region_id']            = $dataForm['region'];
+            $result['province_id']          = $dataForm['province'] ?? null;
+            $result['district_id']          = $dataForm['district'] ?? null;
+            $result['note']                 = $dataForm['note'] ?? null;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableServiceLocation($dataForm, $seoId = null){
+        /* upload carrental_location
+            + name
+            + display_name
+            + description
+            + seo_id
+            + region_id
+            + province_id
+            + district_id
+            + note
+        */
+        $result                             = [];
+        if(!empty($dataForm)){
+            $result['name']                 = $dataForm['title'] ?? null;
+            $result['display_name']         = $dataForm['display_name'] ?? null;
             $result['description']          = $dataForm['description'] ?? null;
             if(!empty($seoId)) $result['seo_id'] = $seoId;
             $result['region_id']            = $dataForm['region'];

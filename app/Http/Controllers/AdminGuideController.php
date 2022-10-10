@@ -42,7 +42,8 @@ class AdminGuideController extends Controller {
                             ->where('id', $id)
                             ->with(['files' => function($query){
                                 $query->where('relation_table', 'guide_info');
-                            }], 'seo')
+                            }])
+                            ->with('seo')
                             ->first();
         $provinces      = Province::getItemByIdRegion($item->region_id ?? 0);
         $districts      = District::getItemByIdProvince($item->province_id ?? 0);

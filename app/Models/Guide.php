@@ -31,7 +31,8 @@ class Guide extends Model {
                         })
                         ->with(['files' => function($query){
                             $query->where('relation_table', 'guide_info');
-                        }], 'seo')
+                        }])
+                        ->with('seo')
                         ->orderBy('id', 'DESC')
                         ->get();
         return $result;
