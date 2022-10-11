@@ -81,24 +81,11 @@ class CarrentalLocation extends Model {
         return $this->hasOne(\App\Models\District::class, 'id', 'district_id');
     }
 
-    // public function tours(){
-    //     return $this->hasMany(\App\Models\RelationTourLocation::class, 'tour_location_id', 'id');
-    // }
+    public function questions(){
+        return $this->hasMany(\App\Models\QuestionAnswer::class, 'reference_id', 'id');
+    }
 
-    // public function guides() {
-    //     return $this->hasMany(\App\Models\RelationTourLocationGuide::class, 'tour_location_id', 'id');
-    // }
-
-    // public function services() {
-    //     return $this->hasMany(\App\Models\Service::class, 'tour_location_id', 'id');
-    // }
-
-    // public function questions(){
-    //     return $this->hasMany(\App\Models\QuestionAnswer::class, 'reference_id', 'id');
-    // }
-
-    // public function shipLocations(){
-    //     return $this->hasMany(\App\Models\RelationTourLocationShipLocation::class, 'tour_location_id', 'id');
-    // }
-
+    public function tourLocations(){
+        return $this->hasMany(\App\Models\RelationTourLocationCarrentalLocation::class, 'carrental_location_id', 'id');
+    }
 }

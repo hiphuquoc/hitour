@@ -45,13 +45,35 @@
                 </li>
                 <li>
                     <div>
-                        <div>Tour du lịch</div>
+                        <div>Tour trong nước</div>
                     </div>
                     @include('main.snippets.megaMenuTour', compact('dataMB', 'dataMT', 'dataMN', 'dataBD'))
                 </li>
                 <li>
                     <div>
-                        <div>Tàu cao tốc</div>
+                        <div>Tour nước ngoài</div>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <div style="padding-right:0;">Khách sạn</div>
+                    <div>
+                </li>
+            </ul>
+        </div>
+        <div class="headerMain_item" style="flex:0 0 70px;">
+            <div class="logoSquare"></div>
+        </div>
+        <div class="headerMain_item">
+            <ul style="justify-content:flex-end;">
+                <li>
+                    <a href="#">
+                        <div>Vé máy bay</div>
+                    </a>
+                </li>
+                <li>
+                    <div>
+                        <div>Vé tàu</div>
                     </div>
                     @if($dataShip->isNotEmpty())
                     <div class="normalMenu">
@@ -60,7 +82,7 @@
                             <li>
                                 <a class="max-line_1" href="/{{ $shipLocation->seo->slug_full }}">{{ $shipLocation->name }}<i class="fas fa-angle-right"></i></a>
                                 @if(!empty($shipLocation->ships))
-                                    <ul>
+                                    <ul style="left:unset;right:250px;box-shadow: 0 2px 3px #adb5bd;">
                                     @foreach($shipLocation->ships as $ship)
                                         <li class="max-line_1">
                                             <a href="/{{ $ship->seo->slug_full }}">
@@ -77,32 +99,11 @@
                     @endif
                 </li>
                 <li>
-                    <div>
-                        <div>Vé máy bay</div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="headerMain_item" style="flex:0 0 70px;">
-            <div class="logoSquare"></div>
-        </div>
-        <div class="headerMain_item">
-            <ul style="justify-content:flex-end;">
-                <li>
-                    <a href="#">
-                        <div>Khách sạn</div>
-                    </a>
-                </li>
-                <li>
                     <a href="/">
                         <div>Vé giải trí</div>
                     </a>
                 </li>
-                <li>
-                    <a href="/">
-                        <div>Cẩm nang</div>
-                    </a>
-                </li>
+                
                 <li>
                     <a href="/">
                         <i class="fa-solid fa-bars" style="font-size:1.4rem;margin-top:0.25rem;"></i>
@@ -116,7 +117,17 @@
                             </li>
                             <li>
                                 <a href="#">
-                                    <div>Tin tức</div>
+                                    <div>Cẩm nang du lịch</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div>Điểm đến</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div>Đặc sản</div>
                                 </a>
                             </li>
                             <li>
@@ -181,6 +192,22 @@
                         <div><i class="fas fa-home"></i>Trang chủ</div>
                         <div class="right-icon"></div>
                     </a>
+                </li>
+                <li>
+                    <div>
+                        <i class="fas fa-umbrella-beach"></i>
+                        Tour nước ngoài
+                    </div>
+                    <span class="right-icon" onclick="javascript:showHideListMenuMobile(this);"><i class="fas fa-chevron-right"></i></span>
+                    <ul style="display:none;">
+                    {{-- @foreach($dataBD as $tourBD)
+                        <li>
+                            <a href="/{{ $tourBD->slug_full }}">
+                                <div>{{ $tourBD->name }}</div>
+                            </a>
+                        </li>
+                    @endforeach --}}
+                    </ul>
                 </li>
                 @if(!empty($dataBD))
                     <li>

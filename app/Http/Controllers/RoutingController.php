@@ -10,6 +10,7 @@ use App\Models\Ship;
 use App\Models\Guide;
 use App\Models\Service;
 use App\Models\ServiceLocation;
+use App\Models\CarrentalLocation;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -131,7 +132,7 @@ class RoutingController extends Controller {
                                         ->with(['questions' => function($q){
                                             $q->where('relation_table', 'service_info');
                                         }])
-                                        ->with('seo', 'serviceLocation.seo', 'serviceLocation.tourLocations.infoTourLocation.seo', 'serviceLocation.tourLocations.infoTourLocation.shipLocations.infoShipLocation.seo', 'serviceLocation.tourLocations.infoTourLocation.carrentalLocations.infoCarrentalLocation.seo')
+                                        ->with('seo', 'serviceLocation.seo', 'serviceLocation.tourLocations.infoTourLocation.seo', 'serviceLocation.tourLocations.infoTourLocation.shipLocations.infoShipLocation.seo', 'serviceLocation.tourLocations.infoTourLocation.carrentalLocations.infoCarrentalLocation.seo', 'serviceLocation.tourLocations.infoTourLocation.guides.infoGuide.seo')
                                         ->first();
                 $content            = Blade::render(Storage::get(config('admin.storage.contentService').$item->seo->slug.'.blade.php'));
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
@@ -151,6 +152,22 @@ class RoutingController extends Controller {
                                         ->first();
                 $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
                 return view('main.serviceLocation.index', compact('item', 'breadcrumb'));
+            }else if($checkExists['type']==='carrental_location'){
+                $item               = CarrentalLocation::select('*')
+                                        ->whereHas('seo', function($query) use($checkExists){
+                                            $query->where('slug', $checkExists['slug']);
+                                        })
+                                        ->with(['files' => function($query){
+                                            $query->where('relation_table', 'service_location');
+                                        }])
+                                        ->with(['questions' => function($q){
+                                            $q->where('relation_table', 'service_location');
+                                        }])
+                                        ->with('seo', 'tourLocations.infoTourLocation.seo', 'tourLocations.infoTourLocation.shipLocations.infoShipLocation.seo', 'tourLocations.infoTourLocation.serviceLocations.infoServiceLocation.seo', 'tourLocations.infoTourLocation.guides.infoGuide.seo')
+                                        ->first();
+                $content            = Blade::render(Storage::get(config('admin.storage.contentCarrentalLocation').$item->seo->slug.'.blade.php'));
+                $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
+                return view('main.carrentalLocation.index', compact('item', 'breadcrumb', 'content'));
             }
         }else {
             /* Error 404 */

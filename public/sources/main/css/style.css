@@ -431,10 +431,10 @@ input, textarea {
     font-size: 1.025rem;
   }
   .headerMain_item > ul > li:not(:first-child) > a > *, .headerMain_item > ul > li:not(:first-child) > div:not(.megaMenu, .normalMenu) > * {
-    padding-left: 1.2rem;
+    padding-left: 0.8rem;
   }
   .headerMain_item > ul > li > a > *, .headerMain_item > ul > li > div:not(.megaMenu, .normalMenu) > * {
-    padding-right: 1.2rem;
+    padding-right: 0.8rem;
   }
 }
 @media (max-width: 1023px) {
