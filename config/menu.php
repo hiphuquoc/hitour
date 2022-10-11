@@ -47,6 +47,16 @@ return [
                     'name'  => '2. Điểm khởi hành',
                     'route' => 'admin.airDeparture.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '3. Điểm đến',
+                    'route' => 'admin.airLocation.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '4. Đối tác',
+                    'route' => 'admin.airPartner.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
                 ]
             ]
         ],

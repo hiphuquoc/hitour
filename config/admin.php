@@ -103,7 +103,9 @@ return [
         'contentGuide'              => 'public/contents/guides/',
         'contentService'            => 'public/contents/services/',
         'contentCarrentalLocation'  => 'public/contents/carrentalLocations/',
-        'contentAirDeparture'       => 'public/contents/airDepartures/'
+        'contentAirDeparture'       => 'public/contents/airDepartures/',
+        'contentAirLocation'        => 'public/contents/airLocations/',
+        'contentAirPartner'         => 'public/contents/airPartners/'
     ],
 
     'alert'     => [

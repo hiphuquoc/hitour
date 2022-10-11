@@ -43,12 +43,14 @@
             </thead>
             <tbody>
                 @php
-                if(!empty($list)){
+                if(!empty($list)&&$list->isNotEmpty()){
                     $i          = 1;
                     foreach($list as $item){
                         echo view('admin.shipLocation.oneRow', ['item' => $item, 'no' => $i]);
                         ++$i;
                     }
+                }else {
+                    echo '<tr><td colspan="6">Không có dữ liệu phù hợp!</td></tr>';
                 }
                 @endphp
             </tbody>

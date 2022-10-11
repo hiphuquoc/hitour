@@ -72,7 +72,7 @@
                 </tr>
             </thead>
             <tbody>
-                @if(!empty($list))
+                @if(!empty($list)&&$list->isNotEmpty())
                     @foreach($list as $item)
                         <tr id="ship_booking_{{ $item->id }}">
                             <td class="text-center">{{ $loop->index+1 }}</td>
@@ -210,6 +210,8 @@
                             </td>
                         </tr>
                     @endforeach
+                @else 
+                    <tr><td colspan="7">Không có dữ liệu phù hợp!</td></tr>
                 @endif
             </tbody>
         </table>

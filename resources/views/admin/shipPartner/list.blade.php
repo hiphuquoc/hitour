@@ -19,7 +19,7 @@
                 </tr>
             </thead>
             <tbody>
-                @if(!empty($list))
+                @if(!empty($list)&&$list->isNotEmpty())
                     @foreach($list as $item)
                     {{-- @php
                         dd($item);
@@ -82,6 +82,8 @@
                         </td>
                     </tr>
                     @endforeach
+                @else 
+                    <tr><td colspan="5">Không có dữ liệu phù hợp!</td></tr>
                 @endif
                 
             </tbody>

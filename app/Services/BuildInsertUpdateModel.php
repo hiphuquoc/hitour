@@ -809,4 +809,78 @@ class BuildInsertUpdateModel {
         }
         return $result;
     }
+
+    public static function buildArrayTableAirLocation($dataForm, $seoId = null){
+        /* upload ship_location
+            + name
+            + description
+            + display_name
+            + seo_id
+            + region_id
+            + province_id
+            + district_id
+        */
+        $result                             = [];
+        if(!empty($dataForm)){
+            $result['name']                 = $dataForm['title'] ?? null;
+            $result['description']          = $dataForm['description'] ?? null;
+            $result['display_name']         = $dataForm['display_name'] ?? null;
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
+            $result['region_id']            = $dataForm['region'];
+            $result['province_id']          = $dataForm['province'] ?? null;
+            $result['district_id']          = $dataForm['district'] ?? null;
+            $result['note']                 = $dataForm['note'] ?? null;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableAirPartnerContact($dataForm){
+        /*
+           partner_id
+           name
+           address
+           phone
+           zalo
+           email
+           # default
+       */
+       $result                         = [];
+       if(!empty($dataForm)&&!empty($dataForm['partner_id'])){
+           $result['partner_id']       = $dataForm['partner_id'];
+           $result['name']             = $dataForm['name'] ?? null;
+           $result['address']          = $dataForm['address'] ?? null;
+           $result['phone']            = $dataForm['phone'] ?? null;
+           $result['zalo']             = $dataForm['zalo'] ?? null;
+           $result['email']            = $dataForm['email'] ?? null;
+       }
+       return $result;
+   }
+
+   public static function buildArrayTableAirPartner($dataForm, $seoId = null, $logoPath = null){
+    /*
+        seo_id
+        name
+        company_name
+        company_code
+        company_address
+        company_website
+        company_hotline
+        company_email
+        company_logo
+        created_by
+    */
+    $result                         = [];
+    if(!empty($dataForm)){
+        if(!empty($seoId)) $result['seo_id'] = $seoId;
+        $result['name']             = $dataForm['name'] ?? null;
+        $result['company_name']     = $dataForm['company_name'] ?? null;
+        $result['company_code']     = $dataForm['company_code'] ?? null;
+        $result['company_address']  = $dataForm['company_address'] ?? null;
+        $result['company_website']  = $dataForm['company_website'] ?? null;
+        $result['company_hotline']  = $dataForm['company_hotline'] ?? null;
+        $result['company_email']    = $dataForm['company_email'] ?? null;
+        if(!empty($logoPath)) $result['company_logo'] = $logoPath;
+    }
+    return $result;
+}
 }

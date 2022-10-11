@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-                @if(!empty($list))
+                @if(!empty($list)&&$list->isNotEmpty())
                     @foreach($list as $item)
                     <tr id="item-{{ $item->id }}">
                         <td style="vertical-align:top;text-align:center">
@@ -56,6 +56,8 @@
                         </td>
                     </tr>
                     @endforeach
+                @else 
+                    <tr><td colspan="3">Không có dữ liệu phù hợp!</td></tr>
                 @endif
                 
             </tbody>

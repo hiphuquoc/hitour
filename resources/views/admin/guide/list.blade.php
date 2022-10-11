@@ -50,9 +50,7 @@
                         ++$i;
                     }
                 }else {
-                    echo '<tr>
-                                <td colspan="6">Không có dữ liệu phù hợp!</td>
-                            </tr>';
+                    echo '<tr><td colspan="6">Không có dữ liệu phù hợp!</td></tr>';
                 }
                 @endphp
             </tbody>

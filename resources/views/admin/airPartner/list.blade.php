@@ -62,13 +62,13 @@
                         </td>
                         <td style="vertical-align:top;display:flex;">
                             <div class="icon-wrapper iconAction">
-                                <a href="{{ route('admin.tourPartner.view', ['id' => $item->id]) }}">
+                                <a href="{{ route('admin.airPartner.view', ['id' => $item->id]) }}">
                                     <i data-feather='edit'></i>
                                     <div>Sửa</div>
                                 </a>
                             </div>
                             <div class="icon-wrapper iconAction">
-                                <a href="{{ route('admin.tourPartner.view', ['id' => $item->id, 'type' => 'copy']) }}">
+                                <a href="{{ route('admin.airPartner.view', ['id' => $item->id, 'type' => 'copy']) }}">
                                     <i data-feather='copy'></i>
                                     <div>Chép</div>
                                 </a>
@@ -92,7 +92,7 @@
 
 </div>
 <!-- Nút thêm -->
-<a href="{{ route('admin.tourPartner.view') }}" class="addItemBox">
+<a href="{{ route('admin.airPartner.view') }}" class="addItemBox">
     <i class="fa-regular fa-plus"></i>
     <span>Thêm</span>
 </a>
@@ -103,7 +103,7 @@
         function deleteItem(id){
             if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
                 $.ajax({
-                    url         : "{{ route('admin.tourPartner.delete') }}",
+                    url         : "{{ route('admin.airPartner.delete') }}",
                     type        : "GET",
                     dataType    : "html",
                     data        : { id : id }

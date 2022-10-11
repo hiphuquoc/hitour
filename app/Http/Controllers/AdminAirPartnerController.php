@@ -3,46 +3,46 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\ShipPartnerRequest;
+use App\Http\Requests\AirPartnerRequest;
 use App\Helpers\Upload;
 use App\Services\BuildInsertUpdateModel;
-use App\Models\ShipPartner;
+use App\Models\AirPartner;
 use App\Models\Seo;
 use App\Models\QuestionAnswer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
-class AdminShipPartnerController extends Controller {
+class AdminAirPartnerController extends Controller {
 
     public function __construct(BuildInsertUpdateModel $BuildInsertUpdateModel){
         $this->BuildInsertUpdateModel  = $BuildInsertUpdateModel;
     }
 
     public function list(){
-        $list               = ShipPartner::getList();
-        return view('admin.shipPartner.list', compact('list'));
+        $list               = AirPartner::getList();
+        return view('admin.airPartner.list', compact('list'));
     }
 
     public function view(Request $request){
         $id                 = $request->get('id') ?? 0;
-        $item               = ShipPartner::select('*')
+        $item               = AirPartner::select('*')
                             ->where('id', $id)
                             ->with(['questions' => function($query){
-                                $query->where('relation_table', 'ship_partner');
+                                $query->where('relation_table', 'air_partner');
                             }])
                             ->with('seo')
                             ->first();
         $content            = null;
         if(!empty($item->seo->slug)){
-            $content        = Storage::get(config('admin.storage.contentShipPartner').$item->seo->slug.'.blade.php');
+            $content        = Storage::get(config('admin.storage.contentAirPartner').$item->seo->slug.'.blade.php');
         }
         /* type */
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.shipPartner.view', compact('item', 'type', 'content'));
+        return view('admin.airPartner.view', compact('item', 'type', 'content'));
     }
 
-    public function create(ShipPartnerRequest $request){
+    public function create(AirPartnerRequest $request){
         try {
             DB::beginTransaction();
             /* upload image */
@@ -53,13 +53,13 @@ class AdminShipPartnerController extends Controller {
             }
             /* insert seo */
             $request->merge(['title' => $request->get('company_name')]);
-            $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'ship_partner', $dataPath);
+            $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'air_partner', $dataPath);
             $seoId              = Seo::insertItem($insertPage);
-            /* insert ship_partner */
-            $insertPartnerInfo  = $this->BuildInsertUpdateModel->buildArrayTableShipPartner($request->all(), $seoId, $dataPath['filePathNormal']);
-            $idShipPartner      = ShipPartner::insertItem($insertPartnerInfo);
+            /* insert air_partner */
+            $insertPartnerInfo  = $this->BuildInsertUpdateModel->buildArrayTableAirPartner($request->all(), $seoId, $dataPath['filePathNormal']);
+            $idAirPartner      = AirPartner::insertItem($insertPartnerInfo);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentShipPartner').$request->get('slug').'.blade.php', $request->get('content'));
+            Storage::put(config('admin.storage.contentAirPartner').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert câu hỏi thường gặp */
             if(!empty($request->get('question_answer'))){
                 foreach($request->get('question_answer') as $itemQues){
@@ -67,8 +67,8 @@ class AdminShipPartnerController extends Controller {
                         QuestionAnswer::insertItem([
                             'question'          => $itemQues['question'],
                             'answer'            => $itemQues['answer'],
-                            'relation_table'    => 'ship_partner',
-                            'reference_id'      => $idShipPartner
+                            'relation_table'    => 'air_partner',
+                            'reference_id'      => $idAirPartner
                         ]);
                     }
                 }
@@ -77,7 +77,7 @@ class AdminShipPartnerController extends Controller {
             /* Message */
             $message            = [
                 'type'      => 'success',
-                'message'   => '<strong>Thành công!</strong> Đã tạo đối tác Tàu mới'
+                'message'   => '<strong>Thành công!</strong> Đã tạo đối tác Vé máy bay mới'
             ];
         } catch (\Exception $exception){
             DB::rollBack();
@@ -88,13 +88,13 @@ class AdminShipPartnerController extends Controller {
             ];
         }
         $request->session()->put('message', $message);
-        return redirect()->route('admin.shipPartner.view', ['id' => $idShipPartner]);
+        return redirect()->route('admin.airPartner.view', ['id' => $idAirPartner]);
     }
 
-    public function update(ShipPartnerRequest $request){
+    public function update(AirPartnerRequest $request){
         try {
             DB::beginTransaction();
-            $idShipPartner      = $request->get('id') ?? 0;
+            $idAirPartner      = $request->get('id') ?? 0;
             /* upload image */
             $dataPath           = null;
             if($request->hasFile('image')) {
@@ -103,17 +103,17 @@ class AdminShipPartnerController extends Controller {
             }
             /* update seo */
             $request->merge(['title' => $request->get('company_name')]);
-            $updatePage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'ship_partner', $dataPath);
+            $updatePage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'air_partner', $dataPath);
             Seo::updateItem($request->get('seo_id'), $updatePage);
             /* update partner_info */
-            $updatePartnerInfo  = $this->BuildInsertUpdateModel->buildArrayTableShipPartner($request->all(), null, $dataPath['filePathNormal'] ?? null);
-            ShipPartner::updateItem($idShipPartner, $updatePartnerInfo);
+            $updatePartnerInfo  = $this->BuildInsertUpdateModel->buildArrayTableAirPartner($request->all(), null, $dataPath['filePathNormal'] ?? null);
+            AirPartner::updateItem($idAirPartner, $updatePartnerInfo);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentShipPartner').$request->get('slug').'.blade.php', $request->get('content'));
+            Storage::put(config('admin.storage.contentAirPartner').$request->get('slug').'.blade.php', $request->get('content'));
             /* update câu hỏi thường gặp */
             QuestionAnswer::select('*')
-                            ->where('relation_table', 'ship_partner')
-                            ->where('reference_id', $idShipPartner)
+                            ->where('relation_table', 'air_partner')
+                            ->where('reference_id', $idAirPartner)
                             ->delete();
             if(!empty($request->get('question_answer'))){
                 foreach($request->get('question_answer') as $itemQues){
@@ -121,8 +121,8 @@ class AdminShipPartnerController extends Controller {
                         QuestionAnswer::insertItem([
                             'question'          => $itemQues['question'],
                             'answer'            => $itemQues['answer'],
-                            'relation_table'    => 'ship_partner',
-                            'reference_id'      => $idShipPartner
+                            'relation_table'    => 'air_partner',
+                            'reference_id'      => $idAirPartner
                         ]);
                     }
                 }
@@ -142,7 +142,7 @@ class AdminShipPartnerController extends Controller {
             ];
         }
         $request->session()->put('message', $message);
-        return redirect()->route('admin.shipPartner.view', ['id' => $idShipPartner]);
+        return redirect()->route('admin.airPartner.view', ['id' => $idAirPartner]);
     }
 
     public static function delete(Request $request){
@@ -151,7 +151,7 @@ class AdminShipPartnerController extends Controller {
                 DB::beginTransaction();
                 $id                 = $request->get('id');
                 /* lấy thông tin */
-                $infoPartner        = ShipPartner::select('*')
+                $infoPartner        = AirPartner::select('*')
                                     ->where('id', $id)
                                     ->with('seo')
                                     ->first();
@@ -160,7 +160,7 @@ class AdminShipPartnerController extends Controller {
                 if(file_exists($imageSmallPath)) @unlink($imageSmallPath);
                 $imagePath          = Storage::path(config('admin.images.folderUpload').basename($infoPartner->seo->image));
                 if(file_exists($imagePath)) @unlink($imagePath);
-                /* delete bảng ship_partner */
+                /* delete bảng air_partner */
                 $infoPartner->delete();
                 DB::commit();
                 return true;

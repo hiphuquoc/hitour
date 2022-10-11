@@ -1,9 +1,9 @@
 @extends('admin.layouts.main')
 @section('content')
 
-<div class="titlePage">Danh sách Cho thuê xe</div>
+<div class="titlePage">Danh sách khu vực Tour</div>
 <!-- ===== START: SEARCH FORM ===== -->
-<form id="formSearch" method="get" action="{{ route('admin.carrentalLocation.list') }}">
+<form id="formSearch" method="get" action="{{ route('admin.airLocation.list') }}">
     <div class="searchBox">
         <div class="searchBox_item">
             <div class="input-group">
@@ -46,7 +46,7 @@
                 if(!empty($list)&&$list->isNotEmpty()){
                     $i          = 1;
                     foreach($list as $item){
-                        echo view('admin.carrentalLocation.oneRow', ['item' => $item, 'no' => $i]);
+                        echo view('admin.airLocation.oneRow', ['item' => $item, 'no' => $i]);
                         ++$i;
                     }
                 }else {
@@ -59,7 +59,7 @@
 
 </div>
 <!-- Nút thêm -->
-<a href="{{ route('admin.carrentalLocation.view') }}" class="addItemBox">
+<a href="{{ route('admin.airLocation.view') }}" class="addItemBox">
     <i class="fa-regular fa-plus"></i>
     <span>Thêm</span>
 </a>
@@ -70,12 +70,12 @@
         function deleteItem(id){
             if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
                 $.ajax({
-                    url         : "{{ route('admin.carrentalLocation.delete') }}",
+                    url         : "{{ route('admin.airLocation.delete') }}",
                     type        : "GET",
                     dataType    : "html",
                     data        : { id : id }
                 }).done(function(data){
-                    if(data==true) $('#carrentalLocation_'+id).remove();
+                    if(data==true) $('#tourLocation-'+id).remove();
                 });
             }
         }
