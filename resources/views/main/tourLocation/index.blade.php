@@ -39,14 +39,12 @@
                 @include('main.tourLocation.tourGrid', ['list' => $item->tours])
             </div>
 
-            <!-- Vé vui chơi & giải trí -->
-            @if($item->serviceLocations->isNotEmpty())
-                <div class="sectionBox">
-                    <h2 class="titlePage">Vé vui chơi tại {{ $item->display_name ?? null }}</h2>
-                    <p>Ngoài các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> bạn cũng có thể tham khảo thêm các <strong>hoạt động vui chơi giải trí khác tại {{ $item->display_name ?? null }}</strong>. Đây là các chương trình đặc biệt có thể bù dắp khoảng trống thời gian tự túc trong <strong>chương trình Tour</strong> của bạn và chắc chắn sẽ mang đến cho bạn nhiều trải nghiệm thú vị.</p>
-                    @include('main.tourLocation.serviceGrid', ['list' => $item->serviceLocations])
-                </div>
-            @endif
+            <!-- Vé máy bay -->
+            <div class="sectionBox">
+                <h2 class="titlePage">Vé máy bay đi {{ $item->display_name ?? null }}</h2>
+                <p>Để đến được {{ $item->display_name ?? null }} nhanh chóng, an toàn và tiện lợi nhất bạn có thể di chuyển bằng máy bay. Chi tiết các <strong>chuyến bay đến {{ $item->display_name ?? null }}</strong> bạn có thể tham khảo thông tin bên dưới</p>
+                @include('main.tourLocation.airticketGrid', ['list' => $item->serviceLocations])
+            </div>
 
             <!-- Vé tàu cao tốc -->
             @if($item->shipLocations->isNotEmpty())
@@ -60,6 +58,15 @@
                         }
                     @endphp
                     @include('main.shipLocation.shipGridMerge', ['list' => $dataShips])
+                </div>
+            @endif
+
+            <!-- Vé vui chơi & giải trí -->
+            @if($item->serviceLocations->isNotEmpty())
+                <div class="sectionBox">
+                    <h2 class="titlePage">Vé vui chơi tại {{ $item->display_name ?? null }}</h2>
+                    <p>Ngoài các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> bạn cũng có thể tham khảo thêm các <strong>hoạt động vui chơi giải trí khác tại {{ $item->display_name ?? null }}</strong>. Đây là các chương trình đặc biệt có thể bù dắp khoảng trống thời gian tự túc trong <strong>chương trình Tour</strong> của bạn và chắc chắn sẽ mang đến cho bạn nhiều trải nghiệm thú vị.</p>
+                    @include('main.tourLocation.serviceGrid', ['list' => $item->serviceLocations])
                 </div>
             @endif
 

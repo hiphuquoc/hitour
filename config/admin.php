@@ -97,12 +97,13 @@ return [
         'contentTourLocation'       => 'public/contents/tourLocations/',
         'contentTourDeparture'      => 'public/contents/tourDepartures/',
         'contentShip'               => 'public/contents/ships/',
-        'contentShipLocation'       > 'public/contents/shipLocations/',
+        'contentShipLocation'       => 'public/contents/shipLocations/',
         'contentShipDeparture'      => 'public/contents/shipDepartures/',
         'contentShipPartner'        => 'public/contents/shipPartners/',
         'contentGuide'              => 'public/contents/guides/',
         'contentService'            => 'public/contents/services/',
-        'contentCarrentalLocation'  => 'public/contents/carrentalLocations/'
+        'contentCarrentalLocation'  => 'public/contents/carrentalLocations/',
+        'contentAirDeparture'       => 'public/contents/airDepartures/'
     ],
 
     'alert'     => [

@@ -2945,6 +2945,7 @@ blockquote em {
 }
 .serviceGrid_item_title {
   display: flex;
+  align-items: center;
   margin-bottom: 0.45rem;
   padding: 0 0.75rem;
 }

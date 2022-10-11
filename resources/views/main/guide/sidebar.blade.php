@@ -31,7 +31,7 @@
             @foreach($item->tourLocations as $tourLocation)
                @foreach($tourLocation->infoTourLocation->carrentalLocations as $carrentalLocation)
                   <a href="/{{ $carrentalLocation->infoCarrentalLocation->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">
-                     <i class="fa-solid fa-star"></i><h3>{{ $carrentalLocation->infoCarrentalLocation->name }}</h3>
+                     <i class="fa-solid fa-car-side"></i><h3>{{ $carrentalLocation->infoCarrentalLocation->name }}</h3>
                   </a>
                @endforeach
             @endforeach

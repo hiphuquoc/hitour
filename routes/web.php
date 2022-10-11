@@ -23,6 +23,9 @@ use App\Http\Controllers\AdminShipPortController;
 use App\Http\Controllers\AdminServiceController;
 use App\Http\Controllers\AdminServiceLocationController;
 
+use App\Http\Controllers\AdminAirPortController;
+use App\Http\Controllers\AdminAirDepartureController;
+
 use App\Http\Controllers\AdminStaffController;
 use App\Http\Controllers\AdminCostController;
 use App\Http\Controllers\AdminImageController;
@@ -263,6 +266,25 @@ Route::prefix('admin')->group(function(){
             Route::post('/update', [AdminCarrentalLocationController::class, 'update'])->name('admin.carrentalLocation.update');
             /* Delete AJAX */
             Route::get('/delete', [AdminCarrentalLocationController::class, 'delete'])->name('admin.carrentalLocation.delete');
+        });
+        /* ===== AIR PORT ===== */
+        Route::prefix('airPort')->group(function(){
+            Route::get('/', [AdminAirPortController::class, 'list'])->name('admin.airPort.list');
+            Route::post('/create', [AdminAirPortController::class, 'create'])->name('admin.airPort.create');
+            Route::get('/view', [AdminAirPortController::class, 'view'])->name('admin.airPort.view');
+            Route::post('/update', [AdminAirPortController::class, 'update'])->name('admin.airPort.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminAirPortController::class, 'delete'])->name('admin.airPort.delete');
+            Route::get('/loadSelectBoxShipPort', [AdminAirPortController::class, 'loadSelectBoxShipPort'])->name('admin.airPort.loadSelectBoxShipPort');
+        });
+        /* ===== AIR DEPARTURE ===== */
+        Route::prefix('airDeparture')->group(function(){
+            Route::get('/', [AdminAirDepartureController::class, 'list'])->name('admin.airDeparture.list');
+            Route::post('/create', [AdminAirDepartureController::class, 'create'])->name('admin.airDeparture.create');
+            Route::get('/view', [AdminAirDepartureController::class, 'view'])->name('admin.airDeparture.view');
+            Route::post('/update', [AdminAirDepartureController::class, 'update'])->name('admin.airDeparture.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminAirDepartureController::class, 'delete'])->name('admin.airDeparture.delete');
         });
         /* ===== AJAX ===== */
         Route::post('/loadProvinceByRegion', [AdminFormController::class, 'loadProvinceByRegion'])->name('admin.form.loadProvinceByRegion');

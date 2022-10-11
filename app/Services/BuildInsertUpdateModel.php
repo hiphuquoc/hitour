@@ -769,4 +769,44 @@ class BuildInsertUpdateModel {
         }
         return $result;
     }
+
+    public static function buildArrayTableAirPort($dataForm){
+        /* 
+            name
+            address
+            district_id
+            province_id
+            region_id
+        */
+        $result                     = [];
+        if(!empty($dataForm)){
+            $result['name']         = $dataForm['name'];
+            $result['address']      = $dataForm['address'];
+            $result['district_id']  = $dataForm['district'];
+            $result['province_id']  = $dataForm['province'];
+            $result['region_id']    = $dataForm['region'];
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableAirDeparture($dataForm, $seoId = null){
+        /* upload air_departure
+            + name
+            + seo_id
+            + region_id
+            + province_id
+            + district_id
+        */
+        $result                             = [];
+        if(!empty($dataForm)){
+            $result['name']                 = $dataForm['title'] ?? null;
+            $result['description']          = $dataForm['description'] ?? null;
+            $result['display_name']         = $dataForm['display_name'] ?? null;
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
+            $result['region_id']            = $dataForm['region'];
+            $result['province_id']          = $dataForm['province'] ?? null;
+            $result['district_id']          = $dataForm['district'] ?? null;
+        }
+        return $result;
+    }
 }

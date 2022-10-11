@@ -2800,6 +2800,7 @@ $tourGrid_radius : 5px;
         }
         &_title {
             display: flex;
+            align-items: center;
             margin-bottom: 0.45rem;
             padding: 0 0.75rem;
             h2, h3 {
