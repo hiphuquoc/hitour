@@ -25,6 +25,28 @@ class RelationAirStaff extends Model {
         return $id;
     }
 
+    public static function deleteAndInsertItem($idAir, $arrayIdStaff){
+        /* delete relation trước đó */
+        $countDeleted                       = 0;
+        if(!empty($idAir)) {
+            $countDeleted                   = self::select('*')->where('air_info_id', $idAir)->delete();
+        }
+        /* insert */
+        $countInsert                        = 0;
+        if(!empty($arrayIdStaff)){
+            foreach($arrayIdStaff as $idStaff){
+                $model                      = new RelationAirStaff();
+                $model->air_info_id         = $idAir;
+                $model->staff_info_id       = $idStaff;
+                $model->save();
+                $countInsert                += 1;
+            }
+        }
+        $result['delete']                   = $countDeleted;
+        $result['insert']                   = $countInsert;
+        return $result;
+    }
+
     public function infoStaff(){
         return $this->hasOne(\App\Models\Staff::class, 'id', 'staff_info_id');
     }

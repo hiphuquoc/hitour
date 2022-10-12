@@ -25,6 +25,28 @@ class RelationAirPartner extends Model {
         return $id;
     }
 
+    public static function deleteAndInsertItem($idAir, $arrayIdPartner){
+        /* delete relation trước đó */
+        $countDeleted                       = 0;
+        if(!empty($idAir)) {
+            $countDeleted                   = self::select('*')->where('air_info_id', $idAir)->delete();
+        }
+        /* insert */
+        $countInsert                        = 0;
+        if(!empty($arrayIdPartner)){
+            foreach($arrayIdPartner as $idPartner){
+                $model                      = new RelationAirPartner();
+                $model->air_info_id         = $idAir;
+                $model->partner_info_id     = $idPartner;
+                $model->save();
+                $countInsert                += 1;
+            }
+        }
+        $result['delete']                   = $countDeleted;
+        $result['insert']                   = $countInsert;
+        return $result;
+    }
+
     public function infoPartner(){
         return $this->hasOne(\App\Models\AirPartner::class, 'id', 'partner_info_id');
     }

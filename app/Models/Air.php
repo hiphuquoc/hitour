@@ -82,19 +82,19 @@ class Air extends Model {
     }
 
     public function departure(){
-        return $this->hasOne(\App\Models\AirDeparture::class, 'id', 'ship_departure_id');
+        return $this->hasOne(\App\Models\AirDeparture::class, 'id', 'air_departure_id');
     }
 
     public function portDeparture(){
-        return $this->hasOne(\App\Models\AirPort::class, 'id', 'ship_port_departure_id');
+        return $this->hasOne(\App\Models\AirPort::class, 'id', 'air_port_departure_id');
     }
 
     public function location(){
-        return $this->hasOne(\App\Models\AirLocation::class, 'id', 'ship_location_id');
+        return $this->hasOne(\App\Models\AirLocation::class, 'id', 'air_location_id');
     }
 
     public function portLocation(){
-        return $this->hasOne(\App\Models\AirPort::class, 'id', 'ship_port_location_id');
+        return $this->hasOne(\App\Models\AirPort::class, 'id', 'air_port_location_id');
     }
 
     public function staffs(){

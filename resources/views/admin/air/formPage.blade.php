@@ -54,7 +54,7 @@
                     </select>
                 </div>
                 <div class="flexBox_item">
-                    <label class="form-label inputRequired" for="air_port_departure_id">Cảng khởi hành</label>
+                    <label class="form-label inputRequired" for="air_port_departure_id">Sân bay khởi hành</label>
                     <select id="js_loadSelectBoxAirPort_idWrite_departure" class="form-select" name="air_port_departure_id">
                         <option value="0">- Lựa chọn -</option>
                         @if(!empty($airPortDepartures))
@@ -90,7 +90,7 @@
                     </select>
                 </div>
                 <div class="flexBox_item">
-                    <label class="form-label inputRequired" for="air_port_location_id">Cảng cập bến</label>
+                    <label class="form-label inputRequired" for="air_port_location_id">Sân bay đáp</label>
                     <select id="js_loadSelectBoxAirPort_idWrite_location" class="form-select" name="air_port_location_id">
                         <option value="0">- Lựa chọn -</option>
                         @if(!empty($airPortLocations))
@@ -131,10 +131,10 @@
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
-            <label class="form-label inputRequired" for="partner">Đối tác Tàu</label>
+            <label class="form-label inputRequired" for="partner">Đối tác</label>
             <select class="select2 form-select select2-hidden-accessible" name="partner[]" multiple="true">
-                @if(!empty($shipPartners))
-                    @foreach($shipPartners as $partner)
+                @if(!empty($airPartners))
+                    @foreach($airPartners as $partner)
                         @php
                             $selected   = null;
                             if(!empty($item->partners)){
@@ -166,7 +166,6 @@
                     type
                 }
             }).done(function(data){
-                console.log(data);
                 $('#'+idWrite).html(data);
             });
         }

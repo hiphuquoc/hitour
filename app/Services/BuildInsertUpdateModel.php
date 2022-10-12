@@ -857,30 +857,52 @@ class BuildInsertUpdateModel {
    }
 
    public static function buildArrayTableAirPartner($dataForm, $seoId = null, $logoPath = null){
-    /*
-        seo_id
-        name
-        company_name
-        company_code
-        company_address
-        company_website
-        company_hotline
-        company_email
-        company_logo
-        created_by
-    */
-    $result                         = [];
-    if(!empty($dataForm)){
-        if(!empty($seoId)) $result['seo_id'] = $seoId;
-        $result['name']             = $dataForm['name'] ?? null;
-        $result['company_name']     = $dataForm['company_name'] ?? null;
-        $result['company_code']     = $dataForm['company_code'] ?? null;
-        $result['company_address']  = $dataForm['company_address'] ?? null;
-        $result['company_website']  = $dataForm['company_website'] ?? null;
-        $result['company_hotline']  = $dataForm['company_hotline'] ?? null;
-        $result['company_email']    = $dataForm['company_email'] ?? null;
-        if(!empty($logoPath)) $result['company_logo'] = $logoPath;
+        /*
+            seo_id
+            name
+            company_name
+            company_code
+            company_address
+            company_website
+            company_hotline
+            company_email
+            company_logo
+            created_by
+        */
+        $result                         = [];
+        if(!empty($dataForm)){
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
+            $result['name']             = $dataForm['name'] ?? null;
+            $result['company_name']     = $dataForm['company_name'] ?? null;
+            $result['company_code']     = $dataForm['company_code'] ?? null;
+            $result['company_address']  = $dataForm['company_address'] ?? null;
+            $result['company_website']  = $dataForm['company_website'] ?? null;
+            $result['company_hotline']  = $dataForm['company_hotline'] ?? null;
+            $result['company_email']    = $dataForm['company_email'] ?? null;
+            if(!empty($logoPath)) $result['company_logo'] = $logoPath;
+        }
+        return $result;
     }
-    return $result;
-}
+
+    public static function buildArrayTableAirInfo($dataForm, $seoId = null){
+        /* 
+            seo_id
+            name
+            ship_location_id
+            ship_departure_id
+            note
+            created_by
+        */
+        $result     = [];
+        if(!empty($dataForm)){
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
+            $result['name']                     = $dataForm['title'];
+            $result['air_departure_id']         = $dataForm['air_departure_id'];
+            $result['air_port_departure_id']    = $dataForm['air_port_departure_id'];
+            $result['air_location_id']          = $dataForm['air_location_id'];
+            $result['air_port_location_id']     = $dataForm['air_port_location_id'];
+            $result['note']                     = $dataForm['note'] ?? null;
+        }
+        return $result;
+    }
 }

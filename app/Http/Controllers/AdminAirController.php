@@ -67,7 +67,7 @@ class AdminAirController extends Controller {
                                 ->with('seo', 'location', 'departure', 'partners.infoPartner', 'staffs')
                                 ->first();
         $airDepartures      = AirDeparture::all();
-        $idPortDeparture    = 1;
+        $idPortDeparture    = $item->departure->id ?? 0;
         $airPortDepartures  = AirPort::getAirPortByAirDepartureId($idPortDeparture);
         $airLocations       = AirLocation::all();
         $idPortLocation     = $item->location->id ?? 0;
@@ -179,7 +179,7 @@ class AdminAirController extends Controller {
     public function update(AirRequest $request){
         try {
             DB::beginTransaction();
-            $idAir             = $request->get('air_info_id') ?? 0;
+            $idAir              = $request->get('air_info_id') ?? 0;
             /* upload image */
             $dataPath           = [];
             if($request->hasFile('image')) {
