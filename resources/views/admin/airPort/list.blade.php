@@ -26,9 +26,10 @@
                         <td style="vertical-align:top;">
                             <div class="oneLine">
                                 @php
-                                    $tmp            = [
-                                        $item->address, $item->district->district_name, $item->province->province_name
-                                    ];
+                                    $tmp            = [];
+                                    if(!empty($item->address)) $tmp[]   = $item->address;
+                                    if(!empty($item->district->district_name)) $tmp[]   = $item->district->district_name;
+                                    if(!empty($item->province->province_name)) $tmp[]   = $item->province->province_name;
                                     $fullAddress    = implode(', ', $tmp);
                                 @endphp 
                                 <b>{{ $item->name }}</b> - Địa chỉ: {{ $fullAddress }}
