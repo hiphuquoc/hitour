@@ -57,6 +57,11 @@ return [
                     'name'  => '4. Đối tác',
                     'route' => 'admin.airPartner.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '5. Chi tiết bay',
+                    'route' => 'admin.air.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
                 ]
             ]
         ],

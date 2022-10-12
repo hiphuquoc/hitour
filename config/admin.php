@@ -105,7 +105,8 @@ return [
         'contentCarrentalLocation'  => 'public/contents/carrentalLocations/',
         'contentAirDeparture'       => 'public/contents/airDepartures/',
         'contentAirLocation'        => 'public/contents/airLocations/',
-        'contentAirPartner'         => 'public/contents/airPartners/'
+        'contentAirPartner'         => 'public/contents/airPartners/',
+        'contentAir'                => 'public/contents/airs/'
     ],
 
     'alert'     => [

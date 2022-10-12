@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\airLocation;
-use App\Models\ShipDeparture;
+use App\Models\AirLocation;
+use App\Models\AirDeparture;
 
 class AirPort extends Model {
     use HasFactory;
@@ -40,33 +40,33 @@ class AirPort extends Model {
         return $flag;
     }
 
-    // public static function getAirPortByAirDepartureId($airLocationId){
-    //     $result         = [];
-    //     if(!empty($airLocationId)){
-    //         $tmp        = ShipDeparture::select('province_id')
-    //                         ->where('id', $airLocationId)
-    //                         ->first();
-    //         $idProvinceOfPort   = $tmp->province_id ?? 0;
-    //         $result     = self::select('*')
-    //                         ->where('province_id', $idProvinceOfPort)
-    //                         ->get();
-    //     }
-    //     return $result;
-    // }
+    public static function getAirPortByAirDepartureId($airLocationId){
+        $result         = [];
+        if(!empty($airLocationId)){
+            $tmp        = AirDeparture::select('province_id')
+                            ->where('id', $airLocationId)
+                            ->first();
+            $idProvinceOfPort   = $tmp->province_id ?? 0;
+            $result     = self::select('*')
+                            ->where('province_id', $idProvinceOfPort)
+                            ->get();
+        }
+        return $result;
+    }
 
-    // public static function getAirPortByAirLocationId($airLocationId){
-    //     $result         = [];
-    //     if(!empty($airLocationId)){
-    //         $tmp        = ShipLocation::select('province_id')
-    //                         ->where('id', $airLocationId)
-    //                         ->first();
-    //         $idProvinceOfPort   = $tmp->province_id ?? 0;
-    //         $result     = self::select('*')
-    //                         ->where('province_id', $idProvinceOfPort)
-    //                         ->get();
-    //     }
-    //     return $result;
-    // }
+    public static function getAirPortByAirLocationId($airLocationId){
+        $result         = [];
+        if(!empty($airLocationId)){
+            $tmp        = AirLocation::select('province_id')
+                            ->where('id', $airLocationId)
+                            ->first();
+            $idProvinceOfPort   = $tmp->province_id ?? 0;
+            $result     = self::select('*')
+                            ->where('province_id', $idProvinceOfPort)
+                            ->get();
+        }
+        return $result;
+    }
 
     public function region(){
         return $this->hasOne(\App\Models\Region::class, 'id', 'region_id');

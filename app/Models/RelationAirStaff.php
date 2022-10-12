@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RelationAirPartner extends Model {
+class RelationAirStaff extends Model {
     use HasFactory;
-    protected $table        = 'relation_air_partner';
+    protected $table        = 'relation_air_staff';
     protected $fillable     = [
         'air_info_id', 
-        'partner_info_id'
+        'staff_info_id'
     ];
     public $timestamps      = false;
 
     public static function insertItem($params){
         $id             = 0;
         if(!empty($params)){
-            $model      = new RelationAirPartner();
+            $model      = new RelationAirStaff();
             foreach($params as $key => $value) $model->{$key}  = $value;
             $model->save();
             $id         = $model->id;
@@ -25,7 +25,7 @@ class RelationAirPartner extends Model {
         return $id;
     }
 
-    public function infoPartner(){
-        return $this->hasOne(\App\Models\AirPartner::class, 'id', 'partner_info_id');
+    public function infoStaff(){
+        return $this->hasOne(\App\Models\Staff::class, 'id', 'staff_info_id');
     }
 }

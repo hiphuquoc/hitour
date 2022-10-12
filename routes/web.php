@@ -28,6 +28,7 @@ use App\Http\Controllers\AdminAirDepartureController;
 use App\Http\Controllers\AdminAirLocationController;
 use App\Http\Controllers\AdminAirPartnerController;
 use App\Http\Controllers\AdminAirPartnerContactController;
+use App\Http\Controllers\AdminAirController;
 
 use App\Http\Controllers\AdminStaffController;
 use App\Http\Controllers\AdminCostController;
@@ -278,7 +279,7 @@ Route::prefix('admin')->group(function(){
             Route::post('/update', [AdminAirPortController::class, 'update'])->name('admin.airPort.update');
             /* Delete AJAX */
             Route::get('/delete', [AdminAirPortController::class, 'delete'])->name('admin.airPort.delete');
-            Route::get('/loadSelectBoxShipPort', [AdminAirPortController::class, 'loadSelectBoxShipPort'])->name('admin.airPort.loadSelectBoxShipPort');
+            Route::get('/loadSelectBoxAirPort', [AdminAirPortController::class, 'loadSelectBoxAirPort'])->name('admin.airPort.loadSelectBoxAirPort');
         });
         /* ===== AIR DEPARTURE ===== */
         Route::prefix('airDeparture')->group(function(){
@@ -311,6 +312,20 @@ Route::prefix('admin')->group(function(){
             Route::post('/loadContact', [AdminAirPartnerContactController::class, 'loadContact'])->name('admin.airPartner.loadContact');
             Route::post('/loadFormContact', [AdminAirPartnerContactController::class, 'loadFormContact'])->name('admin.airPartner.loadFormContact');
             Route::post('/deleteContact', [AdminAirPartnerContactController::class, 'delete'])->name('admin.airPartner.deleteContact');
+        });
+        /* ===== AIR INFO ===== */
+        Route::prefix('air')->group(function(){
+            Route::get('/', [AdminAirController::class, 'list'])->name('admin.air.list');
+            Route::post('/create', [AdminAirController::class, 'create'])->name('admin.air.create');
+            Route::get('/view', [AdminAirController::class, 'view'])->name('admin.air.view');
+            Route::post('/update', [AdminAirController::class, 'update'])->name('admin.air.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminAirController::class, 'delete'])->name('admin.air.delete');
+            // Route::post('/loadFormModal', [AdminShipPriceController::class, 'loadFormModal'])->name('admin.shipPrice.loadFormModal');
+            // Route::post('/loadList', [AdminShipPriceController::class, 'loadList'])->name('admin.shipPrice.loadList');
+            // Route::post('/createPrice', [AdminShipPriceController::class, 'createPrice'])->name('admin.shipPrice.createPrice');
+            // Route::post('/updatePrice', [AdminShipPriceController::class, 'updatePrice'])->name('admin.shipPrice.updatePrice');
+            // Route::post('/deletePrice', [AdminShipPriceController::class, 'deletePrice'])->name('admin.shipPrice.deletePrice');
         });
         /* ===== AJAX ===== */
         Route::post('/loadProvinceByRegion', [AdminFormController::class, 'loadProvinceByRegion'])->name('admin.form.loadProvinceByRegion');

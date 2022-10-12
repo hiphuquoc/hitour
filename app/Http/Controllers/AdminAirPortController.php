@@ -102,15 +102,15 @@ class AdminAirPortController extends Controller {
         }
     }
 
-    // public static function loadSelectBoxAirPort(Request $request){
-    //     if(!empty($request->get('id'))){
-    //         if($request->get('type')=='departure'){
-    //             $data   = AirPort::getAirPortByAirDepartureId($request->get('id'));
-    //         }else {
-    //             $data   = AirPort::getAirPortByAirLocationId($request->get('id'));
-    //         }
-    //         $result     = view('admin.ajax.selectBox', compact('data'));
-    //         echo $result;
-    //     }
-    // }
+    public static function loadSelectBoxAirPort(Request $request){
+        if(!empty($request->get('id'))){
+            if($request->get('type')=='departure'){
+                $data   = AirPort::getAirPortByAirDepartureId($request->get('id'));
+            }else {
+                $data   = AirPort::getAirPortByAirLocationId($request->get('id'));
+            }
+            $result     = view('admin.ajax.selectBox', compact('data'));
+            echo $result;
+        }
+    }
 }
