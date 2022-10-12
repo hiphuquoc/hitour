@@ -37,7 +37,7 @@
                     </tr>
                     <tr>
                         <td style="width:90px;vertical-align:top;">Xuất phát</td>
-                        <td>{{ $item->pick_up }} {{ $item->departure->name }}</td>
+                        <td>{{ $item->pick_up }}</td>
                     </tr>
 				</tbody>
 			</table>

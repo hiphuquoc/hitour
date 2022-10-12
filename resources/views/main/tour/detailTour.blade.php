@@ -37,7 +37,7 @@
             @endif
             <tr>
                 <td>Xuất phát</td>
-                <td>{{ $item->pick_up }} {{ $item->departure->name }}</td>
+                <td>{{ $item->pick_up }}</td>
             </tr>
         </tbody>
     </table>
