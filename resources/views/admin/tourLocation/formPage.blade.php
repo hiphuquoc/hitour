@@ -173,6 +173,26 @@
                 @endif
             </select>
         </div>
+        <!-- One Row -->
+        <div class="formBox_full_item">
+            <label class="form-label" for="air_location_id">Liên kết vé máy bay</label>
+            <select class="select2 form-select select2-hidden-accessible" id="air_location_id" name="air_location_id[]" tabindex="-1" aria-hidden="true" multiple>
+                @if(!empty($airLocations))
+                    @foreach($airLocations as $airLocation)
+                        @php
+                            $selected           = null;
+                            foreach($item->airLocations as $a){
+                                if($a->infoAirLocation->id==$airLocation->id){
+                                    $selected   = ' selected';
+                                    break;
+                                }
+                            }
+                        @endphp
+                        <option value="{{ $airLocation->id }}"{{ $selected }}>{{ $airLocation->name }}</option>
+                    @endforeach
+                @endif
+            </select>
+        </div>
     </div>
 </div>
 

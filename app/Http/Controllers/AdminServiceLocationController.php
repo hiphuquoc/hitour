@@ -53,14 +53,14 @@ class AdminServiceLocationController extends Controller {
                                 ->first();
         $provinces          = Province::getItemByIdRegion($item->region_id ?? 0);
         $districts          = District::getItemByIdProvince($item->province_id ?? 0);
-        // $content        = null;
-        // if(!empty($item->seo->slug)){
-        //     $content    = Storage::get(config('admin.storage.contentServiceLocation').$item->seo->slug.'.blade.php');
-        // }
+        $content            = null;
+        if(!empty($item->seo->slug)){
+            $content        = Storage::get(config('admin.storage.contentServiceLocation').$item->seo->slug.'.blade.php');
+        }
         $message            = $request->get('message') ?? null; 
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.serviceLocation.view', compact('item', 'type', 'provinces', 'districts', 'message'));
+        return view('admin.serviceLocation.view', compact('item', 'type', 'provinces', 'districts', 'content', 'message'));
     }
 
     public function create(ServiceLocationRequest $request){
@@ -92,7 +92,7 @@ class AdminServiceLocationController extends Controller {
                 }
             }
             /* lưu content vào file */
-            // Storage::put(config('admin.storage.contentServiceLocation').$request->get('slug').'.blade.php', $request->get('content'));
+            Storage::put(config('admin.storage.contentServiceLocation').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
@@ -155,7 +155,7 @@ class AdminServiceLocationController extends Controller {
                 }
             }
             /* lưu content vào file */
-            // Storage::put(config('admin.storage.contentServiceLocation').$request->get('slug').'.blade.php', $request->get('content'));
+            Storage::put(config('admin.storage.contentServiceLocation').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();

@@ -108,4 +108,8 @@ class Air extends Model {
     public function questions(){
         return $this->hasMany(\App\Models\QuestionAnswer::class, 'reference_id', 'id');
     }
+
+    public function airLocation(){
+        return $this->hasOne(\App\Models\AirLocation::class, 'id', 'air_location_id');
+    }
 }

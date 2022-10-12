@@ -102,6 +102,7 @@ return [
         'contentShipPartner'        => 'public/contents/shipPartners/',
         'contentGuide'              => 'public/contents/guides/',
         'contentService'            => 'public/contents/services/',
+        'contentServiceLocation'    => 'public/contents/serviceLocations/',
         'contentCarrentalLocation'  => 'public/contents/carrentalLocations/',
         'contentAirDeparture'       => 'public/contents/airDepartures/',
         'contentAirLocation'        => 'public/contents/airLocations/',

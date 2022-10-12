@@ -1,8 +1,16 @@
 @php
+    /* Vé máy bay */
+    $dataAir            = \App\Models\AirLocation::select('*')
+                            ->with('seo', 'airs.seo')
+                            ->get();
     /* Tàu cao tốc */
-    $dataShip   = \App\Models\ShipLocation::select('*')
-                        ->with('seo', 'ships.seo')
-                        ->get();
+    $dataShip           = \App\Models\ShipLocation::select('*')
+                            ->with('seo', 'ships.seo')
+                            ->get();
+                            /* Tàu cao tốc */
+    $dataService        = \App\Models\ServiceLocation::select('*')
+                            ->with('seo')
+                            ->get();
     /* Tour du lịch */
     $infoMenuByRegion   = \Illuminate\Support\Facades\DB::table('tour_location as tl')
                             ->join('region_info as ri', 'ri.id', '=', 'tl.region_id')
@@ -70,12 +78,32 @@
                     <a href="#">
                         <div>Vé máy bay</div>
                     </a>
+                    @if(!empty($dataAir)&&$dataAir->isNotEmpty())
+                        <div class="megaMenu">
+                            <div class="megaMenu_content" style="width:100%;">
+                                <ul>
+                                    @php
+                                        $i = 0;
+                                        $xhtml = null;
+                                        foreach($dataAir as $air){
+                                            if($i==0) $xhtml = '<li><ul>';
+                                            if($i!=0&&$i%7==0) $xhtml .= '</ul></li><li><ul>';
+                                            $xhtml .= '<li><a href="/'.$air->seo->slug_full.'">'.$air->name.'</a></li>';
+                                            if($i==($dataAir->count()-1)) $xhtml .= '</ul></li>';
+                                            ++$i;
+                                        }
+                                        echo $xhtml;
+                                    @endphp
+                                </ul>
+                            </div>
+                        </div>
+                    @endif
                 </li>
                 <li>
                     <div>
                         <div>Vé tàu</div>
                     </div>
-                    @if($dataShip->isNotEmpty())
+                    @if(!empty($dataShip)&&$dataShip->isNotEmpty())
                     <div class="normalMenu">
                         <ul>
                             @foreach($dataShip as $shipLocation)
@@ -102,6 +130,15 @@
                     <a href="/">
                         <div>Vé giải trí</div>
                     </a>
+                    <div class="normalMenu">
+                        <ul>
+                            @foreach($dataService as $serviceLocation)
+                            <li>
+                                <a class="max-line_1" href="/{{ $serviceLocation->seo->slug_full }}">{{ $serviceLocation->display_name }}</a>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </li>
                 
                 <li>
@@ -281,7 +318,7 @@
                         </ul>
                     </li>
                 @endif
-                @if(!empty($dataShip))
+                @if(!empty($dataShip)&&$dataShip->isNotEmpty())
                     <li>
                         <div>
                             <i class="fas fa-ship"></i>
@@ -304,6 +341,18 @@
                         <i class="fa-solid fa-plane-departure"></i>
                         <div>Vé máy bay</div>
                     </a>
+                    @if(!empty($dataAir)&&$dataAir->isNotEmpty())
+                        <span class="right-icon" onclick="javascript:showHideListMenuMobile(this);"><i class="fas fa-chevron-right"></i></span>
+                        <ul style="display:none;">
+                        @foreach($dataAir as $airLocation)
+                            <li>
+                                <a href="/{{ $airLocation->seo->slug_full }}">
+                                    <div>{{ $airLocation->name }}</div>
+                                </a>
+                            </li>
+                        @endforeach
+                        </ul>
+                    @endif
                 </li>
                 <li>
                     <a href="#">
@@ -316,6 +365,18 @@
                         <i class="fa-solid fa-star"></i>
                         <div>Vui chơi giải trí</div>
                     </a>
+                    @if(!empty($dataService)&&$dataService->isNotEmpty())
+                        <span class="right-icon" onclick="javascript:showHideListMenuMobile(this);"><i class="fas fa-chevron-right"></i></span>
+                        <ul style="display:none;">
+                        @foreach($dataService as $serviceLocation)
+                            <li>
+                                <a href="/{{ $serviceLocation->seo->slug_full }}">
+                                    <div>{{ $serviceLocation->display_name }}</div>
+                                </a>
+                            </li>
+                        @endforeach
+                        </ul>
+                    @endif
                 </li>
                 <li>
                     <a href="#">

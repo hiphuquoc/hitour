@@ -29,11 +29,13 @@
             @php
                 // dd($item->airs);
             @endphp
-            @include('main.serviceLocation.serviceGrid', ['list' => $item->services])
+            @include('main.airLocation.airGrid', ['list' => $item->airs])
             
             <div class="pageContent_body">
                 <div class="pageContent_body_content">
                     <div id="js_autoLoadTocContentWithIcon_element" class="contentShip">
+                        <!-- Lịch tàu và Hãng tàu -->
+                        {{-- @include('main.airLocation.headContent', ['keyWord' => $item->name]) --}}
                         <!-- Nội dung tùy biến -->
                         {!! $content ?? null !!}
 
@@ -42,7 +44,7 @@
                     </div>
                 </div>
                 <div class="pageContent_body_sidebar">
-                    @include('main.serviceLocation.sidebar')
+                    @include('main.airLocation.sidebar')
                 </div>
             </div>
 

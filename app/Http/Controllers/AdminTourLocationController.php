@@ -10,6 +10,7 @@ use App\Models\TourLocation;
 use App\Models\ShipLocation;
 use App\Models\CarrentalLocation;
 use App\Models\ServiceLocation;
+use App\Models\AirLocation;
 use App\Models\Seo;
 use App\Services\BuildInsertUpdateModel;
 use App\Models\District;
@@ -26,6 +27,7 @@ use App\Http\Requests\TourLocationRequest;
 use App\Models\RelationTourLocationShipLocation;
 use App\Models\RelationTourLocationCarrentalLocation;
 use App\Models\RelationTourLocationServiceLocation;
+use App\Models\RelationTourLocationAirLocation;
 
 class AdminTourLocationController extends Controller {
 
@@ -62,6 +64,7 @@ class AdminTourLocationController extends Controller {
         $shipLocations      = ShipLocation::all();
         $carrentalLocations = CarrentalLocation::all();
         $serviceLocations   = ServiceLocation::all();
+        $airLocations       = AirLocation::all();
         // $content        = null;
         // if(!empty($item->seo->slug)){
         //     $content    = Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php');
@@ -69,7 +72,7 @@ class AdminTourLocationController extends Controller {
         $message            = $request->get('message') ?? null; 
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.tourLocation.view', compact('item', 'type', 'provinces', 'districts', 'guides', 'shipLocations', 'carrentalLocations', 'serviceLocations', 'message'));
+        return view('admin.tourLocation.view', compact('item', 'type', 'provinces', 'districts', 'guides', 'shipLocations', 'carrentalLocations', 'serviceLocations', 'airLocations', 'message'));
     }
 
     public function create(TourLocationRequest $request){
@@ -138,6 +141,16 @@ class AdminTourLocationController extends Controller {
                         'service_location_id'   => $idServiceLocation
                     ];
                     RelationTourLocationServiceLocation::insertItem($insertRelationTourLocationServiceLocation);
+                }
+            }
+            /* relation tour_location và air_location */
+            if(!empty($request->get('air_location_id'))){
+                foreach($request->get('air_location_id') as $idAirLocation){
+                    $insertRelationTourLocationAirLocation    = [
+                        'tour_location_id'      => $idTourLocation,
+                        'air_location_id'   => $idAirLocation
+                    ];
+                    RelationTourLocationAirLocation::insertItem($insertRelationTourLocationAirLocation);
                 }
             }
             /* lưu content vào file */
@@ -267,6 +280,19 @@ class AdminTourLocationController extends Controller {
                         'service_location_id'   => $idServiceLocation
                     ];
                     RelationTourLocationServiceLocation::insertItem($insertRelationTourLocationServiceLocation);
+                }
+            }
+            /* relation tour_location và air_location */
+            RelationTourLocationAirLocation::select('*')
+                                ->where('tour_location_id', $idTourLocation)
+                                ->delete();
+            if(!empty($request->get('air_location_id'))){
+                foreach($request->get('air_location_id') as $idAirLocation){
+                    $insertRelationTourLocationAirLocation    = [
+                        'tour_location_id'      => $idTourLocation,
+                        'air_location_id'       => $idAirLocation
+                    ];
+                    RelationTourLocationAirLocation::insertItem($insertRelationTourLocationAirLocation);
                 }
             }
             /* lưu content vào file */

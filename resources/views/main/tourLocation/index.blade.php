@@ -40,11 +40,21 @@
             </div>
 
             <!-- Vé máy bay -->
-            <div class="sectionBox">
-                <h2 class="titlePage">Vé máy bay đi {{ $item->display_name ?? null }}</h2>
-                <p>Để đến được {{ $item->display_name ?? null }} nhanh chóng, an toàn và tiện lợi nhất bạn có thể di chuyển bằng máy bay. Chi tiết các <strong>chuyến bay đến {{ $item->display_name ?? null }}</strong> bạn có thể tham khảo thông tin bên dưới</p>
-                @include('main.tourLocation.airticketGrid', ['list' => $item->serviceLocations])
-            </div>
+            @php
+                $dataAirs               = new \Illuminate\Support\Collection();
+                foreach($item->airLocations as $airLocation){
+                    foreach($airLocation->infoAirLocation->airs as $air){
+                        $dataAirs[]     = $air;
+                    }
+                }
+            @endphp
+            @if(!empty($dataAirs)&&$dataAirs->isNotEmpty())
+                <div class="sectionBox">
+                    <h2 class="titlePage">Vé máy bay đi {{ $item->display_name ?? null }}</h2>
+                    <p>Để đến được {{ $item->display_name ?? null }} nhanh chóng, an toàn và tiện lợi nhất bạn có thể di chuyển bằng máy bay. Chi tiết các <strong>chuyến bay đến {{ $item->display_name ?? null }}</strong> bạn có thể tham khảo thông tin bên dưới</p>
+                    @include('main.tourLocation.airGrid', ['list' => $dataAirs])
+                </div>
+            @endif
 
             <!-- Vé tàu cao tốc -->
             @if($item->shipLocations->isNotEmpty())

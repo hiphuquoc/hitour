@@ -59,6 +59,18 @@
                     <div class="pageAdminWithRightSidebar_main_content_item width100">
                         <div class="card">
                             <div class="card-header border-bottom">
+                                <h4 class="card-title">
+                                    Nội dung
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                                @include('admin.form.formContent')
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pageAdminWithRightSidebar_main_content_item width100">
+                        <div class="card">
+                            <div class="card-header border-bottom">
                                 <h4 class="card-title">Câu hỏi thường gặp</h4>
                             </div>
                             <div class="card-body">

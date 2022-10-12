@@ -91,4 +91,8 @@ class AirLocation extends Model {
         return $this->hasMany(\App\Models\QuestionAnswer::class, 'reference_id', 'id');
     }
 
+    public function tourLocations() {
+        return $this->hasMany(\App\Models\RelationTourLocationAirLocation::class, 'air_location_id', 'id');
+    }
+
 }

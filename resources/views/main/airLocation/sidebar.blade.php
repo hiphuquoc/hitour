@@ -66,9 +66,8 @@
       </div>
    </div>
    @endif
-
    @php
-      $flagSpace = !empty($item->tourLocations)&&$item->tourLocations->isNotEmpty() ? 'style=margin-top:1.5rem;' : null;
+      $flagSpace = !empty($item->tourLocations)&&$item->tourLocations->isNotEmpty() ? ' style=margin-top:1.5rem;' : null;
    @endphp
    <div class="callBookTour" {{ $flagSpace }}>
       <div class="callBookTour_button">
