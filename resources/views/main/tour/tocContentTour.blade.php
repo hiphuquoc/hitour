@@ -22,12 +22,12 @@
     @endif
     @if(!empty($item->content->policy_cancel))
         <a href="#chinh-sach-huy-tour" class="tocContentTour_item">
-            <i class="fa-solid fa-xmark-large"></i>Chính sách hủy tour
+            <i class="fa-solid fa-xmark"></i>Chính sách hủy tour
         </a>
     @endif
     @if(!empty($item->content->note))
         <a href="#luu-y-khi-tham-gia-chuong-trinh-tour" class="tocContentTour_item">
-            <i class="fa-solid fa-memo-circle-info"></i>Lưu ý
+            <i class="fa-solid fa-circle-exclamation"></i>Lưu ý
         </a>
     @endif
     @if(!empty($item->content->menu))
