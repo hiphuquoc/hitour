@@ -1,4 +1,21 @@
 @extends('main.layouts.main')
+@push('head-custom')
+<!-- ===== START:: SCHEMA ===== -->
+
+<!-- STRAT:: Organization Schema -->
+@include('main.schema.organization')
+<!-- END:: Organization Schema -->
+
+<!-- STRAT:: Article Schema -->
+@include('main.schema.article', compact('item'))
+<!-- END:: Article Schema -->
+
+<!-- STRAT:: Article Schema -->
+@include('main.schema.creativeworkseries', compact('item'))
+<!-- END:: Article Schema -->
+
+<!-- ===== END:: SCHEMA ===== -->
+@endpush
 @section('content')
 
     <!-- START: Home slider -->

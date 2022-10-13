@@ -1,4 +1,27 @@
 @extends('main.layouts.main')
+@push('head-custom')
+<!-- ===== START:: SCHEMA ===== -->
+@php
+    $dataSchema = $item->seo ?? null;
+@endphp
+<!-- STRAT:: Organization Schema -->
+@include('main.schema.organization')
+<!-- END:: Organization Schema -->
+
+<!-- STRAT:: Article Schema -->
+@include('main.schema.article', ['data' => $dataSchema])
+<!-- END:: Article Schema -->
+
+<!-- STRAT:: Article Schema -->
+@include('main.schema.creativeworkseries', ['data' => $dataSchema])
+<!-- END:: Article Schema -->
+
+<!-- STRAT:: Article Schema -->
+@include('main.schema.breadcrumb', ['data' => $breadcrumb])
+<!-- END:: Article Schema -->
+
+<!-- ===== END:: SCHEMA ===== -->
+@endpush
 @section('content')
 
     {{-- @php

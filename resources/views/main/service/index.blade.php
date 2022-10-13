@@ -1,4 +1,35 @@
 @extends('main.layouts.main')
+@push('head-custom')
+<!-- ===== START:: SCHEMA ===== -->
+@php
+    $dataSchema = $item->seo ?? null;
+@endphp
+<!-- STRAT:: Organization Schema -->
+@include('main.schema.organization')
+<!-- END:: Organization Schema -->
+
+<!-- STRAT:: Article Schema -->
+@include('main.schema.article', ['data' => $dataSchema])
+<!-- END:: Article Schema -->
+
+<!-- STRAT:: Article Schema -->
+@include('main.schema.creativeworkseries', ['data' => $dataSchema])
+<!-- END:: Article Schema -->
+
+<!-- STRAT:: Article Schema -->
+@php
+    $highPrice  = $item->price_show ?? 1000000;
+    $lowPrice   = $highPrice - 200000;
+@endphp
+@include('main.schema.product', ['data' => $dataSchema, 'files' => $item->files, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
+<!-- END:: Article Schema -->
+
+<!-- STRAT:: Article Schema -->
+@include('main.schema.breadcrumb', ['data' => $breadcrumb])
+<!-- END:: Article Schema -->
+
+<!-- ===== END:: SCHEMA ===== -->
+@endpush
 @section('content')
 
     @php

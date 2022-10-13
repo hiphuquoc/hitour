@@ -49,7 +49,7 @@
         <div id="bang-gia-tour" class="contentTour_item">
             <div class="contentTour_item_title noBorder">
                 <i class="fa-solid fa-hand-holding-dollar"></i>
-                <h2>Bảng giá Tour</h2>
+                <h2>Bảng giá {{ $item->name ?? null }}</h2>
             </div>
             <div class="contentTour_item_text">
                 @php
@@ -170,12 +170,36 @@
             </div>
         </div>
     @endif
+    <!-- Chính sách hủy tour -->
+    @if(!empty($item->content->policy_cancel))
+        <div class="contentTour_item">
+            <div class="contentTour_item_title">
+                <i class="fa-solid fa-bookmark"></i>
+                <h2>Chính sách hủy {{ $item->name ?? null }}</h2>
+            </div>
+            <div class="contentTour_item_text">
+                {!! $item->content->policy_cancel !!}
+            </div>
+        </div>
+    @endif
+    <!-- Chính sách hủy tour -->
+    @if(!empty($item->content->note))
+        <div class="contentTour_item">
+            <div class="contentTour_item_title">
+                <i class="fa-solid fa-bookmark"></i>
+                <h2>Lưu ý khi tham gia {{ $item->name ?? null }}</h2>
+            </div>
+            <div class="contentTour_item_text">
+                {!! $item->content->note !!}
+            </div>
+        </div>
+    @endif
     <!-- Thực đơn -->
     @if(!empty($item->content->menu))
         <div id="thuc-don-theo-chuong-trinh-tour" class="contentTour_item">
             <div class="contentTour_item_title noBorder">
                 <i class="fa-solid fa-bookmark"></i>
-                <h2>Thực đơn</h2>
+                <h2>Thực đơn {{ $item->name ?? null }}</h2>
             </div>
             <div class="contentTour_item_text">
                 <div class="menuTour">

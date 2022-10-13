@@ -64,6 +64,14 @@
             </div>
             <textarea class="form-control" id="policy_cancel"  name="policy_cancel" rows="5">{{ old('policy_cancel') ?? $item->content->policy_cancel ?? '' }}</textarea>
         </div>
+        <!-- One Row -->
+        <div class="formBox_full_item">
+            <div class="flexBox" style="justify-content:space-between;">
+                <label class="form-label" for="note">Lưu ý</label>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalNote">Lấy mẫu</a>
+            </div>
+            <textarea class="form-control" id="note"  name="note" rows="5">{{ old('note') ?? $item->content->note ?? '' }}</textarea>
+        </div>
     </div>
 </div>
 
@@ -231,3 +239,21 @@
     </div>
 </div>
 <!-- ===== END:: Modal chính sách hủy tour ===== -->
+
+<!-- ===== START:: Modal lưu ý ===== -->
+<div class="modal fade" id="modalNote" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <textarea class="exampleContentBox" rows="5">
+                    <ul>
+                        <li>Trong vòng 05 (năm) ngày: ...</li>
+                        <li>Trong vòng 03 (ba) ngày: ...</li>
+                        <li>Trong vòng 24 giờ trước ngày: ...</li>
+                    </ul>
+                </textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ===== END:: Modal lưu ý ===== -->

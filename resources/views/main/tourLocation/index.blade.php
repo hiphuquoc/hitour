@@ -1,4 +1,40 @@
 @extends('main.layouts.main')
+@push('head-custom')
+<!-- ===== START:: SCHEMA ===== -->
+@php
+    $dataSchema = $item->seo ?? null;
+@endphp
+<!-- STRAT:: Organization Schema -->
+@include('main.schema.organization')
+<!-- END:: Organization Schema -->
+
+<!-- STRAT:: Article Schema -->
+@include('main.schema.article', ['data' => $dataSchema])
+<!-- END:: Article Schema -->
+
+<!-- STRAT:: Article Schema -->
+@include('main.schema.creativeworkseries', ['data' => $dataSchema])
+<!-- END:: Article Schema -->
+
+<!-- STRAT:: Article Schema -->
+@include('main.schema.breadcrumb', ['data' => $breadcrumb])
+<!-- END:: Article Schema -->
+
+@php
+    $dataList           = null;  
+    if(!empty($item->tours)&&$item->tours->isNotEmpty()){
+        $dataList       = new \Illuminate\Support\Collection();
+        foreach($item->tours as $tour){
+            $dataList[] = $tour->infoTour;
+        }
+    }
+@endphp
+<!-- STRAT:: Article Schema -->
+@include('main.schema.itemlist', ['data' => $dataList])
+<!-- END:: Article Schema -->
+
+<!-- ===== END:: SCHEMA ===== -->
+@endpush
 @section('content')
 
     @php

@@ -2,12 +2,12 @@
     {
         "@context": "https://schema.org/",
         "@type": "CreativeWorkSeries",
-        "name": "Du lịch Côn Đảo - Tour du lịch Côn Đảo chất lượng ®Hitour",
+        "name": "{{ $data->seo_title ?? $data->title ?? null }}",
         "aggregateRating": {
             "@type": "AggregateRating",
-            "ratingValue": "4.7",
+            "ratingValue": "{{ $data->rating_aggregate_star ?? '5' }}",
             "bestRating": "5",
-            "ratingCount": "251"
+            "ratingCount": "{{ $data->rating_aggregate_count ?? '120' }}"
         }
     }
 </script>
