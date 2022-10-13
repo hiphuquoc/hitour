@@ -172,7 +172,7 @@
     @endif
     <!-- Chính sách hủy tour -->
     @if(!empty($item->content->policy_cancel))
-        <div class="contentTour_item">
+        <div id="chinh-sach-huy-tour" class="contentTour_item">
             <div class="contentTour_item_title">
                 <i class="fa-solid fa-bookmark"></i>
                 <h2>Chính sách hủy {{ $item->name ?? null }}</h2>
@@ -184,7 +184,7 @@
     @endif
     <!-- Chính sách hủy tour -->
     @if(!empty($item->content->note))
-        <div class="contentTour_item">
+        <div id="luu-y-khi-tham-gia-chuong-trinh-tour" class="contentTour_item">
             <div class="contentTour_item_title">
                 <i class="fa-solid fa-bookmark"></i>
                 <h2>Lưu ý khi tham gia {{ $item->name ?? null }}</h2>

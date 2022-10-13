@@ -20,6 +20,16 @@
             <i class="fa-solid fa-list-check"></i>Tour bao gồm và không bao gồm
         </a>
     @endif
+    @if(!empty($item->content->policy_cancel))
+        <a href="#chinh-sach-huy-tour" class="tocContentTour_item">
+            <i class="fa-solid fa-utensils"></i>Chính sách hủy tour
+        </a>
+    @endif
+    @if(!empty($item->content->policy_cancel))
+        <a href="#luu-y-khi-tham-gia-chuong-trinh-tour" class="tocContentTour_item">
+            <i class="fa-solid fa-utensils"></i>Lưu ý
+        </a>
+    @endif
     @if(!empty($item->content->menu))
         <a href="#thuc-don-theo-chuong-trinh-tour" class="tocContentTour_item">
             <i class="fa-solid fa-utensils"></i>Thực đơn
