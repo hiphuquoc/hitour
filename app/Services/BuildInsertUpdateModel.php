@@ -688,7 +688,7 @@ class BuildInsertUpdateModel {
             $result['description']          = $dataForm['description'] ?? null;
             $result['display_name']         = $dataForm['display_name'] ?? null;
             if(!empty($seoId)) $result['seo_id'] = $seoId;
-            $result['region_id']            = $dataForm['region'];
+            $result['region_id']            = $dataForm['region'] ?? null;
             $result['province_id']          = $dataForm['province'] ?? null;
             $result['district_id']          = $dataForm['district'] ?? null;
         }
@@ -762,7 +762,7 @@ class BuildInsertUpdateModel {
             $result['display_name']         = $dataForm['display_name'] ?? null;
             $result['description']          = $dataForm['description'] ?? null;
             if(!empty($seoId)) $result['seo_id'] = $seoId;
-            $result['region_id']            = $dataForm['region'];
+            $result['region_id']            = $dataForm['region'] ?? null;
             $result['province_id']          = $dataForm['province'] ?? null;
             $result['district_id']          = $dataForm['district'] ?? null;
             $result['note']                 = $dataForm['note'] ?? null;
@@ -902,6 +902,25 @@ class BuildInsertUpdateModel {
             $result['air_location_id']          = $dataForm['air_location_id'];
             $result['air_port_location_id']     = $dataForm['air_port_location_id'];
             $result['note']                     = $dataForm['note'] ?? null;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableTourContinent($dataForm, $seoId = null){
+        /* upload tour_continent
+            + name
+            + seo_id
+            + description
+            + display_name
+            + note
+        */
+        $result                             = [];
+        if(!empty($dataForm)){
+            $result['name']                 = $dataForm['title'] ?? null;
+            $result['description']          = $dataForm['description'] ?? null;
+            $result['display_name']         = $dataForm['display_name'] ?? null;
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
+            $result['note']                 = $dataForm['note'] ?? null;
         }
         return $result;
     }

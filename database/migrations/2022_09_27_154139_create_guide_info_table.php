@@ -18,11 +18,10 @@ return new class extends Migration
             $table->text('name');
             $table->text('display_name');
             $table->text('description');
-            $table->integer('seo_id');         // [ref: > seo.id]
+            $table->integer('seo_id');
             $table->integer('district_id')->nullable();
-            $table->integer('province_id');
-            $table->integer('region_id');
-            // $table->boolean('island')->default(0);
+            $table->integer('province_id')->nullable();
+            $table->integer('region_id')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
         });

@@ -35,6 +35,6 @@ class CreateTourLocationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('locations_info');
+        // Schema::dropIfExists('tour_location');
     }
 }

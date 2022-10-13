@@ -30,6 +30,8 @@ use App\Http\Controllers\AdminAirPartnerController;
 use App\Http\Controllers\AdminAirPartnerContactController;
 use App\Http\Controllers\AdminAirController;
 
+use App\Http\Controllers\AdminTourContinentController;
+
 use App\Http\Controllers\AdminStaffController;
 use App\Http\Controllers\AdminCostController;
 use App\Http\Controllers\AdminImageController;
@@ -326,6 +328,15 @@ Route::prefix('admin')->group(function(){
             // Route::post('/createPrice', [AdminShipPriceController::class, 'createPrice'])->name('admin.shipPrice.createPrice');
             // Route::post('/updatePrice', [AdminShipPriceController::class, 'updatePrice'])->name('admin.shipPrice.updatePrice');
             // Route::post('/deletePrice', [AdminShipPriceController::class, 'deletePrice'])->name('admin.shipPrice.deletePrice');
+        });
+        /* ===== TOUR CONTINENT ===== */
+        Route::prefix('tourContinent')->group(function(){
+            Route::get('/', [AdminTourContinentController::class, 'list'])->name('admin.tourContinent.list');
+            Route::post('/create', [AdminTourContinentController::class, 'create'])->name('admin.tourContinent.create');
+            Route::get('/view', [AdminTourContinentController::class, 'view'])->name('admin.tourContinent.view');
+            Route::post('/update', [AdminTourContinentController::class, 'update'])->name('admin.tourContinent.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminTourContinentController::class, 'delete'])->name('admin.tourContinent.delete');
         });
         /* ===== AJAX ===== */
         Route::post('/loadProvinceByRegion', [AdminFormController::class, 'loadProvinceByRegion'])->name('admin.form.loadProvinceByRegion');

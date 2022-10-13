@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('service_location', function (Blueprint $table) {
+        Schema::create('tour_continent', function (Blueprint $table) {
             $table->id();
             $table->text('name');
             $table->text('display_name');
             $table->text('description');
             $table->integer('seo_id');
-            $table->integer('district_id')->nullable();
-            $table->integer('province_id')->nullable();
-            $table->integer('region_id')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
         });
@@ -34,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('service_location');
+        // Schema::dropIfExists('tour_continent');
     }
 };

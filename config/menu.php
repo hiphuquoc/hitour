@@ -2,7 +2,7 @@
 return [
     'left-menu-admin'   => [
         [
-            'name'      => 'Quản lí Tour',
+            'name'      => 'Tour trong nước',
             'route'     => '',
             'icon'      => '<i data-feather=\'briefcase\'></i>',
             'child'     => [
@@ -29,6 +29,18 @@ return [
                 [
                     'name'  => '5. Booking Tour',
                     'route' => 'admin.tourBooking.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ]
+            ]
+        ],
+        [
+            'name'      => 'Tour nước ngoài',
+            'route'     => '',
+            'icon'      => '<i data-feather=\'briefcase\'></i>',
+            'child'     => [
+                [
+                    'name'  => '1. Châu lục',
+                    'route' => 'admin.tourContinent.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ]
             ]
