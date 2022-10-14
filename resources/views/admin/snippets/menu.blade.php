@@ -56,13 +56,14 @@
                   $link             = !empty($menu['route']) ? route($menu['route']) : '#';
                   $flagSub          = !empty($child['child']) ? 'has-sub' : null;
                   $menuChild        = null;
+                  $active           = !empty($menu['route'])&&$menu['route']==$routeCurrent ? 'active' : null;
                   if(!empty($menu['child'])){
                      $menuChild     = '<ul class="menu-content">';
                      foreach($menu['child'] as $child){
-                        $active     = !empty($child['route'])&&$child['route']==$routeCurrent ? 'active' : null;
+                        $active1    = !empty($child['route'])&&$child['route']==$routeCurrent ? 'active' : null;
                         $linkChild  = !empty($child['route']) ? route($child['route']) : '#';
                         $flagSub2   = !empty($child['child']) ? 'has-sub' : null;
-                        $menuChild  .= '<li class="'.$flagSub2.' '.$active.'">';
+                        $menuChild  .= '<li class="'.$flagSub2.' '.$active1.'">';
                         $menuChild  .= '  <a class="d-flex align-items-center" href="'.$linkChild.'">
                                              '.$child['icon'].'
                                              <span class="menu-title text-truncate">'.$child['name'].'</span>
@@ -84,7 +85,7 @@
                      }
                      $menuChild     .= '</ul>';
                   }
-                  echo '<li class="nav-item '.$flagSub.'">
+                  echo '<li class="nav-item '.$flagSub.' '.$active.'">
                            <a href="'.$link.'" class="d-flex align-items-center">
                               '.$menu['icon'].'
                               <span class="menu-title text-truncate">'.$menu['name'].'</span>
