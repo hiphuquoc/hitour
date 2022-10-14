@@ -129,24 +129,6 @@ table:not(.sendEmail) {
     }
 }
 
-.main-menu .main-menu-content {
-    overflow-y: scroll !important;
-    &::-webkit-scrollbar {
-      background-color: transparent;
-      width: 5px;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: $bg-05;
-      border-radius: 1000px;
-      -webkit-box-shadow: inset 0 0 6px $bg-03;
-    }
-    &::-webkit-scrollbar-track {
-      -webkit-box-shadow: inset 0 0 6px $bg-03;
-      border-radius: 10px;
-      background: transparent;
-    }
-}
-
 .iconAction {
     width: 40px;
     text-align: center;
@@ -302,7 +284,7 @@ table:not(.sendEmail) {
         font-weight: 700;
         margin-top: 0.75rem !important;
         > a {
-            padding: 7px 12px !important;
+            // padding: 7px 12px !important;
             > i, > svg {
                 height: 20px !important;
                 width: 20px !important;
@@ -315,6 +297,9 @@ table:not(.sendEmail) {
         }
     }
     
+}
+.vertical-layout.vertical-menu-modern .main-menu .navigation .menu-content > li > a svg, .vertical-layout.vertical-menu-modern .main-menu .navigation .menu-content > li > a i {
+    margin-right: 1rem !important;
 }
 
 html .content.app-content {
@@ -803,4 +788,12 @@ html .content {
             color: #fff;
         }
     }
+}
+
+.main-menu.menu-light .navigation > li ul li > a {
+    padding: 10px 15px !important;
+}
+
+.main-menu.menu-light .navigation > li ul li ul a {
+    padding: 10px 15px !important;
 }

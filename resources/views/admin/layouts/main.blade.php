@@ -8,7 +8,7 @@
 <!-- === END:: Head === -->
 
 <!-- === START:: Body === -->
-<body>
+<body class="pace-done vertical-layout vertical-menu-modern navbar-floating footer-static menu-expanded" data-open="click" data-menu="vertical-menu-modern" data-col>
     <!-- === START:: Header === -->
     {{-- <div class="headerTop">
         <div class="headerTop_phone"><i class="fa-solid fa-phone"></i>0388.189.089</div>

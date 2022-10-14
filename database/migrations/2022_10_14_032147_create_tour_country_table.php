@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ship_location', function (Blueprint $table) {
+        Schema::create('tour_country', function (Blueprint $table) {
             $table->id();
-            $table->integer('seo_id');
-            $table->integer('district_id')->nullable();
-            $table->integer('province_id')->nullable();
-            $table->integer('region_id')->nullable();
+            $table->text('tour_continent_id');
             $table->text('name');
+            $table->text('display_name');
             $table->text('description');
+            $table->integer('seo_id');
+            $table->boolean('island')->default(0);
             $table->text('note')->nullable();
             $table->timestamps();
         });
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('ship_location');
+        // Schema::dropIfExists('tour_country');
     }
 };

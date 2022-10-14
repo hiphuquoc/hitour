@@ -59,24 +59,6 @@ table:not(.sendEmail) tr th {
   font-size: 1rem !important;
 }
 
-.main-menu .main-menu-content {
-  overflow-y: scroll !important;
-}
-.main-menu .main-menu-content::-webkit-scrollbar {
-  background-color: transparent;
-  width: 5px;
-}
-.main-menu .main-menu-content::-webkit-scrollbar-thumb {
-  background-color: #ced4da;
-  border-radius: 1000px;
-  -webkit-box-shadow: inset 0 0 6px #e9ecef;
-}
-.main-menu .main-menu-content::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px #e9ecef;
-  border-radius: 10px;
-  background: transparent;
-}
-
 .iconAction {
   width: 40px;
   text-align: center;
@@ -229,9 +211,6 @@ table:not(.sendEmail) tr th {
   font-weight: 700;
   margin-top: 0.75rem !important;
 }
-.navigation > li > a {
-  padding: 7px 12px !important;
-}
 .navigation > li > a > i, .navigation > li > a > svg {
   height: 20px !important;
   width: 20px !important;
@@ -240,6 +219,10 @@ table:not(.sendEmail) tr th {
 .navigation > li ul {
   font-weight: normal;
   margin-left: 1.2rem !important;
+}
+
+.vertical-layout.vertical-menu-modern .main-menu .navigation .menu-content > li > a svg, .vertical-layout.vertical-menu-modern .main-menu .navigation .menu-content > li > a i {
+  margin-right: 1rem !important;
 }
 
 html .content.app-content {
@@ -711,4 +694,12 @@ html .content {
 .chooseTripBox_item.active {
   background: linear-gradient(90deg, rgb(105, 103, 240) 0, rgb(90, 88, 225) 100%);
   color: #fff;
+}
+
+.main-menu.menu-light .navigation > li ul li > a {
+  padding: 10px 15px !important;
+}
+
+.main-menu.menu-light .navigation > li ul li ul a {
+  padding: 10px 15px !important;
 }

@@ -51,25 +51,40 @@
       <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             @php
                $dataMenu            = config('menu.left-menu-admin');
-               $uriCurrent          = Route::current()->uri;
+               $routeCurrent        = request()->route()->getName();
                foreach($dataMenu as $menu){
                   $link             = !empty($menu['route']) ? route($menu['route']) : '#';
+                  $flagSub          = !empty($child['child']) ? 'has-sub' : null;
                   $menuChild        = null;
                   if(!empty($menu['child'])){
-                     $menuChild     = '<ul class="menu-content" style="display:block;">';
+                     $menuChild     = '<ul class="menu-content">';
                      foreach($menu['child'] as $child){
+                        $active     = !empty($child['route'])&&$child['route']==$routeCurrent ? 'active' : null;
                         $linkChild  = !empty($child['route']) ? route($child['route']) : '#';
-                        $active     = url($uriCurrent)==route($child['route']) ? ' class="active"': '';
-                        $menuChild  .= '<li'.$active.'>
-                                          <a class="d-flex align-items-center" href="'.$linkChild.'">
+                        $flagSub2   = !empty($child['child']) ? 'has-sub' : null;
+                        $menuChild  .= '<li class="'.$flagSub2.' '.$active.'">';
+                        $menuChild  .= '  <a class="d-flex align-items-center" href="'.$linkChild.'">
                                              '.$child['icon'].'
                                              <span class="menu-title text-truncate">'.$child['name'].'</span>
-                                          </a>
-                                       </li>';
+                                          </a>';
+                        if(!empty($child['child'])){
+                           $menuChild     .= '<ul class="menu-content">';
+                           foreach($child['child'] as $child2){
+                              $linkChild2 = !empty($child2['route']) ? route($child2['route']) : '#';
+                              $active2    = !empty($child2['route'])&&$child2['route']==$routeCurrent ? 'active' : null;
+                              $menuChild .= '<li class="'.$active2.'">
+                                                <a class="d-flex align-items-center" href="'.$linkChild2.'">
+                                                   <span class="menu-item text-truncate" data-i18n="Basic">'.$child2['name'].'</span>
+                                                </a>
+                                             </li>';
+                           }
+                           $menuChild     .= '</ul>';
+                        }
+                        $menuChild  .= '</li>';
                      }
                      $menuChild     .= '</ul>';
                   }
-                  echo '<li class="nav-item has-sub">
+                  echo '<li class="nav-item '.$flagSub.'">
                            <a href="'.$link.'" class="d-flex align-items-center">
                               '.$menu['icon'].'
                               <span class="menu-title text-truncate">'.$menu['name'].'</span>
@@ -79,12 +94,6 @@
                }
             @endphp
       </ul>
-      {{-- <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
-         <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
-      </div>
-      <div class="ps__rail-y" style="top: 0px; height: 890px; right: 0px;">
-         <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 459px;"></div>
-      </div> --}}
    </div>
 </div>
  <!-- END: Main Menu-->

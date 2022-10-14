@@ -5,14 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TourContinent extends Model {
+class TourCountry extends Model {
     use HasFactory;
-    protected $table        = 'tour_continent';
+    protected $table        = 'tour_country';
     protected $fillable     = [
+        'tour_continent_id',
         'name', 
         'display_name',
         'description',
-        'seo_id',
+        'seo_id', 
+        'district_id',
+        'province_id',
+        'region_id',
+        'island',
         'note'
     ];
     public $timestamps      = true;
@@ -23,8 +28,12 @@ class TourContinent extends Model {
                         ->when(!empty($params['search_name']), function($query) use($params){
                             $query->where('name', 'like', '%'.$params['search_name'].'%');
                         })
+                        // /* tìm theo vùng miền */
+                        // ->when(!empty($params['search_region']), function($query) use($params){
+                        //     $query->where('region_id', $params['search_region']);
+                        // })
                         ->with(['files' => function($query){
-                            $query->where('relation_table', 'tour_continent');
+                            $query->where('relation_table', 'tour_country');
                         }])
                         ->with('seo')
                         ->get();
@@ -34,7 +43,7 @@ class TourContinent extends Model {
     public static function insertItem($params){
         $id             = 0;
         if(!empty($params)){
-            $model      = new TourContinent();
+            $model      = new TourCountry();
             foreach($params as $key => $value) $model->{$key}  = $value;
             $model->save();
             $id         = $model->id;
@@ -60,20 +69,24 @@ class TourContinent extends Model {
         return $this->hasMany(\App\Models\SystemFile::class, 'attachment_id', 'id');
     }
 
-    public function questions(){
-        return $this->hasMany(\App\Models\QuestionAnswer::class, 'reference_id', 'id');
-    }
+    // public function tours(){
+    //     return $this->hasMany(\App\Models\RelationTourCountry::class, 'tour_country_id', 'id');
+    // }
 
     public function guides() {
-        return $this->hasMany(\App\Models\RelationTourContinentGuideInfo::class, 'tour_continent_id', 'id');
+        return $this->hasMany(\App\Models\RelationTourCountryGuideInfo::class, 'tour_country_id', 'id');
     }
 
     public function serviceLocations() {
-        return $this->hasMany(\App\Models\RelationTourContinentServiceLocation::class, 'tour_continent_id', 'id');
+        return $this->hasMany(\App\Models\RelationTourCountryServiceLocation::class, 'tour_country_id', 'id');
     }
 
     public function airLocations() {
-        return $this->hasMany(\App\Models\RelationTourContinentAirLocation::class, 'tour_continent_id', 'id');
+        return $this->hasMany(\App\Models\RelationTourCountryAirLocation::class, 'tour_country_id', 'id');
+    }
+
+    public function questions(){
+        return $this->hasMany(\App\Models\QuestionAnswer::class, 'reference_id', 'id');
     }
 
 }

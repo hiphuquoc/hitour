@@ -162,7 +162,7 @@ class AdminAirController extends Controller {
             /* Message */
             $message        = [
                 'type'      => 'success',
-                'message'   => '<strong>Thành công!</strong> Dã tạo Chuyến tàu mới'
+                'message'   => '<strong>Thành công!</strong> Dã tạo chuyến bay mới'
             ];
         } catch (\Exception $exception){
             DB::rollBack();

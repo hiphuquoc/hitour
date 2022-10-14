@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ship_port', function (Blueprint $table) {
+        Schema::create('relation_tour_country_guide_info', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('address');
-            $table->integer('district_id')->nullable();
-            $table->integer('province_id')->nullable();
-            $table->integer('region_id')->nullable();
-            $table->timestamps();
+            $table->integer('tour_country_id');
+            $table->integer('guide_info_id');
         });
     }
 
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('ship_port');
+        // Schema::dropIfExists('relation_tour_country_guide_info');
     }
 };

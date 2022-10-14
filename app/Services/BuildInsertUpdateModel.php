@@ -924,4 +924,27 @@ class BuildInsertUpdateModel {
         }
         return $result;
     }
+
+    public static function buildArrayTableTourCountry($dataForm, $seoId = null){
+        /* upload tour_country
+            + tour_continent_id
+            + name
+            + display_name
+            + description
+            + seo_id
+            + island
+            + note
+        */
+        $result                             = [];
+        if(!empty($dataForm)){
+            $result['name']                 = $dataForm['title'] ?? null;
+            $result['description']          = $dataForm['description'] ?? null;
+            $result['display_name']         = $dataForm['display_name'] ?? null;
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
+            $result['island']               = !empty($dataForm['island']) ? 1 : 0;
+            $result['tour_continent_id']    = $dataForm['tour_continent_id'] ?? null;
+            $result['note']                 = $dataForm['note'] ?? null;
+        }
+        return $result;
+    }
 }

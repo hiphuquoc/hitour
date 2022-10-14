@@ -20,8 +20,8 @@ return new class extends Migration
             $table->text('description');
             $table->integer('seo_id');
             $table->integer('district_id')->nullable();
-            $table->integer('province_id');
-            $table->integer('region_id');
+            $table->integer('province_id')->nullable();
+            $table->integer('region_id')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
         });

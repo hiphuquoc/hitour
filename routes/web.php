@@ -31,6 +31,7 @@ use App\Http\Controllers\AdminAirPartnerContactController;
 use App\Http\Controllers\AdminAirController;
 
 use App\Http\Controllers\AdminTourContinentController;
+use App\Http\Controllers\AdminTourCountryController;
 
 use App\Http\Controllers\AdminStaffController;
 use App\Http\Controllers\AdminCostController;
@@ -337,6 +338,15 @@ Route::prefix('admin')->group(function(){
             Route::post('/update', [AdminTourContinentController::class, 'update'])->name('admin.tourContinent.update');
             /* Delete AJAX */
             Route::get('/delete', [AdminTourContinentController::class, 'delete'])->name('admin.tourContinent.delete');
+        });
+        /* ===== TOUR CONTINENT ===== */
+        Route::prefix('tourCountry')->group(function(){
+            Route::get('/', [AdminTourCountryController::class, 'list'])->name('admin.tourCountry.list');
+            Route::post('/create', [AdminTourCountryController::class, 'create'])->name('admin.tourCountry.create');
+            Route::get('/view', [AdminTourCountryController::class, 'view'])->name('admin.tourCountry.view');
+            Route::post('/update', [AdminTourCountryController::class, 'update'])->name('admin.tourCountry.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminTourCountryController::class, 'delete'])->name('admin.tourCountry.delete');
         });
         /* ===== AJAX ===== */
         Route::post('/loadProvinceByRegion', [AdminFormController::class, 'loadProvinceByRegion'])->name('admin.form.loadProvinceByRegion');

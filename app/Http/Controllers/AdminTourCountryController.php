@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 use App\Helpers\Upload;
 
 use App\Http\Controllers\AdminSliderController;
+use App\Models\TourCountry;
 use App\Models\TourContinent;
-use App\Models\ShipLocation;
-use App\Models\CarrentalLocation;
 use App\Models\ServiceLocation;
 use App\Models\AirLocation;
 use App\Models\Seo;
@@ -16,21 +15,19 @@ use App\Services\BuildInsertUpdateModel;
 use App\Models\District;
 use App\Models\Province;
 use App\Models\Guide;
-use App\Models\RelationTourContinentGuide;
+use App\Models\RelationTourCountryGuide;
 use App\Models\SystemFile;
 use App\Models\QuestionAnswer;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Storage;
 
-use App\Http\Requests\TourContinentRequest;
-use App\Models\RelationTourContinentShipLocation;
-use App\Models\RelationTourContinentCarrentalLocation;
-use App\Models\RelationTourContinentServiceLocation;
-use App\Models\RelationTourContinentAirLocation;
-use App\Models\RelationTourContinentGuideInfo;
+use App\Http\Requests\TourCountryRequest;
+use App\Models\RelationTourCountryGuideInfo;
+use App\Models\RelationTourCountryServiceLocation;
+use App\Models\RelationTourCountryAirLocation;
 
-class AdminTourContinentController extends Controller {
+class AdminTourCountryController extends Controller {
 
     public function __construct(BuildInsertUpdateModel $BuildInsertUpdateModel){
         $this->BuildInsertUpdateModel  = $BuildInsertUpdateModel;
@@ -40,37 +37,41 @@ class AdminTourContinentController extends Controller {
         $params         = [];
         /* Search theo tên */
         if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
+        // /* Search theo vùng miền */
+        // if(!empty($request->get('search_region'))) $params['search_region'] = $request->get('search_region');
         /* lấy dữ liệu */
-        $list           = TourContinent::getList($params);
-        return view('admin.tourContinent.list', compact('list', 'params'));
+        $list           = TourCountry::getList($params);
+        return view('admin.tourCountry.list', compact('list', 'params'));
     }
 
     public function view(Request $request){
         $id                 = $request->get('id') ?? 0;
-        $item               = TourContinent::select('*')
+        $item               = TourCountry::select('*')
                                 ->where('id', $id)
                                 ->with(['files' => function($query){
-                                    $query->where('relation_table', 'tour_continent');
+                                    $query->where('relation_table', 'tour_country');
                                 }])
                                 ->with(['questions' => function($query){
-                                    $query->where('relation_table', 'tour_continent');
+                                    $query->where('relation_table', 'tour_country');
                                 }])
                                 ->with('seo', 'guides.infoGuide.seo', 'serviceLocations.infoServiceLocation.seo', 'airLocations.infoAirLocation.seo')
                                 ->first();
+        $tourContinents     = TourContinent::all();
+        $parents            = $tourContinents;
         $guides             = Guide::all();
         $serviceLocations   = ServiceLocation::all();
         $airLocations       = AirLocation::all();
         // $content        = null;
         // if(!empty($item->seo->slug)){
-        //     $content    = Storage::get(config('admin.storage.contentTourContinent').$item->seo->slug.'.blade.php');
+        //     $content    = Storage::get(config('admin.storage.contentTourCountry').$item->seo->slug.'.blade.php');
         // }
         $message            = $request->get('message') ?? null; 
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.tourContinent.view', compact('item', 'type', 'guides', 'serviceLocations', 'airLocations', 'message'));
+        return view('admin.tourCountry.view', compact('item', 'type', 'parents', 'tourContinents', 'guides', 'serviceLocations', 'airLocations', 'message'));
     }
 
-    public function create(TourContinentRequest $request){
+    public function create(TourCountryRequest $request){
         try {
             DB::beginTransaction();
             /* upload image */
@@ -80,43 +81,11 @@ class AdminTourContinentController extends Controller {
                 $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
             }
             /* insert page */
-            $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'tour_continent', $dataPath);
+            $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'tour_country', $dataPath);
             $pageId             = Seo::insertItem($insertPage);
-            /* insert tour_continent */
-            $insertTourContinent = $this->BuildInsertUpdateModel->buildArrayTableTourContinent($request->all(), $pageId);
-            $idTourContinent     = TourContinent::insertItem($insertTourContinent);
-            /* lưu content vào file */
-            // Storage::put(config('admin.storage.contentTourContinent').$request->get('slug').'.blade.php', $request->get('content'));
-            /* relation tour_continent và guide_info */
-            if(!empty($request->get('guide_info_id'))){
-                foreach($request->get('guide_info_id') as $idGuideInfo){
-                    $insertRelationTourContinentGuideInfo    = [
-                        'tour_continent_id'     => $idTourContinent,
-                        'guide_info_id'         => $idGuideInfo
-                    ];
-                    RelationTourContinentGuideInfo::insertItem($insertRelationTourContinentGuideInfo);
-                }
-            }
-            /* relation tour_continent và service_location */
-            if(!empty($request->get('service_location_id'))){
-                foreach($request->get('service_location_id') as $idServiceLocation){
-                    $insertRelationTourContinentServiceLocation    = [
-                        'tour_continent_id'     => $idTourContinent,
-                        'service_location_id'   => $idServiceLocation
-                    ];
-                    RelationTourContinentServiceLocation::insertItem($insertRelationTourContinentServiceLocation);
-                }
-            }
-            /* relation tour_continent và air_location */
-            if(!empty($request->get('air_location_id'))){
-                foreach($request->get('air_location_id') as $idAirLocation){
-                    $insertRelationTourContinentAirLocation    = [
-                        'tour_continent_id'     => $idTourContinent,
-                        'air_location_id'       => $idAirLocation
-                    ];
-                    RelationTourContinentAirLocation::insertItem($insertRelationTourContinentAirLocation);
-                }
-            }
+            /* insert tour_country */
+            $insertTourCountry = $this->BuildInsertUpdateModel->buildArrayTableTourCountry($request->all(), $pageId);
+            $idTourCountry     = TourCountry::insertItem($insertTourCountry);
             /* insert câu hỏi thường gặp */
             if(!empty($request->get('question_answer'))){
                 foreach($request->get('question_answer') as $itemQues){
@@ -124,18 +93,50 @@ class AdminTourContinentController extends Controller {
                         QuestionAnswer::insertItem([
                             'question'          => $itemQues['question'],
                             'answer'            => $itemQues['answer'],
-                            'relation_table'    => 'tour_continent',
-                            'reference_id'      => $idTourContinent
+                            'relation_table'    => 'tour_country',
+                            'reference_id'      => $idTourCountry
                         ]);
                     }
                 }
             }
+            /* relation tour_country và guide_info */
+            if(!empty($request->get('guide_info_id'))){
+                foreach($request->get('guide_info_id') as $idGuideInfo){
+                    $insertRelationTourCountryGuideInfo    = [
+                        'tour_country_id'  => $idTourCountry,
+                        'guide_info_id'     => $idGuideInfo
+                    ];
+                    RelationTourCountryGuideInfo::insertItem($insertRelationTourCountryGuideInfo);
+                }
+            }
+            /* relation tour_country và service_location */
+            if(!empty($request->get('service_location_id'))){
+                foreach($request->get('service_location_id') as $idServiceLocation){
+                    $insertRelationTourCountryServiceLocation    = [
+                        'tour_country_id'       => $idTourCountry,
+                        'service_location_id'   => $idServiceLocation
+                    ];
+                    RelationTourCountryServiceLocation::insertItem($insertRelationTourCountryServiceLocation);
+                }
+            }
+            /* relation tour_country và air_location */
+            if(!empty($request->get('air_location_id'))){
+                foreach($request->get('air_location_id') as $idAirLocation){
+                    $insertRelationTourCountryAirLocation    = [
+                        'tour_country_id'       => $idTourCountry,
+                        'air_location_id'       => $idAirLocation
+                    ];
+                    RelationTourCountryAirLocation::insertItem($insertRelationTourCountryAirLocation);
+                }
+            }
+            /* lưu content vào file */
+            // Storage::put(config('admin.storage.contentTourCountry').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
                 $params         = [
-                    'attachment_id'     => $idTourContinent,
-                    'relation_table'    => 'tour_continent',
+                    'attachment_id'     => $idTourCountry,
+                    'relation_table'    => 'tour_country',
                     'name'              => $name
                 ];
                 AdminSliderController::uploadSlider($request->file('slider'), $params);
@@ -144,7 +145,7 @@ class AdminTourContinentController extends Controller {
             /* Message */
             $message        = [
                 'type'      => 'success',
-                'message'   => '<strong>Thành công!</strong> Đã tạo Châu lục mới'
+                'message'   => '<strong>Thành công!</strong> Đã tạo Quốc gia tour mới'
             ];
         } catch (\Exception $exception){
             DB::rollBack();
@@ -155,10 +156,10 @@ class AdminTourContinentController extends Controller {
             ];
         }
         $request->session()->put('message', $message);
-        return redirect()->route('admin.tourContinent.view', ['id' => $idTourContinent]);
+        return redirect()->route('admin.tourCountry.view', ['id' => $idTourCountry]);
     }
 
-    public function update(TourContinentRequest $request){
+    public function update(TourCountryRequest $request){
         try {
             DB::beginTransaction();
             /* upload image */
@@ -168,57 +169,16 @@ class AdminTourContinentController extends Controller {
                 $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
             }
             /* update page */
-            $updatePage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'tour_continent', $dataPath);
+            $updatePage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'tour_country', $dataPath);
             Seo::updateItem($request->get('seo_id'), $updatePage);
-            /* update TourContinent */
-            $idTourContinent     = $request->get('tour_continent_id');
-            $updateTourContinent = $this->BuildInsertUpdateModel->buildArrayTableTourContinent($request->all());
-            TourContinent::updateItem($idTourContinent, $updateTourContinent);
-            /* lưu content vào file */
-            // Storage::put(config('admin.storage.contentTourContinent').$request->get('slug').'.blade.php', $request->get('content'));
-            /* relation tour_continent và guide_info */
-            RelationTourContinentGuideInfo::select('*')
-                ->where('tour_continent_id', $idTourContinent)
-                ->delete();
-            if(!empty($request->get('guide_info_id'))){
-                foreach($request->get('guide_info_id') as $idGuideInfo){
-                    $insertRelationTourContinentGuideInfo    = [
-                        'tour_continent_id'     => $idTourContinent,
-                        'guide_info_id'         => $idGuideInfo
-                    ];
-                    RelationTourContinentGuideInfo::insertItem($insertRelationTourContinentGuideInfo);
-                }
-            }
-            /* relation tour_continent và service_location */
-            RelationTourContinentServiceLocation::select('*')
-                ->where('tour_continent_id', $idTourContinent)
-                ->delete();
-            if(!empty($request->get('service_location_id'))){
-                foreach($request->get('service_location_id') as $idServiceLocation){
-                    $insertRelationTourContinentServiceLocation    = [
-                        'tour_continent_id'     => $idTourContinent,
-                        'service_location_id'   => $idServiceLocation
-                    ];
-                    RelationTourContinentServiceLocation::insertItem($insertRelationTourContinentServiceLocation);
-                }
-            }
-            /* relation tour_continent và air_location */
-            RelationTourContinentAirLocation::select('*')
-                ->where('tour_continent_id', $idTourContinent)
-                ->delete();
-            if(!empty($request->get('air_location_id'))){
-                foreach($request->get('air_location_id') as $idAirLocation){
-                    $insertRelationTourContinentAirLocation    = [
-                        'tour_continent_id'     => $idTourContinent,
-                        'air_location_id'       => $idAirLocation
-                    ];
-                    RelationTourContinentAirLocation::insertItem($insertRelationTourContinentAirLocation);
-                }
-            }
+            /* update TourCountry */
+            $idTourCountry     = $request->get('tour_country_id');
+            $updateTourCountry = $this->BuildInsertUpdateModel->buildArrayTableTourCountry($request->all());
+            TourCountry::updateItem($idTourCountry, $updateTourCountry);
             /* update câu hỏi thường gặp */
             QuestionAnswer::select('*')
-                        ->where('relation_table', 'tour_continent')
-                        ->where('reference_id', $idTourContinent)
+                        ->where('relation_table', 'tour_country')
+                        ->where('reference_id', $idTourCountry)
                         ->delete();
             if(!empty($request->get('question_answer'))){
                 foreach($request->get('question_answer') as $itemQues){
@@ -226,18 +186,59 @@ class AdminTourContinentController extends Controller {
                         QuestionAnswer::insertItem([
                             'question'          => $itemQues['question'],
                             'answer'            => $itemQues['answer'],
-                            'relation_table'    => 'tour_continent',
-                            'reference_id'      => $idTourContinent
+                            'relation_table'    => 'tour_country',
+                            'reference_id'      => $idTourCountry
                         ]);
                     }
                 }
             }
+            /* relation tour_country và guide_info */
+            RelationTourCountryGuideInfo::select('*')
+                ->where('tour_country_id', $idTourCountry)
+                ->delete();
+            if(!empty($request->get('guide_info_id'))){
+                foreach($request->get('guide_info_id') as $idGuideInfo){
+                    $insertRelationTourCountryGuideInfo    = [
+                        'tour_country_id'  => $idTourCountry,
+                        'guide_info_id'     => $idGuideInfo
+                    ];
+                    RelationTourCountryGuideInfo::insertItem($insertRelationTourCountryGuideInfo);
+                }
+            }
+            /* relation tour_country và service_location */
+            RelationTourCountryServiceLocation::select('*')
+                ->where('tour_country_id', $idTourCountry)
+                ->delete();
+            if(!empty($request->get('service_location_id'))){
+                foreach($request->get('service_location_id') as $idServiceLocation){
+                    $insertRelationTourCountryServiceLocation    = [
+                        'tour_country_id'       => $idTourCountry,
+                        'service_location_id'   => $idServiceLocation
+                    ];
+                    RelationTourCountryServiceLocation::insertItem($insertRelationTourCountryServiceLocation);
+                }
+            }
+            /* relation tour_country và air_location */
+            RelationTourCountryAirLocation::select('*')
+                ->where('tour_country_id', $idTourCountry)
+                ->delete();
+            if(!empty($request->get('air_location_id'))){
+                foreach($request->get('air_location_id') as $idAirLocation){
+                    $insertRelationTourCountryAirLocation    = [
+                        'tour_country_id'       => $idTourCountry,
+                        'air_location_id'       => $idAirLocation
+                    ];
+                    RelationTourCountryAirLocation::insertItem($insertRelationTourCountryAirLocation);
+                }
+            }
+            /* lưu content vào file */
+            // Storage::put(config('admin.storage.contentTourCountry').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
                 $params         = [
-                    'attachment_id'     => $idTourContinent,
-                    'relation_table'    => 'tour_continent',
+                    'attachment_id'     => $idTourCountry,
+                    'relation_table'    => 'tour_country',
                     'name'              => $name
                 ];
                 AdminSliderController::uploadSlider($request->file('slider'), $params);
@@ -257,7 +258,7 @@ class AdminTourContinentController extends Controller {
             ];
         }
         $request->session()->put('message', $message);
-        return redirect()->route('admin.tourContinent.view', ['id' => $idTourContinent]);
+        return redirect()->route('admin.tourCountry.view', ['id' => $idTourCountry]);
     }
 
     public function delete(Request $request){
@@ -265,15 +266,15 @@ class AdminTourContinentController extends Controller {
             try {
                 DB::beginTransaction();
                 $id         = $request->get('id');
-                $info       = TourContinent::select('*')
+                $info       = TourCountry::select('*')
                                 ->where('id', $id)
                                 ->with(['files' => function($query){
-                                    $query->where('relation_table', 'tour_continent');
+                                    $query->where('relation_table', 'tour_country');
                                 }])
                                 ->with('seo')
                                 ->first();
-                /* delete bảng tour_continent */
-                TourContinent::find($id)->delete();
+                /* delete bảng tour_country */
+                TourCountry::find($id)->delete();
                 /* delete bảng seo */
                 Seo::find($info->seo->id)->delete();
                 /* xóa ảnh đại diện trong thư mục */

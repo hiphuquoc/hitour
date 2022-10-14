@@ -43,18 +43,17 @@
         <!-- One Row -->
         <div class="formBox_full_item">
             <label class="form-label" for="guide_info_id">Liên kết cẩm nang du lịch</label>
-            @php
-                // dd($guides);
-            @endphp
             <select class="select2 form-select select2-hidden-accessible" id="guide_info_id" name="guide_info_id[]" tabindex="-1" aria-hidden="true" multiple>
                 @if(!empty($guides)&&$guides->isNotEmpty())
                     @foreach($guides as $guide)
                         @php
                             $selected           = null;
-                            foreach($item->guides as $g){
-                                if($g->guide_info_id==$guide->id){
-                                    $selected   = ' selected';
-                                    break;
+                            if(!empty($item->guides)&&$item->guides->isNotEmpty()){
+                                foreach($item->guides as $g){
+                                    if($g->guide_info_id==$guide->id){
+                                        $selected   = ' selected';
+                                        break;
+                                    }
                                 }
                             }
                         @endphp
@@ -71,10 +70,12 @@
                     @foreach($serviceLocations as $serviceLocation)
                         @php
                             $selected           = null;
-                            foreach($item->serviceLocations as $s){
-                                if($s->infoServiceLocation->id==$serviceLocation->id){
-                                    $selected   = ' selected';
-                                    break;
+                            if(!empty($item->serviceLocations)&&$item->serviceLocations->isNotEmpty()){
+                                foreach($item->serviceLocations as $s){
+                                    if($s->infoServiceLocation->id==$serviceLocation->id){
+                                        $selected   = ' selected';
+                                        break;
+                                    }
                                 }
                             }
                         @endphp
@@ -85,16 +86,18 @@
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
-            <label class="form-label" for="air_continent_id">Liên kết vé máy bay</label>
-            <select class="select2 form-select select2-hidden-accessible" id="air_continent_id" name="air_continent_id[]" tabindex="-1" aria-hidden="true" multiple>
+            <label class="form-label" for="air_location_id">Liên kết vé máy bay</label>
+            <select class="select2 form-select select2-hidden-accessible" id="air_location_id" name="air_location_id[]" tabindex="-1" aria-hidden="true" multiple>
                 @if(!empty($airLocations))
                     @foreach($airLocations as $airLocation)
                         @php
                             $selected           = null;
-                            foreach($item->airLocations as $a){
-                                if($a->infoAirLocation->id==$airLocation->id){
-                                    $selected   = ' selected';
-                                    break;
+                            if(!empty($item->airLocations)&&$item->airLocations->isNotEmpty()){
+                                foreach($item->airLocations as $a){
+                                    if($a->infoAirLocation->id==$airLocation->id){
+                                        $selected   = ' selected';
+                                        break;
+                                    }
                                 }
                             }
                         @endphp

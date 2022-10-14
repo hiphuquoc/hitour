@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('seo_id');
             $table->integer('district_id')->nullable();
-            $table->integer('province_id');
-            $table->integer('region_id');
+            $table->integer('province_id')->nullable();
+            $table->integer('region_id')->nullable();
             $table->text('name');
             $table->text('description');
             $table->text('note')->nullable();

@@ -2,19 +2,43 @@
 return [
     'left-menu-admin'   => [
         [
-            'name'      => 'Tour trong nước',
+            'name'      => 'Tour du lịch',
             'route'     => '',
             'icon'      => '<i data-feather=\'briefcase\'></i>',
             'child'     => [
                 [
-                    'name'  => '1. Điểm khởi hành',
-                    'route' => 'admin.tourDeparture.list',
-                    'icon'  => '<i data-feather=\'circle\'></i>'
+                    'name'  => '1. Trong nước',
+                    'route' => '',
+                    'icon'  => '<i data-feather=\'circle\'></i>',
+                    'child' => [
+                        [
+                            'name'  => '1.1. Điểm khởi hành',
+                            'route' => 'admin.tourDeparture.list',
+                            'icon'  => '<i data-feather=\'circle\'></i>'
+                        ],
+                        [
+                            'name'  => '1.2. Điểm đến',
+                            'route' => 'admin.tourLocation.list',
+                            'icon'  => '<i data-feather=\'circle\'></i>'
+                        ],
+                    ]
                 ],
                 [
-                    'name'  => '2. Điểm đến',
-                    'route' => 'admin.tourLocation.list',
-                    'icon'  => '<i data-feather=\'circle\'></i>'
+                    'name'  => '2. Nước ngoài',
+                    'route' => '',
+                    'icon'  => '<i data-feather=\'circle\'></i>',
+                    'child' => [
+                        [
+                            'name'  => '2.1. Châu lục',
+                            'route' => 'admin.tourContinent.list',
+                            'icon'  => '<i data-feather=\'circle\'></i>'
+                        ],
+                        [
+                            'name'  => '2.2. Quốc gia',
+                            'route' => 'admin.tourCountry.list',
+                            'icon'  => '<i data-feather=\'circle\'></i>'
+                        ]
+                    ]
                 ],
                 [
                     'name'  => '3. Đối tác Tour',
@@ -29,18 +53,6 @@ return [
                 [
                     'name'  => '5. Booking Tour',
                     'route' => 'admin.tourBooking.list',
-                    'icon'  => '<i data-feather=\'circle\'></i>'
-                ]
-            ]
-        ],
-        [
-            'name'      => 'Tour nước ngoài',
-            'route'     => '',
-            'icon'      => '<i data-feather=\'briefcase\'></i>',
-            'child'     => [
-                [
-                    'name'  => '1. Châu lục',
-                    'route' => 'admin.tourContinent.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ]
             ]

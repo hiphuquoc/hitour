@@ -17,7 +17,12 @@
 <script src="{{ asset('sources/admin/app-assets/js/scripts/forms/form-repeater.min.js') }}"></script>
 <!-- BEGIN: SLICK -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<!-- BEGIN: SLICK -->
+<!-- END: SLICK -->
+<!-- BEGIN: MENU -->
+<script src="{{ asset('sources/admin/app-assets/js/core/app.min.js') }}"></script>
+<script src="{{ asset('sources/admin/app-assets/js/scripts/customizer.min.js') }}"></script>
+<script src="{{ asset('sources/admin/app-assets/js/core/app-menu.min.js') }}"></script>
+<!-- END: MENU -->
 
 <!-- END: Page Vendor JS-->
 <script defer>
