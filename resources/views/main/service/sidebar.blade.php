@@ -1,7 +1,14 @@
 <div class="js_scrollFixed">
+   <div class="callBookTour">
+      @include('main.template.callbook', ['button' => 'Đặt vé', 'flagButton' => true])
+   </div>
+
+   <div id="js_autoLoadTocContentWithIcon_idWrite" class="tocContentTour customScrollBar-y" style="margin-top:1.5rem;">
+      <!-- loadTocContent ajax -->
+   </div>
 
    @if(!empty($item->serviceLocation->tourLocations)&&$item->serviceLocation->tourLocations->isNotEmpty())
-   <div class="serviceRelatedSidebarBox">
+   <div class="serviceRelatedSidebarBox" style="margin-top:1.5rem;">
       <div class="serviceRelatedSidebarBox_title">
          <h2>Chuyên mục liên quan</h2>
       </div>
@@ -73,12 +80,5 @@
       </div>
    </div>
    @endif
-
-   @php
-      $flagSpace = !empty($item->serviceLocation->tourLocations)&&$item->serviceLocation->tourLocations->isNotEmpty() ? 'style=margin-top:1.5rem;' : null;
-   @endphp
-   <div id="js_autoLoadTocContentWithIcon_idWrite" class="tocContentTour customScrollBar-y" {{ $flagSpace }}>
-      <!-- loadTocContent ajax -->
-   </div>
 
 </div>

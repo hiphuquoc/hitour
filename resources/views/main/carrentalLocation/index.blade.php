@@ -126,7 +126,6 @@
                     const heightUsed    = $('#js_autoLoadTocContentWithIcon_idWrite').parent().outerHeight();
                     const height        = parseInt(heightW - heightUsed);
                     $('#js_autoLoadTocContentWithIcon_idWrite').css('max-height', 'calc('+height+'px - 3rem)').html(data);
-                    // $('#js_autoLoadTocContentWithIcon_idWrite')
                 }
             });
         }

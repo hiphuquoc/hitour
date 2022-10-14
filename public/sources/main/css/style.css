@@ -2759,6 +2759,7 @@ blockquote em {
   display: flex;
 }
 .bookFormSort_head > * {
+  opacity: 0.8;
   background: #fff;
   padding: 0.25rem 1rem;
   font-family: "SVN-Gilroy Bold", serif;
@@ -2771,6 +2772,7 @@ blockquote em {
   margin-left: 0.25rem;
 }
 .bookFormSort_head > *.active {
+  opacity: 1;
   background: rgb(0, 123, 255);
   color: #fff;
 }

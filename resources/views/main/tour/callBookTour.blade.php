@@ -13,34 +13,7 @@
             </div>
         </div>
     </div>
-    <div class="callBookTour_button">
-        <div class="callBookTour_button_item hotline">
-            @if($item->staffs->isNotEmpty())
-                <div style="display:flex;line-height:1.7;align-items:center;">
-                    <div>
-                        Tư vấn:
-                    </div>
-                    <div style="margin-left:0.5rem;">
-                        @foreach($item->staffs as $staff)
-                            <div><span>{{ $staff->infoStaff->phone }}</span> ({{ $staff->infoStaff->prefix_name }} {{ $staff->infoStaff->lastname }})</div>
-                        @endforeach
-                    </div>
-                </div>
-            @else
-                <div style="display:flex;line-height:1.7;align-items:center;">
-                    <div>
-                        Tư vấn:
-                    </div>
-                    <div style="margin-left:0.75rem;">
-                        <div><span>{{ config('main.hotline') }}</span> (hotline)</div>
-                    </div>
-                </div>
-            @endif
-        </div>
-        <div class="callBookTour_button_item bookonline">
-            Đặt Tour
-        </div>
-    </div>
+    @include('main.template.callbook')
 </div>
 
 @push('scripts-custom')

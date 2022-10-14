@@ -2608,6 +2608,7 @@ blockquote{
     &_head {
         display: flex;
         > * {
+            opacity: 0.8;
             background: #fff;
             padding: 0.25rem 1rem;
             font-family: $font-primary-title;
@@ -2619,6 +2620,7 @@ blockquote{
                 margin-left: 0.25rem;
             }
             &.active {
+                opacity: 1;
                 background: $color-primary;
                 color: #fff;
             }

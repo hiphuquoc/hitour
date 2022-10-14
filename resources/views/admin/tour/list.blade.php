@@ -66,7 +66,7 @@
                     <th class="text-center">Ảnh</th>
                     <th class="text-center">Thông tin</th>
                     <th class="text-center">Gallery</th>
-                    <th class="text-center">Slider</th>
+                    {{-- <th class="text-center">Slider</th> --}}
                     <th class="text-center" style="width:200px;">Khác</th>
                     <th class="text-center" width="60px">-</th>
                 </tr>

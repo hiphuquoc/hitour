@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'hotline'       => '0868684868',
+    'hotline'       => '08 6868 4868',
     /* Thông báo validate form */
     'message_validate'  => [
         'not_empty' => 'Không để trống trường này!',

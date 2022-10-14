@@ -64,7 +64,7 @@
             </div>
         @endif
     </td>
-    <td style="vertical-align:top;width:210px;">
+    {{-- <td style="vertical-align:top;width:210px;">
         @php
             if(!empty($item->files)){
                 $slider        = [];
@@ -88,7 +88,7 @@
             </div>
         @endif
 
-    </td>
+    </td> --}}
     <td style="vertical-align:top;">
         <div class="oneLine">
             Đánh giá:
