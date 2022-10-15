@@ -93,4 +93,8 @@ class ShipLocation extends Model {
         return $this->hasMany(\App\Models\QuestionAnswer::class, 'reference_id', 'id');
     }
 
+    public function TourLocations(){
+        return $this->hasMany(\App\Models\RelationTourLocationShipLocation::class, 'ship_location_id', 'id');
+    }
+
 }

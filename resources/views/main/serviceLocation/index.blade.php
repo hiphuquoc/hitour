@@ -59,13 +59,10 @@
                 </div>
             </div>
             <!-- ship box -->
-            @php
-                // dd($item->airs);
-            @endphp
             @include('main.serviceLocation.serviceGrid', ['list' => $item->services])
             
             <div class="pageContent_body">
-                <div class="pageContent_body_content">
+                <div id="js_autoLoadTocContentWithIcon_element" class="pageContent_body_content">
                     <div id="js_autoLoadTocContentWithIcon_element" class="contentShip">
                         <!-- Nội dung tùy biến -->
                         {!! $content ?? null !!}

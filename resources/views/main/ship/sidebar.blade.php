@@ -3,7 +3,7 @@
       @include('main.template.callbook', ['button' => 'Đặt vé tàu', 'flagButton' => true])
    </div>
 
-   @if(!empty($item->tourLocations)&&$item->tourLocations->isNotEmpty())
+   @if(!empty($item->location->tourLocations)&&$item->location->tourLocations->isNotEmpty())
    <div class="serviceRelatedSidebarBox" style="margin-top:1.5rem;">
       <div class="serviceRelatedSidebarBox_title">
          <h2>Chuyên mục liên quan</h2>
@@ -11,14 +11,14 @@
       <div class="serviceRelatedSidebarBox_box">
 
          <!-- tour du lịch -->
-         @foreach($item->tourLocations as $tourLocation)
+         @foreach($item->location->tourLocations as $tourLocation)
             <a href="/{{ $tourLocation->infoTourLocation->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">
                <i class="fa-solid fa-person-hiking"></i><h3>{{ $tourLocation->infoTourLocation->name }}</h3>
             </a>
          @endforeach
 
          <!-- vé máy bay -->
-         @foreach($item->tourLocations as $tourLocation)
+         @foreach($item->location->tourLocations as $tourLocation)
             @if($tourLocation->infoTourLocation->airLocations->isNotEmpty())
                @foreach($tourLocation->infoTourLocation->airLocations as $airLocation)
                   <a href="/{{ $airLocation->infoAirLocation->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">
@@ -29,7 +29,7 @@
          @endforeach
 
          <!-- vé vui chơi -->
-         @foreach($item->tourLocations as $tourLocation)
+         @foreach($item->location->tourLocations as $tourLocation)
             @if($tourLocation->infoTourLocation->serviceLocations->isNotEmpty())
                @foreach($tourLocation->infoTourLocation->serviceLocations as $serviceLocation)
                   <a href="/{{ $serviceLocation->infoServiceLocation->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">
@@ -40,7 +40,7 @@
          @endforeach
 
          <!-- cho thuê xe -->
-         @foreach($item->tourLocations as $tourLocation)
+         @foreach($item->location->tourLocations as $tourLocation)
             @if($tourLocation->infoTourLocation->carrentalLocations->isNotEmpty())
                @foreach($tourLocation->infoTourLocation->carrentalLocations as $carrentalLocation)
                   <a href="/{{ $carrentalLocation->infoCarrentalLocation->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">
@@ -51,7 +51,7 @@
          @endforeach
 
          <!-- cẩm nang du lịch -->
-         @foreach($item->tourLocations as $tourLocation)
+         @foreach($item->location->tourLocations as $tourLocation)
             @if($tourLocation->infoTourLocation->guides->isNotEmpty())
                @foreach($tourLocation->infoTourLocation->guides as $guide)
                   <a href="/{{ $guide->infoGuide->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">

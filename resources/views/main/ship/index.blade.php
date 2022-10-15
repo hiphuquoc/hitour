@@ -25,7 +25,7 @@
                         <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
                     </div>
                     <div class="ratingBox_text maxLine_1" style="margin-left:2px;font-size:14px;">
-                        {{ $item->seo->rating_aggregate_star }} sao / <a href="{{ URL::current() }}">{{ $item->seo->rating_aggregate_count }} đánh giá từ khách du lịch</a>
+                        {{ $item->seo->rating_aggregate_star }} sao / {{ $item->seo->rating_aggregate_count }} đánh giá từ khách du lịch
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="pageContent_body_sidebar">
-                    @include('main.shipLocation.sidebar')
+                    @include('main.ship.sidebar')
                 </div>
             </div>
         </div>

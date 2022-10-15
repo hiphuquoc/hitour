@@ -50,4 +50,8 @@ class RelationShipPartner extends Model {
     public function infoPartner(){
         return $this->hasOne(\App\Models\ShipPartner::class, 'id', 'partner_info_id');
     }
+
+    public function infoShip(){
+        return $this->hasOne(\App\Models\Ship::class, 'id', 'ship_info_id');
+    }
 }
