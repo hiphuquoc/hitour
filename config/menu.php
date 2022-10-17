@@ -68,7 +68,7 @@ return [
             'icon'      => '<i class="fa-solid fa-paper-plane"></i>',
             'child'     => [
                 [
-                    'name'  => '1. Sân bay',
+                    'name'  => '1. Sân Bay',
                     'route' => 'admin.airPort.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
@@ -83,12 +83,12 @@ return [
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '4. Đối tác',
+                    'name'  => '4. Hãng Bay',
                     'route' => 'admin.airPartner.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '5. Chi tiết bay',
+                    'name'  => '5. Chi tiết Bay',
                     'route' => 'admin.air.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ]
