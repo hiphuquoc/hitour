@@ -115,7 +115,7 @@
                     <div class="guideList">
                         @foreach($item->guides as $guide)
                             <div class="guideList_item">
-                                <i class="fa-solid fa-angles-right"></i>Xem thêm <a href="{{ $guide->infoGuide->seo->slug_full }}">{{ $guide->infoGuide->name }}</a>
+                                <i class="fa-solid fa-angles-right"></i>Xem thêm <a href="/{{ $guide->infoGuide->seo->slug_full }}">{{ $guide->infoGuide->name }}</a>
                             </div>
                         @endforeach
                     </div>

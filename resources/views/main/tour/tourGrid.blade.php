@@ -2,7 +2,7 @@
     @if(!empty($list))
         @foreach($list as $tour)
             <div class="tourGrid_item">
-                <a href="{{ $tour->slug_full }}" class="tourGrid_item_image">
+                <a href="/{{ $tour->slug_full }}" class="tourGrid_item_image">
                     <img src="{{ $tour->image }}" alt="{{ $tour->name }}" title="{{ $tour->name }}" />
                     @if($tour->days>1)
                         <div class="tourGrid_item_image_time">
@@ -16,10 +16,10 @@
                         @endif
                     @endif
                 </a>
-                <a href="{{ $tour->slug_full }}" class="tourGrid_item_title maxLine_1">
+                <a href="/{{ $tour->slug_full }}" class="tourGrid_item_title maxLine_1">
                     <h2>{{ $tour->name }}</h2>
                 </a>
-                <a href="{{ $tour->slug_full }}" class="tourGrid_item_desc maxLine_4">
+                <a href="/{{ $tour->slug_full }}" class="tourGrid_item_desc maxLine_4">
                     <h3>{{ $tour->description }}</h3>
                 </a>
                 <div class="column">

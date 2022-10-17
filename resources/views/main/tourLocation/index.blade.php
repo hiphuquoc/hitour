@@ -130,7 +130,7 @@
                     <div class="guideList">
                         @foreach($item->guides as $guide)
                             <div class="guideList_item">
-                                <i class="fa-solid fa-angles-right"></i>Xem thêm <a href="{{ $guide->infoGuide->seo->slug_full }}">{{ $guide->infoGuide->name }}</a>
+                                <i class="fa-solid fa-angles-right"></i>Xem thêm <a href="/{{ $guide->infoGuide->seo->slug_full }}">{{ $guide->infoGuide->name }}</a>
                             </div>
                         @endforeach
                     </div>
@@ -145,7 +145,7 @@
                     <div class="guideList">
                         @foreach($item->carrentalLocations as $carrentalLocation)
                             <div class="guideList_item">
-                                <i class="fa-solid fa-angles-right"></i>Xem thêm <a href="{{ $carrentalLocation->infoCarrentalLocation->seo->slug_full }}">{{ $carrentalLocation->infoCarrentalLocation->name }}</a>
+                                <i class="fa-solid fa-angles-right"></i>Xem thêm <a href="/{{ $carrentalLocation->infoCarrentalLocation->seo->slug_full }}">{{ $carrentalLocation->infoCarrentalLocation->name }}</a>
                             </div>
                         @endforeach
                     </div>

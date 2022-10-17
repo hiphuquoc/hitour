@@ -2,7 +2,7 @@
     @if(!empty($list))
         @foreach($list as $service)
             <div class="serviceGrid_item">
-                <a href="{{ $service->seo->slug_full }}" class="serviceGrid_item_image">
+                <a href="/{{ $service->seo->slug_full }}" class="serviceGrid_item_image">
                     <img src="{{ $service->seo->image }}" alt="{{ $service->name }}" title="{{ $service->name }}" />
                     @if(!empty($service->time_start)&&!empty($service->time_end))
                         <div class="serviceGrid_item_image_time">
@@ -10,10 +10,10 @@
                         </div>
                     @endif
                 </a>
-                <a href="{{ $service->seo->slug_full }}" class="serviceGrid_item_title maxLine_1">
+                <a href="/{{ $service->seo->slug_full }}" class="serviceGrid_item_title maxLine_1">
                     <h2>{{ $service->name }}</h2>
                 </a>
-                <a href="{{ $service->seo->slug_full }}" class="serviceGrid_item_desc maxLine_4">
+                <a href="/{{ $service->seo->slug_full }}" class="serviceGrid_item_desc maxLine_4">
                     <h3>{{ $service->seo->description }}</h3>
                 </a>
                 <div class="column">
