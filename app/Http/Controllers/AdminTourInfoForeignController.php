@@ -95,7 +95,7 @@ class AdminTourInfoForeignController extends Controller {
             $pageId             = Seo::insertItem($insertPage);
             /* insert tour_info_foreign */
             $insertTourInfoForeign     = $this->BuildInsertUpdateModel->buildArrayTableTourInfoForeign($request->all(), $pageId);
-            $idTourInfoForeign             = TourInfoForeign::insertItem($insertTourInfoForeign);
+            $idTourInfoForeign         = TourInfoForeign::insertItem($insertTourInfoForeign);
             /* insert tour_content_foreign */
             $insertTourInfoForeign     = $this->BuildInsertUpdateModel->buildArrayTableTourContentForeign($request->all(), $idTourInfoForeign);
             TourContentForeign::insertItem($insertTourInfoForeign);

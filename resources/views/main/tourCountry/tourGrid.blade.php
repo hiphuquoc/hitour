@@ -1,4 +1,4 @@
-@if(!empty($list)&&$list->isNotEmpty()) 
+@if(!empty($list)&&$list->isNotEmpty())
     <div class="tourGrid">
         @foreach($list as $tour)
             <div class="tourGrid_item">

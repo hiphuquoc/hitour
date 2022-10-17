@@ -43,7 +43,7 @@
             <span class="tableHighLight">
                 Đường dẫn tĩnh:
             </span>
-            {{ $item->seo->slug }}
+            {{ $item->seo->slug_full }}
         </div>
     </td>
     <td style="vertical-align:top;width:210px;">
@@ -117,15 +117,14 @@
         @endif
     </td>
     <td style="vertical-align:top;display:flex;">
-        <div class="icon-wrapper iconAction">
-            @php
-                $tmp    = \App\Helpers\Url::buildFullLinkOne($item->seo);
-            @endphp
-            <a href="/{{ $tmp->slug_full }}" target="_blank">
-                <i data-feather='eye'></i>
-                <div>Xem</div>
-            </a>
-        </div>
+        @if(!empty($item->seo->slug_full))
+            <div class="icon-wrapper iconAction">
+                <a href="{{ url($item->seo->slug_full) }}" target="_blank">
+                    <i data-feather='eye'></i>
+                    <div>Xem</div>
+                </a>
+            </div>
+        @endif
         <div class="icon-wrapper iconAction">
             <a href="{{ route('admin.service.view', ['id' => $item->id, 'type' => 'edit']) }}">
                 <i data-feather='edit'></i>

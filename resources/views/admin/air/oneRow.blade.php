@@ -40,7 +40,7 @@
             <span class="tableHighLight">
                 Đường dẫn tĩnh:
             </span>
-            {{ $item->seo->slug }}
+            {{ $item->seo->slug_full }}
         </div>
     </td>
     <td style="vertical-align:top;width:210px;">

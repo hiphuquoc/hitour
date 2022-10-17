@@ -64,6 +64,10 @@ class TourContinent extends Model {
         return $this->hasMany(\App\Models\QuestionAnswer::class, 'reference_id', 'id');
     }
 
+    public function tourCountries(){
+        return $this->hasMany(\App\Models\TourCountry::class, 'tour_continent_id', 'id');
+    }
+
     public function guides() {
         return $this->hasMany(\App\Models\RelationTourContinentGuideInfo::class, 'tour_continent_id', 'id');
     }

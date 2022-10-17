@@ -69,9 +69,9 @@ class TourCountry extends Model {
         return $this->hasMany(\App\Models\SystemFile::class, 'attachment_id', 'id');
     }
 
-    // public function tours(){
-    //     return $this->hasMany(\App\Models\RelationTourCountry::class, 'tour_country_id', 'id');
-    // }
+    public function tours(){
+        return $this->hasMany(\App\Models\RelationTourInfoForeignTourCountry::class, 'tour_country_id', 'id');
+    }
 
     public function guides() {
         return $this->hasMany(\App\Models\RelationTourCountryGuideInfo::class, 'tour_country_id', 'id');

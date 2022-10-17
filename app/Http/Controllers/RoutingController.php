@@ -13,6 +13,8 @@ use App\Models\ServiceLocation;
 use App\Models\CarrentalLocation;
 use App\Models\AirLocation;
 use App\Models\Air;
+use App\Models\TourContinent;
+use App\Models\TourCountry;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Blade;
@@ -203,6 +205,38 @@ class RoutingController extends Controller {
                     $content            = Blade::render(Storage::get(config('admin.storage.contentAir').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
                     return view('main.air.index', compact('item', 'breadcrumb', 'content'));
+                case 'tour_continent':
+                    $item               = TourContinent::select('*')
+                                            ->whereHas('seo', function($q) use ($checkExists){
+                                                $q->where('slug', $checkExists['slug']);
+                                            })
+                                            ->with(['files' => function($query){
+                                                $query->where('relation_table', 'tour_continent');
+                                            }])
+                                            ->with(['questions' => function($q){
+                                                $q->where('relation_table', 'tour_continent');
+                                            }])
+                                            ->with('seo', 'tourCountries.tours.infoTourForeign.seo', 'airLocations.infoAirLocation.airs.seo', 'serviceLocations.infoServiceLocation.services.seo', 'guides.infoGuide.seo')
+                                            ->first();
+                    // $content            = Blade::render(Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php'));
+                    $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
+                    return view('main.tourContinent.index', compact('item', 'breadcrumb'));
+                case 'tour_country':
+                    $item               = TourCountry::select('*')
+                                            ->whereHas('seo', function($q) use ($checkExists){
+                                                $q->where('slug', $checkExists['slug']);
+                                            })
+                                            ->with(['files' => function($query){
+                                                $query->where('relation_table', 'tour_country');
+                                            }])
+                                            ->with(['questions' => function($q){
+                                                $q->where('relation_table', 'tour_country');
+                                            }])
+                                            ->with('seo', 'tours.infoTourForeign.seo', 'airLocations.infoAirLocation.airs.seo', 'serviceLocations.infoServiceLocation.services.seo', 'guides.infoGuide.seo')
+                                            ->first();
+                    // $content            = Blade::render(Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php'));
+                    $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
+                    return view('main.tourCountry.index', compact('item', 'breadcrumb'));
             }
         }else {
             /* Error 404 */

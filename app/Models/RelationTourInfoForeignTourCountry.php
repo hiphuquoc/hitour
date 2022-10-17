@@ -25,7 +25,7 @@ class RelationTourInfoForeignTourCountry extends Model {
         return $id;
     }
 
-    public function infoTourInfoForeign(){
+    public function infoTourForeign(){
         return $this->hasOne(\App\Models\TourInfoForeign::class, 'id', 'tour_info_foreign_id');
     }
 
