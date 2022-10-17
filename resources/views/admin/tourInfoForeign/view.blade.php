@@ -1,18 +1,20 @@
 @extends('admin.layouts.main')
 @section('content')
     @php
-        $titlePage      = 'Thêm Tour mới';
-        $submit         = 'admin.tour.create';
+        $titlePage      = 'Thêm Tour nước ngoài mới';
+        $submit         = 'admin.tourInfoForeign.create';
         $checkImage     = 'required';
         if(!empty($type)&&$type=='edit'){
-            $titlePage  = 'Chỉnh sửa Tour';
-            $submit     = 'admin.tour.update';
+            $titlePage  = 'Chỉnh sửa Tour nước ngoài';
+            $submit     = 'admin.tourInfoForeign.update';
             $checkImage = null;
         }
     @endphp
 
     <form id="formAction" class="needs-validation invalid" action="{{ route($submit) }}" method="POST" novalidate enctype="multipart/form-data">
     @csrf
+        <!-- input hidden -->
+        {{-- <input type="hidden" id="tour_info_foreign_id" name="tour_info_foreign_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : null }}" /> --}}
         <div class="pageAdminWithRightSidebar withRightSidebar">
             <div class="pageAdminWithRightSidebar_header">
                 {{ $titlePage }}
@@ -38,7 +40,7 @@
                             </div>
                             <div class="card-body">
 
-                                @include('admin.tour.formPage')
+                                @include('admin.tourInfoForeign.formPage')
 
                             </div>
                         </div>
@@ -62,7 +64,7 @@
                             </div>
                             <div class="card-body">
 
-                                @include('admin.tour.formDescription')
+                                @include('admin.tourInfoForeign.formDescription')
 
                             </div>
                         </div>
@@ -93,7 +95,7 @@
                             </div>
                             <div class="card-body">
                                 
-                                @include('admin.tour.formInfo', compact('item'))
+                                @include('admin.tourInfoForeign.formInfo', compact('item'))
                                 
                             </div>
                         </div>
@@ -111,7 +113,7 @@
                                         </div>
                                         <div class="card-body">
                 
-                                            @include('admin.tour.formTimetable', ['item' => $timetable])
+                                            @include('admin.tourInfoForeign.formTimetable', ['item' => $timetable])
                                             
                                         </div>
                                     </div>
@@ -126,7 +128,7 @@
                                     </div>
                                     <div class="card-body">
             
-                                        @include('admin.tour.formTimetable')
+                                        @include('admin.tourInfoForeign.formTimetable')
                                         
                                     </div>
                                 </div>
@@ -182,10 +184,10 @@
 
     </form>
     <!-- ===== START:: Modal ===== -->
-    <form id="formTourOption" method="POST" action="{{ route('admin.tourOption.createOption') }}">
+    <form id="formTourOption" method="POST" action="{{ route('admin.tourOptionForeign.createOption') }}">
     @csrf
         <!-- Input Hidden -->
-        {{-- <input type="hidden" id="tour_info_id" name="tour_info_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : 0 }}" /> --}}
+        {{-- <input type="hidden" id="tour_info_foreign_id" name="tour_info_foreign_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : 0 }}" /> --}}
         <div class="modal fade" id="modalContact" tabindex="-1" aria-labelledby="addNewCardTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -253,19 +255,19 @@
                 });
                 /* gộp dataForm đầy đủ */
                 let dataForm            = {
-                    tour_info_id    : $('#tour_info_id').val(),
-                    tour_option_id  : $('#tour_option_id').val(),
-                    option          : $('#tour_option').val(),
+                    tour_info_foreign_id    : $('#tour_info_foreign_id').val(),
+                    tour_option_foreign_id  : $('#tour_option_foreign_id').val(),
+                    option                  : $('#tour_option_foreign').val(),
                     date_range,
                     apply_age,
                     price,
                     profit
                 };
                 /* không có trường required bỏ trống */
-                if(dataForm['tour_option_id']==null||dataForm['tour_option_id']==''){
+                if(dataForm['tour_option_foreign_id']==null||dataForm['tour_option_foreign_id']==''){
                     /* insert */
                     $.ajax({
-                        url         : '{{ route("admin.tourOption.createOption") }}',
+                        url         : '{{ route("admin.tourOptionForeign.createOption") }}',
                         type        : 'post',
                         dataType    : 'html',
                         data        : {
@@ -286,7 +288,7 @@
                 }else {
                     /* update */
                     $.ajax({
-                        url         : '{{ route("admin.tourOption.updateOption") }}',
+                        url         : '{{ route("admin.tourOptionForeign.updateOption") }}',
                         type        : 'post',
                         dataType    : 'html',
                         data        : {
@@ -325,12 +327,12 @@
 
         function loadOptionPrice(idWrite){
             $.ajax({
-                url         : '{{ route("admin.tourOption.loadOptionPrice") }}',
+                url         : '{{ route("admin.tourOptionForeign.loadOptionPrice") }}',
                 type        : 'post',
                 dataType    : 'html',
                 data        : {
                     '_token'        : '{{ csrf_token() }}',
-                    tour_info_id    : '{{ !empty($item->id)&&$type!="copy" ? $item->id : 0 }}'
+                    tour_info_foreign_id    : '{{ !empty($item->id)&&$type!="copy" ? $item->id : 0 }}'
                 },
                 success     : function(data){
                     $('#'+idWrite).html(data);
@@ -339,16 +341,16 @@
         }
 
         function loadFormOption(tourOption = 0){
-            const tourId    = $('#tour_info_id').val();
+            const tourId    = $('#tour_info_foreign_id').val();
             const type      = '{{ $type }}';
             $.ajax({
-                url         : '{{ route("admin.tourOption.loadFormOption") }}',
+                url         : '{{ route("admin.tourOptionForeign.loadFormOption") }}',
                 type        : 'post',
                 dataType    : 'json',
                 data        : {
                     '_token'        : '{{ csrf_token() }}',
-                    tour_info_id    : tourId,
-                    tour_option_id  : tourOption
+                    tour_info_foreign_id    : tourId,
+                    tour_option_foreign_id  : tourOption
                 },
                 success     : function(data){
                     $('#js_loadFormOption_header').html(data.header);
@@ -360,7 +362,7 @@
         function deleteOptionPrice(id){
             if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
                 $.ajax({
-                    url         : '{{ route("admin.tourOption.deleteOption") }}',
+                    url         : '{{ route("admin.tourOptionForeign.deleteOption") }}',
                     type        : 'post',
                     dataType    : 'html',
                     data        : {

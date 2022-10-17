@@ -32,6 +32,8 @@ use App\Http\Controllers\AdminAirController;
 
 use App\Http\Controllers\AdminTourContinentController;
 use App\Http\Controllers\AdminTourCountryController;
+use App\Http\Controllers\AdminTourInfoForeignController;
+use App\Http\Controllers\AdminTourOptionForeignController;
 
 use App\Http\Controllers\AdminStaffController;
 use App\Http\Controllers\AdminCostController;
@@ -347,6 +349,20 @@ Route::prefix('admin')->group(function(){
             Route::post('/update', [AdminTourCountryController::class, 'update'])->name('admin.tourCountry.update');
             /* Delete AJAX */
             Route::get('/delete', [AdminTourCountryController::class, 'delete'])->name('admin.tourCountry.delete');
+        });
+        /* ===== TOUR ===== */
+        Route::prefix('tourInfoForeign')->group(function(){
+            Route::get('/', [AdminTourInfoForeignController::class, 'list'])->name('admin.tourInfoForeign.list');
+            Route::post('/create', [AdminTourInfoForeignController::class, 'create'])->name('admin.tourInfoForeign.create');
+            Route::get('/view', [AdminTourInfoForeignController::class, 'view'])->name('admin.tourInfoForeign.view');
+            Route::post('/update', [AdminTourInfoForeignController::class, 'update'])->name('admin.tourInfoForeign.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminTourInfoForeignController::class, 'delete'])->name('admin.tourInfoForeign.delete');
+            Route::post('/loadOptionPrice', [AdminTourOptionForeignController::class, 'loadOptionPrice'])->name('admin.tourOptionForeign.loadOptionPrice');
+            Route::post('/loadFormOption', [AdminTourOptionForeignController::class, 'loadFormOption'])->name('admin.tourOptionForeign.loadFormOption');
+            Route::post('/createOption', [AdminTourOptionForeignController::class, 'create'])->name('admin.tourOptionForeign.createOption');
+            Route::post('/updateOption', [AdminTourOptionForeignController::class, 'update'])->name('admin.tourOptionForeign.updateOption');
+            Route::post('/deleteOption', [AdminTourOptionForeignController::class, 'delete'])->name('admin.tourOptionForeign.deleteOption');
         });
         /* ===== AJAX ===== */
         Route::post('/loadProvinceByRegion', [AdminFormController::class, 'loadProvinceByRegion'])->name('admin.form.loadProvinceByRegion');

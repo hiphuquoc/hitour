@@ -947,4 +947,85 @@ class BuildInsertUpdateModel {
         }
         return $result;
     }
+
+    public static function buildArrayTableTourInfoForeign($dataForm, $seoId = null){
+        /* 
+            seo_id
+            tour_departure_id
+            pick_up
+            transport
+            code
+            name
+            price_show
+            price_del
+            departure_schedule
+            days
+            nights
+            time_start
+            time_end
+            status_show
+            status_sidebar
+        */
+        $result     = [];
+        if(!empty($dataForm)){
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
+            $result['tour_departure_id']    = $dataForm['tour_departure_id'] ?? null;
+            $result['pick_up']              = $dataForm['pick_up'] ?? null;
+            $result['transport']            = $dataForm['transport'] ?? null;
+            $result['code']                 = $dataForm['code'] ?? null;
+            $result['name']                 = $dataForm['title'] ?? null;
+            $result['price_show']           = $dataForm['price_show'] ?? 0;
+            $result['price_del']            = $dataForm['price_del'] ?? 0;
+            $result['departure_schedule']   = $dataForm['departure_schedule'];
+            $result['days']                 = $dataForm['days'] ?? 0;
+            $result['nights']               = $dataForm['nights'] ?? 0;
+            $result['time_start']           = $dataForm['time_start'] ?? null;
+            $result['time_end']             = $dataForm['time_end'] ?? null;
+            $result['status_show']          = !empty($dataForm['status_show']) ? 1 : 0;
+            $result['status_sidebar']       = !empty($dataForm['status_sidebar']) ? 1 : 0;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableTourContentForeign($dataForm, $idTourForeign){
+        /* 
+            tour_info_foreign_id
+            special_content
+            special_list
+            include
+            not_include
+            policy_child
+            policy_cancel
+            menu
+            hotel
+            note
+        */
+        $result     = [];
+        if(!empty($dataForm)&&!empty($idTourForeign)){
+            $result['tour_info_foreign_id']         = $idTourForeign;
+            $result['special_content']      = $dataForm['special_content'] ?? null;
+            $result['special_list']         = $dataForm['special_list'] ?? null;
+            $result['include']              = $dataForm['include'] ?? null;
+            $result['not_include']          = $dataForm['not_include'] ?? null;
+            $result['policy_child']         = $dataForm['policy_child'] ?? null;
+            $result['menu']                 = $dataForm['menu'] ?? null;
+            $result['hotel']                = $dataForm['hotel'] ?? null;
+            $result['policy_cancel']        = $dataForm['policy_cancel'] ?? null;
+            $result['note']                 = $dataForm['note'] ?? null;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableTourOptionForeign($dataForm){
+        /*
+            tour_info_foreign_id
+            option
+        */
+        $result     = [];
+        if(!empty($dataForm)&&!empty($dataForm['tour_info_foreign_id'])){
+            $result['tour_info_foreign_id']     = $dataForm['tour_info_foreign_id'];
+            $result['option']                   = $dataForm['option'] ?? null;
+        }
+        return $result;
+    }
 }

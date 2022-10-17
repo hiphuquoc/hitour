@@ -64,9 +64,9 @@
                     @foreach($guides as $guide)
                         @php
                             $selected           = null;
-                            if(!empty($item->guides)&&$item->guide->isNotEmpty()){
+                            if(!empty($item->guides)&&$item->guides->isNotEmpty()){
                                 foreach($item->guides as $g){
-                                    if($g->guide_info_id==$guide->id){
+                                    if($g->infoGuide->id==$guide->id){
                                         $selected   = ' selected';
                                         break;
                                     }

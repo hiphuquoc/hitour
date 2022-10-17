@@ -11,18 +11,20 @@
                 <button class="btn btn-primary waves-effect" id="button-addon2" type="submit">Tìm</button>
             </div>
         </div>
-        <div class="searchBox_item">
-            <select class="form-select" id="search_region" name="search_region" onChange="submitForm('formSearch');">
-                <option value="0">- Lựa chọn -</option>
-                @foreach(config('admin.region') as $region)
-                    @php
-                        $selected   = null;
-                        if(!empty($params['search_region'])&&$params['search_region']==$region['id']) $selected = 'selected';
-                    @endphp
-                    <option value="{{ $region['id'] }}" {{ $selected }}>{{ $region['name'] }}</option>
-                @endforeach
-            </select>
-        </div>
+        @if(!empty($tourContinents)&&$tourContinents->isNotEmpty())
+            <div class="searchBox_item">
+                <select class="form-select" id="search_continent" name="search_continent" onChange="submitForm('formSearch');">
+                    <option value="0">- Lựa chọn -</option>
+                    @foreach($tourContinents as $tourContinent)
+                        @php
+                            $selected   = null;
+                            if(!empty($params['search_continent'])&&$params['search_continent']==$tourContinent['id']) $selected = 'selected';
+                        @endphp
+                        <option value="{{ $tourContinent['id'] }}" {{ $selected }}>{{ $tourContinent['name'] }}</option>
+                    @endforeach
+                </select>
+            </div>
+        @endif
     </div>
     </form>
     <!-- ===== END: SEARCH FORM ===== -->

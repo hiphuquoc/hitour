@@ -1,4 +1,5 @@
-<input type="hidden" id="tour_info_id" name="tour_info_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : null }}" />
+<input type="hidden" id="tour_info_foreign_id" name="tour_info_foreign_id" value="{{ !empty($item->id)&&$type=='edit' ? $item->id : null }}" />
+
 <div class="formBox">
     <div class="formBox_full">
         <!-- One Row -->
@@ -45,22 +46,22 @@
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
-            <label class="form-label inputRequired" for="location">Điểm đến Tour</label>
-            <select class="select2 form-select select2-hidden-accessible" id="location" name="location[]" multiple="true">
-                @if(!empty($tourLocations))
-                    @foreach($tourLocations as $location)
+            <label class="form-label inputRequired" for="tour_country_id">Điểm đến Tour</label>
+            <select class="select2 form-select select2-hidden-accessible" id="tour_country_id" name="tour_country_id[]" multiple="true">
+                @if(!empty($tourCountries))
+                    @foreach($tourCountries as $tourCountry)
                         @php
                             $selected   = null;
-                            if(!empty($item->locations)){
-                                foreach($item->locations as $l) {
-                                    if($location['id']==$l['tour_location_id']) {
+                            if(!empty($item->tourCountries)){
+                                foreach($item->tourCountries as $t) {
+                                    if($tourCountry['id']==$t['tour_country_id']) {
                                         $selected = ' selected';
                                         break;
                                     }
                                 }
                             }
                         @endphp
-                        <option value="{{ $location['id'] }}"{{ $selected }}>{{ $location['name'] }}</option>
+                        <option value="{{ $tourCountry['id'] }}"{{ $selected }}>{{ $tourCountry['name'] }}</option>
                     @endforeach
                 @endif
             </select>

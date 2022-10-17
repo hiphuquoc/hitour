@@ -4,7 +4,7 @@ return [
         [
             'name'      => 'Tour du lịch',
             'route'     => '',
-            'icon'      => '<i data-feather=\'briefcase\'></i>',
+            'icon'      => '<i class="fa-solid fa-suitcase-rolling"></i>',
             'child'     => [
                 [
                     'name'  => '1. Trong nước',
@@ -12,15 +12,15 @@ return [
                     'icon'  => '<i data-feather=\'circle\'></i>',
                     'child' => [
                         [
-                            'name'  => '1.1. Điểm khởi hành',
-                            'route' => 'admin.tourDeparture.list',
-                            'icon'  => '<i data-feather=\'circle\'></i>'
-                        ],
-                        [
-                            'name'  => '1.2. Điểm đến',
+                            'name'  => '1.1. Điểm đến',
                             'route' => 'admin.tourLocation.list',
                             'icon'  => '<i data-feather=\'circle\'></i>'
                         ],
+                        [
+                            'name'  => '1.2. Chi tiết Tour',
+                            'route' => 'admin.tour.list',
+                            'icon'  => '<i data-feather=\'circle\'></i>'
+                        ]
                     ]
                 ],
                 [
@@ -37,17 +37,22 @@ return [
                             'name'  => '2.2. Quốc gia',
                             'route' => 'admin.tourCountry.list',
                             'icon'  => '<i data-feather=\'circle\'></i>'
-                        ]
+                        ],
+                        [
+                            'name'  => '2.3. Chi tiết Tour',
+                            'route' => 'admin.tourInfoForeign.list',
+                            'icon'  => '<i data-feather=\'circle\'></i>'
+                        ],
                     ]
                 ],
                 [
-                    'name'  => '3. Đối tác Tour',
-                    'route' => 'admin.tourPartner.list',
+                    'name'  => '3. Điểm khởi hành',
+                    'route' => 'admin.tourDeparture.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '4. Chi tiết Tour',
-                    'route' => 'admin.tour.list',
+                    'name'  => '4. Đối tác Tour',
+                    'route' => 'admin.tourPartner.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
@@ -92,7 +97,7 @@ return [
         [
             'name'      => 'Quản lí Tàu',
             'route'     => '',
-            'icon'      => '<i data-feather=\'anchor\'></i>',
+            'icon'      => '<i class="fa-solid fa-ship"></i>',
             'child'     => [
                 [
                     'name'  => '1. Bến cảng',
@@ -130,7 +135,7 @@ return [
         [
             'name'      => 'Vé vui chơi',
             'route'     => '',
-            'icon'      => '<i data-feather=\'star\'></i>',
+            'icon'      => '<i class="fa-solid fa-ticket"></i>',
             'child'     => [
                 [
                     'name'  => '1. Điểm đến',
@@ -148,7 +153,7 @@ return [
         [
             'name'      => 'Cảm nang du lịch',
             'route'     => 'admin.guide.list',
-            'icon'      => '<i data-feather=\'book-open\'></i>',    
+            'icon'      => '<i class="fa-solid fa-book"></i>',    
         ],
         [
             'name'      => 'Cho thuê xe',
@@ -158,12 +163,12 @@ return [
         [
             'name'  => 'Nhân viên tư vấn',
             'route' => 'admin.staff.list',
-            'icon'  => '<i data-feather=\'user\'></i>'
+            'icon'  => '<i class="fa-solid fa-users"></i>'
         ],
         [
             'name'      => 'Quản lí Ảnh',
             'route'     => 'admin.image.list',
-            'icon'      => '<i data-feather=\'image\'></i>'
+            'icon'      => '<i class="fa-solid fa-image"></i>'
         ],
     ]
 ];

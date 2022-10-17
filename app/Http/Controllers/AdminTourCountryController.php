@@ -37,11 +37,12 @@ class AdminTourCountryController extends Controller {
         $params         = [];
         /* Search theo tên */
         if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
-        // /* Search theo vùng miền */
-        // if(!empty($request->get('search_region'))) $params['search_region'] = $request->get('search_region');
+        /* Search theo châu lục */
+        if(!empty($request->get('search_continent'))) $params['search_continent'] = $request->get('search_continent');
         /* lấy dữ liệu */
         $list           = TourCountry::getList($params);
-        return view('admin.tourCountry.list', compact('list', 'params'));
+        $tourContinents = TourContinent::all();
+        return view('admin.tourCountry.list', compact('list', 'tourContinents', 'params'));
     }
 
     public function view(Request $request){

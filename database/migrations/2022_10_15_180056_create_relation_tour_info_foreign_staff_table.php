@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tour_option', function (Blueprint $table) {
+        Schema::create('relation_tour_info_foreign_staff', function (Blueprint $table) {
             $table->id();
-            $table->integer('tour_info_id');
-            $table->string('option');
+            $table->integer('tour_info_foreign_id');
+            $table->integer('staff_info_id');
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('tour_option');
+        // Schema::dropIfExists('relation_tour_info_foreign_staff');
     }
 };
