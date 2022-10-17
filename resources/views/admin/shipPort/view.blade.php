@@ -1,11 +1,11 @@
 @extends('admin.layouts.main')
 @section('content')
     @php
-        $titlePage      = 'Thêm Bến cảng mới';
+        $titlePage      = 'Thêm Cảng tàu mới';
         $submit         = 'admin.shipPort.create';
         $checkImage     = 'required';
         if(!empty($type)&&$type=='edit'){
-            $titlePage  = 'Chỉnh sửa Bến cảng';
+            $titlePage  = 'Chỉnh sửa Cảng tàu';
             $submit     = 'admin.shipPort.update';
             $checkImage = null;
         }

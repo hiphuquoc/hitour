@@ -1,11 +1,11 @@
 @extends('admin.layouts.main')
 @section('content')
     @php
-        $titlePage      = 'Thêm Đối tác Tàu mới';
+        $titlePage      = 'Thêm Hãng máy bay mới';
         $submit         = 'admin.airPartner.create';
         $checkImage     = 'required';
         if(!empty($type)&&$type=='edit'){
-            $titlePage  = 'Chỉnh sửa Đối tác Tàu';
+            $titlePage  = 'Chỉnh sửa Hãng máy bay';
             $submit     = 'admin.airPartner.update';
             $checkImage = null;
         }

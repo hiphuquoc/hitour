@@ -1,11 +1,11 @@
 @extends('admin.layouts.main')
 @section('content')
     @php
-        $titlePage      = 'Thêm Quốc gia tour mới';
+        $titlePage      = 'Thêm Quốc gia Tour mới';
         $submit         = 'admin.tourCountry.create';
         $checkImage     = 'required';
         if(!empty($type)&&$type=='edit'){
-            $titlePage  = 'Chỉnh sửa Quốc gia tour';
+            $titlePage  = 'Chỉnh sửa Quốc gia Tour';
             $submit     = 'admin.tourCountry.update';
             $checkImage = null;
         }

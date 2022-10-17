@@ -1,11 +1,11 @@
 @extends('admin.layouts.main')
 @section('content')
     @php
-        $titlePage      = 'Thêm điểm đến Tàu mới';
+        $titlePage      = 'Thêm điểm đến Vé máy bay mới';
         $submit         = 'admin.airLocation.create';
         $checkImage     = 'required';
         if(!empty($type)&&$type=='edit'){
-            $titlePage  = 'Chỉnh sửa điểm đến Tàu';
+            $titlePage  = 'Chỉnh sửa điểm đến Vé máy bay';
             $submit     = 'admin.airLocation.update';
             $checkImage = null;
         }

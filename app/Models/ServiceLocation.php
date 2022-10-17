@@ -26,10 +26,6 @@ class ServiceLocation extends Model {
                         ->when(!empty($params['search_name']), function($query) use($params){
                             $query->where('name', 'like', '%'.$params['search_name'].'%');
                         })
-                        /* tìm theo vùng miền */
-                        ->when(!empty($params['search_region']), function($query) use($params){
-                            $query->where('region_id', $params['search_region']);
-                        })
                         ->with(['files' => function($query){
                             $query->where('relation_table', 'service_location');
                         }])

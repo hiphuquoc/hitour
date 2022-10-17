@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 @section('content')
 
-<div class="titlePage">Danh sách điểm đến Tour</div>
+<div class="titlePage">Danh sách Châu lục</div>
 <!-- ===== START: SEARCH FORM ===== -->
 <form id="formSearch" method="get" action="{{ route('admin.tourContinent.list') }}">
     <div class="searchBox">

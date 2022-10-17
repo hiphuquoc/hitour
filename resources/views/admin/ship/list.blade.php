@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 @section('content')
 
-<div class="titlePage">Danh sách Tour</div>
+<div class="titlePage">Danh sách Chuyến tàu</div>
 <!-- ===== START: SEARCH FORM ===== -->
 <form id="formSearch" method="get" action="{{ route('admin.ship.list') }}">
 <div class="searchBox">
@@ -11,10 +11,10 @@
             <button class="btn btn-primary waves-effect" id="button-addon2" type="submit">Tìm</button>
         </div>
     </div>
-    @if(!empty($shipLocations))
+    @if(!empty($shipLocations)&&$shipLocations->isNotEmpty())
         <div class="searchBox_item">
             <select class="form-select select2" name="search_location" onChange="submitForm('formSearch');">
-                <option value="0">- Tìm theo Khu vực -</option>
+                <option value="0">- Tìm theo Điểm đến -</option>
                 @foreach($shipLocations as $location)
                     @php
                         $selected   = null;
@@ -25,10 +25,10 @@
             </select>
         </div>
     @endif
-    @if(!empty($partners))
+    @if(!empty($partners)&&$partners->isNotEmpty())
         <div class="searchBox_item">
             <select class="form-select select2" name="search_partner" onChange="submitForm('formSearch');">
-                <option value="0">- Tìm theo Đối tác -</option>
+                <option value="0">- Tìm theo Hãng tàu -</option>
                 @foreach($partners as $partner)
                     @php
                         $selected   = null;
@@ -39,7 +39,7 @@
             </select>
         </div>
     @endif
-    @if(!empty($staffs))
+    @if(!empty($staffs)&&$staffs->isNotEmpty())
         <div class="searchBox_item">
             <select class="form-select select2" name="search_staff" onChange="submitForm('formSearch');">
                 <option value="0">- Tìm theo Nhân viên -</option>

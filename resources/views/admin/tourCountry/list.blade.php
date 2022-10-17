@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 @section('content')
 
-<div class="titlePage">Danh sách điểm đến Tour</div>
+<div class="titlePage">Danh sách Quốc gia</div>
 <!-- ===== START: SEARCH FORM ===== -->
 <form id="formSearch" method="get" action="{{ route('admin.tourCountry.list') }}">
     <div class="searchBox">
@@ -14,7 +14,7 @@
         @if(!empty($tourContinents)&&$tourContinents->isNotEmpty())
             <div class="searchBox_item">
                 <select class="form-select" id="search_continent" name="search_continent" onChange="submitForm('formSearch');">
-                    <option value="0">- Lựa chọn -</option>
+                    <option value="0">- Tìm  theo Châu lục -</option>
                     @foreach($tourContinents as $tourContinent)
                         @php
                             $selected   = null;

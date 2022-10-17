@@ -3,7 +3,7 @@
 
 <!-- ===== Card Header ===== -->
 <div class="titlePage">
-    Danh sách Đối tác Hitour
+    Danh sách Đối tác Tour
 </div>
 <div class="card">
     <!-- ===== Table ===== -->

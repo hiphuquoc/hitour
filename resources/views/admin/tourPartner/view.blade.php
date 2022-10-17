@@ -1,11 +1,11 @@
 @extends('admin.layouts.main')
 @section('content')
     @php
-        $titlePage      = 'Thêm Đối tác mới';
+        $titlePage      = 'Thêm Đối tác Tour mới';
         $submit         = 'admin.tourPartner.create';
         $checkImage     = 'required';
         if(!empty($type)&&$type=='edit'){
-            $titlePage  = 'Chỉnh sửa Đối tác';
+            $titlePage  = 'Chỉnh sửa Đối tác Tour';
             $submit     = 'admin.tourPartner.update';
             $checkImage = null;
         }

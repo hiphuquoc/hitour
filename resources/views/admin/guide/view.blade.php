@@ -1,11 +1,11 @@
 @extends('admin.layouts.main')
 @section('content')
     @php
-        $titlePage      = 'Thêm điểm đến Tour mới';
+        $titlePage      = 'Thêm Cẩm nang du lịch mới';
         $submit         = 'admin.guide.create';
         $checkImage     = 'required';
         if(!empty($type)&&$type=='edit'){
-            $titlePage  = 'Chỉnh sửa điểm đến Tour';
+            $titlePage  = 'Chỉnh sửa Cẩm nang du lịch';
             $submit     = 'admin.guide.update';
             $checkImage = null;
         }

@@ -116,7 +116,7 @@ return [
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '4. Đối tác Tàu',
+                    'name'  => '4. Hãng Tàu',
                     'route' => 'admin.shipPartner.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
@@ -151,7 +151,7 @@ return [
             ]
         ],
         [
-            'name'      => 'Cảm nang du lịch',
+            'name'      => 'Cẩm nang du lịch',
             'route'     => 'admin.guide.list',
             'icon'      => '<i class="fa-solid fa-book"></i>',    
         ],

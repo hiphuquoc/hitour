@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 @section('content')
 
-<div class="titlePage">Danh sách khu vực Tour</div>
+<div class="titlePage">Danh sách Điểm đến vé máy bay</div>
 <!-- ===== START: SEARCH FORM ===== -->
 <form id="formSearch" method="get" action="{{ route('admin.airLocation.list') }}">
     <div class="searchBox">

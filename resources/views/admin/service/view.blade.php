@@ -1,11 +1,11 @@
 @extends('admin.layouts.main')
 @section('content')
     @php
-        $titlePage      = 'Thêm Tour mới';
+        $titlePage      = 'Thêm Vé dịch vụ mới';
         $submit         = 'admin.service.create';
         $checkImage     = 'required';
         if(!empty($type)&&$type=='edit'){
-            $titlePage  = 'Chỉnh sửa Tour';
+            $titlePage  = 'Chỉnh sửa Vé dịch vụ';
             $submit     = 'admin.service.update';
             $checkImage = null;
         }

@@ -3,7 +3,7 @@
 
 <!-- ===== Card Header ===== -->
 <div class="titlePage">
-    Danh sách Đối tác Hitour
+    Danh sách Hãng máy bay
 </div>
 <div class="card">
     <!-- ===== Table ===== -->
@@ -21,15 +21,6 @@
             <tbody>
                 @if(!empty($list)&&$list->isNotEmpty())
                     @foreach($list as $item)
-                    {{-- @php
-                        dd($item);
-                        $listContact            = null;
-                        if(!empty($item->contacts)){
-                            foreach($item->contacts as $contact){
-                                $listContact    .= 
-                            }
-                        }
-                    @endphp --}}
                     <tr id="item-{{ $item->id }}">
                         <td style="vertical-align:top;text-align:center">
                             {{ $loop->index + 1 }}

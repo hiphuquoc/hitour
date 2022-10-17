@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 @section('content')
 
-<div class="titlePage">Danh sách dịch vụ</div>
+<div class="titlePage">Danh sách Điểm đến dịch vụ</div>
 <!-- ===== START: SEARCH FORM ===== -->
 <form id="formSearch" method="get" action="{{ route('admin.serviceLocation.list') }}">
     <div class="searchBox">
@@ -10,18 +10,6 @@
                 <input type="text" class="form-control" id="search_name" name="search_name" placeholder="Tìm theo tên" value="{{ $params['search_name'] ?? null }}">
                 <button class="btn btn-primary waves-effect" id="button-addon2" type="submit">Tìm</button>
             </div>
-        </div>
-        <div class="searchBox_item">
-            <select class="form-select" id="search_region" name="search_region" onChange="submitForm('formSearch');">
-                <option value="0">- Lựa chọn -</option>
-                @foreach(config('admin.region') as $region)
-                    @php
-                        $selected   = null;
-                        if(!empty($params['search_region'])&&$params['search_region']==$region['id']) $selected = 'selected';
-                    @endphp
-                    <option value="{{ $region['id'] }}" {{ $selected }}>{{ $region['name'] }}</option>
-                @endforeach
-            </select>
         </div>
     </div>
     </form>

@@ -7,14 +7,10 @@ use App\Helpers\Upload;
 
 use App\Http\Controllers\AdminSliderController;
 use App\Models\ServiceLocation;
-use App\Models\ShipLocation;
-use App\Models\CarrentalLocation;
 use App\Models\Seo;
 use App\Services\BuildInsertUpdateModel;
 use App\Models\District;
 use App\Models\Province;
-use App\Models\Guide;
-use App\Models\SystemFile;
 use App\Models\QuestionAnswer;
 use Illuminate\Support\Facades\DB;
 
@@ -32,8 +28,6 @@ class AdminServiceLocationController extends Controller {
         $params         = [];
         /* Search theo tên */
         if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
-        /* Search theo vùng miền */
-        if(!empty($request->get('search_region'))) $params['search_region'] = $request->get('search_region');
         /* lấy dữ liệu */
         $list           = ServiceLocation::getList($params);
         return view('admin.serviceLocation.list', compact('list', 'params'));

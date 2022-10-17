@@ -2,7 +2,7 @@
 @section('content')
 
  <div class="titlePage">
-    Danh sách khu vực Tour
+    Danh sách Nhân viên tư vấn
 </div>
 <div class="card">
     <!-- ===== Table ===== -->

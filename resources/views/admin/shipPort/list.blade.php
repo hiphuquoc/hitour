@@ -3,7 +3,7 @@
 
 <!-- ===== Card Header ===== -->
 <div class="titlePage">
-    Danh sách Đối tác Hitour
+    Danh Cảng tàu cao tốc
 </div>
 <div class="card">
     <!-- ===== Table ===== -->

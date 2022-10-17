@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 @section('content')
 
-<div class="titlePage">Danh sách Điểm khởi hành bay</div>
+<div class="titlePage">Danh sách Điểm khởi hành vé máy bay</div>
 <!-- ===== START: SEARCH FORM ===== -->
 <form id="formSearch" method="get" action="{{ route('admin.airDeparture.list') }}">
     <div class="searchBox">
@@ -13,7 +13,7 @@
         </div>
         <div class="searchBox_item">
             <select class="form-select" id="search_region" name="search_region" onChange="submitForm('formSearch');">
-                <option value="0">- Lựa chọn -</option>
+                <option value="0">- Tim theo Vùng miền -</option>
                 @foreach(config('admin.region') as $region)
                     @php
                         $selected   = null;

@@ -5,7 +5,7 @@
     dd($list);
 @endphp --}}
 
-<div class="titlePage">Danh sách Tour</div>
+<div class="titlePage">Danh sách Vé dịch vụ</div>
 <!-- ===== START: SEARCH FORM ===== -->
 <form id="formSearch" method="get" action="{{ route('admin.service.list') }}">
 <div class="searchBox">
@@ -18,7 +18,7 @@
     @if(!empty($serviceLocations))
         <div class="searchBox_item">
             <select class="form-select select2" name="search_location" onChange="submitForm('formSearch');">
-                <option value="0">- Tìm theo Khu vực -</option>
+                <option value="0">- Tìm theo Điểm đến -</option>
                 @foreach($serviceLocations as $location)
                     @php
                         $selected   = null;
