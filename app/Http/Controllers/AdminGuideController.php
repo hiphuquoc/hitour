@@ -11,8 +11,6 @@ use App\Models\Seo;
 use App\Services\BuildInsertUpdateModel;
 use App\Models\District;
 use App\Models\Province;
-use App\Models\TourLocation;
-use App\Models\SystemFile;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Storage;
@@ -73,10 +71,6 @@ class AdminGuideController extends Controller {
             $insertGuide        = $this->BuildInsertUpdateModel->buildArrayTableGuideInfo($request->all(), $pageId);
             $idGuide            = Guide::insertItem($insertGuide);
             /* lưu content vào file */
-            // $content            = $request->get('content');
-            // $content            = str_replace('public/image/', '/storage/images/upload/', $content);
-            // $content            = str_replace('.webp', '-type-manager-upload.webp', $content);
-            // $content            = str_replace('autoTable', 'tableContentBorder', $content);
             Storage::put(config('admin.storage.contentGuide').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){

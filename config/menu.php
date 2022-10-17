@@ -54,11 +54,6 @@ return [
                     'name'  => '4. Đối tác Tour',
                     'route' => 'admin.tourPartner.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
-                ],
-                [
-                    'name'  => '5. Booking Tour',
-                    'route' => 'admin.tourBooking.list',
-                    'icon'  => '<i data-feather=\'circle\'></i>'
                 ]
             ]
         ],
@@ -124,11 +119,6 @@ return [
                     'name'  => '5. Chi tiết Tàu',
                     'route' => 'admin.ship.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
-                ],
-                [
-                    'name'  => '6. Booking Tàu',
-                    'route' => 'admin.shipBooking.list',
-                    'icon'  => '<i data-feather=\'circle\'></i>'
                 ]
             ]
         ],
@@ -164,6 +154,23 @@ return [
             'name'  => 'Nhân viên tư vấn',
             'route' => 'admin.staff.list',
             'icon'  => '<i class="fa-solid fa-users"></i>'
+        ],
+        [
+            'name'  => 'Quản lí Booking',
+            'route' => '',
+            'icon'  => '<i class="fa-solid fa-file-pen"></i>',
+            'child' => [
+                [
+                    'name'  => '1. Booking Tour',
+                    'route' => 'admin.tourBooking.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ], 
+                [
+                    'name'  => '2. Booking Tàu',
+                    'route' => 'admin.shipBooking.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ]
+            ]
         ],
         [
             'name'      => 'Quản lí Ảnh',
