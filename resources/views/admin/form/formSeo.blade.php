@@ -47,7 +47,7 @@
         </div>
         <div class="formBox_full_item">
             <span data-toggle="tooltip" data-placement="top" title="
-                Đây là thẻ khai báo Link Canonical để khai báo trang trùng lặp nội dung về trang chính. Bỏ trống tức trang chính là trang này
+                Đây là thẻ khai báo Link Canonical để chuyển giá trị trang trùng lặp nội dung về trang chính. Bỏ trống tức trang chính là trang này
             ">
                 <i class="explainInput" data-feather='alert-circle'></i>
                 <label class="form-label" for="link_canonical">Link Canonical</label>

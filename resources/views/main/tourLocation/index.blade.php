@@ -4,6 +4,10 @@
 @php
     $dataSchema = $item->seo ?? null;
 @endphp
+<!-- STRAT:: Title - Description - Social -->
+@include('main.schema.social', ['data' => $dataSchema])
+<!-- END:: Title - Description - Social -->
+
 <!-- STRAT:: Organization Schema -->
 @include('main.schema.organization')
 <!-- END:: Organization Schema -->

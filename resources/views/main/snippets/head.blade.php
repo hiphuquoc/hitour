@@ -2,7 +2,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="fragment" content="!"/>
+<meta name="fragment" content="!" />
 <title>Trang chủ Hitour.vn</title>
 
 <!-- BEGIN: Custom CSS-->

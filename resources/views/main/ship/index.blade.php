@@ -1,5 +1,32 @@
 @extends('main.layouts.main')
+@push('head-custom')
+<!-- ===== START:: SCHEMA ===== -->
+@php
+    $dataSchema = $item->seo ?? null;
+@endphp
 
+<!-- STRAT:: Title - Description - Social -->
+@include('main.schema.social', ['data' => $dataSchema])
+<!-- END:: Title - Description - Social -->
+
+<!-- STRAT:: Organization Schema -->
+@include('main.schema.organization')
+<!-- END:: Organization Schema -->
+
+<!-- STRAT:: Article Schema -->
+@include('main.schema.article', ['data' => $dataSchema])
+<!-- END:: Article Schema -->
+
+<!-- STRAT:: Article Schema -->
+@include('main.schema.creativeworkseries', ['data' => $dataSchema])
+<!-- END:: Article Schema -->
+
+<!-- STRAT:: Article Schema -->
+@include('main.schema.breadcrumb', ['data' => $breadcrumb])
+<!-- END:: Article Schema -->
+
+<!-- ===== END:: SCHEMA ===== -->
+@endpush
 @section('content')
 
     @php
