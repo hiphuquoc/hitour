@@ -4,7 +4,7 @@
         @if(!empty($item->files))
             @foreach($item->files as $file)
                 @if($file->file_type==='gallery')
-                    <img src="{{ $file->file_path }}" alt="" title="" />
+                    <img src="{{ $file->file_path }}" alt="{{ $item->name ?? $item->seo->title ?? null }}" title="{{ $item->name ?? $item->seo->title ?? null }}" />
                 @endif
             @endforeach
         @endif

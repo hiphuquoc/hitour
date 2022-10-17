@@ -45,6 +45,18 @@
             <input type="text" id="slug" class="form-control" name="slug" value="{{ old('slug') ?? $item->seo['slug'] ?? '' }}" required>
             <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
         </div>
+        <div class="formBox_full_item">
+            <span data-toggle="tooltip" data-placement="top" title="
+                Đây là thẻ khai báo Link Canonical để khai báo trang trùng lặp nội dung về trang chính. Bỏ trống tức trang chính là trang này
+            ">
+                <i class="explainInput" data-feather='alert-circle'></i>
+                <label class="form-label" for="link_canonical">Link Canonical</label>
+            </span>
+            <div class="input-group input-group-merge">
+                <span class="input-group-text" style="background:#efefef;">{{ env('APP_URL') }}/</span>
+                <input type="text" name="link_canonical" class="form-control" value="{{ old('link_canonical') ?? $item->seo->link_canonical ?? null }}" style="padding-left:1rem;" />
+            </div>
+        </div>
         <!-- One Row -->
         @if(!empty($parents))
         <div class="formBox_full_item">

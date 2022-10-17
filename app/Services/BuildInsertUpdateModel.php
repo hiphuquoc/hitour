@@ -50,6 +50,13 @@ class BuildInsertUpdateModel {
             $result['slug']                     = $dataForm['slug'];
             /* slug full */
             $result['slug_full']                = Seo::buildFullUrl($dataForm['slug'], $pageLevel, $pageParent);
+            /* link canonical */
+            if(!empty($dataForm['link_canonical'])){
+                $tmp                            = explode('/', $dataForm['link_canonical']);
+                $tmp2                           = [];
+                foreach($tmp as $t) if(!empty($t)) $tmp2[] = $t;
+                $result['link_canonical']       = implode('/', $tmp2);
+            }
             /* type */
             $result['type']                     = $type;
             $result['rating_author_name']       = 1;
