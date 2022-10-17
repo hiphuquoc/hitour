@@ -117,7 +117,7 @@
                             $selected   = null;
                             if(!empty($item->staffs)){
                                 foreach($item->staffs as $s) {
-                                    if($staff['id']==$s['staff_info_id']) {
+                                    if(!empty($s['staff_info_id'])&&$s['staff_info_id']==$staff['id']) {
                                         $selected = ' selected';
                                         break;
                                     }
@@ -139,7 +139,7 @@
                             $selected   = null;
                             if(!empty($item->partners)){
                                 foreach($item->partners as $p) {
-                                    if($partner['id']==$p['partner_info_id']) {
+                                    if(!empty($p['partner_info_id'])&&$p['partner_info_id']==$partner['id']) {
                                         $selected = ' selected';
                                         break;
                                     }

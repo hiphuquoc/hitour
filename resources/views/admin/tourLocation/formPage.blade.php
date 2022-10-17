@@ -103,7 +103,7 @@
                             $selected           = null;
                             if(!empty($item->guides)&&$item->guides->isNotEmpty()){
                                 foreach($item->guides as $g){
-                                    if($g->guide_info_id==$guide->id){
+                                    if(!empty($g->guide_info_id)&&$g->guide_info_id==$guide->id){
                                         $selected   = ' selected';
                                         break;
                                     }
@@ -125,7 +125,7 @@
                             $selected           = null;
                             if(!empty($item->shipLocations)&&$item->shipLocations->isNotEmpty()){
                                 foreach($item->shipLocations as $s){
-                                    if($s->infoShipLocation->id==$shipLocation->id){
+                                    if(!empty($s->infoShipLocation->id)&&$s->infoShipLocation->id==$shipLocation->id){
                                         $selected   = ' selected';
                                         break;
                                     }
@@ -147,7 +147,7 @@
                             $selected           = null;
                             if(!empty($item->serviceLocations)&&$item->serviceLocations->isNotEmpty()){
                                 foreach($item->serviceLocations as $s){
-                                    if($s->infoServiceLocation->id==$serviceLocation->id){
+                                    if(!empty($s->infoServiceLocation->id)&&$s->infoServiceLocation->id==$serviceLocation->id){
                                         $selected   = ' selected';
                                         break;
                                     }
@@ -169,7 +169,7 @@
                             $selected           = null;
                             if(!empty($item->carrentalLocations)&&$item->carrentalLocations->isNotEmpty()){
                                 foreach($item->carrentalLocations as $c){
-                                    if($c->infoCarrentalLocation->id==$carrentalLocation->id){
+                                    if(!empty($c->infoCarrentalLocation->id)&&$c->infoCarrentalLocation->id==$carrentalLocation->id){
                                         $selected   = ' selected';
                                         break;
                                     }
@@ -191,7 +191,7 @@
                             $selected           = null;
                             if(!empty($item->airLocations)&&$item->airLocations->isNotEmpty()){
                                 foreach($item->airLocations as $a){
-                                    if($a->infoAirLocation->id==$airLocation->id){
+                                    if(!empty($a->infoAirLocation->id)&&$a->infoAirLocation->id==$airLocation->id){
                                         $selected   = ' selected';
                                         break;
                                     }

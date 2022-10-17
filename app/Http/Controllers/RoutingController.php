@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Blade;
 
 use App\Helpers\Url;
+use App\Models\TourInfoForeign;
 
 class RoutingController extends Controller {
 
@@ -237,6 +238,22 @@ class RoutingController extends Controller {
                     // $content            = Blade::render(Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
                     return view('main.tourCountry.index', compact('item', 'breadcrumb'));
+                case 'tour_info_foreign':
+                    $item               = TourInfoForeign::select('*')
+                                            ->whereHas('seo', function($q) use ($checkExists){
+                                                $q->where('slug', $checkExists['slug']);
+                                            })
+                                            ->with(['files' => function($query){
+                                                $query->where('relation_table', 'tour_info_foreign');
+                                            }])
+                                            ->with(['questions' => function($q){
+                                                $q->where('relation_table', 'tour_info_foreign');
+                                            }])
+                                            ->with('seo', 'staffs.infoStaff', 'options.prices', 'departure', 'content', 'timetables')
+                                            ->first();
+                    $content            = Blade::render(Storage::get(config('admin.storage.contentTour').$item->seo->slug.'.blade.php'));
+                    $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
+                    return view('main.tourInfoForeign.index', compact('item', 'breadcrumb', 'content'));
             }
         }else {
             /* Error 404 */
