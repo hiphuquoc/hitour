@@ -1,5 +1,5 @@
-<div class="serviceGrid">
-    @if(!empty($list))
+@if(!empty($list)&&$list->isNotEmpty())
+    <div class="serviceGrid">
         @foreach($list as $air)
             <div class="serviceGrid_item">
                 <a href="/{{ $air->seo->slug_full }}" class="serviceGrid_item_image">
@@ -35,5 +35,5 @@
                 </div> --}}
             </div>
         @endforeach
-    @endif
-</div>
+    </div>
+@endif
