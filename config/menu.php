@@ -177,5 +177,17 @@ return [
             'route'     => 'admin.image.list',
             'icon'      => '<i class="fa-solid fa-image"></i>'
         ],
+        [
+            'name'      => 'Công cụ SEO',
+            'route'     => '',
+            'icon'      => '<i class="fa-solid fa-screwdriver-wrench"></i>',
+            'child'     => [
+                [
+                    'name'  => '1. Blog vệ tinh',
+                    'route' => 'admin.toolSeo.listBlogger',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ]
+            ]
+        ],
     ]
 ];

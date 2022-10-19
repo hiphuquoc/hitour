@@ -1035,4 +1035,30 @@ class BuildInsertUpdateModel {
         }
         return $result;
     }
+
+    public static function buildArrayTableBloggerInfo($dataForm){
+        /*
+            name
+            url
+            email
+            password
+            phone
+            status
+            page_support
+            email_manager
+            note
+        */
+        $result     = [];
+        if(!empty($dataForm)){
+            $result['name']             = $dataForm['name'] ?? null;
+            $result['url']              = $dataForm['url'] ?? null;
+            $result['password']         = $dataForm['password'] ?? null;
+            $result['phone']            = $dataForm['phone'] ?? null;
+            $result['status']           = $dataForm['status'] ?? null;
+            $result['page_support']     = $dataForm['page_support'] ?? null;
+            $result['email_manager']    = $dataForm['email'] ?? null;
+            $result['note']             = $dataForm['note'] ?? null;
+        }
+        return $result;
+    }
 }

@@ -49,6 +49,20 @@
             elemtShow.html(lengthInput);
         }
     })
-
+    /* Setting view */
+    function settingView(name, valDefault){
+        $.ajax({
+            url         : '{{ route("admin.setting.settingView") }}',
+            type        : 'get',
+            dataType    : 'html',
+            data        : {
+                name,
+                default : valDefault
+            },
+            success     : function(result){
+                location.reload();
+            }
+        });
+    }
     
 </script>

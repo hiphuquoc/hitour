@@ -703,3 +703,13 @@ html .content {
 .main-menu.menu-light .navigation > li ul li ul a {
   padding: 10px 15px !important;
 }
+
+.pagination {
+  margin-bottom: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.page-link {
+  width: 30px;
+}

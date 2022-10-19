@@ -35,6 +35,9 @@ use App\Http\Controllers\AdminTourCountryController;
 use App\Http\Controllers\AdminTourInfoForeignController;
 use App\Http\Controllers\AdminTourOptionForeignController;
 
+use App\Http\Controllers\AdminToolSeoController;
+use App\Http\Controllers\AdminSettingController;
+
 use App\Http\Controllers\AdminStaffController;
 use App\Http\Controllers\AdminCostController;
 use App\Http\Controllers\AdminImageController;
@@ -364,11 +367,19 @@ Route::prefix('admin')->group(function(){
             Route::post('/updateOption', [AdminTourOptionForeignController::class, 'update'])->name('admin.tourOptionForeign.updateOption');
             Route::post('/deleteOption', [AdminTourOptionForeignController::class, 'delete'])->name('admin.tourOptionForeign.deleteOption');
         });
+        /* ===== TOOL SEO ===== */
+        Route::prefix('toolSeo')->group(function(){
+            Route::get('/listBlogger', [AdminToolSeoController::class, 'listBlogger'])->name('admin.toolSeo.listBlogger');
+            Route::get('/viewBlogger', [AdminToolSeoController::class, 'viewBlogger'])->name('admin.toolSeo.viewBlogger');
+            Route::post('/addBlogger', [AdminToolSeoController::class, 'addBlogger'])->name('admin.toolSeo.addBlogger');
+            Route::get('/deleteBlogger', [AdminToolSeoController::class, 'deleteBlogger'])->name('admin.toolSeo.deleteBlogger');
+        });
         /* ===== AJAX ===== */
         Route::post('/loadProvinceByRegion', [AdminFormController::class, 'loadProvinceByRegion'])->name('admin.form.loadProvinceByRegion');
         Route::post('/loadDistrictByProvince', [AdminFormController::class, 'loadDistrictByProvince'])->name('admin.form.loadDistrictByProvince');
         Route::post('/removeSlider', [AdminSliderController::class, 'removeSlider'])->name('admin.slider.removeSlider');
         Route::get('/removeGallery', [AdminGalleryController::class, 'removeGallery'])->name('admin.gallery.removeGallery');
+        Route::get('/settingView', [AdminSettingController::class, 'settingView'])->name('admin.setting.settingView');
     });
 });
 
