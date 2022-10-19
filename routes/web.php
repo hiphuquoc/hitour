@@ -373,6 +373,9 @@ Route::prefix('admin')->group(function(){
             Route::get('/viewBlogger', [AdminToolSeoController::class, 'viewBlogger'])->name('admin.toolSeo.viewBlogger');
             Route::post('/addBlogger', [AdminToolSeoController::class, 'addBlogger'])->name('admin.toolSeo.addBlogger');
             Route::get('/deleteBlogger', [AdminToolSeoController::class, 'deleteBlogger'])->name('admin.toolSeo.deleteBlogger');
+            Route::get('/listAutoPost', [AdminToolSeoController::class, 'listAutoPost'])->name('admin.toolSeo.listAutoPost');
+            Route::get('/loadContentspin', [AdminToolSeoController::class, 'loadContentspin'])->name('admin.toolSeo.loadContentspin');
+            Route::get('/createContentspin', [AdminToolSeoController::class, 'createContentspin'])->name('admin.toolSeo.createContentspin');
         });
         /* ===== AJAX ===== */
         Route::post('/loadProvinceByRegion', [AdminFormController::class, 'loadProvinceByRegion'])->name('admin.form.loadProvinceByRegion');

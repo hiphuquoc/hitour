@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Contentspin extends Model {
+    use HasFactory;
+    protected $table        = 'contentspin_info';
+    protected $fillable     = [
+        'seo_id', 
+        'title',
+        'description',
+        'content'
+    ];
+    public $timestamps      = false;
+
+    public static function insertItem($params){
+        $id             = 0;
+        if(!empty($params)){
+            $model      = new Contentspin();
+            foreach($params as $key => $value) $model->{$key}  = $value;
+            $model->save();
+            $id         = $model->id;
+        }
+        return $id;
+    }
+
+    public static function updateItem($id, $params){
+        $flag           = false;
+        if(!empty($id)&&!empty($params)){
+            $model      = self::find($id);
+            foreach($params as $key => $value) $model->{$key}  = $value;
+            $flag       = $model->update();
+        }
+        return $flag;
+    }
+
+    // public function seo() {
+    //     return $this->hasOne(\App\Models\Seo::class, 'id', 'seo_id');
+    // }
+}

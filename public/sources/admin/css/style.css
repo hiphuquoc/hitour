@@ -52,6 +52,16 @@ table:not(.sendEmail) tr td div.oneLine:not(:first-child), table:not(.sendEmail)
 table:not(.sendEmail) tr td div.oneLine .badge, table:not(.sendEmail) tr th div.oneLine .badge {
   margin-top: 0.3rem;
 }
+table:not(.sendEmail) tr td i, table:not(.sendEmail) tr th i {
+  font-size: 1.2rem;
+  color: #adb5bd;
+  width: 20px;
+  margin-right: 0.25rem;
+  text-align: center;
+}
+table:not(.sendEmail) tr td i.active, table:not(.sendEmail) tr th i.active {
+  color: rgb(105, 103, 240);
+}
 table:not(.sendEmail) tr th {
   background: rgb(105, 103, 240) !important;
   color: #fff !important;

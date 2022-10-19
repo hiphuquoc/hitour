@@ -88,4 +88,12 @@ class Seo extends Model {
         }
         return $url;
     }
+
+    public function keywords() {
+        return $this->hasMany(\App\Models\Keyword::class, 'seo_id', 'id');
+    }
+
+    public function contentspin() {
+        return $this->hasOne(\App\Models\Contentspin::class, 'seo_id', 'id');
+    }
 }
