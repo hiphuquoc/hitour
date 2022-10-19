@@ -141,14 +141,6 @@
                     loadContentspin(id);
                     /* tải lại row */
                     loadRowAutoPost(id);
-                    /* tô nền cột vừa cập nhật */
-                    setTimeout(() => {
-                        $('#row_'+id).css('background', 'rgba(0,123,255,0.1)');
-                    }, 100);
-                    /* bỏ tô màu */
-                    setTimeout(() => {
-                        $('#row_'+id).css('background', 'unset');
-                    }, 5000);
                 }
             });
         });
