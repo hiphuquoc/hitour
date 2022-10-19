@@ -137,8 +137,18 @@
                 },
                 success     : function(id){
                     showMessage('js_showMessage', 'Cập nhật Contentspin thành công!', 'success');
+                    /* tải lại form */
                     loadContentspin(id);
-                    $('#row_'+id).css('background', 'rgba(0,123,255,0.1)');
+                    /* tải lại row */
+                    loadRowAutoPost(id);
+                    /* tô nền cột vừa cập nhật */
+                    setTimeout(() => {
+                        $('#row_'+id).css('background', 'rgba(0,123,255,0.1)');
+                    }, 100);
+                    /* bỏ tô màu */
+                    setTimeout(() => {
+                        $('#row_'+id).css('background', 'unset');
+                    }, 5000);
                 }
             });
         });
@@ -153,6 +163,20 @@
                 },
                 success     : function(data){
                     $('#js_loadContentspin_idWrite').html(data);
+                }
+            });
+        }
+
+        function loadRowAutoPost(idSeo){
+            $.ajax({
+                url         : '{{ route("admin.toolSeo.loadRowAutoPost") }}',
+                type        : 'get',
+                dataType    : 'html',
+                data        : {
+                    id    : idSeo
+                },
+                success     : function(data){
+                    $('#row_'+idSeo).replaceWith(data);
                 }
             });
         }

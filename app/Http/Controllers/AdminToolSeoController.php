@@ -60,6 +60,18 @@ class AdminToolSeoController extends Controller {
         return view('admin.toolSeo.listAutoPost', compact('list', 'viewPerPage'));
     }
 
+    public function loadRowAutoPost(Request $request){
+        $result         = null;
+        if(!empty($request->get('id'))){
+            $item       = Seo::select('*')
+                            ->where('id', $request->get('id'))
+                            ->with('keywords', 'contentspin')
+                            ->first();
+            $result     = view('admin.toolSeo.oneRowAutoPost', compact('item'));
+        }
+        echo $result;
+    }
+
     public function loadContentspin(Request $request){
         $result         = null;
         if(!empty($request->get('id'))){

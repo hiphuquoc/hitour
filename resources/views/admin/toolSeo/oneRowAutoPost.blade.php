@@ -1,6 +1,6 @@
 @if(!empty($item))
 <tr id="row_{{ $item->id }}" style="{{ $style ?? null }}">
-    <td class="text-center">{{ $no }}</td>
+    <td class="text-center">{{ $no ?? '-' }}</td>
     <td>
         <div>
             <b>{{ $item->title }}</b> - {{ $item->slug_full }}
