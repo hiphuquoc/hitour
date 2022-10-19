@@ -14,7 +14,7 @@
             <i class="fa-solid fa-font {{ !empty($item->keywords)&&$item->keywords->isNotEmpty() ? 'active' : null }}"></i>Bộ từ khóa
         </div>
         <div class="oneLine" data-bs-toggle="modal" data-bs-target="#shareProject" style="cursor:pointer;" onClick="loadContentspin({{ $item->id }});">
-            <i class="fa-solid fa-file-word {{ !empty($item->contentspins)&&$item->contentspins->isNotEmpty() ? 'active' : null }}"></i>Nội dung spin
+            <i class="fa-solid fa-file-word {{ !empty($item->contentspin) ? 'active' : null }}"></i>Nội dung spin
         </div>
     </td>
     <td style="vertical-align:top;display:flex;">
