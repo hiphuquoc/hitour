@@ -188,7 +188,7 @@ return [
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '2. Auto post',
+                    'name'  => '2. Auto Post',
                     'route' => 'admin.toolSeo.listAutoPost',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ]

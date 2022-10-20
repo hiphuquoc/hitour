@@ -27,7 +27,7 @@
                 <tr>
                     <th class="text-center" style="width:70px;"></th>
                     <th class="text-center">Thông tin</th>
-                    <th class="text-center">Thao tác</th>
+                    <th class="text-center">Dữ liệu</th>
                     <th class="text-center" style="width:100px;">Auto Post</th>
                 </tr>
             </thead>
