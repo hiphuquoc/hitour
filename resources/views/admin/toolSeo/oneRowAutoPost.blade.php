@@ -10,10 +10,10 @@
         </div>
     </td>
     <td>
-        <div class="oneLine" style="cursor:pointer;">
+        <div class="oneLine" data-bs-toggle="modal" data-bs-target="#modalBox_keyword" style="cursor:pointer;" onClick="loadFormKeyword({{ $item->id }});">
             <i class="fa-solid fa-font {{ !empty($item->keywords)&&$item->keywords->isNotEmpty() ? 'active' : null }}"></i>Bộ từ khóa
         </div>
-        <div class="oneLine" data-bs-toggle="modal" data-bs-target="#shareProject" style="cursor:pointer;" onClick="loadContentspin({{ $item->id }});">
+        <div class="oneLine" data-bs-toggle="modal" data-bs-target="#modalBox_contentspin" style="cursor:pointer;" onClick="loadFormContentspin({{ $item->id }});">
             <i class="fa-solid fa-file-word {{ !empty($item->contentspin) ? 'active' : null }}"></i>Nội dung spin
         </div>
     </td>

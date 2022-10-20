@@ -500,7 +500,7 @@ html .content {
 .modal {
     background: rgba(0,0,0,0.4);
     &-header {
-        padding: 1rem 1.4rem;
+        padding: 0.75rem 1.4rem;
         background: $color-primary !important;
         h2, h3, h4 {
             @include titleBox;
@@ -816,4 +816,21 @@ html .content {
 
 .page-link {
     width: 30px;
+}
+
+.badgeKeyword {
+    font-size: 0.95rem;
+    margin-right: 0.15rem;
+    margin-bottom: 0.35rem;
+    padding: 0.25rem 0 0.25rem 0.75rem;
+    color: #fff;
+    border-radius: 3px;
+    display: inline-block;
+    i {
+        padding: 0.25rem 0.5rem;
+        margin-left: 0.25rem;
+        cursor: pointer;
+        vertical-align: bottom;
+        margin-bottom: -0.1rem;
+    }
 }

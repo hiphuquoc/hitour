@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Seo;
 use App\Models\Blogger;
 use App\Models\Contentspin;
+use App\Models\Keyword;
 use App\Services\BuildInsertUpdateModel;
 use Illuminate\Support\Facades\Cookie;
 
@@ -55,6 +56,7 @@ class AdminToolSeoController extends Controller {
     public function listAutoPost(){
         $viewPerPage    = Cookie::get('viewAutoPost') ?? 50;
         $list           = Seo::select('*')
+                            ->orderBy('type', 'DESC')
                             ->with('keywords', 'contentspin')
                             ->paginate($viewPerPage);
         return view('admin.toolSeo.listAutoPost', compact('list', 'viewPerPage'));
@@ -72,7 +74,7 @@ class AdminToolSeoController extends Controller {
         echo $result;
     }
 
-    public function loadContentspin(Request $request){
+    public function loadFormContentspin(Request $request){
         $result         = null;
         if(!empty($request->get('id'))){
             $item       = Seo::select('*')
@@ -86,7 +88,6 @@ class AdminToolSeoController extends Controller {
     }
 
     public function createContentspin(Request $request){
-        $idContentspin  = null;
         if(!empty($request->get('dataForm'))){
             $dataForm   = [];
             foreach($request->get('dataForm') as $tmp){
@@ -96,7 +97,7 @@ class AdminToolSeoController extends Controller {
             Contentspin::select('*')
                 ->where('seo_id', $dataForm['seo_id'])
                 ->delete();
-            $idContentspin  = Contentspin::insertItem([
+            Contentspin::insertItem([
                 'seo_id'        => $dataForm['seo_id'],
                 'title'         => $dataForm['title'],
                 'description'   => $dataForm['description'],
@@ -104,5 +105,54 @@ class AdminToolSeoController extends Controller {
             ]);
         }
         echo $dataForm['seo_id'];
+    }
+
+    public function loadFormKeyword(Request $request){
+        $result         = null;
+        if(!empty($request->get('id'))){
+            $item       = Seo::select('*')
+                            ->where('id', $request->get('id'))
+                            ->with('keywords')
+                            ->first();
+            $result     = view('admin.toolSeo.formKeyword', compact('item'));
+        }
+        echo $result;
+    }
+
+    public function createKeyword(Request $request){
+        $result                 = null;
+        if(!empty($request->get('id')&&!empty($request->get('strKeyword')))){
+            $idSeo              = $request->get('id');
+            $arrayKeyword       = explode(',', $request->get('strKeyword'));
+            foreach($arrayKeyword as $keyword){
+                if(!empty($keyword)){
+                    $tmp        = Keyword::select('*')
+                                    ->where('seo_id', $idSeo)
+                                    ->where('keyword', $keyword)
+                                    ->first();
+                    if(empty($tmp)){
+                        $idKeyword = Keyword::insertItem([
+                            'seo_id'    => $idSeo,
+                            'keyword'   => $keyword
+                        ]);
+                        $result     .= '<span id="keyword_'.$idKeyword.'" class="bg-primary badgeKeyword">
+                                            '.$keyword.'
+                                            <i class="fa-solid fa-xmark" onClick="deleteKeyword('.$idKeyword.');"></i>
+                                        </span>';
+                    }
+                }
+            }
+        }
+        echo $result;
+    }
+
+    public function deleteKeyword(Request $request){
+        $flag       = false;
+        if(!empty($request->get('idKeyword'))){
+            $flag   = Keyword::select('*')
+                        ->where('id', $request->get('idKeyword'))
+                        ->delete();
+        }
+        echo $flag;
     }
 }

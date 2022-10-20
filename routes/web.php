@@ -375,8 +375,11 @@ Route::prefix('admin')->group(function(){
             Route::get('/deleteBlogger', [AdminToolSeoController::class, 'deleteBlogger'])->name('admin.toolSeo.deleteBlogger');
             Route::get('/listAutoPost', [AdminToolSeoController::class, 'listAutoPost'])->name('admin.toolSeo.listAutoPost');
             Route::get('/loadRowAutoPost', [AdminToolSeoController::class, 'loadRowAutoPost'])->name('admin.toolSeo.loadRowAutoPost');
-            Route::get('/loadContentspin', [AdminToolSeoController::class, 'loadContentspin'])->name('admin.toolSeo.loadContentspin');
+            Route::get('/loadFormContentspin', [AdminToolSeoController::class, 'loadFormContentspin'])->name('admin.toolSeo.loadFormContentspin');
             Route::get('/createContentspin', [AdminToolSeoController::class, 'createContentspin'])->name('admin.toolSeo.createContentspin');
+            Route::get('/loadFormKeyword', [AdminToolSeoController::class, 'loadFormKeyword'])->name('admin.toolSeo.loadFormKeyword');
+            Route::get('/createKeyword', [AdminToolSeoController::class, 'createKeyword'])->name('admin.toolSeo.createKeyword');
+            Route::get('/deleteKeyword', [AdminToolSeoController::class, 'deleteKeyword'])->name('admin.toolSeo.deleteKeyword');
         });
         /* ===== AJAX ===== */
         Route::post('/loadProvinceByRegion', [AdminFormController::class, 'loadProvinceByRegion'])->name('admin.form.loadProvinceByRegion');

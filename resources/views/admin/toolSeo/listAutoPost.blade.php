@@ -59,52 +59,23 @@
     </div>
 </div>
 {{ !empty($list&&$list->isNotEmpty()) ? $list->appends(request()->query())->links('admin.template.paginate') : '' }}
-<!-- Nút thêm -->
-<div class="addItemBox" data-bs-toggle="modal" data-bs-target="#modalBox">
-    <i class="fa-regular fa-plus"></i>
-    <span>Thêm</span>
-</div>
-<!-- ===== START:: Modal ===== -->
-<form id="formAddBlogger" method="POST" action="#">
-@csrf
-    <!-- Input Hidden -->
-    {{-- <input type="hidden" id="tour_info_id" name="tour_info_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : 0 }}" /> --}}
-    <div class="modal fade" id="modalBox" tabindex="-1" aria-labelledby="addNewCardTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-transparent">
-                    <h4 id="js_loadFormOption_header">Thêm Blog vệ tinh mới</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div id="js_loadFormOption_body" class="modal-body">
-                    @include('admin.toolSeo.formAddBlogger', ['item' => null])
-                </div>
-                <div class="modal-footer">
-                    <div id="js_validateFormModal_message" class="error" style="display:none;"><!-- Load Ajax --></div>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary" onClick="addBlogger();">Xác nhận</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-<!-- ===== END:: Modal ===== -->
-<!-- ===== START:: Modal ===== -->
+
+<!-- ===== START:: Modal Contentspin ===== -->
 <form id="formContentspin"  class="needs-validation invalid" method="GET" action="#">
 @csrf
     <!-- Input Hidden -->
     {{-- <input type="hidden" id="tour_info_id" name="tour_info_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : 0 }}" /> --}}
-    <div class="modal fade" id="shareProject" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="modalBox_contentspin" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-transparent">
-                    <h4 id="js_loadFormOption_header">Thêm /Sửa Nội dung Spin</h4>
+                    <h4>Thêm /Sửa Nội dung Spin</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="formBox">
-                        <div id="js_loadContentspin_idWrite" class="formBox_full">
-                            <!-- load AJAX:: loadContentspin -->
+                        <div id="js_loadFormContentspin_idWrite" class="formBox_full">
+                            <!-- load AJAX:: loadFormContentspin -->
                         </div>
                     </div>
                 </div>
@@ -119,6 +90,31 @@
         </div>
     </div>
 </form>
+<!-- ===== END:: Modal ===== -->
+
+<!-- ===== START:: Modal Keyword ===== -->
+<div class="modal fade" id="modalBox_keyword" tabindex="-1" aria-labelledby="addNewCardTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-transparent">
+                <h4>Thêm Từ khóa</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="formBox" style="padding:0.5rem 0;">
+                    <div id="js_loadFormKeyword_idWrite" class="formBox_full">
+                        <!-- load AJAX:: loadFormKeyword -->
+                    </div>
+                </div>
+            </div>
+            {{-- <div class="modal-footer">
+                <div id="js_validateFormModal_message" class="error" style="display:none;"><!-- Load Ajax --></div>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" onClick="addBlogger();">Xác nhận</button>
+            </div> --}}
+        </div>
+    </div>
+</div>
 <!-- ===== END:: Modal ===== -->
     
 @endsection
@@ -138,23 +134,70 @@
                 success     : function(id){
                     showMessage('js_showMessage', 'Cập nhật Contentspin thành công!', 'success');
                     /* tải lại form */
-                    loadContentspin(id);
+                    loadFormContentspin(id);
                     /* tải lại row */
                     loadRowAutoPost(id);
                 }
             });
         });
 
-        function loadContentspin(idSeo){
+        function loadFormContentspin(idSeo){
             $.ajax({
-                url         : '{{ route("admin.toolSeo.loadContentspin") }}',
+                url         : '{{ route("admin.toolSeo.loadFormContentspin") }}',
                 type        : 'get',
                 dataType    : 'html',
                 data        : {
                     id    : idSeo
                 },
                 success     : function(data){
-                    $('#js_loadContentspin_idWrite').html(data);
+                    $('#js_loadFormContentspin_idWrite').html(data);
+                }
+            });
+        }
+
+        function loadFormKeyword(idSeo){
+            $.ajax({
+                url         : '{{ route("admin.toolSeo.loadFormKeyword") }}',
+                type        : 'get',
+                dataType    : 'html',
+                data        : {
+                    id    : idSeo
+                },
+                success     : function(data){
+                    $('#js_loadFormKeyword_idWrite').html(data);
+                }
+            });
+        }
+
+        function createKeyword(element){
+            const strKeyword    = $(element).val();
+            const idSeo         = $('[name=seo_id]').val();
+            $.ajax({
+                url         : '{{ route("admin.toolSeo.createKeyword") }}',
+                type        : 'get',
+                dataType    : 'html',
+                data        : {
+                    id          : idSeo,
+                    strKeyword
+                },
+                success     : function(data){
+                    const contentOld    = $('#js_createKeyword_idWrite').html();
+                    $('#js_createKeyword_idWrite').html(data + contentOld);
+                    $(element).val('');
+                }
+            });
+        }
+
+        function deleteKeyword(idKeyword){
+            $.ajax({
+                url         : '{{ route("admin.toolSeo.deleteKeyword") }}',
+                type        : 'get',
+                dataType    : 'html',
+                data        : {
+                    idKeyword
+                },
+                success     : function(data){
+                    $('#keyword_'+idKeyword).hide();
                 }
             });
         }
