@@ -18,8 +18,25 @@
         </div>
     </td>
     <td style="vertical-align:top;display:flex;">
-        <div class="form-check form-check-primary form-switch">
-            <input type="checkbox" checked="" class="form-check-input" id="customSwitch3">
+        @php
+            $toolTip        = 'data-toggle="tooltip" data-placement="top" data-bs-original-title="Để bật tính năng này phải cập nhật *Bộ từ khóa* và *Nội dung spin* trước!"';
+            $disabled       = 'disabled';
+            $checked        = null;
+            $action         = null;
+            if(!empty($item->auto_post)&&$item->auto_post==1){
+                $toolTip    = null;
+                $disabled   = null;
+                $checked    = 'checked';
+                $action     = 'onClick="changeAutoPost(this);"';
+            }
+            if(!empty($item->keywords)&&$item->keywords->isNotEmpty()&&!empty($item->contentspin)){
+                $toolTip    = null;
+                $disabled   = null;
+                $action     = 'onClick="changeAutoPost(this);"';
+            }
+        @endphp
+        <div class="form-check form-check-primary form-switch" {!! $toolTip !!} style="margin:0 auto;cursor:pointer;">
+            <input type="checkbox" class="form-check-input" value="{{ $item->id }}" {{ $checked }} {!! $action !!} {{ $disabled }} style="cursor:pointer;" />
         </div>
     </td>
 </tr>

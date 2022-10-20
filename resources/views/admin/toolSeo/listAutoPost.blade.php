@@ -28,7 +28,7 @@
                     <th class="text-center" style="width:70px;"></th>
                     <th class="text-center">Thông tin</th>
                     <th class="text-center">Thao tác</th>
-                    <th class="text-center" width="60px">-</th>
+                    <th class="text-center" style="width:100px;">Auto Post</th>
                 </tr>
             </thead>
             <tbody>
@@ -141,6 +141,25 @@
             });
         });
 
+        function changeAutoPost(element){
+            const idSeo         = $(element).val();
+            let autoPost        = 1;
+            const statusElement = $(element).prop('checked');
+            if(statusElement==false) autoPost = 0;
+            $.ajax({
+                url         : '{{ route("admin.toolSeo.changeAutoPost") }}',
+                type        : 'get',
+                dataType    : 'html',
+                data        : {
+                    id          : idSeo,
+                    auto_post   : autoPost
+                },
+                success     : function(data){
+                    /*  */
+                }
+            });
+        }
+
         function loadFormContentspin(idSeo){
             $.ajax({
                 url         : '{{ route("admin.toolSeo.loadFormContentspin") }}',
@@ -184,6 +203,8 @@
                     const contentOld    = $('#js_createKeyword_idWrite').html();
                     $('#js_createKeyword_idWrite').html(data + contentOld);
                     $(element).val('');
+                    /* tải lại row */
+                    loadRowAutoPost(idSeo);
                 }
             });
         }
@@ -198,6 +219,9 @@
                 },
                 success     : function(data){
                     $('#keyword_'+idKeyword).hide();
+                    /* tải lại row */
+                    const idSeo     = $('[name=seo_id]').val();
+                    loadRowAutoPost(idSeo);
                 }
             });
         }

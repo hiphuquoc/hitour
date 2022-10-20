@@ -103,6 +103,8 @@ class AdminToolSeoController extends Controller {
                 'description'   => $dataForm['description'],
                 'content'       => $dataForm['content']
             ]);
+            /* bật auto_post (điều kiện kiểm tra trong hàm) */
+            self::handleChangeAutoPost($dataForm['seo_id'], 1);
         }
         echo $dataForm['seo_id'];
     }
@@ -123,6 +125,12 @@ class AdminToolSeoController extends Controller {
         $result                 = null;
         if(!empty($request->get('id')&&!empty($request->get('strKeyword')))){
             $idSeo              = $request->get('id');
+            /* kiểm tra xem có phải thêm từ khóa lần đầu? */
+            $tmp                = Keyword::select('*')
+                                    ->where('seo_id', $idSeo)
+                                    ->first();
+            $flagFirst          = !empty($tmp) ? false : true;
+            /* thêm từ khóa */
             $arrayKeyword       = explode(',', $request->get('strKeyword'));
             foreach($arrayKeyword as $keyword){
                 if(!empty($keyword)){
@@ -139,6 +147,8 @@ class AdminToolSeoController extends Controller {
                                             '.$keyword.'
                                             <i class="fa-solid fa-xmark" onClick="deleteKeyword('.$idKeyword.');"></i>
                                         </span>';
+                        /* bật auto_post (điều kiện kiểm tra trong hàm) */
+                        if($flagFirst==true) self::handleChangeAutoPost($idSeo, 1);
                     }
                 }
             }
@@ -149,10 +159,43 @@ class AdminToolSeoController extends Controller {
     public function deleteKeyword(Request $request){
         $flag       = false;
         if(!empty($request->get('idKeyword'))){
-            $flag   = Keyword::select('*')
-                        ->where('id', $request->get('idKeyword'))
-                        ->delete();
+            $infoKeyword    = Keyword::select('*')
+                                ->where('id', $request->get('idKeyword'))
+                                ->first();
+            /* xoá keyword */
+            $flag           = $infoKeyword->delete();
+            /* kiểm tra nếu xóa từ khóa cuối cùng => chuyển auto_post về off */
+            $idSeo          = $infoKeyword->seo_id ?? 0;
+            $tmp            = Keyword::select('*')
+                                ->where('seo_id', $idSeo)
+                                ->first();
+            if(empty($tmp)) self::handleChangeAutoPost($idSeo, 0);
         }
         echo $flag;
+    }
+
+    public function changeAutoPost(Request $request){
+        $flag       = false;
+        if(!empty($request->get('id'))){
+            $flag   = Seo::updateItem($request->get('id'), ['auto_post' => $request->get('auto_post')]);
+        }
+        echo $flag;
+    }
+
+    public static function handleChangeAutoPost($idSeo, $status = 1){
+        if(!empty($idSeo)){
+            if($status==1){ /* bật */
+                $tmp = Seo::select('*')
+                        ->where('id', $idSeo)
+                        ->with('keywords', 'contentspin')
+                        ->first();
+                /* bật auto_post nếu đủ cả keywords và contentspin */
+                if(!empty($tmp->keywords)&&$tmp->keywords->isNotEmpty()&&!empty($tmp->contentspin)){
+                    Seo::updateItem($idSeo, ['auto_post' => 1]);
+                }
+            }else { /* tắt */
+                Seo::updateItem($idSeo, ['auto_post' => 0]);
+            }
+        }
     }
 }

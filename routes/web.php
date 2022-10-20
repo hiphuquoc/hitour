@@ -373,6 +373,7 @@ Route::prefix('admin')->group(function(){
             Route::get('/viewBlogger', [AdminToolSeoController::class, 'viewBlogger'])->name('admin.toolSeo.viewBlogger');
             Route::post('/addBlogger', [AdminToolSeoController::class, 'addBlogger'])->name('admin.toolSeo.addBlogger');
             Route::get('/deleteBlogger', [AdminToolSeoController::class, 'deleteBlogger'])->name('admin.toolSeo.deleteBlogger');
+            Route::get('/changeAutoPost', [AdminToolSeoController::class, 'changeAutoPost'])->name('admin.toolSeo.changeAutoPost');
             Route::get('/listAutoPost', [AdminToolSeoController::class, 'listAutoPost'])->name('admin.toolSeo.listAutoPost');
             Route::get('/loadRowAutoPost', [AdminToolSeoController::class, 'loadRowAutoPost'])->name('admin.toolSeo.loadRowAutoPost');
             Route::get('/loadFormContentspin', [AdminToolSeoController::class, 'loadFormContentspin'])->name('admin.toolSeo.loadFormContentspin');
