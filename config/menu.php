@@ -191,6 +191,11 @@ return [
                     'name'  => '2. Auto Post',
                     'route' => 'admin.toolSeo.listAutoPost',
                     'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '3. Check Onpage',
+                    'route' => 'admin.toolSeo.listCheckSeo',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
                 ]
             ]
         ],

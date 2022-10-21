@@ -740,3 +740,24 @@ html .content {
   vertical-align: bottom;
   margin-bottom: -0.1rem;
 }
+
+.iconWithNumber {
+  position: relative;
+}
+.iconWithNumber i {
+  font-size: 1.6rem !important;
+}
+.iconWithNumber_number {
+  position: absolute;
+  top: -10px;
+  right: 0;
+  background: #27AE60;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #fff;
+}

@@ -112,5 +112,12 @@ return [
 
     'alert'     => [
         'confirmRemove'     => 'Bạn có chắc muốn thực hiện thao tác này!'
+    ],
+
+    'error_color'   => [
+        0   => '#27AE60',
+        1   => '#D4AC0D',
+        2   => '#D35400',
+        3   => '#C0392B'
     ]
 ];

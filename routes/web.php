@@ -37,6 +37,7 @@ use App\Http\Controllers\AdminTourOptionForeignController;
 
 use App\Http\Controllers\AdminToolSeoController;
 use App\Http\Controllers\AdminSettingController;
+use App\Http\Controllers\AdminCheckSeoController;
 
 use App\Http\Controllers\AdminStaffController;
 use App\Http\Controllers\AdminCostController;
@@ -381,6 +382,7 @@ Route::prefix('admin')->group(function(){
             Route::get('/loadFormKeyword', [AdminToolSeoController::class, 'loadFormKeyword'])->name('admin.toolSeo.loadFormKeyword');
             Route::get('/createKeyword', [AdminToolSeoController::class, 'createKeyword'])->name('admin.toolSeo.createKeyword');
             Route::get('/deleteKeyword', [AdminToolSeoController::class, 'deleteKeyword'])->name('admin.toolSeo.deleteKeyword');
+            Route::get('/listCheckSeo', [AdminCheckSeoController::class, 'listCheckSeo'])->name('admin.toolSeo.listCheckSeo');
         });
         /* ===== AJAX ===== */
         Route::post('/loadProvinceByRegion', [AdminFormController::class, 'loadProvinceByRegion'])->name('admin.form.loadProvinceByRegion');

@@ -258,11 +258,11 @@ class RoutingController extends Controller {
         }else {
             /* Error 404 */
             // return view('main.error.404');
-
             // return view('main.blog.detail');
+
+            return response()->json([
+                'status' => '404'
+            ]);
         }
     }
-
-    
-
 }

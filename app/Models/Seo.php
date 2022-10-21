@@ -96,4 +96,8 @@ class Seo extends Model {
     public function contentspin() {
         return $this->hasOne(\App\Models\Contentspin::class, 'seo_id', 'id');
     }
+
+    public function checkSeos() {
+        return $this->hasMany(\App\Models\CheckSeo::class, 'seo_id', 'id');
+    }
 }
