@@ -4,19 +4,19 @@
 <div class="titlePage">Danh sách Blog vệ tinh</div>
 <!-- ===== START: SEARCH FORM ===== -->
 <form id="formSearch" method="get" action="{{ route('admin.toolSeo.listBlogger') }}">
-<div class="searchBox" style="justify-content:space-between;">
-    <div class="searchBox_item">
-        <div class="input-group">
-            <input type="text" class="form-control" name="search_name" placeholder="Tìm theo tên" value="{{ $params['search_name'] ?? null }}">
-            <button class="btn btn-primary waves-effect" id="button-addon2" type="submit">Tìm</button>
+    <div class="searchBox" style="justify-content:space-between;">
+        <div class="searchBox_item">
+            <div class="input-group">
+                <input type="text" class="form-control" name="search_name" placeholder="Tìm theo tên" value="{{ $params['search_name'] ?? null }}">
+                <button class="btn btn-primary waves-effect" id="button-addon2" type="submit">Tìm</button>
+            </div>
         </div>
-    </div>
 
-    <?php
-        $xhtmlSettingView   = \App\Helpers\Setting::settingView('viewBloggers', [20, 50, 100, 200, 300, 400, 500], $viewPerPage, $list->total());
-        echo $xhtmlSettingView;
-    ?>
-</div>
+        <?php
+            $xhtmlSettingView   = \App\Helpers\Setting::settingView('viewBloggers', [20, 50, 100, 200, 500], $viewPerPage, $list->total());
+            echo $xhtmlSettingView;
+        ?>
+    </div>
 </form>
 <!-- ===== END: SEARCH FORM ===== -->
 <div id="js_showMessage">

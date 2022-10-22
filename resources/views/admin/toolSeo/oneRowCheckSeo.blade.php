@@ -1,4 +1,4 @@
-@if(!empty($item))
+@if(!empty($item->checkSeos)&&$item->checkSeos->isNotEmpty())
 @php
     $dataCheckSeo = [];
     foreach($item->checkSeos as $check){

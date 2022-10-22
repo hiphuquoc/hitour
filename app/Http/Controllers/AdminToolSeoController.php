@@ -16,12 +16,19 @@ class AdminToolSeoController extends Controller {
         $this->BuildInsertUpdateModel   = $BuildInsertUpdateModel;
     }
 
-    public function listBlogger(){
+    public function listBlogger(Request $request){
+        $params         = [];
+        if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
         $viewPerPage    = Cookie::get('viewBloggers') ?? 50;
         $list           = Blogger::select('*')
+                            ->when(!empty($params['search_name']), function($query) use($params){
+                                $query->where('name', 'like', '%'.$params['search_name'].'%')
+                                        ->orWhere('url', 'like', '%'.$params['search_name'].'%')
+                                        ->orWhere('email_manager', 'like', '%'.$params['search_name'].'%');
+                            })
                             ->orderBy('id', 'DESC')
                             ->paginate($viewPerPage);
-        return view('admin.toolSeo.listBlogger', compact('list', 'viewPerPage'));
+        return view('admin.toolSeo.listBlogger', compact('list', 'viewPerPage', 'params'));
     }
 
     public function addBlogger(Request $request){
@@ -53,13 +60,19 @@ class AdminToolSeoController extends Controller {
         echo false;
     }
 
-    public function listAutoPost(){
+    public function listAutoPost(Request $request){
+        $params         = [];
+        if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
         $viewPerPage    = Cookie::get('viewAutoPost') ?? 50;
         $list           = Seo::select('*')
+                            ->when(!empty($params['search_name']), function($query) use($params){
+                                $query->where('title', 'like', '%'.$params['search_name'].'%')
+                                        ->orWhere('slug', 'like', '%'.$params['search_name'].'%');
+                            })
                             ->orderBy('type', 'DESC')
                             ->with('keywords', 'contentspin')
                             ->paginate($viewPerPage);
-        return view('admin.toolSeo.listAutoPost', compact('list', 'viewPerPage'));
+        return view('admin.toolSeo.listAutoPost', compact('list', 'viewPerPage', 'params'));
     }
 
     public function loadRowAutoPost(Request $request){

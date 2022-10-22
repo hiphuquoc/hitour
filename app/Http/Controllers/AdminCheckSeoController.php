@@ -9,14 +9,21 @@ use App\Models\Seo;
 class AdminCheckSeoController extends Controller {
 
     public function listCheckSeo(Request $request){
+        $params         = [];
+        if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
         $viewPerPage    = Cookie::get('viewCheckSeo') ?? 50;
         $list           = Seo::select('*')
                             ->whereHas('checkSeos', function($query){
                                 
                             })
+                            ->when(!empty($params['search_name']), function($query) use($params){
+                                $query->where('title', 'like', '%'.$params['search_name'].'%')
+                                        ->orWhere('slug', 'like', '%'.$params['search_name'].'%');
+                            })
                             ->with('checkSeos')
                             ->paginate($viewPerPage);
-        return view('admin.toolSeo.listCheckSeo', compact('list', 'viewPerPage'));
+        // dd($list);
+        return view('admin.toolSeo.listCheckSeo', compact('list', 'viewPerPage', 'params'));
     }
 
     public function loadDetailCheckSeo(Request $request){

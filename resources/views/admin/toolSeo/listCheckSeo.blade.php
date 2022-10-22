@@ -3,7 +3,7 @@
 
 <div class="titlePage">Danh sách Trang SEO</div>
 <!-- ===== START: SEARCH FORM ===== -->
-<form id="formSearch" method="get" action="{{ route('admin.toolSeo.listAutoPost') }}">
+<form id="formSearch" method="get" action="{{ route('admin.toolSeo.listCheckSeo') }}">
 <div class="searchBox" style="justify-content:space-between;">
     <div class="searchBox_item">
         <div class="input-group">
