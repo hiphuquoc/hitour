@@ -56,7 +56,7 @@ class TourInfoForeign extends Model {
                             $query->where('relation_table', 'tour_info_foreign');
                         }])
                         ->with('seo', 'departure', 'staffs.infoStaff', 'partners.infoPartner')
-                        ->get();
+                        ->paginate($params['paginate']);
         return $result;
     }
 

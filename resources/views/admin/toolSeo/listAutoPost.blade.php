@@ -57,8 +57,9 @@
             </tbody>
         </table>
     </div>
+    {{ !empty($list&&$list->isNotEmpty()) ? $list->appends(request()->query())->links('admin.template.paginate') : '' }}
 </div>
-{{ !empty($list&&$list->isNotEmpty()) ? $list->appends(request()->query())->links('admin.template.paginate') : '' }}
+
 
 <!-- ===== START:: Modal Contentspin ===== -->
 <form id="formContentspin"  class="needs-validation invalid" method="GET" action="#">

@@ -33,7 +33,7 @@ class TourDeparture extends Model {
                             $query->where('relation_table', 'tour_departure');
                         }])
                         ->with('seo')
-                        ->get();
+                        ->paginate($params['paginate']);
         return $result;
     }
 

@@ -35,7 +35,7 @@ class TourLocation extends Model {
                             $query->where('relation_table', 'tour_location');
                         }])
                         ->with('seo')
-                        ->get();
+                        ->paginate($params['paginate']);
         return $result;
     }
 

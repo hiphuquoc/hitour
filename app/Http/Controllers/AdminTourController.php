@@ -23,6 +23,7 @@ use App\Models\Seo;
 use App\Models\QuestionAnswer;
 use App\Services\BuildInsertUpdateModel;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\TourRequest;
 use App\Models\SystemFile;
@@ -45,6 +46,9 @@ class AdminTourController extends Controller {
         if(!empty($request->get('search_partner'))) $params['search_partner'] = $request->get('search_partner');
         /* Search theo nhân viên */
         if(!empty($request->get('search_staff'))) $params['search_staff'] = $request->get('search_staff');
+        /* paginate */
+        $viewPerPage        = Cookie::get('viewTourInfo') ?? 50;
+        $params['paginate'] = $viewPerPage;
         /* lấy dữ liệu */
         $list                           = Tour::getList($params);
         /* khu vực Tour */
@@ -53,7 +57,7 @@ class AdminTourController extends Controller {
         $partners                       = TourPartner::all();
         /* nhân viên */
         $staffs                         = Staff::all();
-        return view('admin.tour.list', compact('list', 'params', 'tourLocations', 'partners', 'staffs'));
+        return view('admin.tour.list', compact('list', 'params', 'viewPerPage', 'tourLocations', 'partners', 'staffs'));
     }
 
     public function view(Request $request){

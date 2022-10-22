@@ -17,13 +17,12 @@ use App\Models\RelationTourInfoForeignStaff;
 use App\Models\RelationTourInfoForeignPartner;
 use App\Models\Staff;
 use App\Models\TourPartner;
-use App\Models\TourPrice;
-use App\Models\TourOption;
 use App\Models\Seo;
 use App\Models\QuestionAnswer;
 use App\Services\BuildInsertUpdateModel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cookie;
 use App\Http\Requests\TourInfoForeignRequest;
 use App\Models\SystemFile;
 use App\Models\TourContinent;
@@ -44,6 +43,9 @@ class AdminTourInfoForeignController extends Controller {
         if(!empty($request->get('search_partner'))) $params['search_partner'] = $request->get('search_partner');
         /* Search theo nhân viên */
         if(!empty($request->get('search_staff'))) $params['search_staff'] = $request->get('search_staff');
+        /* paginate */
+        $viewPerPage        = Cookie::get('viewTourInfoForeign') ?? 50;
+        $params['paginate'] = $viewPerPage;
         /* lấy dữ liệu */
         $list                           = TourInfoForeign::getList($params);
         /* đối tác */
@@ -52,7 +54,7 @@ class AdminTourInfoForeignController extends Controller {
         $staffs                         = Staff::all();
         /* đối tác */
         $tourContinents                 = TourContinent::all();
-        return view('admin.tourInfoForeign.list', compact('list', 'params', 'partners', 'staffs', 'tourContinents'));
+        return view('admin.tourInfoForeign.list', compact('list', 'params', 'viewPerPage', 'partners', 'staffs', 'tourContinents'));
     }
 
     public function view(Request $request){

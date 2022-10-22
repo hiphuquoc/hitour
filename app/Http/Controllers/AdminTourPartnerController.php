@@ -7,6 +7,7 @@ use App\Helpers\Upload;
 use App\Services\BuildInsertUpdateModel;
 use App\Models\TourPartner;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
 
 class AdminTourPartnerController extends Controller {
@@ -15,9 +16,15 @@ class AdminTourPartnerController extends Controller {
         $this->BuildInsertUpdateModel  = $BuildInsertUpdateModel;
     }
 
-    public function list(){
-        $list               = TourPartner::getList();
-        return view('admin.tourPartner.list', compact('list'));
+    public function list(Request $request){
+        $params                         = [];
+        /* Search theo tên */
+        if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
+        /* paginate */
+        $viewPerPage        = Cookie::get('viewTourPartner') ?? 50;
+        $params['paginate'] = $viewPerPage;
+        $list               = TourPartner::getList($params);
+        return view('admin.tourPartner.list', compact('list', 'params', 'viewPerPage'));
     }
 
     public function view(Request $request){

@@ -23,6 +23,12 @@
                 @endforeach
             </select>
         </div>
+        <div class="searchBox_item" style="margin-left:auto;text-align:right;">
+        <?php
+            $xhtmlSettingView   = \App\Helpers\Setting::settingView('viewTourLocation', [20, 50, 100, 200, 500], $viewPerPage, $list->total());
+            echo $xhtmlSettingView;
+        ?>
+        </div>
     </div>
     </form>
     <!-- ===== END: SEARCH FORM ===== -->
@@ -56,8 +62,10 @@
             </tbody>
         </table>
     </div>
-
+    {{ !empty($list&&$list->isNotEmpty()) ? $list->appends(request()->query())->links('admin.template.paginate') : '' }}
 </div>
+
+
 <!-- Nút thêm -->
 <a href="{{ route('admin.tourLocation.view') }}" class="addItemBox">
     <i class="fa-regular fa-plus"></i>

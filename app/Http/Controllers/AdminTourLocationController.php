@@ -20,7 +20,7 @@ use App\Models\RelationTourLocationGuide;
 use App\Models\SystemFile;
 use App\Models\QuestionAnswer;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\TourLocationRequest;
@@ -36,14 +36,17 @@ class AdminTourLocationController extends Controller {
     }
 
     public function list(Request $request){
-        $params         = [];
+        $params             = [];
         /* Search theo tên */
         if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
         /* Search theo vùng miền */
         if(!empty($request->get('search_region'))) $params['search_region'] = $request->get('search_region');
+        /* paginate */
+        $viewPerPage        = Cookie::get('viewTourLocation') ?? 50;
+        $params['paginate'] = $viewPerPage;
         /* lấy dữ liệu */
-        $list           = TourLocation::getList($params);
-        return view('admin.tourLocation.list', compact('list', 'params'));
+        $list               = TourLocation::getList($params);
+        return view('admin.tourLocation.list', compact('list', 'params', 'viewPerPage'));
     }
 
     public function view(Request $request){

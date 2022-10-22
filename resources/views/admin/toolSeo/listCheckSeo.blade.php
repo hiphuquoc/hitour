@@ -56,8 +56,9 @@
             </tbody>
         </table>
     </div>
+    {{ !empty($list&&$list->isNotEmpty()) ? $list->appends(request()->query())->links('admin.template.paginate') : '' }}
 </div>
-{{ !empty($list&&$list->isNotEmpty()) ? $list->appends(request()->query())->links('admin.template.paginate') : '' }}
+
 <!-- ===== START:: Modal ===== -->
 <div class="modal fade" id="modalBox" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">

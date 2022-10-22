@@ -23,9 +23,15 @@ class TourPartner extends Model {
     public static function getList($params = null){
         $paginate   = $params['paginate'] ?? 0;
         $result     = self::select('*')
+                        ->when(!empty($params['search_name']), function($query) use($params){
+                            $query->where('name', 'like', '%'.$params['search_name'].'%')
+                                    ->orWhere('company_name', 'like', '%'.$params['search_name'].'%')
+                                    ->orWhere('company_code', 'like', '%'.$params['search_name'].'%')
+                                    ->orWhere('company_website', 'like', '%'.$params['search_name'].'%');
+                        })
                         ->with('contacts')
                         ->orderBy('id', 'DESC')
-                        ->get();
+                        ->paginate($params['paginate']);
         return $result;
     }
 

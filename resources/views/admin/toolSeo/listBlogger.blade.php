@@ -60,8 +60,9 @@
             </tbody>
         </table>
     </div>
+    {{ !empty($list&&$list->isNotEmpty()) ? $list->appends(request()->query())->links('admin.template.paginate') : '' }}
 </div>
-{{ !empty($list&&$list->isNotEmpty()) ? $list->appends(request()->query())->links('admin.template.paginate') : '' }}
+
 <!-- Nút thêm -->
 <div class="addItemBox" data-bs-toggle="modal" data-bs-target="#modalBox">
     <i class="fa-regular fa-plus"></i>

@@ -14,7 +14,7 @@ use App\Models\District;
 use App\Models\Province;
 use App\Models\SystemFile;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\TourDepartureRequest;
@@ -31,9 +31,12 @@ class AdminTourDepartureController extends Controller {
         if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
         /* Search theo vùng miền */
         if(!empty($request->get('search_region'))) $params['search_region'] = $request->get('search_region');
+        /* paginate */
+        $viewPerPage        = Cookie::get('viewTourDeparture') ?? 50;
+        $params['paginate'] = $viewPerPage;
         /* lấy dữ liệu */
         $list           = TourDeparture::getList($params);
-        return view('admin.tourDeparture.list', compact('list', 'params'));
+        return view('admin.tourDeparture.list', compact('list', 'params', 'viewPerPage'));
     }
 
     public function view(Request $request){

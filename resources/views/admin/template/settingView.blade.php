@@ -1,4 +1,4 @@
-<div class="flexBox" style="margin:0;">
+<div class="flexBox" style="margin:0;display:inline-block;">
     <div class="input-group input-group-merge">
         <select class="form-select" style="max-width:60px;" tabindex="-1" aria-hidden="true" onChange="settingView('{{ $name ?? null }}', this.value);">
             @foreach($listItem as $item)

@@ -56,7 +56,7 @@ class Tour extends Model {
                             $query->where('relation_table', 'tour_info');
                         }])
                         ->with('seo', 'locations.infoLocation', 'departure', 'staffs.infoStaff', 'partners.infoPartner')
-                        ->get();
+                        ->paginate($params['paginate']);
         return $result;
     }
 
