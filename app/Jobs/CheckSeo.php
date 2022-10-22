@@ -98,17 +98,17 @@ class CheckSeo implements ShouldQueue {
                     $error[]    = 'Alt của ảnh trống';
                     $errorType  = 3;
                 }
-                /* kiểm tra lỗi ảnh */
-                if(substr($image['src'], 0, 4)=='http'){
-                    $fullImg    = $image['src'];
-                }else {
-                    $fullImg    = env('APP_URL').$image['src'];
-                }
-                $file_headers   = @get_headers($fullImg);
-                if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') {
-                    $error[]    = 'Không tải được ảnh do đường dẫn sai';
-                    $errorType  = 3;
-                }
+                // /* kiểm tra lỗi ảnh */
+                // if(substr($image['src'], 0, 4)=='http'){
+                //     $fullImg    = $image['src'];
+                // }else {
+                //     $fullImg    = env('APP_URL').$image['src'];
+                // }
+                // $file_headers   = @get_headers($fullImg);
+                // if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') {
+                //     $error[]    = 'Không tải được ảnh do đường dẫn sai';
+                //     $errorType  = 3;
+                // }
                 /* insert */
                 CheckSeoModel::insertItem([
                     'seo_id'        => $this->idSeo,
