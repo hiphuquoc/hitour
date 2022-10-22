@@ -58,10 +58,37 @@
     </div>
 </div>
 {{ !empty($list&&$list->isNotEmpty()) ? $list->appends(request()->query())->links('admin.template.paginate') : '' }}
+<!-- ===== START:: Modal ===== -->
+<div class="modal fade" id="modalBox" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" style="position:absolute;top:0;">
+            <div class="modal-body">
+                <div class="formBox">
+                    <div id="js_loadDetailCheckSeo_idWrite" class="formBox_full">
+                        <!-- load AJAX:: loadDetailCheckSeo -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ===== END:: Modal ===== -->
     
 @endsection
 @push('scripts-custom')
     <script type="text/javascript">
-    
+        function loadDetailCheckSeo(idSeo){
+            $.ajax({
+                url         : '{{ route("admin.toolSeo.loadDetailCheckSeo") }}',
+                type        : 'get',
+                dataType    : 'html',
+                data        : {
+                    id    : idSeo
+                },
+                success     : function(data){
+                    $('#js_loadDetailCheckSeo_idWrite').html(data);
+                }
+            });
+        }
     </script>
 @endpush

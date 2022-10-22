@@ -383,6 +383,7 @@ Route::prefix('admin')->group(function(){
             Route::get('/createKeyword', [AdminToolSeoController::class, 'createKeyword'])->name('admin.toolSeo.createKeyword');
             Route::get('/deleteKeyword', [AdminToolSeoController::class, 'deleteKeyword'])->name('admin.toolSeo.deleteKeyword');
             Route::get('/listCheckSeo', [AdminCheckSeoController::class, 'listCheckSeo'])->name('admin.toolSeo.listCheckSeo');
+            Route::get('/loadDetailCheckSeo', [AdminCheckSeoController::class, 'loadDetailCheckSeo'])->name('admin.toolSeo.loadDetailCheckSeo');
         });
         /* ===== AJAX ===== */
         Route::post('/loadProvinceByRegion', [AdminFormController::class, 'loadProvinceByRegion'])->name('admin.form.loadProvinceByRegion');

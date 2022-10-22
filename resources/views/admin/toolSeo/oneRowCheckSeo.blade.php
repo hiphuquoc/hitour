@@ -34,15 +34,15 @@
     </td>
     <td>
         <div class="flexBox">
-            <div class="flexBox_item iconWithNumber">
+            <div class="flexBox_item iconWithNumber" data-bs-toggle="modal" data-bs-target="#modalBox" onClick="loadDetailCheckSeo({{ $item->id }});">
                 <i class="fa-solid fa-heading"></i>
                 <div class="iconWithNumber_number" style="background:{{ config('admin.error_color')[$errorHeading] }}">{{ count($dataCheckSeo['heading']) }}</div>
             </div>
-            <div class="flexBox_item iconWithNumber">
+            <div class="flexBox_item iconWithNumber" data-bs-toggle="modal" data-bs-target="#modalBox" onClick="loadDetailCheckSeo({{ $item->id }});">
                 <i class="fa-solid fa-link"></i>
                 <div class="iconWithNumber_number" style="background:{{ config('admin.error_color')[$errorLink] }}">{{ count($dataCheckSeo['link']) }}</div>
             </div>
-            <div class="flexBox_item iconWithNumber">
+            <div class="flexBox_item iconWithNumber" data-bs-toggle="modal" data-bs-target="#modalBox" onClick="loadDetailCheckSeo({{ $item->id }});">
                 <i class="fa-regular fa-image"></i>
                 <div class="iconWithNumber_number" style="background:{{ config('admin.error_color')[$errorImage] }}">{{ count($dataCheckSeo['image']) }}</div>
             </div>
