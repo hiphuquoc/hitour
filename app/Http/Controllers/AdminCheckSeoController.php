@@ -20,13 +20,14 @@ class AdminCheckSeoController extends Controller {
     }
 
     public function loadDetailCheckSeo(Request $request){
-        $result     = null;
+        $result         = null;
         if(!empty($request->get('id'))){
-            $item   = Seo::select('*')
-                        ->where('id', $request->get('id'))
-                        ->with('checkSeos')
-                        ->first();
-            $result = view('admin.toolSeo.detailCheckSeo', compact('item'))->render();
+            $item       = Seo::select('*')
+                            ->where('id', $request->get('id'))
+                            ->with('checkSeos')
+                            ->first();
+            $tabActive  = $request->get('tab_active') ?? 'heading';
+            $result     = view('admin.toolSeo.detailCheckSeo', compact('item', 'tabActive'))->render();
         }
         echo $result;
     }

@@ -61,7 +61,7 @@
                 <div class="pageAdminWithRightSidebar_main_rightSidebar">
                     <!-- Button Save -->
                     <div class="pageAdminWithRightSidebar_main_rightSidebar_item buttonAction" style="padding-bottom:1rem;">
-                        <button type="button" class="btn btn-secondary waves-effect waves-float waves-light"  onClick="history.back();">Quay lại</button>
+                        <a href="{{ route('admin.tourDeparture.list') }}" type="button" class="btn btn-secondary waves-effect waves-float waves-light">Quay lại</a>
                         <button type="submit" class="btn btn-success waves-effect waves-float waves-light" onClick="javascript:submitForm('formCategory');" style="width:100px;">Lưu</button>
                     </div>
                     <div class="customScrollBar-y" style="height: calc(100% - 70px);border-top: 1px dashed #adb5bd;">

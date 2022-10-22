@@ -77,13 +77,14 @@
 @endsection
 @push('scripts-custom')
     <script type="text/javascript">
-        function loadDetailCheckSeo(idSeo){
+        function loadDetailCheckSeo(idSeo, tabActive){
             $.ajax({
                 url         : '{{ route("admin.toolSeo.loadDetailCheckSeo") }}',
                 type        : 'get',
                 dataType    : 'html',
                 data        : {
-                    id    : idSeo
+                    id          : idSeo,
+                    tab_active  : tabActive
                 },
                 success     : function(data){
                     $('#js_loadDetailCheckSeo_idWrite').html(data);
