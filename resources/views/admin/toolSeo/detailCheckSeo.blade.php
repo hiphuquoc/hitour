@@ -85,7 +85,7 @@
                                 {{ $link['href'] }}
                             </td>
                             <td>
-                                <span style="color:{{ $colorError[$link->error_type] }};font-weight:bold;">
+                                <span style="color:{{ !empty($image->error_type) ? $colorError[$image->error_type] : null }};font-weight:bold;">
                                     {{ $link['error'] }}
                                 </span>
                             </td>
