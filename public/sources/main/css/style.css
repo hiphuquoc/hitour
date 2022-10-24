@@ -1299,7 +1299,6 @@ input, textarea {
 }
 .tourGrid_item_title, .serviceGrid_item_title {
   display: flex;
-  align-items: center;
   margin-bottom: 0.5rem;
   padding: 0 0.75rem;
 }
