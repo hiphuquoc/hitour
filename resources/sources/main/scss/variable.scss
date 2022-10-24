@@ -47,6 +47,13 @@ $background-image: '/images/main/hitour-background.png';
 
 // font Gilroy
 $folderFont : '/fonts/';
+// @font-face{
+// 	font-family:'mt';
+// 	font-style:normal;
+// 	font-weight:400;
+// 	src:url($folderFont+"mt-regular.otf")
+// }
+
 @font-face{
 	font-family:'SVN-Gilroy Thin';
 	font-style:normal;
