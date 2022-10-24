@@ -87,6 +87,13 @@
                 </div>
             </div>
 
+            <!-- Hướng dẫn đặt Tour -->
+            {{-- <div class="sectionBox">
+                <div class="container">
+                    test
+                </div>
+            </div> --}}
+
             <!-- Vé máy bay -->
             @php
                 $dataAirs               = new \Illuminate\Support\Collection();
@@ -97,7 +104,7 @@
                 }
             @endphp
             @if(!empty($dataAirs)&&$dataAirs->isNotEmpty())
-                <div class="sectionBox backgroundPrimary">
+                <div class="sectionBox">
                     <div class="container">
                         <h2 class="titlePage">Vé máy bay đi {{ $item->display_name ?? null }}</h2>
                         <p>Để đến được {{ $item->display_name ?? null }} nhanh chóng, an toàn và tiện lợi nhất bạn có thể di chuyển bằng máy bay. Chi tiết các <strong>chuyến bay đến {{ $item->display_name ?? null }}</strong> bạn có thể tham khảo thông tin bên dưới</p>
@@ -125,7 +132,7 @@
 
             <!-- Vé vui chơi & giải trí -->
             @if(!empty($item->serviceLocations)&&$item->serviceLocations->isNotEmpty())
-                <div class="sectionBox backgroundSecondary">
+                <div class="sectionBox">
                     <div class="container">
                         <h2 class="titlePage">Vé vui chơi tại {{ $item->display_name ?? null }}</h2>
                         <p>Ngoài các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> bạn cũng có thể tham khảo thêm các <strong>hoạt động vui chơi giải trí khác tại {{ $item->display_name ?? null }}</strong>. Đây là các chương trình đặc biệt có thể bù dắp khoảng trống thời gian tự túc trong <strong>chương trình Tour</strong> của bạn và chắc chắn sẽ mang đến cho bạn nhiều trải nghiệm thú vị.</p>

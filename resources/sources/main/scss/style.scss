@@ -3214,7 +3214,7 @@ $width-single-menu  : 260px;
     }
 }
 .sectionBox {
-    padding-bottom: 3.5rem;
+    padding-bottom: 3.25rem;
     &:not(:first-child){
         padding-top: 2.5rem;
     }
@@ -3222,13 +3222,13 @@ $width-single-menu  : 260px;
         margin-bottom: 1rem;
     }
     @media (max-width: 1199px){
-        padding-bottom: 3.25rem;
+        padding-bottom: 3rem;
         &:not(:first-child){
             padding-top: 2.25rem;
         }
     }
     @media (max-width: 767px){
-        padding-bottom: 3rem;
+        padding-bottom: 2.75rem;
         &:not(:first-child){
             padding-top: 2rem;
         }

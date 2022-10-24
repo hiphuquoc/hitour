@@ -3272,7 +3272,7 @@ blockquote em {
 }
 
 .sectionBox {
-  padding-bottom: 3.5rem;
+  padding-bottom: 3.25rem;
 }
 .sectionBox:not(:first-child) {
   padding-top: 2.5rem;
@@ -3282,7 +3282,7 @@ blockquote em {
 }
 @media (max-width: 1199px) {
   .sectionBox {
-    padding-bottom: 3.25rem;
+    padding-bottom: 3rem;
   }
   .sectionBox:not(:first-child) {
     padding-top: 2.25rem;
@@ -3290,7 +3290,7 @@ blockquote em {
 }
 @media (max-width: 767px) {
   .sectionBox {
-    padding-bottom: 3rem;
+    padding-bottom: 2.75rem;
   }
   .sectionBox:not(:first-child) {
     padding-top: 2rem;
