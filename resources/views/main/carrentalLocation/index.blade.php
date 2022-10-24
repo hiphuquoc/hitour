@@ -41,32 +41,34 @@
     @include('main.snippets.breadcrumb')
 
     <div class="pageContent">
-        <div class="container">
-            <div class="pageContent_body">
-                <div id="js_autoLoadTocContentWithIcon_element" class="pageContent_body_content">
-                    <!-- title -->
-                    <h1 class="titlePage">{{ $item->name ?? null }}</h1>
-                    <!-- rating -->
-                    <div class="ratingBox">
-                        <div class="ratingBox_star">
-                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+        <div class="sectionBox">
+            <div class="container">
+                <div class="pageContent_body">
+                    <div id="js_autoLoadTocContentWithIcon_element" class="pageContent_body_content">
+                        <!-- title -->
+                        <h1 class="titlePage">{{ $item->name ?? null }}</h1>
+                        <!-- rating -->
+                        <div class="ratingBox">
+                            <div class="ratingBox_star">
+                                <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                                <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                                <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                                <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                                <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="ratingBox_text maxLine_1" style="margin-left:2px;font-size:14px;">
+                                {{ $item->seo->rating_aggregate_star }} sao / {{ $item->seo->rating_aggregate_count }} đánh giá từ khách du lịch
+                            </div>
                         </div>
-                        <div class="ratingBox_text maxLine_1" style="margin-left:2px;font-size:14px;">
-                            {{ $item->seo->rating_aggregate_star }} sao / {{ $item->seo->rating_aggregate_count }} đánh giá từ khách du lịch
+    
+                        <div class="contentShip">
+                            <!-- Nội dung tùy biến -->
+                            {!! $content ?? null !!}
                         </div>
                     </div>
-
-                    <div class="contentShip">
-                        <!-- Nội dung tùy biến -->
-                        {!! $content ?? null !!}
+                    <div class="pageContent_body_sidebar">
+                        @include('main.carrentalLocation.sidebar')
                     </div>
-                </div>
-                <div class="pageContent_body_sidebar">
-                    @include('main.carrentalLocation.sidebar')
                 </div>
             </div>
         </div>

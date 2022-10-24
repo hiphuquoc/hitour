@@ -37,38 +37,37 @@
     @include('main.snippets.breadcrumb')
 
     <div class="pageContent">
-        <div class="container">
-            <!-- content -->
-            <div class="pageContent_header">
-                <!-- title -->
-                <h1 class="titlePage">Tàu cao tốc {{ $item->name ?? null }}</h1>
-                <!-- rating -->
-                <div class="ratingBox">
-                    <div class="ratingBox_star">
-                        <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                        <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                        <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                        <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                        <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+        <div class="sectionBox">
+            <div class="container">
+                <div class="pageContent_body">
+                    <div class="pageContent_body_content">
+                        <!-- title -->
+                        <h1 class="titlePage">Tàu cao tốc {{ $item->name ?? null }}</h1>
+                        <!-- rating -->
+                        <div class="ratingBox">
+                            <div class="ratingBox_star">
+                                <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                                <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                                <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                                <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                                <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="ratingBox_text maxLine_1" style="margin-left:2px;font-size:14px;">
+                                {{ $item->seo->rating_aggregate_star }} sao / {{ $item->seo->rating_aggregate_count }} đánh giá từ khách du lịch
+                            </div>
+                        </div>
+                        <div class="contentShip">
+                            <!-- Lịch tàu và Hãng tàu -->
+                            @include('main.ship.headContent', ['keyWord' => $item->name])
+                            <!-- Nội dung tùy biến -->
+                            {!! $content ?? null !!}
+                            <!-- faq -->
+                            @include('main.snippets.faq', ['list' => $item->questions, 'title' => 'tàu '.$item->name])
+                        </div>
                     </div>
-                    <div class="ratingBox_text maxLine_1" style="margin-left:2px;font-size:14px;">
-                        {{ $item->seo->rating_aggregate_star }} sao / {{ $item->seo->rating_aggregate_count }} đánh giá từ khách du lịch
+                    <div class="pageContent_body_sidebar">
+                        @include('main.ship.sidebar')
                     </div>
-                </div>
-            </div>
-            <div class="pageContent_body">
-                <div class="pageContent_body_content">
-                    <div class="contentShip">
-                        <!-- Lịch tàu và Hãng tàu -->
-                        @include('main.ship.headContent', ['keyWord' => $item->name])
-                        <!-- Nội dung tùy biến -->
-                        {!! $content ?? null !!}
-                        <!-- faq -->
-                        @include('main.snippets.faq', ['list' => $item->questions, 'title' => 'tàu '.$item->name])
-                    </div>
-                </div>
-                <div class="pageContent_body_sidebar">
-                    @include('main.ship.sidebar')
                 </div>
             </div>
         </div>

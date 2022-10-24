@@ -39,48 +39,53 @@
 @endpush
 @section('content')
 
-    {{-- @php
+    @php
         $active = 'ship';
     @endphp
-    @include('main.form.sortBooking', compact('item', 'active')) --}}
+    @include('main.form.sortBooking', compact('item', 'active'))
 
     @include('main.snippets.breadcrumb')
 
     <div class="pageContent">
-        <div class="container">
-            <!-- title -->
-            <h1 class="titlePage">{{ $item->name }}{{ !empty($item->district->district_name) ? ' - Đặt vé máy bay '.$item->district->district_name : null}}</h1>
-            <!-- rating -->
-            <div class="ratingBox">
-                <div class="ratingBox_star">
-                    <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                    <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                    <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                    <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                    <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                </div>
-                <div class="ratingBox_text maxLine_1" style="margin-left:2px;font-size:14px;">
-                    {{ $item->seo->rating_aggregate_star }} sao / {{ $item->seo->rating_aggregate_count }} đánh giá từ khách du lịch
-                </div>
-            </div>
-            <!-- ship box -->
-            @include('main.serviceLocation.serviceGrid', ['list' => $item->services])
-            
-            <div class="pageContent_body">
-                <div id="js_autoLoadTocContentWithIcon_element" class="pageContent_body_content">
-                    <div id="js_autoLoadTocContentWithIcon_element" class="contentShip">
-                        <!-- Nội dung tùy biến -->
-                        {!! $content ?? null !!}
-
-                        @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
-
+        <div class="sectionBox backgroundPrimaryGradiend">
+            <div class="container">
+                <!-- title -->
+                <h1 class="titlePage">{{ $item->name }}{{ !empty($item->district->district_name) ? ' - Đặt vé máy bay '.$item->district->district_name : null}}</h1>
+                <!-- rating -->
+                <div class="ratingBox">
+                    <div class="ratingBox_star">
+                        <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                        <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                        <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                        <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                        <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                    </div>
+                    <div class="ratingBox_text maxLine_1" style="margin-left:2px;font-size:14px;">
+                        {{ $item->seo->rating_aggregate_star }} sao / {{ $item->seo->rating_aggregate_count }} đánh giá từ khách du lịch
                     </div>
                 </div>
-                <div class="pageContent_body_sidebar">
-                    @include('main.serviceLocation.sidebar')
+                <!-- ship box -->
+                @include('main.serviceLocation.serviceGrid', ['list' => $item->services])
+            </div>
+        </div>
+        
+        <div class="sectionBox noBackground">
+            <div class="container">
+                <div class="pageContent_body">
+                    <div id="js_autoLoadTocContentWithIcon_element" class="pageContent_body_content">
+                        <div id="js_autoLoadTocContentWithIcon_element" class="contentShip">
+                            <!-- Nội dung tùy biến -->
+                            {!! $content ?? null !!}
+    
+                            @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
+    
+                        </div>
+                    </div>
+                    <div class="pageContent_body_sidebar">
+                        @include('main.serviceLocation.sidebar')
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 @endsection

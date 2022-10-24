@@ -11,7 +11,7 @@
                     @endif --}}
                 </a>
                 <a href="/{{ $air->seo->slug_full }}" class="serviceGrid_item_title maxLine_1">
-                    <i class="fa-solid fa-paper-plane" style="margin-right:0.5rem;"></i><h2>{{ $air->name }}</h2>
+                    <i class="fa-solid fa-paper-plane"></i><h2>{{ $air->name }}</h2>
                 </a>
                 <a href="/{{ $air->seo->slug_full }}" class="serviceGrid_item_desc maxLine_4">
                     {{-- <h3>{{ $air->seo->description }}</h3> --}}
