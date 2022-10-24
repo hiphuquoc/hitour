@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Helpers\Upload;
-
 use App\Http\Controllers\AdminSliderController;
 use App\Models\Guide;
 use App\Models\Seo;
@@ -12,10 +11,9 @@ use App\Services\BuildInsertUpdateModel;
 use App\Models\District;
 use App\Models\Province;
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Support\Facades\Storage;
-
 use App\Http\Requests\GuideRequest;
+use App\Jobs\CheckSeo;
 
 class AdminGuideController extends Controller {
 
@@ -66,9 +64,9 @@ class AdminGuideController extends Controller {
             }
             /* insert page */
             $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'guide_info', $dataPath);
-            $pageId             = Seo::insertItem($insertPage);
+            $seoId             = Seo::insertItem($insertPage);
             /* insert guide_info */
-            $insertGuide        = $this->BuildInsertUpdateModel->buildArrayTableGuideInfo($request->all(), $pageId);
+            $insertGuide        = $this->BuildInsertUpdateModel->buildArrayTableGuideInfo($request->all(), $seoId);
             $idGuide            = Guide::insertItem($insertGuide);
             /* lưu content vào file */
             Storage::put(config('admin.storage.contentGuide').$request->get('slug').'.blade.php', $request->get('content'));
@@ -96,6 +94,9 @@ class AdminGuideController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($seoId);
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.guide.view', ['id' => $idGuide]);
     }
@@ -141,6 +142,9 @@ class AdminGuideController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($request->get('seo_id'));
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.guide.view', ['id' => $request->get('guide_info_id')]);
     }

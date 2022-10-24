@@ -140,5 +140,13 @@
             </div>
         </div>
         @endif
+        @php
+            if(!empty($limit)&&($loop->index+1)==$limit) break;
+        @endphp
     @endforeach
  </div>
+ @if(!empty($limit)&&$list->count()>$limit)
+    <div class="viewMore">
+        <a href="/{{ $link ?? null }}"><i class="fa-solid fa-arrow-down-long"></i>Xem thêm</a>
+    </div>
+@endif

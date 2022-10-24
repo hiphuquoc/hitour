@@ -11,6 +11,7 @@ use App\Models\Seo;
 use App\Models\QuestionAnswer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Jobs\CheckSeo;
 
 class AdminShipPartnerController extends Controller {
 
@@ -87,6 +88,9 @@ class AdminShipPartnerController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($seoId);
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.shipPartner.view', ['id' => $idShipPartner]);
     }
@@ -141,6 +145,9 @@ class AdminShipPartnerController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($request->get('seo_id'));
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.shipPartner.view', ['id' => $idShipPartner]);
     }

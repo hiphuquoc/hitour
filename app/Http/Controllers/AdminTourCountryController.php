@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Helpers\Upload;
-
 use App\Http\Controllers\AdminSliderController;
 use App\Models\TourCountry;
 use App\Models\TourContinent;
@@ -12,20 +11,15 @@ use App\Models\ServiceLocation;
 use App\Models\AirLocation;
 use App\Models\Seo;
 use App\Services\BuildInsertUpdateModel;
-use App\Models\District;
-use App\Models\Province;
 use App\Models\Guide;
-use App\Models\RelationTourCountryGuide;
-use App\Models\SystemFile;
 use App\Models\QuestionAnswer;
-use Illuminate\Support\Facades\DB;
-
-use Illuminate\Support\Facades\Storage;
-
 use App\Http\Requests\TourCountryRequest;
 use App\Models\RelationTourCountryGuideInfo;
 use App\Models\RelationTourCountryServiceLocation;
 use App\Models\RelationTourCountryAirLocation;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use App\Jobs\CheckSeo;
 
 class AdminTourCountryController extends Controller {
 
@@ -83,10 +77,10 @@ class AdminTourCountryController extends Controller {
             }
             /* insert page */
             $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'tour_country', $dataPath);
-            $pageId             = Seo::insertItem($insertPage);
+            $seoId              = Seo::insertItem($insertPage);
             /* insert tour_country */
-            $insertTourCountry = $this->BuildInsertUpdateModel->buildArrayTableTourCountry($request->all(), $pageId);
-            $idTourCountry     = TourCountry::insertItem($insertTourCountry);
+            $insertTourCountry  = $this->BuildInsertUpdateModel->buildArrayTableTourCountry($request->all(), $seoId);
+            $idTourCountry      = TourCountry::insertItem($insertTourCountry);
             /* insert câu hỏi thường gặp */
             if(!empty($request->get('question_answer'))){
                 foreach($request->get('question_answer') as $itemQues){
@@ -156,6 +150,9 @@ class AdminTourCountryController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($seoId);
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.tourCountry.view', ['id' => $idTourCountry]);
     }
@@ -258,6 +255,9 @@ class AdminTourCountryController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($request->get('seo_id'));
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.tourCountry.view', ['id' => $idTourCountry]);
     }

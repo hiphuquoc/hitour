@@ -4,21 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Helpers\Upload;
-
 use App\Http\Controllers\AdminSliderController;
 use App\Models\CarrentalLocation;
-use App\Models\ShipLocation;
 use App\Models\Seo;
 use App\Services\BuildInsertUpdateModel;
 use App\Models\District;
 use App\Models\Province;
-use App\Models\SystemFile;
-use App\Models\QuestionAnswer;
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Support\Facades\Storage;
-
 use App\Http\Requests\CarrentalLocationRequest;
+use App\Jobs\CheckSeo;
+
 class AdminCarrentalLocationController extends Controller {
 
     public function __construct(BuildInsertUpdateModel $BuildInsertUpdateModel){
@@ -69,9 +65,9 @@ class AdminCarrentalLocationController extends Controller {
             }
             /* insert page */
             $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'carrental_location', $dataPath);
-            $pageId             = Seo::insertItem($insertPage);
+            $seoId             = Seo::insertItem($insertPage);
             /* insert carrental_location */
-            $insertCarrentalLocation = $this->BuildInsertUpdateModel->buildArrayTableCarrentalLocation($request->all(), $pageId);
+            $insertCarrentalLocation = $this->BuildInsertUpdateModel->buildArrayTableCarrentalLocation($request->all(), $seoId);
             $idCarrentalLocation     = CarrentalLocation::insertItem($insertCarrentalLocation);
             /* lưu content vào file */
             Storage::put(config('admin.storage.contentCarrentalLocation').$request->get('slug').'.blade.php', $request->get('content'));
@@ -99,6 +95,9 @@ class AdminCarrentalLocationController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($seoId);
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.carrentalLocation.view', ['id' => $idCarrentalLocation]);
     }
@@ -145,6 +144,9 @@ class AdminCarrentalLocationController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($request->get('seo_id'));
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.carrentalLocation.view', ['id' => $idCarrentalLocation]);
     }

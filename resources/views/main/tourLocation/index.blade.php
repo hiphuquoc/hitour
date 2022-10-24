@@ -101,7 +101,7 @@
                     <div class="container">
                         <h2 class="titlePage">Vé máy bay đi {{ $item->display_name ?? null }}</h2>
                         <p>Để đến được {{ $item->display_name ?? null }} nhanh chóng, an toàn và tiện lợi nhất bạn có thể di chuyển bằng máy bay. Chi tiết các <strong>chuyến bay đến {{ $item->display_name ?? null }}</strong> bạn có thể tham khảo thông tin bên dưới</p>
-                        @include('main.tourLocation.airGrid', ['list' => $dataAirs])
+                        @include('main.tourLocation.airGrid', ['list' => $dataAirs, 'limit' => 3, 'link' => $item->airLocations[0]->infoAirLocation->seo->slug_full])
                     </div>
                 </div>
             @endif
@@ -118,7 +118,7 @@
                                 $dataShips  = $dataShips->merge($shipLocation->infoShipLocation->ships);
                             }
                         @endphp
-                        @include('main.shipLocation.shipGridMerge', ['list' => $dataShips])
+                        @include('main.shipLocation.shipGridMerge', ['list' => $dataShips, 'limit' => 3, 'link' => $item->shipLocations[0]->infoShipLocation->seo->slug_full])
                     </div>
                 </div>
             @endif

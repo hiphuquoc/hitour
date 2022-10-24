@@ -4,20 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Helpers\Upload;
-
 use App\Http\Controllers\AdminSliderController;
-
 use App\Models\AirLocation;
 use App\Models\Seo;
 use App\Services\BuildInsertUpdateModel;
 use App\Models\District;
 use App\Models\Province;
-use App\Models\SystemFile;
 use App\Models\QuestionAnswer;
 use Illuminate\Support\Facades\DB;
-
-use App\Http\Requests\AirLocationRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\AirLocationRequest;
+use App\Jobs\CheckSeo;
 
 class AdminAirLocationController extends Controller {
 
@@ -71,9 +68,9 @@ class AdminAirLocationController extends Controller {
             }
             /* insert page */
             $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'air_location', $dataPath);
-            $pageId             = Seo::insertItem($insertPage);
+            $seoId             = Seo::insertItem($insertPage);
             /* insert air_location */
-            $insertAirLocation  = $this->BuildInsertUpdateModel->buildArrayTableAirLocation($request->all(), $pageId);
+            $insertAirLocation  = $this->BuildInsertUpdateModel->buildArrayTableAirLocation($request->all(), $seoId);
             $idAirLocation      = AirLocation::insertItem($insertAirLocation);
             /* lưu content vào file */
             Storage::put(config('admin.storage.contentAirLocation').$request->get('slug').'.blade.php', $request->get('content'));
@@ -114,6 +111,9 @@ class AdminAirLocationController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($seoId);
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.airLocation.view', ['id' => $idAirLocation]);
     }
@@ -177,6 +177,9 @@ class AdminAirLocationController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($request->get('seo_id'));
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.airLocation.view', ['id' => $idAirLocation]);
     }

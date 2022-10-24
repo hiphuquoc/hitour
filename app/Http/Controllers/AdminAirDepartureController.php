@@ -4,18 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Helpers\Upload;
-
 use App\Http\Controllers\AdminSliderController;
-
 use App\Models\AirDeparture;
 use App\Models\Seo;
 use App\Services\BuildInsertUpdateModel;
 use App\Models\District;
 use App\Models\Province;
-use App\Models\SystemFile;
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Support\Facades\Storage;
+use App\Jobs\CheckSeo;
 
 use App\Http\Requests\AirDepartureRequest;
 
@@ -68,9 +65,9 @@ class AdminAirDepartureController extends Controller {
             }
             /* insert page */
             $insertPage             = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'air_departure', $dataPath);
-            $pageId                 = Seo::insertItem($insertPage);
+            $seoId                 = Seo::insertItem($insertPage);
             /* insert air_departure */
-            $insertAirDeparture    = $this->BuildInsertUpdateModel->buildArrayTableAirDeparture($request->all(), $pageId);
+            $insertAirDeparture    = $this->BuildInsertUpdateModel->buildArrayTableAirDeparture($request->all(), $seoId);
             $idAirDeparture        = AirDeparture::insertItem($insertAirDeparture);
             /* lưu content vào file */
             Storage::put(config('admin.storage.contentAirDeparture').$request->get('slug').'.blade.php', $request->get('content'));
@@ -98,6 +95,9 @@ class AdminAirDepartureController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($seoId);
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.airDeparture.view', ['id' => $idAirDeparture]);
     }
@@ -144,6 +144,9 @@ class AdminAirDepartureController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($request->get('seo_id'));
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.airDeparture.view', ['id'  => $idAirDeparture]);
     }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Helpers\Upload;
-
 use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\AdminGalleryController;
 use App\Models\TourContentForeign;
@@ -20,12 +19,11 @@ use App\Models\TourPartner;
 use App\Models\Seo;
 use App\Models\QuestionAnswer;
 use App\Services\BuildInsertUpdateModel;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cookie;
 use App\Http\Requests\TourInfoForeignRequest;
-use App\Models\SystemFile;
 use App\Models\TourContinent;
+use App\Jobs\CheckSeo;
 
 class AdminTourInfoForeignController extends Controller {
 
@@ -94,9 +92,9 @@ class AdminTourInfoForeignController extends Controller {
             }
             /* insert page */
             $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'tour_info_foreign', $dataPath);
-            $pageId             = Seo::insertItem($insertPage);
+            $seoId              = Seo::insertItem($insertPage);
             /* insert tour_info_foreign */
-            $insertTourInfoForeign     = $this->BuildInsertUpdateModel->buildArrayTableTourInfoForeign($request->all(), $pageId);
+            $insertTourInfoForeign     = $this->BuildInsertUpdateModel->buildArrayTableTourInfoForeign($request->all(), $seoId);
             $idTourInfoForeign         = TourInfoForeign::insertItem($insertTourInfoForeign);
             /* insert tour_content_foreign */
             $insertTourInfoForeign     = $this->BuildInsertUpdateModel->buildArrayTableTourContentForeign($request->all(), $idTourInfoForeign);
@@ -192,6 +190,9 @@ class AdminTourInfoForeignController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($seoId);
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.tourInfoForeign.view', ['id' => $idTourInfoForeign]);
     }
@@ -325,6 +326,9 @@ class AdminTourInfoForeignController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($request->get('seo_id'));
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.tourInfoForeign.view', ['id' => $idTourInfoForeign]);
     }

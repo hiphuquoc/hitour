@@ -4,20 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Helpers\Upload;
-
 use App\Http\Controllers\AdminSliderController;
-
 use App\Models\TourDeparture;
 use App\Models\Seo;
 use App\Services\BuildInsertUpdateModel;
 use App\Models\District;
 use App\Models\Province;
-use App\Models\SystemFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
-
 use App\Http\Requests\TourDepartureRequest;
+use App\Jobs\CheckSeo;
 
 class AdminTourDepartureController extends Controller {
 
@@ -67,9 +64,9 @@ class AdminTourDepartureController extends Controller {
             }
             /* insert page */
             $insertPage             = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'tour_departure', $dataPath);
-            $pageId                 = Seo::insertItem($insertPage);
+            $seoId                  = Seo::insertItem($insertPage);
             /* insert tour_departure */
-            $insertTourDeparture    = $this->BuildInsertUpdateModel->buildArrayTableTourDeparture($request->all(), $pageId);
+            $insertTourDeparture    = $this->BuildInsertUpdateModel->buildArrayTableTourDeparture($request->all(), $seoId);
             $idTourDeparture        = TourDeparture::insertItem($insertTourDeparture);
             /* lưu content vào file */
             // Storage::put(config('admin.storage.contentTourDeparture').$request->get('slug').'.html', $request->get('content'));
@@ -97,6 +94,9 @@ class AdminTourDepartureController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($seoId);
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.tourDeparture.view', ['id' => $idTourDeparture]);
     }
@@ -142,6 +142,9 @@ class AdminTourDepartureController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($request->get('seo_id'));
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.tourDeparture.view', ['id'  => $request->get('tour_departure_id')]);
     }

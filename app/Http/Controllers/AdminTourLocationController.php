@@ -17,17 +17,16 @@ use App\Models\District;
 use App\Models\Province;
 use App\Models\Guide;
 use App\Models\RelationTourLocationGuide;
-use App\Models\SystemFile;
 use App\Models\QuestionAnswer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
-
 use App\Http\Requests\TourLocationRequest;
 use App\Models\RelationTourLocationShipLocation;
 use App\Models\RelationTourLocationCarrentalLocation;
 use App\Models\RelationTourLocationServiceLocation;
 use App\Models\RelationTourLocationAirLocation;
+use App\Jobs\CheckSeo;
 
 class AdminTourLocationController extends Controller {
 
@@ -89,9 +88,9 @@ class AdminTourLocationController extends Controller {
             }
             /* insert page */
             $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'tour_location', $dataPath);
-            $pageId             = Seo::insertItem($insertPage);
+            $seoId              = Seo::insertItem($insertPage);
             /* insert tour_location */
-            $insertTourLocation = $this->BuildInsertUpdateModel->buildArrayTableTourLocation($request->all(), $pageId);
+            $insertTourLocation = $this->BuildInsertUpdateModel->buildArrayTableTourLocation($request->all(), $seoId);
             $idTourLocation     = TourLocation::insertItem($insertTourLocation);
             /* insert câu hỏi thường gặp */
             if(!empty($request->get('question_answer'))){
@@ -182,6 +181,9 @@ class AdminTourLocationController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($seoId);
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.tourLocation.view', ['id' => $idTourLocation]);
     }
@@ -324,6 +326,9 @@ class AdminTourLocationController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($request->get('seo_id'));
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.tourLocation.view', ['id' => $idTourLocation]);
     }

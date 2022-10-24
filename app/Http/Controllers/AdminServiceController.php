@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Helpers\Upload;
-
 use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\AdminGalleryController;
 use App\Models\Staff;
@@ -14,9 +13,9 @@ use App\Models\RelationServiceStaff;
 use App\Models\Seo;
 use App\Services\BuildInsertUpdateModel;
 use Illuminate\Support\Facades\Storage;
-
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ServiceRequest;
+use App\Jobs\CheckSeo;
 
 class AdminServiceController extends Controller {
 
@@ -77,9 +76,9 @@ class AdminServiceController extends Controller {
             }
             /* insert page */
             $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'service_info', $dataPath);
-            $pageId             = Seo::insertItem($insertPage);
+            $seoId             = Seo::insertItem($insertPage);
             /* insert service_info */
-            $insertServiceInfo  = $this->BuildInsertUpdateModel->buildArrayTableServiceInfo($request->all(), $pageId);
+            $insertServiceInfo  = $this->BuildInsertUpdateModel->buildArrayTableServiceInfo($request->all(), $seoId);
             $idService          = Service::insertItem($insertServiceInfo);
             /* lưu content vào file */
             Storage::put(config('admin.storage.contentService').$request->get('slug').'.blade.php', $request->get('content'));
@@ -127,6 +126,9 @@ class AdminServiceController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($seoId);
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.service.view', ['id' => $idService]);
     }
@@ -196,6 +198,9 @@ class AdminServiceController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($request->get('seo_id'));
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.service.view', ['id' => $idService]);
     }

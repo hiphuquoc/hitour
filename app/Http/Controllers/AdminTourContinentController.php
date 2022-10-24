@@ -7,28 +7,19 @@ use App\Helpers\Upload;
 
 use App\Http\Controllers\AdminSliderController;
 use App\Models\TourContinent;
-use App\Models\ShipLocation;
-use App\Models\CarrentalLocation;
 use App\Models\ServiceLocation;
 use App\Models\AirLocation;
 use App\Models\Seo;
 use App\Services\BuildInsertUpdateModel;
-use App\Models\District;
-use App\Models\Province;
 use App\Models\Guide;
-use App\Models\RelationTourContinentGuide;
-use App\Models\SystemFile;
 use App\Models\QuestionAnswer;
-use Illuminate\Support\Facades\DB;
-
-use Illuminate\Support\Facades\Storage;
-
-use App\Http\Requests\TourContinentRequest;
-use App\Models\RelationTourContinentShipLocation;
-use App\Models\RelationTourContinentCarrentalLocation;
 use App\Models\RelationTourContinentServiceLocation;
 use App\Models\RelationTourContinentAirLocation;
 use App\Models\RelationTourContinentGuideInfo;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\TourContinentRequest;
+use App\Jobs\CheckSeo;
 
 class AdminTourContinentController extends Controller {
 
@@ -81,9 +72,9 @@ class AdminTourContinentController extends Controller {
             }
             /* insert page */
             $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'tour_continent', $dataPath);
-            $pageId             = Seo::insertItem($insertPage);
+            $seoId              = Seo::insertItem($insertPage);
             /* insert tour_continent */
-            $insertTourContinent = $this->BuildInsertUpdateModel->buildArrayTableTourContinent($request->all(), $pageId);
+            $insertTourContinent = $this->BuildInsertUpdateModel->buildArrayTableTourContinent($request->all(), $seoId);
             $idTourContinent     = TourContinent::insertItem($insertTourContinent);
             /* lưu content vào file */
             // Storage::put(config('admin.storage.contentTourContinent').$request->get('slug').'.blade.php', $request->get('content'));
@@ -154,6 +145,9 @@ class AdminTourContinentController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($seoId);
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.tourContinent.view', ['id' => $idTourContinent]);
     }
@@ -256,6 +250,9 @@ class AdminTourContinentController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($request->get('seo_id'));
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.tourContinent.view', ['id' => $idTourContinent]);
     }

@@ -22,12 +22,9 @@ use App\Models\TourOption;
 use App\Models\Seo;
 use App\Models\QuestionAnswer;
 use App\Services\BuildInsertUpdateModel;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\TourRequest;
-use App\Models\SystemFile;
-
 use App\Jobs\CheckSeo;
 
 class AdminTourController extends Controller {

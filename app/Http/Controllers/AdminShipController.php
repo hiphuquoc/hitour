@@ -4,30 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Helpers\Upload;
-
 use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\AdminGalleryController;
-
 use App\Models\ShipLocation;
 use App\Models\ShipDeparture;
 use App\Models\Ship;
-use App\Models\RelationShipLocation;
 use App\Models\RelationShipStaff;
 use App\Models\RelationShipPartner;
 use App\Models\Staff;
 use App\Models\ShipPartner;
 use App\Models\Seo;
 use App\Services\BuildInsertUpdateModel;
-
 use Illuminate\Support\Facades\Storage;
-
-
 use Illuminate\Support\Facades\DB;
-
 use App\Http\Requests\ShipRequest;
 use App\Models\ShipPort;
-use App\Models\SystemFile;
 use App\Models\QuestionAnswer;
+use App\Jobs\CheckSeo;
 
 class AdminShipController extends Controller {
 
@@ -173,6 +166,9 @@ class AdminShipController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($seoId);
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.ship.view', ['id' => $idShip]);
     }
@@ -250,6 +246,9 @@ class AdminShipController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($request->get('seo_id'));
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.ship.view', ['id' => $idShip]);
     }

@@ -13,10 +13,9 @@ use App\Models\District;
 use App\Models\Province;
 use App\Models\QuestionAnswer;
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Support\Facades\Storage;
-
 use App\Http\Requests\ServiceLocationRequest;
+use App\Jobs\CheckSeo;
 
 class AdminServiceLocationController extends Controller {
 
@@ -68,9 +67,9 @@ class AdminServiceLocationController extends Controller {
             }
             /* insert page */
             $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'service_location', $dataPath);
-            $pageId             = Seo::insertItem($insertPage);
+            $seoId             = Seo::insertItem($insertPage);
             /* insert service_location */
-            $insertServiceLocation = $this->BuildInsertUpdateModel->buildArrayTableServiceLocation($request->all(), $pageId);
+            $insertServiceLocation = $this->BuildInsertUpdateModel->buildArrayTableServiceLocation($request->all(), $seoId);
             $idServiceLocation     = ServiceLocation::insertItem($insertServiceLocation);
             /* insert câu hỏi thường gặp */
             if(!empty($request->get('question_answer'))){
@@ -111,6 +110,9 @@ class AdminServiceLocationController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($seoId);
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.serviceLocation.view', ['id' => $idServiceLocation]);
     }
@@ -174,6 +176,9 @@ class AdminServiceLocationController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($request->get('seo_id'));
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.serviceLocation.view', ['id' => $idServiceLocation]);
     }
