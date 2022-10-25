@@ -2817,6 +2817,7 @@ blockquote{
                     font-size: 1.05rem;
                     font-family: $font-primary-title;
                     border-radius: 5px;
+                    padding-right: 2rem;
                 }
                 &.off {
                     position: relative;
@@ -2826,7 +2827,7 @@ blockquote{
                         content: '\f107';
                         position: absolute;
                         right: 0;
-                        top: 0.25rem;
+                        top: 0;
                         font-size: 0.9rem;
                     }
                 }

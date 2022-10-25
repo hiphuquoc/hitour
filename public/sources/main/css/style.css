@@ -2927,6 +2927,7 @@ blockquote em {
   font-size: 1.05rem;
   font-family: "SVN-Gilroy Bold", serif;
   border-radius: 5px;
+  padding-right: 2rem;
 }
 .faqBox_content_item_question.off {
   position: relative;
@@ -2937,7 +2938,7 @@ blockquote em {
   content: "\f107";
   position: absolute;
   right: 0;
-  top: 0.25rem;
+  top: 0;
   font-size: 0.9rem;
 }
 .faqBox_content_item_question.on {
