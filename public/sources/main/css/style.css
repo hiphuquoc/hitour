@@ -51,11 +51,17 @@ body {
 @media (max-width: 577px) {
   body {
     background: #fff;
+    font-size: 1rem;
   }
 }
 
 p {
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
+}
+@media (max-width: 1023px) {
+  p {
+    margin-bottom: 0.75rem;
+  }
 }
 @media (max-width: 577px) {
   p {
@@ -1659,6 +1665,7 @@ input, textarea {
   }
   .contentTour_item_title h2, .contentTour_item_title h3 {
     margin-top: 0 !important;
+    margin-bottom: 0.25rem !important;
     font-size: 1.25rem;
   }
 }
@@ -1684,7 +1691,7 @@ input, textarea {
   padding: 0.35rem 1rem;
   border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
 }
 .dayTourByList_item_title:before {
   content: "";
@@ -1712,12 +1719,20 @@ input, textarea {
   font-weight: 700;
   margin-bottom: 0;
 }
+@media (max-width: 1023px) {
+  .dayTourByList_item_title {
+    margin-bottom: 0.75rem;
+  }
+}
 @media (max-width: 577px) {
   .dayTourByList {
     padding-left: 0.75rem;
   }
   .dayTourByList:before {
     left: 0;
+  }
+  .dayTourByList_item_title {
+    margin-bottom: 0.5rem;
   }
   .dayTourByList_item_title:before {
     width: 15px;
@@ -3290,6 +3305,40 @@ blockquote em {
 .sectionBox:not(:first-child) {
   padding-top: 2.5rem;
 }
+.sectionBox.withBorder {
+  padding: 0;
+  background: none !important;
+}
+.sectionBox.withBorder .container {
+  padding-bottom: 3.25rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid #e9ecef;
+  border-bottom: 1px solid #e9ecef;
+}
+@media (max-width: 1199px) {
+  .sectionBox.withBorder .container {
+    padding-bottom: 3rem;
+    padding-top: 2.25rem;
+  }
+}
+@media (max-width: 767px) {
+  .sectionBox.withBorder .container {
+    padding-bottom: 2.75rem;
+    padding-top: 2rem;
+  }
+}
+@media (max-width: 577px) {
+  .sectionBox.withBorder .container {
+    padding-bottom: 0;
+    padding-top: 2.5rem;
+  }
+}
+@media (max-width: 419px) {
+  .sectionBox.withBorder .container {
+    padding-bottom: 0;
+    padding-top: 2.25rem;
+  }
+}
 .sectionBox_title {
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
@@ -3307,9 +3356,6 @@ blockquote em {
     margin-bottom: 1rem;
   }
 }
-.sectionBox p {
-  margin-bottom: 1rem;
-}
 @media (max-width: 1199px) {
   .sectionBox {
     padding-bottom: 3rem;
@@ -3324,9 +3370,6 @@ blockquote em {
   }
   .sectionBox:not(:first-child) {
     padding-top: 2rem;
-  }
-  .sectionBox p {
-    margin-bottom: 0.75rem;
   }
 }
 @media (max-width: 577px) {

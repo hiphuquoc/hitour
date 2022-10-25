@@ -139,7 +139,7 @@
 
             <!-- Cẩm nang du lịch -->
             @if(!empty($item->guides)&&$item->guides->isNotEmpty())
-                <div class="sectionBox">
+                <div class="sectionBox withBorder">
                     <div class="container">
                         <h2 class="sectionBox_title">Cẩm nang du lịch {{ $item->display_name ?? null }}</h2>
                         <p>Nếu các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> của Hitour không đáp ứng được nhu cầu của bạn, hoặc bạn là người ưu thích du lịch tự túc,... Hitour cung cấp thêm cho bạn <strong>Cẩm nang du lịch {{ $item->display_name ?? null }}</strong> để bạn có thể tham khảo thêm thông tin, tự do lên kế hoạch, sắp xếp cho chuyến đi du lịch của mình được chu đáo nhất.</p>
@@ -156,7 +156,7 @@
 
             <!-- Cho thuê xe -->
             @if(!empty($item->carrentalLocations)&&$item->carrentalLocations->isNotEmpty())
-                <div class="sectionBox">
+                <div class="sectionBox withBorder">
                     <div class="container">
                         <h2 class="sectionBox_title">Cho thuê xe {{ $item->display_name ?? null }}</h2>
                         <p>Nếu cần phương tiện di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ <strong>Cho thuê xe tại {{ $item->display_name ?? null }}</strong> của Hitour với đầy đủ lựa chọn (tự lái hoặc có tài xế), xe mới, nhiều loại phù hợp yêu cầu và mức giá hợp lí.</p>
@@ -173,7 +173,7 @@
 
             <!-- faq -->
             @if(!empty($item->questions)&&$item->questions->isNotEmpty())
-                <div class="sectionBox">
+                <div class="sectionBox withBorder">
                     <div class="container">
                         <h2 class="sectionBox_title">Câu hỏi thường gặp về Tour {{ $item->display_name ?? null }}</h2>
                         @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])

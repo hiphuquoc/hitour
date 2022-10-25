@@ -1428,6 +1428,7 @@ $tourGrid_radius : 5px;
             &_title {
                 h2, h3 {
                     margin-top: 0 !important;
+                    margin-bottom: 0.25rem !important;
                     font-size: 1.25rem;
                 }
             }
@@ -1455,7 +1456,7 @@ $tourGrid_radius : 5px;
             padding: 0.35rem 1rem;
             border-radius: 5px;
             cursor: pointer;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
             &:before {
                 content: "";
                 position: absolute;
@@ -1484,6 +1485,13 @@ $tourGrid_radius : 5px;
             }   
         }
     }
+    @media (max-width: 1023px){
+        &_item {
+            &_title {
+                margin-bottom: 0.75rem;
+            }
+        }
+    }
     @media (max-width: 577px){
         padding-left: 0.75rem;
         &:before {
@@ -1491,6 +1499,7 @@ $tourGrid_radius : 5px;
         }
         &_item {
             &_title {
+                margin-bottom: 0.5rem;
                 &:before {
                     width: 15px;
                     height: 15px;
@@ -3217,11 +3226,34 @@ $width-single-menu  : 260px;
     &:not(:first-child){
         padding-top: 2.5rem;
     }
+    &.withBorder {
+        padding: 0;
+        background: none !important;
+        .container {
+            padding-bottom: 3.25rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid $bg-03;
+            border-bottom: 1px solid $bg-03;
+            @media (max-width: 1199px){
+                padding-bottom: 3rem;
+                padding-top: 2.25rem;
+            }
+            @media (max-width: 767px){
+                padding-bottom: 2.75rem;
+                padding-top: 2rem;
+            }
+            @media (max-width: 577px){
+                padding-bottom: 0;
+                padding-top: 2.5rem;
+            }
+            @media (max-width: 419px){
+                padding-bottom: 0;
+                padding-top: 2.25rem;
+            }
+        }
+    }
     &_title {
         @include titleSection;
-    }
-    p {
-        margin-bottom: 1rem;
     }
     @media (max-width: 1199px){
         padding-bottom: 3rem;
@@ -3233,9 +3265,6 @@ $width-single-menu  : 260px;
         padding-bottom: 2.75rem;
         &:not(:first-child){
             padding-top: 2rem;
-        }
-        p {
-            margin-bottom: 0.75rem;
         }
     }
     @media (max-width: 577px){
