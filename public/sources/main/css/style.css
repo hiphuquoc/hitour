@@ -2894,6 +2894,19 @@ blockquote em {
 .faqBox_title h2, .faqBox_title h3 {
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
+  text-align: center;
+  color: rgb(0, 90, 180);
+}
+@media (max-width: 1023px) {
+  .faqBox_title h2, .faqBox_title h3 {
+    font-size: 1.45rem;
+  }
+}
+@media (max-width: 767px) {
+  .faqBox_title h2, .faqBox_title h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
 }
 .faqBox_content_item {
   border-bottom: 1px dashed rgba(0, 123, 255, 0.3);
@@ -3277,6 +3290,23 @@ blockquote em {
 .sectionBox:not(:first-child) {
   padding-top: 2.5rem;
 }
+.sectionBox_title {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: rgb(0, 90, 180);
+}
+@media (max-width: 1023px) {
+  .sectionBox_title {
+    font-size: 1.45rem;
+  }
+}
+@media (max-width: 767px) {
+  .sectionBox_title {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+}
 .sectionBox p {
   margin-bottom: 1rem;
 }
@@ -3352,4 +3382,151 @@ blockquote em {
 }
 .sectionBox .viewMore i {
   margin-right: 0.5rem;
+}
+
+.guideBookBox {
+  display: flex;
+}
+.guideBookBox_image {
+  width: 42.5%;
+  text-align: right;
+}
+.guideBookBox_content {
+  width: 57.5%;
+  margin-left: 5rem;
+}
+@media (max-width: 1023px) {
+  .guideBookBox_content {
+    margin-left: 4rem;
+  }
+}
+@media (max-width: 1023px) {
+  .guideBookBox_content {
+    margin-left: 3rem;
+  }
+}
+
+.guideBookStepByStep {
+  padding-left: 3.5rem;
+  position: relative;
+}
+.guideBookStepByStep:before {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  bottom: 0;
+  border-left: 1px dashed #008fea;
+}
+.guideBookStepByStep_item {
+  min-height: 100px;
+  padding-bottom: 1.5rem;
+  transition: all 1s;
+}
+.guideBookStepByStep_item_title {
+  position: relative;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+.guideBookStepByStep_item_title:before {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  border: solid 1px rgb(244, 208, 63);
+  background-color: #dee2e6;
+  top: 0;
+  left: -63px;
+}
+.guideBookStepByStep_item_title h3, .guideBookStepByStep_item_title h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+.guideBookStepByStep_item_title_no {
+  position: absolute;
+  left: -51px;
+  top: 2px;
+  font-size: 1rem;
+}
+.guideBookStepByStep_item_text {
+  display: none;
+  transition: all 1s;
+}
+.guideBookStepByStep_item_text ul {
+  margin-bottom: 0;
+  margin-top: 0;
+  margin-left: 1.25rem;
+}
+.guideBookStepByStep_item.active .guideBookStepByStep_item_title:before {
+  background-color: rgb(244, 208, 63);
+}
+.guideBookStepByStep_item.active .guideBookStepByStep_item_text {
+  display: block;
+}
+@media (max-width: 577px) {
+  .guideBookStepByStep {
+    padding-left: 0.75rem;
+  }
+  .guideBookStepByStep:before {
+    left: 0;
+  }
+  .guideBookStepByStep_item_title:before {
+    width: 15px;
+    height: 15px;
+    left: -1.4rem;
+    top: 0;
+  }
+  .guideBookStepByStep_item_title:after {
+    top: 4px;
+    left: -18px;
+  }
+}
+
+.galleryCustomBox {
+  position: relative;
+  overflow: hidden;
+  width: 285px;
+  float: right;
+}
+.galleryCustomBox_box {
+  display: flex;
+  transform: translate3d(0px, 0px, 0px);
+  transition: all 0.3s;
+}
+.galleryCustomBox_box > * {
+  width: 100%;
+}
+.galleryCustomBox_arrow .privious, .galleryCustomBox_arrow .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.galleryCustomBox_arrow .privious::after, .galleryCustomBox_arrow .next::after {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  z-index: 100;
+  font-size: 1.2rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  cursor: pointer;
+}
+.galleryCustomBox_arrow .privious:hover::after, .galleryCustomBox_arrow .next:hover::after {
+  background: rgba(0, 0, 0, 0.5);
+}
+.galleryCustomBox_arrow .privious {
+  left: 0.25rem;
+}
+.galleryCustomBox_arrow .privious::after {
+  content: "\f053";
+}
+.galleryCustomBox_arrow .next {
+  right: 0.25rem;
+}
+.galleryCustomBox_arrow .next::after {
+  content: "\f054";
 }

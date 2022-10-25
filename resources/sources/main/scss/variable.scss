@@ -104,6 +104,21 @@ $folderFont : '/fonts/';
     margin-bottom: 0.5rem;
 }
 
+@mixin titleSection {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: $color-primary-hover;
+    @media (max-width: 1023px){
+        font-size: 1.45rem;
+
+    }
+    @media (max-width: 767px){
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+}
+
 @mixin slickSliderMain {
     &:hover {
         .slick-prev, .slick-next {
