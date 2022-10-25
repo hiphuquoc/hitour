@@ -1354,7 +1354,7 @@ $tourGrid_radius : 5px;
                 font-family: $font-primary-title;
                 font-weight: 700;
                 margin-top: 0.25rem !important;
-                margin-bottom: 0.25rem !important;
+                margin-bottom: 0.5rem !important;
             }
             > i {
                 flex: 0 0 30px;
@@ -1428,7 +1428,6 @@ $tourGrid_radius : 5px;
             &_title {
                 h2, h3 {
                     margin-top: 0 !important;
-                    margin-bottom: 0 !important;
                     font-size: 1.25rem;
                 }
             }

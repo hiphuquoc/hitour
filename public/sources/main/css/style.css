@@ -1604,7 +1604,7 @@ input, textarea {
   font-family: "SVN-Gilroy Bold", serif;
   font-weight: 700;
   margin-top: 0.25rem !important;
-  margin-bottom: 0.25rem !important;
+  margin-bottom: 0.5rem !important;
 }
 .contentTour_item_title > i {
   flex: 0 0 30px;
@@ -1659,7 +1659,6 @@ input, textarea {
   }
   .contentTour_item_title h2, .contentTour_item_title h3 {
     margin-top: 0 !important;
-    margin-bottom: 0 !important;
     font-size: 1.25rem;
   }
 }
