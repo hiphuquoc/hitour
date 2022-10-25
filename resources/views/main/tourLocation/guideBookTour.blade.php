@@ -8,7 +8,7 @@
 @endphp     
 <div class="sectionBox hide-767">
     <div class="container">
-        <h2 class="sectionBox_title">Quy trình đặt Tour Phú Quốc và Sử dụng dịch vụ</h2>
+        <h2 class="sectionBox_title">{{ $title ?? null }}</h2>
         <div class="guideBookBox">
             <div class="guideBookBox_image">
                 <div class="galleryCustomBox">

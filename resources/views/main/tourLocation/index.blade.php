@@ -88,7 +88,7 @@
             </div>
 
             <!-- Hướng dẫn đặt Tour -->
-            @include('main.tourLocation.guideBookTour')
+            @include('main.tourLocation.guideBookTour', ['title' => 'Quy trình đặt Tour '.$item->display_name.' và Sử dụng dịch vụ'])
 
             <!-- Vé máy bay -->
             @php
