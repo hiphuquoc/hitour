@@ -65,9 +65,6 @@
                         <!-- content box -->
                         @include('main.tour.content', compact('item'))
     
-                        <!-- faq -->
-                        @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
-    
                     </div>
                     <div class="pageContent_body_sidebar">
     

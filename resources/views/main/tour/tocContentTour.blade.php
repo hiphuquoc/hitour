@@ -5,7 +5,7 @@
     <a href="#bang-gia-tour" class="tocContentTour_item">
         <i class="fa-solid fa-hand-holding-dollar"></i>Bảng giá Tour
     </a>
-    @if($item->timetables->isNotEmpty())
+    @if(!empty($item->timetables)&&$item->timetables->isNotEmpty())
         <a href="#lich-trinh-tour-du-lich" class="tocContentTour_item">
             <i class="fa-solid fa-bookmark"></i>Lịch trình Tour
         </a>
@@ -38,6 +38,11 @@
     @if(!empty($item->content->hotel))
         <a href="#khach-san-tham-khao" class="tocContentTour_item">
             <i class="fa-solid fa-bed"></i>Khách sạn tham khảo
+        </a>
+    @endif
+    @if(!empty($item->questions)&&$item->questions->isNotEmpty())
+        <a href="#cau-hoi-thuong-gap" class="tocContentTour_item">
+            <i class="fa-solid fa-circle-question"></i>Câu hỏi thường gặp
         </a>
     @endif
     {{-- <a href="#" class="tocContentTour_item">

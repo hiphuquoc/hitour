@@ -92,7 +92,7 @@
         </div>
     @endif
     <!-- Chương trình tour -->
-    @if($item->timetables->isNotEmpty())
+    @if(!empty($item->timetables)&&$item->timetables->isNotEmpty())
         <div id="lich-trinh-tour-du-lich" class="contentTour_item">
             <div class="contentTour_item_title noBorder">
                 <i class="fa-solid fa-bookmark"></i>
@@ -219,6 +219,19 @@
                 <div class="hotelTour">
                     {!! $item->content->hotel !!}
                 </div>
+            </div>
+        </div>
+    @endif
+    <!-- Câu hỏi thường gặp -->
+    @if(!empty($item->questions)&&$item->questions->isNotEmpty())
+        <div id="cau-hoi-thuong-gap" class="contentTour_item">
+            <div class="contentTour_item_title">
+                <i class="fa-solid fa-circle-question"></i>
+                <h2>Câu hỏi thường gặp về {{ $item->name ?? null }}</h2>
+            </div>
+            <div class="contentTour_item_text">
+                <!-- faq -->
+                @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
             </div>
         </div>
     @endif
