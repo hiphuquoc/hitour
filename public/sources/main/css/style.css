@@ -3388,16 +3388,16 @@ blockquote em {
   display: flex;
 }
 .guideBookBox_image {
-  width: 42.5%;
+  width: 40%;
   text-align: right;
 }
 .guideBookBox_content {
-  width: 57.5%;
-  margin-left: 5rem;
+  width: 60%;
+  margin-left: 4rem;
 }
 @media (max-width: 1023px) {
   .guideBookBox_content {
-    margin-left: 4rem;
+    margin-left: 3.5rem;
   }
 }
 @media (max-width: 1023px) {
@@ -3419,7 +3419,7 @@ blockquote em {
   border-left: 1px dashed #008fea;
 }
 .guideBookStepByStep_item {
-  min-height: 100px;
+  min-height: 105px;
   padding-bottom: 1.5rem;
   transition: all 1s;
 }
@@ -3488,7 +3488,7 @@ blockquote em {
 .galleryCustomBox {
   position: relative;
   overflow: hidden;
-  width: 285px;
+  width: 240px;
   float: right;
 }
 .galleryCustomBox_box {

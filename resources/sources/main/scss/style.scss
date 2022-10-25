@@ -3295,16 +3295,16 @@ $width-single-menu  : 260px;
 .guideBookBox {
     display: flex;
     &_image {
-        width: 42.5%;
+        width: 40%;
         text-align: right;
     }
     &_content {
-        width: 57.5%;
-        margin-left: 5rem;
+        width: 60%;
+        margin-left: 4rem;
     }
     @media (max-width: 1023px){
         &_content {
-            margin-left: 4rem;
+            margin-left: 3.5rem;
         }
     }
     @media (max-width: 1023px){
@@ -3325,7 +3325,7 @@ $width-single-menu  : 260px;
         border-left: 1px dashed #008fea;
     }
     &_item {
-        min-height: 100px;
+        min-height: 105px;
         padding-bottom: 1.5rem;
         transition: all 1s;
         &_title {
@@ -3404,7 +3404,7 @@ $width-single-menu  : 260px;
 .galleryCustomBox {
     position: relative;
     overflow: hidden;
-    width: 285px;
+    width: 240px;
     float: right;
     &_box {
         display: flex;
