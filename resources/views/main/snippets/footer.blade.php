@@ -4,7 +4,7 @@
                 <div class="footerBox_item">
                     <ul style="margin:0;">
                         <li>
-                            <b style="font-size:1.05rem;">Cty TNHH du lịch biển đảo Hitour</b>
+                            <b style="font-size:1.05rem;font-family:'SVN-Gilroy Bold', serif;display:flex;margin-top:-5px;">Cty TNHH du lịch biển đảo Hitour</b>
                         </li>
                         <li>
                             <i class="fa-solid fa-location-dot"></i>trụ sở: Số 43 Nguyễn Tuân, Phường Vĩnh Quang, Rạch Giá, Kiên Giang

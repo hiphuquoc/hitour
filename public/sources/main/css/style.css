@@ -1039,7 +1039,7 @@ input, textarea {
 }
 .footerBox_item_title {
   font-size: 1.05rem;
-  font-weight: 700;
+  font-family: "SVN-Gilroy Bold", serif;
   margin-bottom: 0.5rem !important;
 }
 .footerBox_item_list li a {
