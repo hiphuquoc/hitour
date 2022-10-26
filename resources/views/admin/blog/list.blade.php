@@ -17,7 +17,7 @@
             </thead>
             <tbody>
                 @php
-                if(!empty($list)){
+                if(!empty($list)&&$list->isNotEmpty()){
                     $i          = 1;
                     foreach($list as $item){
                         echo view('admin.blog.oneRow', ['item' => $item, 'no' => $i]);
@@ -44,6 +44,8 @@
                         }
                         ++$i;
                     }
+                }else {
+                    echo '<tr><td colspan="5">Không có dữ liệu phù hợp!</td></tr>';
                 }
                 @endphp
             </tbody>

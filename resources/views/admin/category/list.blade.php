@@ -44,6 +44,8 @@
                         }
                         ++$i;
                     }
+                }else {
+                    echo '<tr><td colspan="5">Không có dữ liệu phù hợp!</td></tr>';
                 }
                 @endphp
             </tbody>
