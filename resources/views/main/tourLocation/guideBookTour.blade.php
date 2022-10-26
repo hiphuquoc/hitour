@@ -5,81 +5,122 @@
         '/storage/images/upload/guide_book_tour_1-type-manager-upload.webp',
         '/storage/images/upload/guide_book_tour_2-type-manager-upload.webp'
     ];
-@endphp     
-<div class="sectionBox hide-767">
-    <div class="container">
-        <h2 class="sectionBox_title">{{ $title ?? null }}</h2>
-        <div class="guideBookBox">
-            <div class="guideBookBox_image">
-                <div class="galleryCustomBox">
-                    <div id="js_setGuideBook_image" class="galleryCustomBox_box">
-                        @foreach($arrayImage as $image)
-                            <img src="{{ $image }}" alt="Hướng dẫn đặt Tour Phú Quốc" title="Hướng dẫn đặt Tour Phú Quốc" />
-                        @endforeach
-                        <input type="hidden" id="js_prevNextGallery_input" value="0" />
-                    </div>
-                    <div class="galleryCustomBox_arrow">
-                        <div class="privious" id="js_prevNextGallery_prev" onClick="prevNextGallery('previous');"></div>
-                        <div class="next" id="js_prevNextGallery_next" onClick="prevNextGallery('next');"></div>
+@endphp    
+
+<div class="sectionBox">
+    <!-- Desktop --> 
+    <div class="hide-767">
+        <div class="container">
+            <h2 class="sectionBox_title">{{ $title ?? null }}</h2>
+            <div class="guideBookBox">
+                <div class="guideBookBox_image">
+                    <div class="galleryCustomBox">
+                        <div id="js_setGuideBook_image" class="galleryCustomBox_box">
+                            @foreach($arrayImage as $image)
+                                <img src="{{ $image }}" alt="{{ $title ?? null }}" title="{{ $title ?? null }}" />
+                            @endforeach
+                            <input type="hidden" id="js_prevNextGallery_input" value="0" />
+                        </div>
+                        <div class="galleryCustomBox_arrow">
+                            <div class="privious" id="js_prevNextGallery_prev" onClick="prevNextGallery('previous');"></div>
+                            <div class="next" id="js_prevNextGallery_next" onClick="prevNextGallery('next');"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="guideBookBox_content">
-                <div id="js_setGuideBook_box" class="guideBookStepByStep">
-                    <div class="guideBookStepByStep_item active" onClick="setGuideBook(0);">
-                        <div class="guideBookStepByStep_item_title">
-                            <span class="guideBookStepByStep_item_title_no">1</span>Chọn các thông tin quan trọng của Tour
+                <div class="guideBookBox_content">
+                    <div id="js_setGuideBook_box" class="guideBookStepByStep">
+                        <div class="guideBookStepByStep_item active" onClick="setGuideBook(0);">
+                            <div class="guideBookStepByStep_item_title">
+                                <span class="guideBookStepByStep_item_title_no">1</span>Chọn các thông tin quan trọng của Tour
+                            </div>
+                            <div class="guideBookStepByStep_item_text">
+                                <ul>
+                                    <li>Chọn Điểm đến và Tour Quý khách muốn đặt</li>
+                                    <li>Chọn Số lượng hành khách tham gia Tour</li>
+                                    <li>Chọn Ngày khởi hành</li>
+                                    <li>Click <strong>Đặt tour ngay</strong></li>
+                                </ul>   
+                            </div>
                         </div>
-                        <div class="guideBookStepByStep_item_text">
-                            <ul>
-                                <li>Chọn Điểm đến và Tour Quý khách muốn đặt</li>
-                                <li>Chọn Số lượng hành khách tham gia Tour</li>
-                                <li>Chọn Ngày khởi hành</li>
-                                <li>Click <strong>Đặt tour ngay</strong></li>
-                            </ul>   
+                        <div class="guideBookStepByStep_item active" onClick="setGuideBook(1);">
+                            <div class="guideBookStepByStep_item_title">
+                                <span class="guideBookStepByStep_item_title_no">2</span>Vui lòng chờ hệ thống tìm kiếm Tour
+                            </div>
+                            <div class="guideBookStepByStep_item_text">
+                                <ul>
+                                    <li>Hệ thống chuyển hướng Quý khách sang trang đặt Tour chi tiết</li>
+                                    <li>Điền tiếp thông tin liên hệ của người đặt Tour</li>
+                                    <li>Chọn option của Tour</li>
+                                    <li>Click <strong>Xác nhận</strong></li>
+                                </ul>   
+                            </div>
+                        </div>
+                        <div class="guideBookStepByStep_item active" onClick="setGuideBook(2);">
+                            <div class="guideBookStepByStep_item_title">
+                                <span class="guideBookStepByStep_item_title_no">3</span>Thanh toán và hoàn tất
+                            </div>
+                            <div class="guideBookStepByStep_item_text">
+                                <ul>
+                                    <li>Nhân viên Hitour sẽ liên hệ lại và gửi xác nhận</li>
+                                    <li>Quý khách vui lòng thanh toán theo hướng dẫn trong xác nhận</li>
+                                    <li>Và cung cấp thông tin từng hành khách</li>
+                                    <li>Hoàn tất các bước trên Quý khách sẽ nhận được một <strong>Phiếu xác nhận</strong></li>
+                                </ul>   
+                            </div>
+                        </div>
+                        <div class="guideBookStepByStep_item active" onClick="setGuideBook(3);">
+                            <div class="guideBookStepByStep_item_title">
+                                <span class="guideBookStepByStep_item_title_no">4</span>Sử dụng dịch vụ
+                            </div>
+                            <div class="guideBookStepByStep_item_text">
+                                <ul>
+                                    <li><strong>Phiếu xác nhận</strong> có giá trị sử dụng dịch vụ của Hitour</li>
+                                    <li>Tùy thuộc vào mỗi chương trình Tour mà Quý khách nhận thêm các <strong>Vé dịch vụ</strong> đi kèm khác nhau (Ví dụ: vé tàu cao tốc, vé máy bay,...)</li>
+                                    <li>Trường hợp Quý khách làm mất Phiếu xác nhận và Vé dịch vụ có thể sử dụng <strong>số điện thoại đặt Tour</strong></li>
+                                </ul>   
+                            </div>
                         </div>
                     </div>
-                    <div class="guideBookStepByStep_item active" onClick="setGuideBook(1);">
-                        <div class="guideBookStepByStep_item_title">
-                            <span class="guideBookStepByStep_item_title_no">2</span>Vui lòng chờ hệ thống tìm kiếm Tour
-                        </div>
-                        <div class="guideBookStepByStep_item_text">
-                            <ul>
-                                <li>Hệ thống chuyển hướng Quý khách sang trang đặt Tour chi tiết</li>
-                                <li>Điền tiếp thông tin liên hệ của người đặt Tour</li>
-                                <li>Chọn option của Tour</li>
-                                <li>Click <strong>Xác nhận</strong></li>
-                            </ul>   
-                        </div>
+                </div>
+            </div>  
+        </div>
+    </div>
+    <!-- Mobile --> 
+    <div class="show-767">
+        <div class="container">
+            <h2 class="sectionBox_title">{{ $title ?? null }}</h2>
+            <div class="guideBookBoxMobile">
+                <div class="guideBookBoxMobile_image">
+                    @foreach($arrayImage as $image)
+                        <img src="{{ $image }}" alt="{{ $title ?? null }}" title="{{ $title ?? null }}" />
+                        @php
+                            if($loop->index==2) break;
+                        @endphp
+                    @endforeach
+                </div>
+                <div id="js_showHideElement_box" class="guideBookBoxMobile_box">
+                    <div class="guideBookBoxMobile_box_title">
+                        <h2 class="maxLine_1">Hướng dẫn đặt Tour Phú Quốc</h2>
+                        <div class="guideBookBoxMobile_box_title_close" onClick="showHideElement('js_showHideElement_box');"></div>
                     </div>
-                    <div class="guideBookStepByStep_item active" onClick="setGuideBook(2);">
-                        <div class="guideBookStepByStep_item_title">
-                            <span class="guideBookStepByStep_item_title_no">3</span>Thanh toán và hoàn tất
-                        </div>
-                        <div class="guideBookStepByStep_item_text">
-                            <ul>
-                                <li>Nhân viên Hitour sẽ liên hệ lại và gửi xác nhận</li>
-                                <li>Quý khách vui lòng thanh toán theo hướng dẫn trong xác nhận</li>
-                                <li>Và cung cấp thông tin từng hành khách</li>
-                                <li>Hoàn tất các bước trên Quý khách sẽ nhận được một <strong>Phiếu xác nhận</strong></li>
-                            </ul>   
-                        </div>
-                    </div>
-                    <div class="guideBookStepByStep_item active" onClick="setGuideBook(3);">
-                        <div class="guideBookStepByStep_item_title">
-                            <span class="guideBookStepByStep_item_title_no">4</span>Sử dụng dịch vụ
-                        </div>
-                        <div class="guideBookStepByStep_item_text">
+                    <div class="guideBookBoxMobile_box_content customScrollBar-y" style="height:calc(100% - 100px)">
+                        @foreach($arrayImage as $image)
+                        <div class="guideBookBoxMobile_box_content_item">
+                            <img src="{{ $image }}" alt="{{ $title ?? null }}" title="{{ $title ?? null }}" />
                             <ul>
                                 <li><strong>Phiếu xác nhận</strong> có giá trị sử dụng dịch vụ của Hitour</li>
                                 <li>Tùy thuộc vào mỗi chương trình Tour mà Quý khách nhận thêm các <strong>Vé dịch vụ</strong> đi kèm khác nhau (Ví dụ: vé tàu cao tốc, vé máy bay,...)</li>
                                 <li>Trường hợp Quý khách làm mất Phiếu xác nhận và Vé dịch vụ có thể sử dụng <strong>số điện thoại đặt Tour</strong></li>
-                            </ul>   
+                            </ul>
                         </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
-        </div>  
+            <div class="viewMore">
+                <div onClick="showHideElement('js_showHideElement_box');"><i class="fa-solid fa-arrow-down-long"></i>Xem chi tiết</div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -129,6 +170,28 @@
             $('#js_setGuideBook_image').css('transform', 'translate3d(-'+valueTransform+'px, 0px, 0px)');
             /* set value input */
             hideShowButtonGallery(valueSet);
+        }
+
+        function showHideElement(idElement){
+            const displayElement = $('#'+idElement).css('display');
+            if(displayElement=='none'){
+                $('#'+idElement).css({
+                    'display'   : 'block'
+                });
+
+            }else {
+                $('#'+idElement).css({
+                    'display'   : 'none'
+                });
+            }
+
+            $('.guideBookBoxMobile_box_content').slick({
+                infinite: false,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: false,
+                dots: true
+            });
         }
     </script>
 @endpush

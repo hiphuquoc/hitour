@@ -1,7 +1,4 @@
 <div class="serviceGrid">
-    @php
-        // dd($list);
-    @endphp
     @if(!empty($list))
         @foreach($list as $listItem)
             @foreach($listItem->infoServiceLocation->services as $service)

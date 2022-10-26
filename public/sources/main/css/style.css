@@ -2923,7 +2923,7 @@ blockquote em {
   }
 }
 .faqBox_content_item {
-  border-bottom: 1px dashed rgba(0, 123, 255, 0.3);
+  border-bottom: 1px dashed rgba(0, 123, 255, 0.2);
 }
 .faqBox_content_item:not(:first-child) {
   margin-top: 0.75rem;
@@ -2970,29 +2970,6 @@ blockquote em {
 .faqBox_content_item_answer {
   display: none;
   margin-bottom: 1rem;
-}
-@media (max-width: 1023px) {
-  .faqBox_title h2, .faqBox_title h3 {
-    font-size: 1.45rem;
-    margin-bottom: 1.25rem;
-  }
-}
-@media (max-width: 577px) {
-  .faqBox_title h2, .faqBox_title h3 {
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-  }
-}
-@media (max-width: 419px) {
-  .faqBox_content_item:not(:first-child) {
-    margin-top: 1rem;
-  }
-  .faqBox_content_item_question {
-    margin-bottom: 0.5rem;
-  }
-  .faqBox_content_item_question h3 {
-    width: calc(100% - 57.5px);
-  }
 }
 
 .serviceRelatedSidebarBox_title h2, .serviceRelatedSidebarBox_title h3 {
@@ -3306,7 +3283,7 @@ blockquote em {
   padding-top: 2.5rem;
 }
 .sectionBox.withBorder {
-  padding: 0;
+  padding: 0 !important;
   background: none !important;
 }
 .sectionBox.withBorder .container {
@@ -3329,14 +3306,8 @@ blockquote em {
 }
 @media (max-width: 577px) {
   .sectionBox.withBorder .container {
-    padding-bottom: 0;
-    padding-top: 2.5rem;
-  }
-}
-@media (max-width: 419px) {
-  .sectionBox.withBorder .container {
-    padding-bottom: 0;
-    padding-top: 2.25rem;
+    padding-bottom: 2.5rem;
+    padding-top: 1.75rem;
   }
 }
 .sectionBox_title {
@@ -3356,6 +3327,24 @@ blockquote em {
     margin-bottom: 1rem;
   }
 }
+.sectionBox.backgroundPrimary {
+  background: rgba(0, 123, 255, 0.075);
+}
+.sectionBox.backgroundSecondary {
+  background: rgba(244, 208, 63, 0.1);
+}
+.sectionBox.backgroundPrimaryGradiend {
+  background: linear-gradient(0deg, rgba(0, 123, 255, 0.125) 0, rgba(255, 255, 255, 0.05) 100%);
+}
+.sectionBox.backgroundSecondaryGradiend {
+  background: linear-gradient(0deg, rgba(244, 208, 63, 0.15) 0, rgba(255, 255, 255, 0.05) 100%);
+}
+.sectionBox:nth-child(4n+2):not(.noBackground) {
+  background: rgba(0, 123, 255, 0.075);
+}
+.sectionBox:nth-child(4n+4):not(.noBackground) {
+  background: rgba(244, 208, 63, 0.1);
+}
 @media (max-width: 1199px) {
   .sectionBox {
     padding-bottom: 3rem;
@@ -3374,37 +3363,11 @@ blockquote em {
 }
 @media (max-width: 577px) {
   .sectionBox {
-    padding-bottom: 0;
+    padding-bottom: 2.5rem;
   }
   .sectionBox:not(:first-child) {
-    padding-top: 2.5rem;
+    padding-top: 1.75rem;
   }
-}
-@media (max-width: 419px) {
-  .sectionBox {
-    padding-bottom: 0;
-  }
-  .sectionBox:not(:first-child) {
-    padding-top: 2.25rem;
-  }
-}
-.sectionBox.backgroundPrimary {
-  background: rgba(0, 123, 255, 0.075);
-}
-.sectionBox.backgroundSecondary {
-  background: rgba(244, 208, 63, 0.1);
-}
-.sectionBox.backgroundPrimaryGradiend {
-  background: linear-gradient(0deg, rgba(0, 123, 255, 0.125) 0, rgba(255, 255, 255, 0.05) 100%);
-}
-.sectionBox.backgroundSecondaryGradiend {
-  background: linear-gradient(0deg, rgba(244, 208, 63, 0.15) 0, rgba(255, 255, 255, 0.05) 100%);
-}
-.sectionBox:nth-child(4n+2):not(.noBackground) {
-  background: rgba(0, 123, 255, 0.075);
-}
-.sectionBox:nth-child(4n+4):not(.noBackground) {
-  background: rgba(244, 208, 63, 0.1);
 }
 .sectionBox .viewMore {
   text-align: center;
@@ -3447,6 +3410,113 @@ blockquote em {
   .guideBookBox_content {
     margin-left: 3rem;
   }
+}
+
+.guideBookBoxMobile {
+  position: relative;
+  overflow: hidden;
+}
+.guideBookBoxMobile_image {
+  display: flex;
+  justify-content: center;
+}
+.guideBookBoxMobile_image img:first-child {
+  width: 220px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.guideBookBoxMobile_image img:nth-child(2) {
+  width: 170px;
+  margin-top: 3.5rem;
+  margin-bottom: 3rem;
+}
+.guideBookBoxMobile_image img:nth-child(3) {
+  margin-left: 1rem;
+  width: 170px;
+  margin-top: 3.5rem;
+  margin-bottom: 3rem;
+}
+.guideBookBoxMobile_box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #fff;
+  z-index: 105;
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+.guideBookBoxMobile_box_title {
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  justify-content: space-between;
+}
+.guideBookBoxMobile_box_title h2, .guideBookBoxMobile_box_title h3 {
+  width: 100%;
+  text-align: center;
+  padding: 0.75rem;
+  font-size: 1.05rem;
+  font-weight: bold;
+  margin: 0;
+  color: rgb(0, 90, 180);
+}
+.guideBookBoxMobile_box_title_close {
+  flex: 0 0 50px;
+  height: 50px;
+}
+.guideBookBoxMobile_box_title_close::after {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f00d";
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  line-height: 50px;
+  font-size: 1.4rem;
+}
+.guideBookBoxMobile_box_content {
+  padding: 1rem;
+  display: flex;
+}
+.guideBookBoxMobile_box_content > * {
+  width: 100%;
+}
+.guideBookBoxMobile_box_content > *:not(:first-child) {
+  margin-left: 1rem;
+}
+.guideBookBoxMobile_box_content img {
+  width: 160px;
+  margin: 0.5rem auto 1rem auto;
+}
+.guideBookBoxMobile_box_content ul {
+  text-align: justify;
+  margin: 1rem 0 1rem 1.25rem;
+}
+.guideBookBoxMobile_box_content .slick-dots {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  margin: 0 auto;
+  background: #fff;
+  justify-content: center;
+  padding: 0.35rem;
+  border-top: 1px solid #dee2e6;
+}
+.guideBookBoxMobile_box_content .slick-dots li {
+  list-style-type: none;
+}
+.guideBookBoxMobile_box_content .slick-dots li button {
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+.guideBookBoxMobile_box_content .slick-dots li.slick-active button {
+  background: rgb(244, 208, 63);
+  border-radius: 50%;
+  padding: 8px 12px;
 }
 
 .guideBookStepByStep {

@@ -13,7 +13,7 @@
             </div>
         </div>
     </div>
-    @include('main.template.callbook')
+    @include('main.template.callbook', ['flagButton' => true])
 </div>
 
 @push('scripts-custom')
