@@ -11,7 +11,6 @@ use App\Http\Controllers\AdminTourPartnerContactController;
 use App\Http\Controllers\AdminTourController;
 use App\Http\Controllers\AdminTourBookingController;
 use App\Http\Controllers\AdminTourOptionController;
-
 use App\Http\Controllers\AdminShipLocationController;
 use App\Http\Controllers\AdminShipDepartureController;
 use App\Http\Controllers\AdminShipPartnerController;
@@ -19,39 +18,32 @@ use App\Http\Controllers\AdminShipPartnerContactController;
 use App\Http\Controllers\AdminShipController;
 use App\Http\Controllers\AdminShipPriceController;
 use App\Http\Controllers\AdminShipPortController;
-
 use App\Http\Controllers\AdminServiceController;
 use App\Http\Controllers\AdminServiceLocationController;
-
 use App\Http\Controllers\AdminAirPortController;
 use App\Http\Controllers\AdminAirDepartureController;
 use App\Http\Controllers\AdminAirLocationController;
 use App\Http\Controllers\AdminAirPartnerController;
 use App\Http\Controllers\AdminAirPartnerContactController;
 use App\Http\Controllers\AdminAirController;
-
 use App\Http\Controllers\AdminTourContinentController;
 use App\Http\Controllers\AdminTourCountryController;
 use App\Http\Controllers\AdminTourInfoForeignController;
 use App\Http\Controllers\AdminTourOptionForeignController;
-
 use App\Http\Controllers\AdminToolSeoController;
 use App\Http\Controllers\AdminSettingController;
 use App\Http\Controllers\AdminCheckSeoController;
-
 use App\Http\Controllers\AdminStaffController;
 use App\Http\Controllers\AdminCostController;
 use App\Http\Controllers\AdminImageController;
-
 use App\Http\Controllers\AdminFormController;
 use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\AdminGalleryController;
-
 use App\Http\Controllers\AdminShipBookingController;
-
 use App\Http\Controllers\AdminGuideController;
-
 use App\Http\Controllers\AdminCarrentalLocationController;
+use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\AdminBlogController;
 
 use App\Http\Controllers\MainHomeController;
 use App\Http\Controllers\RoutingController;
@@ -384,6 +376,24 @@ Route::prefix('admin')->group(function(){
             Route::get('/deleteKeyword', [AdminToolSeoController::class, 'deleteKeyword'])->name('admin.toolSeo.deleteKeyword');
             Route::get('/listCheckSeo', [AdminCheckSeoController::class, 'listCheckSeo'])->name('admin.toolSeo.listCheckSeo');
             Route::get('/loadDetailCheckSeo', [AdminCheckSeoController::class, 'loadDetailCheckSeo'])->name('admin.toolSeo.loadDetailCheckSeo');
+        });
+        /* ===== CATEGORY ===== */
+        Route::prefix('category')->group(function(){
+            Route::get('/', [AdminCategoryController::class, 'list'])->name('admin.category.list');
+            Route::post('/create', [AdminCategoryController::class, 'create'])->name('admin.category.create');
+            Route::get('/view', [AdminCategoryController::class, 'view'])->name('admin.category.view');
+            Route::post('/update', [AdminCategoryController::class, 'update'])->name('admin.category.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminCategoryController::class, 'delete'])->name('admin.category.delete');
+        });
+        /* ===== BLOG ===== */
+        Route::prefix('blog')->group(function(){
+            Route::get('/', [AdminBlogController::class, 'list'])->name('admin.blog.list');
+            Route::post('/create', [AdminBlogController::class, 'create'])->name('admin.blog.create');
+            Route::get('/view', [AdminBlogController::class, 'view'])->name('admin.blog.view');
+            Route::post('/update', [AdminBlogController::class, 'update'])->name('admin.blog.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminBlogController::class, 'delete'])->name('admin.blog.delete');
         });
         /* ===== AJAX ===== */
         Route::post('/loadProvinceByRegion', [AdminFormController::class, 'loadProvinceByRegion'])->name('admin.form.loadProvinceByRegion');

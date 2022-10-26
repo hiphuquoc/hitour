@@ -1061,4 +1061,41 @@ class BuildInsertUpdateModel {
         }
         return $result;
     }
+
+    public static function buildArrayTableCategoryInfo($dataForm, $seoId = null){
+        /*
+            name
+            description
+            seo_id
+        */
+        $result     = [];
+        if(!empty($dataForm)){
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
+            $result['name']             = $dataForm['title'] ?? null;
+            $result['description']      = $dataForm['description'] ?? null;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableBlogInfo($dataForm, $seoId = null){
+        /*
+            name
+            description
+            seo_id
+            outstanding
+            note
+        */
+        $result     = [];
+        if(!empty($dataForm)){
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
+            $result['name']             = $dataForm['title'] ?? null;
+            $result['description']      = $dataForm['description'] ?? null;
+            $result['outstanding']          = 0;
+            if(!empty($dataForm['outstanding'])) {
+                if($dataForm['outstanding']=='on') $result['outstanding'] = 1;
+            }
+            $result['note']             = $dataForm['note'] ?? null;
+        }
+        return $result;
+    }
 }

@@ -107,7 +107,8 @@ return [
         'contentAirDeparture'       => 'public/contents/airDepartures/',
         'contentAirLocation'        => 'public/contents/airLocations/',
         'contentAirPartner'         => 'public/contents/airPartners/',
-        'contentAir'                => 'public/contents/airs/'
+        'contentAir'                => 'public/contents/airs/',
+        'contentBlog'               => 'public/contents/blogs/'
     ],
 
     'alert'     => [

@@ -151,6 +151,23 @@ return [
             'icon'      => '<i class="fa-solid fa-car-side"></i>',    
         ],
         [
+            'name'      => 'Quản lí Blog',
+            'route'     => '',
+            'icon'      => '<i class="fa-solid fa-blog"></i>',    
+            'child'     => [
+                [
+                    'name'      => 'Chuyên mục',
+                    'route'     => 'admin.category.list',
+                    'icon'      => '<i data-feather=\'circle\'></i>',    
+                ],
+                [
+                    'name'      => 'Bài viết',
+                    'route'     => 'admin.blog.list',
+                    'icon'      => '<i data-feather=\'circle\'></i>',    
+                ]
+            ]
+        ],
+        [
             'name'  => 'Nhân viên tư vấn',
             'route' => 'admin.staff.list',
             'icon'  => '<i class="fa-solid fa-users"></i>'
