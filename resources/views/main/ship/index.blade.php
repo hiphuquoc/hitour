@@ -40,7 +40,7 @@
         <div class="sectionBox">
             <div class="container">
                 <div class="pageContent_body">
-                    <div class="pageContent_body_content">
+                    <div id="js_autoLoadTocContentWithIcon_element" class="pageContent_body_content">
                         <!-- title -->
                         <h1 class="titlePage">Tàu cao tốc {{ $item->name ?? null }}</h1>
                         <!-- rating -->
@@ -80,7 +80,7 @@
 
         $(window).on('load', function () {
             
-            autoLoadTocContentWithIcon();
+            autoLoadTocContentWithIcon('js_autoLoadTocContentWithIcon_element');
 
             /* fixed sidebar khi scroll */
             const elemt                 = $('.js_scrollFixed');
