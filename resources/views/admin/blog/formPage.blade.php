@@ -59,7 +59,7 @@
                             $selected       = null;
                             if(!empty($item->categories)&&$item->categories->isNotEmpty()){
                                 foreach($item->categories as $cActive){
-                                    if($c->id==$cActive->id) {
+                                    if($c->id==$cActive->infoCategory->id) {
                                         $selected = 'selected';
                                         break;
                                     }

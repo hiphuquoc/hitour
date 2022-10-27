@@ -53,18 +53,25 @@
                     <!-- title -->
                     <h1 class="titlePage">{{ $item->name }}{{ !empty($item->district->district_name) ? ' - Vé tàu '.$item->district->district_name : null}}</h1>
                     <!-- rating -->
-                    <div class="ratingBox">
-                        <div class="ratingBox_star">
-                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                    @if(!empty($item->seo->rating_aggregate_star)&&!empty($item->seo->rating_aggregate_count))
+                        <div class="ratingBox">
+                            <div class="ratingBox_star">
+                                <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                                <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                                <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                                <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                                <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="ratingBox_text maxLine_1">
+                                {{ $item->seo->rating_aggregate_star }} sao / {{ $item->seo->rating_aggregate_count }} đánh giá từ khách du lịch
+                            </div>
                         </div>
-                        <div class="ratingBox_text maxLine_1" style="margin-left:2px;font-size:14px;">
-                            {{ $item->seo->rating_aggregate_star }} sao / {{ $item->seo->rating_aggregate_count }} đánh giá từ khách du lịch
+                    @endif
+                    @if(!empty($item->description))
+                        <div class="contentBox">
+                            <p>{!! $item->description !!}</p>
                         </div>
-                    </div>
+                    @endif
                     <!-- ship box -->
                     @include('main.shipLocation.shipGridMerge', ['list' => $item->ships])
                 </div>

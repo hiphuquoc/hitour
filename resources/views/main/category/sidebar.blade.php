@@ -1,20 +1,19 @@
 <div class="js_scrollFixed">
 
-   <div class="callBookTour">
+   {{-- <div class="callBookTour">
       @include('main.template.callbook', ['button' => 'Đặt xe', 'flagButton' => false])
    </div>
 
    <div id="js_autoLoadTocContentWithIcon_idWrite" class="tocContentTour customScrollBar-y" style="margin-top:1.5rem;">
       <!-- loadTocContent ajax -->
-   </div>
+   </div> --}}
 
    @if(!empty($item->tourLocations)&&$item->tourLocations->isNotEmpty())
    <div class="serviceRelatedSidebarBox" style="margin-top:1.5rem;">
       <div class="serviceRelatedSidebarBox_title">
-         <h2>Chuyên mục liên quan</h2>
+         <h2>Có thể bạn cần?</h2>
       </div>
       <div class="serviceRelatedSidebarBox_box">
-
          <!-- tour du lịch -->
          @foreach($item->tourLocations as $tourLocation)
             <a href="/{{ $tourLocation->infoTourLocation->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">
@@ -22,12 +21,12 @@
             </a>
          @endforeach
 
-         <!-- vé vui chơi -->
+         <!-- vé máy bay -->
          @foreach($item->tourLocations as $tourLocation)
             @if($tourLocation->infoTourLocation->airLocations->isNotEmpty())
                @foreach($tourLocation->infoTourLocation->airLocations as $airLocation)
                   <a href="/{{ $airLocation->infoAirLocation->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">
-                     <i class="fa-solid fa-star"></i><h3>{{ $airLocation->infoAirLocation->name }}</h3>
+                     <i class="fa-solid fa-paper-plane"></i><h3>{{ $airLocation->infoAirLocation->name }}</h3>
                   </a>
                @endforeach
             @endif
@@ -44,12 +43,12 @@
             @endif
          @endforeach
 
-         <!-- cho thuê xe -->
+         <!-- vé vui chơi -->
          @foreach($item->tourLocations as $tourLocation)
-            @if($tourLocation->infoTourLocation->carrentalLocations->isNotEmpty())
-               @foreach($tourLocation->infoTourLocation->carrentalLocations as $carrentalLocation)
-                  <a href="/{{ $carrentalLocation->infoCarrentalLocation->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">
-                     <i class="fa-solid fa-car-side"></i><h3>{{ $carrentalLocation->infoCarrentalLocation->name }}</h3>
+            @if($tourLocation->infoTourLocation->serviceLocations->isNotEmpty())
+               @foreach($tourLocation->infoTourLocation->serviceLocations as $serviceLocation)
+                  <a href="/{{ $serviceLocation->infoServiceLocation->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">
+                     <i class="fa-solid fa-star"></i><h3>{{ $serviceLocation->infoServiceLocation->name }}</h3>
                   </a>
                @endforeach
             @endif
@@ -66,6 +65,17 @@
             @endif
          @endforeach
 
+         <!-- cẩm nang du lịch -->
+         @foreach($item->tourLocations as $tourLocation)
+            @if($tourLocation->infoTourLocation->carrentalLocations->isNotEmpty())
+               @foreach($tourLocation->infoTourLocation->carrentalLocations as $carrentalLocation)
+                  <a href="/{{ $carrentalLocation->infoCarrentalLocation->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">
+                     <i class="fa-solid fa-car-side"></i><h3>{{ $carrentalLocation->infoCarrentalLocation->name }}</h3>
+                  </a>
+               @endforeach
+            @endif
+         @endforeach
+         
          {{-- <a href="#" class="serviceRelatedSidebarBox_box_item">
             <i class="fa-solid fa-building"></i><h3>Khách sạn Phú Quốc</h3>
          </a>

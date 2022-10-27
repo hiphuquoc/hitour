@@ -75,8 +75,28 @@ class Category extends Model {
         return $item;
     }
 
+    public static function getArrayCategoryChildByIdSeo($idSeo){
+        $result             = [];
+        $tmp                = Category::select('*')
+                                ->whereHas('seo', function($query) use($idSeo){
+                                    $query->where('parent', $idSeo);
+                                })
+                                ->get();
+        if(!empty($tmp)&&$tmp->isNotEmpty()){
+            foreach($tmp as $t) {
+                $result[]   = $t->id;
+                $result     = array_merge($result, self::getArrayCategoryChildByIdSeo($t->seo->id));
+            }
+        }
+        return $result;
+    }
+
     public function seo() {
         return $this->hasOne(\App\Models\Seo::class, 'id', 'seo_id');
+    }
+
+    public function tourLocations() {
+        return $this->hasMany(\App\Models\RelationCategoryInfoTourLocation::class, 'category_info_id', 'id');
     }
 
 }

@@ -7,6 +7,8 @@ use App\Helpers\Upload;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Models\Seo;
+use App\Models\TourLocation;
+use App\Models\RelationCategoryInfoTourLocation;
 use App\Services\BuildInsertUpdateModel;
 
 use Illuminate\Support\Facades\Storage;
@@ -30,12 +32,13 @@ class AdminCategoryController extends Controller {
         $id             = $request->get('id') ?? 0;
         $item           = Category::select('*')
                             ->where('id', $id)
-                            ->with('seo')
+                            ->with('seo', 'tourLocations.infoTourLocation')
                             ->first();
+        $tourLocations  = TourLocation::all();
         /* type */
         $type           = !empty($item) ? 'edit' : 'create';
         $type           = $request->get('type') ?? $type;
-        return view('admin.category.view', compact('parents', 'item', 'type'));
+        return view('admin.category.view', compact('parents', 'tourLocations', 'item', 'type'));
     }
 
     public function create(CategoryRequest $request){
@@ -53,6 +56,16 @@ class AdminCategoryController extends Controller {
             /* insert category_info */
             $insertCategory     = $this->BuildInsertUpdateModel->buildArrayTableCategoryInfo($request->all(), $seoId);
             $idCategory         = Category::insertItem($insertCategory);
+            /* relation category_info và tour_location */
+            if(!empty($request->get('tour_location_id'))){
+                foreach($request->get('tour_location_id') as $idTourLocation){
+                    $insertRelationCategoryInfoTourLocation    = [
+                        'category_info_id'  => $idCategory,
+                        'tour_location_id'  => $idTourLocation
+                    ];
+                    RelationCategoryInfoTourLocation::insertItem($insertRelationCategoryInfoTourLocation);
+                }
+            }
             DB::commit();
             /* Message */
             $message        = [
@@ -89,6 +102,19 @@ class AdminCategoryController extends Controller {
             Category::updateItem($idCategory, $updateCategory);
             /* update cột level và slug_full của child */
             $this->updateChild($request->get('seo_id'));
+            /* relation category_info và tour_location */
+            RelationCategoryInfoTourLocation::select('*')
+                ->where('category_info_id', $idCategory)
+                ->delete();
+            if(!empty($request->get('tour_location_id'))){
+                foreach($request->get('tour_location_id') as $idTourLocation){
+                    $insertRelationCategoryInfoTourLocation    = [
+                        'category_info_id'  => $idCategory,
+                        'tour_location_id'  => $idTourLocation
+                    ];
+                    RelationCategoryInfoTourLocation::insertItem($insertRelationCategoryInfoTourLocation);
+                }
+            }
             DB::commit();
             /* Message */
             $message        = [

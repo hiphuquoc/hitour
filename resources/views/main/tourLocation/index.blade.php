@@ -49,139 +49,138 @@
     @include('main.snippets.breadcrumb')
 
     <div class="pageContent">
-        
+    
+        <!-- Mô tả Tour du lịch -->
+        <div class="sectionBox">
+            <div class="container">
+                <!-- title -->
+                <h1 class="titlePage">Tour du lịch {{ $item->display_name }} - Du lịch {{ $item->display_name }}</h1>
+                <!-- rating -->
+                @if(!empty($item->seo->rating_aggregate_star)&&!empty($item->seo->rating_aggregate_count))
+                    <div class="ratingBox">
+                        <div class="ratingBox_star">
+                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                        </div>
+                        <div class="ratingBox_text maxLine_1">
+                            {{ $item->seo->rating_aggregate_star }} sao / {{ $item->seo->rating_aggregate_count }} đánh giá từ khách du lịch
+                        </div>
+                    </div>
+                @endif
+                @if(!empty($item->description))
+                    <div class="contentBox">
+                        <p>{!! $item->description !!}</p>
+                    </div>
+                @endif
+                <!-- Tour box -->
+                @if(!empty($item->tours)&&$item->tours->isNotEmpty())
+                    @php
+                        $dataTours              = new \Illuminate\Support\Collection();
+                        foreach($item->tours as $tour) $dataTours[] = $tour->infoTour;
+                    @endphp
+                    @include('main.tourLocation.tourGrid', ['list' => $dataTours])
+                @endif
+            </div>
+        </div>
 
-            <!-- Mô tả Tour du lịch -->
+        <!-- Hướng dẫn đặt Tour -->
+        @include('main.tourLocation.guideBookTour', ['title' => 'Quy trình đặt Tour '.$item->display_name.' và Sử dụng dịch vụ'])
+
+        <!-- Vé máy bay -->
+        @php
+            $dataAirs               = new \Illuminate\Support\Collection();
+            foreach($item->airLocations as $airLocation){
+                foreach($airLocation->infoAirLocation->airs as $air){
+                    $dataAirs[]     = $air;
+                }
+            }
+        @endphp
+        @if(!empty($dataAirs)&&$dataAirs->isNotEmpty())
             <div class="sectionBox">
                 <div class="container">
-                    <!-- title -->
-                    <h1 class="titlePage">Tour du lịch {{ $item->display_name }} - Du lịch {{ $item->display_name }}</h1>
-                    <!-- rating -->
-                    @if(!empty($item->seo->rating_aggregate_star)&&!empty($item->seo->rating_aggregate_count))
-                        <div class="ratingBox">
-                            <div class="ratingBox_star">
-                                <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                                <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                                <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                                <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                                <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                            </div>
-                            <div class="ratingBox_text maxLine_1" style="margin-left:2px;font-size:14px;">
-                                {{ $item->seo->rating_aggregate_star }} sao / {{ $item->seo->rating_aggregate_count }} đánh giá từ khách du lịch
-                            </div>
-                        </div>
-                    @endif
-                    @if(!empty($item->description))
-                        <div class="contentBox">
-                            <p>{!! $item->description !!}</p>
-                        </div>
-                    @endif
-                    <!-- Tour box -->
-                    @if(!empty($item->tours)&&$item->tours->isNotEmpty())
-                        @php
-                            $dataTours              = new \Illuminate\Support\Collection();
-                            foreach($item->tours as $tour) $dataTours[] = $tour->infoTour;
-                        @endphp
-                        @include('main.tourLocation.tourGrid', ['list' => $dataTours])
-                    @endif
+                    <h2 class="sectionBox_title">Vé máy bay đi {{ $item->display_name ?? null }}</h2>
+                    <p>Để đến được {{ $item->display_name ?? null }} nhanh chóng, an toàn và tiện lợi nhất bạn có thể di chuyển bằng máy bay. Chi tiết các <strong>chuyến bay đến {{ $item->display_name ?? null }}</strong> bạn có thể tham khảo thông tin bên dưới</p>
+                    @include('main.tourLocation.airGrid', ['list' => $dataAirs, 'limit' => 3, 'link' => $item->airLocations[0]->infoAirLocation->seo->slug_full])
                 </div>
             </div>
+        @endif
 
-            <!-- Hướng dẫn đặt Tour -->
-            @include('main.tourLocation.guideBookTour', ['title' => 'Quy trình đặt Tour '.$item->display_name.' và Sử dụng dịch vụ'])
+        <!-- Vé tàu cao tốc -->
+        @if(!empty($item->shipLocations[0]->infoShipLocation))
+            <div class="sectionBox">
+                <div class="container">
+                    <h2 class="sectionBox_title">Vé tàu cao tốc {{ $item->display_name ?? null }}</h2>
+                    <p>Để đến được {{ $item->display_name ?? null }} bạn có thể di chuyển bằng tàu cao tốc để tiết kiệm chi phí, đa dạng lịch trình và được trải nghiệm khung cảnh biển đúng nghĩa. Bên dưới là tất cả các <strong>chuyến tàu {{ $item->display_name ?? null }}</strong> đang hoạt động năm {{ date('Y', time() )}}, thông tin về giá, lịch trình và chính sách mới nhất sẽ được cập nhật mỗi ngày tại <a href="/">Hitour</a>.</p>
+                    @php
+                        $dataShips      = new \Illuminate\Support\Collection();
+                        foreach($item->shipLocations as $shipLocation){
+                            $dataShips  = $dataShips->merge($shipLocation->infoShipLocation->ships);
+                        }
+                    @endphp
+                    @include('main.shipLocation.shipGridMerge', ['list' => $dataShips, 'limit' => 3, 'link' => $item->shipLocations[0]->infoShipLocation->seo->slug_full])
+                </div>
+            </div>
+        @endif
 
-            <!-- Vé máy bay -->
-            @php
-                $dataAirs               = new \Illuminate\Support\Collection();
-                foreach($item->airLocations as $airLocation){
-                    foreach($airLocation->infoAirLocation->airs as $air){
-                        $dataAirs[]     = $air;
-                    }
-                }
-            @endphp
-            @if(!empty($dataAirs)&&$dataAirs->isNotEmpty())
-                <div class="sectionBox">
-                    <div class="container">
-                        <h2 class="sectionBox_title">Vé máy bay đi {{ $item->display_name ?? null }}</h2>
-                        <p>Để đến được {{ $item->display_name ?? null }} nhanh chóng, an toàn và tiện lợi nhất bạn có thể di chuyển bằng máy bay. Chi tiết các <strong>chuyến bay đến {{ $item->display_name ?? null }}</strong> bạn có thể tham khảo thông tin bên dưới</p>
-                        @include('main.tourLocation.airGrid', ['list' => $dataAirs, 'limit' => 3, 'link' => $item->airLocations[0]->infoAirLocation->seo->slug_full])
+        <!-- Vé vui chơi & giải trí -->
+        @if(!empty($item->serviceLocations[0]->infoServiceLocation))
+            <div class="sectionBox">
+                <div class="container">
+                    <h2 class="sectionBox_title">Vé vui chơi tại {{ $item->display_name ?? null }}</h2>
+                    <p>Ngoài các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> bạn cũng có thể tham khảo thêm các <strong>hoạt động vui chơi giải trí khác tại {{ $item->display_name ?? null }}</strong>. Đây là các chương trình đặc biệt có thể bù dắp khoảng trống thời gian tự túc trong <strong>chương trình Tour</strong> của bạn và chắc chắn sẽ mang đến cho bạn nhiều trải nghiệm thú vị.</p>
+                    @include('main.tourLocation.serviceGrid', ['list' => $item->serviceLocations])
+                </div>
+            </div>
+        @endif
+
+        <!-- Cẩm nang du lịch -->
+        @if(!empty($item->guides[0]->infoGuide))
+            <div class="sectionBox withBorder">
+                <div class="container">
+                    <h2 class="sectionBox_title">Cẩm nang du lịch {{ $item->display_name ?? null }}</h2>
+                    <p>Nếu các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> của Hitour không đáp ứng được nhu cầu của bạn, hoặc bạn là người ưu thích du lịch tự túc,... Hitour cung cấp thêm cho bạn <strong>Cẩm nang du lịch {{ $item->display_name ?? null }}</strong> để bạn có thể tham khảo thêm thông tin, tự do lên kế hoạch, sắp xếp cho chuyến đi du lịch của mình được chu đáo nhất.</p>
+                    <div class="guideList">
+                        @foreach($item->guides as $guide)
+                            <div class="guideList_item">
+                                <i class="fa-solid fa-angles-right"></i>Xem thêm <a href="/{{ $guide->infoGuide->seo->slug_full }}">{{ $guide->infoGuide->name }}</a>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
-            @endif
+            </div>
+        @endif
 
-            <!-- Vé tàu cao tốc -->
-            @if(!empty($item->shipLocations)&&$item->shipLocations->isNotEmpty())
-                <div class="sectionBox">
-                    <div class="container">
-                        <h2 class="sectionBox_title">Vé tàu cao tốc {{ $item->display_name ?? null }}</h2>
-                        <p>Để đến được {{ $item->display_name ?? null }} bạn có thể di chuyển bằng tàu cao tốc để tiết kiệm chi phí, đa dạng lịch trình và được trải nghiệm khung cảnh biển đúng nghĩa. Bên dưới là tất cả các <strong>chuyến tàu {{ $item->display_name ?? null }}</strong> đang hoạt động năm {{ date('Y', time() )}}, thông tin về giá, lịch trình và chính sách mới nhất sẽ được cập nhật mỗi ngày tại <a href="/">Hitour</a>.</p>
-                        @php
-                            $dataShips      = new \Illuminate\Support\Collection();
-                            foreach($item->shipLocations as $shipLocation){
-                                $dataShips  = $dataShips->merge($shipLocation->infoShipLocation->ships);
-                            }
-                        @endphp
-                        @include('main.shipLocation.shipGridMerge', ['list' => $dataShips, 'limit' => 3, 'link' => $item->shipLocations[0]->infoShipLocation->seo->slug_full])
+        <!-- Cho thuê xe -->
+        @if(!empty($item->carrentalLocations[0]->infoCarrentalLocation))
+            <div class="sectionBox withBorder">
+                <div class="container">
+                    <h2 class="sectionBox_title">Cho thuê xe {{ $item->display_name ?? null }}</h2>
+                    <p>Nếu cần phương tiện di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ <strong>Cho thuê xe tại {{ $item->display_name ?? null }}</strong> của Hitour với đầy đủ lựa chọn (tự lái hoặc có tài xế), xe mới, nhiều loại phù hợp yêu cầu và mức giá hợp lí.</p>
+                    <div class="guideList">
+                        @foreach($item->carrentalLocations as $carrentalLocation)
+                            <div class="guideList_item">
+                                <i class="fa-solid fa-angles-right"></i>Xem thêm <a href="/{{ $carrentalLocation->infoCarrentalLocation->seo->slug_full }}">{{ $carrentalLocation->infoCarrentalLocation->name }}</a>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
-            @endif
+            </div>
+        @endif
 
-            <!-- Vé vui chơi & giải trí -->
-            @if(!empty($item->serviceLocations)&&$item->serviceLocations->isNotEmpty())
-                <div class="sectionBox">
-                    <div class="container">
-                        <h2 class="sectionBox_title">Vé vui chơi tại {{ $item->display_name ?? null }}</h2>
-                        <p>Ngoài các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> bạn cũng có thể tham khảo thêm các <strong>hoạt động vui chơi giải trí khác tại {{ $item->display_name ?? null }}</strong>. Đây là các chương trình đặc biệt có thể bù dắp khoảng trống thời gian tự túc trong <strong>chương trình Tour</strong> của bạn và chắc chắn sẽ mang đến cho bạn nhiều trải nghiệm thú vị.</p>
-                        @include('main.tourLocation.serviceGrid', ['list' => $item->serviceLocations])
-                    </div>
+        <!-- faq -->
+        @if(!empty($item->questions)&&$item->questions->isNotEmpty())
+            <div class="sectionBox withBorder">
+                <div class="container">
+                    <h2 class="sectionBox_title">Câu hỏi thường gặp về Tour {{ $item->display_name ?? null }}</h2>
+                    @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
                 </div>
-            @endif
-
-            <!-- Cẩm nang du lịch -->
-            @if(!empty($item->guides)&&$item->guides->isNotEmpty())
-                <div class="sectionBox withBorder">
-                    <div class="container">
-                        <h2 class="sectionBox_title">Cẩm nang du lịch {{ $item->display_name ?? null }}</h2>
-                        <p>Nếu các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> của Hitour không đáp ứng được nhu cầu của bạn, hoặc bạn là người ưu thích du lịch tự túc,... Hitour cung cấp thêm cho bạn <strong>Cẩm nang du lịch {{ $item->display_name ?? null }}</strong> để bạn có thể tham khảo thêm thông tin, tự do lên kế hoạch, sắp xếp cho chuyến đi du lịch của mình được chu đáo nhất.</p>
-                        <div class="guideList">
-                            @foreach($item->guides as $guide)
-                                <div class="guideList_item">
-                                    <i class="fa-solid fa-angles-right"></i>Xem thêm <a href="/{{ $guide->infoGuide->seo->slug_full }}">{{ $guide->infoGuide->name }}</a>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            @endif
-
-            <!-- Cho thuê xe -->
-            @if(!empty($item->carrentalLocations)&&$item->carrentalLocations->isNotEmpty())
-                <div class="sectionBox withBorder">
-                    <div class="container">
-                        <h2 class="sectionBox_title">Cho thuê xe {{ $item->display_name ?? null }}</h2>
-                        <p>Nếu cần phương tiện di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ <strong>Cho thuê xe tại {{ $item->display_name ?? null }}</strong> của Hitour với đầy đủ lựa chọn (tự lái hoặc có tài xế), xe mới, nhiều loại phù hợp yêu cầu và mức giá hợp lí.</p>
-                        <div class="guideList">
-                            @foreach($item->carrentalLocations as $carrentalLocation)
-                                <div class="guideList_item">
-                                    <i class="fa-solid fa-angles-right"></i>Xem thêm <a href="/{{ $carrentalLocation->infoCarrentalLocation->seo->slug_full }}">{{ $carrentalLocation->infoCarrentalLocation->name }}</a>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            @endif
-
-            <!-- faq -->
-            @if(!empty($item->questions)&&$item->questions->isNotEmpty())
-                <div class="sectionBox withBorder">
-                    <div class="container">
-                        <h2 class="sectionBox_title">Câu hỏi thường gặp về Tour {{ $item->display_name ?? null }}</h2>
-                        @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
-                    </div>
-                </div>
-            @endif
-        </div>
+            </div>
+        @endif
     </div>
+</div>
 
     
     

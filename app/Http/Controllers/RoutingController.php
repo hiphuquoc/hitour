@@ -15,7 +15,8 @@ use App\Models\AirLocation;
 use App\Models\Air;
 use App\Models\TourContinent;
 use App\Models\TourCountry;
-
+use App\Models\Category;
+use App\Models\Blog;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Blade;
 
@@ -44,7 +45,8 @@ class RoutingController extends Controller {
                                             ->with(['questions' => function($q){
                                                 $q->where('relation_table', 'tour_location');
                                             }])
-                                            ->with('seo', 'tours.infoTour.seo', 'airLocations.infoAirLocation.airs.seo', 'guides.infoGuide.seo', 'shipLocations.infoShipLocation.ships.seo', 'shipLocations.infoShipLocation.ships.location.district', 'shipLocations.infoShipLocation.ships.location.province', 'shipLocations.infoShipLocation.ships.departure', 'shipLocations.infoShipLocation.ships.prices.times', 'shipLocations.infoShipLocation.ships.prices.partner', 'shipLocations.infoShipLocation.ships.partners.infoPartner.seo', 'shipLocations.infoShipLocation.ships.portDeparture', 'shipLocations.infoShipLocation.ships.portLocation', 'carrentalLocations.infoCarrentalLocation.seo', 'serviceLocations.infoServiceLocation.seo', 'serviceLocations.infoServiceLocation.services.seo')
+                                            // ->with('seo', 'tours.infoTour.seo', 'airLocations.infoAirLocation.airs.seo', 'guides.infoGuide.seo', 'shipLocations.infoShipLocation.ships.seo', 'shipLocations.infoShipLocation.ships.location.district', 'shipLocations.infoShipLocation.ships.location.province', 'shipLocations.infoShipLocation.ships.departure', 'shipLocations.infoShipLocation.ships.prices.times', 'shipLocations.infoShipLocation.ships.prices.partner', 'shipLocations.infoShipLocation.ships.partners.infoPartner.seo', 'shipLocations.infoShipLocation.ships.portDeparture', 'shipLocations.infoShipLocation.ships.portLocation', 'carrentalLocations.infoCarrentalLocation.seo', 'serviceLocations.infoServiceLocation.seo', 'serviceLocations.infoServiceLocation.services.seo')
+                                            ->with('seo', 'tours', 'airLocations', 'guides', 'shipLocations', 'carrentalLocations', 'serviceLocations')
                                             ->first();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
@@ -76,7 +78,7 @@ class RoutingController extends Controller {
                                             ->with(['questions' => function($q){
                                                 $q->where('relation_table', 'ship_location');
                                             }])
-                                            ->with('seo', 'district', 'ships.seo', 'ships.location.district', 'ships.location.province', 'ships.departure', 'ships.prices.times', 'ships.prices.partner', 'ships.partners.infoPartner.seo', 'ships.portDeparture', 'ships.portLocation', 'tourLocations.infoTourLocation.airLocations.infoAirLocation.seo', 'tourLocations.infoTourLocation.serviceLocations.infoServiceLocation.seo', 'tourLocations.infoTourLocation.carrentalLocations.infoCarrentalLocation.seo', 'tourLocations.infoTourLocation.guides.infoGuide.seo')
+                                            ->with('seo', 'district', 'ships', 'tourLocations')
                                             ->first();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentShipLocation').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
@@ -105,7 +107,7 @@ class RoutingController extends Controller {
                                             ->with(['questions' => function($q){
                                                 $q->where('relation_table', 'ship_info');
                                             }])
-                                            ->with('seo', 'partners.infoPartner.seo', 'portDeparture', 'portLocation', 'location.TourLocations.infoTourLocation.seo', 'location.TourLocations.infoTourLocation.airLocations.infoAirLocation.seo', 'location.TourLocations.infoTourLocation.serviceLocations.infoServiceLocation.seo', 'location.TourLocations.infoTourLocation.carrentalLocations.infoCarrentalLocation.seo', 'location.TourLocations.infoTourLocation.guides.infoGuide.seo')
+                                            ->with('seo', 'partners', 'portDeparture', 'portLocation', 'location')
                                             ->first();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentShip').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
@@ -121,7 +123,7 @@ class RoutingController extends Controller {
                                             ->with(['questions' => function($q){
                                                 $q->where('relation_table', 'guide_info');
                                             }])
-                                            ->with('seo', 'tourLocations.infoTourLocation.seo', 'tourLocations.infoTourLocation.shipLocations.infoShipLocation.seo', 'tourLocations.infoTourLocation.airLocations.infoAirLocation.seo', 'tourLocations.infoTourLocation.serviceLocations.infoServiceLocation.seo', 'tourLocations.infoTourLocation.carrentalLocations.infoCarrentalLocation.seo')
+                                            ->with('seo', 'tourLocations')
                                             ->first();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentGuide').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
@@ -137,7 +139,7 @@ class RoutingController extends Controller {
                                             ->with(['questions' => function($q){
                                                 $q->where('relation_table', 'service_info');
                                             }])
-                                            ->with('seo', 'serviceLocation.seo', 'serviceLocation.tourLocations.infoTourLocation.seo', 'serviceLocation.tourLocations.infoTourLocation.airLocations.infoAirLocation.seo', 'serviceLocation.tourLocations.infoTourLocation.shipLocations.infoShipLocation.seo', 'serviceLocation.tourLocations.infoTourLocation.carrentalLocations.infoCarrentalLocation.seo', 'serviceLocation.tourLocations.infoTourLocation.guides.infoGuide.seo')
+                                            ->with('seo', 'serviceLocation')
                                             ->first();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentService').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
@@ -153,7 +155,7 @@ class RoutingController extends Controller {
                                             ->with(['questions' => function($q){
                                                 $q->where('relation_table', 'service_location');
                                             }])
-                                            ->with('seo', 'services.seo', 'tourLocations.infoTourLocation.tours.infoTour.seo', 'tourLocations.infoTourLocation.airLocations.infoAirLocation.airs.seo', 'tourLocations.infoTourLocation.shipLocations.infoShipLocation.ships.seo', 'tourLocations.infoTourLocation.carrentalLocations.infoCarrentalLocation.seo', 'tourLocations.infoTourLocation.guides.infoGuide.seo')
+                                            ->with('seo', 'services', 'tourLocations')
                                             ->first();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentServiceLocation').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
@@ -169,7 +171,7 @@ class RoutingController extends Controller {
                                             ->with(['questions' => function($q){
                                                 $q->where('relation_table', 'service_location');
                                             }])
-                                            ->with('seo', 'tourLocations.infoTourLocation.seo', 'tourLocations.infoTourLocation.shipLocations.infoShipLocation.seo', 'tourLocations.infoTourLocation.airLocations.infoAirLocation.seo', 'tourLocations.infoTourLocation.serviceLocations.infoServiceLocation.seo', 'tourLocations.infoTourLocation.guides.infoGuide.seo')
+                                            ->with('seo', 'tourLocations')
                                             ->first();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentCarrentalLocation').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
@@ -185,7 +187,7 @@ class RoutingController extends Controller {
                                             ->with(['questions' => function($q){
                                                 $q->where('relation_table', 'air_location');
                                             }])
-                                            ->with('seo', 'airs.portDeparture', 'airs.portLocation', 'airs.seo', 'tourLocations.infoTourLocation.seo', 'tourLocations.infoTourLocation.shipLocations.infoShipLocation.seo', 'tourLocations.infoTourLocation.serviceLocations.infoServiceLocation.seo', 'tourLocations.infoTourLocation.guides.infoGuide.seo', 'tourLocations.infoTourLocation.carrentalLocations.infoCarrentalLocation.seo')
+                                            ->with('seo', 'airs', 'tourLocations')
                                             ->first();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentAirLocation').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
@@ -201,7 +203,7 @@ class RoutingController extends Controller {
                                             ->with(['questions' => function($q){
                                                 $q->where('relation_table', 'air_info');
                                             }])
-                                            ->with('seo', 'airLocation.tourLocations.infoTourLocation.seo', 'airLocation.tourLocations.infoTourLocation.shipLocations.infoShipLocation.ships.seo', 'airLocation.tourLocations.infoTourLocation.serviceLocations.infoServiceLocation.services.seo', 'airLocation.tourLocations.infoTourLocation.carrentalLocations.infoCarrentalLocation.seo', 'airLocation.tourLocations.infoTourLocation.guides.infoGuide.seo')
+                                            ->with('seo', 'airLocation')
                                             ->first();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentAir').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
@@ -217,7 +219,7 @@ class RoutingController extends Controller {
                                             ->with(['questions' => function($q){
                                                 $q->where('relation_table', 'tour_continent');
                                             }])
-                                            ->with('seo', 'tourCountries.tours.infoTourForeign.seo', 'airLocations.infoAirLocation.airs.seo', 'serviceLocations.infoServiceLocation.services.seo', 'guides.infoGuide.seo')
+                                            ->with('seo', 'tourCountries', 'airLocations', 'serviceLocations', 'guides.infoGuide.seo')
                                             ->first();
                     // $content            = Blade::render(Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
@@ -233,7 +235,7 @@ class RoutingController extends Controller {
                                             ->with(['questions' => function($q){
                                                 $q->where('relation_table', 'tour_country');
                                             }])
-                                            ->with('seo', 'tours.infoTourForeign.seo', 'airLocations.infoAirLocation.airs.seo', 'serviceLocations.infoServiceLocation.services.seo', 'guides.infoGuide.seo')
+                                            ->with('seo', 'tours', 'airLocations', 'serviceLocations', 'guides')
                                             ->first();
                     // $content            = Blade::render(Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
@@ -254,6 +256,26 @@ class RoutingController extends Controller {
                     $content            = Blade::render(Storage::get(config('admin.storage.contentTour').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
                     return view('main.tourInfoForeign.index', compact('item', 'breadcrumb', 'content'));
+                case 'category_info':
+                    $item               = Category::select('*')
+                                            ->whereHas('seo', function($q) use ($checkExists){
+                                                $q->where('slug', $checkExists['slug']);
+                                            })
+                                            ->with('seo', 'tourLocations')
+                                            ->first();
+                    /* lấy blog trong category và category con */
+                    $arrayIdCategory    = array_merge([$item->id], Category::getArrayCategoryChildByIdSeo($item->seo->id));
+                    $blogs              = Blog::select('*')
+                                            ->whereHas('categories.infoCategory', function($query) use($arrayIdCategory){
+                                                $query->whereIn('id', $arrayIdCategory);
+                                            })
+                                            ->with('seo')
+                                            ->get();
+                    // $content            = Blade::render(Storage::get(config('admin.storage.contentTour').$item->seo->slug.'.blade.php'));
+                    $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
+                    return view('main.category.index', compact('item', 'breadcrumb', 'blogs'));
+                case 'blog_info':
+
             }
         }else {
             /* Error 404 */

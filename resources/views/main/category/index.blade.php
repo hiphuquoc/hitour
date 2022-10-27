@@ -22,10 +22,6 @@
 <!-- END:: Article Schema -->
 
 <!-- STRAT:: Article Schema -->
-@include('main.schema.product', ['data' => $dataSchema, 'files' => $item->files, 'lowPrice' => '700000', 'highPrice' => '5000000'])
-<!-- END:: Article Schema -->
-
-<!-- STRAT:: Article Schema -->
 @include('main.schema.breadcrumb', ['data' => $breadcrumb])
 <!-- END:: Article Schema -->
 
@@ -33,17 +29,11 @@
 @endpush
 @section('content')
 
-    {{-- @php
-        $active = 'ship';
-    @endphp
-    @include('main.form.sortBooking', compact('item', 'active')) --}}
-
     @include('main.snippets.breadcrumb')
 
     <div class="pageContent">
         <div class="sectionBox">
             <div class="container">
-                <!-- content -->
                 <div class="pageContent_body">
                     <div id="js_autoLoadTocContentWithIcon_element" class="pageContent_body_content">
                         <!-- title -->
@@ -63,15 +53,27 @@
                                 </div>
                             </div>
                         @endif
-                        <div class="contentShip">
-                            <!-- Nội dung tùy biến -->
-                            {!! $content ?? null !!}
-                            <!-- faq -->
-                            @include('main.snippets.faq', ['list' => $item->questions, 'title' => 'tàu '.$item->name])
-                        </div>
+                        <!-- Blog List -->
+                        @include('main.category.blogList', compact('blogs'))
+                        <!-- START:: Pagination -->
+                        {{-- <div class="pull-right pagination">
+                            <ul class="pagination">
+                            <li class="disabled">
+                                <span><i class="fa-solid fa-arrow-left-long"></i></span>
+                            </li>
+                            <li class="active"><span>1</span></li>
+                            <li><a href="https://chuyentauvanhoc.edu.vn/nghi-luan-van-hoc?page=2">2</a></li>
+                            <li>
+                                <a href="https://chuyentauvanhoc.edu.vn/nghi-luan-van-hoc?page=2">
+                                <span><i class="fa-solid fa-arrow-right-long"></i></span>
+                                </a>
+                            </li>
+                            </ul>
+                        </div> --}}
+                        <!-- END:: Pagination -->
                     </div>
                     <div class="pageContent_body_sidebar">
-                        @include('main.air.sidebar')
+                        @include('main.category.sidebar')
                     </div>
                 </div>
             </div>
@@ -80,8 +82,9 @@
 @endsection
 @push('scripts-custom')
     <script type="text/javascript">
-        $(window).on('load', function () {
 
+        $(window).on('load', function () {
+            
             autoLoadTocContentWithIcon('js_autoLoadTocContentWithIcon_element');
 
             /* fixed sidebar khi scroll */

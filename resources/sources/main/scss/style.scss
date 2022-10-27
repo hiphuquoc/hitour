@@ -331,7 +331,7 @@ $height_headerMain : 80px;
     }
 }
 .ratingBox {
-	font-size: 13px;
+	font-size: 0.925rem;
     display:flex;
     margin-bottom: 0.5rem;
 	&_star {
@@ -346,6 +346,7 @@ $height_headerMain : 80px;
 	&_text {
 		font-weight: normal;
 		color: #789;
+        margin-left: 1rem;
         a {
             font-size: 15px;
             color: $color-primary;
@@ -3541,4 +3542,135 @@ $width-single-menu  : 260px;
         }
     }
     
+}
+.articleBox {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    &_item {
+        display: flex;
+        justify-content: space-between;
+        &:not(:first-child){
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed $bg-05;
+        }
+        &_image {
+            display: flex;
+            flex: 0 0 260px;
+            img {
+                width: 100%;
+                border-radius: 5px;
+                object-fit: cover;
+                height: 160px;
+                margin: 0;
+            }
+        }
+        &_content {
+            width: 100%;
+            margin-left: 1rem;
+            text-align: justify;
+            &_title {
+                // height: 50px;
+                display: flex;
+                h2 {
+                    font-size: 1.25rem !important;
+                    margin: 0 0 0.5rem 0;
+                    color: $color-title;
+                    &:hover {
+                        color: $color-primary;
+                    }
+                }
+            }
+            &_subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 0.25rem;
+                > * {
+                    &:not(:first-child){
+                        margin-left: 1.2rem;
+                    }
+                    i {
+                        margin-right: 0.1rem;
+                        color: $bg-06;
+                    }
+                }
+            }
+            &_des {
+                color: $color-des;
+                font-size: 1rem;
+                margin-top: 0.25rem;
+            }
+        }
+        @media (min-width: 991px) and (max-width: 1199px) {
+            &_content {
+                &_title {
+                    h2 {
+                        font-size: 1.2rem !important;
+                    }
+                }
+            }
+        }
+        @media (min-width: 768px) and (max-width: 990px){
+            &_content {
+                &_title {
+                    h2 {
+                        font-size: 1.2rem !important;
+                    }
+                }
+            }
+        }
+        @media (min-width: 578px) and (max-width: 767px){
+            &_content {
+                &_title {
+                    h2 {
+                        font-size: 1.2rem !important;
+                    }
+                }
+                &_subtitle {
+                    font-size: 0.9rem !important;
+                    margin-bottom: 0.5rem;
+                    &_author {
+                        display: none;
+                    }
+                }
+            }
+            &_image {
+                flex: 0 0 240px;
+            }
+        }
+        @media (max-width: 577px) {
+            flex-wrap: wrap;
+            border-radius: 5px;
+            &:not(:first-child){
+                margin-top: 1.5rem;
+                border: none;
+                padding-top: 0;
+            }
+            &_image {
+                flex: 0 0 100%;
+                height: unset;
+                img {
+                    height: 215px !important;
+                }
+            }
+            &_content {
+                padding: 0.5rem 0;
+                margin-left: 0;
+                background: #fff;
+                border-radius: 0 0 5px 5px;
+                &_title {
+                    h2 {
+                        font-size: 1.15rem !important;
+                    }
+                }
+                &_subtitle {
+                    font-size: 0.9rem !important;
+                    margin-bottom: 0.5rem;
+                }
+                &_des {
+                    font-size: 0.95rem !important;
+                }
+            }
+        }
+    }
 }

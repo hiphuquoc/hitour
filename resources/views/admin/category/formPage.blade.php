@@ -44,6 +44,27 @@
             </span>
             <input type="number" min="0" id="ordering" class="form-control" name="ordering" value="{{ old('ordering') ?? $item->seo['ordering'] ?? '' }}">
         </div>
-
+        <!-- One Row -->
+        <div class="formBox_full_item">
+            <label class="form-label" for="guide_info_id">Liên kết Tour</label>
+            <select class="select2 form-select select2-hidden-accessible" id="tour_location_id" name="tour_location_id[]" aria-hidden="true" multiple>
+                @if(!empty($tourLocations))
+                    @foreach($tourLocations as $tourLocation)
+                        @php
+                            $selected           = null;
+                            if(!empty($item->tourLocations)&&$item->tourLocations->isNotEmpty()){
+                                foreach($item->tourLocations as $s){
+                                    if(!empty($s->infoTourLocation->id)&&$s->infoTourLocation->id==$tourLocation->id){
+                                        $selected   = ' selected';
+                                        break;
+                                    }
+                                }
+                            }
+                        @endphp
+                        <option value="{{ $tourLocation->id }}"{{ $selected }}>{{ $tourLocation->name }}</option>
+                    @endforeach
+                @endif
+            </select>
+        </div>
     </div>
 </div>
