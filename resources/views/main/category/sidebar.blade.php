@@ -9,7 +9,7 @@
    </div> --}}
 
    @if(!empty($item->tourLocations)&&$item->tourLocations->isNotEmpty())
-   <div class="serviceRelatedSidebarBox" style="margin-top:1.5rem;">
+   <div class="serviceRelatedSidebarBox">
       <div class="serviceRelatedSidebarBox_title">
          <h2>Có thể bạn cần?</h2>
       </div>

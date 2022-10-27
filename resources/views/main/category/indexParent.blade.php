@@ -58,23 +58,8 @@
                             </div>
                         @endif
                         <!-- Blog List -->
-                        @include('main.category.blogList', compact('blogs'))
-                        <!-- START:: Pagination -->
-                        {{-- <div class="pull-right pagination">
-                            <ul class="pagination">
-                            <li class="disabled">
-                                <span><i class="fa-solid fa-arrow-left-long"></i></span>
-                            </li>
-                            <li class="active"><span>1</span></li>
-                            <li><a href="https://chuyentauvanhoc.edu.vn/nghi-luan-van-hoc?page=2">2</a></li>
-                            <li>
-                                <a href="https://chuyentauvanhoc.edu.vn/nghi-luan-van-hoc?page=2">
-                                <span><i class="fa-solid fa-arrow-right-long"></i></span>
-                                </a>
-                            </li>
-                            </ul>
-                        </div> --}}
-                        <!-- END:: Pagination -->
+                        @include('main.category.blogListLeftRight')
+                        
                     </div>
                     <div class="pageContent_body_sidebar">
                         @include('main.category.sidebar')

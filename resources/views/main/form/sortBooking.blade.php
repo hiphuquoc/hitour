@@ -22,7 +22,7 @@
 	<div class="bookFormSort" onClick="hideShowAround();">
 		<div class="bookFormSort_head">
 			<div {{ !empty($active)&&$active=='ship' ? 'class=active' : null }} data-tab="shipBookingForm" onClick="changeTab(this);">
-				<i class="fa-solid fa-ship"></i>Vé tàu cao tốc
+				<i class="fa-solid fa-ship"></i>Tàu cao tốc
 			</div>
 			<div {{ !empty($active)&&$active=='tour' ? 'class=active' : null }} data-tab="tourBookingForm" onClick="changeTab(this);">
 				<i class="fa-solid fa-suitcase-rolling"></i>Tour du lịch

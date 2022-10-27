@@ -263,17 +263,47 @@ class RoutingController extends Controller {
                                             })
                                             ->with('seo', 'tourLocations')
                                             ->first();
-                    /* lấy blog trong category và category con */
+                    /* lấy id category và id category con (đệ quy) */
                     $arrayIdCategory    = array_merge([$item->id], Category::getArrayCategoryChildByIdSeo($item->seo->id));
-                    $blogs              = Blog::select('*')
+                    /* dùng cho schema list */
+                    $list               = Blog::select('*')
                                             ->whereHas('categories.infoCategory', function($query) use($arrayIdCategory){
                                                 $query->whereIn('id', $arrayIdCategory);
                                             })
                                             ->with('seo')
                                             ->get();
+                    /* content */
                     // $content            = Blade::render(Storage::get(config('admin.storage.contentTour').$item->seo->slug.'.blade.php'));
+                    /* breadcrumb */
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                    return view('main.category.index', compact('item', 'breadcrumb', 'blogs'));
+                    /* lấy thông tin category con (để phân biệt giao diện category cấp cuối và không phải cấp cuối) */
+                    $infoCategoryChilds = Category::select('*')
+                                            ->whereHas('seo', function($q) use ($item){
+                                                $q->where('parent', $item->seo->id);
+                                            })
+                                            ->with('seo', 'tourLocations')
+                                            ->get();
+                    if(!empty($infoCategoryChilds)&&$infoCategoryChilds->isNotEmpty()){ /* trường hợp category chưa phải cấp cuối */
+                        /* lấy danh sách từng blog theo category child */
+                        foreach($infoCategoryChilds as $infoCategoryChild){
+                            $infoCategoryChild->childs  = Blog::select('*')
+                                                            ->whereHas('categories.infoCategory', function($query) use($infoCategoryChild){
+                                                                $query->where('id', $infoCategoryChild->id);
+                                                            })
+                                                            ->with('seo')
+                                                            ->get();
+                        }
+                        return view('main.category.indexParent', compact('item', 'breadcrumb', 'infoCategoryChilds', 'list'));
+                    }else { /* trường hợp category là cấp cuối */
+                        /* lấy danh sách blog bằng array id category */
+                        $blogs              = Blog::select('*')
+                        ->whereHas('categories.infoCategory', function($query) use($arrayIdCategory){
+                            $query->whereIn('id', $arrayIdCategory);
+                        })
+                        ->with('seo')
+                        ->paginate(20);
+                        return view('main.category.index', compact('item', 'breadcrumb', 'blogs', 'list'));
+                    }
                 case 'blog_info':
                     $item               = Blog::select('*')
                                             ->whereHas('seo', function($q) use ($checkExists){
@@ -288,7 +318,7 @@ class RoutingController extends Controller {
                                             })
                                             ->with('seo', 'tourLocations')
                                             ->first();
-                    /* lấy category liên quan với category cha của blog */
+                    /* lấy category cùng cấp với category cha của blog */
                     $categoryRelates    = Category::select('*')
                                             ->whereHas('seo', function($query) use($parent){
                                                 $query->where('parent', $parent->seo->parent);
