@@ -2985,6 +2985,7 @@ blockquote em {
 .serviceRelatedSidebarBox_box_item {
   display: flex;
   padding: 0.65rem 1rem;
+  align-items: center;
 }
 .serviceRelatedSidebarBox_box_item:not(:first-child) {
   border-top: 1px dashed #dee2e6;
@@ -3761,4 +3762,62 @@ blockquote em {
   .articleBox_item_content_des {
     font-size: 0.95rem !important;
   }
+}
+
+.relatedBox {
+  margin: 2rem 0 1rem 0;
+}
+.relatedBox_title {
+  font-size: 1.3rem;
+  font-family: "SVN-Gilroy Bold", serif;
+  margin-bottom: 1rem;
+}
+.relatedBox_box {
+  display: flex;
+}
+.relatedBox_box_item {
+  width: calc(33.33% - 0.8rem);
+  margin-bottom: 2px;
+}
+.relatedBox_box_item:not(:first-child) {
+  margin-left: 1.5rem;
+}
+.relatedBox_box_item_image a {
+  display: flex;
+}
+.relatedBox_box_item_image img {
+  border-radius: 5px;
+  height: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  margin: 0;
+}
+.relatedBox_box_item_content {
+  padding: 0.75rem 0;
+}
+.relatedBox_box_item_content_title h3 {
+  color: #345;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  font-family: "SVN-Gilroy Bold", serif;
+}
+.relatedBox_box_item_content_title h3:hover {
+  color: rgb(0, 123, 255);
+}
+.relatedBox_box_item_content_des {
+  font-size: 1rem;
+}
+.relatedBox_box_item.background {
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #dee2e6 !important;
+}
+.relatedBox_box_item.background .relatedBox_box_item_content {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0 0 5px 5px;
+}
+
+.slick-track {
+  display: flex !important;
 }

@@ -275,7 +275,38 @@ class RoutingController extends Controller {
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
                     return view('main.category.index', compact('item', 'breadcrumb', 'blogs'));
                 case 'blog_info':
-
+                    $item               = Blog::select('*')
+                                            ->whereHas('seo', function($q) use ($checkExists){
+                                                $q->where('slug', $checkExists['slug']);
+                                            })
+                                            ->with('seo')
+                                            ->first();
+                    $idParent           = $item->seo->parent ?? 0;
+                    $parent             = Category::select('*')
+                                            ->whereHas('seo', function($query) use($idParent){
+                                                $query->where('id', $idParent);
+                                            })
+                                            ->with('seo', 'tourLocations')
+                                            ->first();
+                    /* lấy category liên quan với category cha của blog */
+                    $categoryRelates    = Category::select('*')
+                                            ->whereHas('seo', function($query) use($parent){
+                                                $query->where('parent', $parent->seo->parent);
+                                            })
+                                            ->with('seo', 'tourLocations')
+                                            ->get();
+                    /* lấy blog trong category và category con */
+                    $arrayIdCategory    = array_merge([$parent->id], Category::getArrayCategoryChildByIdSeo($parent->seo->id));
+                    $blogRelates        = Blog::select('*')
+                                            ->whereHas('categories.infoCategory', function($query) use($arrayIdCategory){
+                                                $query->whereIn('id', $arrayIdCategory);
+                                            })
+                                            ->where('id', '!=', $item->id)
+                                            ->with('seo')
+                                            ->get();
+                    $content            = Blade::render(Storage::get(config('admin.storage.contentBlog').$item->seo->slug.'.blade.php'));
+                    $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
+                    return view('main.blog.index', compact('item', 'breadcrumb', 'parent', 'blogRelates', 'categoryRelates', 'content'));
             }
         }else {
             /* Error 404 */

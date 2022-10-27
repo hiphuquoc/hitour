@@ -25,71 +25,43 @@
 @include('main.schema.breadcrumb', ['data' => $breadcrumb])
 <!-- END:: Article Schema -->
 
-@php
-    $dataList       = null;
-    if(!empty($item->services)&&$item->services->isNotEmpty()){
-        $dataList   = $item->services;
-    }
-@endphp
-<!-- STRAT:: Article Schema -->
-@include('main.schema.itemlist', ['data' => $dataList])
-<!-- END:: Article Schema -->
-
 <!-- ===== END:: SCHEMA ===== -->
 @endpush
 @section('content')
 
-    @php
-        $active = 'ship';
-    @endphp
-    @include('main.form.sortBooking', compact('item', 'active'))
-
     @include('main.snippets.breadcrumb')
 
     <div class="pageContent">
-        <div class="sectionBox backgroundPrimaryGradiend">
-            <div class="container">
-                <!-- title -->
-                <h1 class="titlePage">{{ $item->name }}{{ !empty($item->district->district_name) ? ' - Đặt vé máy bay '.$item->district->district_name : null}}</h1>
-                <!-- rating -->
-                @if(!empty($item->seo->rating_aggregate_star)&&!empty($item->seo->rating_aggregate_count))
-                    <div class="ratingBox">
-                        <div class="ratingBox_star">
-                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                            <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
-                        </div>
-                        <div class="ratingBox_text maxLine_1">
-                            {{ $item->seo->rating_aggregate_star }} sao / {{ $item->seo->rating_aggregate_count }} đánh giá từ khách du lịch
-                        </div>
-                    </div>
-                @endif
-                @if(!empty($item->description))
-                    <div class="contentBox">
-                        <p>{!! $item->description !!}</p>
-                    </div>
-                @endif
-                <!-- ship box -->
-                @include('main.serviceLocation.serviceGrid', ['list' => $item->services])
-            </div>
-        </div>
-        
-        <div class="sectionBox noBackground">
+        <div class="sectionBox">
             <div class="container">
                 <div class="pageContent_body">
                     <div id="js_autoLoadTocContentWithIcon_element" class="pageContent_body_content">
-                        <div id="js_autoLoadTocContentWithIcon_element" class="contentShip">
+                        <!-- title -->
+                        <h1 class="titlePage">{{ $item->name ?? null }}</h1>
+                        <!-- rating -->
+                        @if(!empty($item->seo->rating_aggregate_star)&&!empty($item->seo->rating_aggregate_count))
+                            <div class="ratingBox">
+                                <div class="ratingBox_star">
+                                    <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                                    <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                                    <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                                    <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                                    <span class="ratingBox_star_on"><i class="fas fa-star"></i></span>
+                                </div>
+                                <div class="ratingBox_text maxLine_1">
+                                    {{ $item->seo->rating_aggregate_star }} sao / {{ $item->seo->rating_aggregate_count }} đánh giá từ khách du lịch
+                                </div>
+                            </div>
+                        @endif
+                        <div class="contentShip">
                             <!-- Nội dung tùy biến -->
                             {!! $content ?? null !!}
-    
-                            @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
-    
                         </div>
+                        <!-- related box -->
+                        @include('main.blog.related', compact('blogRelates'))
                     </div>
                     <div class="pageContent_body_sidebar">
-                        @include('main.serviceLocation.sidebar')
+                        @include('main.blog.sidebar')
                     </div>
                 </div>
             </div>
@@ -98,6 +70,7 @@
 @endsection
 @push('scripts-custom')
     <script type="text/javascript">
+
         $(window).on('load', function () {
             
             autoLoadTocContentWithIcon('js_autoLoadTocContentWithIcon_element');
@@ -123,6 +96,7 @@
                     });
                 }
             });
+
         });
     </script>
 @endpush

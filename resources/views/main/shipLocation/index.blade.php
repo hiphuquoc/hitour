@@ -128,46 +128,5 @@
                 }
             });
         });
-
-        function autoLoadTocContentWithIcon(idElement){
-            var dataTocContent      = {};
-            var i                   = 0;
-            var indexToc            = 0;
-            $('#'+idElement).find('h2').each(function(){
-                let dataId          = $(this).attr('id');
-                if(typeof dataId=='undefined'){
-                    dataId          = 'randomIdTocContent_'+i;
-                    $(this).attr('id', dataId);
-                    ++indexToc;
-                }
-                const dataIcon      = $('<div />').append($(this).parent().find('i').clone()).html();
-                const name          = $(this)[0].localName;
-                const dataTitle     = $(this).html();
-                dataTocContent[i]   = {
-                    id      : dataId,
-                    name    : name,
-                    icon    : dataIcon,
-                    title   : dataTitle
-                };
-                ++i;
-            });
-            $.ajax({
-                url         : '{{ route("main.ship.loadTocContent") }}',
-                type        : 'post',
-                dataType    : 'html',
-                data        : {
-                    '_token'    : '{{ csrf_token() }}',
-                    dataSend    : dataTocContent
-                },
-                success     : function(data){
-                    /* tính toán chiều cao sidebar */
-                    const heightW       = $(window).height();
-                    const heightUsed    = $('#js_autoLoadTocContentWithIcon_idWrite').parent().outerHeight();
-                    const height        = parseInt(heightW - heightUsed);
-                    $('#js_autoLoadTocContentWithIcon_idWrite').css('max-height', 'calc('+height+'px - 3rem)').html(data);
-                    // $('#js_autoLoadTocContentWithIcon_idWrite')
-                }
-            });
-        }
     </script>
 @endpush

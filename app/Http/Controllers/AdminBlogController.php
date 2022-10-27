@@ -10,9 +10,9 @@ use App\Models\Blog;
 use App\Models\Seo;
 use App\Models\RelationCategoryInfoBlogInfo;
 use App\Services\BuildInsertUpdateModel;
-
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use App\Jobs\CheckSeo;
 
 class AdminBlogController extends Controller {
 
@@ -85,6 +85,9 @@ class AdminBlogController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($seoId);
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.blog.view', ['id' => $idBlog]);
     }
@@ -134,6 +137,9 @@ class AdminBlogController extends Controller {
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
+        /* ===== START:: check_seo_info */
+        CheckSeo::dispatch($request->get('seo_id'));
+        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
         return redirect()->route('admin.blog.view', ['id' => $idBlog]);
     }

@@ -7,25 +7,19 @@ use App\Helpers\Upload;
 
 use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\AdminGalleryController;
-
 use App\Models\AirLocation;
 use App\Models\AirDeparture;
 use App\Models\Air;
-use App\Models\RelationAirLocation;
 use App\Models\RelationAirStaff;
 use App\Models\RelationAirPartner;
 use App\Models\Staff;
 use App\Models\AirPartner;
 use App\Models\Seo;
 use App\Services\BuildInsertUpdateModel;
-
 use Illuminate\Support\Facades\Storage;
-
 use Illuminate\Support\Facades\DB;
-
 use App\Http\Requests\AirRequest;
 use App\Models\AirPort;
-use App\Models\SystemFile;
 use App\Models\QuestionAnswer;
 use App\Jobs\CheckSeo;
 
