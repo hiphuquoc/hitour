@@ -10,7 +10,7 @@
                         <img src="" data-src="{{ $infoCategory->childs[0]->seo->image ?? $infoCategory->childs[0]->seo->image_small ?? config('admin.images.default_750x460') }}" alt="{{ $infoCategory->childs[0]->name ?? $infoCategory->childs[0]->seo->title ?? $infoCategory->childs[0]->seo->seo_title ?? null }}" title="{{ $infoCategory->childs[0]->name ?? $infoCategory->childs[0]->seo->title ?? $infoCategory->childs[0]->seo->seo_title ?? null }}" />
                     </a>
                     <div class="blogListLeftRight_box_left_content">
-                        <a href="/" class="blogListLeftRight_box_left_content_title">
+                        <a href="/{{ $infoCategory->childs[0]->seo->slug_full ?? null }}" class="blogListLeftRight_box_left_content_title">
                             <h3 class="maxLine_2">{{ $infoCategory->childs[0]->name ?? $infoCategory->childs[0]->seo->title ?? $infoCategory->childs[0]->seo->seo_title ?? null }}</h3>
                         </a>
                         @if(!empty($infoCategory->childs[0]->seo->updated_at))
@@ -30,7 +30,9 @@
                                 <img src="" data-src="{{ $infoCategory->childs[$i]->seo->image ?? $infoCategory->childs[$i]->seo->image_small ?? config('admin.images.default_750x460') }}" alt="{{ $infoCategory->childs[$i]->name ?? $infoCategory->childs[$i]->seo->title ?? $infoCategory->childs[$i]->seo->seo_title ?? null }}" title="{{ $infoCategory->childs[$i]->name ?? $infoCategory->childs[$i]->seo->title ?? $infoCategory->childs[$i]->seo->seo_title ?? null }}" />
                             </a>
                             <div class="blogListLeftRight_box_right_item_content">
-                                <h3 class="maxLine_2">{{ $infoCategory->childs[$i]->name ?? $infoCategory->childs[$i]->seo->title ?? $infoCategory->childs[$i]->seo->seo_title ?? null }}</h3>
+                                <a href="{{ $infoCategory->childs[$i]->slug_full ?? null }}">
+                                    <h3 class="maxLine_2">{{ $infoCategory->childs[$i]->name ?? $infoCategory->childs[$i]->seo->title ?? $infoCategory->childs[$i]->seo->seo_title ?? null }}</h3>
+                                </a>
                                 @if(!empty($infoCategory->childs[$i]->seo->updated_at))
                                     <div class="blogListLeftRight_box_right_item_content_time">
                                         <i class="fa-regular fa-calendar-days"></i>{{ date('H:i\, d/m/Y', strtotime($infoCategory->childs[$i]->seo->updated_at)) }}
