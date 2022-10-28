@@ -10,7 +10,7 @@ use App\Models\Seo;
 use App\Models\TourLocation;
 use App\Models\RelationCategoryInfoTourLocation;
 use App\Services\BuildInsertUpdateModel;
-
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
@@ -21,8 +21,17 @@ class AdminCategoryController extends Controller {
     }
 
     public function list(Request $request){
-        $list               = Category::getAllCategoryByTree();
-        return view('admin.category.list', compact('list'));
+        $params     = [];
+        /* Search theo tên */
+        if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
+        $data       = Category::select('*')
+                        ->when(!empty($params['search_name']), function($query) use($params){
+                            $query->where('name', 'LIKE', '%'.$params['search_name'].'%');
+                        })
+                        ->with('seo')
+                        ->get();
+        $list   = Category::getAllCategoryByTree($data);
+        return view('admin.category.list', compact('list', 'params'));
     }
 
     public function view(Request $request){

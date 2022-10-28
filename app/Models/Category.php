@@ -39,15 +39,13 @@ class Category extends Model {
         return $flag;
     }
 
-    public static function getAllCategoryByTree(){
-        /* Lấy danh sách category */
-        $result         = Category::select('*')
-                            ->with('seo')
-                            ->get();
+    public static function getAllCategoryByTree($list){
         /* lấy phần tử level 1 build cây thư mục category */
         $data           = [];
-        foreach($result as $r){
-            if($r->seo->level==1) $data[] = self::buildParentChild($r, $result);
+        if(!empty($list&&$list->isNotEmpty())){
+            foreach($list as $l){
+                if($l->seo->level==1) $data[] = self::buildParentChild($l, $list);
+            }
         }
         return $data;
     }

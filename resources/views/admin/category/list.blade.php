@@ -2,6 +2,18 @@
 @section('content')
 
 <div class="titlePage">Danh sách Chuyên mục</div>
+<!-- ===== START: SEARCH FORM ===== -->
+<form id="formSearch" method="get" action="{{ route('admin.category.list') }}">
+    <div class="searchBox">
+        <div class="searchBox_item">
+            <div class="input-group">
+                <input type="text" class="form-control" name="search_name" placeholder="Tìm theo tên" value="{{ $params['search_name'] ?? null }}">
+                <button class="btn btn-primary waves-effect" id="button-addon2" type="submit">Tìm</button>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- ===== END: SEARCH FORM ===== -->
 <div class="card">
     <!-- ===== Table ===== -->
     <div class="table-responsive">
