@@ -82,8 +82,8 @@ class AdminTourInfoForeignController extends Controller {
     }
 
     public function create(TourInfoForeignRequest $request){
-        try {
-            DB::beginTransaction();
+        // try {
+        //     DB::beginTransaction();
             /* upload image */
             $dataPath           = [];
             if($request->hasFile('image')) {
@@ -176,25 +176,25 @@ class AdminTourInfoForeignController extends Controller {
                     RelationTourInfoForeignPartner::insertItem($params);
                 }
             }
-            DB::commit();
-            /* Message */
-            $message        = [
-                'type'      => 'success',
-                'message'   => '<strong>Thành công!</strong> Dã tạo Tour mới'
-            ];
-        } catch (\Exception $exception){
-            DB::rollBack();
-            /* Message */
-            $message        = [
-                'type'      => 'danger',
-                'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
-            ];
-        }
-        /* ===== START:: check_seo_info */
-        CheckSeo::dispatch($seoId);
-        /* ===== END:: check_seo_info */
-        $request->session()->put('message', $message);
-        return redirect()->route('admin.tourInfoForeign.view', ['id' => $idTourInfoForeign]);
+        //     DB::commit();
+        //     /* Message */
+        //     $message        = [
+        //         'type'      => 'success',
+        //         'message'   => '<strong>Thành công!</strong> Dã tạo Tour mới'
+        //     ];
+        // } catch (\Exception $exception){
+        //     DB::rollBack();
+        //     /* Message */
+        //     $message        = [
+        //         'type'      => 'danger',
+        //         'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
+        //     ];
+        // }
+        // /* ===== START:: check_seo_info */
+        // CheckSeo::dispatch($seoId);
+        // /* ===== END:: check_seo_info */
+        // $request->session()->put('message', $message);
+        // return redirect()->route('admin.tourInfoForeign.view', ['id' => $idTourInfoForeign]);
     }
 
     public function update(TourInfoForeignRequest $request){
