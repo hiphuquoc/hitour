@@ -203,6 +203,50 @@
                 @endif
             </select>
         </div>
+        <!-- One Row -->
+        <div class="formBox_full_item">
+            <label class="form-label" for="destination_list_id">Liên kết điểm đến</label>
+            <select class="select2 form-select select2-hidden-accessible" id="destination_list_id" name="destination_list_id[]" tabindex="-1" aria-hidden="true" multiple>
+                @if(!empty($categories))
+                    @foreach($categories as $category)
+                        @php
+                            $selected           = null;
+                            if(!empty($item->destinations)&&$item->destinations->isNotEmpty()){
+                                foreach($item->destinations as $a){
+                                    if(!empty($a->infoCategory->id)&&$a->infoCategory->id==$category->id){
+                                        $selected   = ' selected';
+                                        break;
+                                    }
+                                }
+                            }
+                        @endphp
+                        <option value="{{ $category->id }}"{{ $selected }}>{{ $category->name }}</option>
+                    @endforeach
+                @endif
+            </select>
+        </div>
+         <!-- One Row -->
+         <div class="formBox_full_item">
+            <label class="form-label" for="special_list_id">Liên kết đặc sản</label>
+            <select class="select2 form-select select2-hidden-accessible" id="special_list_id" name="special_list_id[]" tabindex="-1" aria-hidden="true" multiple>
+                @if(!empty($categories))
+                    @foreach($categories as $category)
+                        @php
+                            $selected           = null;
+                            if(!empty($item->specials)&&$item->specials->isNotEmpty()){
+                                foreach($item->specials as $a){
+                                    if(!empty($a->infoCategory->id)&&$a->infoCategory->id==$category->id){
+                                        $selected   = ' selected';
+                                        break;
+                                    }
+                                }
+                            }
+                        @endphp
+                        <option value="{{ $category->id }}"{{ $selected }}>{{ $category->name }}</option>
+                    @endforeach
+                @endif
+            </select>
+        </div>
     </div>
 </div>
 

@@ -17,6 +17,11 @@
                                 {{ $blog->seo->title ?? $blog->name ?? null }}
                             </h3>
                         </a>
+                        @if(!empty($blog->seo->updated_at))
+                            <div class="relatedBox_box_item_content_time">
+                                <i class="fa-regular fa-calendar-days"></i>{{ date('H:i\, d/m/Y', strtotime($blog->seo->updated_at)) }}
+                            </div>
+                        @endif
                         <div class="relatedBox_box_item_content_des maxLine_3">
                             {{ $blog->seo->description ?? $blog->description ?? null }}
                         </div>

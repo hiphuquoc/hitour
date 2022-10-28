@@ -45,12 +45,29 @@ class RoutingController extends Controller {
                                             ->with(['questions' => function($q){
                                                 $q->where('relation_table', 'tour_location');
                                             }])
-                                            // ->with('seo', 'tours.infoTour.seo', 'airLocations.infoAirLocation.airs.seo', 'guides.infoGuide.seo', 'shipLocations.infoShipLocation.ships.seo', 'shipLocations.infoShipLocation.ships.location.district', 'shipLocations.infoShipLocation.ships.location.province', 'shipLocations.infoShipLocation.ships.departure', 'shipLocations.infoShipLocation.ships.prices.times', 'shipLocations.infoShipLocation.ships.prices.partner', 'shipLocations.infoShipLocation.ships.partners.infoPartner.seo', 'shipLocations.infoShipLocation.ships.portDeparture', 'shipLocations.infoShipLocation.ships.portLocation', 'carrentalLocations.infoCarrentalLocation.seo', 'serviceLocations.infoServiceLocation.seo', 'serviceLocations.infoServiceLocation.services.seo')
-                                            ->with('seo', 'tours', 'airLocations', 'guides', 'shipLocations', 'carrentalLocations', 'serviceLocations')
+                                            ->with('seo', 'tours', 'airLocations', 'guides', 'shipLocations', 'carrentalLocations', 'serviceLocations', 'destinations', 'specials')
                                             ->first();
+                    /* danh sách blog điểm đến */
+                    $arrayIdDestination = [];
+                    foreach($item->destinations as $destination) $arrayIdDestination[] = $destination->infoCategory->id;
+                    $destinationList    = Blog::select('*')
+                                            ->whereHas('categories.infoCategory', function($query) use($arrayIdDestination){
+                                                $query->whereIn('id', $arrayIdDestination);
+                                            })
+                                            ->with('seo')
+                                            ->get();
+                    /* danh sách blog đặc sản */
+                    $arrayIdSpecial     = [];
+                    foreach($item->specials as $special) $arrayIdSpecial[] = $special->infoCategory->id;
+                    $specialList        = Blog::select('*')
+                                            ->whereHas('categories.infoCategory', function($query) use($arrayIdSpecial){
+                                                $query->whereIn('id', $arrayIdSpecial);
+                                            })
+                                            ->with('seo')
+                                            ->get();                    
                     $content            = Blade::render(Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                    return view('main.tourLocation.index', compact('item', 'breadcrumb', 'content'));
+                    return view('main.tourLocation.index', compact('item', 'breadcrumb', 'destinationList', 'specialList', 'content'));
                 case 'tour_info': /* Tour Info */
                     $item               = Tour::select('*')
                                             ->whereHas('seo', function($q) use ($checkExists){

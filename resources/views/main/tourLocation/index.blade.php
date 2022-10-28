@@ -158,6 +158,24 @@
             </div>
         @endif
 
+        <!-- Điểm đến -->
+        @if(!empty($destinationList[0]))
+            <div class="sectionBox">
+                <div class="container">
+                    <h2 class="sectionBox_title">Điểm đến {{ $item->display_name ?? null }}</h2>
+                    @include('main.tourLocation.blogGrid', ['list' => $destinationList, 'limit' => 4])
+                </div>
+            </div>
+        @endif
+        <!-- Đặc sản -->
+        @if(!empty($specialList[0]))
+            <div class="sectionBox">
+                <div class="container">
+                    <h2 class="sectionBox_title">Đặc sản {{ $item->display_name ?? null }}</h2>
+                    @include('main.tourLocation.blogGrid', ['list' => $specialList, 'limit' => 4])
+                </div>
+            </div>
+        @endif
         <!-- faq -->
         @if(!empty($item->questions)&&$item->questions->isNotEmpty())
             <div class="sectionBox withBorder">

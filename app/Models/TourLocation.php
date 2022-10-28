@@ -108,4 +108,12 @@ class TourLocation extends Model {
         return $this->hasMany(\App\Models\RelationTourLocationAirLocation::class, 'tour_location_id', 'id');
     }
 
+    public function destinations() {
+        return $this->hasMany(\App\Models\RelationTourLocationDestinationList::class, 'tour_location_id', 'id');
+    }
+
+    public function specials() {
+        return $this->hasMany(\App\Models\RelationTourLocationSpecialList::class, 'tour_location_id', 'id');
+    }
+
 }
