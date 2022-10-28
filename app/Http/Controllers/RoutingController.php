@@ -263,6 +263,13 @@ class RoutingController extends Controller {
                                             })
                                             ->with('seo', 'tourLocations')
                                             ->first();
+                    /* danh sách category cấp 1 */
+                    $listCategoryLv1    = Category::select('*')
+                                            ->whereHas('seo', function($query){
+                                                $query->where('level', 1);
+                                            })
+                                            ->with('seo')
+                                            ->get();
                     /* lấy id category và id category con (đệ quy) */
                     $arrayIdCategory    = array_merge([$item->id], Category::getArrayCategoryChildByIdSeo($item->seo->id));
                     /* dùng cho schema list */
@@ -293,7 +300,7 @@ class RoutingController extends Controller {
                                                             ->with('seo')
                                                             ->get();
                         }
-                        return view('main.category.indexParent', compact('item', 'breadcrumb', 'infoCategoryChilds', 'list'));
+                        return view('main.category.indexParent', compact('item', 'breadcrumb', 'infoCategoryChilds', 'list', 'listCategoryLv1'));
                     }else { /* trường hợp category là cấp cuối */
                         /* lấy danh sách blog bằng array id category */
                         $blogs              = Blog::select('*')
@@ -302,7 +309,7 @@ class RoutingController extends Controller {
                         })
                         ->with('seo')
                         ->paginate(20);
-                        return view('main.category.index', compact('item', 'breadcrumb', 'blogs', 'list'));
+                        return view('main.category.index', compact('item', 'breadcrumb', 'blogs', 'list', 'listCategoryLv1'));
                     }
                 case 'blog_info':
                     $item               = Blog::select('*')

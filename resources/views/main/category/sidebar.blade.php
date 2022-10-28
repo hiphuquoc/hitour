@@ -1,14 +1,12 @@
 <div class="js_scrollFixed">
 
-   {{-- <div class="callBookTour">
-      @include('main.template.callbook', ['button' => 'Đặt xe', 'flagButton' => false])
-   </div>
-
-   <div id="js_autoLoadTocContentWithIcon_idWrite" class="tocContentTour customScrollBar-y" style="margin-top:1.5rem;">
-      <!-- loadTocContent ajax -->
-   </div> --}}
-
+   @php
+       $flagMargin  = null;
+   @endphp
    @if(!empty($item->tourLocations)&&$item->tourLocations->isNotEmpty())
+   @php
+       $flagMargin  = 'margin-top:1.5rem;';
+   @endphp
    <div class="serviceRelatedSidebarBox">
       <div class="serviceRelatedSidebarBox_title">
          <h2>Có thể bạn cần?</h2>
@@ -86,4 +84,20 @@
    </div>
    @endif
 
+   @if(!empty($listCategoryLv1)&&$listCategoryLv1->isNotEmpty())
+      <div class="serviceRelatedSidebarBox" style="{{ $flagMargin }}">
+         <div class="serviceRelatedSidebarBox_title">
+            <h2>Chuyên mục</h2>
+         </div>
+         <div class="serviceRelatedSidebarBox_box customScrollBar-y" style="max-height:250px;">
+            
+            @foreach($listCategoryLv1 as $category)
+               <a href="/{{ $category->seo->slug_full ?? null }}" class="serviceRelatedSidebarBox_box_item">
+                  <i class="fa-solid fa-arrow-right"></i><h3>{{ $category->name ?? $category->seo->title ?? $category->seo->seo_title ?? null }}</h3>
+               </a>
+            @endforeach
+
+         </div>
+      </div>
+   @endif
 </div>

@@ -335,7 +335,7 @@ $height_headerMain : 80px;
     display:flex;
     margin-bottom: 0.5rem;
 	&_star {
-        min-width: 95px;
+        min-width: 100px;
 		&_on {
 			color: $color-secondary !important;
 		}
@@ -3774,25 +3774,30 @@ $width-single-menu  : 260px;
                     border-radius: 5px;
                 }
             }
-            &_title {
-                display: flex;
-                h2, h3 {
-                    font-size: 1.2rem;
-                    margin-bottom: 0.75rem;
-                    color: $color-title;
-                    &:hover {
-                        color: $color-primary-hover;
+            &_content {
+                &_title {
+                    display: flex;
+                    h2, h3 {
+                        font-size: 1.2rem;
+                        margin-bottom: 0.75rem;
+                        color: $color-title;
+                        &:hover {
+                            color: $color-primary-hover;
+                        }
                     }
                 }
-            }
-            &_time {
-                font-size: 0.95rem;
-                color: $color-des;
-                margin-bottom: 0.25rem;
-            }
-            &_desc {
-                color: $color-des;
-                font-size: 1rem;
+                &_time {
+                    font-size: 0.95rem;
+                    color: $color-des;
+                    margin-bottom: 0.25rem;
+                    i {
+                        margin-right: 0.5rem;
+                    }
+                }
+                &_desc {
+                    color: $color-des;
+                    font-size: 1rem;
+                }
             }
         }
         &_right {
@@ -3819,6 +3824,7 @@ $width-single-menu  : 260px;
                 }
                 &_content {
                     margin-left: 1rem;
+                    width: 100%;
                     // display: flex;
                     h2, h3 {
                         font-size: 1.05rem;
@@ -3832,6 +3838,9 @@ $width-single-menu  : 260px;
                     &_time {
                         font-size: 0.95rem;
                         color: $color-des;
+                        i {
+                            margin-right: 0.5rem;
+                        }
                     }
                 }
             }
@@ -3865,6 +3874,67 @@ $width-single-menu  : 260px;
             font-size: 1.2rem;
             font-weight: bold;
             color: $color-primary-hover;
+        }
+    }
+    @media(max-width: 767px){
+        &_box {
+            flex-wrap: wrap;
+            &_left {
+                width: 100%;
+                display: flex;
+                &_image {
+                    flex: 0 0 260px;
+                    margin-bottom: 0;
+                }
+                &_content {
+                    margin-left: 1rem;
+                }
+            }
+            &_right {
+                width: 100%;
+                margin: 0.75rem 0 0 0;
+                padding: 0.75rem 0 0 0;
+                border-top: 1px dashed $bg-04;
+                &_item {
+                    &_image {
+                        flex: 0 0 160px;
+                        img {
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @media(max-width: 577px){
+        margin-top: 0.75rem;
+        &_title {
+            margin-bottom: 1.25rem;
+        }
+        &_box {
+            &_left {
+                flex-wrap: wrap;
+                &_image {
+                    width: 100%;
+                    margin-bottom: 0.75rem;
+                    flex: unset;
+                }
+                &_content {
+                    margin-left: 0;
+                    &_title {
+                        h2, h3 {
+                            margin-bottom: 0.5rem;
+                        }
+                    }
+                }
+            }
+            &_right {
+                &_item {
+                    &_image {
+                        flex: 0 0 100px;
+                    }
+                }
+            }
         }
     }
 }
