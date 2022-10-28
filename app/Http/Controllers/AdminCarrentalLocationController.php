@@ -10,6 +10,7 @@ use App\Models\Seo;
 use App\Services\BuildInsertUpdateModel;
 use App\Models\District;
 use App\Models\Province;
+use App\Models\QuestionAnswer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\CarrentalLocationRequest;
@@ -37,6 +38,9 @@ class AdminCarrentalLocationController extends Controller {
         $item           = CarrentalLocation::select('*')
                             ->where('id', $id)
                             ->with(['files' => function($query){
+                                $query->where('relation_table', 'carrental_location');
+                            }])
+                            ->with(['questions' => function($query){
                                 $query->where('relation_table', 'carrental_location');
                             }])
                             ->with('seo', 'region', 'province', 'district')
@@ -71,6 +75,19 @@ class AdminCarrentalLocationController extends Controller {
             $idCarrentalLocation     = CarrentalLocation::insertItem($insertCarrentalLocation);
             /* lưu content vào file */
             Storage::put(config('admin.storage.contentCarrentalLocation').$request->get('slug').'.blade.php', $request->get('content'));
+            /* insert câu hỏi thường gặp */
+            if(!empty($request->get('question_answer'))){
+                foreach($request->get('question_answer') as $itemQues){
+                    if(!empty($itemQues['question'])&&!empty($itemQues['answer'])){
+                        QuestionAnswer::insertItem([
+                            'question'          => $itemQues['question'],
+                            'answer'            => $itemQues['answer'],
+                            'relation_table'    => 'carrental_location',
+                            'reference_id'      => $idCarrentalLocation
+                        ]);
+                    }
+                }
+            }
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
@@ -120,6 +137,23 @@ class AdminCarrentalLocationController extends Controller {
             CarrentalLocation::updateItem($idCarrentalLocation, $updateCarrentalLocation);
             /* lưu content vào file */
             Storage::put(config('admin.storage.contentCarrentalLocation').$request->get('slug').'.blade.php', $request->get('content'));
+            /* update câu hỏi thường gặp */
+            QuestionAnswer::select('*')
+                            ->where('relation_table', 'carrental_location')
+                            ->where('reference_id', $request->get('carrental_location_id'))
+                            ->delete();
+            if(!empty($request->get('question_answer'))){
+                foreach($request->get('question_answer') as $itemQues){
+                    if(!empty($itemQues['question'])&&!empty($itemQues['answer'])){
+                        QuestionAnswer::insertItem([
+                            'question'          => $itemQues['question'],
+                            'answer'            => $itemQues['answer'],
+                            'relation_table'    => 'carrental_location',
+                            'reference_id'      => $request->get('carrental_location_id')
+                        ]);
+                    }
+                }
+            }
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();

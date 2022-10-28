@@ -11,6 +11,7 @@ use App\Models\ServiceLocation;
 use App\Models\Service;
 use App\Models\RelationServiceStaff;
 use App\Models\Seo;
+use App\Models\QuestionAnswer;
 use App\Services\BuildInsertUpdateModel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -50,6 +51,9 @@ class AdminServiceController extends Controller {
                                 ->with(['files' => function($query){
                                     $query->where('relation_table', 'service_info');
                                 }])
+                                ->with(['questions' => function($query){
+                                    $query->where('relation_table', 'service_info');
+                                }])
                                 ->with('seo', 'serviceLocation', 'staffs.infoStaff')
                                 ->first();
         $parents            = ServiceLocation::select('*')
@@ -82,6 +86,19 @@ class AdminServiceController extends Controller {
             $idService          = Service::insertItem($insertServiceInfo);
             /* lưu content vào file */
             Storage::put(config('admin.storage.contentService').$request->get('slug').'.blade.php', $request->get('content'));
+            /* insert câu hỏi thường gặp */
+            if(!empty($request->get('question_answer'))){
+                foreach($request->get('question_answer') as $itemQues){
+                    if(!empty($itemQues['question'])&&!empty($itemQues['answer'])){
+                        QuestionAnswer::insertItem([
+                            'question'          => $itemQues['question'],
+                            'answer'            => $itemQues['answer'],
+                            'relation_table'    => 'service_info',
+                            'reference_id'      => $idService
+                        ]);
+                    }
+                }
+            }
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')&&!empty($idService)){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
@@ -151,6 +168,23 @@ class AdminServiceController extends Controller {
             Service::updateItem($idService, $updateServiceInfo);
             /* lưu content vào file */
             Storage::put(config('admin.storage.contentService').$request->get('slug').'.blade.php', $request->get('content'));
+            /* update câu hỏi thường gặp */
+            QuestionAnswer::select('*')
+                            ->where('relation_table', 'service_info')
+                            ->where('reference_id', $idService)
+                            ->delete();
+            if(!empty($request->get('question_answer'))){
+                foreach($request->get('question_answer') as $itemQues){
+                    if(!empty($itemQues['question'])&&!empty($itemQues['answer'])){
+                        QuestionAnswer::insertItem([
+                            'question'          => $itemQues['question'],
+                            'answer'            => $itemQues['answer'],
+                            'relation_table'    => 'service_info',
+                            'reference_id'      => $idService
+                        ]);
+                    }
+                }
+            }
             /* update slider và lưu CSDL */
             if($request->hasFile('slider')&&!empty($idService)){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();

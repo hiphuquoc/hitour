@@ -137,9 +137,6 @@ class RoutingController extends Controller {
                                             ->with(['files' => function($query){
                                                 $query->where('relation_table', 'guide_info');
                                             }])
-                                            ->with(['questions' => function($q){
-                                                $q->where('relation_table', 'guide_info');
-                                            }])
                                             ->with('seo', 'tourLocations')
                                             ->first();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentGuide').$item->seo->slug.'.blade.php'));
@@ -183,10 +180,10 @@ class RoutingController extends Controller {
                                                 $query->where('slug', $checkExists['slug']);
                                             })
                                             ->with(['files' => function($query){
-                                                $query->where('relation_table', 'service_location');
+                                                $query->where('relation_table', 'carrental_location');
                                             }])
                                             ->with(['questions' => function($q){
-                                                $q->where('relation_table', 'service_location');
+                                                $q->where('relation_table', 'carrental_location');
                                             }])
                                             ->with('seo', 'tourLocations')
                                             ->first();

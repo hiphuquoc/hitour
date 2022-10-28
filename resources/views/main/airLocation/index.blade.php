@@ -68,14 +68,23 @@
                 <div class="container">
                     <div class="pageContent_body">
                         <div class="pageContent_body_content">
-                            <div id="js_autoLoadTocContentWithIcon_element" class="contentShip">
+                            <div id="js_autoLoadTocContentWithIcon_element">
                                 <!-- Lịch tàu và Hãng tàu -->
                                 {{-- @include('main.airLocation.headContent', ['keyWord' => $item->name]) --}}
                                 <!-- Nội dung tùy biến -->
                                 {!! $content ?? null !!}
-        
-                                @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
-        
+                                <!-- Câu hỏi thường gặp -->
+                                @if(!empty($item->questions)&&$item->questions->isNotEmpty())
+                                    <div id="cau-hoi-thuong-gap" class="contentTour_item">
+                                        <div class="contentTour_item_title">
+                                            <i class="fa-solid fa-circle-question"></i>
+                                            <h2>Câu hỏi thường gặp về {{ $item->name ?? null }}</h2>
+                                        </div>
+                                        <div class="contentTour_item_text">
+                                            @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="pageContent_body_sidebar">

@@ -55,7 +55,7 @@
             <div class="sectionBox">
                 <div class="container">
                     <!-- title -->
-                    <h1 class="titlePage">Du lịch {{ $item->display_name }} - Tour du lịch {{ $item->display_name }}</h1>
+                    <h1 class="titlePage">Tour du lịch {{ $item->display_name }} - Du lịch {{ $item->display_name }}</h1>
                     <!-- rating -->
                     @include('main.template.rating', compact('item'))
                     <!-- description -->
@@ -92,9 +92,9 @@
             @if(!empty($dataAirs)&&$dataAirs->isNotEmpty())
                 <div class="sectionBox">
                     <div class="container">
-                        <h2 class="titlePage">Vé máy bay đi {{ $item->display_name ?? null }}</h2>
+                        <h2 class="sectionBox_title">Vé máy bay đi {{ $item->display_name ?? null }}</h2>
                         <p>Để đến được {{ $item->display_name ?? null }} nhanh chóng, an toàn và tiện lợi nhất bạn có thể di chuyển bằng máy bay. Chi tiết các <strong>chuyến bay đến {{ $item->display_name ?? null }}</strong> bạn có thể tham khảo thông tin bên dưới</p>
-                        @include('main.tourContinent.airGrid', ['list' => $dataAirs])
+                        @include('main.tourLocation.airGrid', ['list' => $dataAirs, 'limit' => 3, 'link' => $item->airLocations[0]->infoAirLocation->seo->slug_full])
                     </div>
                 </div>
             @endif
@@ -103,19 +103,19 @@
             @if(!empty($item->serviceLocations[0]->infoServiceLocation))
                 <div class="sectionBox">
                     <div class="container">
-                        <h2 class="titlePage">Vé vui chơi tại {{ $item->display_name ?? null }}</h2>
+                        <h2 class="sectionBox_title">Vé vui chơi tại {{ $item->display_name ?? null }}</h2>
                         <p>Ngoài các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> bạn cũng có thể tham khảo thêm các <strong>hoạt động vui chơi giải trí khác tại {{ $item->display_name ?? null }}</strong>. Đây là các chương trình đặc biệt có thể bù dắp khoảng trống thời gian tự túc trong <strong>chương trình Tour</strong> của bạn và chắc chắn sẽ mang đến cho bạn nhiều trải nghiệm thú vị.</p>
-                        @include('main.tourContinent.serviceGrid', ['list' => $item->serviceLocations])
+                        @include('main.tourLocation.serviceGrid', ['list' => $item->serviceLocations])
                     </div>
                 </div>
             @endif
 
             <!-- Cẩm nang du lịch -->
             @if(!empty($item->guides[0]->infoGuide))
-                <div class="sectionBox">
+                <div class="sectionBox withBorder">
                     <div class="container">
-                        <h2 class="titlePage">Cẩm nang du lịch {{ $item->display_name ?? null }}</h2>
-                        <p>Nếu các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> của Hitour không đáp ứng được nhu cầu của bạn, hoặc bạn là người ưu thích du lịch tự túc,... Hitour cung cấp thêm cho bạn <strong>Cẩm nang du lịch {{ $item->display_name ?? null }} từ A-Z</strong> để bạn có thể tự do tham khảo thông tin chi tiết về <strong>du lịch {{ $item->display_name ?? null }}</strong>, lên kế hoạch, sắp xếp cho chuyến đi du lịch của mình được chu đáo nhất.</p>
+                        <h2 class="sectionBox_title">Cẩm nang du lịch {{ $item->display_name ?? null }}</h2>
+                        <p>Nếu các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> của Hitour không đáp ứng được nhu cầu của bạn, hoặc bạn là người ưu thích du lịch tự túc,... Hitour cung cấp thêm cho bạn <strong>Cẩm nang du lịch {{ $item->display_name ?? null }}</strong> để bạn có thể tham khảo thêm thông tin, tự do lên kế hoạch, sắp xếp cho chuyến đi du lịch của mình được chu đáo nhất.</p>
                         <div class="guideList">
                             @foreach($item->guides as $guide)
                                 <div class="guideList_item">
@@ -129,8 +129,9 @@
 
             <!-- faq -->
             @if(!empty($item->questions)&&$item->questions->isNotEmpty())
-                <div class="sectionBox">
+                <div class="sectionBox withBorder">
                     <div class="container">
+                        <h2 class="sectionBox_title">Câu hỏi thường gặp về Tour {{ $item->display_name ?? null }}</h2>
                         @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
                     </div>
                 </div>

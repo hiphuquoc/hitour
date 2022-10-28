@@ -40,40 +40,39 @@
     @include('main.snippets.breadcrumb')
 
     <div class="pageContent">
-        <div class="container">
+        <div class="sectionBox">
+            <div class="container">
 
-            <div class="pageContent_head">
-                <!-- title -->
-                <h1 class="titlePage">{{ $item->name }}</h1>
-                <!-- rating -->
-                @include('main.template.rating', compact('item'))
-            </div>
-
-            <div class="pageContent_body">
-                <div class="pageContent_body_content">
-
-                    <!-- content box -->
-                    @include('main.tourInfoForeign.gallery', compact('item'))
-
-                    <!-- content box -->
-                    @include('main.tourInfoForeign.content', compact('item'))
-
-                    <!-- faq -->
-                    @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
-
+                <div class="pageContent_head">
+                    <!-- title -->
+                    <h1 class="titlePage">{{ $item->name }}</h1>
+                    <!-- rating -->
+                    @include('main.template.rating', compact('item'))
                 </div>
-                <div class="pageContent_body_sidebar">
 
-                    @include('main.tourInfoForeign.detailTour', compact('item'))
+                <div class="pageContent_body">
+                    <div class="pageContent_body_content">
 
-                    <div class="js_scrollFixed">
-                        @include('main.tourInfoForeign.callBookTour', compact('item'))
+                        <!-- gallery -->
+                        @include('main.tourInfoForeign.gallery', compact('item'))
 
-                        @include('main.tourInfoForeign.tocContentTour', compact('item'))
+                        <!-- content box -->
+                        @include('main.tourInfoForeign.content', compact('item'))
+
+                    </div>
+                    <div class="pageContent_body_sidebar">
+
+                        @include('main.tourInfoForeign.detailTour', compact('item'))
+
+                        <div class="js_scrollFixed">
+                            @include('main.tourInfoForeign.callBookTour', compact('item'))
+
+                            @include('main.tourInfoForeign.tocContentTour', compact('item'))
+                        </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
 

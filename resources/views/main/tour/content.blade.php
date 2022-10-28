@@ -230,7 +230,6 @@
                 <h2>Câu hỏi thường gặp về {{ $item->name ?? null }}</h2>
             </div>
             <div class="contentTour_item_text">
-                <!-- faq -->
                 @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
             </div>
         </div>

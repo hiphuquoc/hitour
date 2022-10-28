@@ -48,7 +48,7 @@
                 <div class="pageContent_body">
                     <div class="pageContent_body_content">
     
-                        <!-- content box -->
+                        <!-- gallery -->
                         @include('main.tour.gallery', compact('item'))
     
                         <!-- content box -->

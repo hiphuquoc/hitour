@@ -71,14 +71,14 @@ class AdminTourLocationController extends Controller {
         $serviceLocations   = ServiceLocation::all();
         $airLocations       = AirLocation::all();
         $categories         = Category::all();
-        // $content        = null;
-        // if(!empty($item->seo->slug)){
-        //     $content    = Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php');
-        // }
+        $content        = null;
+        if(!empty($item->seo->slug)){
+            $content    = Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php');
+        }
         $message            = $request->get('message') ?? null; 
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.tourLocation.view', compact('item', 'type', 'provinces', 'districts', 'guides', 'shipLocations', 'carrentalLocations', 'serviceLocations', 'airLocations', 'categories', 'message'));
+        return view('admin.tourLocation.view', compact('item', 'type', 'provinces', 'districts', 'guides', 'shipLocations', 'carrentalLocations', 'serviceLocations', 'airLocations', 'categories', 'content', 'message'));
     }
 
     public function create(TourLocationRequest $request){
@@ -180,7 +180,7 @@ class AdminTourLocationController extends Controller {
                 }
             }
             /* lưu content vào file */
-            // Storage::put(config('admin.storage.contentTourLocation').$request->get('slug').'.blade.php', $request->get('content'));
+            Storage::put(config('admin.storage.contentTourLocation').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
@@ -337,7 +337,7 @@ class AdminTourLocationController extends Controller {
                 }
             }
             /* lưu content vào file */
-            // Storage::put(config('admin.storage.contentTourLocation').$request->get('slug').'.blade.php', $request->get('content'));
+            Storage::put(config('admin.storage.contentTourLocation').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
