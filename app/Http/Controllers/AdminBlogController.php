@@ -12,6 +12,7 @@ use App\Models\RelationCategoryInfoBlogInfo;
 use App\Services\BuildInsertUpdateModel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cookie;
 use App\Jobs\CheckSeo;
 
 class AdminBlogController extends Controller {
@@ -21,8 +22,17 @@ class AdminBlogController extends Controller {
     }
 
     public function list(Request $request){
-        $list           = Blog::getList();
-        return view('admin.blog.list', compact('list'));
+        $params             = [];
+        /* Search theo tên */
+        if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
+        /* Search theo tên */
+        if(!empty($request->get('search_category'))) $params['search_category'] = $request->get('search_category');
+        /* paginate */
+        $viewPerPage        = Cookie::get('viewBlogInfo') ?? 50;
+        $params['paginate'] = $viewPerPage;
+        $categories         = Category::all();
+        $list               = Blog::getList($params);
+        return view('admin.blog.list', compact('list', 'categories', 'params', 'viewPerPage'));
     }
 
     public function view(Request $request){

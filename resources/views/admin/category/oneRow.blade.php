@@ -3,7 +3,7 @@
     $no = $no ?? 0;
 @endphp
 <tr id="category_{{ $item->id }}">
-    <td style="width:60px;font-weight:700;">
+    <td class="text-center" style="width:60px;font-weight:700;">
         {{ $no }}
     </td>
     <td style="width:200px;text-align:right;">

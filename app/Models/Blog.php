@@ -23,9 +23,15 @@ class Blog extends Model {
                         ->when(!empty($params['search_name']), function($query) use($params){
                             $query->where('name', 'like', '%'.$params['search_name'].'%');
                         })
+                        /* tìm theo Chuyên mục */
+                        ->when(!empty($params['search_category']), function($query) use($params){
+                            $query->whereHas('categories.infoCategory', function($q) use($params){
+                                $q->where('id', $params['search_category']);
+                            });
+                        })
                         ->with('seo')
                         ->orderBy('id', 'DESC')
-                        ->get();
+                        ->paginate($params['paginate']);
         return $result;
     }
 

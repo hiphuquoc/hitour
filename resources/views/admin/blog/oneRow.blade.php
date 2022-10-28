@@ -3,7 +3,7 @@
     $no = $no ?? 0;
 @endphp
 <tr id="category_{{ $item->id }}">
-    <td style="width:60px;font-weight:700;">
+    <td class="text-center" style="width:60px;font-weight:700;">
         {{ $no }}
     </td>
     <td style="width:200px;text-align:right;">
@@ -34,6 +34,14 @@
             </span>
             {{ $item->seo->slug_full }}
         </div>
+        @if(!empty($item->categories)&&$item->categories->isNotEmpty())
+            <div class="oneLine">
+                <span class="tableHighLight">Category:</span>
+                @foreach($item->categories as $category)
+                    <span class="badge bg-primary">{{ $category->infoCategory->name }}</span>
+                @endforeach
+            </div>
+        @endif
     </td>
     <td style="vertical-align:top;">
         <div class="oneLine">
