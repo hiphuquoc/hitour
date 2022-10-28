@@ -13,7 +13,7 @@
         <!-- One Row -->
         <div class="formBox_full_item">
             <label class="form-label" for="tour_timetable_content_sort">Nội dung rút gọn</label>
-            <textarea class="form-control" name="tour_timetable_content_sort" rows="5">{{ old('tour_timetable_content') ?? $item->content_sort ?? '' }}</textarea>
+            <textarea class="form-control" name="tour_timetable_content_sort" rows="5">{{ old('tour_timetable_content_sort') ?? $item->content_sort ?? '' }}</textarea>
         </div>
     </div>
 </div>
