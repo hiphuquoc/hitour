@@ -280,9 +280,19 @@ class RoutingController extends Controller {
                                             }])
                                             ->with('seo', 'staffs.infoStaff', 'options.prices', 'departure', 'content', 'timetables')
                                             ->first();
+                    $idTour                 = $item->id ?? 0;
+                    $arrayIdTourCountry     = [];
+                    foreach($item->tourCountries as $tourCountry) $arrayIdTourCountry[]  = $tourCountry->infoCountry->id;
+                    $related                = TourInfoForeign::select('*')
+                                                ->where('id', '!=', $idTour)
+                                                ->whereHas('tourCountries.infoCountry', function($query) use($arrayIdTourCountry){
+                                                    $query->whereIn('id', $arrayIdTourCountry);
+                                                })
+                                                ->with('seo')
+                                                ->get();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentTour').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                    return view('main.tourInfoForeign.index', compact('item', 'breadcrumb', 'content'));
+                    return view('main.tourInfoForeign.index', compact('item', 'breadcrumb', 'content', 'related'));
                 case 'category_info':
                     $item               = Category::select('*')
                                             ->whereHas('seo', function($q) use ($checkExists){
