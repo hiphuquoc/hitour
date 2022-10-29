@@ -23,8 +23,8 @@
         @endif
     </div>
     @if(!empty($flagButton)&&$flagButton==true)
-        <div class="callBookTour_button_item bookonline">
+        <h2 class="callBookTour_button_item bookonline">
             {{ $button ?? 'Đặt ngay' }}
-        </div>
+        </h2>
     @endif
 </div>

@@ -18,7 +18,11 @@
             <div class="shipGrid_item_content">
                 <div class="shipGrid_item_content_title maxLine_1">
                 <a href="/{{ $item->seo->slug_full ?? null }}">
-                    <h2>{{ $item->name ?? $item->seo->title ?? null }}</h2>
+                    @if(!empty($itemHeading)&&$itemHeading=='h3')
+                        <h3>{{ $item->name ?? $item->seo->title ?? null }}</h3>
+                    @else 
+                        <h2>{{ $item->name ?? $item->seo->title ?? null }}</h2>
+                    @endif
                 </a>
                 </div>
                 <div class="shipGrid_item_content_table">

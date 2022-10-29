@@ -1044,7 +1044,7 @@ $tourGrid_radius : 5px;
             display: flex;
             margin-bottom: 0.75rem;
             padding: 0 0.75rem;
-            h2, h3 {
+            h3, h4 {
                 font-size: 1.2rem;
                 font-family: $font-primary-title;
                 color: #003B7B;
@@ -1270,12 +1270,12 @@ $tourGrid_radius : 5px;
                 }
             }
             &.bookonline {
+                font-family: $font-primary-title;
                 background: $color-secondary;
                 color: #333;
                 padding: 0.5rem 1rem;
                 border-radius: 5px;
                 text-transform: uppercase;
-                font-weight: 700;
                 font-size: 1.1rem;
                 text-align: center;
                 cursor: pointer;
@@ -1837,8 +1837,8 @@ blockquote{
         
         &_content {
             &_title {
-                padding: 0.75rem 0.75rem 0 0.75rem;
-                margin-bottom: 0.55rem;
+                padding: 0.55rem 0.75rem 0 0.75rem;
+                margin-bottom: 0.5rem;
                 
                 a {
                     color: $color-primary;

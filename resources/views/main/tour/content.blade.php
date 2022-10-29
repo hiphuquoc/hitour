@@ -9,35 +9,35 @@
 			<table class="tableList">
 				<tbody>
 					<tr>
-						<td style="width:90px;vertical-align:top;">Hành trình</td>
-						<td>{{ $item->seo->description }}</td>
+						<td style="width:100px;">Hành trình</td>
+						<td><h3 style="font-size:1.05rem;">{{ $item->seo->description }}</h3></td>
 					</tr>
 					@if(!empty($item->days))
                         @if($item->days>1)
                             <tr>
-                                <td style="width:90px;vertical-align:top;">Thời gian</td>
-                                <td>{{ $item->days }} ngày {{ $item->nights }} đêm</td>
+                                <td>Thời gian</td>
+                                <td><h3>{{ $item->days }} ngày {{ $item->nights }} đêm</h3></td>
                             </tr>
                         @else 
                             <tr>
-                                <td style="width:90px;vertical-align:top;">Thời gian</td>
-                                <td>{{ $item->time_start }} - {{ $item->time_end }}</td>
+                                <td>Thời gian</td>
+                                <td><h3>{{ $item->time_start }} - {{ $item->time_end }}</h3></td>
                             </tr>
                         @endif
                     @endif
                     @if(!empty($item->departure_schedule))
                         <tr>
-                            <td style="width:90px;vertical-align:top;">Lịch tour</td>
-                            <td>{{ $item->departure_schedule }}</td>
+                            <td>Lịch tour</td>
+                            <td><h3>{{ $item->departure_schedule }}</h3></td>
                         </tr>
                     @endif
                     <tr>
-                        <td style="width:90px;vertical-align:top;">Vận chuyển</td>
-                        <td>{{ $item->transport }}</td>
+                        <td>Vận chuyển</td>
+                        <td><h3>{{ $item->transport }}</h3></td>
                     </tr>
                     <tr>
-                        <td style="width:90px;vertical-align:top;">Xuất phát</td>
-                        <td>{{ $item->pick_up }}</td>
+                        <td>Xuất phát</td>
+                        <td><h3>{{ $item->pick_up }}</h3></td>
                     </tr>
 				</tbody>
 			</table>
@@ -66,7 +66,7 @@
                         @foreach($options as $option)
                             <tr>
                                 <td>
-                                    <div style="font-weight:700;">{{ $option['option'] }}</div>
+                                    <h3 style="font-weight:700;font-size:1.05rem;">{{ $option['option'] }}</h3>
                                     @foreach($option['date_apply'] as $price)
                                         @foreach($price as $applyAge)
                                             <div style="font-size:0.95rem;">từ <b>{{ !empty($applyAge['date_start']) ? date('d/m/Y', strtotime($applyAge['date_start'])) : '...' }}</b> đến <b>{{ !empty($applyAge['date_end']) ? date('d/m/Y', strtotime($applyAge['date_end'])) : '...' }}</b></div>

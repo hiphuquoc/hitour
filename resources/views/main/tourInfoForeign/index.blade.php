@@ -33,6 +33,10 @@
 @include('main.schema.breadcrumb', ['data' => $breadcrumb])
 <!-- END:: Article Schema -->
 
+<!-- STRAT:: FAQ Schema -->
+@include('main.schema.faq', ['data' => $item->questions])
+<!-- END:: FAQ Schema -->
+
 <!-- ===== END:: SCHEMA ===== -->
 @endpush
 @section('content')
@@ -125,7 +129,7 @@
             if(positionScrollbar>positionTopElemt&&positionScrollbar<heightLimit){
                 elemt.addClass('scrollFixedSidebar').css({
                     'width'         : widthElemt,
-                    'margin-top'    : '1.5rem'
+                    'margin-top'    : 0
                 });
             }else {
                 elemt.removeClass('scrollFixedSidebar').css({

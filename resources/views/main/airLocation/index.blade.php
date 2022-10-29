@@ -25,6 +25,10 @@
 @include('main.schema.breadcrumb', ['data' => $breadcrumb])
 <!-- END:: Article Schema -->
 
+<!-- STRAT:: FAQ Schema -->
+@include('main.schema.faq', ['data' => $item->questions])
+<!-- END:: FAQ Schema -->
+
 @php
     $dataList       = null;
     if(!empty($item->airs)&&$item->airs->isNotEmpty()){

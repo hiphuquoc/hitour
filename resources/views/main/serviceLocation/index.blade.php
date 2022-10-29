@@ -25,6 +25,10 @@
 @include('main.schema.breadcrumb', ['data' => $breadcrumb])
 <!-- END:: Article Schema -->
 
+<!-- STRAT:: FAQ Schema -->
+@include('main.schema.faq', ['data' => $item->questions])
+<!-- END:: FAQ Schema -->
+
 @php
     $dataList       = null;
     if(!empty($item->services)&&$item->services->isNotEmpty()){
@@ -50,7 +54,7 @@
         <div class="sectionBox backgroundPrimaryGradiend">
             <div class="container">
                 <!-- title -->
-                <h1 class="titlePage">{{ $item->name }}{{ !empty($item->district->district_name) ? ' - Đặt vé máy bay '.$item->district->district_name : null}}</h1>
+                <h1 class="titlePage">{{ $item->name }}{{ !empty($item->district->district_name) ? ' - Đặt vé vui chơi '.$item->district->district_name : null}}</h1>
                 <!-- rating -->
                 @include('main.template.rating', compact('item'))
                 <!-- content -->

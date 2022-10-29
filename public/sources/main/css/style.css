@@ -1325,7 +1325,7 @@ input, textarea {
   margin-bottom: 0.75rem;
   padding: 0 0.75rem;
 }
-.tourGrid_item_desc h2, .tourGrid_item_desc h3, .serviceGrid_item_desc h2, .serviceGrid_item_desc h3 {
+.tourGrid_item_desc h3, .tourGrid_item_desc h4, .serviceGrid_item_desc h3, .serviceGrid_item_desc h4 {
   font-size: 1.2rem;
   font-family: "SVN-Gilroy Bold", serif;
   color: #003B7B;
@@ -1533,12 +1533,12 @@ input, textarea {
   font-weight: 700;
 }
 .callBookTour_button_item.bookonline {
+  font-family: "SVN-Gilroy Bold", serif;
   background: rgb(244, 208, 63);
   color: #333;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   text-transform: uppercase;
-  font-weight: 700;
   font-size: 1.1rem;
   text-align: center;
   cursor: pointer;
@@ -2059,8 +2059,8 @@ blockquote em {
   font-size: 0.95rem;
 }
 .shipGrid_item_content_title {
-  padding: 0.75rem 0.75rem 0 0.75rem;
-  margin-bottom: 0.55rem;
+  padding: 0.55rem 0.75rem 0 0.75rem;
+  margin-bottom: 0.5rem;
 }
 .shipGrid_item_content_title a {
   color: rgb(0, 123, 255);

@@ -29,6 +29,10 @@
 @include('main.schema.breadcrumb', ['data' => $breadcrumb])
 <!-- END:: Article Schema -->
 
+<!-- STRAT:: FAQ Schema -->
+@include('main.schema.faq', ['data' => $item->questions])
+<!-- END:: FAQ Schema -->
+
 <!-- ===== END:: SCHEMA ===== -->
 @endpush
 @section('content')

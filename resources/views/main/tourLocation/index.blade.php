@@ -24,6 +24,10 @@
 @include('main.schema.breadcrumb', ['data' => $breadcrumb])
 <!-- END:: Article Schema -->
 
+<!-- STRAT:: FAQ Schema -->
+@include('main.schema.faq', ['data' => $item->questions])
+<!-- END:: FAQ Schema -->
+
 @php
     $dataList           = null;  
     if(!empty($item->tours)&&$item->tours->isNotEmpty()){
@@ -91,7 +95,12 @@
                 <div class="container">
                     <h2 class="sectionBox_title">Vé máy bay đi {{ $item->display_name ?? null }}</h2>
                     <p>Để đến được {{ $item->display_name ?? null }} nhanh chóng, an toàn và tiện lợi nhất bạn có thể di chuyển bằng máy bay. Chi tiết các <strong>chuyến bay đến {{ $item->display_name ?? null }}</strong> bạn có thể tham khảo thông tin bên dưới</p>
-                    @include('main.tourLocation.airGrid', ['list' => $dataAirs, 'limit' => 3, 'link' => $item->airLocations[0]->infoAirLocation->seo->slug_full])
+                    @include('main.tourLocation.airGrid', [
+                        'list'          => $dataAirs, 
+                        'limit'         => 3, 
+                        'link'          => $item->airLocations[0]->infoAirLocation->seo->slug_full, 
+                        'itemHeading'   => 'h3'
+                    ])
                 </div>
             </div>
         @endif
@@ -108,7 +117,12 @@
                             $dataShips  = $dataShips->merge($shipLocation->infoShipLocation->ships);
                         }
                     @endphp
-                    @include('main.shipLocation.shipGridMerge', ['list' => $dataShips, 'limit' => 3, 'link' => $item->shipLocations[0]->infoShipLocation->seo->slug_full])
+                    @include('main.shipLocation.shipGridMerge', [
+                        'list'          => $dataShips, 
+                        'limit'         => 3, 
+                        'link'          => $item->shipLocations[0]->infoShipLocation->seo->slug_full,
+                        'itemHeading'   => 'h3'
+                    ])
                 </div>
             </div>
         @endif
@@ -119,7 +133,10 @@
                 <div class="container">
                     <h2 class="sectionBox_title">Vé vui chơi tại {{ $item->display_name ?? null }}</h2>
                     <p>Ngoài các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> bạn cũng có thể tham khảo thêm các <strong>hoạt động vui chơi giải trí khác tại {{ $item->display_name ?? null }}</strong>. Đây là các chương trình đặc biệt có thể bù dắp khoảng trống thời gian tự túc trong <strong>chương trình Tour</strong> của bạn và chắc chắn sẽ mang đến cho bạn nhiều trải nghiệm thú vị.</p>
-                    @include('main.tourLocation.serviceGrid', ['list' => $item->serviceLocations])
+                    @include('main.tourLocation.serviceGrid', [
+                        'list'          => $item->serviceLocations,
+                        'itemHeading'   => 'h3'
+                    ])
                 </div>
             </div>
         @endif
