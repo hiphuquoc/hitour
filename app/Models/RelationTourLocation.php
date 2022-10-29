@@ -26,12 +26,12 @@ class RelationTourLocation extends Model {
     }
 
     public static function deleteAndInsertItem($idTour, $arrayIdTourLocation){
-        // delete relation trước đó
+        /* delete relation trước đó */
         $countDeleted                       = 0;
         if(!empty($idTour)) {
             $countDeleted                   = self::select('*')->where('tour_info_id', $idTour)->delete();
         }
-        // insert
+        /* insert */
         $countInsert                        = 0;
         if(!empty($arrayIdTourLocation)){
             foreach($arrayIdTourLocation as $idTourLocation){

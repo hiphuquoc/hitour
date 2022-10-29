@@ -39,13 +39,16 @@ class RoutingController extends Controller {
                                             ->whereHas('seo', function($q) use ($checkExists){
                                                 $q->where('slug', $checkExists['slug']);
                                             })
+                                            ->with('tours.infoTour', function($query){
+                                                $query->where('status_show', 1);
+                                            })
                                             ->with(['files' => function($query){
                                                 $query->where('relation_table', 'tour_location');
                                             }])
                                             ->with(['questions' => function($q){
                                                 $q->where('relation_table', 'tour_location');
                                             }])
-                                            ->with('seo', 'tours', 'airLocations', 'guides', 'shipLocations', 'carrentalLocations', 'serviceLocations', 'destinations', 'specials')
+                                            ->with('seo', 'airLocations', 'guides', 'shipLocations', 'carrentalLocations', 'serviceLocations', 'destinations', 'specials')
                                             ->first();
                     /* danh sách blog điểm đến */
                     $arrayIdDestination = [];

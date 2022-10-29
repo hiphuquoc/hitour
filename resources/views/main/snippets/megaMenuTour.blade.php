@@ -92,19 +92,19 @@
 </div>
 
 @push('scripts-custom')
-<script type="text/javascript">
-    function openMegaMenu(id){
-        var elemt	= $('#'+id);
-        elemt.siblings().removeClass('selected');
-        elemt.addClass('selected');
-        $('[data-menu]').each(function(){
-            var key	= $(this).attr('data-menu');
-            if(key==id){
-            $(this).css('display', 'flex');
-            }else {
-                $(this).css('display', 'none');
-            }
-        });
-    }
-</script>
+    <script type="text/javascript">
+        function openMegaMenu(id){
+            var elemt	= $('#'+id);
+            elemt.siblings().removeClass('selected');
+            elemt.addClass('selected');
+            $('[data-menu]').each(function(){
+                var key	= $(this).attr('data-menu');
+                if(key==id){
+                $(this).css('display', 'flex');
+                }else {
+                    $(this).css('display', 'none');
+                }
+            });
+        }
+    </script>
 @endpush

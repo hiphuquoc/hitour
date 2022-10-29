@@ -71,7 +71,7 @@
                 @if(!empty($item->tours)&&$item->tours->isNotEmpty())
                     @php
                         $dataTours              = new \Illuminate\Support\Collection();
-                        foreach($item->tours as $tour) $dataTours[] = $tour->infoTour;
+                        foreach($item->tours as $tour) if(!empty($tour->infoTour)) $dataTours[] = $tour->infoTour;
                     @endphp
                     @include('main.tourLocation.tourGrid', ['list' => $dataTours])
                 @endif

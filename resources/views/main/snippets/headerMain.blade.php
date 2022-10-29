@@ -7,11 +7,11 @@
     $dataShip           = \App\Models\ShipLocation::select('*')
                             ->with('seo', 'ships.seo')
                             ->get();
-                            /* Tàu cao tốc */
+    /* Vé vui chơi */
     $dataService        = \App\Models\ServiceLocation::select('*')
                             ->with('seo')
                             ->get();
-    /* Tour du lịch */
+    /* Tour trong nước */
     $infoMenuByRegion   = \Illuminate\Support\Facades\DB::table('tour_location as tl')
                             ->join('region_info as ri', 'ri.id', '=', 'tl.region_id')
                             ->join('seo', 'seo.id', '=', 'tl.seo_id')
@@ -41,6 +41,14 @@
         /* biển đảo */
         if($item->island==true) $dataBD[] = $item;
     }
+    /* Tour nước ngoài */
+    $dataTourContinent  = \App\Models\TourContinent::select('*')
+                            ->with('tourCountries', function($query){
+                                $query->whereHas('tours', function($q){
+
+                                });
+                            })
+                            ->get();
 @endphp
 <div class="headerMain">
     <div class="container">
@@ -61,6 +69,7 @@
                     <div>
                         <div>Tour nước ngoài</div>
                     </div>
+                    @include('main.snippets.megaMenuTourContinent', compact('dataTourContinent'))
                 </li>
                 <li>
                     <div>
@@ -75,9 +84,9 @@
         <div class="headerMain_item">
             <ul style="justify-content:flex-end;">
                 <li>
-                    <a href="#">
+                    <div>
                         <div>Vé máy bay</div>
-                    </a>
+                    </div>
                     @if(!empty($dataAir)&&$dataAir->isNotEmpty())
                         <div class="megaMenu">
                             <div class="megaMenu_content" style="width:100%;">
@@ -127,9 +136,9 @@
                     @endif
                 </li>
                 <li>
-                    <a href="/">
+                    <div>
                         <div>Vé giải trí</div>
-                    </a>
+                    </div>
                     <div class="normalMenu">
                         <ul>
                             @foreach($dataService as $serviceLocation)
@@ -142,12 +151,12 @@
                 </li>
                 
                 <li>
-                    <a href="/">
+                    <div>
                         <i class="fa-solid fa-bars" style="font-size:1.4rem;margin-top:0.25rem;"></i>
-                    </a>
+                    </div>
                     <div class="normalMenu" style="margin-right:1.5rem;right:0;">
                         <ul>
-                            <li>
+                            {{-- <li>
                                 <a href="#">
                                     <div>Cho thuê xe</div>
                                 </a>
@@ -166,9 +175,9 @@
                                 <a href="#">
                                     <div>Đặc sản</div>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li>
-                                <a href="#">
+                                <a href="/">
                                     <div>Liên hệ</div>
                                 </a>
                             </li>
@@ -184,7 +193,7 @@
     <div class="container">
         @if(!Request::is('/'))
             <div class="header_arrow">
-                <a href="#">
+                <a href="javascript:history.back()">
                     <i class="fa-solid fa-arrow-left-long"></i>
                 </a>
             </div>
@@ -237,13 +246,13 @@
                     </div>
                     <span class="right-icon" onclick="javascript:showHideListMenuMobile(this);"><i class="fas fa-chevron-right"></i></span>
                     <ul style="display:none;">
-                    {{-- @foreach($dataBD as $tourBD)
+                    @foreach($dataTourContinent as $tourContinent)
                         <li>
-                            <a href="/{{ $tourBD->slug_full }}">
-                                <div>{{ $tourBD->name }}</div>
+                            <a href="/{{ $tourContinent->seo->slug_full ?? null}}">
+                                <div>{{ $tourContinent->name ?? $tourContinent->seo->title ?? null }}</div>
                             </a>
                         </li>
-                    @endforeach --}}
+                    @endforeach
                     </ul>
                 </li>
                 @if(!empty($dataBD))
@@ -337,10 +346,10 @@
                     </li>
                 @endif
                 <li>
-                    <a href="#">
+                    <div>
                         <i class="fa-solid fa-plane-departure"></i>
                         <div>Vé máy bay</div>
-                    </a>
+                    </div>
                     @if(!empty($dataAir)&&$dataAir->isNotEmpty())
                         <span class="right-icon" onclick="javascript:showHideListMenuMobile(this);"><i class="fas fa-chevron-right"></i></span>
                         <ul style="display:none;">
@@ -355,16 +364,16 @@
                     @endif
                 </li>
                 <li>
-                    <a href="#">
+                    <div>
                         <i class="fa-solid fa-hotel"></i>
                         <div>Khách sạn</div>
-                    </a>
+                    </div>
                 </li>
                 <li>
-                    <a href="#">
+                    <div>
                         <i class="fa-solid fa-star"></i>
                         <div>Vui chơi giải trí</div>
-                    </a>
+                    </div>
                     @if(!empty($dataService)&&$dataService->isNotEmpty())
                         <span class="right-icon" onclick="javascript:showHideListMenuMobile(this);"><i class="fas fa-chevron-right"></i></span>
                         <ul style="display:none;">
@@ -378,14 +387,14 @@
                         </ul>
                     @endif
                 </li>
-                <li>
-                    <a href="#">
+                {{-- <li>
+                    <div>
                         <i class="fa-solid fa-book"></i>
                         <div>Cẩm nang du lịch</div>
-                    </a>
-                </li>
+                    </div>
+                </li> --}}
                 <li>
-                    <a href="#">
+                    <a href="/">
                         <i class="fa-solid fa-phone"></i>
                         <div>Liên hệ</div>
                     </a>
