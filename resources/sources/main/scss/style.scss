@@ -1152,11 +1152,8 @@ $tourGrid_radius : 5px;
         box-shadow: 0 0 5px $bg-03;
         background: #fff;
         padding-bottom: 0.75rem;
-        &:not(:nth-child(3n + 1)){
+        &:not(:first-child){
             margin-left: 1.25rem;
-        }
-        &:nth-child(n + 4){
-            margin-top: 1.25rem;
         }
         &_image {
             position: relative;

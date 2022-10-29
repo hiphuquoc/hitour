@@ -1433,11 +1433,8 @@ input, textarea {
   background: #fff;
   padding-bottom: 0.75rem;
 }
-.tourRelated_item:not(:nth-child(3n+1)) {
+.tourRelated_item:not(:first-child) {
   margin-left: 1.25rem;
-}
-.tourRelated_item:nth-child(n+4) {
-  margin-top: 1.25rem;
 }
 .tourRelated_item_image {
   position: relative;
