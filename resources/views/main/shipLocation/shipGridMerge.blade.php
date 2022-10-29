@@ -9,28 +9,28 @@
         @if(!empty($item->prices[0]->price_adult))
         <div class="shipGrid_item">
             <div class="shipGrid_item_image">
-                <a href="/{{ $item->seo->slug_full }}">
-                    <img src="{{ $item->seo->image_small ?? $item->seo->image }}" title="{{ $item->name }}" alt="{{ $item->name }}">
+                <a href="/{{ $item->seo->slug_full ?? null }}">
+                    <img src="{{ config('main.svg.loading_main') }}" data-src="{{ $item->seo->image_small ?? $item->seo->image ?? config('admin.images.default_750x460') }}" alt="{{ $item->name ?? $item->seo->title ?? $item->seo->seo_title ?? null }}" title="{{ $item->name ?? $item->seo->title ?? $item->seo->seo_title ?? null }}" />
                 </a>
                 <div class="shipGrid_item_image_left">{{ !empty($item->prices[0]->times[0]->time_move) ? \App\Helpers\Time::convertMkToTimeMove($item->prices[0]->times[0]->time_move) : null }}</div>
                 <div class="shipGrid_item_image_bottom">{{ implode(', ', $arrayBrandShip) }}</div>
             </div>
             <div class="shipGrid_item_content">
                 <div class="shipGrid_item_content_title maxLine_1">
-                <a href="/{{ $item->seo->slug_full }}">
-                    <h2>{{ $item->name }}</h2>
+                <a href="/{{ $item->seo->slug_full ?? null }}">
+                    <h2>{{ $item->name ?? $item->seo->title ?? null }}</h2>
                 </a>
                 </div>
                 <div class="shipGrid_item_content_table">
                 <div class="shipGrid_item_content_table_row" style="align-items:center !important;">
                     <div class="shipGrid_item_content_table_row__dp maxLine_1" style="flex:unset !important;">
-                        Cảng {{ $item->departure->district->district_name ?? $item->departure->province->province_name }}
+                        Cảng {{ $item->departure->district->district_name ?? $item->departure->province->province_name ?? 'không rõ' }}
                     </div>
                     <div style="text-align:center;flex: 0 0 40px;">
                         <i class="fas fa-exchange-alt" style="vertical-align:middle;"></i>
                     </div>
                     <div class="shipGrid_item_content_table_row__dp maxLine_1">
-                        Cảng {{ $item->location->district->district_name ?? $item->location->province->province_name }}
+                        Cảng {{ $item->location->district->district_name ?? $item->location->province->province_name ?? 'không rõ' }}
                     </div>
                 </div>
                 @php
@@ -133,7 +133,7 @@
                     <a href="{{ route('main.shipBooking.form', ['ship_port_departure_id' => $item->portDeparture->id, 'ship_port_location_id' => $item->portLocation->id]) }}" style="border-radius:0 0 0 5px;">
                         <i class="far fa-edit"></i>Đặt vé
                     </a>
-                    <a href="/{{ $item->seo->slug_full }}" style="border-radius:0 0 5px 0;">
+                    <a href="/{{ $item->seo->slug_full ?? null }}" style="border-radius:0 0 5px 0;">
                         <i class="fas fa-external-link-alt"></i>Xem chi tiết
                     </a>
                 </div>

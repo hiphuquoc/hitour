@@ -997,6 +997,7 @@ $tourGrid_radius : 5px;
         border-radius: $tourGrid_radius;
         box-shadow: 0 0 5px $bg-03;
         background: #fff;
+        padding-bottom: 0.75rem;
         &:not(:nth-child(3n + 1)){
             margin-left: 1.25rem;
         }
@@ -1057,7 +1058,6 @@ $tourGrid_radius : 5px;
             font-size: 0.95rem;
         }
         &_departureSchedule {
-            margin-bottom: 0.75rem;
             padding: 0 0.75rem;
             color: #567;
             font-size: 0.95rem;
@@ -1068,7 +1068,6 @@ $tourGrid_radius : 5px;
             font-weight: 800;
             color: $color-price;
             letter-spacing: 0.5px;
-            margin-bottom: 0.75rem;
         }
         &_location {
             padding: 0.4rem 1rem;

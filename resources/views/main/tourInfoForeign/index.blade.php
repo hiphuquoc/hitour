@@ -54,20 +54,20 @@
                     <div class="pageContent_body_content">
 
                         <!-- gallery -->
-                        @include('main.tourInfoForeign.gallery', compact('item'))
+                        @include('main.tour.gallery', compact('item'))
 
                         <!-- content box -->
-                        @include('main.tourInfoForeign.content', compact('item'))
+                        @include('main.tour.content', compact('item'))
 
                     </div>
                     <div class="pageContent_body_sidebar">
 
-                        @include('main.tourInfoForeign.detailTour', compact('item'))
+                        @include('main.tour.detailTour', compact('item'))
 
                         <div class="js_scrollFixed">
-                            @include('main.tourInfoForeign.callBookTour', compact('item'))
+                            @include('main.tour.callBookTour', compact('item'))
 
-                            @include('main.tourInfoForeign.tocContentTour', compact('item'))
+                            @include('main.tour.tocContentTour', compact('item'))
                         </div>
                     </div>
                 </div>

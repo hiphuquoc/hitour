@@ -4,7 +4,7 @@
         @if(!empty($item->files))
             @foreach($item->files as $file)
                 @if($file->file_type==='gallery')
-                    <img src="{{ $file->file_path }}" alt="{{ $item->name ?? $item->seo->title ?? null }}" title="{{ $item->name ?? $item->seo->title ?? null }}" />
+                    <img src="{{ config('main.svg.loading_main') }}" data-src="{{ $file->file_path ?? config('admin.images.default_750x460') }}" alt="{{ $item->name ?? $item->seo->title ?? $item->seo->seo_title ?? null }}" title="{{ $item->name ?? $item->seo->title ?? $item->seo->seo_title ?? null }}" />
                 @endif
             @endforeach
         @endif

@@ -8,7 +8,7 @@
                 <div class="relatedBox_box_item">
                     <div class="relatedBox_box_item_image">
                         <a href="{{ !empty($blog->seo->slug_full) ? url($blog->seo->slug_full) : url($blog->slug_full) }}">
-                            <img src="/images/image-default-750x460.png" data-src="{{ $blog->seo->image_small ?? $blog->seo->image }}" alt="{{ $blog->name }}" title="{{ $blog->name }}">
+                            <img src="{{ config('main.svg.loading_main') }}" data-src="{{ $blog->seo->image_small ?? $blog->seo->image ?? config('admin.images.default_750x460') }}" alt="{{ $blog->name ?? $blog->seo->title ?? $blog->seo->seo_title ?? null }}" title="{{ $blog->name ?? $blog->seo->title ?? $blog->seo->seo_title ?? null }}" />
                         </a>
                     </div>
                     <div class="relatedBox_box_item_content">

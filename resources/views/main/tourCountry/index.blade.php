@@ -70,7 +70,7 @@
                             $dataTours              = new \Illuminate\Support\Collection();
                             foreach($item->tours as $tour) $dataTours[] = $tour->infoTourForeign;
                         @endphp
-                        @include('main.tourCountry.tourGrid', ['list' => $dataTours])
+                        @include('main.tourLocation.tourGrid', ['list' => $dataTours])
                     @endif
                 </div>
             </div>

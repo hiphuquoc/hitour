@@ -1275,6 +1275,7 @@ input, textarea {
   border-radius: 5px;
   box-shadow: 0 0 5px #e9ecef;
   background: #fff;
+  padding-bottom: 0.75rem;
 }
 .tourGrid_item:not(:nth-child(3n+1)), .serviceGrid_item:not(:nth-child(3n+1)) {
   margin-left: 1.25rem;
@@ -1337,7 +1338,6 @@ input, textarea {
   font-size: 0.95rem;
 }
 .tourGrid_item_departureSchedule, .serviceGrid_item_departureSchedule {
-  margin-bottom: 0.75rem;
   padding: 0 0.75rem;
   color: #567;
   font-size: 0.95rem;
@@ -1348,7 +1348,6 @@ input, textarea {
   font-weight: 800;
   color: #fd5056;
   letter-spacing: 0.5px;
-  margin-bottom: 0.75rem;
 }
 .tourGrid_item_location, .serviceGrid_item_location {
   padding: 0.4rem 1rem;

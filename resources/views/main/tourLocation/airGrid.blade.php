@@ -2,15 +2,17 @@
     @if(!empty($list))
         @foreach($list as $air)
             <div class="serviceGrid_item">
-                <a href="/{{ $air->seo->slug_full }}" class="serviceGrid_item_image">
-                    <img src="{{ $air->seo->image }}" alt="{{ $air->name }}" title="{{ $air->name }}" />
+                <a href="/{{ $air->seo->slug_full ?? null }}" class="serviceGrid_item_image">
+                    <img src="{{ config('main.svg.loading_main') }}" data-src="{{ $air->seo->image_small ?? $air->seo->image ?? config('admin.images.default_750x460') }}" alt="{{ $air->name ?? $air->seo->title ?? $air->seo->seo_title ?? null }}" title="{{ $air->name ?? $air->seo->title ?? $air->seo->seo_title ?? null }}" />
                 </a>
-                <a href="/{{ $air->seo->slug_full }}" class="serviceGrid_item_title maxLine_1">
-                    <i class="fa-solid fa-paper-plane"></i><h2>{{ $air->name }}</h2>
+                <a href="/{{ $air->seo->slug_full ?? null }}" class="serviceGrid_item_title maxLine_1">
+                    <i class="fa-solid fa-paper-plane"></i><h2>{{ $air->name ?? $air->seo->title ?? null }}</h2>
                 </a>
-                <a href="/{{ $air->seo->slug_full }}" class="serviceGrid_item_desc maxLine_4">
-                    <h3>{{ $air->portDeparture->name }} - {{ $air->portLocation->name }}</h3>
-                </a>
+                @if(!empty($air->portDeparture->name)&&!empty($air->portLocation->name))
+                    <a href="/{{ $air->seo->slug_full }}" class="serviceGrid_item_desc maxLine_4">
+                        <h3>{{ $air->portDeparture->name }} - {{ $air->portLocation->name }}</h3>
+                    </a>
+                @endif
             </div>
             @php
                 if(!empty($limit)&&($loop->index+1)==$limit) break;

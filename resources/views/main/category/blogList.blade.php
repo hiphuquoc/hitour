@@ -3,7 +3,7 @@
     @foreach($blogs as $blog)
         <div class="articleBox_item">
             <a href="/{{ $blog->seo->slug_full ?? null }}" class="articleBox_item_image">
-                <img data-src="{{ $blog->seo->image ?? $blog->seo->image_small ?? config('admin.images.default_750x460') }}" alt="{{ $blog->name ?? $blog->seo->title ?? $blog->seo->seo_title ?? null }}" title="{{ $blog->name ?? $blog->seo->title ?? $blog->seo->seo_title ?? null }}" />
+                <img src="{{ config('main.svg.loading_main') }}" data-src="{{ $blog->seo->image_small ?? $blog->seo->image ?? config('admin.images.default_750x460') }}" alt="{{ $blog->name ?? $blog->seo->title ?? $blog->seo->seo_title ?? null }}" title="{{ $blog->name ?? $blog->seo->title ?? $blog->seo->seo_title ?? null }}" />
             </a>
             <div class="articleBox_item_content">
                 <a href="/{{ $blog->seo->slug_full ?? null }}" class="articleBox_item_content_title">

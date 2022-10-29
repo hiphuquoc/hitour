@@ -7,6 +7,12 @@
 <!-- END: SLICK -->
 
 <script type="text/javascript">
+        $(window).ready(function(){
+            $(window).ready(function(){
+                loadImage();
+            });
+        });
+
         mybutton 					    = document.getElementById("gotoTop");
         window.onscroll                 = function() {scrollFunction()};
         function scrollFunction() {
@@ -24,12 +30,6 @@
                 $(this).attr('src', $(this).attr('data-src'));
             });
         }
-
-        $(window).ready(function(){
-            $(window).ready(function(){
-                loadImage();
-            });
-        });
 
         function autoLoadTocContentWithIcon(idElement){
             var dataTocContent      = {};

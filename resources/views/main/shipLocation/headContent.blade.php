@@ -139,7 +139,7 @@
                 foreach($item->ships as $ship){
                     foreach($ship->partners as $partner) {
                         if(!in_array($partner->infoPartner->id, $dataPartnerUnique)) {
-                            $dataPartnerUnique[$partner->infoPartner->id] = $partner->infoPartner->toArray();
+                            $dataPartnerUnique[$partner->infoPartner->id]                       = $partner->infoPartner->toArray();
                             $dataPartnerUnique[$partner->infoPartner->id]['seo_description']    = $partner->infoPartner->seo->seo_description;
                             $dataPartnerUnique[$partner->infoPartner->id]['slug_full']          = $partner->infoPartner->seo->slug_full;
                         }
@@ -148,12 +148,12 @@
             @endphp
             @foreach($dataPartnerUnique as $partner)
                 <div class="shipPartnerBox_item">
-                    <a href="/{{ $partner['slug_full'] }}" class="shipPartnerBox_item_image">
-                        <img src="{{ $partner['company_logo'] }}" alt="{{ $partner['name'] }}" title="{{ $partner['name'] }}" />
+                    <a href="/{{ $partner['slug_full'] ?? null }}" class="shipPartnerBox_item_image">
+                        <img src="{{ config('main.svg.loading_main') }}" data-src="{{ $partner['company_logo'] }}" alt="{{ $partner['name'] ?? null }}" title="{{ $partner['name'] ?? null }}" />
                     </a>
                     <div class="shipPartnerBox_item_content">
-                        <a href="/{{ $partner['slug_full'] }}"><h3>{{ $partner['name'] }}</h3></a>
-                        <div class="shipPartnerBox_item_content_desc maxLine_4">{{ $partner['seo_description'] }}</div>
+                        <a href="/{{ $partner['slug_full'] ?? null }}"><h3>{{ $partner['name'] ?? null }}</h3></a>
+                        <div class="shipPartnerBox_item_content_desc maxLine_4">{{ $partner['seo_description'] ?? null }}</div>
                     </div>
                 </div>  
             @endforeach

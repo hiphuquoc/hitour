@@ -72,7 +72,7 @@
                                 foreach($tourCountry->tours as $tour) $dataTours[] = $tour->infoTourForeign;
                             }
                         @endphp
-                        @include('main.tourContinent.tourGrid', ['list' => $dataTours])
+                        @include('main.tourLocation.tourGrid', ['list' => $dataTours])
                     @endif
                 </div>
             </div>

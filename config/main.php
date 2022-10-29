@@ -10,4 +10,7 @@ return [
     'unit_currency' => 'đ',
     'logo_square'   => env('APP_URL').'/storage/images/upload/logo-share-type-manager-upload.png',
     'avatar_home'   => env('APP_URL').'/storage/images/upload/banner-hitour-1-type-manager-upload.webp',
+    'svg'           => [
+        'loading_main'  => '/images/main/svg/loading_plane_bge9ecef.svg'
+    ]
 ];
