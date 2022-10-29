@@ -234,6 +234,19 @@
             </div>
         </div>
     @endif
+
+    <!-- Tour liên quan -->
+    @if(!empty($related)&&$related->isNotEmpty())
+        <div id="tour-lien-quan" class="contentTour_item">
+            <div class="contentTour_item_title">
+                <i class="fa-solid fa-person-walking-luggage"></i>
+                <h2>Tour liên quan</h2>
+            </div>
+            <div class="contentTour_item_text">
+                @include('main.tour.related', ['list' => $related])
+            </div>
+        </div>
+    @endif
 </div>
 
 @push('scripts-custom')

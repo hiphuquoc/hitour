@@ -82,11 +82,21 @@ class RoutingController extends Controller {
                                             ->with(['questions' => function($q){
                                                 $q->where('relation_table', 'tour_info');
                                             }])
-                                            ->with('seo', 'staffs.infoStaff', 'options.prices', 'departure', 'content', 'timetables')
+                                            ->with('seo', 'locations', 'staffs.infoStaff', 'options.prices', 'departure', 'content', 'timetables')
                                             ->first();
+                    $idTour                 = $item->id ?? 0;
+                    $arrayIdTourLocation    = [];
+                    foreach($item->locations as $location) $arrayIdTourLocation[]  = $location->infoLocation->id;
+                    $related                = Tour::select('*')
+                                                ->where('id', '!=', $idTour)
+                                                ->with('locations.infoLocation', function($query) use($arrayIdTourLocation, $idTour){
+                                                    $query->whereIn('id', $arrayIdTourLocation);
+                                                })
+                                                ->with('seo')
+                                                ->get();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentTour').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                    return view('main.tour.index', compact('item', 'breadcrumb', 'content'));
+                    return view('main.tour.index', compact('item', 'breadcrumb', 'content', 'related'));
                 case 'ship_location': /* Ship Location */
                     $item               = ShipLocation::select('*')
                                             ->whereHas('seo', function($query) use($checkExists){

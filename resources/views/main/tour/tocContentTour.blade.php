@@ -45,6 +45,11 @@
             <i class="fa-solid fa-circle-question"></i>Câu hỏi thường gặp
         </a>
     @endif
+    @if(!empty($related)&&$related->isNotEmpty())
+        <a href="#tour-lien-quan" class="tocContentTour_item">
+            <i class="fa-solid fa-person-walking-luggage"></i>Tour liên quan
+        </a>
+    @endif
     {{-- <a href="#" class="tocContentTour_item">
         <i class="fa-solid fa-images"></i>Ảnh đẹp Tour
     </a> --}}

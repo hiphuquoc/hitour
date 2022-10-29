@@ -1268,6 +1268,7 @@ input, textarea {
 .tourGrid, .serviceGrid {
   display: flex;
   flex-wrap: wrap;
+  text-align: left;
 }
 .tourGrid_item, .serviceGrid_item {
   width: calc(33.33% - 0.8333rem);
@@ -1293,6 +1294,7 @@ input, textarea {
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 5px 5px 0 0;
+  margin: 0;
 }
 .tourGrid_item_image_time, .serviceGrid_item_image_time {
   position: absolute;
@@ -1414,6 +1416,133 @@ input, textarea {
     margin-bottom: 0.5rem;
   }
   .tourGrid_item_desc h2, .tourGrid_item_desc h3, .serviceGrid_item_desc h2, .serviceGrid_item_desc h3 {
+    font-size: 1.15rem;
+  }
+}
+
+.tourRelated {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: left;
+}
+.tourRelated_item {
+  width: calc(33.33% - 0.8333rem);
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #e9ecef;
+  background: #fff;
+  padding-bottom: 0.75rem;
+}
+.tourRelated_item:not(:nth-child(3n+1)) {
+  margin-left: 1.25rem;
+}
+.tourRelated_item:nth-child(n+4) {
+  margin-top: 1.25rem;
+}
+.tourRelated_item_image {
+  position: relative;
+  display: flex;
+  margin-bottom: 0.75rem;
+}
+.tourRelated_item_image img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 5px 5px 0 0;
+  margin: 0;
+}
+.tourRelated_item_image_time {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #456;
+  font-weight: 500;
+  font-size: 0.95rem;
+  font-family: "SVN-Gilroy Bold", serif;
+  background: rgb(244, 208, 63);
+  padding: 0.1rem 1rem;
+}
+.tourRelated_item_title {
+  display: flex;
+  margin-bottom: 0.5rem;
+  padding: 0 0.75rem;
+}
+.tourRelated_item_title h2, .tourRelated_item_title h3 {
+  font-family: "SVN-Gilroy Bold", serif;
+  font-size: 1.1rem;
+  color: rgb(0, 123, 255);
+  margin: 0;
+}
+.tourRelated_item_title i {
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+}
+.tourRelated_item_desc {
+  display: flex;
+  margin-bottom: 0.75rem;
+  padding: 0 0.75rem;
+}
+.tourRelated_item_desc h3, .tourRelated_item_desc h4 {
+  font-size: 1.1rem;
+  font-family: "SVN-Gilroy Bold", serif;
+  color: #003B7B;
+  margin: 0;
+}
+.tourRelated_item_departureFrom {
+  padding: 0 0.75rem;
+  color: #567;
+  margin-bottom: 0.1rem;
+  font-size: 0.95rem;
+}
+.tourRelated_item_departureSchedule {
+  padding: 0 0.75rem;
+  color: #567;
+  font-size: 0.95rem;
+}
+.tourRelated_item_price {
+  padding: 0 0.75rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #fd5056;
+  letter-spacing: 0.5px;
+}
+.tourRelated_item_location {
+  padding: 0.4rem 1rem;
+  font-size: 0.95rem;
+  background: #e9ecef;
+  text-align: center;
+  color: #456;
+}
+.tourRelated_item_location i {
+  color: #789;
+  margin-right: 0.5rem;
+}
+.tourRelated_item .column {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (max-width: 577px) {
+  .tourRelated_item {
+    width: 100%;
+    margin-left: 0 !important;
+  }
+  .tourRelated_item:not(:first-child) {
+    margin-top: 1rem;
+  }
+  .tourRelated_item_image {
+    margin-bottom: 0.5rem;
+  }
+  .tourRelated_item_title {
+    margin-bottom: 0.25rem;
+  }
+  .tourRelated_item_title h2, .tourRelated_item_title h3 {
+    font-size: 1.05rem;
+  }
+  .tourRelated_item_desc {
+    margin-bottom: 0.5rem;
+  }
+  .tourRelated_item_desc h2, .tourRelated_item_desc h3 {
     font-size: 1.15rem;
   }
 }
@@ -3827,6 +3956,7 @@ blockquote em {
 
 .slick-track {
   display: flex !important;
+  float: left;
 }
 
 .blogListLeftRight {

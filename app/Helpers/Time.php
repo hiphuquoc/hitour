@@ -22,8 +22,8 @@ class Time {
         if(!empty($mkTime)){
             $hours          = number_format(floor($mkTime/3600), 0);
             $minutes        = ($mkTime%3600)/60;
-            $result         = $hours.'h';
-            if(!empty($minutes)) $result  .= ' '.$minutes.'m';
+            $result         = !empty($hours) ? $hours.'h ' : null;
+            if(!empty($minutes)) $result  .= $minutes.'m';
         }
         return $result;
     }
