@@ -97,7 +97,7 @@
         </div>
         <div style="text-align:right;">
             <div class="buttonSecondary" onClick="submitForm('tourBookingSort');">
-                <i class="fa-solid fa-magnifying-glass"></i>Đặt tour ngay
+                <i class="fa-solid fa-check"></i>Đặt tour ngay
             </div>
         </div>
     </div>

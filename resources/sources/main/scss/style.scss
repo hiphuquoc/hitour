@@ -1969,6 +1969,9 @@ blockquote{
                     &:hover {
                         color: $color-primary-hover;
                     }
+                    h2, h3 {
+                        margin-bottom: 0;
+                    }
                 }
             }
             &_table {
@@ -3597,6 +3600,9 @@ $width-single-menu  : 260px;
                     }
                 }
             }
+        }
+        &:last-child {
+            padding-bottom: 0;
         }
     }
     @media (max-width: 577px){

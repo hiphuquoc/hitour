@@ -5,6 +5,50 @@
         '/storage/images/upload/guide_book_tour_1-type-manager-upload.webp',
         '/storage/images/upload/guide_book_tour_2-type-manager-upload.webp'
     ];
+    $arrayData  = [
+        0 => [
+            'img'       => '/storage/images/upload/guide_book_tour_1-type-manager-upload.webp',
+            'title'     => 'Chọn các thông tin quan trọng của Tour',
+            'content'   => '<ul>
+                                <li>Chọn Điểm đến và Tour Quý khách muốn đặt</li>
+                                <li>Chọn Số lượng hành khách tham gia Tour</li>
+                                <li>Chọn Ngày khởi hành</li>
+                                <li>Click <strong>Đặt tour ngay</strong></li>
+                            </ul>'
+        ],
+        1 => [
+            'img'       => '/storage/images/upload/guide_book_tour_2-type-manager-upload.webp',
+            'title'     => 'Vui lòng chờ hệ thống tìm kiếm Tour',
+            'content'   => '<ul>
+                                <li>Hệ thống chuyển hướng Quý khách sang trang đặt Tour chi tiết</li>
+                                <li>Điền tiếp thông tin liên hệ của người đặt Tour</li>
+                                <li>Chọn option của Tour</li>
+                                <li>Click <strong>Xác nhận</strong></li>
+                            </ul>'
+        ],
+        2 => [
+            'img'       => '/storage/images/upload/guide_book_tour_1-type-manager-upload.webp',
+            'title'     => 'Thanh toán và hoàn tất',
+            'content'   => '<ul>
+                                <li>Nhân viên Hitour sẽ liên hệ lại và gửi xác nhận chi tiết</li>
+                                <li>Quý khách thanh toán (hoặc cọc) theo hướng dẫn trong xác nhận</li>
+                                <li>Và cung cấp thông tin từng hành khách (nếu có yêu cầu)</li>
+                                <li>Hoàn tất các bước trên Quý khách sẽ nhận được một <strong>Phiếu xác nhận</strong></li>
+                            </ul>'
+        ],
+        3 => [
+            'img'       => '/storage/images/upload/guide_book_tour_2-type-manager-upload.webp',
+            'title'     => 'Sử dụng dịch vụ Tour',
+            'content'   => '<ul>
+                                <li>Trước ngày khởi hành Nhân viên sẽ liên hệ Quý khách để dặn dò chi tiết</li>
+                                <li><strong>Phiếu xác nhận</strong> có giá trị sử dụng dịch vụ Tour của Hitour</li>
+                                <li>Tùy thuộc vào mỗi chương trình Tour mà Quý khách nhận thêm các <strong>Vé dịch vụ</strong> đi kèm khác nhau (Ví dụ: vé tàu cao tốc, vé máy bay,...)</li>
+                            </ul>
+                            <p>
+                                <em>Ghi chú: Trường hợp làm lạc hoặc bất tiện trong việc dùng Phiếu xác nhận và Vé dịch vụ Quý khách có thể sử dụng <strong>số điện thoại đặt Tour</strong> để thay thế.</em>
+                            </p>'
+        ]
+    ]
 @endphp    
 
 <div class="sectionBox">
@@ -16,8 +60,8 @@
                 <div class="guideBookBox_image">
                     <div class="galleryCustomBox">
                         <div id="js_setGuideBook_image" class="galleryCustomBox_box">
-                            @foreach($arrayImage as $image)
-                                <img src="{{ $image }}" alt="{{ $title ?? null }}" title="{{ $title ?? null }}" />
+                            @foreach($arrayData as $item)
+                                <img src="{{ $item['img'] }}" alt="{{ $title ?? null }}" title="{{ $title ?? null }}" />
                             @endforeach
                             <input type="hidden" id="js_prevNextGallery_input" value="0" />
                         </div>
@@ -29,57 +73,19 @@
                 </div>
                 <div class="guideBookBox_content">
                     <div id="js_setGuideBook_box" class="guideBookStepByStep">
-                        <div class="guideBookStepByStep_item active" onClick="setGuideBook(0);">
-                            <div class="guideBookStepByStep_item_title">
-                                <span class="guideBookStepByStep_item_title_no">1</span>Chọn các thông tin quan trọng của Tour
+                        @foreach($arrayData as $item)
+                            @php
+                                $active = $loop->index==0 ? 'active' : null;
+                            @endphp
+                            <div class="guideBookStepByStep_item {{ $active }}" onClick="setGuideBook({{ $loop->index }});">
+                                <div class="guideBookStepByStep_item_title">
+                                    <span class="guideBookStepByStep_item_title_no">{{ $loop->index + 1 }}</span>{{ $item['title'] }}
+                                </div>
+                                <div class="guideBookStepByStep_item_text">
+                                    {!! $item['content'] !!} 
+                                </div>
                             </div>
-                            <div class="guideBookStepByStep_item_text">
-                                <ul>
-                                    <li>Chọn Điểm đến và Tour Quý khách muốn đặt</li>
-                                    <li>Chọn Số lượng hành khách tham gia Tour</li>
-                                    <li>Chọn Ngày khởi hành</li>
-                                    <li>Click <strong>Đặt tour ngay</strong></li>
-                                </ul>   
-                            </div>
-                        </div>
-                        <div class="guideBookStepByStep_item active" onClick="setGuideBook(1);">
-                            <div class="guideBookStepByStep_item_title">
-                                <span class="guideBookStepByStep_item_title_no">2</span>Vui lòng chờ hệ thống tìm kiếm Tour
-                            </div>
-                            <div class="guideBookStepByStep_item_text">
-                                <ul>
-                                    <li>Hệ thống chuyển hướng Quý khách sang trang đặt Tour chi tiết</li>
-                                    <li>Điền tiếp thông tin liên hệ của người đặt Tour</li>
-                                    <li>Chọn option của Tour</li>
-                                    <li>Click <strong>Xác nhận</strong></li>
-                                </ul>   
-                            </div>
-                        </div>
-                        <div class="guideBookStepByStep_item active" onClick="setGuideBook(2);">
-                            <div class="guideBookStepByStep_item_title">
-                                <span class="guideBookStepByStep_item_title_no">3</span>Thanh toán và hoàn tất
-                            </div>
-                            <div class="guideBookStepByStep_item_text">
-                                <ul>
-                                    <li>Nhân viên Hitour sẽ liên hệ lại và gửi xác nhận</li>
-                                    <li>Quý khách vui lòng thanh toán theo hướng dẫn trong xác nhận</li>
-                                    <li>Và cung cấp thông tin từng hành khách</li>
-                                    <li>Hoàn tất các bước trên Quý khách sẽ nhận được một <strong>Phiếu xác nhận</strong></li>
-                                </ul>   
-                            </div>
-                        </div>
-                        <div class="guideBookStepByStep_item active" onClick="setGuideBook(3);">
-                            <div class="guideBookStepByStep_item_title">
-                                <span class="guideBookStepByStep_item_title_no">4</span>Sử dụng dịch vụ
-                            </div>
-                            <div class="guideBookStepByStep_item_text">
-                                <ul>
-                                    <li><strong>Phiếu xác nhận</strong> có giá trị sử dụng dịch vụ của Hitour</li>
-                                    <li>Tùy thuộc vào mỗi chương trình Tour mà Quý khách nhận thêm các <strong>Vé dịch vụ</strong> đi kèm khác nhau (Ví dụ: vé tàu cao tốc, vé máy bay,...)</li>
-                                    <li>Trường hợp Quý khách làm mất Phiếu xác nhận và Vé dịch vụ có thể sử dụng <strong>số điện thoại đặt Tour</strong></li>
-                                </ul>   
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>  
@@ -104,15 +110,11 @@
                         <div class="guideBookBoxMobile_box_title_close" onClick="showHideElement('js_showHideElement_box');"></div>
                     </div>
                     <div class="guideBookBoxMobile_box_content customScrollBar-y" style="height:calc(100% - 100px)">
-                        @foreach($arrayImage as $image)
-                        <div class="guideBookBoxMobile_box_content_item">
-                            <img src="{{ $image }}" alt="{{ $title ?? null }}" title="{{ $title ?? null }}" />
-                            <ul>
-                                <li><strong>Phiếu xác nhận</strong> có giá trị sử dụng dịch vụ của Hitour</li>
-                                <li>Tùy thuộc vào mỗi chương trình Tour mà Quý khách nhận thêm các <strong>Vé dịch vụ</strong> đi kèm khác nhau (Ví dụ: vé tàu cao tốc, vé máy bay,...)</li>
-                                <li>Trường hợp Quý khách làm mất Phiếu xác nhận và Vé dịch vụ có thể sử dụng <strong>số điện thoại đặt Tour</strong></li>
-                            </ul>
-                        </div>
+                        @foreach($arrayData as $item)
+                            <div class="guideBookBoxMobile_box_content_item">
+                                <img src="{{ $item['img'] }}" alt="{{ $title ?? null }}" title="{{ $title ?? null }}" />
+                                {!! $item['content'] !!}
+                            </div>
                         @endforeach
                     </div>
                 </div>
