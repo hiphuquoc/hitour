@@ -3455,16 +3455,18 @@ blockquote em {
   }
 }
 .sectionBox.backgroundPrimary {
-  background: rgba(0, 123, 255, 0.075);
+  background: rgba(0, 123, 255, 0.075) !important;
 }
 .sectionBox.backgroundSecondary {
-  background: rgba(244, 208, 63, 0.1);
+  background: rgba(244, 208, 63, 0.1) !important;
 }
 .sectionBox.backgroundPrimaryGradiend {
-  background: linear-gradient(0deg, rgba(0, 123, 255, 0.125) 0, rgba(255, 255, 255, 0.05) 100%);
+  padding-top: 0 !important;
+  background: linear-gradient(0deg, rgba(0, 123, 255, 0.125) 0, rgba(255, 255, 255, 0.05) 100%) !important;
 }
 .sectionBox.backgroundSecondaryGradiend {
-  background: linear-gradient(0deg, rgba(244, 208, 63, 0.15) 0, rgba(255, 255, 255, 0.05) 100%);
+  padding-top: 0 !important;
+  background: linear-gradient(0deg, rgba(244, 208, 63, 0.15) 0, rgba(255, 255, 255, 0.05) 100%) !important;
 }
 .sectionBox:nth-child(4n+2):not(.noBackground) {
   background: rgba(0, 123, 255, 0.075);

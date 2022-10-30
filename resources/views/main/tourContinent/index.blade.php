@@ -27,8 +27,8 @@
     foreach($item->tourCountries as $tourCountry) {
         foreach($tourCountry->tours as $tour) $arrayPrice[] = $tour->infoTourForeign->price_show;
     }
-    $highPrice  = max($arrayPrice) ?? 5000000;
-    $lowPrice   = min($arrayPrice) ?? 3000000;
+    $highPrice  = !empty($arrayPrice) ? max($arrayPrice) : 5000000;
+    $lowPrice   = !empty($arrayPrice) ? min($arrayPrice) : 3000000;
 @endphp
 @include('main.schema.product', ['data' => $dataSchema, 'files' => $item->files, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
 <!-- END:: Article Schema -->

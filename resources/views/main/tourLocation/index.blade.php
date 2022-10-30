@@ -24,8 +24,8 @@
 @php
     $arrayPrice = [];
     foreach($item->tours as $tour) $arrayPrice[] = $tour->infoTour->price_show;
-    $highPrice  = max($arrayPrice) ?? 5000000;
-    $lowPrice   = min($arrayPrice) ?? 3000000;
+    $highPrice  = !empty($arrayPrice) ? max($arrayPrice) : 5000000;
+    $lowPrice   = !empty($arrayPrice) ? min($arrayPrice) : 3000000;
 @endphp
 @include('main.schema.product', ['data' => $dataSchema, 'files' => $item->files, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
 <!-- END:: Article Schema -->
@@ -68,25 +68,36 @@
         <div class="sectionBox">
             <div class="container">
                 <!-- title -->
-                <h1 class="titlePage">Tour du lịch {{ $item->display_name }} - Du lịch {{ $item->display_name }}</h1>
+                <h1 class="titlePage">Tour {{ $item->display_name }} - Giới thiệu Tour du lịch {{ $item->display_name }}</h1>
                 <!-- rating -->
                 @include('main.template.rating', compact('item'))
                 <!-- content -->
                 @if(!empty($content))
-                    <div class="contentBox">
-                        <p>{!! $content !!}</p>
+                    <div id="js_showHideFullContent_content" class="contentBox maxLine_4">
+                        {!! $content !!}
+                    </div>
+                    <div class="viewMore">
+                        <div onClick="showHideFullContent(this, 'maxLine_4');">
+                            <i class="fa-solid fa-arrow-down-long"></i>Đọc thêm
+                        </div>
                     </div>
                 @endif
-                <!-- Tour box -->
-                @if(!empty($item->tours)&&$item->tours->isNotEmpty())
+            </div>
+        </div>
+
+        <!-- Tour box -->
+        @if(!empty($item->tours)&&$item->tours->isNotEmpty())
+            <div class="sectionBox backgroundPrimaryGradiend">
+                <div class="container">
+                    <h2 class="sectionBox_title">Tour {{ $item->display_name }} - Danh sách Tour du lịch {{ $item->display_name ?? null }} chất lượng</h2>
                     @php
                         $dataTours              = new \Illuminate\Support\Collection();
                         foreach($item->tours as $tour) if(!empty($tour->infoTour)) $dataTours[] = $tour->infoTour;
                     @endphp
                     @include('main.tourLocation.tourGrid', ['list' => $dataTours])
-                @endif
+                </div>
             </div>
-        </div>
+        @endif
 
         <!-- Hướng dẫn đặt Tour -->
         @include('main.tourLocation.guideBookTour', ['title' => 'Quy trình đặt Tour '.$item->display_name.' và Sử dụng dịch vụ'])
@@ -222,35 +233,46 @@
 @push('scripts-custom')
     <script type="text/javascript">
         $(window).on('load', function () {
-            setupSlick();
-            $(window).resize(function(){
-                setupSlick();
-            })
+            // setupSlick();
+            // $(window).resize(function(){
+            //     setupSlick();
+            // })
 
-            $('.sliderHome').slick({
-                dots: true,
-                arrows: true,
-                autoplay: true,
-                infinite: true,
-                autoplaySpeed: 5000,
-                lazyLoad: 'ondemand',
-                responsive: [
-                    {
-                        breakpoint: 567,
-                        settings: {
-                            arrows: false,
-                        }
-                    }
-                ]
-            });
+            // $('.sliderHome').slick({
+            //     dots: true,
+            //     arrows: true,
+            //     autoplay: true,
+            //     infinite: true,
+            //     autoplaySpeed: 5000,
+            //     lazyLoad: 'ondemand',
+            //     responsive: [
+            //         {
+            //             breakpoint: 567,
+            //             settings: {
+            //                 arrows: false,
+            //             }
+            //         }
+            //     ]
+            // });
 
-            function setupSlick(){
-                setTimeout(function(){
-                    $('.sliderHome .slick-prev').html('<i class="fa-solid fa-arrow-left-long"></i>');
-                    $('.sliderHome .slick-next').html('<i class="fa-solid fa-arrow-right-long"></i>');
-                    $('.sliderHome .slick-dots button').html('');
-                }, 0);
-            }
+            // function setupSlick(){
+            //     setTimeout(function(){
+            //         $('.sliderHome .slick-prev').html('<i class="fa-solid fa-arrow-left-long"></i>');
+            //         $('.sliderHome .slick-next').html('<i class="fa-solid fa-arrow-right-long"></i>');
+            //         $('.sliderHome .slick-dots button').html('');
+            //     }, 0);
+            // }
         });
+
+        function showHideFullContent(elementButton, classCheck){
+            const contentBox = $('#js_showHideFullContent_content');
+            if(contentBox.hasClass(classCheck)){
+                contentBox.removeClass(classCheck);
+                $(elementButton).html('<i class="fa-solid fa-arrow-up-long"></i>Thu gọn');
+            }else {
+                contentBox.addClass(classCheck);
+                $(elementButton).html('<i class="fa-solid fa-arrow-down-long"></i>Đọc thêm');
+            }
+        }
     </script>
 @endpush
