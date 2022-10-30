@@ -3,22 +3,22 @@
     <ul>
         @if(!empty($dataMB))
             <li id="menu_1" onmouseover="openMegaMenu(this.id);" class="selected">
-                <a href="/">Tour Miền Bắc<i class="fas fa-angle-right"></i></a>
+                <div>Tour Miền Bắc<i class="fas fa-angle-right"></i></div>
             </li>
         @endif
         @if(!empty($dataMT))
             <li id="menu_2" onmouseover="openMegaMenu(this.id);">
-                <a href="/">Tour Miền Trung<i class="fas fa-angle-right"></i></a>
+                <div>Tour Miền Trung<i class="fas fa-angle-right"></i></div>
             </li>
         @endif
         @if(!empty($dataMN))
             <li id="menu_3" onmouseover="openMegaMenu(this.id);">
-                <a href="/">Tour Miền Nam<i class="fas fa-angle-right"></i></a>
+                <div>Tour Miền Nam<i class="fas fa-angle-right"></i></div>
             </li>
         @endif
         @if(!empty($dataBD))
             <li id="menu_4" onmouseover="openMegaMenu(this.id);">
-                <a href="/">Tour Biển Đảo<i class="fas fa-angle-right"></i></a>
+                <div>Tour Biển Đảo<i class="fas fa-angle-right"></i></div>
             </li>
         @endif
     </ul>

@@ -738,14 +738,17 @@ input, textarea {
   border-bottom: 1px dashed rgba(0, 123, 255, 0.2);
 }
 .megaMenu_title > ul > li {
-  padding: 8px 10px;
   font-family: "SVN-Gilroy Bold", serif;
 }
-.megaMenu_title > ul > li a {
+.megaMenu_title > ul > li > a, .megaMenu_title > ul > li > div {
   color: #567;
   border: none;
   box-shadow: none;
   font-weight: 500;
+  justify-content: space-between;
+  display: flex;
+  width: 100%;
+  padding: 8px 10px;
 }
 .megaMenu_title > ul > li i {
   float: right;
@@ -763,7 +766,7 @@ input, textarea {
   background: rgba(0, 123, 255, 0.1);
   cursor: pointer;
 }
-.megaMenu_title > ul > li.selected a {
+.megaMenu_title > ul > li.selected > a, .megaMenu_title > ul > li.selected > div {
   color: rgb(0, 123, 255);
 }
 .megaMenu_content {

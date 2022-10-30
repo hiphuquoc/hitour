@@ -406,14 +406,17 @@ $height_headerMain : 80px;
     &_title {
         > ul {
             > li {
-                padding: 8px 10px;
                 font-family: $font-primary-title;
 
-                a {
+                > a, > div {
                     color: #567;
                     border: none;
                     box-shadow: none;
                     font-weight: 500;
+                    justify-content: space-between;
+                    display: flex;
+                    width: 100%;
+                    padding: 8px 10px;
                 }
 
                 i {
@@ -435,7 +438,7 @@ $height_headerMain : 80px;
                     background: $color-primary-01;
                     cursor: pointer;
 
-                    a {
+                    > a, > div {
                         color: $color-primary;
                     }
                 }

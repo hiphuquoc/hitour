@@ -114,8 +114,14 @@
             @if(!empty($dataAirs)&&$dataAirs->isNotEmpty())
                 <div class="sectionBox">
                     <div class="container">
-                        <h2 class="sectionBox_title">Vé máy bay đi {{ $item->display_name ?? null }}</h2>
-                        <p>Để đến được {{ $item->display_name ?? null }} nhanh chóng, an toàn và tiện lợi nhất bạn có thể di chuyển bằng máy bay. Chi tiết các <strong>chuyến bay đến {{ $item->display_name ?? null }}</strong> bạn có thể tham khảo thông tin bên dưới</p>
+                        @if(!empty($item->airLocations[0]->infoAirLocation->seo->slug_full))
+                            <a href="/{{ $item->airLocations[0]->infoAirLocation->seo->slug_full }}" title="Vé máy bay đi {{ $item->display_name ?? null }}">
+                                <h2 class="sectionBox_title">Vé máy bay đi {{ $item->display_name ?? null }}</h2>
+                            </a>
+                        @else 
+                            <h2 class="sectionBox_title">Vé máy bay đi {{ $item->display_name ?? null }}</h2>
+                        @endif
+                        <p>Để đến được {{ $item->display_name ?? null }} nhanh chóng, an toàn và tiện lợi tốt nhất bạn nên di chuyển bằng máy bay. Thông tin chi tiết các <strong>chuyến bay đến {{ $item->display_name ?? null }}</strong> bạn có thể tham khảo bên dưới</p>
                         @include('main.tourLocation.airGrid', [
                             'list'          => $dataAirs, 
                             'limit'         => 3, 
@@ -130,8 +136,14 @@
             @if(!empty($item->serviceLocations[0]->infoServiceLocation))
                 <div class="sectionBox">
                     <div class="container">
-                        <h2 class="sectionBox_title">Vé vui chơi tại {{ $item->display_name ?? null }}</h2>
-                        <p>Ngoài các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> bạn cũng có thể tham khảo thêm các <strong>hoạt động vui chơi giải trí khác tại {{ $item->display_name ?? null }}</strong>. Đây là các chương trình đặc biệt có thể bù dắp khoảng trống thời gian tự túc trong <strong>chương trình Tour</strong> của bạn và chắc chắn sẽ mang đến cho bạn nhiều trải nghiệm thú vị.</p>
+                        @if(!empty($item->serviceLocations[0]->infoServiceLocation->seo->slug_full))
+                            <a href="/{{ $item->serviceLocations[0]->infoServiceLocation->seo->slug_full }}" title="Vé vui chơi tại {{ $item->display_name ?? null }}">
+                                <h2 class="sectionBox_title">Vé vui chơi tại {{ $item->display_name ?? null }}</h2>
+                            </a>
+                        @else 
+                            <h2 class="sectionBox_title">Vé vui chơi tại {{ $item->display_name ?? null }}</h2>
+                        @endif
+                        <p>Ngoài các chương trình <strong>Tour {{ $item->display_name ?? null }}</strong> bạn cũng có thể tham khảo thêm các <strong>hoạt động vui chơi, giải trí khác tại {{ $item->display_name ?? null }}</strong>. Đây là các chương trình đặc biệt bạn có thể tham gia để bù đắp thời gian tự túc trong <strong>chương trình Tour</strong> và chắc chắn sẽ mang đến cho bạn nhiều trải nghiệm thú vị.</p>
                         @include('main.tourLocation.serviceGrid', [
                             'list' => $item->serviceLocations,
                             'itemHeading'   => 'h3'
@@ -145,11 +157,11 @@
                 <div class="sectionBox withBorder">
                     <div class="container">
                         <h2 class="sectionBox_title">Cẩm nang du lịch {{ $item->display_name ?? null }}</h2>
-                        <p>Nếu các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> của Hitour không đáp ứng được nhu cầu của bạn, hoặc bạn là người ưu thích du lịch tự túc,... Hitour cung cấp thêm cho bạn <strong>Cẩm nang du lịch {{ $item->display_name ?? null }}</strong> để bạn có thể tham khảo thêm thông tin, tự do lên kế hoạch, sắp xếp cho chuyến đi du lịch của mình được chu đáo nhất.</p>
+                        <p>Nếu các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> của Hitour không đáp ứng được nhu cầu của bạn hoặc là người ưu thích du lịch tự túc,... Bạn có thể tham khảo <strong>Cẩm nang du lịch</strong> bên dưới để có đầy đủ thông tin, tự do lên kế hoạch, sắp xếp lịch trình cho chuyến đi của mình được chu đáo nhất.</p>
                         <div class="guideList">
                             @foreach($item->guides as $guide)
                                 <div class="guideList_item">
-                                    <i class="fa-solid fa-angles-right"></i>Xem thêm <a href="/{{ $guide->infoGuide->seo->slug_full }}">{{ $guide->infoGuide->name }}</a>
+                                    <i class="fa-solid fa-angles-right"></i>Xem thêm <a href="/{{ $guide->infoGuide->seo->slug_full }}" title="{{ $guide->infoGuide->name }}<">{{ $guide->infoGuide->name }}</a>
                                 </div>
                             @endforeach
                         </div>
