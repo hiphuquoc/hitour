@@ -67,31 +67,42 @@
 
     <div class="pageContent">
 
-            <!-- Mô tả Tour du lịch -->
+            <!-- Giới thiệu Tour du lịch -->
             <div class="sectionBox">
                 <div class="container">
                     <!-- title -->
-                    <h1 class="titlePage">Tour du lịch {{ $item->display_name }} - Du lịch {{ $item->display_name }}</h1>
+                    <h1 class="titlePage">Tour {{ $item->display_name }} - Giới thiệu Tour du lịch {{ $item->display_name }}</h1>
                     <!-- rating -->
                     @include('main.template.rating', compact('item'))
-                    <!-- description -->
-                    @if(!empty($item->description))
-                        <div class="contentBox">
-                            <p>{!! $item->description !!}</p>
+                    <!-- content -->
+                    @if(!empty($content))
+                        <div id="js_showHideFullContent_content" class="contentBox maxLine_4">
+                            {!! $content !!}
                         </div>
-                    @endif
-                    <!-- Tour box -->
-                    @if(!empty($item->tourCountries)&&$item->tourCountries->isNotEmpty())
-                        @php
-                            $dataTours              = new \Illuminate\Support\Collection();
-                            foreach($item->tourCountries as $tourCountry){
-                                foreach($tourCountry->tours as $tour) $dataTours[] = $tour->infoTourForeign;
-                            }
-                        @endphp
-                        @include('main.tourLocation.tourGrid', ['list' => $dataTours])
+                        <div class="viewMore">
+                            <div onClick="showHideFullContent(this, 'maxLine_4');">
+                                <i class="fa-solid fa-arrow-down-long"></i>Đọc thêm
+                            </div>
+                        </div>
                     @endif
                 </div>
             </div>
+
+            <!-- Tour box -->
+            @if(!empty($item->tourCountries)&&$item->tourCountries->isNotEmpty())
+                <div class="sectionBox backgroundPrimaryGradiend">
+                    <div class="container">
+                        <h2 class="sectionBox_title">Tour {{ $item->display_name }} - Danh sách Tour du lịch {{ $item->display_name ?? null }} chất lượng</h2>
+                        @php
+                            $dataTours              = new \Illuminate\Support\Collection();
+                            foreach($item->tourCountries as $tourCountry){
+                                foreach($tourCountry->tours as $tour) if(!empty($tour->infoTourForeign)) $dataTours[] = $tour->infoTourForeign;
+                            }
+                        @endphp
+                        @include('main.tourLocation.tourGrid', ['list' => $dataTours])
+                    </div>
+                </div>
+            @endif
 
             <!-- Hướng dẫn đặt Tour -->
             @include('main.tourLocation.guideBookTour', ['title' => 'Quy trình đặt Tour '.$item->display_name.' và Sử dụng dịch vụ'])

@@ -64,7 +64,7 @@
 
     <div class="pageContent">
     
-        <!-- Mô tả Tour du lịch -->
+        <!-- Giới thiệu Tour du lịch -->
         <div class="sectionBox">
             <div class="container">
                 <!-- title -->

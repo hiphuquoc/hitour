@@ -1,6 +1,9 @@
 @if(!empty($item))
 <div class="galleryBox">
     <div class="galleryBox_image">
+        @if(!empty($item->seo->image))
+            <img src="{{ config('main.svg.loading_main') }}" data-src="{{ $item->seo->image ?? config('admin.images.default_750x460') }}" alt="{{ $item->name ?? $item->seo->title ?? $item->seo->seo_title ?? null }}" title="{{ $item->name ?? $item->seo->title ?? $item->seo->seo_title ?? null }}" />
+        @endif
         @if(!empty($item->files))
             @foreach($item->files as $file)
                 @if($file->file_type==='gallery')
