@@ -25,7 +25,7 @@
 @php
     $arrayPrice = [];
     foreach($item->tourCountries as $tourCountry) {
-        foreach($tourCountry->tours as $tour) $arrayPrice[] = $tour->infoTourForeign->price_show;
+        foreach($tourCountry->tours as $tour) !empty($tour->infoTourForeign->price_show) $arrayPrice[] = $tour->infoTourForeign->price_show;
     }
     $highPrice  = !empty($arrayPrice) ? max($arrayPrice) : 5000000;
     $lowPrice   = !empty($arrayPrice) ? min($arrayPrice) : 3000000;
