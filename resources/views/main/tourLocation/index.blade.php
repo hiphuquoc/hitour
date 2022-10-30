@@ -21,6 +21,16 @@
 <!-- END:: Article Schema -->
 
 <!-- STRAT:: Article Schema -->
+@php
+    $arrayPrice = [];
+    foreach($item->tours as $tour) $arrayPrice[] = $tour->infoTour->price_show;
+    $highPrice  = max($arrayPrice) ?? 5000000;
+    $lowPrice   = min($arrayPrice) ?? 3000000;
+@endphp
+@include('main.schema.product', ['data' => $dataSchema, 'files' => $item->files, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
+<!-- END:: Article Schema -->
+
+<!-- STRAT:: Article Schema -->
 @include('main.schema.breadcrumb', ['data' => $breadcrumb])
 <!-- END:: Article Schema -->
 
@@ -61,10 +71,10 @@
                 <h1 class="titlePage">Tour du lịch {{ $item->display_name }} - Du lịch {{ $item->display_name }}</h1>
                 <!-- rating -->
                 @include('main.template.rating', compact('item'))
-                <!-- description -->
-                @if(!empty($item->description))
+                <!-- content -->
+                @if(!empty($content))
                     <div class="contentBox">
-                        <p>{!! $item->description !!}</p>
+                        <p>{!! $content !!}</p>
                     </div>
                 @endif
                 <!-- Tour box -->
