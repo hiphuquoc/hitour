@@ -2,15 +2,15 @@
     @if(!empty($infoCategory->childs)&&$infoCategory->childs->isNotEmpty())
         <div class="blogListLeftRight">
             <div class="blogListLeftRight_title">
-                <a href="/{{ $infoCategory->seo->slug_full ?? null }}"><h2>{{ $infoCategory->name ?? null }}</h2></a>
+                <a href="/{{ $infoCategory->seo->slug_full ?? null }}" title="{{ $infoCategory->name ?? $infoCategory->seo->title ?? null }}"><h2>{{ $infoCategory->name ?? $infoCategory->seo->title ?? null }}</h2></a>
             </div>
             <div class="blogListLeftRight_box">
                 <div class="blogListLeftRight_box_left">
-                    <a href="/{{ $infoCategory->childs[0]->seo->slug_full ?? null }}" class="blogListLeftRight_box_left_image">
+                    <a href="/{{ $infoCategory->childs[0]->seo->slug_full ?? null }}" title="{{ $infoCategory->childs[0]->name ?? $infoCategory->childs[0]->seo->title ?? $infoCategory->childs[0]->seo->seo_title ?? null }}" class="blogListLeftRight_box_left_image">
                         <img src="{{ config('main.svg.loading_main') }}" data-src="{{ $infoCategory->childs[0]->seo->image_small ?? $infoCategory->childs[0]->seo->image ?? config('admin.images.default_750x460') }}" alt="{{ $infoCategory->childs[0]->name ?? $infoCategory->childs[0]->seo->title ?? $infoCategory->childs[0]->seo->seo_title ?? null }}" title="{{ $infoCategory->childs[0]->name ?? $infoCategory->childs[0]->seo->title ?? $infoCategory->childs[0]->seo->seo_title ?? null }}" />
                     </a>
                     <div class="blogListLeftRight_box_left_content">
-                        <a href="/{{ $infoCategory->childs[0]->seo->slug_full ?? null }}" class="blogListLeftRight_box_left_content_title">
+                        <a href="/{{ $infoCategory->childs[0]->seo->slug_full ?? null }}" title="{{ $infoCategory->childs[0]->name ?? $infoCategory->childs[0]->seo->title ?? $infoCategory->childs[0]->seo->seo_title ?? null }}" class="blogListLeftRight_box_left_content_title">
                             <h3 class="maxLine_2">{{ $infoCategory->childs[0]->name ?? $infoCategory->childs[0]->seo->title ?? $infoCategory->childs[0]->seo->seo_title ?? null }}</h3>
                         </a>
                         @if(!empty($infoCategory->childs[0]->seo->updated_at))
@@ -26,11 +26,11 @@
                 <div class="blogListLeftRight_box_right">
                     @for($i=1;$i<$infoCategory->childs->count();++$i)
                         <div class="blogListLeftRight_box_right_item">
-                            <a href="/{{ $infoCategory->childs[$i]->slug_full ?? null }}" class="blogListLeftRight_box_right_item_image">
+                            <a href="/{{ $infoCategory->childs[$i]->slug_full ?? null }}" title="{{ $infoCategory->childs[$i]->name ?? $infoCategory->childs[$i]->seo->title ?? $infoCategory->childs[$i]->seo->seo_title ?? null }}" class="blogListLeftRight_box_right_item_image">
                                 <img src="{{ config('main.svg.loading_main') }}" data-src="{{ $infoCategory->childs[$i]->seo->image_small ?? $infoCategory->childs[$i]->seo->image ?? config('admin.images.default_750x460') }}" alt="{{ $infoCategory->childs[$i]->name ?? $infoCategory->childs[$i]->seo->title ?? $infoCategory->childs[$i]->seo->seo_title ?? null }}" title="{{ $infoCategory->childs[$i]->name ?? $infoCategory->childs[$i]->seo->title ?? $infoCategory->childs[$i]->seo->seo_title ?? null }}" />
                             </a>
                             <div class="blogListLeftRight_box_right_item_content">
-                                <a href="{{ $infoCategory->childs[$i]->slug_full ?? null }}">
+                                <a href="{{ $infoCategory->childs[$i]->slug_full ?? null }}" title="{{ $infoCategory->childs[$i]->name ?? $infoCategory->childs[$i]->seo->title ?? $infoCategory->childs[$i]->seo->seo_title ?? null }}">
                                     <h3 class="maxLine_2">{{ $infoCategory->childs[$i]->name ?? $infoCategory->childs[$i]->seo->title ?? $infoCategory->childs[$i]->seo->seo_title ?? null }}</h3>
                                 </a>
                                 @if(!empty($infoCategory->childs[$i]->seo->updated_at))
@@ -51,7 +51,7 @@
                     <div class="blogListLeftRight_footer_text">
                         Chuyên mục Đặc sản Phú Quốc có <span class="highLight">{{ $infoCategory->childs->count() }}</span> bài
                     </div>
-                    <a href="/{{ $infoCategory->seo->slug_full ?? null }}" class="blogListLeftRight_footer_button"><i class="fa-solid fa-arrow-down-long"></i>Xem tất cả</a>
+                    <a href="/{{ $infoCategory->seo->slug_full ?? null }}" title="{{ $infoCategory->name ?? $infoCategory->seo->title ?? null }}" class="blogListLeftRight_footer_button"><i class="fa-solid fa-arrow-down-long"></i>Xem tất cả</a>
                 </div>
             {{-- @endif --}}
         </div>

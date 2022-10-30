@@ -4,7 +4,7 @@
         <h2>Lịch trình và giá vé tàu {{ $keyWord ?? null }}</h2>
     </div>
     <div class="contentTour_item_text">
-        <p><a href="{{ URL::current() }}">{{ !empty($keyWord) ? 'Lịch tàu '.$keyWord : 'Lịch tàu cao tốc' }}</a> bên dưới là lộ trình chính xác được Hitour cập nhật thường xuyên từ hãng tàu. Tuy nhiên, có một số trường hợp do thời tiết, bảo trì,... lịch tàu thay đổi đột xuất sẽ được thông báo riêng cho Quý khách khi đặt vé.</p>
+        <p><a href="{{ URL::current() }}" title="{{ !empty($keyWord) ? 'Lịch tàu '.$keyWord : 'Lịch tàu cao tốc' }}">{{ !empty($keyWord) ? 'Lịch tàu '.$keyWord : 'Lịch tàu cao tốc' }}</a> bên dưới là lộ trình chính xác được Hitour cập nhật thường xuyên từ hãng tàu. Tuy nhiên, có một số trường hợp do thời tiết, bảo trì,... lịch tàu thay đổi đột xuất sẽ được thông báo riêng cho Quý khách khi đặt vé.</p>
         <p><strong>Giá vé tàu</strong> niêm yết theo bảng bên dưới áp dụng cho khách lẻ. Đối với khách đoàn lớn (20 khách trở lên) và đối tác vui lòng liện hệ <span style="font-size:1.4rem;font-weight:bold;color:rgb(0,123,255);">08.6868.4868</span> để biết thêm chi tiết.</p>
         @php
             /*
@@ -134,11 +134,13 @@
         <div class="shipPartnerBox">
             @foreach($item->partners as $partner)
                 <div class="shipPartnerBox_item">
-                    <a href="/{{ $partner->infoPartner->seo->slug_full ?? null }}" class="shipPartnerBox_item_image">
+                    <a href="/{{ $partner->infoPartner->seo->slug_full ?? null }}" title="{{ $partner->infoPartner->name ?? $partner->infoPartner->seo->title ?? $partner->infoPartner->seo->seo_title ?? null }}" class="shipPartnerBox_item_image">
                         <img src="{{ config('main.svg.loading_main') }}" data-src="{{ $partner->infoPartner->seo->image_small ?? $partner->infoPartner->seo->image ?? config('admin.images.default_750x460') }}" alt="{{ $partner->infoPartner->name ?? $partner->infoPartner->seo->title ?? $partner->infoPartner->seo->seo_title ?? null }}" title="{{ $partner->infoPartner->name ?? $partner->infoPartner->seo->title ?? $partner->infoPartner->seo->seo_title ?? null }}" />
                     </a>
                     <div class="shipPartnerBox_item_content">
-                        <a href="/{{ $partner->infoPartner->seo->slug_full ?? null }}"><h3>{{ $partner->infoPartner->name ?? $partner->infoPartner->seo->title ?? null }}</h3></a>
+                        <a href="/{{ $partner->infoPartner->seo->slug_full ?? null }}" title="{{ $partner->infoPartner->name ?? $partner->infoPartner->seo->title ?? $partner->infoPartner->seo->seo_title ?? null }}">
+                            <h3>{{ $partner->infoPartner->name ?? $partner->infoPartner->seo->title ?? null }}</h3>
+                        </a>
                         <div class="shipPartnerBox_item_content_desc maxLine_4">{{ $partner->infoPartner->seo->seo_description ?? null }}</div>
                     </div>
                 </div>  

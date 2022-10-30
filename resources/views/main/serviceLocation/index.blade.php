@@ -21,6 +21,18 @@
 @include('main.schema.creativeworkseries', ['data' => $dataSchema])
 <!-- END:: Article Schema -->
 
+<!-- STRAT:: Product Schema -->
+@php
+    $arrayPrice = [];
+    if(!empty($item->services)&&$item->services->isNotEmpty()){
+        foreach($item->services as $service) if(!empty($service->price_show)) $arrayPrice[] = $service->price_show;
+    }
+    $highPrice  = !empty($arrayPrice) ? max($arrayPrice) : 5000000;
+    $lowPrice   = !empty($arrayPrice) ? min($arrayPrice) : 3000000;
+@endphp
+@include('main.schema.product', ['data' => $dataSchema, 'files' => $item->files, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
+<!-- END:: Product Schema -->
+
 <!-- STRAT:: Article Schema -->
 @include('main.schema.breadcrumb', ['data' => $breadcrumb])
 <!-- END:: Article Schema -->
@@ -31,9 +43,7 @@
 
 @php
     $dataList       = null;
-    if(!empty($item->services)&&$item->services->isNotEmpty()){
-        $dataList   = $item->services;
-    }
+    if(!empty($item->services)&&$item->services->isNotEmpty()) $dataList = $item->services;
 @endphp
 <!-- STRAT:: Article Schema -->
 @include('main.schema.itemlist', ['data' => $dataList])

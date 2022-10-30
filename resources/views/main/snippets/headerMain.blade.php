@@ -55,8 +55,8 @@
         <div class="headerMain_item">
             <ul>
                 <li>
-                    <a href="/">
-                        <img src="/images/main/svg/home-fff.svg" alt="icon trang chủ Hitour" title="icon trang chủ Hitour" />
+                    <a href="/" title="Trang chủ Hitour">
+                        <img src="/images/main/svg/home-fff.svg" alt="Trang chủ Hitour" title="Trang chủ Hitour" />
                     </a>
                 </li>
                 <li>
@@ -97,7 +97,7 @@
                                         foreach($dataAir as $air){
                                             if($i==0) $xhtml = '<li><ul>';
                                             if($i!=0&&$i%7==0) $xhtml .= '</ul></li><li><ul>';
-                                            $xhtml .= '<li><a href="/'.$air->seo->slug_full.'">'.$air->name.'</a></li>';
+                                            $xhtml .= '<li><a href="/'.$air->seo->slug_full.'" title="'.$air->name.'">'.$air->name.'</a></li>';
                                             if($i==($dataAir->count()-1)) $xhtml .= '</ul></li>';
                                             ++$i;
                                         }
@@ -117,13 +117,13 @@
                         <ul>
                             @foreach($dataShip as $shipLocation)
                             <li>
-                                <a class="max-line_1" href="/{{ $shipLocation->seo->slug_full }}">{{ $shipLocation->name }}<i class="fas fa-angle-right"></i></a>
+                                <a class="max-line_1" href="/{{ $shipLocation->seo->slug_full ?? null }}" title="{{ $shipLocation->name ?? $shipLocation->seo->title ?? null }}">{{ $shipLocation->name ?? $shipLocation->seo->title ?? null }}<i class="fas fa-angle-right"></i></a>
                                 @if(!empty($shipLocation->ships))
                                     <ul style="left:unset;right:250px;box-shadow: 0 2px 3px #adb5bd;">
                                     @foreach($shipLocation->ships as $ship)
                                         <li class="max-line_1">
-                                            <a href="/{{ $ship->seo->slug_full }}">
-                                                <div>{{ $ship->name }}</div>
+                                            <a href="/{{ $ship->seo->slug_full ?? null }}" title="{{ $ship->name ?? $ship->seo->title ?? null }}">
+                                                <div>{{ $ship->name ?? $ship->seo->title ?? null }}</div>
                                             </a>
                                         </li>
                                     @endforeach
@@ -143,7 +143,7 @@
                         <ul>
                             @foreach($dataService as $serviceLocation)
                             <li>
-                                <a class="max-line_1" href="/{{ $serviceLocation->seo->slug_full }}">{{ $serviceLocation->display_name }}</a>
+                                <a class="max-line_1" href="/{{ $serviceLocation->seo->slug_full ?? null }}" title="{{ $serviceLocation->name ?? $serviceLocation->seo->title ?? null }}">{{ $serviceLocation->display_name ?? null }}</a>
                             </li>
                             @endforeach
                         </ul>
@@ -177,7 +177,7 @@
                                 </a>
                             </li> --}}
                             <li>
-                                <a href="/">
+                                <a href="/" title="Liên hệ Hitour">
                                     <div>Liên hệ</div>
                                 </a>
                             </li>
@@ -193,13 +193,13 @@
     <div class="container">
         @if(!Request::is('/'))
             <div class="header_arrow">
-                <a href="javascript:history.back()">
+                <a href="javascript:history.back()" title="Quay lại trang trước">
                     <i class="fa-solid fa-arrow-left-long"></i>
                 </a>
             </div>
         @endif
         <div class="header_logo">
-            <a href="/" class="logo">
+            <a href="/" title="Trang chủ Hitour" class="logo">
                 <!-- Background Image -->
                 <h1 style="display:none;">Trang chủ Hitour - Kênh du lịch trực tuyến hàng đầu Việt Nam</h1>
             </a>
@@ -229,12 +229,12 @@
             <div class="nav-mobile_main__exit" onclick="javascript:openCloseElemt('nav-mobile');">
                 <i class="fas fa-times"></i>
             </div>
-            <a href="/" style="display:flex;justify-content:center;margin-top:5px;margin-bottom:-10px;">
+            <a href="/" title="Trang chủ Hitour" style="display:flex;justify-content:center;margin-top:5px;margin-bottom:-10px;">
                 <div class="logoSquare"></div>
             </a>
             <ul>
                 <li>
-                    <a href="/">
+                    <a href="/" title="Trang chủ Hitour">
                         <div><i class="fas fa-home"></i>Trang chủ</div>
                         <div class="right-icon"></div>
                     </a>
@@ -248,7 +248,7 @@
                     <ul style="display:none;">
                     @foreach($dataTourContinent as $tourContinent)
                         <li>
-                            <a href="/{{ $tourContinent->seo->slug_full ?? null}}">
+                            <a href="/{{ $tourContinent->seo->slug_full ?? null}}" title="{{ $tourContinent->name ?? $tourContinent->seo->title ?? null }}">
                                 <div>{{ $tourContinent->name ?? $tourContinent->seo->title ?? null }}</div>
                             </a>
                         </li>
@@ -265,8 +265,8 @@
                         <ul style="display:none;">
                         @foreach($dataBD as $tourBD)
                             <li>
-                                <a href="/{{ $tourBD->slug_full }}">
-                                    <div>{{ $tourBD->name }}</div>
+                                <a href="/{{ $tourBD->slug_full ?? null }}" title="{{ $tourBD->name ?? $tourBD->seo->title ?? null }}">
+                                    <div>{{ $tourBD->name ?? $tourBD->seo->title ?? null }}</div>
                                 </a>
                             </li>
                         @endforeach
@@ -283,8 +283,8 @@
                         <ul style="display:none;">
                         @foreach($dataMB as $tourMB)
                             <li>
-                                <a href="/{{ $tourMB->slug_full }}">
-                                    <div>{{ $tourMB->name }}</div>
+                                <a href="/{{ $tourMB->slug_full ?? null }}" title="{{ $tourMB->name ?? $tourMB->seo->title ?? null }}">
+                                    <div>{{ $tourMB->name ?? $tourMB->seo->title ?? null }}</div>
                                 </a>
                             </li>
                         @endforeach
@@ -301,8 +301,8 @@
                         <ul style="display:none;">
                         @foreach($dataMT as $tourMT)
                             <li>
-                                <a href="/{{ $tourMT->slug_full }}">
-                                    <div>{{ $tourMT->name }}</div>
+                                <a href="/{{ $tourMT->slug_full ?? null }}" title="{{ $tourMT->name ?? $tourMT->seo->title ?? null }}">
+                                    <div>{{ $tourMT->name ?? $tourMT->seo->title ?? null }}</div>
                                 </a>
                             </li>
                         @endforeach
@@ -319,8 +319,8 @@
                         <ul style="display:none;">
                         @foreach($dataMN as $tourMN)
                             <li>
-                                <a href="/{{ $tourMN->slug_full }}">
-                                    <div>{{ $tourMN->name }}</div>
+                                <a href="/{{ $tourMN->slug_full ?? null }}" title="{{ $tourMN->name ?? $tourMN->seo->title ?? null }}">
+                                    <div>{{ $tourMN->name ?? $tourMN->seo->title ?? null }}</div>
                                 </a>
                             </li>
                         @endforeach
@@ -337,8 +337,8 @@
                         <ul style="display:none;">
                         @foreach($dataShip as $shipLocation)
                             <li>
-                                <a href="/{{ $shipLocation->seo->slug_full }}">
-                                    <div>{{ $shipLocation->name }}</div>
+                                <a href="/{{ $shipLocation->seo->slug_full ?? null }}" title="{{ $shipLocation->name ?? $shipLocation->seo->title ?? null }}">
+                                    <div>{{ $shipLocation->name ?? $shipLocation->seo->title ?? null }}</div>
                                 </a>
                             </li>
                         @endforeach
@@ -355,8 +355,8 @@
                         <ul style="display:none;">
                         @foreach($dataAir as $airLocation)
                             <li>
-                                <a href="/{{ $airLocation->seo->slug_full }}">
-                                    <div>{{ $airLocation->name }}</div>
+                                <a href="/{{ $airLocation->seo->slug_full ?? null }}" title="{{ $airLocation->name ?? $airLocation->seo->title ?? null }}">
+                                    <div>{{ $airLocation->name ?? $airLocation->seo->title ?? null }}</div>
                                 </a>
                             </li>
                         @endforeach
@@ -379,8 +379,8 @@
                         <ul style="display:none;">
                         @foreach($dataService as $serviceLocation)
                             <li>
-                                <a href="/{{ $serviceLocation->seo->slug_full }}">
-                                    <div>{{ $serviceLocation->display_name }}</div>
+                                <a href="/{{ $serviceLocation->seo->slug_full ?? null }}" title="{{ $serviceLocation->display_name ?? null }}">
+                                    <div>{{ $serviceLocation->display_name ?? null }}</div>
                                 </a>
                             </li>
                         @endforeach
@@ -394,7 +394,7 @@
                     </div>
                 </li> --}}
                 <li>
-                    <a href="/">
+                    <a href="/" title="Liên hệ Hitour">
                         <i class="fa-solid fa-phone"></i>
                         <div>Liên hệ</div>
                     </a>

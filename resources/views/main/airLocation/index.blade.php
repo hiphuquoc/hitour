@@ -31,9 +31,7 @@
 
 @php
     $dataList       = null;
-    if(!empty($item->airs)&&$item->airs->isNotEmpty()){
-        $dataList   = $item->airs;
-    }
+    if(!empty($item->airs)&&$item->airs->isNotEmpty()) $dataList = $item->airs;
 @endphp
 <!-- STRAT:: Article Schema -->
 @include('main.schema.itemlist', ['data' => $dataList])

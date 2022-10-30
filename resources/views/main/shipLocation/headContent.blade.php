@@ -4,7 +4,7 @@
         <h2>Lịch trình và giá vé {{ $keyWord ?? null }}</h2>
     </div>
     <div class="contentTour_item_text">
-        <p><a href="{{ URL::current() }}">{{ !empty($keyWord) ? 'Lịch '.$keyWord : 'Lịch tàu' }}</a> bên dưới là lộ trình chính xác được Hitour cập nhật thường xuyên từ hãng tàu. Tuy nhiên, có một số trường hợp do thời tiết, bảo trì,... lịch tàu thay đổi đột xuất sẽ được thông báo riêng cho Quý khách khi đặt vé.</p>
+        <p><a href="{{ URL::current() }}" title="{{ !empty($keyWord) ? 'Lịch '.$keyWord : 'Lịch tàu' }}">{{ !empty($keyWord) ? 'Lịch '.$keyWord : 'Lịch tàu' }}</a> bên dưới là lộ trình chính xác được Hitour cập nhật thường xuyên từ hãng tàu. Tuy nhiên, có một số trường hợp do thời tiết, bảo trì,... lịch tàu thay đổi đột xuất sẽ được thông báo riêng cho Quý khách khi đặt vé.</p>
         <p><strong>Giá vé {{ $keyWord ?? 'tàu' }}</strong> niêm yết theo bảng bên dưới áp dụng cho khách lẻ. Đối với khách đoàn lớn (20 khách trở lên) và đối tác vui lòng liện hệ <span style="font-size:1.4rem;font-weight:bold;color:rgb(0,123,255);">08.6868.4868</span> để biết thêm chi tiết.</p>
         @php
             /*
@@ -148,11 +148,11 @@
             @endphp
             @foreach($dataPartnerUnique as $partner)
                 <div class="shipPartnerBox_item">
-                    <a href="/{{ $partner['slug_full'] ?? null }}" class="shipPartnerBox_item_image">
+                    <a href="/{{ $partner['slug_full'] ?? null }}" title="{{ $partner['name'] ?? null }}" class="shipPartnerBox_item_image">
                         <img src="{{ config('main.svg.loading_main') }}" data-src="{{ $partner['company_logo'] }}" alt="{{ $partner['name'] ?? null }}" title="{{ $partner['name'] ?? null }}" />
                     </a>
                     <div class="shipPartnerBox_item_content">
-                        <a href="/{{ $partner['slug_full'] ?? null }}"><h3>{{ $partner['name'] ?? null }}</h3></a>
+                        <a href="/{{ $partner['slug_full'] ?? null }}" title="{{ $partner['name'] ?? null }}"><h3>{{ $partner['name'] ?? null }}</h3></a>
                         <div class="shipPartnerBox_item_content_desc maxLine_4">{{ $partner['seo_description'] ?? null }}</div>
                     </div>
                 </div>  

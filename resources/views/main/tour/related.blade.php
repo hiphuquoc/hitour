@@ -2,7 +2,7 @@
     <div class="tourRelated">
         @foreach($list as $tour)
             <div class="tourRelated_item">
-                <a href="/{{ $tour->seo->slug_full ?? null }}" class="tourRelated_item_image">
+                <a href="/{{ $tour->seo->slug_full ?? null }}" title="{{ $tour->name ?? $tour->seo->title ?? $tour->seo->seo_title ?? null }}" class="tourRelated_item_image">
                     <img src="{{ config('main.svg.loading_main') }}" data-src="{{ $tour->seo->image_small ?? $tour->seo->image ?? config('admin.images.default_750x460') }}" alt="{{ $tour->name ?? $tour->seo->title ?? $tour->seo->seo_title ?? null }}" title="{{ $tour->name ?? $tour->seo->title ?? $tour->seo->seo_title ?? null }}" />
                     @if($tour->days>1)
                         <div class="tourRelated_item_image_time">
@@ -16,10 +16,10 @@
                         @endif
                     @endif
                 </a>
-                <a href="/{{ $tour->seo->slug_full ?? null }}" class="tourRelated_item_title maxLine_1">
+                <a href="/{{ $tour->seo->slug_full ?? null }}" title="{{ $tour->name ?? $tour->seo->title ?? $tour->seo->seo_title ?? null }}" class="tourRelated_item_title maxLine_1">
                     <h2>{{ $tour->name ?? $tour->seo->title ?? null }}</h2>
                 </a>
-                <a href="/{{ $tour->seo->slug_full ?? null }}" class="tourRelated_item_desc maxLine_4">
+                <a href="/{{ $tour->seo->slug_full ?? null }}" title="{{ $tour->name ?? $tour->seo->title ?? $tour->seo->seo_title ?? null }}" class="tourRelated_item_desc maxLine_4">
                     <h3 class="maxLine_3">{{ $tour->description ?? $tour->seo->description ?? null }}</h3>
                 </a>
                 <div class="column" style="align-items:flex-end !important;">

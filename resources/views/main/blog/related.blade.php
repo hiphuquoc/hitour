@@ -7,12 +7,12 @@
             @foreach($blogRelates as $blog)
                 <div class="relatedBox_box_item">
                     <div class="relatedBox_box_item_image">
-                        <a href="{{ !empty($blog->seo->slug_full) ? url($blog->seo->slug_full) : url($blog->slug_full) }}">
+                        <a href="{{ !empty($blog->seo->slug_full) ? url($blog->seo->slug_full) : url($blog->slug_full) }}" title="{{ $blog->name ?? $blog->seo->title ?? $blog->seo->seo_title ?? null }}">
                             <img src="{{ config('main.svg.loading_main') }}" data-src="{{ $blog->seo->image_small ?? $blog->seo->image ?? config('admin.images.default_750x460') }}" alt="{{ $blog->name ?? $blog->seo->title ?? $blog->seo->seo_title ?? null }}" title="{{ $blog->name ?? $blog->seo->title ?? $blog->seo->seo_title ?? null }}" />
                         </a>
                     </div>
                     <div class="relatedBox_box_item_content">
-                        <a href="{{ !empty($blog->seo->slug_full) ? url($blog->seo->slug_full) : url($blog->slug_full) }}" class="relatedBox_box_item_content_title">
+                        <a href="{{ !empty($blog->seo->slug_full) ? url($blog->seo->slug_full) : url($blog->slug_full) }}" title="{{ $blog->name ?? $blog->seo->title ?? $blog->seo->seo_title ?? null }}" class="relatedBox_box_item_content_title">
                             <h3 class="maxLine_2">
                                 {{ $blog->seo->title ?? $blog->name ?? null }}
                             </h3>

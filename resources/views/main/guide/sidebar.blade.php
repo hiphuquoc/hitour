@@ -7,13 +7,13 @@
    @if(!empty($item->tourLocations)&&$item->tourLocations->isNotEmpty())
    <div class="serviceRelatedSidebarBox" style="margin-top:1.5rem;">
       <div class="serviceRelatedSidebarBox_title">
-         <h2>Chuyên mục liên quan</h2>
+         <h2>{{ config('main.title_list_service_sidebar') }}</h2>
       </div>
       <div class="serviceRelatedSidebarBox_box">
             <!-- tour du lịch -->
             @foreach($item->tourLocations as $tourLocation)
-               <a href="/{{ $tourLocation->infoTourLocation->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">
-                  <i class="fa-solid fa-person-hiking"></i><h3>{{ $tourLocation->infoTourLocation->name }}</h3>
+               <a href="/{{ $tourLocation->infoTourLocation->seo->slug_full ?? null }}" title="{{ $tourLocation->infoTourLocation->name ?? $tourLocation->infoTourLocation->seo->title ?? null }}" class="serviceRelatedSidebarBox_box_item">
+                  <i class="fa-solid fa-person-hiking"></i><h3>{{ $tourLocation->infoTourLocation->name ?? $tourLocation->infoTourLocation->seo->title ?? null }}</h3>
                </a>
             @endforeach
 
@@ -21,8 +21,8 @@
             @foreach($item->tourLocations as $tourLocation)
                @if($tourLocation->infoTourLocation->airLocations->isNotEmpty())
                   @foreach($tourLocation->infoTourLocation->airLocations as $airLocation)
-                     <a href="/{{ $airLocation->infoAirLocation->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">
-                        <i class="fa-solid fa-paper-plane"></i><h3>{{ $airLocation->infoAirLocation->name }}</h3>
+                     <a href="/{{ $airLocation->infoAirLocation->seo->slug_full ?? null }}" title="{{ $airLocation->infoAirLocation->name ?? $airLocation->infoAirLocation->seo->title ?? null }}" class="serviceRelatedSidebarBox_box_item">
+                        <i class="fa-solid fa-paper-plane"></i><h3>{{ $airLocation->infoAirLocation->name ?? $airLocation->infoAirLocation->seo->title ?? null }}</h3>
                      </a>
                   @endforeach
                @endif
@@ -31,8 +31,8 @@
             <!-- dịch vụ tàu -->
             @foreach($item->tourLocations as $tourLocation)
                @foreach($tourLocation->infoTourLocation->shipLocations as $shipLocation)
-                  <a href="/{{ $shipLocation->infoShipLocation->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">
-                     <i class="fa-solid fa-ship"></i><h3>{{ $shipLocation->infoShipLocation->name }}</h3>
+                  <a href="/{{ $shipLocation->infoShipLocation->seo->slug_full ?? null }}" title="{{ $shipLocation->infoShipLocation->name ?? $shipLocation->infoShipLocation->seo->title ?? null }}" class="serviceRelatedSidebarBox_box_item">
+                     <i class="fa-solid fa-ship"></i><h3>{{ $shipLocation->infoShipLocation->name ?? $shipLocation->infoShipLocation->seo->title ?? null }}</h3>
                   </a>
                @endforeach
             @endforeach
@@ -40,8 +40,8 @@
             <!-- dịch vụ hoạt động vui chơi giải trí -->
             @foreach($item->tourLocations as $tourLocation)
                @foreach($tourLocation->infoTourLocation->serviceLocations as $serviceLocation)
-                  <a href="/{{ $serviceLocation->infoServiceLocation->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">
-                     <i class="fa-solid fa-star"></i><h3>{{ $serviceLocation->infoServiceLocation->name }}</h3>
+                  <a href="/{{ $serviceLocation->infoServiceLocation->seo->slug_full ?? null }}" title="{{ $serviceLocation->infoServiceLocation->name ?? $serviceLocation->infoServiceLocation->seo->title ?? null }}" class="serviceRelatedSidebarBox_box_item">
+                     <i class="fa-solid fa-star"></i><h3>{{ $serviceLocation->infoServiceLocation->name ?? $serviceLocation->infoServiceLocation->seo->title ?? null }}</h3>
                   </a>
                @endforeach
             @endforeach
@@ -49,8 +49,8 @@
             <!-- cho thuê xe -->
             @foreach($item->tourLocations as $tourLocation)
                @foreach($tourLocation->infoTourLocation->carrentalLocations as $carrentalLocation)
-                  <a href="/{{ $carrentalLocation->infoCarrentalLocation->seo->slug_full }}" class="serviceRelatedSidebarBox_box_item">
-                     <i class="fa-solid fa-car-side"></i><h3>{{ $carrentalLocation->infoCarrentalLocation->name }}</h3>
+                  <a href="/{{ $carrentalLocation->infoCarrentalLocation->seo->slug_full ?? null }}" title="{{ $carrentalLocation->infoCarrentalLocation->name ?? $carrentalLocation->infoCarrentalLocation->seo->title ?? null }}" class="serviceRelatedSidebarBox_box_item">
+                     <i class="fa-solid fa-car-side"></i><h3>{{ $carrentalLocation->infoCarrentalLocation->name ?? $carrentalLocation->infoCarrentalLocation->seo->title ?? null }}</h3>
                   </a>
                @endforeach
             @endforeach

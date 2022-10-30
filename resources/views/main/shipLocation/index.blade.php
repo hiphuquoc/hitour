@@ -21,6 +21,27 @@
 @include('main.schema.creativeworkseries', ['data' => $dataSchema])
 <!-- END:: Article Schema -->
 
+<!-- STRAT:: Product Schema -->
+@php
+    $arrayPrice = [];
+    if(!empty($item->ships)&&$item->ships->isNotEmpty()){
+        foreach($item->ships as $ship){
+            if(!empty($ship->prices)&&$ship->prices->isNotEmpty()){
+                foreach($ship->prices as $price){
+                    if(!empty($price->price_adult)) $arrayPrice[] = $price->price_adult;
+                    if(!empty($price->price_child)) $arrayPrice[] = $price->price_child;
+                    if(!empty($price->price_old)) $arrayPrice[] = $price->price_old;
+                    if(!empty($price->price_vip)) $arrayPrice[] = $price->price_vip;
+                }
+            }
+        }
+    }
+    $highPrice  = !empty($arrayPrice) ? max($arrayPrice) : 5000000;
+    $lowPrice   = !empty($arrayPrice) ? min($arrayPrice) : 3000000;
+@endphp
+@include('main.schema.product', ['data' => $dataSchema, 'files' => $item->files, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
+<!-- END:: Product Schema -->
+
 <!-- STRAT:: Article Schema -->
 @include('main.schema.breadcrumb', ['data' => $breadcrumb])
 <!-- END:: Article Schema -->
@@ -31,9 +52,7 @@
 
 @php
     $dataList       = null;
-    if(!empty($item->ships)&&$item->ships->isNotEmpty()){
-        $dataList   = $item->ships;
-    }
+    if(!empty($item->ships)&&$item->ships->isNotEmpty()) $dataList = $item->ships;
 @endphp
 <!-- STRAT:: Article Schema -->
 @include('main.schema.itemlist', ['data' => $dataList])

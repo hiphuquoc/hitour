@@ -7,13 +7,13 @@
       </div>
       <div class="headerTop_item">
          <div class="headerTop_item_list">
-            <a href="#" class="headerTop_item_list_item">
+            {{-- <a href="#" class="headerTop_item_list_item">
                Tư vấn khách hàng
-            </a>
-            <a href="#" class="headerTop_item_list_item">
+            </a> --}}
+            <a href="/" title="Liên hệ Hitour" class="headerTop_item_list_item">
                Liên hệ
             </a>
-            <a href="/admin" class="headerTop_item_list_item">
+            <a href="/admin" title="Đăng nhập" class="headerTop_item_list_item">
                Đăng nhập
             </a>
          </div>

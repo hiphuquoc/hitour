@@ -4,7 +4,7 @@
         @if(!empty($dataTourContinent)&&$dataTourContinent->isNotEmpty())
             @foreach($dataTourContinent as $tourContinent)
                 <li id="menuTourContinent_{{ $loop->index }}" onmouseover="openMegaMenuTourContinent(this.id);" {{ $loop->index==0 ? 'class=selected' : null }}>
-                    <a href="/{{ $tourContinent->seo->slug_full ?? null }}">Tour {{ $tourContinent->display_name }}<i class="fas fa-angle-right"></i></a>
+                    <a href="/{{ $tourContinent->seo->slug_full ?? null }}" title="Tour {{ $tourContinent->display_name }}">Tour {{ $tourContinent->display_name }}<i class="fas fa-angle-right"></i></a>
                 </li>
             @endforeach
         @endif 
@@ -19,7 +19,7 @@
                         <li>
                             <ul>
                     @endif
-                    <li><a href="/{{ $tourCountry->seo->slug_full ?? null }}">{{ $tourCountry->name ?? $tourCountry->seo->title ?? null }}</a></li>
+                    <li><a href="/{{ $tourCountry->seo->slug_full ?? null }}" title="{{ $tourCountry->name ?? $tourCountry->seo->title ?? null }}">{{ $tourCountry->name ?? $tourCountry->seo->title ?? null }}</a></li>
                     @if(($loop->index+1)%7==0||($loop->index+1)==$tourContinent->tourCountries->count())
                             </ul>
                         </li>

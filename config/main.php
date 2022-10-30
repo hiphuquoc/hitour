@@ -12,5 +12,6 @@ return [
     'avatar_home'   => env('APP_URL').'/storage/images/upload/banner-hitour-1-type-manager-upload.webp',
     'svg'           => [
         'loading_main'  => '/images/main/svg/loading_plane_bge9ecef.svg'
-    ]
+    ],
+    'title_list_service_sidebar'    => 'Có thể bạn cần?'
 ];

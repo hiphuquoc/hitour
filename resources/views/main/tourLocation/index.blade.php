@@ -20,7 +20,7 @@
 @include('main.schema.creativeworkseries', ['data' => $dataSchema])
 <!-- END:: Article Schema -->
 
-<!-- STRAT:: Article Schema -->
+<!-- STRAT:: Product Schema -->
 @php
     $arrayPrice = [];
     foreach($item->tours as $tour) $arrayPrice[] = $tour->infoTour->price_show;
@@ -28,7 +28,7 @@
     $lowPrice   = !empty($arrayPrice) ? min($arrayPrice) : 3000000;
 @endphp
 @include('main.schema.product', ['data' => $dataSchema, 'files' => $item->files, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
-<!-- END:: Article Schema -->
+<!-- END:: Product Schema -->
 
 <!-- STRAT:: Article Schema -->
 @include('main.schema.breadcrumb', ['data' => $breadcrumb])
@@ -39,9 +39,8 @@
 <!-- END:: FAQ Schema -->
 
 @php
-    $dataList           = null;  
+    $dataList           = new \Illuminate\Support\Collection();
     if(!empty($item->tours)&&$item->tours->isNotEmpty()){
-        $dataList       = new \Illuminate\Support\Collection();
         foreach($item->tours as $tour){
             $dataList[] = $tour->infoTour;
         }

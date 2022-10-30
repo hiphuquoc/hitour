@@ -10,13 +10,13 @@
                             <i class="fa-solid fa-location-dot"></i>trụ sở: Số 43 Nguyễn Tuân, Phường Vĩnh Quang, Rạch Giá, Kiên Giang
                         </li>
                         <li>
-                            <i class="fa-solid fa-phone"></i>hotline: <a href="tel:0868684868">08 6868 4868</a>
+                            <i class="fa-solid fa-phone"></i>hotline: <a href="tel:0868684868" title="Hotline Hitour">08 6868 4868</a>
                         </li>
                         <li>
-                            <i class="fa-solid fa-globe"></i>website: <a href="https://hitour.vn">hitour.vn - hitour.com.vn</a>
+                            <i class="fa-solid fa-globe"></i>website: <a href="https://hitour.vn" title="Trang chủ Hitour">hitour.vn</a> - <a href="https://hitour.vn" title="Trang chủ Hitour">hitour.com.vn</a>
                         </li>
                         <li>
-                            <i class="fa-solid fa-envelope"></i>email: <a href="mailTo:hiphuquoc@gmail.com">hiphuquoc@gmail.com</a>
+                            <i class="fa-solid fa-envelope"></i>email: <a href="mailTo:hiphuquoc@gmail.com" title="Email Hitour">hiphuquoc@gmail.com</a>
                         </li>
                     </ul>
                 </div>
@@ -24,20 +24,20 @@
                     <div class="footerBox_item_title">Góc khách hàng</div>
                     <ul class="footerBox_item_list">
                         <li>
-                            <a href="#">Thông tin thanh toán</a>
+                            <div>Thông tin thanh toán</div>
                         </li>
                         <li>
-                            <a href="#">Chính sách đặt dịch vụ</a>
+                            <div>Chính sách đặt dịch vụ</div>
                         </li>
                         <li>
-                            <a href="#">Chính sách bảo mật</a>
+                            <div>Chính sách bảo mật</div>
+                        </li>
+                        {{-- <li>
+                            <div>Ý kiến khách hàng</div>
                         </li>
                         <li>
-                            <a href="#">Ý kiến khách hàng</a>
-                        </li>
-                        <li>
-                            <a href="#">Phiếu góp ý</a>
-                        </li>
+                            <div>Phiếu góp ý</div>
+                        </li> --}}
                     </ul>
                 </div>
                 <div class="footerBox_item">
@@ -85,24 +85,24 @@
                 <div class="footerBox_item_title">Hệ thống Hitour</div>
                 <ul>
                     <li>
-                        <a href="https://superdong.vn" target="_blank" rel="nofollow">Cẩm nang du lịch Việt</a>
+                        <a href="https://superdong.vn" title="Cẩm nang du lịch Việt" target="_blank" rel="nofollow">Cẩm nang du lịch Việt</a>
                     </li>
                     <li>
-                        <a href="https://name.com.vn" target="_blank" rel="nofollow">Đặc sản ba miền</a>
+                        <a href="https://name.com.vn" title="Đặc sản ba miền" target="_blank" rel="nofollow">Đặc sản ba miền</a>
                     </li>
                     <li>
-                        <a href="https://name.com.vn" target="_blank" rel="nofollow">Bất động sản</a>
+                        <a href="https://name.com.vn" title="Bất động sản" target="_blank" rel="nofollow">Bất động sản</a>
                     </li>
                 </ul>
             </div>
             <div class="footerBox_item">
                 <div class="footerBox_item_title">Kết nối với chúng tôi</div>
                 <div class="socialBox">
-                    <a href="#" class="socialBox_item socialFacebook"></a>
-                    {{-- <a href="#" class="socialBox_item socialInstagram"></a> --}}
-                    <a href="#" class="socialBox_item socialYoutube"></a>
-                    <a href="#" class="socialBox_item socialLinkendin"></a>
-                    <a href="#" class="socialBox_item socialTwitter"></a>
+                    <div class="socialBox_item socialFacebook"></div>
+                    {{-- <div class="socialBox_item socialInstagram"></div> --}}
+                    <div class="socialBox_item socialYoutube"></div>
+                    <div class="socialBox_item socialLinkendin"></div>
+                    <div class="socialBox_item socialTwitter"></div>
                 </div>
             </div>
         </div>
@@ -110,7 +110,6 @@
 </section>
 <div class="copyright">
     <div class="container">
-        © 2022 - Bản quyền <b><a href="https://hitour.vn">HITOUR</a></b> - Thiết kế và phát triển bởi Phạm Văn Phú. Ghi rõ nguồn "hitour.vn" khi sử dụng thông tin từ website này!
-
+        © 2022 - Bản quyền <b><a href="https://hitour.vn" title="Trang chủ Hitour">HITOUR</a></b> - Thiết kế và phát triển bởi Phạm Văn Phú. Ghi rõ nguồn "hitour.vn" khi sử dụng thông tin từ website này!
     </div>
 </div>
