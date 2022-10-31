@@ -80,7 +80,7 @@
                         <div id="js_showHideFullContent_content" class="contentBox maxLine_4">
                             {!! $content !!}
                         </div>
-                        <div class="viewMore">
+                        <div class="viewMore" style="margin-top:1.5rem;">
                             <div onClick="showHideFullContent(this, 'maxLine_4');">
                                 <i class="fa-solid fa-arrow-down-long"></i>Đọc thêm
                             </div>

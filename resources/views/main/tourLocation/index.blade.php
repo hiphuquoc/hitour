@@ -75,7 +75,7 @@
                     <div id="js_showHideFullContent_content" class="contentBox maxLine_4">
                         {!! $content !!}
                     </div>
-                    <div class="viewMore">
+                    <div class="viewMore" style="margin-top:1.5rem;">
                         <div onClick="showHideFullContent(this, 'maxLine_4');">
                             <i class="fa-solid fa-arrow-down-long"></i>Đọc thêm
                         </div>
@@ -201,7 +201,7 @@
             <div class="sectionBox">
                 <div class="container">
                     <h2 class="sectionBox_title">Điểm đến {{ $item->display_name ?? null }}</h2>
-                    @include('main.tourLocation.blogGrid', ['list' => $destinationList, 'limit' => 4])
+                    @include('main.tourLocation.blogGridSlick', ['list' => $destinationList, 'limit' => 10])
                 </div>
             </div>
         @endif
@@ -210,7 +210,7 @@
             <div class="sectionBox">
                 <div class="container">
                     <h2 class="sectionBox_title">Đặc sản {{ $item->display_name ?? null }}</h2>
-                    @include('main.tourLocation.blogGrid', ['list' => $specialList, 'limit' => 4])
+                    @include('main.tourLocation.blogGridSlick', ['list' => $specialList, 'limit' => 10])
                 </div>
             </div>
         @endif
