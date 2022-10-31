@@ -63,7 +63,7 @@
             const heightBox     = $('#js_autoLoadTocContentWithIcon_idWrite').parent().outerHeight();
             const heightElemt   = $('#js_autoLoadTocContentWithIcon_idWrite').outerHeight();
             const height        = parseInt(heightW) - parseInt(heightBox - heightElemt);
-            $('#js_autoLoadTocContentWithIcon_idWrite').css('max-height', 'calc('+height+'px - 1.5rem)');
+            $('#js_autoLoadTocContentWithIcon_idWrite').css('max-height', 'calc('+height+'px - 3rem)');
         });
     </script>
 @endpush

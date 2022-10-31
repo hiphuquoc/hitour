@@ -8,7 +8,7 @@
    @endphp
    @if(!empty($item->tourLocations)&&$item->tourLocations->isNotEmpty())
       @php
-         $flagMargin = 'margin:1.5rem;';
+         $flagMargin = 'margin-top:1.5rem;';
       @endphp
       <div class="serviceRelatedSidebarBox" style="margin-top:1.5rem;">
          <div class="serviceRelatedSidebarBox_title">
