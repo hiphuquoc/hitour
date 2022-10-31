@@ -415,11 +415,11 @@ Route::prefix('admin')->group(function(){
 });
 
 /* redirect */
-foreach(\App\Models\Redirect::all() as $redirect){
-    Route::get($redirect->url_old, function() use($redirect){ 
-        return Redirect::to($redirect->url_new, 301); 
-    });
-}
+// foreach(\App\Models\Redirect::all() as $redirect){
+//     Route::get($redirect->url_old, function() use($redirect){ 
+//         return Redirect::to($redirect->url_new, 301); 
+//     });
+// }
 
 Route::get('/', [MainHomeController::class, 'home'])->name('main.home');
 /* ===== SITEMAP ===== */
