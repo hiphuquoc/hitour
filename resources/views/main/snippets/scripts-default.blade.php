@@ -8,9 +8,34 @@
 
 <script type="text/javascript">
         $(window).ready(function(){
-            $(window).ready(function(){
-                loadImage();
-            });
+            loadImage();
+
+            /* fixed sidebar khi scroll */
+            const elemt                 = $('.js_scrollFixed');
+            const widthResponsive   = $(window).width();
+            if(elemt.length>0&&widthResponsive>991){
+                const widthElemt            = elemt.parent().width();
+                const positionTopElemt      = elemt.offset().top;
+                const heightFooter          = 500;
+                $(window).scroll(function(){
+                    const positionScrollbar = $(window).scrollTop();
+                    const scrollHeight      = $('body').prop('scrollHeight');
+                    const heightLimit       = parseInt(scrollHeight - heightFooter - elemt.outerHeight());
+                    if(positionScrollbar>positionTopElemt&&positionScrollbar<heightLimit){
+                        elemt.addClass('scrollFixedSidebar').css({
+                            'width'         : widthElemt,
+                            'margin-top'    : '1.5rem'
+                        });
+                    }else {
+                        elemt.removeClass('scrollFixedSidebar').css({
+                            'width'         : 'unset',
+                            'margin-top'    : 0
+                        });
+                    }
+                });
+            }
+            
+            
         });
 
         mybutton 					    = document.getElementById("gotoTop");
@@ -35,7 +60,7 @@
             var dataTocContent      = {};
             var i                   = 0;
             var indexToc            = 0;
-            $('#'+idElement).find('h2, h3').each(function(){
+            $('#'+idElement).find('h2').each(function(){
                 let dataId        = $(this).attr('id');
                 if(typeof dataId=='undefined'){
                     dataId          = 'randomIdTocContent_'+i;

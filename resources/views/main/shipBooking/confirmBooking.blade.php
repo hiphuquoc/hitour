@@ -218,7 +218,7 @@
                     <!-- Button Quay lại -->
                     <div class="buttonBox">
                         <a href="/">
-                            <button class="buttonSecondary" type="button">
+                            <button class="buttonSecondary" type="button" aria-label="Quay lại trang chủ">
                                 <i class="fa-solid fa-angles-left"></i>Quay lại trang chủ
                             </button>
                         </a>

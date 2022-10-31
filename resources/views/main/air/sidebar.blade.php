@@ -3,12 +3,14 @@
    <div class="callBookTour">
       @include('main.template.callbook', ['button' => 'Đặt vé bay', 'flagButton' => false])  
    </div>
-   
-   <div id="js_autoLoadTocContentWithIcon_idWrite" class="tocContentTour customScrollBar-y" style="margin-top:1.5rem;">
-      <!-- loadTocContent ajax -->
-   </div>
 
+   @php
+       $flagMargin = null;
+   @endphp
    @if(!empty($item->airLocation->tourLocations)&&$item->airLocation->tourLocations->isNotEmpty())
+      @php
+         $flagMargin = 'margin-top:1.5rem;';
+      @endphp
       <div class="serviceRelatedSidebarBox" style="margin-top:1.5rem;">
          <div class="serviceRelatedSidebarBox_title">
             <h2>{{ config('main.title_list_service_sidebar') }}</h2>
@@ -69,5 +71,9 @@
          </div>
       </div>
    @endif
+
+   <div id="js_autoLoadTocContentWithIcon_idWrite" class="tocContentTour customScrollBar-y" style="{{ $flagMargin }}">
+      <!-- loadTocContent ajax -->
+   </div>
 
 </div>

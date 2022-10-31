@@ -76,8 +76,8 @@
                 <div class="pageAdminWithRightSidebar_main_rightSidebar">
                     <!-- Button Save -->
                     <div class="pageAdminWithRightSidebar_main_rightSidebar_item buttonAction" style="padding-bottom:1rem;">
-                        <button type="button" class="btn btn-secondary waves-effect waves-float waves-light" onClick="history.back();">Quay lại</button>
-                        <button type="submit" class="btn btn-success waves-effect waves-float waves-light" onClick="javascript:submitForm('formAction');" style="width:100px;">Lưu</button>
+                        <button type="button" class="btn btn-secondary waves-effect waves-float waves-light" onClick="history.back();" aria-label="Quay lại">Quay lại</button>
+                        <button type="submit" class="btn btn-success waves-effect waves-float waves-light" onClick="javascript:submitForm('formAction');" style="width:100px;" aria-label="Lưu">Lưu</button>
                     </div>
                     <div class="customScrollBar-y" style="height: calc(100% - 70px);border-top:1px dashed #adb5bd;">
                         {{-- <div class="pageAdminWithRightSidebar_main_rightSidebar_item">

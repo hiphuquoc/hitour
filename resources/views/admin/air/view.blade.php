@@ -89,7 +89,7 @@
                     <!-- Button Save -->
                     <div class="pageAdminWithRightSidebar_main_rightSidebar_item buttonAction" style="padding-bottom:1rem;">
                         <a href="{{ route('admin.air.list') }}" type="button" class="btn btn-secondary waves-effect waves-float waves-light">Quay lại</a>
-                        <button type="submit" class="btn btn-success waves-effect waves-float waves-light" onClick="javascript:submitForm('formAction');" style="width:100px;">Lưu</button>
+                        <button type="submit" class="btn btn-success waves-effect waves-float waves-light" onClick="javascript:submitForm('formAction');" style="width:100px;" aria-label="Lưu">Lưu</button>
                     </div>
                     <div class="customScrollBar-y" style="height: calc(100% - 70px);border-top: 1px dashed #adb5bd;">
                         <!-- Form Upload -->
@@ -128,8 +128,8 @@
                     </div>
                     <div class="modal-footer">
                         <div id="js_validateFormModal_message" class="error" style="display:none;"><!-- Load Ajax --></div>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <button type="button" class="btn btn-primary" onClick="addAndUpdateShipPriceAndTime();">Xác nhận</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Đóng">Đóng</button>
+                        <button type="button" class="btn btn-primary" onClick="addAndUpdateShipPriceAndTime();" aria-label="Xác nhận">Xác nhận</button>
                     </div>
                 </div>
             </div>

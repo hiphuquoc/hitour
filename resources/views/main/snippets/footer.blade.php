@@ -53,7 +53,7 @@
                         <div class="signupReceiveEmail_desc">Nhập email để nhận thông tin về các chương trình khuyến mãi của Hitour!</div>
                         <div class="signupReceiveEmail_input">
                             <input type="text" name="email" placeholder="Email của bạn" />
-                            <button type="submit"><i class="fa-solid fa-envelope"></i></button>
+                            <button type="submit" aria-label="Đăng ký email"><i class="fa-solid fa-envelope"></i></button>
                         </div>
                     </div>
                     

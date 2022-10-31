@@ -9,7 +9,7 @@
         <form id="formSearch" method="get" action="{{ route('admin.image.list') }}">
             <div class="input-group">
                 <input type="text" class="form-control" name="search_name" placeholder="Tìm theo tên" value="{{ $params['search_name'] ?? null }}">
-                <button class="btn btn-primary waves-effect" id="button-addon2" type="submit">Tìm</button>
+                <button class="btn btn-primary waves-effect" id="button-addon2" type="submit" aria-label="Tìm">Tìm</button>
             </div>
         </form>
     </div>
@@ -18,7 +18,7 @@
         @csrf
             <div class="input-group">
                 <input class="form-control" type="file" name="image_upload[]" multiple>
-                <button class="btn btn-primary waves-effect" id="button-addon2" type="submit">Tải lên</button>
+                <button class="btn btn-primary waves-effect" id="button-addon2" type="submit" aria-label="Tải lên">Tải lên</button>
             </div>
         </form>
     </div>
@@ -51,8 +51,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button id="js_loadModal_action" type="button" class="btn btn-primary" tableindex="0">Xác nhận</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Đóng">Đóng</button>
+                    <button id="js_loadModal_action" type="button" class="btn btn-primary" tableindex="0" aria-label="Xác nhận">Xác nhận</button>
                 </div>
             </div>
         </div>

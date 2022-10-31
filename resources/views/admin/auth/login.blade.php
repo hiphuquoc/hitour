@@ -75,7 +75,7 @@
                                         <label class="form-check-label" for="remember-me"> Lưu đăng nhập </label>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary w-100 waves-effect waves-float waves-light" tabindex="4">Đăng nhập</button>
+                                <button type="submit" class="btn btn-primary w-100 waves-effect waves-float waves-light" tabindex="4" aria-label="Đăng nhập">Đăng nhập</button>
                             </form>
                             {{-- <p class="text-center mt-2">
                                 <span>New on our platform?</span>

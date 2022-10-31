@@ -8,7 +8,7 @@
     <div class="searchBox_item">
         <div class="input-group">
             <input type="text" class="form-control" name="search_name" placeholder="Tìm theo tên" value="{{ $params['search_name'] ?? null }}">
-            <button class="btn btn-primary waves-effect" id="button-addon2" type="submit">Tìm</button>
+            <button class="btn btn-primary waves-effect" id="button-addon2" type="submit" aria-label="Tìm">Tìm</button>
         </div>
     </div>
 
@@ -84,8 +84,8 @@
                     <div id="js_showMessage" style="float:left;">
                         <!-- js_showMessage -->
                     </div>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-primary">Xác nhận</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Đóng">Đóng</button>
+                    <button type="submit" class="btn btn-primary" aria-label="Xác nhận">Xác nhận</button>
                 </div>
             </div>
         </div>
@@ -110,8 +110,8 @@
             </div>
             {{-- <div class="modal-footer">
                 <div id="js_validateFormModal_message" class="error" style="display:none;"><!-- Load Ajax --></div>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary" onClick="addBlogger();">Xác nhận</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Đóng">Đóng</button>
+                <button type="button" class="btn btn-primary" onClick="addBlogger();" aria-label="Xác nhận">Xác nhận</button>
             </div> --}}
         </div>
     </div>
