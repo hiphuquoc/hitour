@@ -3628,7 +3628,7 @@ $width-single-menu  : 260px;
 .galleryCustomBox {
     position: relative;
     overflow: hidden;
-    width: 240px;
+    width: 245px;
     float: right;
     &_box {
         display: flex;
@@ -3636,6 +3636,7 @@ $width-single-menu  : 260px;
         transition: all 0.3s;
         > * {
             width: 100%;
+            margin: 0 !important;
         }
     }
     &_arrow {

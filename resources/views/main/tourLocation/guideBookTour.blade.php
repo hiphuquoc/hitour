@@ -168,7 +168,7 @@
             });
             $('#js_setGuideBook_box').children().eq(valueSet).addClass('active');
             /* set transform */
-            let valueTransform = parseInt(valueSet*240);
+            let valueTransform = parseInt(valueSet*245);
             $('#js_setGuideBook_image').css('transform', 'translate3d(-'+valueTransform+'px, 0px, 0px)');
             /* set value input */
             hideShowButtonGallery(valueSet);

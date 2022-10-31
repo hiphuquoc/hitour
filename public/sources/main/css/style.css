@@ -3770,7 +3770,7 @@ blockquote em {
 .galleryCustomBox {
   position: relative;
   overflow: hidden;
-  width: 240px;
+  width: 245px;
   float: right;
 }
 .galleryCustomBox_box {
@@ -3780,6 +3780,7 @@ blockquote em {
 }
 .galleryCustomBox_box > * {
   width: 100%;
+  margin: 0 !important;
 }
 .galleryCustomBox_arrow .privious, .galleryCustomBox_arrow .next {
   position: absolute;
