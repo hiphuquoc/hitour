@@ -44,6 +44,7 @@ use App\Http\Controllers\AdminGuideController;
 use App\Http\Controllers\AdminCarrentalLocationController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminBlogController;
+use App\Http\Controllers\AdminRedirectController;
 
 use App\Http\Controllers\MainHomeController;
 use App\Http\Controllers\SitemapController;
@@ -51,6 +52,8 @@ use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\ShipController;
 use App\Http\Controllers\ShipBookingController;
 use App\Http\Controllers\TourBookingController;
+
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -396,6 +399,12 @@ Route::prefix('admin')->group(function(){
             /* Delete AJAX */
             Route::get('/delete', [AdminBlogController::class, 'delete'])->name('admin.blog.delete');
         });
+        /* ===== REDIRECT ===== */
+        Route::prefix('redirect')->group(function(){
+            Route::get('/list', [AdminRedirectController::class, 'list'])->name('admin.redirect.list');
+            Route::get('/create', [AdminRedirectController::class, 'create'])->name('admin.redirect.create');
+            Route::get('/delete', [AdminRedirectController::class, 'delete'])->name('admin.redirect.delete');
+        });
         /* ===== AJAX ===== */
         Route::post('/loadProvinceByRegion', [AdminFormController::class, 'loadProvinceByRegion'])->name('admin.form.loadProvinceByRegion');
         Route::post('/loadDistrictByProvince', [AdminFormController::class, 'loadDistrictByProvince'])->name('admin.form.loadDistrictByProvince');
@@ -404,6 +413,13 @@ Route::prefix('admin')->group(function(){
         Route::get('/settingView', [AdminSettingController::class, 'settingView'])->name('admin.setting.settingView');
     });
 });
+
+/* redirect */
+foreach(\App\Models\Redirect::all() as $redirect){
+    Route::get($redirect->url_old, function() use($redirect){ 
+        return Redirect::to($redirect->url_new, 301); 
+    });
+}
 
 Route::get('/', [MainHomeController::class, 'home'])->name('main.home');
 /* ===== SITEMAP ===== */

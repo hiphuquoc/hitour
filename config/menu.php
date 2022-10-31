@@ -216,5 +216,10 @@ return [
                 ]
             ]
         ],
+        [
+            'name'      => 'Redirect 301',
+            'route'     => 'admin.redirect.list',
+            'icon'      => '<i data-feather=\'refresh-cw\'></i>'
+        ]
     ]
 ];
