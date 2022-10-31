@@ -387,9 +387,7 @@ class RoutingController extends Controller {
             // return view('main.error.404');
             // return view('main.blog.detail');
 
-            return response()->json([
-                'status' => '404'
-            ]);
+            return \App\Http\Controllers\ErrorController::error404();
         }
     }
 }

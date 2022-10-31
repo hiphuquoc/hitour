@@ -46,6 +46,7 @@ use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminBlogController;
 
 use App\Http\Controllers\MainHomeController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\ShipController;
 use App\Http\Controllers\ShipBookingController;
@@ -405,6 +406,9 @@ Route::prefix('admin')->group(function(){
 });
 
 Route::get('/', [MainHomeController::class, 'home'])->name('main.home');
+/* ===== SITEMAP ===== */
+Route::get('sitemap.xml', [SitemapController::class, 'main'])->name('sitemap.main');
+Route::get('sitemap/{type}.xml', [SitemapController::class, 'child'])->name('sitemap.child');
 /* ===== SHIP BOOKING ===== */
 Route::prefix('shipBooking')->group(function(){
     Route::get('/form', [ShipBookingController::class, 'form'])->name('main.shipBooking.form');
