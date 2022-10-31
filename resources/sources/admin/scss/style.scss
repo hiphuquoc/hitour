@@ -244,7 +244,7 @@ table:not(.sendEmail) {
 
 .customScrollBar-y {
     width: 100%;
-    overflow-y: scroll;
+    overflow-y: scroll !important;
     &::-webkit-scrollbar {
       background-color: #fff;
       width: 5px;
@@ -262,7 +262,7 @@ table:not(.sendEmail) {
   }
   .customScrollBar-x {
     width: 100%;
-    overflow-x: scroll;
+    overflow-x: scroll !important;
     &::-webkit-scrollbar {
       background-color: #fff;
       height: 5px;

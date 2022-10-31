@@ -47,7 +47,7 @@
       </ul>
    </div>
    <div class="shadow-bottom"></div>
-   <div class="main-menu-content ps ps--active-y">
+   <div class="main-menu-content ps ps--active-y customScrollBar-y">
       <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             @php
                $dataMenu            = config('menu.left-menu-admin');

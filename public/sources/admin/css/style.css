@@ -169,7 +169,7 @@ table:not(.sendEmail) tr th {
 
 .customScrollBar-y {
   width: 100%;
-  overflow-y: scroll;
+  overflow-y: scroll !important;
 }
 .customScrollBar-y::-webkit-scrollbar {
   background-color: #fff;
@@ -188,7 +188,7 @@ table:not(.sendEmail) tr th {
 
 .customScrollBar-x {
   width: 100%;
-  overflow-x: scroll;
+  overflow-x: scroll !important;
 }
 .customScrollBar-x::-webkit-scrollbar {
   background-color: #fff;

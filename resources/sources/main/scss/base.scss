@@ -135,7 +135,7 @@ table {
 
 .customScrollBar-y {
     width: 100%;
-    overflow-y: scroll;
+    overflow-y: scroll !important;
     &::-webkit-scrollbar {
       background-color: transparent;
       width: 5px;
@@ -153,7 +153,7 @@ table {
   }
   .customScrollBar-x {
     width: 100%;
-    overflow-x: scroll;
+    overflow-x: scroll !important;
     &::-webkit-scrollbar {
       background-color: transparent;
       height: 5px;
