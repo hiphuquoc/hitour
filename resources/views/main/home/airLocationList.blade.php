@@ -5,7 +5,7 @@
                 <a href="/{{ $airLocation->seo->slug_full ?? null }}" title="{{ $airLocation->name ?? $airLocation->seo->title ?? $airLocation->seo->seo_title ?? null }}" class="airLocationList_item_title">
                     <h3>{{ $airLocation->name ?? $airLocation->seo->title ?? null }}</h3>
                 </a>
-                <ul>
+                {{-- <ul>
                     @foreach($airLocation->airs as $air)
                         <li>
                             <a href="/{{ $air->seo->slug_full ?? null }}" title="{{ $air->name ?? $air->seo->slug_full ?? null }}">
@@ -13,7 +13,7 @@
                             </a>
                         </li>
                     @endforeach
-                </ul>
+                </ul> --}}
             </div>
         @endforeach
     </div>
