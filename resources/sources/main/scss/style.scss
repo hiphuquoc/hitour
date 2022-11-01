@@ -4280,7 +4280,7 @@ $width-single-menu  : 260px;
         }
     }
 }
-.shipLocationList, .airLocationList, .serviceLocationList {
+.shipLocationList, .serviceLocationList {
     display: flex;
     flex-wrap: wrap;
     &_item {
@@ -4293,18 +4293,73 @@ $width-single-menu  : 260px;
             margin-top: 0.5rem;
         }
         &_title {
-            color: $color-title;
             display: flex;
             background: linear-gradient(90deg, rgba(0, 123, 255, 0.2) 0, rgb(255, 255, 255) 100%);
             padding: 0.5rem 1rem;
             border-radius: 50px 0 0 50px;
-            &:hover {
-                color: $color-primary-hover;
-            }
             h2, h3, h4 {
                 font-size: 1.1rem;
                 font-family: $font-primary-title;
                 margin-bottom: 0;
+                color: $color-title;
+                &:hover {
+                    color: $color-primary-hover;
+                }
+            }
+        }
+        ul {
+            margin: 0.75rem 0 0 0;
+            line-height: 1.8;
+            li {
+                list-style-type: none;
+                color: $color-text;
+                display: flex;
+                a {
+                    color: $color-text;
+                    display: inline-block;
+                    &:hover {
+                        color: $color-primary-hover;
+                    }
+                    h3, h4 {
+                        font-size: inherit;
+                        font-family: $font-primary-text;
+                        font-weight: normal;
+                    }
+                }
+                &::before {
+                    @include fontAwesome;
+                    content: '\f178';
+                    margin-right: 0.75rem;
+                }
+            }
+        }
+    }
+}
+.airLocationList {
+    display: flex;
+    flex-wrap: wrap;
+    &_item {
+        width: calc(33.33% - 1rem);
+        margin-left: 1.5rem;
+        &:nth-child(3n + 1){
+            margin-left: 0;
+        }
+        &:nth-child(n + 4){
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px dashed $bg-04;
+        }
+        &_title {
+            display: flex;
+            border-radius: 50px 0 0 50px;
+            h2, h3, h4 {
+                font-size: 1.1rem;
+                font-family: $font-primary-title;
+                margin-bottom: 0;
+                color: $color-title;
+                &:hover {
+                    color: $color-primary-hover;
+                }
             }
         }
         ul {
