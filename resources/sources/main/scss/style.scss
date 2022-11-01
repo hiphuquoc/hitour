@@ -984,19 +984,18 @@ $tourGrid_radius : 5px;
     flex-wrap: wrap;
     text-align: left;
     &_item {
-        width: calc(33.33% - 0.8333rem);
-        border: 1px solid $bg-04;
+        width: calc(33.33% - 1rem);
         border-radius: $tourGrid_radius;
-        box-shadow: 0 0 4px $bg-05;
+        box-shadow: 0 0 5px $bg-05;
         background: #fff;
         padding-bottom: 0.75rem;
         display: flex;
         flex-direction: column;
         &:not(:nth-child(3n + 1)){
-            margin-left: 1.25rem;
+            margin-left: 1.5rem;
         }
         &:nth-child(n + 4){
-            margin-top: 1.25rem;
+            margin-top: 1.5rem;
         }
         &_image {
             position: relative;
@@ -1088,9 +1087,9 @@ $tourGrid_radius : 5px;
     }
     @media (max-width: 1023px){
         &_item {
-            width: calc(50% - 0.625rem);
+            width: calc(50% - 0.75rem);
             &:not(:nth-child(2n + 1)){
-                margin-left: 1.25rem;
+                margin-left: 1.5rem;
             }
             &:nth-child(2n + 1){
                 margin-left: 0;
@@ -1099,18 +1098,18 @@ $tourGrid_radius : 5px;
                 margin-top: 0;
             }
             &:nth-child(n + 3){
-                margin-top: 1.25rem;
+                margin-top: 1.5rem;
             }
         }
     }
     @media (max-width: 767px){
         &_item {
-            width: calc(50% - 0.5rem);
+            width: calc(50% - 0.625rem);
             &:not(:nth-child(2n + 1)){
-                margin-left: 1rem;
+                margin-left: 1.25rem;
             }
             &:nth-child(n + 3){
-                margin-top: 1rem;
+                margin-top: 1.25rem;
             }
         }
     }

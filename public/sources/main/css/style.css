@@ -1294,20 +1294,19 @@ input, textarea {
   text-align: left;
 }
 .tourGrid_item, .serviceGrid_item {
-  width: calc(33.33% - 0.8333rem);
-  border: 1px solid #dee2e6;
+  width: calc(33.33% - 1rem);
   border-radius: 5px;
-  box-shadow: 0 0 4px #ced4da;
+  box-shadow: 0 0 5px #ced4da;
   background: #fff;
   padding-bottom: 0.75rem;
   display: flex;
   flex-direction: column;
 }
 .tourGrid_item:not(:nth-child(3n+1)), .serviceGrid_item:not(:nth-child(3n+1)) {
-  margin-left: 1.25rem;
+  margin-left: 1.5rem;
 }
 .tourGrid_item:nth-child(n+4), .serviceGrid_item:nth-child(n+4) {
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
 }
 .tourGrid_item_image, .serviceGrid_item_image {
   position: relative;
@@ -1397,10 +1396,10 @@ input, textarea {
 }
 @media (max-width: 1023px) {
   .tourGrid_item, .serviceGrid_item {
-    width: calc(50% - 0.625rem);
+    width: calc(50% - 0.75rem);
   }
   .tourGrid_item:not(:nth-child(2n+1)), .serviceGrid_item:not(:nth-child(2n+1)) {
-    margin-left: 1.25rem;
+    margin-left: 1.5rem;
   }
   .tourGrid_item:nth-child(2n+1), .serviceGrid_item:nth-child(2n+1) {
     margin-left: 0;
@@ -1409,18 +1408,18 @@ input, textarea {
     margin-top: 0;
   }
   .tourGrid_item:nth-child(n+3), .serviceGrid_item:nth-child(n+3) {
-    margin-top: 1.25rem;
+    margin-top: 1.5rem;
   }
 }
 @media (max-width: 767px) {
   .tourGrid_item, .serviceGrid_item {
-    width: calc(50% - 0.5rem);
+    width: calc(50% - 0.625rem);
   }
   .tourGrid_item:not(:nth-child(2n+1)), .serviceGrid_item:not(:nth-child(2n+1)) {
-    margin-left: 1rem;
+    margin-left: 1.25rem;
   }
   .tourGrid_item:nth-child(n+3), .serviceGrid_item:nth-child(n+3) {
-    margin-top: 1rem;
+    margin-top: 1.25rem;
   }
 }
 @media (max-width: 577px) {
