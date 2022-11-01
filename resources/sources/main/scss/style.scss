@@ -990,6 +990,8 @@ $tourGrid_radius : 5px;
         box-shadow: 0 0 4px $bg-05;
         background: #fff;
         padding-bottom: 0.75rem;
+        display: flex;
+        flex-direction: column;
         &:not(:nth-child(3n + 1)){
             margin-left: 1.25rem;
         }
@@ -1077,6 +1079,11 @@ $tourGrid_radius : 5px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+        > * {
+            &:last-child{
+                margin-top: auto;
+            }
         }
     }
     @media (max-width: 1023px){
@@ -4425,6 +4432,61 @@ $width-single-menu  : 260px;
             font-size: 1.05rem;
             text-align: center;
             border-radius: 5px;
+        }
+    }
+}
+.filterBox {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+    border: 1px solid;
+    border-image: linear-gradient(90deg, rgba(60,74,83,.00), rgba(60,74,83,.00), rgba(60,74,83,0.30), rgba(60,74,83,.00)) 0.5;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    &_label {
+        font-size: 1rem;
+    }
+    &_filter {
+        display: flex;
+        &_item {
+            margin-left: 0.5rem;
+            padding: 0.25rem 1rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            background: #fff;
+            color: $color-title;
+            border: 1px solid $color-primary-03;
+            cursor: pointer;
+            &:hover {
+                background: $color-primary-01;
+            }
+            &.active {
+                background: $bg-08;
+                color: #fff;
+            }
+            h2, h3, h4 {
+                font-size: inherit;
+                margin-bottom: 0;
+            }
+        }
+    }
+    &_view {
+        margin-left: auto;
+        display: flex;
+        &_item {
+            &:not(:first-child){
+                margin-left: 0.5rem;
+            }
+            i {
+                font-size: 1.6rem;
+                color: $bg-05;
+            }
+            &.active {
+                i {
+                    color: $bg-08;
+                }
+            }
         }
     }
 }
