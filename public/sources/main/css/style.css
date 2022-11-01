@@ -698,9 +698,8 @@ input, textarea {
 }
 .sliderHome .slick-dots {
   position: absolute;
-  bottom: 0.75rem;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 0;
+  right: 1.5rem;
   display: flex;
 }
 .sliderHome .slick-dots li {
@@ -870,7 +869,7 @@ input, textarea {
 .normalMenu > ul > li > a, .normalMenu > ul > li > div {
   display: block;
   padding: 8px 10px;
-  color: #456;
+  color: #567;
   font-weight: 500;
 }
 .normalMenu > ul > li > a i, .normalMenu > ul > li > div i {
@@ -901,7 +900,7 @@ input, textarea {
 .normalMenu > ul > li ul li a {
   display: block;
   padding: 8px 10px;
-  color: #456;
+  color: #567;
   font-weight: 500;
 }
 
@@ -927,7 +926,7 @@ input, textarea {
 .blogListNoImage_content ul li > div, .blogListNoImage_content ul li > a {
   position: relative;
   left: -0.25rem;
-  color: #456;
+  color: #567;
 }
 .blogListNoImage_content ul li > div:hover, .blogListNoImage_content ul li > a:hover {
   color: rgb(0, 123, 255);
@@ -1090,7 +1089,7 @@ input, textarea {
   list-style-type: none;
 }
 .footerBox_item a {
-  color: #456;
+  color: #567;
 }
 .footerBox_item a:hover {
   color: rgb(0, 123, 255);
@@ -1324,7 +1323,7 @@ input, textarea {
   position: absolute;
   bottom: 0;
   left: 0;
-  color: #456;
+  color: #567;
   font-weight: 500;
   font-size: 0.95rem;
   font-family: "SVN-Gilroy Bold", serif;
@@ -1476,7 +1475,7 @@ input, textarea {
   position: absolute;
   bottom: 0;
   left: 0;
-  color: #456;
+  color: #567;
   font-weight: 500;
   font-size: 0.95rem;
   font-family: "SVN-Gilroy Bold", serif;
@@ -1722,7 +1721,7 @@ input, textarea {
   padding: 0.65rem 1rem;
   background: #e9ecef;
   border: 1px solid #dee2e6;
-  color: #456;
+  color: #567;
   align-items: flex-start;
   font-weight: 500;
   font-size: 1rem;
@@ -2440,7 +2439,7 @@ blockquote em {
 }
 .shipPartnerBox_item_content_desc {
   font-size: 0.95rem;
-  color: #567;
+  color: #678;
 }
 @media (max-width: 767px) {
   .shipPartnerBox_item {
@@ -3060,8 +3059,7 @@ blockquote em {
 
 .faqBox_title h2, .faqBox_title h3 {
   font-size: 1.5rem !important;
-  margin: 0 0 1.5rem 0 !important;
-  text-align: center;
+  margin: 0 0 0.75rem 0 !important;
   color: rgb(0, 90, 180);
 }
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -3077,7 +3075,7 @@ blockquote em {
   }
 }
 .faqBox_content_item {
-  border-bottom: 1px dashed rgba(0, 123, 255, 0.2);
+  border-bottom: 1px dashed #dee2e6;
 }
 .faqBox_content_item:not(:first-child) {
   margin-top: 0.75rem;
@@ -3467,8 +3465,7 @@ blockquote em {
 }
 .sectionBox_title {
   font-size: 1.5rem !important;
-  margin: 0 0 1.5rem 0 !important;
-  text-align: center;
+  margin: 0 0 0.75rem 0 !important;
   color: rgb(0, 90, 180);
 }
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -3505,7 +3502,7 @@ blockquote em {
 }
 .sectionBox .viewMore {
   text-align: center;
-  margin: 2.5rem auto 0 auto;
+  margin: 2rem auto 0 auto;
 }
 .sectionBox .viewMore > * {
   display: inline-block;
@@ -3533,7 +3530,7 @@ blockquote em {
 }
 @media (max-width: 1023px) {
   .sectionBox .viewMore {
-    margin: 2rem auto 0 auto;
+    margin: 1.75rem auto 0 auto;
   }
 }
 @media (max-width: 767px) {
@@ -3544,7 +3541,7 @@ blockquote em {
     padding-top: 2rem;
   }
   .sectionBox .viewMore {
-    margin: 1.75rem auto 0 auto;
+    margin: 1.5rem auto 0 auto;
   }
 }
 @media (max-width: 577px) {
@@ -3868,7 +3865,7 @@ blockquote em {
   color: #adb5bd;
 }
 .articleBox_item_content_des {
-  color: #567;
+  color: #678;
   font-size: 1rem;
   margin-top: 0.25rem;
 }
@@ -3975,7 +3972,7 @@ blockquote em {
 }
 .relatedBox_box_item_content_time {
   font-size: 0.95rem;
-  color: #567;
+  color: #678;
   margin-bottom: 0.25rem;
 }
 .relatedBox_box_item_content_time i {
@@ -4049,14 +4046,14 @@ blockquote em {
 }
 .blogListLeftRight_box_left_content_time {
   font-size: 0.95rem;
-  color: #567;
+  color: #678;
   margin-bottom: 0.25rem;
 }
 .blogListLeftRight_box_left_content_time i {
   margin-right: 0.5rem;
 }
 .blogListLeftRight_box_left_content_desc {
-  color: #567;
+  color: #678;
   font-size: 1rem;
 }
 .blogListLeftRight_box_right {
@@ -4099,7 +4096,7 @@ blockquote em {
 }
 .blogListLeftRight_box_right_item_content_time {
   font-size: 0.95rem;
-  color: #567;
+  color: #678;
 }
 .blogListLeftRight_box_right_item_content_time i {
   margin-right: 0.5rem;
@@ -4238,7 +4235,7 @@ blockquote em {
 }
 .blogGrid_box_item_content_time {
   font-size: 0.95rem;
-  color: #567;
+  color: #678;
   margin-bottom: 0.25rem;
 }
 .blogGrid_box_item_content_time i {
@@ -4300,9 +4297,6 @@ blockquote em {
   }
 }
 
-.blogGridSlick {
-  margin: 2rem 0 1rem 0;
-}
 .blogGridSlick_title {
   font-size: 1.3rem;
   font-family: "SVN-Gilroy Bold", serif;
@@ -4347,7 +4341,7 @@ blockquote em {
 }
 .blogGridSlick_box_item_content_time {
   font-size: 0.95rem;
-  color: #567;
+  color: #678;
   margin-bottom: 0.25rem;
 }
 .blogGridSlick_box_item_content_time i {
@@ -4365,18 +4359,103 @@ blockquote em {
   padding: 0.5rem 0.75rem;
   border-radius: 0 0 5px 5px;
 }
-@media (max-width: 1023px) {
-  .blogGridSlick {
-    margin: 1.5rem 0 0.75rem 0;
-  }
-}
-@media (max-width: 767px) {
-  .blogGridSlick {
-    margin: 1rem 0 0.5rem 0;
-  }
-}
 @media (max-width: 577px) {
   .blogGridSlick_box_item {
     margin-left: 0 !important;
   }
+}
+
+.shipLocationList, .airLocationList, .serviceLocationList {
+  display: flex;
+  flex-wrap: wrap;
+}
+.shipLocationList_item, .airLocationList_item, .serviceLocationList_item {
+  width: calc(33.33% - 1rem);
+  margin-left: 1.5rem;
+}
+.shipLocationList_item:nth-child(3n+1), .airLocationList_item:nth-child(3n+1), .serviceLocationList_item:nth-child(3n+1) {
+  margin-left: 0;
+}
+.shipLocationList_item:nth-child(n+4), .airLocationList_item:nth-child(n+4), .serviceLocationList_item:nth-child(n+4) {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #ced4da;
+}
+.shipLocationList_item_title, .airLocationList_item_title, .serviceLocationList_item_title {
+  color: #345;
+  display: flex;
+}
+.shipLocationList_item_title:hover, .airLocationList_item_title:hover, .serviceLocationList_item_title:hover {
+  color: rgb(0, 90, 180);
+}
+.shipLocationList_item_title h2, .shipLocationList_item_title h3, .shipLocationList_item_title h4, .airLocationList_item_title h2, .airLocationList_item_title h3, .airLocationList_item_title h4, .serviceLocationList_item_title h2, .serviceLocationList_item_title h3, .serviceLocationList_item_title h4 {
+  font-size: 1.1rem;
+  font-family: "SVN-Gilroy Bold", serif;
+  margin-bottom: 0.75rem;
+}
+.shipLocationList_item ul, .airLocationList_item ul, .serviceLocationList_item ul {
+  margin: 0;
+  line-height: 1.8;
+}
+.shipLocationList_item ul li, .airLocationList_item ul li, .serviceLocationList_item ul li {
+  list-style-type: none;
+  color: #567;
+  display: flex;
+}
+.shipLocationList_item ul li a, .airLocationList_item ul li a, .serviceLocationList_item ul li a {
+  color: #567;
+  display: inline-block;
+}
+.shipLocationList_item ul li a:hover, .airLocationList_item ul li a:hover, .serviceLocationList_item ul li a:hover {
+  color: rgb(0, 90, 180);
+}
+.shipLocationList_item ul li a h3, .shipLocationList_item ul li a h4, .airLocationList_item ul li a h3, .airLocationList_item ul li a h4, .serviceLocationList_item ul li a h3, .serviceLocationList_item ul li a h4 {
+  font-size: inherit;
+  font-family: "SVN-Gilroy", sans-serif;
+  font-weight: normal;
+}
+.shipLocationList_item ul li::before, .airLocationList_item ul li::before, .serviceLocationList_item ul li::before {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f178";
+  margin-right: 0.5rem;
+}
+
+.specialLocationBox {
+  display: flex;
+  flex-wrap: wrap;
+}
+.specialLocationBox_item {
+  width: calc(25% - 1.125rem);
+  margin-left: 1.5rem;
+  position: relative;
+  box-shadow: 0 0 4px #adb5bd;
+  border-radius: 5px;
+  border: 1px solid #f8f9fa;
+}
+.specialLocationBox_item:nth-child(4n+1) {
+  margin-left: 0;
+}
+.specialLocationBox_item:nth-child(n+5) {
+  margin-top: 1.5rem;
+}
+.specialLocationBox_item a {
+  display: flex;
+}
+.specialLocationBox_item a img {
+  margin: 0;
+  border-radius: 5px;
+}
+.specialLocationBox_item h2, .specialLocationBox_item h3 {
+  margin: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.01), #333);
+  width: 100%;
+  padding: 0.75rem;
+  color: #fff;
+  font-size: 1.05rem;
+  text-align: center;
+  border-radius: 5px;
 }

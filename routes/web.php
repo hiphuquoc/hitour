@@ -46,7 +46,7 @@ use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminBlogController;
 use App\Http\Controllers\AdminRedirectController;
 
-use App\Http\Controllers\MainHomeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\ShipController;
@@ -421,7 +421,7 @@ foreach(\App\Models\Redirect::all() as $redirect){
     });
 }
 
-Route::get('/', [MainHomeController::class, 'home'])->name('main.home');
+Route::get('/', [HomeController::class, 'home'])->name('main.home');
 /* ===== SITEMAP ===== */
 Route::get('sitemap.xml', [SitemapController::class, 'main'])->name('sitemap.main');
 Route::get('sitemap/{type}.xml', [SitemapController::class, 'child'])->name('sitemap.child');

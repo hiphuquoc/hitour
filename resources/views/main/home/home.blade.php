@@ -22,21 +22,73 @@
     <div class="sliderHome">
         @for($i=0;$i<3;++$i)
             <div class="sliderHome_item">
-                <img src="/images/main/du-lich-bien-dao-hitour-1.webp" alt="du lịch biển đảo Hitour" title="du lịch biển đảo Hitour" />
+                <img src="/images/main/du-lich-bien-dao-hitour-1.webp" alt="Trang Tour du lịch biển đảo Hitour" title="Trang Tour du lịch biển đảo Hitour" />
             </div>
         @endfor
     </div>
     <!-- END: Home slider -->
 
-    <div class="pageHome">
-        <div class="container">
-            Nội dung test alo
+    <!-- START: Sort Booking -->
+    @php
+        $active = 'ship';
+    @endphp
+    @include('main.form.formBooking', compact('active'))
+    <!-- END: Sort Booking -->
+
+    <!-- START: Điểm đến nổi bật -->
+    @if(!empty($airLocations)&&$airLocations->isNotEmpty())
+        <div class="sectionBox withBorder">
+            <div class="container">
+                <h2 class="sectionBox_title">Điểm đến biển đảo</h2>
+                <p>Danh sách điểm đến biển đảo hấp dẫn tại Việt Nam với đầy đủ thông tin du lịch bạn cần.</p>
+                @include('main.home.specialLocation', compact('specialLocations'))
+            </div>
         </div>
-
-        @include('main.home.blogListNoImage')
-    </div>
-
+    @endif
+    <!-- END: Điểm đến nổi bật -->
     
+
+    <!-- START: Vé máy bay -->
+    @if(!empty($airLocations)&&$airLocations->isNotEmpty())
+        <div class="sectionBox withBorder">
+            <div class="container">
+                <h2 class="sectionBox_title">Vé máy bay trong nước</h2>
+                <p>Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ <strong>Cho thuê xe tại {{ $item->display_name ?? null }}</strong> của Hitour với đầy đủ lựa chọn (tự lái hoặc có tài xế), xe đời mới, nhiều loại phù hợp yêu cầu và mức giá hợp lí.</p>
+                @include('main.home.airLocationList', compact('airLocations'))
+            </div>
+        </div>
+    @endif
+    <!-- END: Vé máy bay -->
+
+    <!-- START: Tàu cao tốc -->
+    @if(!empty($shipLocations)&&$shipLocations->isNotEmpty())
+        <div class="sectionBox withBorder">
+            <div class="container">
+                <h2 class="sectionBox_title">Vé tàu cao tốc</h2>
+                <p>Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ <strong>Cho thuê xe tại {{ $item->display_name ?? null }}</strong> của Hitour với đầy đủ lựa chọn (tự lái hoặc có tài xế), xe đời mới, nhiều loại phù hợp yêu cầu và mức giá hợp lí.</p>
+                @include('main.home.shipLocationList', compact('shipLocations'))
+            </div>
+        </div>
+    @endif
+    <!-- END: Tàu cao tốc -->
+
+    <!-- START: Vé vui chơi giải trí -->
+    @if(!empty($serviceLocations)&&$serviceLocations->isNotEmpty())
+        <div class="sectionBox withBorder">
+            <div class="container">
+                <h2 class="sectionBox_title">Vé vui chơi giải trí</h2>
+                <p>Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ <strong>Cho thuê xe tại {{ $item->display_name ?? null }}</strong> của Hitour với đầy đủ lựa chọn (tự lái hoặc có tài xế), xe đời mới, nhiều loại phù hợp yêu cầu và mức giá hợp lí.</p>
+                @include('main.home.serviceLocationList', compact('serviceLocations'))
+            </div>
+        </div>
+    @endif
+    <!-- END: Vé vui chơi giải trí -->
+
+    {{-- <div class="sectionBox">
+        <div class="container">
+            @include('main.home.blogListNoImage')
+        </div>
+    </div> --}}
     
 @endsection
 @push('scripts-custom')

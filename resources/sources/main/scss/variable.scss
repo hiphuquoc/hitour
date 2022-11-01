@@ -37,8 +37,8 @@ $bg-03: 		#e9ecef;
 $bg-02: 		#f8f9fa;
 $color-link: #3498DB;
 $color-link-dark: #2E86C1;
-$color-des : #567;
-$color-text: #456;
+$color-des : #678;
+$color-text: #567;
 
 $font-primary-title: "SVN-Gilroy Bold", serif;
 $font-primary-text: "SVN-Gilroy", sans-serif;
@@ -106,8 +106,7 @@ $folderFont : '/fonts/';
 
 @mixin titleSection {
     font-size: 1.5rem !important;
-    margin: 0 0 1.5rem 0 !important;
-    text-align: center;
+    margin: 0 0 0.75rem 0 !important;
     color: $color-primary-hover;
     @media (min-width: 768px) and (max-width: 1023px){
         font-size: 1.45rem !important;
@@ -154,9 +153,8 @@ $folderFont : '/fonts/';
     }
     .slick-dots {
         position: absolute;
-        bottom: 0.75rem;
-        left: 50%;
-        transform: translateX(-50%);
+        bottom: 0;
+        right: 1.5rem;
         display: flex;
         li {
             list-style-type: none;

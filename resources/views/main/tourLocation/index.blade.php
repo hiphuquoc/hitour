@@ -201,6 +201,7 @@
             <div class="sectionBox">
                 <div class="container">
                     <h2 class="sectionBox_title">Điểm đến {{ $item->display_name ?? null }}</h2>
+                    <p>Danh sách điểm đến nổi tiếng tại {{ $item->display_name ?? null }} mà bạn được khám phá trong quá trình tham gia <strong>Tour {{ $item->display_name ?? null }}</strong>.</p>
                     @include('main.tourLocation.blogGridSlick', ['list' => $destinationList, 'limit' => 10])
                 </div>
             </div>
@@ -210,6 +211,7 @@
             <div class="sectionBox">
                 <div class="container">
                     <h2 class="sectionBox_title">Đặc sản {{ $item->display_name ?? null }}</h2>
+                    <p>Tổng hợp những món ngon, đặc sản nổi tiếng tại {{ $item->display_name ?? null }}.</p>
                     @include('main.tourLocation.blogGridSlick', ['list' => $specialList, 'limit' => 10])
                 </div>
             </div>

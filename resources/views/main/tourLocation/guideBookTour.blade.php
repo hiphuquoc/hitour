@@ -55,7 +55,7 @@
     <!-- Desktop --> 
     <div class="hide-767">
         <div class="container">
-            <h2 class="sectionBox_title">{{ $title ?? null }}</h2>
+            <h2 class="sectionBox_title" style="text-align:center;margin-bottom:1.5rem !important;">{{ $title ?? null }}</h2>
             <div class="guideBookBox">
                 <div class="guideBookBox_image">
                     <div class="galleryCustomBox">

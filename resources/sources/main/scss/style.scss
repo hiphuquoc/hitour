@@ -2927,7 +2927,7 @@ blockquote{
     }
 	&_content {
         &_item {
-            border-bottom: 1px dashed $color-primary-02;
+            border-bottom: 1px dashed $bg-04;
             &:not(:first-child){
                 margin-top: 0.75rem;
             }
@@ -3359,7 +3359,7 @@ $width-single-menu  : 260px;
     }
     .viewMore {
         text-align: center;
-        margin: 2.5rem auto 0 auto;
+        margin: 2rem auto 0 auto;
         > * {
             display: inline-block;
             border: 1px solid $color-primary;
@@ -3385,7 +3385,7 @@ $width-single-menu  : 260px;
     }
     @media (max-width: 1023px){
         .viewMore {
-            margin: 2rem auto 0 auto;
+            margin: 1.75rem auto 0 auto;
         }
     }
     @media (max-width: 767px){
@@ -3394,7 +3394,7 @@ $width-single-menu  : 260px;
             padding-top: 2rem;
         }
         .viewMore {
-            margin: 1.75rem auto 0 auto;
+            margin: 1.5rem auto 0 auto;
         }
     }
     @media (max-width: 577px){
@@ -4199,7 +4199,7 @@ $width-single-menu  : 260px;
     }
 }
 .blogGridSlick {
-    margin: 2rem 0 1rem 0;
+    // margin: 1.5rem 0 1rem 0;
     &_title {
         font-size: 1.3rem;
         font-family: $font-primary-title;
@@ -4267,16 +4267,108 @@ $width-single-menu  : 260px;
         }
     }
     @media (max-width: 1023px){
-        margin: 1.5rem 0 0.75rem 0;
+        // margin: 1.25rem 0 0.75rem 0;
     }
     @media (max-width: 767px){
-        margin: 1rem 0 0.5rem 0;
+        // margin: 1rem 0 0.5rem 0;
     }
     @media (max-width: 577px){
         &_box {
             &_item {
                 margin-left: 0 !important;
             }
+        }
+    }
+}
+.shipLocationList, .airLocationList, .serviceLocationList {
+    display: flex;
+    flex-wrap: wrap;
+    &_item {
+        width: calc(33.33% - 1rem);
+        margin-left: 1.5rem;
+        &:nth-child(3n + 1){
+            margin-left: 0;
+        }
+        &:nth-child(n + 4){
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed $bg-05;
+        }
+        &_title {
+            color: $color-title;
+            display: flex;
+            &:hover {
+                color: $color-primary-hover;
+            }
+            h2, h3, h4 {
+                font-size: 1.1rem;
+                font-family: $font-primary-title;
+                margin-bottom: 0.75rem;
+            }
+        }
+        ul {
+            margin: 0;
+            line-height: 1.8;
+            li {
+                list-style-type: none;
+                color: $color-text;
+                display: flex;
+                a {
+                    color: $color-text;
+                    display: inline-block;
+                    &:hover {
+                        color: $color-primary-hover;
+                    }
+                    h3, h4 {
+                        font-size: inherit;
+                        font-family: $font-primary-text;
+                        font-weight: normal;
+                    }
+                }
+                &::before {
+                    @include fontAwesome;
+                    content: '\f178';
+                    margin-right: 0.5rem;
+                }
+            }
+        }
+    }
+}
+.specialLocationBox {
+    display: flex;
+    flex-wrap: wrap;
+    &_item {
+        width: calc(25% - 1.125rem);
+        margin-left: 1.5rem;
+        position: relative;
+        box-shadow: 0 0 4px $bg-06;
+        border-radius: 5px;
+        border: 1px solid $bg-02;
+        &:nth-child(4n + 1){
+            margin-left: 0;
+        }
+        &:nth-child(n + 5){
+            margin-top: 1.5rem;
+        }
+        a {
+            display: flex;
+            img {
+                margin: 0;
+                border-radius: 5px;
+            }
+        }
+        h2, h3 {
+            margin: 0;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.01), #333);
+            width: 100%;
+            padding: 0.75rem;
+            color: #fff;
+            font-size: 1.05rem;
+            text-align: center;
+            border-radius: 5px;
         }
     }
 }
