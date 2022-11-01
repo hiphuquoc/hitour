@@ -1297,7 +1297,7 @@ input, textarea {
   width: calc(33.33% - 0.8333rem);
   border: 1px solid #dee2e6;
   border-radius: 5px;
-  box-shadow: 0 0 5px #e9ecef;
+  box-shadow: 0 0 4px #ced4da;
   background: #fff;
   padding-bottom: 0.75rem;
 }
@@ -4391,10 +4391,10 @@ blockquote em {
 .shipLocationList_item_title h2, .shipLocationList_item_title h3, .shipLocationList_item_title h4, .airLocationList_item_title h2, .airLocationList_item_title h3, .airLocationList_item_title h4, .serviceLocationList_item_title h2, .serviceLocationList_item_title h3, .serviceLocationList_item_title h4 {
   font-size: 1.1rem;
   font-family: "SVN-Gilroy Bold", serif;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0;
 }
 .shipLocationList_item ul, .airLocationList_item ul, .serviceLocationList_item ul {
-  margin: 0;
+  margin: 0.75rem 0 0 0;
   line-height: 1.8;
 }
 .shipLocationList_item ul li, .airLocationList_item ul li, .serviceLocationList_item ul li {
