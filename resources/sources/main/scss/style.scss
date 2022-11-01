@@ -4290,13 +4290,14 @@ $width-single-menu  : 260px;
             margin-left: 0;
         }
         &:nth-child(n + 4){
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px dashed $bg-05;
+            margin-top: 0.5rem;
         }
         &_title {
             color: $color-title;
             display: flex;
+            background: linear-gradient(90deg, rgba(0, 123, 255, 0.2) 0, rgb(255, 255, 255) 100%);
+            padding: 0.5rem 1rem;
+            border-radius: 50px 0 0 50px;
             &:hover {
                 color: $color-primary-hover;
             }
@@ -4328,7 +4329,7 @@ $width-single-menu  : 260px;
                 &::before {
                     @include fontAwesome;
                     content: '\f178';
-                    margin-right: 0.5rem;
+                    margin-right: 0.75rem;
                 }
             }
         }

@@ -4377,13 +4377,14 @@ blockquote em {
   margin-left: 0;
 }
 .shipLocationList_item:nth-child(n+4), .airLocationList_item:nth-child(n+4), .serviceLocationList_item:nth-child(n+4) {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px dashed #ced4da;
+  margin-top: 0.5rem;
 }
 .shipLocationList_item_title, .airLocationList_item_title, .serviceLocationList_item_title {
   color: #345;
   display: flex;
+  background: linear-gradient(90deg, rgba(0, 123, 255, 0.2) 0, rgb(255, 255, 255) 100%);
+  padding: 0.5rem 1rem;
+  border-radius: 50px 0 0 50px;
 }
 .shipLocationList_item_title:hover, .airLocationList_item_title:hover, .serviceLocationList_item_title:hover {
   color: rgb(0, 90, 180);
@@ -4418,7 +4419,7 @@ blockquote em {
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   content: "\f178";
-  margin-right: 0.5rem;
+  margin-right: 0.75rem;
 }
 
 .specialLocationBox {
