@@ -48,4 +48,7 @@
             </div>
         @endforeach
     </div>
+    <div id="js_filterTour_hidden" style="display:none;">
+        <!-- chứa phần tử tạm của filter => để hiệu chỉnh nth-child cho chính xác -->
+    </div>
 @endif

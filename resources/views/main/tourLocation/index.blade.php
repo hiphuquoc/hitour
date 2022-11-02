@@ -303,25 +303,35 @@
             $('.loadingGridBox').css('display', 'flex');
             $('.loadingGridBox_note').css('display', 'none');
             const parent    = $('#js_filterTour_parent');
+            const hidden    = $('#js_filterTour_hidden');
             parent.children().each(function(){
                 $(this).css('display', 'none');
             })
             /* lọc phần tử */
             let data                = [];
+            let dataHidden          = [];
             if(type=="tat-ca-tour"){
                 $(document).find("[data-filter-day]").each(function(){
-                    const valueDay  = $(this).data('filter-day');
+                    const valueDay  = $(this).data('filter-day'); /* dùng document để lấy cả trong hidden */
                     data.push($(this));
                 })
             }else if(type=="tour-tron-goi"){
                 $(document).find("[data-filter-day]").each(function(){
                     const valueDay  = $(this).data('filter-day');
-                    if(parseInt(valueDay)>1) data.push($(this));
+                    if(parseInt(valueDay)>1) {
+                        data.push($(this));
+                    }else {
+                        dataHidden.push($(this));
+                    }
                 })
             }else if(type=="tour-trong-ngay"){
                 $(document).find("[data-filter-day]").each(function(){
                     const valueDay  = $(this).data('filter-day');
-                    if(parseInt(valueDay)==1) data.push($(this));
+                    if(parseInt(valueDay)==1) {
+                        data.push($(this));
+                    }else {
+                        dataHidden.push($(this));
+                    }
                 })
             }
             /* ẩn loading - hiện lại kết quả */
@@ -333,14 +343,17 @@
                     $('.loadingGridBox_note').css('display', 'block');
                 }else {
                     /* hiện lại kết quả */
+                    parent.html('');
                     for(let i=0;i<data.length;++i){
-                        data[i].css('display', 'block');
+                        parent.append(data[i].attr('style', '').clone());
+                    }
+                    hidden.html('');
+                    for(let i=0;i<dataHidden.length;++i){
+                        hidden.append(dataHidden[i].clone());
                     }
                 }
                 
             }, 1000);
-            
-            
         }
     </script>
 @endpush
