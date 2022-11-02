@@ -1941,7 +1941,7 @@ blockquote{
     display: flex;
     flex-wrap: wrap;
     &_item {
-        width: calc(33.33% - 0.8333rem);
+        width: calc(33.33% - 1rem);
         height: max-content;
         -webkit-transition: 500ms ease-in-out all;
         -o-transition: 500ms ease-in-out all;
@@ -1951,11 +1951,11 @@ blockquote{
         box-shadow: 0 0 10px $bg-04;
         background: #fff;
         &:not(:nth-child(3n + 1)){
-            margin-left: 1.25rem;
+            margin-left: 1.5rem;
         }
 
         &:nth-child(n + 4){
-            margin-top: 1.25rem;
+            margin-top: 1.5rem;
         }
 
         &_image {
@@ -2071,9 +2071,9 @@ blockquote{
 	}
     @media (max-width: 1023px){
         &_item {
-            width: calc(50% - 0.625rem);
+            width: calc(50% - 0.75rem);
             &:not(:nth-child(2n + 1)){
-                margin-left: 1.25rem;
+                margin-left: 1.5rem;
             }
             &:nth-child(2n + 1){
                 margin-left: 0;
@@ -2082,7 +2082,7 @@ blockquote{
                 margin-top: 0;
             }
             &:nth-child(n + 3){
-                margin-top: 1.25rem;
+                margin-top: 1.5rem;
             }
         }
     }

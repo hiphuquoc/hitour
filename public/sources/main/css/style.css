@@ -2185,7 +2185,7 @@ blockquote em {
   flex-wrap: wrap;
 }
 .shipGrid_item {
-  width: calc(33.33% - 0.8333rem);
+  width: calc(33.33% - 1rem);
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
@@ -2196,10 +2196,10 @@ blockquote em {
   background: #fff;
 }
 .shipGrid_item:not(:nth-child(3n+1)) {
-  margin-left: 1.25rem;
+  margin-left: 1.5rem;
 }
 .shipGrid_item:nth-child(n+4) {
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
 }
 .shipGrid_item_image {
   position: relative;
@@ -2305,10 +2305,10 @@ blockquote em {
 }
 @media (max-width: 1023px) {
   .shipGrid_item {
-    width: calc(50% - 0.625rem);
+    width: calc(50% - 0.75rem);
   }
   .shipGrid_item:not(:nth-child(2n+1)) {
-    margin-left: 1.25rem;
+    margin-left: 1.5rem;
   }
   .shipGrid_item:nth-child(2n+1) {
     margin-left: 0;
@@ -2317,7 +2317,7 @@ blockquote em {
     margin-top: 0;
   }
   .shipGrid_item:nth-child(n+3) {
-    margin-top: 1.25rem;
+    margin-top: 1.5rem;
   }
 }
 @media (max-width: 767px) {
