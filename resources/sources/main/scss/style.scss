@@ -1171,6 +1171,11 @@ $tourGrid_radius : 5px;
                     }
                 }
             }
+            @media(max-width: 1023px){
+                &_item {
+                    width: 100%;
+                }
+            }
         }
     }
 }
@@ -4579,37 +4584,55 @@ $width-single-menu  : 260px;
             }
         }
     }
+    @media(max-width: 1023px){
+        &_item {
+            width: calc(50% - 0.75rem);
+            &:nth-child(2n + 1){
+                margin-left: 0;
+            }
+            &:nth-child(n + 3){
+                display: none;
+            }
+        }
+    }
     &_note {
         display: none;
     }
     &.loadingListBox {
-        .loadingGridBox_item {
-            width: 75%;
-            flex-direction: row;
-            margin-left: 0;
-            position: relative;
-            &:not(:first-child){
-                margin-top: 1.5rem;
-            }
-            &_top {
-                width: 300px;
-                margin-bottom: 0;
-            }
-            &_middle {
-                margin-bottom: 0;
-                padding: 1rem;
-                &_item {
-                    width: 50%;
-                    &:first-child{
-                        width: 100%;
+        .loadingGridBox {
+            &_item {
+                width: 75%;
+                flex-direction: row;
+                margin-left: 0;
+                position: relative;
+                &:not(:first-child){
+                    margin-top: 1.5rem;
+                }
+                &_top {
+                    width: 300px;
+                    margin-bottom: 0;
+                }
+                &_middle {
+                    margin-bottom: 0;
+                    padding: 1rem;
+                    &_item {
+                        width: 50%;
+                        &:first-child{
+                            width: 100%;
+                        }
                     }
                 }
+                &_bottom {
+                    position: absolute;
+                    bottom: 1rem;
+                    right: 1rem;
+                    width: 300px;
+                }
             }
-            &_bottom {
-                position: absolute;
-                bottom: 1rem;
-                right: 1rem;
-                width: 300px;
+            @media(max-width: 1023px){
+                &_item {
+                    width: 100%;
+                }
             }
         }
     }

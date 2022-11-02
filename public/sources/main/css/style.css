@@ -1466,6 +1466,11 @@ input, textarea {
 .tourGrid.tourList .tourGrid_item_content .maxLine_4, .serviceGrid.tourList .tourGrid_item_content .maxLine_4 {
   -webkit-line-clamp: 3;
 }
+@media (max-width: 1023px) {
+  .tourGrid.tourList .tourGrid_item, .serviceGrid.tourList .tourGrid_item {
+    width: 100%;
+  }
+}
 
 .tourRelated {
   display: flex;
@@ -4721,6 +4726,17 @@ blockquote em {
   transform: translateX(-100%);
   background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.04), transparent);
 }
+@media (max-width: 1023px) {
+  .loadingGridBox_item {
+    width: calc(50% - 0.75rem);
+  }
+  .loadingGridBox_item:nth-child(2n+1) {
+    margin-left: 0;
+  }
+  .loadingGridBox_item:nth-child(n+3) {
+    display: none;
+  }
+}
 .loadingGridBox_note {
   display: none;
 }
@@ -4752,4 +4768,9 @@ blockquote em {
   bottom: 1rem;
   right: 1rem;
   width: 300px;
+}
+@media (max-width: 1023px) {
+  .loadingGridBox.loadingListBox .loadingGridBox_item {
+    width: 100%;
+  }
 }

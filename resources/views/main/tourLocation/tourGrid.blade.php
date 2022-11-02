@@ -20,8 +20,8 @@
                     <a href="/{{ $tour->seo->slug_full ?? null }}" title="{{ $tour->name ?? $tour->seo->title ?? $tour->seo->seo_title ?? null }}" class="tourGrid_item_content_title maxLine_1">
                         <h2>{{ $tour->name ?? $tour->seo->title ?? null }}</h2>
                     </a>
-                    <a href="/{{ $tour->seo->slug_full ?? null }}" title="{{ $tour->name ?? $tour->seo->title ?? $tour->seo->seo_title ?? null }}" class="tourGrid_item_content_desc maxLine_4">
-                        <h3>{{ $tour->description ?? $tour->seo->description ?? null }}</h3>
+                    <a href="/{{ $tour->seo->slug_full ?? null }}" title="{{ $tour->name ?? $tour->seo->title ?? $tour->seo->seo_title ?? null }}" class="tourGrid_item_content_desc">
+                        <h3 class="maxLine_4">{{ $tour->description ?? $tour->seo->description ?? null }}</h3>
                     </a>
                     <div class="column" style="align-items:flex-end !important;">
                         <div class="column_item">
