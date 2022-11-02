@@ -4527,8 +4527,8 @@ blockquote em {
   align-items: flex-end;
   margin-bottom: 1.5rem;
   border: 1px solid;
-  -o-border-image: linear-gradient(90deg, rgba(60, 74, 83, 0), rgba(60, 74, 83, 0), rgba(60, 74, 83, 0.3), rgba(60, 74, 83, 0)) 0.5;
-     border-image: linear-gradient(90deg, rgba(60, 74, 83, 0), rgba(60, 74, 83, 0), rgba(60, 74, 83, 0.3), rgba(60, 74, 83, 0)) 0.5;
+  -o-border-image: linear-gradient(90deg, rgba(60, 74, 83, 0), rgba(60, 74, 83, 0), rgba(60, 74, 83, 0.2), rgba(60, 74, 83, 0)) 0.5;
+     border-image: linear-gradient(90deg, rgba(60, 74, 83, 0), rgba(60, 74, 83, 0), rgba(60, 74, 83, 0.2), rgba(60, 74, 83, 0)) 0.5;
   border-left: none;
   border-top: none;
   border-right: none;
@@ -4573,4 +4573,125 @@ blockquote em {
 }
 .filterBox_view_item.active i {
   color: #495057;
+}
+
+@-webkit-keyframes MuiSkeleton-keyframes-wave {
+  0% {
+    transform: translateX(-100%);
+  }
+  60% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes MuiSkeleton-keyframes-wave {
+  0% {
+    transform: translateX(-100%);
+  }
+  60% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+.loadingGridBox {
+  display: none;
+  flex: wrap;
+}
+.loadingGridBox_item {
+  width: calc(33.33% - 1rem);
+  display: flex;
+  flex-direction: column;
+  border-radius: 7px;
+  background: white;
+}
+.loadingGridBox_item:not(:first-child) {
+  margin-left: 1.5rem;
+}
+.loadingGridBox_item_top {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(90deg, #EDF2F7 0%, #F7FAFC 100%);
+  margin-bottom: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  border-radius: 7px 7px 0 0;
+}
+.loadingGridBox_item_top::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: inherit;
+  height: 100%;
+  content: "";
+  -webkit-animation: "MuiSkeleton-keyframes-wave" 1.6s linear 0.5s infinite;
+          animation: "MuiSkeleton-keyframes-wave" 1.6s linear 0.5s infinite;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.04), transparent);
+}
+.loadingGridBox_item_middle {
+  width: 100%;
+  padding: 0 1rem;
+  margin-bottom: 1.25rem;
+}
+.loadingGridBox_item_middle_item {
+  display: block;
+  width: 70%;
+  height: 25px;
+  background: linear-gradient(90deg, #EDF2F7 0%, #F7FAFC 100%);
+  position: relative;
+  overflow: hidden;
+}
+.loadingGridBox_item_middle_item::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: inherit;
+  height: 100%;
+  content: "";
+  -webkit-animation: "MuiSkeleton-keyframes-wave" 1.6s linear 0.5s infinite;
+          animation: "MuiSkeleton-keyframes-wave" 1.6s linear 0.5s infinite;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.04), transparent);
+}
+.loadingGridBox_item_middle_item:first-child {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 1.25rem;
+}
+.loadingGridBox_item_middle_item:not(:first-child) {
+  margin-top: 0.75rem;
+}
+.loadingGridBox_item_bottom {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  border-radius: 0 0 7px 0;
+}
+.loadingGridBox_item_bottom_item {
+  width: 50%;
+  height: 60px;
+  background: linear-gradient(90deg, #EDF2F7 0%, #F7FAFC 100%);
+  border-radius: 0 0 7px 0;
+  position: relative;
+  overflow: hidden;
+}
+.loadingGridBox_item_bottom_item::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: inherit;
+  height: 100%;
+  content: "";
+  -webkit-animation: "MuiSkeleton-keyframes-wave" 1.6s linear 0.5s infinite;
+          animation: "MuiSkeleton-keyframes-wave" 1.6s linear 0.5s infinite;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.04), transparent);
+}
+.loadingGridBox_note {
+  display: none;
 }

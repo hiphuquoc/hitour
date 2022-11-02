@@ -95,13 +95,13 @@
                             Lọc theo:
                         </div>
                         <div class="filterBox_filter">
-                            <div class="filterBox_filter_item active">
+                            <div class="filterBox_filter_item active" onClick="filterTour(this, 'tat-ca-tour');">
                                 <div>Tất cả</div>
                             </div>
-                            <div class="filterBox_filter_item">
+                            <div class="filterBox_filter_item" onClick="filterTour(this, 'tour-tron-goi');">
                                 <h3>Tour trọn gói</h3>
                             </div>
-                            <div class="filterBox_filter_item">
+                            <div class="filterBox_filter_item" onClick="filterTour(this, 'tour-trong-ngay');">
                                 <h3>Tour trong ngày</h3>
                             </div>
                         </div>
@@ -119,6 +119,8 @@
                         foreach($item->tours as $tour) if(!empty($tour->infoTour)) $dataTours[] = $tour->infoTour;
                     @endphp
                     @include('main.tourLocation.tourGrid', ['list' => $dataTours])
+
+                    @include('main.tourLocation.loadingGridBox')
                 </div>
             </div>
         @endif
@@ -277,35 +279,7 @@
 @push('scripts-custom')
     <script type="text/javascript">
         $(window).on('load', function () {
-            // setupSlick();
-            // $(window).resize(function(){
-            //     setupSlick();
-            // })
-
-            // $('.sliderHome').slick({
-            //     dots: true,
-            //     arrows: true,
-            //     autoplay: true,
-            //     infinite: true,
-            //     autoplaySpeed: 5000,
-            //     lazyLoad: 'ondemand',
-            //     responsive: [
-            //         {
-            //             breakpoint: 567,
-            //             settings: {
-            //                 arrows: false,
-            //             }
-            //         }
-            //     ]
-            // });
-
-            // function setupSlick(){
-            //     setTimeout(function(){
-            //         $('.sliderHome .slick-prev').html('<i class="fa-solid fa-arrow-left-long"></i>');
-            //         $('.sliderHome .slick-next').html('<i class="fa-solid fa-arrow-right-long"></i>');
-            //         $('.sliderHome .slick-dots button').html('');
-            //     }, 0);
-            // }
+            
         });
 
         function showHideFullContent(elementButton, classCheck){
@@ -317,6 +291,56 @@
                 contentBox.addClass(classCheck);
                 $(elementButton).html('<i class="fa-solid fa-arrow-down-long"></i>Đọc thêm');
             }
+        }
+
+        function filterTour(elementButton, type){
+            /* active button vừa click */
+            $(elementButton).parent().children().each(function(){
+                $(this).removeClass('active');
+            })
+            $(elementButton).addClass('active');
+            /* hiện loading - ẩn child box chính */
+            $('.loadingGridBox').css('display', 'flex');
+            $('.loadingGridBox_note').css('display', 'none');
+            const parent    = $('#js_filterTour_parent');
+            parent.children().each(function(){
+                $(this).css('display', 'none');
+            })
+            /* lọc phần tử */
+            let data                = [];
+            if(type=="tat-ca-tour"){
+                $(document).find("[data-filter-day]").each(function(){
+                    const valueDay  = $(this).data('filter-day');
+                    data.push($(this));
+                })
+            }else if(type=="tour-tron-goi"){
+                $(document).find("[data-filter-day]").each(function(){
+                    const valueDay  = $(this).data('filter-day');
+                    if(parseInt(valueDay)>0) data.push($(this));
+                })
+            }else if(type=="tour-trong-ngay"){
+                $(document).find("[data-filter-day]").each(function(){
+                    const valueDay  = $(this).data('filter-day');
+                    if(parseInt(valueDay)==0) data.push($(this));
+                })
+            }
+            /* ẩn loading - hiện lại kết quả */
+            setTimeout(() => {
+                /* ẩn loading */
+                $('.loadingGridBox').css('display', 'none');
+                if(data.length==0){
+                    /* trường hợp không có phần tử => thông báo */
+                    $('.loadingGridBox_note').css('display', 'block');
+                }else {
+                    /* hiện lại kết quả */
+                    for(let i=0;i<data.length;++i){
+                        data[i].css('display', 'block');
+                    }
+                }
+                
+            }, 1000);
+            
+            
         }
     </script>
 @endpush

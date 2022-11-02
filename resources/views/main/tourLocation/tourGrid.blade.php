@@ -1,7 +1,7 @@
 @if(!empty($list)&&$list->isNotEmpty()) 
-    <div class="tourGrid">
+    <div id="js_filterTour_parent" class="tourGrid">
         @foreach($list as $tour)
-            <div class="tourGrid_item">
+            <div class="tourGrid_item" data-filter-day="{{ $tour->days ?? 0 }}">
                 <a href="/{{ $tour->seo->slug_full ?? null }}" title="{{ $tour->name ?? $tour->seo->title ?? $tour->seo->seo_title ?? null }}" class="tourGrid_item_image">
                     <img src="{{ config('main.svg.loading_main') }}" data-src="{{ $tour->seo->image_small ?? $tour->seo->image ?? config('admin.images.default_750x460') }}" alt="{{ $tour->name ?? $tour->seo->title ?? $tour->seo->seo_title ?? null }}" title="{{ $tour->name ?? $tour->seo->title ?? $tour->seo->seo_title ?? null }}" />
                     @if($tour->days>1)
