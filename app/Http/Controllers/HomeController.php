@@ -8,6 +8,8 @@ use App\Models\ShipLocation;
 use App\Models\AirLocation;
 use App\Models\ServiceLocation;
 use App\Models\TourLocation;
+use App\Models\ShipPartner;
+use App\Models\AirPartner;
 use App\Models\Seo;
 
 class HomeController extends Controller {
@@ -30,6 +32,12 @@ class HomeController extends Controller {
                                 ->where('island', '1')
                                 ->with('seo')
                                 ->get();
-        return view('main.home.home', compact('item', 'shipLocations', 'airLocations', 'serviceLocations', 'specialLocations'));
+        $shipPartners       = ShipPartner::select('*')
+                                ->with('seo')
+                                ->get();
+        $airPartners        = AirPartner::select('*')
+                                ->with('seo')
+                                ->get();
+        return view('main.home.home', compact('item', 'shipLocations', 'airLocations', 'serviceLocations', 'specialLocations', 'shipPartners', 'airPartners'));
     }
 }

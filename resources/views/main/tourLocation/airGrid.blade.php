@@ -8,9 +8,9 @@
                 <div class="serviceGrid_item_content">
                     <a href="/{{ $air->seo->slug_full ?? null }}" title="{{ $air->name ?? $air->seo->title ?? $air->seo->seo_title ?? null}}" class="serviceGrid_item_content_title maxLine_1">
                         @if(!empty($itemHeading)&&$itemHeading=='h3')
-                            <i class="fa-solid fa-paper-plane"></i><h3>{{ $air->name ?? $air->seo->title ?? null }}</h3>
+                            <h3>{{ $air->name ?? $air->seo->title ?? null }}</h3>
                         @else
-                            <i class="fa-solid fa-paper-plane"></i><h2>{{ $air->name ?? $air->seo->title ?? null }}</h2>
+                            <h2>{{ $air->name ?? $air->seo->title ?? null }}</h2>
                         @endif
                     </a>
                     @if(!empty($air->portDeparture->name)&&!empty($air->portLocation->name))

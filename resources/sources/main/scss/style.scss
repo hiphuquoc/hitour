@@ -322,6 +322,7 @@ $height_headerMain : 80px;
     font-weight: 800;
     font-family: $font-primary-title;
     margin-bottom: 0.75rem;
+    color: $color-title;
     @media (max-width: 1023px){
         font-size: 1.45rem;
     }
@@ -4421,6 +4422,9 @@ $width-single-menu  : 260px;
             border-radius: 5px;
         }
     }
+    @media(max-width: 1023px){
+        
+    }
 }
 .filterBox {
     display: flex;
@@ -4633,6 +4637,33 @@ $width-single-menu  : 260px;
                 &_item {
                     width: 100%;
                 }
+            }
+        }
+    }
+}
+.partnerBox {
+    display: flex;
+    &_content {
+        width: 400px;
+    }
+    &_list {
+        width: calc(100% - 400px - 1.5rem);
+        margin-left: 1.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        &_item {
+            width: calc(20% - 1.25rem);
+            &:not(:first-child){
+                margin-left: 1rem;
+            }
+            &:nth-child(5n + 1){
+                margin-left: 0;
+            }
+            &:nth-child(n + 6){
+                margin-top: 1rem;
+            }
+            img {
+                border-radius: inherit;
             }
         }
     }

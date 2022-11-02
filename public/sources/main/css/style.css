@@ -63,6 +63,7 @@ body {
 
 p {
   margin-bottom: 1rem;
+  color: #567;
 }
 @media (max-width: 767px) {
   p {
@@ -612,6 +613,7 @@ input, textarea {
   font-weight: 800;
   font-family: "SVN-Gilroy Bold", serif;
   margin-bottom: 0.75rem;
+  color: #345;
 }
 @media (max-width: 1023px) {
   .titlePage {
@@ -3094,7 +3096,7 @@ blockquote em {
 .faqBox_title h2, .faqBox_title h3 {
   font-size: 1.5rem !important;
   margin: 0 0 0.75rem 0 !important;
-  color: rgb(0, 90, 180);
+  color: #345;
 }
 @media (min-width: 768px) and (max-width: 1023px) {
   .faqBox_title h2, .faqBox_title h3 {
@@ -3499,7 +3501,7 @@ blockquote em {
 .sectionBox_title {
   font-size: 1.5rem !important;
   margin: 0 0 0.75rem 0 !important;
-  color: rgb(0, 90, 180);
+  color: #345;
 }
 @media (min-width: 768px) and (max-width: 1023px) {
   .sectionBox_title {
@@ -4549,7 +4551,6 @@ blockquote em {
   text-align: center;
   border-radius: 5px;
 }
-
 .filterBox {
   display: flex;
   align-items: flex-end;
@@ -4773,4 +4774,32 @@ blockquote em {
   .loadingGridBox.loadingListBox .loadingGridBox_item {
     width: 100%;
   }
+}
+
+.partnerBox {
+  display: flex;
+}
+.partnerBox_content {
+  width: 400px;
+}
+.partnerBox_list {
+  width: calc(100% - 400px - 1.5rem);
+  margin-left: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+.partnerBox_list_item {
+  width: calc(20% - 1.25rem);
+}
+.partnerBox_list_item:not(:first-child) {
+  margin-left: 1rem;
+}
+.partnerBox_list_item:nth-child(5n+1) {
+  margin-left: 0;
+}
+.partnerBox_list_item:nth-child(n+6) {
+  margin-top: 1rem;
+}
+.partnerBox_list_item img {
+  border-radius: inherit;
 }

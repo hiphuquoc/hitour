@@ -22,12 +22,10 @@ body {
 
 p {
     margin-bottom: 1rem;
+    color: $color-text;
     @media (max-width: 767px){
         margin-bottom: 0.75rem;
     }
-    // @media (max-width: 577px) {
-    //     margin-bottom: 0.5rem;
-    // }
 }
 
 a {

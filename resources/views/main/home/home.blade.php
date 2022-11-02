@@ -24,6 +24,9 @@
             <div class="sliderHome_item">
                 <img src="/images/main/du-lich-bien-dao-hitour-1.webp" alt="Trang Tour du lịch biển đảo Hitour" title="Trang Tour du lịch biển đảo Hitour" />
             </div>
+            <div class="sliderHome_item">
+                <img src="/images/main/du-lich-nuoc-ngoai-hitour-1.jpg" alt="Trang Tour du lịch nước ngoài Hitour" title="Trang Tour du lịch nước ngoài Hitour" />
+            </div>
         @endfor
     </div>
     <!-- END: Home slider -->
@@ -83,6 +86,34 @@
         </div>
     @endif
     <!-- END: Vé vui chơi giải trí -->
+
+    <!-- START: Đối tác tàu cao tốc -->
+    @if(!empty($shipPartners)&&$shipPartners->isNotEmpty())
+        <div class="sectionBox withBorder">
+            <div class="container">
+                @include('main.home.partner', [
+                    'list'          => $shipPartners,
+                    'title'         => 'Đối tác tàu cao tốc Hitour',
+                    'description'   => 'Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ'
+                ])
+            </div>
+        </div>
+    @endif
+    <!-- END: Đối tác tàu cao tốc -->
+
+    <!-- START: Đối tác máy bay -->
+    @if(!empty($airPartners)&&$airPartners->isNotEmpty())
+        <div class="sectionBox withBorder">
+            <div class="container">
+                @include('main.home.partner', [
+                    'list'          => $airPartners,
+                    'title'         => 'Đối tác máy bay Hitour',
+                    'description'   => 'Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ'
+                ])
+            </div>
+        </div>
+    @endif
+    <!-- END: Đối tác máy bay -->
 
     {{-- <div class="sectionBox">
         <div class="container">

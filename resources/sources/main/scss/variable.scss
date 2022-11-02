@@ -107,7 +107,7 @@ $folderFont : '/fonts/';
 @mixin titleSection {
     font-size: 1.5rem !important;
     margin: 0 0 0.75rem 0 !important;
-    color: $color-primary-hover;
+    color: $color-title;
     @media (min-width: 768px) and (max-width: 1023px){
         font-size: 1.45rem !important;
         // margin: 0 0 1.25rem 0 !important;
