@@ -96,7 +96,6 @@
                         foreach($item->tours as $tour) if(!empty($tour->infoTour)) $dataTours[] = $tour->infoTour;
                     @endphp
                     @include('main.tourLocation.tourGrid', ['list' => $dataTours])
-
                     @include('main.tourLocation.loadingGridBox')
                 </div>
             </div>

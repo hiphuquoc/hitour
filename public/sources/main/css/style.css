@@ -4629,7 +4629,7 @@ blockquote em {
 }
 .loadingGridBox {
   display: none;
-  flex: wrap;
+  flex-wrap: wrap;
 }
 .loadingGridBox_item {
   width: calc(33.33% - 1rem);
@@ -4723,4 +4723,33 @@ blockquote em {
 }
 .loadingGridBox_note {
   display: none;
+}
+.loadingGridBox.loadingListBox .loadingGridBox_item {
+  width: 75%;
+  flex-direction: row;
+  margin-left: 0;
+  position: relative;
+}
+.loadingGridBox.loadingListBox .loadingGridBox_item:not(:first-child) {
+  margin-top: 1.5rem;
+}
+.loadingGridBox.loadingListBox .loadingGridBox_item_top {
+  width: 300px;
+  margin-bottom: 0;
+}
+.loadingGridBox.loadingListBox .loadingGridBox_item_middle {
+  margin-bottom: 0;
+  padding: 1rem;
+}
+.loadingGridBox.loadingListBox .loadingGridBox_item_middle_item {
+  width: 50%;
+}
+.loadingGridBox.loadingListBox .loadingGridBox_item_middle_item:first-child {
+  width: 100%;
+}
+.loadingGridBox.loadingListBox .loadingGridBox_item_bottom {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  width: 300px;
 }

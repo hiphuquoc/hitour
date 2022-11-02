@@ -97,8 +97,10 @@
             /* đổi giao diện */
             if(type=='list'){
                 $('.tourGrid').addClass('tourList');
+                $('.loadingGridBox').addClass('loadingListBox');
             }else if(type=='grid'){
                 $('.tourGrid').removeClass('tourList');
+                $('.loadingGridBox').removeClass('loadingListBox');
             }
         }
     </script>
