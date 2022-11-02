@@ -64,14 +64,9 @@ body {
 p {
   margin-bottom: 1rem;
 }
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
   p {
     margin-bottom: 0.75rem;
-  }
-}
-@media (max-width: 577px) {
-  p {
-    margin-bottom: 0.5rem;
   }
 }
 
@@ -3069,13 +3064,12 @@ blockquote em {
 @media (min-width: 768px) and (max-width: 1023px) {
   .faqBox_title h2, .faqBox_title h3 {
     font-size: 1.45rem !important;
-    margin: 0 0 1.25rem 0 !important;
   }
 }
 @media (max-width: 767px) {
   .faqBox_title h2, .faqBox_title h3 {
     font-size: 1.4rem !important;
-    margin: 0 0 1rem 0 !important;
+    margin: 0 0 0.5rem 0 !important;
   }
 }
 .faqBox_content_item {
@@ -3475,13 +3469,12 @@ blockquote em {
 @media (min-width: 768px) and (max-width: 1023px) {
   .sectionBox_title {
     font-size: 1.45rem !important;
-    margin: 0 0 1.25rem 0 !important;
   }
 }
 @media (max-width: 767px) {
   .sectionBox_title {
     font-size: 1.4rem !important;
-    margin: 0 0 1rem 0 !important;
+    margin: 0 0 0.5rem 0 !important;
   }
 }
 .sectionBox.backgroundPrimary {

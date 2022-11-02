@@ -110,11 +110,11 @@ $folderFont : '/fonts/';
     color: $color-primary-hover;
     @media (min-width: 768px) and (max-width: 1023px){
         font-size: 1.45rem !important;
-        margin: 0 0 1.25rem 0 !important;
+        // margin: 0 0 1.25rem 0 !important;
     }
     @media (max-width: 767px){
         font-size: 1.4rem !important;
-        margin: 0 0 1rem 0 !important;
+        margin: 0 0 0.5rem 0 !important;
     }
 }
 
