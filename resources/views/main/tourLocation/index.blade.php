@@ -316,12 +316,12 @@
             }else if(type=="tour-tron-goi"){
                 $(document).find("[data-filter-day]").each(function(){
                     const valueDay  = $(this).data('filter-day');
-                    if(parseInt(valueDay)>0) data.push($(this));
+                    if(parseInt(valueDay)>1) data.push($(this));
                 })
             }else if(type=="tour-trong-ngay"){
                 $(document).find("[data-filter-day]").each(function(){
                     const valueDay  = $(this).data('filter-day');
-                    if(parseInt(valueDay)==0) data.push($(this));
+                    if(parseInt(valueDay)==1) data.push($(this));
                 })
             }
             /* ẩn loading - hiện lại kết quả */
