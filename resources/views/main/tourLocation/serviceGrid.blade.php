@@ -11,34 +11,36 @@
                         </div>
                     @endif
                 </a>
-                <a href="/{{ $service->seo->slug_full }}" title="{{ $service->name ?? $service->seo->title ?? $service->seo->seo_title ?? null }}" class="serviceGrid_item_title maxLine_1">
-                    @if(!empty($itemHeading)&&$itemHeading=='h3')
-                        <h3>{{ $service->name ?? $service->seo->title ?? null }}</h3>
-                    @else 
-                        <h2>{{ $service->name ?? $service->seo->title ?? null }}</h2>
-                    @endif
-                </a>
-                <a href="/{{ $service->seo->slug_full ?? null }}" title="{{ $service->name ?? $service->seo->title ?? $service->seo->seo_title ?? null }}" class="serviceGrid_item_desc maxLine_4">
-                    @if(!empty($itemHeading)&&$itemHeading=='h3')
-                        <h4>{{ $service->description ?? $service->seo->description ?? null }}</h4>
-                    @else 
-                        <h3>{{ $service->description ?? $service->seo->description ?? null }}</h3>
-                    @endif
-                </a>
-                <div class="column">
-                    <div class="column_item">
-                        {{-- <div class="serviceGrid_item_departureFrom maxLine_1">
-                            Đón tại {{ $service->pick_up }} {{ $service->tour_departure_name }}
+                <div class="serviceGrid_item_content">
+                    <a href="/{{ $service->seo->slug_full }}" title="{{ $service->name ?? $service->seo->title ?? $service->seo->seo_title ?? null }}" class="serviceGrid_item_content_title maxLine_1">
+                        @if(!empty($itemHeading)&&$itemHeading=='h3')
+                            <h3>{{ $service->name ?? $service->seo->title ?? null }}</h3>
+                        @else 
+                            <h2>{{ $service->name ?? $service->seo->title ?? null }}</h2>
+                        @endif
+                    </a>
+                    <a href="/{{ $service->seo->slug_full ?? null }}" title="{{ $service->name ?? $service->seo->title ?? $service->seo->seo_title ?? null }}" class="serviceGrid_item_content_desc maxLine_4">
+                        @if(!empty($itemHeading)&&$itemHeading=='h3')
+                            <h4>{{ $service->description ?? $service->seo->description ?? null }}</h4>
+                        @else 
+                            <h3>{{ $service->description ?? $service->seo->description ?? null }}</h3>
+                        @endif
+                    </a>
+                    <div class="column">
+                        <div class="column_item">
+                            {{-- <div class="sserviceGrid_item_content_departureFrom maxLine_1">
+                                Đón tại {{ $service->pick_up }} {{ $service->tour_departure_name }}
+                            </div>
+                            <div class="serviceGrid_item_content_departureSchedule">
+                                {{ $service->departure_schedule }}
+                            </div> --}}
                         </div>
-                        <div class="serviceGrid_item_departureSchedule">
-                            {{ $service->departure_schedule }}
-                        </div> --}}
+                        @if(!empty($service->price_show))
+                            <div class="column_item serviceGrid_item_content_price">
+                                {{ number_format($service->price_show).config('main.unit_currency') }}
+                            </div>
+                        @endif
                     </div>
-                    @if(!empty($service->price_show))
-                        <div class="column_item serviceGrid_item_price">
-                            {{ number_format($service->price_show).config('main.unit_currency') }}
-                        </div>
-                    @endif
                 </div>
                 {{-- <div class="serviceGrid_item_info">
 

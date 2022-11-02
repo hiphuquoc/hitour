@@ -133,14 +133,14 @@
                     </div>
                 </div>
                 </div>
-                <div class="shipGrid_item_content_btn">
-                    <a href="{{ route('main.shipBooking.form', ['ship_port_departure_id' => $item->portDeparture->id, 'ship_port_location_id' => $item->portLocation->id]) }}" title="Đặt vé tàu {{ $item->name ?? $item->seo->title ?? null }}" style="border-radius:0 0 0 5px;">
-                        <i class="far fa-edit"></i>Đặt vé
-                    </a>
-                    <a href="/{{ $item->seo->slug_full ?? null }}" title="Xem chi tiết tàu cao tốc {{ $item->name ?? $item->seo->title ?? null }}" style="border-radius:0 0 5px 0;">
-                        <i class="fas fa-external-link-alt"></i>Xem chi tiết
-                    </a>
-                </div>
+            </div>
+            <div class="shipGrid_item_btn">
+                <a href="{{ route('main.shipBooking.form', ['ship_port_departure_id' => $item->portDeparture->id, 'ship_port_location_id' => $item->portLocation->id]) }}" title="Đặt vé tàu {{ $item->name ?? $item->seo->title ?? null }}" style="border-radius:0 0 0 5px;">
+                    <i class="far fa-edit"></i>Đặt vé
+                </a>
+                <a href="/{{ $item->seo->slug_full ?? null }}" title="Xem chi tiết tàu cao tốc {{ $item->name ?? $item->seo->title ?? null }}" style="border-radius:0 0 5px 0;">
+                    <i class="fas fa-external-link-alt"></i>Xem chi tiết
+                </a>
             </div>
         </div>
         @endif

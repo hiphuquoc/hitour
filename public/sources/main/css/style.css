@@ -2231,8 +2231,10 @@ blockquote em {
   color: rgb(244, 208, 63);
   font-size: 0.95rem;
 }
+.shipGrid_item_content {
+  padding: 0.5rem 1rem 0.75rem 1rem;
+}
 .shipGrid_item_content_title {
-  padding: 0.55rem 0.75rem 0 0.75rem;
   margin-bottom: 0.5rem;
 }
 .shipGrid_item_content_title a {
@@ -2242,12 +2244,11 @@ blockquote em {
   color: rgb(0, 90, 180);
 }
 .shipGrid_item_content_title a h2, .shipGrid_item_content_title a h3 {
+  font-size: 1.2rem;
   margin-bottom: 0;
 }
 .shipGrid_item_content_table {
   font-size: 1rem;
-  padding: 0 0.75rem;
-  margin-bottom: 0.5rem;
 }
 .shipGrid_item_content_table_row {
   display: flex;
@@ -2271,11 +2272,11 @@ blockquote em {
   font-weight: 500;
   margin: 0.25rem 0;
 }
-.shipGrid_item_content_btn {
+.shipGrid_item_btn {
   display: flex;
   justify-content: space-between;
 }
-.shipGrid_item_content_btn > * {
+.shipGrid_item_btn > * {
   width: 100%;
   text-align: center;
   padding: 0.5rem 1rem;
@@ -2285,15 +2286,15 @@ blockquote em {
   font-weight: 500;
   cursor: pointer;
 }
-.shipGrid_item_content_btn > *:hover {
+.shipGrid_item_btn > *:hover {
   background: rgb(0, 123, 255);
   color: #fff;
 }
-.shipGrid_item_content_btn > *:not(:last-child) {
+.shipGrid_item_btn > *:not(:last-child) {
   box-shadow: 3px 0 5px -5px black;
   border-right: 1.5px solid rgba(255, 255, 255, 0.2);
 }
-.shipGrid_item_content_btn > * i {
+.shipGrid_item_btn > * i {
   margin-right: 0.5rem;
 }
 .shipGrid_item h2 {
@@ -2338,8 +2339,14 @@ blockquote em {
   .shipGrid_item:not(:first-child) {
     margin-top: 1rem;
   }
+  .shipGrid_item a h2, .shipGrid_item a h3 {
+    font-size: 1.15rem;
+  }
   .shipGrid_item_desc h2, .shipGrid_item_desc h3 {
     font-size: 1.15rem;
+  }
+  .shipGrid_item_content {
+    padding: 0.5rem 0.75rem 0.75rem;
   }
 }
 .contentShip_item:not(:first-child) {
