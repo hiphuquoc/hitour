@@ -16,28 +16,30 @@
                         @endif
                     @endif
                 </a>
-                <a href="/{{ $tour->seo->slug_full ?? null }}" title="{{ $tour->name ?? $tour->seo->title ?? $tour->seo->seo_title ?? null }}" class="tourGrid_item_title maxLine_1">
-                    <h2>{{ $tour->name ?? $tour->seo->title ?? null }}</h2>
-                </a>
-                <a href="/{{ $tour->seo->slug_full ?? null }}" title="{{ $tour->name ?? $tour->seo->title ?? $tour->seo->seo_title ?? null }}" class="tourGrid_item_desc maxLine_4">
-                    <h3>{{ $tour->description ?? $tour->seo->description ?? null }}</h3>
-                </a>
-                <div class="column" style="align-items:flex-end !important;">
-                    <div class="column_item">
-                        <div class="tourGrid_item_departureFrom maxLine_1">
-                            Đón tại {{ $tour->pick_up ?? null }} {{ $tour->tour_departure_name ?? null }}
+                <div class="tourGrid_item_content">
+                    <a href="/{{ $tour->seo->slug_full ?? null }}" title="{{ $tour->name ?? $tour->seo->title ?? $tour->seo->seo_title ?? null }}" class="tourGrid_item_content_title maxLine_1">
+                        <h2>{{ $tour->name ?? $tour->seo->title ?? null }}</h2>
+                    </a>
+                    <a href="/{{ $tour->seo->slug_full ?? null }}" title="{{ $tour->name ?? $tour->seo->title ?? $tour->seo->seo_title ?? null }}" class="tourGrid_item_content_desc maxLine_4">
+                        <h3>{{ $tour->description ?? $tour->seo->description ?? null }}</h3>
+                    </a>
+                    <div class="column" style="align-items:flex-end !important;">
+                        <div class="column_item">
+                            <div class="tourGrid_item_content_departureFrom maxLine_1">
+                                Đón tại {{ $tour->pick_up ?? null }} {{ $tour->tour_departure_name ?? null }}
+                            </div>
+                            @if(!empty($tour->departure_schedule))
+                                <div class="tourGrid_item_content_departureSchedule">
+                                    {{ $tour->departure_schedule }}
+                                </div>
+                            @endif
                         </div>
-                        @if(!empty($tour->departure_schedule))
-                            <div class="tourGrid_item_departureSchedule">
-                                {{ $tour->departure_schedule }}
+                        @if(!empty($tour->price_show))
+                            <div class="column_item tourGrid_item_content_price">
+                                {{ number_format($tour->price_show).config('main.unit_currency') }}
                             </div>
                         @endif
                     </div>
-                    @if(!empty($tour->price_show))
-                        <div class="column_item tourGrid_item_price">
-                            {{ number_format($tour->price_show).config('main.unit_currency') }}
-                        </div>
-                    @endif
                 </div>
                 {{-- <div class="tourGrid_item_info">
 
