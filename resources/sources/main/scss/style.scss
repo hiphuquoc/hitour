@@ -2002,7 +2002,7 @@ blockquote{
                         color: $color-primary-hover;
                     }
                     h2, h3 {
-                        font-size: 1.2rem;
+                        font-size: 1.15rem;
                         margin-bottom: 0;
                     }
                 }
@@ -2104,11 +2104,13 @@ blockquote{
             &:not(:first-child){
                 margin-top: 1rem;
             }
-            a {
-                h2, h3 {
-                    font-size: 1.15rem;
-                }
-            }
+            // &_content {
+            //     a {
+            //         h2, h3 {
+            //             font-size: 1.15rem;
+            //         }
+            //     }
+            // }
             &_desc {
                 h2, h3 {
                     font-size: 1.15rem;
@@ -2119,61 +2121,6 @@ blockquote{
             }
         }
     }
-    @media (max-width: 419px){
-        &_item {
-            // &_image {
-            //     margin-bottom: 0.5rem;
-            // }
-            // &_title {
-            //     margin-bottom: 0.25rem;
-            // }
-            // &_desc {
-            //     margin-bottom: 0.5rem;
-            // }
-        }
-    }
-    // @media (max-width: 1023px){
-    //     &_item {
-    //         width: calc(50% - 0.5rem);
-    //         &:not(:nth-child(2n + 1)){
-    //             margin-left: 1rem;
-    //         }
-    //         &:nth-child(2n + 1){
-    //             margin-left: 0;
-    //         }
-    //         &:not(:nth-child(n + 3)){
-    //             margin-top: 0;
-    //         }
-    //         &:nth-child(n + 3){
-    //             margin-top: 1rem;
-    //         }
-    //     }
-    // }
-    // @media (max-width: 577px){
-    //     margin: 0.5rem 0 0 0;
-    //     &_item {
-    //         width: 100%;
-    //         margin-left: 0 !important;
-    //         &:not(:first-child){
-    //             margin-top: 1rem;
-    //         }
-    //     }
-    // }
-    // @media (max-width: 419px){
-    //     &_item {
-    //         width: 100%;
-    //         margin-left: 0 !important; 
-    //         &_content {
-    //             &_title {
-    //                 padding: 0.5rem 0.5rem 0 0.5rem;
-    //                 margin-bottom: 0.35rem;
-    //             }
-    //         }
-    //         &:not(:first-child){
-    //             margin-top: 0.75rem;
-    //         }
-    //     }
-    // }
 }
 .contentShip {
     &_item {

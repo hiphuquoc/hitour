@@ -2244,7 +2244,7 @@ blockquote em {
   color: rgb(0, 90, 180);
 }
 .shipGrid_item_content_title a h2, .shipGrid_item_content_title a h3 {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   margin-bottom: 0;
 }
 .shipGrid_item_content_table {
@@ -2339,9 +2339,6 @@ blockquote em {
   .shipGrid_item:not(:first-child) {
     margin-top: 1rem;
   }
-  .shipGrid_item a h2, .shipGrid_item a h3 {
-    font-size: 1.15rem;
-  }
   .shipGrid_item_desc h2, .shipGrid_item_desc h3 {
     font-size: 1.15rem;
   }
@@ -2349,6 +2346,7 @@ blockquote em {
     padding: 0.5rem 0.75rem 0.75rem;
   }
 }
+
 .contentShip_item:not(:first-child) {
   margin-top: 1.5rem;
 }
