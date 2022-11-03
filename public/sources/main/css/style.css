@@ -709,7 +709,7 @@ input, textarea {
 }
 .sliderHome .slick-dots li button {
   padding: 0;
-  height: 6px;
+  height: 5px;
   width: 35px;
   background: rgba(0, 123, 255, 0.3);
   border: none !important;
@@ -728,6 +728,22 @@ input, textarea {
 }
 .sliderHome .slick-dots .slick-active button {
   background: rgb(0, 123, 255);
+}
+@media (max-width: 767px) {
+  .sliderHome .slick-dots {
+    bottom: 0.5rem !important;
+  }
+  .sliderHome .slick-dots li button {
+    height: 4px !important;
+  }
+}
+@media (max-width: 577px) {
+  .sliderHome .slick-dots {
+    right: 1rem;
+  }
+  .sliderHome .slick-dots li button {
+    width: 25px !important;
+  }
 }
 
 /* END:: Slider */
@@ -2935,7 +2951,7 @@ blockquote em {
 }
 @media (max-width: 767px) {
   .bookOnline {
-    display: none;
+    height: 240px;
   }
 }
 
@@ -2998,7 +3014,7 @@ blockquote em {
 }
 @media (max-width: 767px) {
   .bookFormSort {
-    margin-top: 1.5rem;
+    margin-top: -3rem;
   }
   .bookFormSort_body {
     padding: 0.5rem 1rem 1rem 1rem;
@@ -3017,9 +3033,6 @@ blockquote em {
   }
 }
 @media (max-width: 577px) {
-  .bookFormSort {
-    margin-top: 1.25rem;
-  }
   .bookFormSort .flexBox {
     flex-wrap: wrap;
   }

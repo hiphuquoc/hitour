@@ -2740,7 +2740,6 @@ blockquote{
 	padding: 15px 0 35px 0;
 	height: 300px;
 	&_main {
-		
 		&_title {
 			color: #000;
 			font-size: 30px;
@@ -2751,7 +2750,7 @@ blockquote{
 	}
 
     @media (max-width: 767px){
-        display: none;
+        height: 240px;
     }
 }
 .bookFormSort {
@@ -2812,7 +2811,7 @@ blockquote{
         }
     }
     @media (max-width: 767px){
-        margin-top: 1.5rem;
+        margin-top: -3rem;
         &_body {
             padding: 0.5rem 1rem 1rem 1rem;
             &_item {
@@ -2831,7 +2830,7 @@ blockquote{
         }
     }
     @media (max-width: 577px){
-        margin-top: 1.25rem;
+        
         .flexBox {
             flex-wrap: wrap;
             &_item {

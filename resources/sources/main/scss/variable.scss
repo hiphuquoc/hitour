@@ -161,7 +161,7 @@ $folderFont : '/fonts/';
             cursor: pointer;
             button {
                 padding: 0;
-                height: 6px;
+                height: 5px;
                 width: 35px;
                 background: $color-primary-03;
                 border: none !important;
@@ -180,18 +180,22 @@ $folderFont : '/fonts/';
                 background: $color-primary;
             }
         }
-        // @media (max-width: 1023px){
-        //     bottom: 0.25rem !important;
-        //     button {
-        //         width: 55px !important;
-        //         height: 3px !important;
-        //     }
-        // }
-        // @media (max-width: 1023px){
-        //     button {
-        //         width: 50px !important;
-        //     }
-        // }
+        @media (max-width: 767px){
+            bottom: 0.5rem !important;
+            li {
+                button {
+                    height: 4px !important;
+                }
+            }
+        }
+        @media (max-width: 577px){
+            right: 1rem;
+            li {
+                button {
+                    width: 25px !important;
+                }
+            }
+        }
     }
 }
 

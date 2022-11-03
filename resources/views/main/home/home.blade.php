@@ -17,34 +17,41 @@
 <!-- ===== END:: SCHEMA ===== -->
 @endpush
 @section('content')
-
-    <!-- START: Home slider -->
-    <div class="sliderHome">
-        @php
-            $dataSlider = [
-                [
-                    'src'   => '/images/main/du-lich-chau-au-hitour-1.jpg',
-                    'alt'   => 'Trang Tour du lịch Châu Âu Hitour',
-                    'link'  => 'tour-du-lich-chau-au'
-                ],
-                [
-                    'src'   => '/images/main/du-lich-bien-dao-hitour-1.webp',
-                    'alt'   => 'Trang Tour du lịch biển đảo Hitour'
-                ],
-                [
-                    'src'   => '/images/main/dich-vu-lam-visa-hitour-1.png',
-                    'alt'   => 'Dịch vụ làm Visa Hitour'
-                ],
-                [
-                    'src'   => '/images/main/du-lich-nuoc-ngoai-hitour-1.jpg',
-                    'alt'   => 'Trang Tour du lịch Nước ngoài Hitour'
-                ],
-                // [
-                //     'src'   => '/images/main/tour-du-lich-rung-tram-tra-su-hitour.jpg',
-                //     'alt'   => 'Tour du lịch Rừng Tràm Trà Sư Hitour'
-                // ]
+    @php
+        $dataSlider = [
+            [
+                'src'   => '/images/main/du-lich-chau-au-hitour-1.jpg',
+                'alt'   => 'Trang Tour du lịch Châu Âu Hitour',
+                'link'  => 'tour-du-lich-chau-au'
+            ],
+            [
+                'src'   => '/images/main/du-lich-bien-dao-hitour-1.webp',
+                'alt'   => 'Trang Tour du lịch biển đảo Hitour'
+            ],
+            [
+                'src'   => '/images/main/dich-vu-lam-visa-hitour-1.png',
+                'alt'   => 'Dịch vụ làm Visa Hitour'
+            ],
+            [
+                'src'   => '/images/main/du-lich-nuoc-ngoai-hitour-1.jpg',
+                'alt'   => 'Trang Tour du lịch Nước ngoài Hitour'
             ]
-        @endphp
+        ];
+        $dataSliderMobile = [
+            [
+                'src'   => '/images/main/du-lich-chau-au-hitour-1-mobile.jpg',
+                'alt'   => 'Trang Tour du lịch Châu Âu Hitour',
+                'link'  => 'tour-du-lich-chau-au'
+            ],
+            [
+                'src'   => '/images/main/du-lich-chau-au-hitour-1-mobile.jpg',
+                'alt'   => 'Trang Tour du lịch Châu Âu Hitour',
+                'link'  => 'tour-du-lich-chau-au'
+            ]
+        ];
+    @endphp
+    <!-- START: Home slider Desktop -->
+    <div class="sliderHome hide-767">
         @foreach($dataSlider as $slider)
             <div class="sliderHome_item">
                 @if(!empty($slider['link']))
@@ -59,7 +66,25 @@
             </div>
         @endforeach
     </div>
-    <!-- END: Home slider -->
+    <!-- END: Home slider Desktop -->
+
+    <!-- START: Home slider Mobile -->
+    <div class="sliderHome show-767">
+        @foreach($dataSliderMobile as $slider)
+            <div class="sliderHome_item">
+                @if(!empty($slider['link']))
+                    <a href="/{{ $slider['link'] }}" title="{{ $slider['alt'] }}">
+                        <img src="{{ $slider['src'] }}" alt="{{ $slider['alt'] }}" title="{{ $slider['alt'] }}" />
+                    </a>
+                @else 
+                    <div>
+                        <img src="{{ $slider['src'] }}" alt="{{ $slider['alt'] }}" title="{{ $slider['alt'] }}" />
+                    </div>
+                @endif
+            </div>
+        @endforeach
+    </div>
+    <!-- END: Home slider Mobile -->
 
     <!-- START: Sort Booking -->
     @php
