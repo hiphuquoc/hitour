@@ -20,14 +20,44 @@
 
     <!-- START: Home slider -->
     <div class="sliderHome">
-        @for($i=0;$i<3;++$i)
+        @php
+            $dataSlider = [
+                [
+                    'src'   => '/images/main/du-lich-chau-au-hitour-1.jpg',
+                    'alt'   => 'Trang Tour du lịch Châu Âu Hitour',
+                    'link'  => 'tour-du-lich-chau-au'
+                ],
+                [
+                    'src'   => '/images/main/du-lich-bien-dao-hitour-1.webp',
+                    'alt'   => 'Trang Tour du lịch biển đảo Hitour'
+                ],
+                [
+                    'src'   => '/images/main/dich-vu-lam-visa-hitour-1.png',
+                    'alt'   => 'Dịch vụ làm Visa Hitour'
+                ],
+                [
+                    'src'   => '/images/main/du-lich-nuoc-ngoai-hitour-1.jpg',
+                    'alt'   => 'Trang Tour du lịch Nước ngoài Hitour'
+                ],
+                // [
+                //     'src'   => '/images/main/tour-du-lich-rung-tram-tra-su-hitour.jpg',
+                //     'alt'   => 'Tour du lịch Rừng Tràm Trà Sư Hitour'
+                // ]
+            ]
+        @endphp
+        @foreach($dataSlider as $slider)
             <div class="sliderHome_item">
-                <img src="/images/main/du-lich-bien-dao-hitour-1.webp" alt="Trang Tour du lịch biển đảo Hitour" title="Trang Tour du lịch biển đảo Hitour" />
+                @if(!empty($slider['link']))
+                    <a href="/{{ $slider['link'] }}" title="{{ $slider['alt'] }}">
+                        <img src="{{ $slider['src'] }}" alt="{{ $slider['alt'] }}" title="{{ $slider['alt'] }}" />
+                    </a>
+                @else 
+                    <div>
+                        <img src="{{ $slider['src'] }}" alt="{{ $slider['alt'] }}" title="{{ $slider['alt'] }}" />
+                    </div>
+                @endif
             </div>
-            <div class="sliderHome_item">
-                <img src="/images/main/du-lich-nuoc-ngoai-hitour-1.jpg" alt="Trang Tour du lịch nước ngoài Hitour" title="Trang Tour du lịch nước ngoài Hitour" />
-            </div>
-        @endfor
+        @endforeach
     </div>
     <!-- END: Home slider -->
 

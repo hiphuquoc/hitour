@@ -364,10 +364,14 @@ $height_headerMain : 80px;
 .sliderHome {
     position: relative;
     &_item {
-        img {
-            width: 100%;
-            border-radius: 5px;
-            object-fit: cover;
+        a, div {
+            display: flex;
+            margin: 0;
+            img {
+                width: 100%;
+                border-radius: 5px;
+                object-fit: cover;
+            }
         }
     }
     @include slickSliderMain;
@@ -4329,6 +4333,39 @@ $width-single-menu  : 260px;
             }
         }
     }
+    @media(max-width: 1023px){
+        &_item {
+            width: calc(50% - 1rem);
+            &:nth-child(2n + 1){
+                margin-left: 0;
+            }
+            &:not(:nth-child(2n + 1)){
+                margin-left: 1.5rem;
+            }
+            &:nth-child(n + 3){
+                margin-top: 1.5rem;
+            }
+        }
+    }
+    @media(max-width: 767px){
+        &_item {
+            &:not(:nth-child(2n + 1)){
+                margin-left: 1rem;
+            }
+            &:nth-child(n + 3){
+                margin-top: 1rem;
+            }
+        }
+    }
+    @media(max-width: 577px){
+        &_item {
+            width: 100%;
+            margin-left: 0 !important;
+            &:not(:first-child){
+                margin-top: 0.5rem;
+            }
+        }
+    }
 }
 .airLocationList {
     display: flex;
@@ -4384,6 +4421,33 @@ $width-single-menu  : 260px;
             }
         }
     }
+    @media(max-width: 767px){
+        &_item {
+            width: calc(50% - 0.5rem);
+            &:nth-child(2n + 1){
+                margin-left: 0;
+            }
+            &:not(:nth-child(2n + 1)){
+                margin-left: 1rem;
+            }
+            &:nth-child(n + 3){
+                margin-top: 0.75rem;
+                padding-top: 0.75rem;
+                border-top: 1px dashed $bg-04;
+            }
+        }
+    }
+    @media(max-width: 577px){
+        &_item {
+            width: 100%;
+            margin-left: 0 !important;
+            &:not(:first-child){
+                margin-top: 0.75rem;
+                padding-top: 0.75rem;
+                border-top: 1px dashed $bg-04;
+            }
+        }
+    }
 }
 .specialLocationBox {
     display: flex;
@@ -4423,7 +4487,42 @@ $width-single-menu  : 260px;
         }
     }
     @media(max-width: 1023px){
-        
+        &_item {
+            width: calc(33.33% - 1rem);
+            &:nth-child(3n + 1){
+                margin-left: 0;
+            }
+            &:not(:nth-child(3n + 1)){
+                margin-left: 1.5rem;
+            }
+            &:nth-child(n + 4){
+                margin-top: 1.5rem;
+            }
+        }
+    }
+    @media(max-width: 767px){
+        &_item {
+            &:not(:nth-child(3n + 1)){
+                margin-left: 1rem;
+            }
+            &:nth-child(n + 4){
+                margin-top: 1rem;
+            }
+        }
+    }
+    @media(max-width: 577px){
+        &_item {
+            width: calc(50% - 0.5rem);
+            &:nth-child(2n + 1){
+                margin-left: 0;
+            }
+            &:not(:nth-child(2n + 1)){
+                margin-left: 1rem;
+            }
+            &:nth-child(n + 3){
+                margin-top: 1rem;
+            }
+        }
     }
 }
 .filterBox {
@@ -4665,6 +4764,53 @@ $width-single-menu  : 260px;
             img {
                 border-radius: inherit;
             }
+        }
+    }
+    @media(max-width: 1023px){
+        &_content {
+            width: 250px;
+        }
+        &_list {
+            width: calc(100% - 250px - 1.5rem);
+            &_item {
+                width: calc(25% - 0.8rem);
+                &:not(:first-child){
+                    margin-left: 1rem;
+                }
+                &:nth-child(4n + 1){
+                    margin-left: 0;
+                }
+                &:nth-child(n + 5){
+                    margin-top: 1rem;
+                }
+            }
+        }
+    }
+    @media(max-width: 767px){
+        &_list {
+            &_item {
+                width: calc(33.33% - 0.6666rem);
+                &:not(:first-child){
+                    margin-left: 1rem;
+                }
+                &:nth-child(3n + 1){
+                    margin-left: 0;
+                }
+                &:nth-child(n + 4){
+                    margin-top: 1rem;
+                }
+            }
+        }
+    }
+    @media(max-width: 577px){
+        flex-wrap: wrap;
+        &_content {
+            width: 100%;
+        }
+        &_list {
+            width: 100%;
+            margin-left: 0;
+            margin-top: 1rem;
         }
     }
 }

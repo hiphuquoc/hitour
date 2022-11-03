@@ -663,7 +663,11 @@ input, textarea {
 .sliderHome {
   position: relative;
 }
-.sliderHome_item img {
+.sliderHome_item a, .sliderHome_item div {
+  display: flex;
+  margin: 0;
+}
+.sliderHome_item a img, .sliderHome_item div img {
   width: 100%;
   border-radius: 5px;
   -o-object-fit: cover;
@@ -4455,6 +4459,37 @@ blockquote em {
   content: "\f178";
   margin-right: 0.75rem;
 }
+@media (max-width: 1023px) {
+  .shipLocationList_item, .serviceLocationList_item {
+    width: calc(50% - 1rem);
+  }
+  .shipLocationList_item:nth-child(2n+1), .serviceLocationList_item:nth-child(2n+1) {
+    margin-left: 0;
+  }
+  .shipLocationList_item:not(:nth-child(2n+1)), .serviceLocationList_item:not(:nth-child(2n+1)) {
+    margin-left: 1.5rem;
+  }
+  .shipLocationList_item:nth-child(n+3), .serviceLocationList_item:nth-child(n+3) {
+    margin-top: 1.5rem;
+  }
+}
+@media (max-width: 767px) {
+  .shipLocationList_item:not(:nth-child(2n+1)), .serviceLocationList_item:not(:nth-child(2n+1)) {
+    margin-left: 1rem;
+  }
+  .shipLocationList_item:nth-child(n+3), .serviceLocationList_item:nth-child(n+3) {
+    margin-top: 1rem;
+  }
+}
+@media (max-width: 577px) {
+  .shipLocationList_item, .serviceLocationList_item {
+    width: 100%;
+    margin-left: 0 !important;
+  }
+  .shipLocationList_item:not(:first-child), .serviceLocationList_item:not(:first-child) {
+    margin-top: 0.5rem;
+  }
+}
 
 .airLocationList {
   display: flex;
@@ -4512,6 +4547,33 @@ blockquote em {
   content: "\f178";
   margin-right: 0.75rem;
 }
+@media (max-width: 767px) {
+  .airLocationList_item {
+    width: calc(50% - 0.5rem);
+  }
+  .airLocationList_item:nth-child(2n+1) {
+    margin-left: 0;
+  }
+  .airLocationList_item:not(:nth-child(2n+1)) {
+    margin-left: 1rem;
+  }
+  .airLocationList_item:nth-child(n+3) {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px dashed #dee2e6;
+  }
+}
+@media (max-width: 577px) {
+  .airLocationList_item {
+    width: 100%;
+    margin-left: 0 !important;
+  }
+  .airLocationList_item:not(:first-child) {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px dashed #dee2e6;
+  }
+}
 
 .specialLocationBox {
   display: flex;
@@ -4551,6 +4613,43 @@ blockquote em {
   text-align: center;
   border-radius: 5px;
 }
+@media (max-width: 1023px) {
+  .specialLocationBox_item {
+    width: calc(33.33% - 1rem);
+  }
+  .specialLocationBox_item:nth-child(3n+1) {
+    margin-left: 0;
+  }
+  .specialLocationBox_item:not(:nth-child(3n+1)) {
+    margin-left: 1.5rem;
+  }
+  .specialLocationBox_item:nth-child(n+4) {
+    margin-top: 1.5rem;
+  }
+}
+@media (max-width: 767px) {
+  .specialLocationBox_item:not(:nth-child(3n+1)) {
+    margin-left: 1rem;
+  }
+  .specialLocationBox_item:nth-child(n+4) {
+    margin-top: 1rem;
+  }
+}
+@media (max-width: 577px) {
+  .specialLocationBox_item {
+    width: calc(50% - 0.5rem);
+  }
+  .specialLocationBox_item:nth-child(2n+1) {
+    margin-left: 0;
+  }
+  .specialLocationBox_item:not(:nth-child(2n+1)) {
+    margin-left: 1rem;
+  }
+  .specialLocationBox_item:nth-child(n+3) {
+    margin-top: 1rem;
+  }
+}
+
 .filterBox {
   display: flex;
   align-items: flex-end;
@@ -4802,4 +4901,51 @@ blockquote em {
 }
 .partnerBox_list_item img {
   border-radius: inherit;
+}
+@media (max-width: 1023px) {
+  .partnerBox_content {
+    width: 250px;
+  }
+  .partnerBox_list {
+    width: calc(100% - 250px - 1.5rem);
+  }
+  .partnerBox_list_item {
+    width: calc(25% - 0.8rem);
+  }
+  .partnerBox_list_item:not(:first-child) {
+    margin-left: 1rem;
+  }
+  .partnerBox_list_item:nth-child(4n+1) {
+    margin-left: 0;
+  }
+  .partnerBox_list_item:nth-child(n+5) {
+    margin-top: 1rem;
+  }
+}
+@media (max-width: 767px) {
+  .partnerBox_list_item {
+    width: calc(33.33% - 0.6666rem);
+  }
+  .partnerBox_list_item:not(:first-child) {
+    margin-left: 1rem;
+  }
+  .partnerBox_list_item:nth-child(3n+1) {
+    margin-left: 0;
+  }
+  .partnerBox_list_item:nth-child(n+4) {
+    margin-top: 1rem;
+  }
+}
+@media (max-width: 577px) {
+  .partnerBox {
+    flex-wrap: wrap;
+  }
+  .partnerBox_content {
+    width: 100%;
+  }
+  .partnerBox_list {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 1rem;
+  }
 }

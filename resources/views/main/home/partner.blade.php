@@ -4,7 +4,7 @@
             <div class="partnerBox_content_title">
                 <h2 class="sectionBox_title">{{ $title ?? null }}</h2>
             </div>
-            <div class="partnerBox_content_desc">
+            <div class="partnerBox_content_desc maxLine_5">
                 {!! $description ?? null !!}
             </div>
         </div>
