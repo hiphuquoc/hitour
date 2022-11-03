@@ -54,6 +54,14 @@
                         <h1 class="titlePage">{{ $item->name ?? null }}</h1>
                         <!-- rating -->
                         @include('main.template.rating', compact('item'))
+                        <!-- video -->
+                        @if(!empty($item->seo->video))
+                            <div class="videoYoutubeBox">
+                                <p class="videoYoutubeBox_video">
+                                    {!! $item->seo->video !!}
+                                </p>
+                            </div>
+                        @endif
                         <!-- content -->
                         {!! $content ?? null !!}
                         <!-- Câu hỏi thường gặp -->

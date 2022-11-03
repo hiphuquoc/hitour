@@ -176,6 +176,10 @@
                         <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
                             @include('admin.form.formGallery')
                         </div>
+                        <!-- Form Video -->
+                        <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
+                            @include('admin.form.formVideo')
+                        </div>
                     </div>
                 </div>
                 <!-- END:: Sidebar content -->

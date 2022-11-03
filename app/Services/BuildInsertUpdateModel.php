@@ -26,6 +26,7 @@ class BuildInsertUpdateModel {
             + rating_author_star
             + rating_aggregate_count
             + rating_aggregate_star
+            + video
         */
         $result                                 = [];
         if(!empty($dataForm)){
@@ -63,6 +64,7 @@ class BuildInsertUpdateModel {
             $result['rating_author_star']       = 5;
             $result['rating_aggregate_count']   = $dataForm['rating_aggregate_count'] ?? 0;
             $result['rating_aggregate_star']    = $dataForm['rating_aggregate_star'] ?? null;
+            $result['video']                    = $dataForm['video'] ?? null;
             $result['created_by']               = Auth::id() ?? 0;
         }
         return $result;

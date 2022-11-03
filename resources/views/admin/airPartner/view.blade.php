@@ -111,6 +111,10 @@
                         <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
                             @include('admin.airPartner.formLogo')
                         </div>
+                        <!-- Form Video -->
+                        <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
+                            @include('admin.form.formVideo')
+                        </div>
                     </div>
                 </div>
             </div>

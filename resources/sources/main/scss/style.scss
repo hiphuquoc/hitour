@@ -3316,8 +3316,8 @@ $width-single-menu  : 260px;
         .container {
             padding-bottom: 3.25rem;
             padding-top: 2.5rem;
-            border-top: 1px solid $bg-03;
-            border-bottom: 1px solid $bg-03;
+            border-top: 1px solid $bg-04;
+            border-bottom: 1px solid $bg-04;
             @media (max-width: 1199px){
                 padding-bottom: 3rem;
                 padding-top: 2.25rem;
@@ -4810,6 +4810,31 @@ $width-single-menu  : 260px;
             width: 100%;
             margin-left: 0;
             margin-top: 1rem;
+        }
+    }
+}
+.videoYoutubeBox {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.25rem;
+    &_video {
+        width: 100%;
+        text-align: center;
+        iframe {
+            width: 100% !important;
+            max-width: 750px !important;
+            height: 460px !important;
+        }
+    }
+    @media(max-width: 767px){
+        margin-top: 1rem;
+    }
+    @media(max-width: 577px){
+        margin-top: 0.75rem;
+        &_video {
+            iframe {
+                height: 300px !important;
+            }
         }
     }
 }

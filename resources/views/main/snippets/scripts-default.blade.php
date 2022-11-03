@@ -29,7 +29,7 @@
                     }else {
                         elemt.removeClass('scrollFixedSidebar').css({
                             'width'         : 'unset',
-                            'margin-top'    : '1.5rem'
+                            'margin-top'    : 0
                         });
                     }
                 });

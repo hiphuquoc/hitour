@@ -3494,8 +3494,8 @@ blockquote em {
 .sectionBox.withBorder .container {
   padding-bottom: 3.25rem;
   padding-top: 2.5rem;
-  border-top: 1px solid #e9ecef;
-  border-bottom: 1px solid #e9ecef;
+  border-top: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
 }
 @media (max-width: 1199px) {
   .sectionBox.withBorder .container {
@@ -4960,5 +4960,33 @@ blockquote em {
     width: 100%;
     margin-left: 0;
     margin-top: 1rem;
+  }
+}
+
+.videoYoutubeBox {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.25rem;
+}
+.videoYoutubeBox_video {
+  width: 100%;
+  text-align: center;
+}
+.videoYoutubeBox_video iframe {
+  width: 100% !important;
+  max-width: 750px !important;
+  height: 460px !important;
+}
+@media (max-width: 767px) {
+  .videoYoutubeBox {
+    margin-top: 1rem;
+  }
+}
+@media (max-width: 577px) {
+  .videoYoutubeBox {
+    margin-top: 0.75rem;
+  }
+  .videoYoutubeBox_video iframe {
+    height: 300px !important;
   }
 }

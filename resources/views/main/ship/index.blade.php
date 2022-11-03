@@ -49,6 +49,14 @@
                         <h1 class="titlePage">Tàu cao tốc {{ $item->name ?? null }}</h1>
                         <!-- rating -->
                         @include('main.template.rating', compact('item'))
+                        <!-- video -->
+                        @if(!empty($item->seo->video))
+                            <div class="videoYoutubeBox">
+                                <p class="videoYoutubeBox_video">
+                                    {!! $item->seo->video !!}
+                                </p>
+                            </div>
+                        @endif
                         <!-- content -->
                         <div class="contentShip">
                             <!-- Lịch tàu và Hãng tàu -->

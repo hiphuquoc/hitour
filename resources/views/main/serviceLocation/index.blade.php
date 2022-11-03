@@ -77,6 +77,21 @@
                 @include('main.serviceLocation.serviceGrid', ['list' => $item->services])
             </div>
         </div>
+
+        <!-- START:: Video -->
+        @if(!empty($item->seo->video))
+            <div class="sectionBox withBorder">
+                <div class="container">
+                    <h2 class="sectionBox_title" style="text-align:center;">Video dịch vụ du lịch {{ $item->display_name ?? null }}</h2>
+                    <div class="videoYoutubeBox">
+                        <div class="videoYoutubeBox_video">
+                            {!! $item->seo->video !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+        <!-- END:: Video -->
         
         <div class="sectionBox noBackground">
             <div class="container">

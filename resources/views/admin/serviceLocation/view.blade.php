@@ -91,6 +91,10 @@
                         <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
                             @include('admin.form.formImage')
                         </div>
+                        <!-- Form Video -->
+                        <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
+                            @include('admin.form.formVideo')
+                        </div>
                         <!-- Form Slider -->
                         <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
                             @include('admin.form.formSlider')

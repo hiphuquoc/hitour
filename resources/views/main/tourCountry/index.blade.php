@@ -98,6 +98,21 @@
                 </div>
             @endif
 
+            <!-- START:: Video -->
+            @if(!empty($item->seo->video))
+                <div class="sectionBox withBorder">
+                    <div class="container">
+                        <h2 class="sectionBox_title" style="text-align:center;">Video Tour du lịch {{ $item->display_name ?? null }}</h2>
+                        <div class="videoYoutubeBox">
+                            <div class="videoYoutubeBox_video">
+                                {!! $item->seo->video !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+            <!-- END:: Video -->
+
             <!-- Hướng dẫn đặt Tour -->
             @include('main.tourLocation.guideBookTour', ['title' => 'Quy trình đặt Tour '.$item->display_name.' và Sử dụng dịch vụ'])
 
