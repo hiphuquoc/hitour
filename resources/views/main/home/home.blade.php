@@ -17,74 +17,7 @@
 <!-- ===== END:: SCHEMA ===== -->
 @endpush
 @section('content')
-    @php
-        $dataSlider = [
-            [
-                'src'   => '/images/main/du-lich-chau-au-hitour-1.jpg',
-                'alt'   => 'Trang Tour du lịch Châu Âu Hitour',
-                'link'  => 'tour-du-lich-chau-au'
-            ],
-            [
-                'src'   => '/images/main/du-lich-bien-dao-hitour-1.webp',
-                'alt'   => 'Trang Tour du lịch biển đảo Hitour'
-            ],
-            [
-                'src'   => '/images/main/dich-vu-lam-visa-hitour-1.png',
-                'alt'   => 'Dịch vụ làm Visa Hitour'
-            ],
-            [
-                'src'   => '/images/main/du-lich-nuoc-ngoai-hitour-1.jpg',
-                'alt'   => 'Trang Tour du lịch Nước ngoài Hitour'
-            ]
-        ];
-        $dataSliderMobile = [
-            [
-                'src'   => '/images/main/du-lich-chau-au-hitour-1-mobile.jpg',
-                'alt'   => 'Trang Tour du lịch Châu Âu Hitour',
-                'link'  => 'tour-du-lich-chau-au'
-            ],
-            [
-                'src'   => '/images/main/du-lich-chau-au-hitour-1-mobile.jpg',
-                'alt'   => 'Trang Tour du lịch Châu Âu Hitour',
-                'link'  => 'tour-du-lich-chau-au'
-            ]
-        ];
-    @endphp
-    <!-- START: Home slider Desktop -->
-    <div class="sliderHome hide-767">
-        @foreach($dataSlider as $slider)
-            <div class="sliderHome_item">
-                @if(!empty($slider['link']))
-                    <a href="/{{ $slider['link'] }}" title="{{ $slider['alt'] }}">
-                        <img src="{{ $slider['src'] }}" alt="{{ $slider['alt'] }}" title="{{ $slider['alt'] }}" />
-                    </a>
-                @else 
-                    <div>
-                        <img src="{{ $slider['src'] }}" alt="{{ $slider['alt'] }}" title="{{ $slider['alt'] }}" />
-                    </div>
-                @endif
-            </div>
-        @endforeach
-    </div>
-    <!-- END: Home slider Desktop -->
-
-    <!-- START: Home slider Mobile -->
-    <div class="sliderHome show-767">
-        @foreach($dataSliderMobile as $slider)
-            <div class="sliderHome_item">
-                @if(!empty($slider['link']))
-                    <a href="/{{ $slider['link'] }}" title="{{ $slider['alt'] }}">
-                        <img src="{{ $slider['src'] }}" alt="{{ $slider['alt'] }}" title="{{ $slider['alt'] }}" />
-                    </a>
-                @else 
-                    <div>
-                        <img src="{{ $slider['src'] }}" alt="{{ $slider['alt'] }}" title="{{ $slider['alt'] }}" />
-                    </div>
-                @endif
-            </div>
-        @endforeach
-    </div>
-    <!-- END: Home slider Mobile -->
+    @include('main.home.slider')
 
     <!-- START: Sort Booking -->
     @php
@@ -94,16 +27,28 @@
     <!-- END: Sort Booking -->
 
     <!-- START: Điểm đến nổi bật -->
-    @if(!empty($airLocations)&&$airLocations->isNotEmpty())
+    @if(!empty($islandLocations)&&$islandLocations->isNotEmpty())
         <div class="sectionBox withBorder">
             <div class="container">
-                <h2 class="sectionBox_title">Điểm đến biển đảo</h2>
+                <h2 class="sectionBox_title">Điểm đến nổi bật</h2>
                 <p>Danh sách điểm đến biển đảo hấp dẫn tại Việt Nam với đầy đủ thông tin du lịch bạn cần.</p>
                 @include('main.home.specialLocation', compact('specialLocations'))
             </div>
         </div>
     @endif
     <!-- END: Điểm đến nổi bật -->
+
+    <!-- START: Điểm đến biển đảo -->
+    @if(!empty($islandLocations)&&$islandLocations->isNotEmpty())
+        <div class="sectionBox withBorder">
+            <div class="container">
+                <h2 class="sectionBox_title">Điểm đến biển đảo</h2>
+                <p>Danh sách điểm đến biển đảo hấp dẫn tại Việt Nam với đầy đủ thông tin du lịch bạn cần.</p>
+                @include('main.home.islandLocation', compact('islandLocations'))
+            </div>
+        </div>
+    @endif
+    <!-- END: Điểm đến biển đảo -->
     
 
     <!-- START: Vé máy bay -->

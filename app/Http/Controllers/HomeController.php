@@ -28,6 +28,10 @@ class HomeController extends Controller {
                                 ->where('district_id', '!=', '0') /* vé giải trí trong nước */
                                 ->with('seo')
                                 ->get();
+        $islandLocations    = TourLocation::select('*')
+                                ->where('island', '1')
+                                ->with('seo')
+                                ->get();
         $specialLocations   = TourLocation::select('*')
                                 ->where('island', '1')
                                 ->with('seo')
@@ -38,6 +42,6 @@ class HomeController extends Controller {
         $airPartners        = AirPartner::select('*')
                                 ->with('seo')
                                 ->get();
-        return view('main.home.home', compact('item', 'shipLocations', 'airLocations', 'serviceLocations', 'specialLocations', 'shipPartners', 'airPartners'));
+        return view('main.home.home', compact('item', 'shipLocations', 'airLocations', 'serviceLocations', 'islandLocations', 'specialLocations', 'shipPartners', 'airPartners'));
     }
 }
