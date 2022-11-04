@@ -31,7 +31,7 @@
         <div class="sectionBox withBorder">
             <div class="container">
                 <h2 class="sectionBox_title">Điểm đến nổi bật</h2>
-                <p>Danh sách điểm đến biển đảo hấp dẫn tại Việt Nam với đầy đủ thông tin du lịch bạn cần.</p>
+                <p>Điểm đến hot nhất do khách du lịch bình chọn.</p>
                 @include('main.home.specialLocation', compact('specialLocations'))
             </div>
         </div>
@@ -56,7 +56,7 @@
         <div class="sectionBox withBorder">
             <div class="container">
                 <h2 class="sectionBox_title">Vé máy bay trong nước</h2>
-                <p>Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ <strong>Cho thuê xe tại {{ $item->display_name ?? null }}</strong> của Hitour với đầy đủ lựa chọn (tự lái hoặc có tài xế), xe đời mới, nhiều loại phù hợp yêu cầu và mức giá hợp lí.</p>
+                <p>Tổng hợp các chuyến bay trong nước của tất cả các hãng máy bay đang hoạt động tại Việt Nam.</p>
                 @include('main.home.airLocationList', compact('airLocations'))
             </div>
         </div>
@@ -68,7 +68,7 @@
         <div class="sectionBox withBorder">
             <div class="container">
                 <h2 class="sectionBox_title">Vé tàu cao tốc</h2>
-                <p>Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ <strong>Cho thuê xe tại {{ $item->display_name ?? null }}</strong> của Hitour với đầy đủ lựa chọn (tự lái hoặc có tài xế), xe đời mới, nhiều loại phù hợp yêu cầu và mức giá hợp lí.</p>
+                <p>Tổng hợp các chuyến tàu cao tốc biển đảo của tất cả các hãng tàu đang hoạt động tại Việt Nam.</p>
                 @include('main.home.shipLocationList', compact('shipLocations'))
             </div>
         </div>
@@ -80,7 +80,7 @@
         <div class="sectionBox withBorder">
             <div class="container">
                 <h2 class="sectionBox_title">Vé vui chơi giải trí</h2>
-                <p>Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ <strong>Cho thuê xe tại {{ $item->display_name ?? null }}</strong> của Hitour với đầy đủ lựa chọn (tự lái hoặc có tài xế), xe đời mới, nhiều loại phù hợp yêu cầu và mức giá hợp lí.</p>
+                <p>Tổng hợp vé vui chơi và hoạt động giải trí theo từng địa điểm cụ thể.</p>
                 @include('main.home.serviceLocationList', compact('serviceLocations'))
             </div>
         </div>
@@ -93,7 +93,7 @@
             <div class="container">
                 @include('main.home.partner', [
                     'list'          => $shipPartners,
-                    'title'         => 'Đối tác tàu cao tốc Hitour',
+                    'title'         => 'Đối tác tàu cao tốc',
                     'description'   => 'Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ'
                 ])
             </div>
@@ -107,7 +107,7 @@
             <div class="container">
                 @include('main.home.partner', [
                     'list'          => $airPartners,
-                    'title'         => 'Đối tác máy bay Hitour',
+                    'title'         => 'Đối tác máy bay',
                     'description'   => 'Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ'
                 ])
             </div>

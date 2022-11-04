@@ -262,9 +262,23 @@ button {
     }
 }
 
+.hide-1199 {
+    display: block !important;
+    @media (max-width: 1199px){
+        display: none !important;
+    }
+}
+
 .show-767 {
     display: none !important;
     @media (max-width: 767px){
+        display: block !important;
+    }
+}
+
+.show-1199 {
+    display: none !important;
+    @media (max-width: 1199px){
         display: block !important;
     }
 }

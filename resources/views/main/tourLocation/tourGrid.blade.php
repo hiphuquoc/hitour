@@ -54,3 +54,4 @@
         <!-- chứa phần tử tạm của filter => để hiệu chỉnh nth-child cho chính xác -->
     </div>
 @endif
+@include('main.tourLocation.loadingGridBox')

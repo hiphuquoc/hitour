@@ -262,11 +262,29 @@ button i {
   }
 }
 
+.hide-1199 {
+  display: block !important;
+}
+@media (max-width: 1199px) {
+  .hide-1199 {
+    display: none !important;
+  }
+}
+
 .show-767 {
   display: none !important;
 }
 @media (max-width: 767px) {
   .show-767 {
+    display: block !important;
+  }
+}
+
+.show-1199 {
+  display: none !important;
+}
+@media (max-width: 1199px) {
+  .show-1199 {
     display: block !important;
   }
 }
@@ -4789,6 +4807,111 @@ blockquote em {
   height: 220px;
   top: 490px;
   left: 450px;
+}
+
+.specialLocationBoxMobile {
+  display: flex;
+  flex-wrap: wrap;
+}
+.specialLocationBoxMobile_item {
+  position: relative;
+  box-shadow: 0 0 4px #adb5bd;
+  border-radius: 5px;
+  border: 1px solid #f8f9fa;
+}
+.specialLocationBoxMobile_item_content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.8));
+  color: #fff;
+  border-radius: 5px;
+}
+.specialLocationBoxMobile_item_content h2, .specialLocationBoxMobile_item_content h3, .specialLocationBoxMobile_item_content h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: rgb(244, 208, 63);
+}
+.specialLocationBoxMobile_item_content div {
+  font-size: 1rem;
+}
+.specialLocationBoxMobile_item a {
+  display: flex;
+}
+.specialLocationBoxMobile_item a img {
+  width: 100%;
+  margin: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 5px;
+}
+.specialLocationBoxMobile_item:nth-child(1) {
+  margin-left: 0;
+  width: calc(50% - 0.75rem);
+}
+.specialLocationBoxMobile_item:nth-child(2) {
+  margin-left: 1.5rem;
+  width: calc(50% - 0.75rem);
+}
+.specialLocationBoxMobile_item:nth-child(3), .specialLocationBoxMobile_item:nth-child(6), .specialLocationBoxMobile_item:nth-child(9) {
+  margin-left: 0;
+  margin-top: 1.5rem;
+  width: calc(33.33% - 1rem);
+}
+.specialLocationBoxMobile_item:nth-child(4), .specialLocationBoxMobile_item:nth-child(5), .specialLocationBoxMobile_item:nth-child(7), .specialLocationBoxMobile_item:nth-child(8), .specialLocationBoxMobile_item:nth-child(10), .specialLocationBoxMobile_item:nth-child(11) {
+  margin-left: 1.5rem;
+  margin-top: 1.5rem;
+  width: calc(33.33% - 1rem);
+}
+.specialLocationBoxMobile_item:nth-child(12) {
+  margin-left: 0;
+  width: calc(50% - 0.75rem);
+  margin-top: 1.5rem;
+}
+.specialLocationBoxMobile_item:nth-child(13) {
+  margin-left: 1.5rem;
+  margin-top: 1.5rem;
+  width: calc(50% - 0.75rem);
+}
+@media (max-width: 767px) {
+  .specialLocationBoxMobile_item:nth-child(1) {
+    width: calc(50% - 0.5rem);
+  }
+  .specialLocationBoxMobile_item:nth-child(2) {
+    margin-left: 1rem;
+    width: calc(50% - 0.5rem);
+  }
+  .specialLocationBoxMobile_item:nth-child(3), .specialLocationBoxMobile_item:nth-child(6), .specialLocationBoxMobile_item:nth-child(9) {
+    margin-top: 1rem;
+    width: calc(33.33% - 1rem);
+  }
+  .specialLocationBoxMobile_item:nth-child(4), .specialLocationBoxMobile_item:nth-child(5), .specialLocationBoxMobile_item:nth-child(7), .specialLocationBoxMobile_item:nth-child(8), .specialLocationBoxMobile_item:nth-child(10), .specialLocationBoxMobile_item:nth-child(11) {
+    margin-left: 1rem;
+    margin-top: 1rem;
+    width: calc(33.33% - 0.6666rem);
+  }
+  .specialLocationBoxMobile_item:nth-child(12) {
+    margin-top: 1rem;
+    width: calc(50% - 0.6666rem);
+  }
+  .specialLocationBoxMobile_item:nth-child(13) {
+    margin-left: 1rem;
+    margin-top: 1rem;
+    width: calc(50% - 0.5rem);
+  }
+}
+@media (max-width: 577px) {
+  .specialLocationBoxMobile_item:nth-child(3), .specialLocationBoxMobile_item:nth-child(6), .specialLocationBoxMobile_item:nth-child(9), .specialLocationBoxMobile_item:nth-child(4), .specialLocationBoxMobile_item:nth-child(5), .specialLocationBoxMobile_item:nth-child(7), .specialLocationBoxMobile_item:nth-child(8), .specialLocationBoxMobile_item:nth-child(10), .specialLocationBoxMobile_item:nth-child(11) {
+    width: calc(50% - 0.5rem);
+  }
+  .specialLocationBoxMobile_item:nth-child(2n+1) {
+    margin-left: 0;
+  }
+  .specialLocationBoxMobile_item:not(:nth-child(2n+1)) {
+    margin-left: 1rem;
+  }
 }
 
 .filterBox {

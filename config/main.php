@@ -13,5 +13,5 @@ return [
     'svg'           => [
         'loading_main'  => '/images/main/svg/loading_plane_bge9ecef.svg'
     ],
-    'title_list_service_sidebar'    => 'Có thể bạn cần?'
+    'title_list_service_sidebar'        => 'Có thể bạn cần?'
 ];

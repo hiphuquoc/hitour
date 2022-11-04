@@ -67,7 +67,7 @@
         <div class="sectionBox">
             <div class="container">
                 <!-- title -->
-                <h1 class="titlePage">Tour {{ $item->display_name }} - Giới thiệu Tour du lịch {{ $item->display_name }}</h1>
+                <h1 class="titlePage">Tour {{ $item->display_name ?? null }} - Giới thiệu Tour du lịch {{ $item->display_name ?? null }}</h1>
                 <!-- rating -->
                 @include('main.template.rating', compact('item'))
                 <!-- content -->
@@ -87,8 +87,8 @@
         <!-- Tour box -->
         <div class="sectionBox backgroundPrimaryGradiend">
             <div class="container">
-                <h2 class="sectionBox_title">Tour {{ $item->display_name }} - Danh sách Tour du lịch {{ $item->display_name ?? null }} chất lượng</h2>
-                <p>Để đến được {{ $item->display_name ?? null }} nhanh chóng, an toàn và tiện lợi tốt nhất bạn nên di chuyển bằng máy bay. Thông tin chi tiết các <strong>chuyến bay đến {{ $item->display_name ?? null }}</strong> bạn có thể tham khảo bên dưới</p>
+                <h2 class="sectionBox_title">Tour {{ $item->display_name ?? null }} - Danh sách Tour du lịch {{ $item->display_name ?? null }} chất lượng</h2>
+                <p>Tổng hợp các chương trình <strong>Tour {{ $item->display_name ?? null }} trọn gói</strong> và <strong>Tour {{ $item->display_name ?? null }} trong ngày</strong> đa dạng, chất lượng hàng đầu được cung cấp và đảm bảo bởi Hitour cùng hệ thống đối tác du lịch trên toàn quốc.</p>
                 @include('main.tourLocation.filterBox')
                 @php
                     $dataTours              = new \Illuminate\Support\Collection();
@@ -96,7 +96,6 @@
                 @endphp
                 @if(!empty($item->tours)&&$item->tours->isNotEmpty())
                     @include('main.tourLocation.tourGrid', ['list' => $dataTours])
-                    @include('main.tourLocation.loadingGridBox')
                 @else 
                     <div style="color:rgb(0,123,255);">Các chương trình <strong>Tour {{ $item->display_name ?? null }}</strong> đang được Hitour cập nhật và sẽ sớm giới thiệu đến Quý khách trong thời gian tới!</div>
                 @endif
@@ -191,7 +190,7 @@
                     @else 
                         <h2 class="sectionBox_title">Vé vui chơi tại {{ $item->display_name ?? null }}</h2>
                     @endif
-                    <p>Ngoài các chương trình <strong>Tour {{ $item->display_name ?? null }}</strong> bạn cũng có thể tham khảo thêm các <strong>hoạt động vui chơi, giải trí khác tại {{ $item->display_name ?? null }}</strong>. Đây là các chương trình đặc biệt bạn có thể tham gia để bù đắp thời gian tự túc trong <strong>chương trình Tour</strong> và chắc chắn sẽ mang đến cho bạn nhiều trải nghiệm thú vị.</p>
+                    <p>Ngoài các <strong>chương trình Tour {{ $item->display_name ?? null }}</strong> bạn cũng có thể tham khảo thêm các <strong>hoạt động vui chơi, giải trí khác tại {{ $item->display_name ?? null }}</strong>. Đây là các chương trình đặc biệt bạn có thể tham gia để bù đắp thời gian tự túc trong <strong>chương trình Tour</strong> và chắc chắn sẽ mang đến cho bạn nhiều trải nghiệm thú vị.</p>
                     @include('main.tourLocation.serviceGrid', [
                         'list'          => $item->serviceLocations,
                         'itemHeading'   => 'h3'
@@ -232,7 +231,7 @@
             <div class="sectionBox">
                 <div class="container">
                     <h2 class="sectionBox_title">Đặc sản {{ $item->display_name ?? null }}</h2>
-                    <p>Tổng hợp những món ngon, đặc sản nổi tiếng tại {{ $item->display_name ?? null }}.</p>
+                    <p>Tổng hợp những món ngon, đặc sản nổi tiếng tại {{ $item->display_name ?? null }} bạn có thể mua làm quà hoặc thưởng thức ít nhất một lần.</p>
                     @include('main.tourLocation.blogGridSlick', ['list' => $specialList, 'limit' => 10])
                 </div>
             </div>

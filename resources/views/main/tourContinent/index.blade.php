@@ -90,20 +90,25 @@
             </div>
 
             <!-- Tour box -->
-            @if(!empty($item->tourCountries)&&$item->tourCountries->isNotEmpty())
-                <div class="sectionBox backgroundPrimaryGradiend">
-                    <div class="container">
-                        <h2 class="sectionBox_title">Tour {{ $item->display_name }} - Danh sách Tour du lịch {{ $item->display_name ?? null }} chất lượng</h2>
-                        @php
-                            $dataTours              = new \Illuminate\Support\Collection();
-                            foreach($item->tourCountries as $tourCountry){
-                                foreach($tourCountry->tours as $tour) if(!empty($tour->infoTourForeign)) $dataTours[] = $tour->infoTourForeign;
-                            }
-                        @endphp
+            <div class="sectionBox backgroundPrimaryGradiend">
+                <div class="container">
+                    <h2 class="sectionBox_title">Tour {{ $item->display_name }} - Danh sách Tour du lịch {{ $item->display_name ?? null }} chất lượng</h2>
+                    <p>Tổng hợp các chương trình <strong>Tour {{ $item->display_name ?? null }}</strong> đa dạng, chất lượng hàng đầu được cung cấp và đảm bảo bởi Hitour cùng hệ thống đối tác.</p>
+                    @include('main.tourLocation.filterBox')
+                    @php
+                        $dataTours              = new \Illuminate\Support\Collection();
+                        foreach($item->tourCountries as $tourCountry){
+                            foreach($tourCountry->tours as $tour) if(!empty($tour->infoTourForeign)) $dataTours[] = $tour->infoTourForeign;
+                        }
+                    @endphp
+                    @if(!empty($item->tourCountries)&&$item->tourCountries->isNotEmpty())
                         @include('main.tourLocation.tourGrid', ['list' => $dataTours])
-                    </div>
+                    @else 
+                        <div style="color:rgb(0,123,255);">Các chương trình <strong>Tour {{ $item->display_name ?? null }}</strong> đang được Hitour cập nhật và sẽ sớm giới thiệu đến Quý khách trong thời gian tới!</div>
+                    @endif
                 </div>
-            @endif
+            </div>
+            
 
             <!-- START:: Video -->
             @if(!empty($item->seo->video))
@@ -152,7 +157,7 @@
                 <div class="sectionBox">
                     <div class="container">
                         <h2 class="sectionBox_title">Vé vui chơi tại {{ $item->display_name ?? null }}</h2>
-                        <p>Ngoài các chương trình <strong>Tour {{ $item->display_name ?? null }}</strong> bạn cũng có thể tham khảo thêm các <strong>hoạt động vui chơi, giải trí khác tại {{ $item->display_name ?? null }}</strong>. Đây là các chương trình đặc biệt bạn có thể tham gia để bù đắp thời gian tự túc trong <strong>chương trình Tour</strong> và chắc chắn sẽ mang đến cho bạn nhiều trải nghiệm thú vị.</p>
+                        <p>Ngoài các <strong>chương trình Tour {{ $item->display_name ?? null }}</strong> bạn cũng có thể tham khảo thêm các <strong>hoạt động vui chơi, giải trí khác tại {{ $item->display_name ?? null }}</strong>. Đây là các chương trình đặc biệt bạn có thể tham gia để bù đắp thời gian tự túc trong <strong>chương trình Tour</strong> và chắc chắn sẽ mang đến cho bạn nhiều trải nghiệm thú vị.</p>
                         @include('main.tourLocation.serviceGrid', [
                             'list'          => $item->serviceLocations,
                             'itemHeading'   => 'h3'
