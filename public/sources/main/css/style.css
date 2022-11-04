@@ -666,12 +666,10 @@ input, textarea {
 .sliderHome_item a, .sliderHome_item div {
   display: flex;
   margin: 0;
-}
-.sliderHome_item a img, .sliderHome_item div img {
   width: 100%;
-  border-radius: 5px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  height: 100%;
+  background-repeat: no-repeat !important;
+  background-size: 100% auto !important;
 }
 .sliderHome:hover .slick-prev, .sliderHome:hover .slick-next {
   display: block;
@@ -4666,6 +4664,7 @@ blockquote em {
 .specialLocationBox {
   height: 770px;
   position: relative;
+  display: none;
 }
 .specialLocationBox_item {
   position: absolute;

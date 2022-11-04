@@ -32,17 +32,13 @@
     ];
 @endphp
 <!-- START: Home slider Desktop -->
-<div class="sliderHome hide-767">
+<div id="js_setHeightSliderHomeDesktop_box" class="sliderHome hide-767">
     @foreach($dataSlider as $slider)
         <div class="sliderHome_item">
             @if(!empty($slider['link']))
-                <a href="/{{ $slider['link'] }}" title="{{ $slider['alt'] }}">
-                    <img src="{{ $slider['src'] }}" alt="{{ $slider['alt'] }}" title="{{ $slider['alt'] }}" />
-                </a>
+                <a href="/{{ $slider['link'] }}" title="{{ $slider['alt'] }}" style="background:url({{ $slider['src'] }});"></a>
             @else 
-                <div>
-                    <img src="{{ $slider['src'] }}" alt="{{ $slider['alt'] }}" title="{{ $slider['alt'] }}" />
-                </div>
+                <div style="background:url({{ $slider['src'] }});"></div>
             @endif
         </div>
     @endforeach
@@ -50,19 +46,35 @@
 <!-- END: Home slider Desktop -->
 
 <!-- START: Home slider Mobile -->
-<div class="sliderHome show-767">
+<div id="js_setHeightSliderHomeMobile_box" class="sliderHome show-767">
     @foreach($dataSliderMobile as $slider)
         <div class="sliderHome_item">
             @if(!empty($slider['link']))
-                <a href="/{{ $slider['link'] }}" title="{{ $slider['alt'] }}">
-                    <img src="{{ $slider['src'] }}" alt="{{ $slider['alt'] }}" title="{{ $slider['alt'] }}" />
-                </a>
+                <a href="/{{ $slider['link'] }}" title="{{ $slider['alt'] }}" style="background:url({{ $slider['src'] }});"></a>
             @else 
-                <div>
-                    <img src="{{ $slider['src'] }}" alt="{{ $slider['alt'] }}" title="{{ $slider['alt'] }}" />
-                </div>
+                <div style="background:url({{ $slider['src'] }});"></div>
             @endif
         </div>
     @endforeach
 </div>
 <!-- END: Home slider Mobile -->
+@push('scripts-custom')
+    <script type="text/javascript">
+        setHeightSliderHomeDesktop();
+        setHeightSliderHomeMobile();
+        $(window).resize(function(){
+            setHeightSliderHomeDesktop();
+            setHeightSliderHomeMobile();
+        });
+        function setHeightSliderHomeDesktop(){
+            const valueWidth    = $('#js_setHeightSliderHomeDesktop_box').innerWidth();
+            const valueHeight   = parseInt(valueWidth)*0.3385;
+            $('#js_setHeightSliderHomeDesktop_box .sliderHome_item').css('height', valueHeight+'px');
+        }
+        function setHeightSliderHomeMobile(){
+            const valueWidth    = $('#js_setHeightSliderHomeMobile_box').innerWidth();
+            const valueHeight   = parseInt(valueWidth)*0.7333;
+            $('#js_setHeightSliderHomeMobile_box .sliderHome_item').css('height', valueHeight+'px');
+        }
+    </script>
+@endpush
