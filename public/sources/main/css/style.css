@@ -3254,7 +3254,7 @@ blockquote em {
   background-repeat: no-repeat;
   width: 55px;
   height: 55px;
-  border-radius: 50%;
+  border-radius: 100%;
   position: absolute;
   top: 0.5rem;
   left: 0;
@@ -3727,7 +3727,7 @@ blockquote em {
 }
 .guideBookBoxMobile_box_content .slick-dots li.slick-active button {
   background: rgb(244, 208, 63);
-  border-radius: 50%;
+  border-radius: 100%;
   padding: 8px 12px;
 }
 
@@ -3839,7 +3839,7 @@ blockquote em {
   z-index: 100;
   font-size: 1.2rem;
   padding: 0.5rem 0.75rem;
-  border-radius: 50%;
+  border-radius: 100%;
   background: rgba(0, 0, 0, 0.3);
   color: #fff;
   cursor: pointer;
@@ -4668,7 +4668,9 @@ blockquote em {
 .specialLocationBox_item {
   position: absolute;
   overflow: hidden;
-  border-radius: 50%;
+  border-radius: 100%;
+  border: 1px solid #fff;
+  box-shadow: 0 5px 10px #adb5bd;
 }
 .specialLocationBox_item_box {
   position: relative;

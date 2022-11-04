@@ -85,21 +85,24 @@
         </div>
 
         <!-- Tour box -->
-        @if(!empty($item->tours)&&$item->tours->isNotEmpty())
-            <div class="sectionBox backgroundPrimaryGradiend">
-                <div class="container">
-                    <h2 class="sectionBox_title">Tour {{ $item->display_name }} - Danh sách Tour du lịch {{ $item->display_name ?? null }} chất lượng</h2>
-                    <p>Để đến được {{ $item->display_name ?? null }} nhanh chóng, an toàn và tiện lợi tốt nhất bạn nên di chuyển bằng máy bay. Thông tin chi tiết các <strong>chuyến bay đến {{ $item->display_name ?? null }}</strong> bạn có thể tham khảo bên dưới</p>
-                    @include('main.tourLocation.filterBox')
-                    @php
-                        $dataTours              = new \Illuminate\Support\Collection();
-                        foreach($item->tours as $tour) if(!empty($tour->infoTour)) $dataTours[] = $tour->infoTour;
-                    @endphp
+        <div class="sectionBox backgroundPrimaryGradiend">
+            <div class="container">
+                <h2 class="sectionBox_title">Tour {{ $item->display_name }} - Danh sách Tour du lịch {{ $item->display_name ?? null }} chất lượng</h2>
+                <p>Để đến được {{ $item->display_name ?? null }} nhanh chóng, an toàn và tiện lợi tốt nhất bạn nên di chuyển bằng máy bay. Thông tin chi tiết các <strong>chuyến bay đến {{ $item->display_name ?? null }}</strong> bạn có thể tham khảo bên dưới</p>
+                @include('main.tourLocation.filterBox')
+                @php
+                    $dataTours              = new \Illuminate\Support\Collection();
+                    foreach($item->tours as $tour) if(!empty($tour->infoTour)) $dataTours[] = $tour->infoTour;
+                @endphp
+                @if(!empty($item->tours)&&$item->tours->isNotEmpty())
                     @include('main.tourLocation.tourGrid', ['list' => $dataTours])
                     @include('main.tourLocation.loadingGridBox')
-                </div>
+                @else 
+                    <div style="color:rgb(0,123,255);">Các chương trình <strong>Tour {{ $item->display_name ?? null }}</strong> đang được Hitour cập nhật và sẽ sớm giới thiệu đến Quý khách trong thời gian tới!</div>
+                @endif
             </div>
-        @endif
+        </div>
+        
 
         <!-- START:: Video -->
         @if(!empty($item->seo->video))

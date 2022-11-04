@@ -3065,7 +3065,7 @@ $width-single-menu  : 260px;
             background-repeat: no-repeat;
             width: 55px;
             height: 55px;
-            border-radius: 50%;
+            border-radius: 100%;
             position: absolute;
             top: 0.5rem;
             left: 0;
@@ -3522,7 +3522,7 @@ $width-single-menu  : 260px;
                     &.slick-active {
                         button {
                             background: $color-secondary;
-                            border-radius: 50%;
+                            border-radius: 100%;
                             padding: 8px 12px;
                         }
                     }
@@ -3646,7 +3646,7 @@ $width-single-menu  : 260px;
                 z-index: 100;
                 font-size: 1.2rem;
                 padding: 0.5rem 0.75rem;
-                border-radius: 50%;
+                border-radius: 100%;
                 background: rgba(0,0,0,0.3);
                 color: #fff;
                 cursor: pointer;
@@ -4529,7 +4529,9 @@ $width-single-menu  : 260px;
     &_item {
         position: absolute;
         overflow: hidden;
-        border-radius: 50%;
+        border-radius: 100%;
+        border: 1px solid #fff;
+        box-shadow: 0 5px 10px $bg-06;
         &_box {
             position: relative;
             width: 100%;
