@@ -4662,9 +4662,8 @@ blockquote em {
 }
 
 .specialLocationBox {
-  height: 770px;
+  height: 710px;
   position: relative;
-  display: none;
 }
 .specialLocationBox_item {
   position: absolute;
