@@ -67,18 +67,10 @@
             </div>
 
             <!-- START:: Video -->
-            @if(!empty($item->seo->video))
-                <div class="sectionBox withBorder">
-                    <div class="container">
-                        <h2 class="sectionBox_title" style="text-align:center;">Video Vé máy bay {{ $item->display_name ?? null }}</h2>
-                        <div class="videoYoutubeBox">
-                            <div class="videoYoutubeBox_video">
-                                {!! $item->seo->video !!}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
+            @include('main.tourLocation.videoBox', [
+                'item'  => $item,
+                'title' => 'Video Vé máy bay '.$item->display_name
+            ])
             <!-- END:: Video -->
             
             <div class="sectionBox noBackground">
