@@ -658,6 +658,7 @@ $width_normalMenu : 250px;
         margin: 1rem 0 1.5rem 0;
     }
     h2 {
+        color: $color-title;
         font-size: 1.4rem;
         margin: 1.5rem 0 0.75rem 0;
     }
@@ -3340,6 +3341,14 @@ $width-single-menu  : 260px;
     }
     &_title {
         @include titleSection;
+    }
+    a {
+        .sectionBox_title {
+            color: $color-text;
+            &:hover {
+                color: $color-primary-hover;
+            }
+        }
     }
     &.backgroundPrimary {
         background: rgba(0,123,255,0.075) !important;

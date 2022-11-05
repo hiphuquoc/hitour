@@ -1005,6 +1005,7 @@ input, textarea {
   margin: 1rem 0 1.5rem 0;
 }
 .pageContent h2 {
+  color: #345;
   font-size: 1.4rem;
   margin: 1.5rem 0 0.75rem 0;
 }
@@ -3139,6 +3140,7 @@ blockquote em {
   font-size: 1.5rem !important;
   margin: 0 0 0.75rem 0 !important;
   color: #345;
+  display: inline-block;
 }
 @media (min-width: 768px) and (max-width: 1023px) {
   .faqBox_title h2, .faqBox_title h3 {
@@ -3544,6 +3546,7 @@ blockquote em {
   font-size: 1.5rem !important;
   margin: 0 0 0.75rem 0 !important;
   color: #345;
+  display: inline-block;
 }
 @media (min-width: 768px) and (max-width: 1023px) {
   .sectionBox_title {
@@ -3555,6 +3558,12 @@ blockquote em {
     font-size: 1.4rem !important;
     margin: 0 0 0.5rem 0 !important;
   }
+}
+.sectionBox a .sectionBox_title {
+  color: #567;
+}
+.sectionBox a .sectionBox_title:hover {
+  color: rgb(0, 90, 180);
 }
 .sectionBox.backgroundPrimary {
   background: rgba(0, 123, 255, 0.075) !important;

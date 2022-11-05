@@ -107,7 +107,9 @@
         @if(!empty($item->seo->video))
             <div class="sectionBox withBorder">
                 <div class="container">
-                    <h2 class="sectionBox_title" style="text-align:center;">Video Tour du lịch {{ $item->display_name ?? null }}</h2>
+                    <div style="text-align:center;">
+                        <h2 class="sectionBox_title">Video Tour du lịch {{ $item->display_name ?? null }}</h2>
+                    </div>
                     <div class="videoYoutubeBox">
                         <div class="videoYoutubeBox_video">
                             {!! $item->seo->video !!}
