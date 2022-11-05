@@ -1399,6 +1399,9 @@ input, textarea {
   color: #003B7B;
   margin: 0;
 }
+.tourGrid_item_content_desc h3.maxLine_4, .tourGrid_item_content_desc h4.maxLine_4, .serviceGrid_item_content_desc h3.maxLine_4, .serviceGrid_item_content_desc h4.maxLine_4 {
+  -webkit-line-clamp: unset;
+}
 .tourGrid_item_content_departureFrom, .serviceGrid_item_content_departureFrom {
   color: #567;
   font-size: 0.95rem;

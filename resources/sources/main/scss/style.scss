@@ -1053,6 +1053,9 @@ $tourGrid_radius : 5px;
                     font-family: $font-primary-title;
                     color: #003B7B;
                     margin: 0;
+                    &.maxLine_4 {
+                        -webkit-line-clamp: unset;
+                    }
                 }
             }
             &_departureFrom {
