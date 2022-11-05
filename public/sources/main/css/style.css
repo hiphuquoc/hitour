@@ -680,6 +680,7 @@ input, textarea {
 /* START:: Slider ======================================== */
 .sliderHome {
   position: relative;
+  overflow: hidden;
 }
 .sliderHome_item a, .sliderHome_item div {
   transition: all 1s;

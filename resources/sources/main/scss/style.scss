@@ -363,6 +363,7 @@ $height_headerMain : 80px;
 /* START:: Slider ======================================== */
 .sliderHome {
     position: relative;
+    overflow: hidden;
     &_item {
         a, div {
             transition: all 1s;
