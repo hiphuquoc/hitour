@@ -30,70 +30,81 @@
             'link'  => 'tour-du-lich-chau-au'
         ]
     ];
-    /* xhtml của slider desktop */
-    $xhtmlSliderDesktop         = null;
-    foreach($dataSlider as $slider){
-        if(!empty($slider['link'])){
-            // style="background:url('.$slider['src'].');"
-            $xhtmlSliderDesktop .= '<div class="sliderHome_item">
-                                        <a href="/'.$slider['link'].'" title="'.$slider['alt'].'" data-image="'.$slider['src'].'" style="background:url('.$slider['src'].');"></a>
-                                    </div>';
-        }else {
-            $xhtmlSliderDesktop .= '<div class="sliderHome_item">
-                                        <div data-image="'.$slider['src'].'" style="background:url('.$slider['src'].');"></div>
-                                    </div>';
-        }
-    }
-    /* xhtml của slider mobile */
-    $xhtmlSliderMobile          = null;
-    foreach($dataSliderMobile as $slider){
-        if(!empty($slider['link'])){
-            $xhtmlSliderMobile  .= '<div class="sliderHome_item">
-                                        <a href="/'.$slider['link'].'" title="'.$slider['alt'].'" data-image="'.$slider['src'].'" style="background:url('.$slider['src'].');"></a>
-                                    </div>';
-        }else {
-            $xhtmlSliderMobile  .= '<div class="sliderHome_item">
-                                        <div data-image="'.$slider['src'].'" style="background:url('.$slider['src'].');"></div>
-                                    </div>';
-        }
-    }
 @endphp
 <!-- START: Home slider Desktop -->
 <div id="js_lazyloadSliderDesktop_box" class="sliderHome hide-767">
-    <div class="sliderHome_item">
-        <div><img src="{{ config('main.background_slider_home') }}" alt="{{ config('main.description') }}" title="{{ config('main.description') }}" /></div>
-    </div>
+    @foreach($dataSlider as $slider)
+        <div class="sliderHome_item" data-image="{{ $slider['src'] }}" data-link="{{ $slider['link'] ?? null }}" data-title="{{ $slider['alt'] }}">
+            <img src="{{ config('main.background_slider_home') }}" alt="{{ config('main.description') }}" title="{{ config('main.description') }}" />
+        </div>
+    @endforeach
 </div>
 <!-- END: Home slider Desktop -->
 
-<!-- START: Home slider Mobile -->
+{{-- <!-- START: Home slider Mobile -->
 <div id="js_lazyloadSliderMobile_box" class="sliderHome show-767">
-    <div class="sliderHome_item">
-        <div><img src="{{ config('main.background_slider_home') }}" alt="{{ config('main.description') }}" title="{{ config('main.description') }}" /></div>
-    </div>
+    @foreach($dataSlider as $slider)
+        <div class="sliderHome_item">
+            <div class="sliderHome_item">
+                <div><img src="{{ config('main.background_slider_home') }}" alt="{{ config('main.description') }}" title="{{ config('main.description') }}" /></div>
+            </div>
+        </div>
+    @endforeach
 </div>
-<!-- END: Home slider Mobile -->
+<!-- END: Home slider Mobile --> --}}
 @push('scripts-custom')
     <script type="text/javascript">
-        lazyloadSliderDesktop();
-        lazyloadSliderMobile();
-        $(window).resize(function(){
-            setHeightBox('js_lazyloadSliderDesktop_box', 0.3385);
-            setHeightBox('js_lazyloadSliderMobile_box', 0.7333);
+        setTimeout(() => {
+            lazyloadSliderDesktop();
+            // lazyloadSliderMobile();
+        }, 0);
+
+        setupSlick();
+        $('.sliderHome').slick({
+            dots: true,
+            arrows: true,
+            autoplay: true,
+            infinite: true,
+            autoplaySpeed: 5000,
+            lazyLoad: 'ondemand',
+            responsive: [
+                {
+                    breakpoint: 567,
+                    settings: {
+                        arrows: false,
+                    }
+                }
+            ]
         });
+
+        function setupSlick(){
+            setTimeout(function(){
+                $('.sliderHome .slick-prev').html('<i class="fa-solid fa-arrow-left-long"></i>');
+                $('.sliderHome .slick-next').html('<i class="fa-solid fa-arrow-right-long"></i>');
+                $('.sliderHome .slick-dots button').html('');
+            }, 0);
+        }
+
+        // $(window).resize(function(){
+        //     setHeightBox('js_lazyloadSliderDesktop_box', 0.3385);
+        //     setHeightBox('js_lazyloadSliderMobile_box', 0.7333);
+        //     setupSlick();
+        // });
         function lazyloadSliderDesktop(){
             /* hiển thị ảnh */
-            const valueContent  = <?php echo json_encode($xhtmlSliderDesktop) ?>;
-            $('#js_lazyloadSliderDesktop_box').html(valueContent);
+            $('#js_lazyloadSliderDesktop_box').find('.sliderHome_item').each(function(){
+                const image     = $(this).data('image');
+                const link      = $(this).data('link');
+                const title     = $(this).data('title');
+                if(link!=''){
+                    var xhtml   = '<a href="'+link+'" title="'+title+'" style="background:url('+image+')"></a>';
+                }else {
+                    var xhtml   = '<div style="background:url('+image+')"></div>';
+                }
+                $(this).html(xhtml);
+            });
             /* setheight box */
             setHeightBox('js_lazyloadSliderDesktop_box', 0.3385);
-        }
-        function lazyloadSliderMobile(){
-            /* hiển thị ảnh */
-            const valueContent  = <?php echo json_encode($xhtmlSliderMobile) ?>;
-            $('#js_lazyloadSliderMobile_box').html(valueContent);
-            /* setheight box */
-            setHeightBox('js_lazyloadSliderMobile_box', 0.7333);
         }
         function setHeightBox(idBox, ratio){
             const valueWidth    = $('#'+idBox).innerWidth();

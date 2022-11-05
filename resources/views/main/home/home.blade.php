@@ -124,36 +124,8 @@
 @endsection
 @push('scripts-custom')
     <script type="text/javascript">
-        $(window).on('load', function () {
-            setupSlick();
-            $(window).resize(function(){
-                setupSlick();
-            })
-
-            $('.sliderHome').slick({
-                dots: true,
-                arrows: true,
-                autoplay: true,
-                infinite: true,
-                autoplaySpeed: 5000,
-                lazyLoad: 'ondemand',
-                responsive: [
-                    {
-                        breakpoint: 567,
-                        settings: {
-                            arrows: false,
-                        }
-                    }
-                ]
-            });
-
-            function setupSlick(){
-                setTimeout(function(){
-                    $('.sliderHome .slick-prev').html('<i class="fa-solid fa-arrow-left-long"></i>');
-                    $('.sliderHome .slick-next').html('<i class="fa-solid fa-arrow-right-long"></i>');
-                    $('.sliderHome .slick-dots button').html('');
-                }, 0);
-            }
-        });
+        // $(window).on('load', function () {
+            
+        // });
     </script>
 @endpush
