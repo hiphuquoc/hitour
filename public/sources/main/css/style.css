@@ -682,6 +682,9 @@ input, textarea {
   position: relative;
   overflow: hidden;
 }
+.sliderHome_item {
+  overflow: hidden;
+}
 .sliderHome_item a, .sliderHome_item div {
   transition: all 1s;
   display: flex;
@@ -690,6 +693,7 @@ input, textarea {
   height: 650px;
   background-repeat: no-repeat !important;
   background-size: 100% auto !important;
+  overflow: hidden;
 }
 .sliderHome:hover .slick-prev, .sliderHome:hover .slick-next {
   display: block;

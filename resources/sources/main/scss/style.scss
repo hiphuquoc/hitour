@@ -365,6 +365,7 @@ $height_headerMain : 80px;
     position: relative;
     overflow: hidden;
     &_item {
+        overflow: hidden;
         a, div {
             transition: all 1s;
             display: flex;
@@ -373,6 +374,7 @@ $height_headerMain : 80px;
             height: 650px;
             background-repeat: no-repeat !important;
             background-size: 100% auto !important;
+            overflow: hidden;
         }
     }
     @include slickSliderMain;
