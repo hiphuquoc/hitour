@@ -52,7 +52,7 @@
             <div class="sectionBox backgroundPrimaryGradiend">
                 <div class="container">
                     <!-- title -->
-                    <h1 class="titlePage">{{ $item->name }}{{ !empty($item->district->district_name) ? ' - Đặt vé máy bay '.$item->district->district_name : null}}</h1>
+                    <h1 class="titlePage">{{ $item->name }}{{ !empty($item->display_name) ? ' - Đặt vé máy bay '.$item->display_name : null}}</h1>
                     <!-- rating -->
                     @include('main.template.rating', compact('item'))
                     <!-- description -->

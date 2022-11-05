@@ -30,51 +30,75 @@
             'link'  => 'tour-du-lich-chau-au'
         ]
     ];
+    /* xhtml của slider desktop */
+    $xhtmlSliderDesktop         = null;
+    foreach($dataSlider as $slider){
+        if(!empty($slider['link'])){
+            // style="background:url('.$slider['src'].');"
+            $xhtmlSliderDesktop .= '<div class="sliderHome_item">
+                                        <a href="/'.$slider['link'].'" title="'.$slider['alt'].'" data-image="'.$slider['src'].'" style="background:url('.$slider['src'].');"></a>
+                                    </div>';
+        }else {
+            $xhtmlSliderDesktop .= '<div class="sliderHome_item">
+                                        <div data-image="'.$slider['src'].'" style="background:url('.$slider['src'].');"></div>
+                                    </div>';
+        }
+    }
+    /* xhtml của slider mobile */
+    $xhtmlSliderMobile          = null;
+    foreach($dataSliderMobile as $slider){
+        if(!empty($slider['link'])){
+            $xhtmlSliderMobile  .= '<div class="sliderHome_item">
+                                        <a href="/'.$slider['link'].'" title="'.$slider['alt'].'" data-image="'.$slider['src'].'" style="background:url('.$slider['src'].');"></a>
+                                    </div>';
+        }else {
+            $xhtmlSliderMobile  .= '<div class="sliderHome_item">
+                                        <div data-image="'.$slider['src'].'" style="background:url('.$slider['src'].');"></div>
+                                    </div>';
+        }
+    }
 @endphp
 <!-- START: Home slider Desktop -->
-<div id="js_setHeightSliderHomeDesktop_box" class="sliderHome hide-767">
-    @foreach($dataSlider as $slider)
-        <div class="sliderHome_item">
-            @if(!empty($slider['link']))
-                <a href="/{{ $slider['link'] }}" title="{{ $slider['alt'] }}" style="background:url({{ $slider['src'] }});"></a>
-            @else 
-                <div style="background:url({{ $slider['src'] }});"></div>
-            @endif
-        </div>
-    @endforeach
+<div id="js_lazyloadSliderDesktop_box" class="sliderHome hide-767">
+    <div class="sliderHome_item">
+        <div><img src="{{ config('main.background_slider_home') }}" alt="{{ config('main.description') }}" title="{{ config('main.description') }}" /></div>
+    </div>
 </div>
 <!-- END: Home slider Desktop -->
 
 <!-- START: Home slider Mobile -->
-<div id="js_setHeightSliderHomeMobile_box" class="sliderHome show-767">
-    @foreach($dataSliderMobile as $slider)
-        <div class="sliderHome_item">
-            @if(!empty($slider['link']))
-                <a href="/{{ $slider['link'] }}" title="{{ $slider['alt'] }}" style="background:url({{ $slider['src'] }});"></a>
-            @else 
-                <div style="background:url({{ $slider['src'] }});"></div>
-            @endif
-        </div>
-    @endforeach
+<div id="js_lazyloadSliderMobile_box" class="sliderHome show-767">
+    <div class="sliderHome_item">
+        <div><img src="{{ config('main.background_slider_home') }}" alt="{{ config('main.description') }}" title="{{ config('main.description') }}" /></div>
+    </div>
 </div>
 <!-- END: Home slider Mobile -->
 @push('scripts-custom')
     <script type="text/javascript">
-        setHeightSliderHomeDesktop();
-        setHeightSliderHomeMobile();
+        lazyloadSliderDesktop();
+        lazyloadSliderMobile();
         $(window).resize(function(){
-            setHeightSliderHomeDesktop();
-            setHeightSliderHomeMobile();
+            setHeightBox('js_lazyloadSliderDesktop_box', 0.3385);
+            setHeightBox('js_lazyloadSliderMobile_box', 0.7333);
         });
-        function setHeightSliderHomeDesktop(){
-            const valueWidth    = $('#js_setHeightSliderHomeDesktop_box').innerWidth();
-            const valueHeight   = parseInt(valueWidth)*0.3385;
-            $('#js_setHeightSliderHomeDesktop_box .sliderHome_item').css('height', valueHeight+'px');
+        function lazyloadSliderDesktop(){
+            /* hiển thị ảnh */
+            const valueContent  = <?php echo json_encode($xhtmlSliderDesktop) ?>;
+            $('#js_lazyloadSliderDesktop_box').html(valueContent);
+            /* setheight box */
+            setHeightBox('js_lazyloadSliderDesktop_box', 0.3385);
         }
-        function setHeightSliderHomeMobile(){
-            const valueWidth    = $('#js_setHeightSliderHomeMobile_box').innerWidth();
-            const valueHeight   = parseInt(valueWidth)*0.7333;
-            $('#js_setHeightSliderHomeMobile_box .sliderHome_item').css('height', valueHeight+'px');
+        function lazyloadSliderMobile(){
+            /* hiển thị ảnh */
+            const valueContent  = <?php echo json_encode($xhtmlSliderMobile) ?>;
+            $('#js_lazyloadSliderMobile_box').html(valueContent);
+            /* setheight box */
+            setHeightBox('js_lazyloadSliderMobile_box', 0.7333);
+        }
+        function setHeightBox(idBox, ratio){
+            const valueWidth    = $('#'+idBox).innerWidth();
+            const valueHeight   = parseInt(valueWidth)*ratio;
+            $('#'+idBox+' .sliderHome_item').css('height', valueHeight+'px');
         }
     </script>
 @endpush

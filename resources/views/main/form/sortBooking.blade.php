@@ -5,6 +5,19 @@
 	}
 @endphp
 <!-- background slider -->
-<div class="bookOnline" style="background: {{ $imageSlider }}"></div>
+<div id="js_setHeightBox_box" class="bookOnline" style="background: {{ $imageSlider }}"></div>
 <!-- Booking form -->
 @include('main.form.formBooking', compact('active'))
+@push('scripts-custom')
+	<script type="text/javascript">
+		setHeightBox('js_setHeightBox_box', 0.15625);
+        $(window).resize(function(){
+            setHeightBox('js_setHeightBox_box', 0.15625);
+        });
+		function setHeightBox(idBox, ratio){
+            const valueWidth    = $('#'+idBox).innerWidth();
+            const valueHeight   = parseInt(valueWidth)*ratio;
+            $('#'+idBox).css('height', valueHeight+'px');
+        }
+	</script>
+@endpush
