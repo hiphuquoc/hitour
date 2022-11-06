@@ -60,7 +60,9 @@ class AdminAirPartnerController extends Controller {
             $insertPartnerInfo  = $this->BuildInsertUpdateModel->buildArrayTableAirPartner($request->all(), $seoId, $dataPath['filePathNormal']);
             $idAirPartner      = AirPartner::insertItem($insertPartnerInfo);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentAirPartner').$request->get('slug').'.blade.php', $request->get('content'));
+            $content            = $request->get('content') ?? null;
+            $content            = AdminImageController::replaceImageInContentWithLoading($content);
+            Storage::put(config('admin.storage.contentAirPartner').$request->get('slug').'.blade.php', $content);
             /* insert câu hỏi thường gặp */
             if(!empty($request->get('question_answer'))){
                 foreach($request->get('question_answer') as $itemQues){
@@ -113,7 +115,9 @@ class AdminAirPartnerController extends Controller {
             $updatePartnerInfo  = $this->BuildInsertUpdateModel->buildArrayTableAirPartner($request->all(), null, $dataPath['filePathNormal'] ?? null);
             AirPartner::updateItem($idAirPartner, $updatePartnerInfo);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentAirPartner').$request->get('slug').'.blade.php', $request->get('content'));
+            $content            = $request->get('content') ?? null;
+            $content            = AdminImageController::replaceImageInContentWithLoading($content);
+            Storage::put(config('admin.storage.contentAirPartner').$request->get('slug').'.blade.php', $content);
             /* update câu hỏi thường gặp */
             QuestionAnswer::select('*')
                             ->where('relation_table', 'air_partner')

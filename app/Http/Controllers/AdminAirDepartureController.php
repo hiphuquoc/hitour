@@ -70,7 +70,9 @@ class AdminAirDepartureController extends Controller {
             $insertAirDeparture    = $this->BuildInsertUpdateModel->buildArrayTableAirDeparture($request->all(), $seoId);
             $idAirDeparture        = AirDeparture::insertItem($insertAirDeparture);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentAirDeparture').$request->get('slug').'.blade.php', $request->get('content'));
+            $content            = $request->get('content') ?? null;
+            $content            = AdminImageController::replaceImageInContentWithLoading($content);
+            Storage::put(config('admin.storage.contentAirDeparture').$request->get('slug').'.blade.php', $content);
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
@@ -119,7 +121,9 @@ class AdminAirDepartureController extends Controller {
             $updateAirDeparture    = $this->BuildInsertUpdateModel->buildArrayTableAirDeparture($request->all());
             AirDeparture::updateItem($idAirDeparture, $updateAirDeparture);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentAirDeparture').$request->get('slug').'.blade.php', $request->get('content'));
+            $content            = $request->get('content') ?? null;
+            $content            = AdminImageController::replaceImageInContentWithLoading($content);
+            Storage::put(config('admin.storage.contentAirDeparture').$request->get('slug').'.blade.php', $content);
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name               = !empty($request->get('slug')) ? $request->get('slug') : time();

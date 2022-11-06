@@ -11,6 +11,7 @@ use App\Models\TourLocation;
 use App\Models\ShipPartner;
 use App\Models\AirPartner;
 use App\Models\Seo;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller {
 
@@ -44,4 +45,32 @@ class HomeController extends Controller {
                                 ->get();
         return view('main.home.home', compact('item', 'shipLocations', 'airLocations', 'serviceLocations', 'islandLocations', 'specialLocations', 'shipPartners', 'airPartners'));
     }
+
+    /* ===== Tính năng thay tất cả các ảnh hỗ trợ Loading ===== */
+    public static function changeImageInContentWithLoading(){
+        $data           = glob(Storage::path('/public/contents').'/*');
+        $fileSuccess    = [];
+        $fileError      = [];
+        foreach($data as $child){
+            $dataChild  = glob($child.'/*');
+            foreach($dataChild as $fileName){
+                $flag   = self::actionChangeImageInContentWithLoading($fileName);
+                if($flag==true) {
+                    $fileSuccess[]  = $fileName;
+                }else {
+                    $fileError[]    = $fileName;
+                }
+            }
+        }
+        dd($fileSuccess);
+    }
+    public static function actionChangeImageInContentWithLoading($fileName){
+        if(!empty($fileName)){
+            $content        = file_get_contents($fileName);
+            $content        = \App\Http\Controllers\AdminImageController::replaceImageInContentWithLoading($content);
+            return file_put_contents($fileName, $content);
+        }
+        return false;
+    }
+    
 }

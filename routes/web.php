@@ -421,6 +421,8 @@ foreach(\App\Models\Redirect::all() as $redirect){
     });
 }
 
+Route::get('/changeImageInContentWithLoading', [HomeController::class, 'changeImageInContentWithLoading'])->name('main.changeImageInContentWithLoading');
+
 Route::get('/', [HomeController::class, 'home'])->name('main.home');
 /* ===== SITEMAP ===== */
 Route::get('sitemap.xml', [SitemapController::class, 'main'])->name('sitemap.main');

@@ -60,7 +60,9 @@ class AdminShipPartnerController extends Controller {
             $insertPartnerInfo  = $this->BuildInsertUpdateModel->buildArrayTableShipPartner($request->all(), $seoId, $dataPath['filePathNormal']);
             $idShipPartner      = ShipPartner::insertItem($insertPartnerInfo);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentShipPartner').$request->get('slug').'.blade.php', $request->get('content'));
+            $content            = $request->get('content') ?? null;
+            $content            = AdminImageController::replaceImageInContentWithLoading($content);
+            Storage::put(config('admin.storage.contentShipPartner').$request->get('slug').'.blade.php', $content);
             /* insert câu hỏi thường gặp */
             if(!empty($request->get('question_answer'))){
                 foreach($request->get('question_answer') as $itemQues){
@@ -113,7 +115,9 @@ class AdminShipPartnerController extends Controller {
             $updatePartnerInfo  = $this->BuildInsertUpdateModel->buildArrayTableShipPartner($request->all(), null, $dataPath['filePathNormal'] ?? null);
             ShipPartner::updateItem($idShipPartner, $updatePartnerInfo);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentShipPartner').$request->get('slug').'.blade.php', $request->get('content'));
+            $content            = $request->get('content') ?? null;
+            $content            = AdminImageController::replaceImageInContentWithLoading($content);
+            Storage::put(config('admin.storage.contentShipPartner').$request->get('slug').'.blade.php', $content);
             /* update câu hỏi thường gặp */
             QuestionAnswer::select('*')
                             ->where('relation_table', 'ship_partner')

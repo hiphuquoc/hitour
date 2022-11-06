@@ -73,7 +73,9 @@ class AdminAirLocationController extends Controller {
             $insertAirLocation  = $this->BuildInsertUpdateModel->buildArrayTableAirLocation($request->all(), $seoId);
             $idAirLocation      = AirLocation::insertItem($insertAirLocation);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentAirLocation').$request->get('slug').'.blade.php', $request->get('content'));
+            $content            = $request->get('content') ?? null;
+            $content            = AdminImageController::replaceImageInContentWithLoading($content);
+            Storage::put(config('admin.storage.contentAirLocation').$request->get('slug').'.blade.php', $content);
             /* insert câu hỏi thường gặp */
             if(!empty($request->get('question_answer'))){
                 foreach($request->get('question_answer') as $itemQues){
@@ -132,10 +134,12 @@ class AdminAirLocationController extends Controller {
             $updatePage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'air_location', $dataPath);
             Seo::updateItem($request->get('seo_id'), $updatePage);
             /* update AirLocation */
-            $updateAirLocation = $this->BuildInsertUpdateModel->buildArrayTableAirLocation($request->all());
+            $updateAirLocation  = $this->BuildInsertUpdateModel->buildArrayTableAirLocation($request->all());
             AirLocation::updateItem($idAirLocation, $updateAirLocation);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentAirLocation').$request->get('slug').'.blade.php', $request->get('content'));
+            $content            = $request->get('content') ?? null;
+            $content            = AdminImageController::replaceImageInContentWithLoading($content);
+            Storage::put(config('admin.storage.contentAirLocation').$request->get('slug').'.blade.php', $content);
             /* update câu hỏi thường gặp */
             QuestionAnswer::select('*')
                             ->where('relation_table', 'air_location')

@@ -70,7 +70,9 @@ class AdminBlogController extends Controller {
             $insertBlog         = $this->BuildInsertUpdateModel->buildArrayTableBlogInfo($request->all(), $seoId);
             $idBlog             = Blog::insertItem($insertBlog);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentBlog').$request->get('slug').'.blade.php', $request->get('content'));
+            $content            = $request->get('content') ?? null;
+            $content            = AdminImageController::replaceImageInContentWithLoading($content);
+            Storage::put(config('admin.storage.contentBlog').$request->get('slug').'.blade.php', $content);
             /* relation category_info và blog_info */
             if(!empty($request->get('category_info_id'))){
                 foreach($request->get('category_info_id') as $idCategory){
@@ -119,7 +121,9 @@ class AdminBlogController extends Controller {
             $updateBlog         = $this->BuildInsertUpdateModel->buildArrayTableBlogInfo($request->all(), $request->get('seo_id'));
             Blog::updateItem($idBlog, $updateBlog);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentBlog').$request->get('slug').'.blade.php', $request->get('content'));
+            $content            = $request->get('content') ?? null;
+            $content            = AdminImageController::replaceImageInContentWithLoading($content);
+            Storage::put(config('admin.storage.contentBlog').$request->get('slug').'.blade.php', $content);
             /* relation category_info và blog_info */
             RelationCategoryInfoBlogInfo::select('*')
                 ->where('blog_info_id', $idBlog)

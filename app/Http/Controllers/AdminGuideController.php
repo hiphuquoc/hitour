@@ -69,7 +69,9 @@ class AdminGuideController extends Controller {
             $insertGuide        = $this->BuildInsertUpdateModel->buildArrayTableGuideInfo($request->all(), $seoId);
             $idGuide            = Guide::insertItem($insertGuide);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentGuide').$request->get('slug').'.blade.php', $request->get('content'));
+            $content            = $request->get('content') ?? null;
+            $content            = AdminImageController::replaceImageInContentWithLoading($content);
+            Storage::put(config('admin.storage.contentGuide').$request->get('slug').'.blade.php', $content);
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
@@ -117,7 +119,9 @@ class AdminGuideController extends Controller {
             $updateGuide = $this->BuildInsertUpdateModel->buildArrayTableGuideInfo($request->all());
             Guide::updateItem($request->get('guide_info_id'), $updateGuide);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentGuide').$request->get('slug').'.blade.php', $request->get('content'));
+            $content            = $request->get('content') ?? null;
+            $content            = AdminImageController::replaceImageInContentWithLoading($content);
+            Storage::put(config('admin.storage.contentGuide').$request->get('slug').'.blade.php', $content);
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();

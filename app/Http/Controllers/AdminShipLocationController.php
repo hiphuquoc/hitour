@@ -73,7 +73,9 @@ class AdminShipLocationController extends Controller {
             $insertShipLocation = $this->BuildInsertUpdateModel->buildArrayTableShipLocation($request->all(), $seoId);
             $idShipLocation     = ShipLocation::insertItem($insertShipLocation);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentShipLocation').$request->get('slug').'.blade.php', $request->get('content'));
+            $content            = $request->get('content') ?? null;
+            $content            = AdminImageController::replaceImageInContentWithLoading($content);
+            Storage::put(config('admin.storage.contentShipLocation').$request->get('slug').'.blade.php', $content);
             /* insert câu hỏi thường gặp */
             if(!empty($request->get('question_answer'))){
                 foreach($request->get('question_answer') as $itemQues){
@@ -135,7 +137,9 @@ class AdminShipLocationController extends Controller {
             $updateShipLocation = $this->BuildInsertUpdateModel->buildArrayTableShipLocation($request->all());
             ShipLocation::updateItem($idShipLocation, $updateShipLocation);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentShipLocation').$request->get('slug').'.blade.php', $request->get('content'));
+            $content            = $request->get('content') ?? null;
+            $content            = AdminImageController::replaceImageInContentWithLoading($content);
+            Storage::put(config('admin.storage.contentShipLocation').$request->get('slug').'.blade.php', $content);
             /* update câu hỏi thường gặp */
             QuestionAnswer::select('*')
                             ->where('relation_table', 'ship_location')

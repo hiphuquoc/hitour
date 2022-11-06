@@ -201,4 +201,35 @@ class AdminImageController extends Controller {
     //     }
     // }
 
+    public static function replaceImageInContentWithLoading($content){
+        if(!empty($content)){
+            preg_match_all('#(<img.*>)#imsU', $content, $match);
+            $dataAtrrImage  = $match[1];
+            $dataImage      = [];
+            $i              = 0;
+            foreach($dataAtrrImage as $attrImage){
+                $dataImage[$i]['source']   = $attrImage;
+                /* src */
+                preg_match('#src="(.*)"#imsU', $attrImage, $match);
+                $dataImage[$i]['src']      = $match[1];
+                /* data-src */
+                preg_match('#data-src="(.*)"#imsU', $attrImage, $match);
+                $dataImage[$i]['data-src'] = $match[1] ?? null;
+                /* alt và title */
+                preg_match('#alt="(.*)"#imsU', $attrImage, $match);
+                $dataImage[$i]['alt']      = $match[1] ?? null;
+                $dataImage[$i]['title']    = $match[1] ?? null;
+                ++$i;
+            }
+            /* duyệt mảng => thay thế */
+            $tmp            = [];
+            foreach($dataImage as $image){
+                $dataSrc    = $image['data-src'] ?? $image['src'];
+                $tmp        = '<img src="'.config('main.svg.loading_main').'" data-src="'.$dataSrc.'" alt="'.$image['alt'].'" title="'.$image['title'].'" style="width:100%;" />';
+                $content    = str_replace($image['source'], $tmp, $content);
+            }
+        }
+        return $content;
+    }
+
 }

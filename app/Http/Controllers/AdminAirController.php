@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Helpers\Upload;
-
+use App\Http\Controllers\AdminImageController;
 use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\AdminGalleryController;
 use App\Models\AirLocation;
@@ -96,10 +96,12 @@ class AdminAirController extends Controller {
             $insertSeo          = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'air_info', $dataPath);
             $seoId              = Seo::insertItem($insertSeo);
             /* insert air_info */
-            $insertAirInfo     = $this->BuildInsertUpdateModel->buildArrayTableAirInfo($request->all(), $seoId);
-            $idAir             = Air::insertItem($insertAirInfo);
+            $insertAirInfo      = $this->BuildInsertUpdateModel->buildArrayTableAirInfo($request->all(), $seoId);
+            $idAir              = Air::insertItem($insertAirInfo);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentAir').$request->get('slug').'.blade.php', $request->get('content'));
+            $content            = $request->get('content') ?? null;
+            $content            = AdminImageController::replaceImageInContentWithLoading($content);
+            Storage::put(config('admin.storage.contentAir').$request->get('slug').'.blade.php', $content);
             /* insert câu hỏi thường gặp */
             if(!empty($request->get('question_answer'))){
                 foreach($request->get('question_answer') as $itemQues){
@@ -191,7 +193,9 @@ class AdminAirController extends Controller {
             $updateTourInfo     = $this->BuildInsertUpdateModel->buildArrayTableAirInfo($request->all(), $request->get('seo_id'));
             Air::updateItem($idAir, $updateTourInfo);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentAir').$request->get('slug').'.blade.php', $request->get('content'));
+            $content            = $request->get('content') ?? null;
+            $content            = AdminImageController::replaceImageInContentWithLoading($content);
+            Storage::put(config('admin.storage.contentAir').$request->get('slug').'.blade.php', $content);
             /* update câu hỏi thường gặp */
             QuestionAnswer::select('*')
                             ->where('relation_table', 'air_info')

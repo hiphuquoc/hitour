@@ -80,12 +80,14 @@ class AdminServiceController extends Controller {
             }
             /* insert page */
             $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'service_info', $dataPath);
-            $seoId             = Seo::insertItem($insertPage);
+            $seoId              = Seo::insertItem($insertPage);
             /* insert service_info */
             $insertServiceInfo  = $this->BuildInsertUpdateModel->buildArrayTableServiceInfo($request->all(), $seoId);
             $idService          = Service::insertItem($insertServiceInfo);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentService').$request->get('slug').'.blade.php', $request->get('content'));
+            $content            = $request->get('content') ?? null;
+            $content            = AdminImageController::replaceImageInContentWithLoading($content);
+            Storage::put(config('admin.storage.contentService').$request->get('slug').'.blade.php', $content);
             /* insert câu hỏi thường gặp */
             if(!empty($request->get('question_answer'))){
                 foreach($request->get('question_answer') as $itemQues){
@@ -167,7 +169,9 @@ class AdminServiceController extends Controller {
             $updateServiceInfo     = $this->BuildInsertUpdateModel->buildArrayTableServiceInfo($request->all(), $request->get('seo_id'));
             Service::updateItem($idService, $updateServiceInfo);
             /* lưu content vào file */
-            Storage::put(config('admin.storage.contentService').$request->get('slug').'.blade.php', $request->get('content'));
+            $content            = $request->get('content') ?? null;
+            $content            = AdminImageController::replaceImageInContentWithLoading($content);
+            Storage::put(config('admin.storage.contentService').$request->get('slug').'.blade.php', $content);
             /* update câu hỏi thường gặp */
             QuestionAnswer::select('*')
                             ->where('relation_table', 'service_info')
