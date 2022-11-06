@@ -34,8 +34,6 @@
                     }
                 });
             }
-            
-            
         });
 
         mybutton 					    = document.getElementById("gotoTop");

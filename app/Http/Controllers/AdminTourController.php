@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Helpers\Upload;
-
+use App\Http\Controllers\AdminImageController;
 use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\AdminGalleryController;
 use App\Models\TourContent;
@@ -127,8 +127,8 @@ class AdminTourController extends Controller {
                     $insertTourTimetable    = [
                         'tour_info_id'  => $idTour,
                         'title'         => $timetable['tour_timetable_title'],
-                        'content'       => $timetable['tour_timetable_content'],
-                        'content_sort'  => $timetable['tour_timetable_content_sort']
+                        'content'       => AdminImageController::replaceImageInContentWithLoading($timetable['tour_timetable_content']),
+                        'content_sort'  => AdminImageController::replaceImageInContentWithLoading($timetable['tour_timetable_content_sort'])
                     ];
                     TourTimetable::insertItem($insertTourTimetable);
                 }

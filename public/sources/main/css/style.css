@@ -2062,9 +2062,11 @@ input, textarea {
   flex-wrap: wrap;
 }
 .hotelTour_item_image img {
-  width: calc(33.33% - 0.6666rem);
+  width: calc(33.33% - 0.6666rem) !important;
   border-radius: 5px;
   margin: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .hotelTour_item_image img:not(:nth-child(3n+1)) {
   margin-left: 1rem;
@@ -2074,7 +2076,7 @@ input, textarea {
 }
 @media (max-width: 1023px) {
   .hotelTour_item_image img {
-    width: calc(50% - 0.5rem);
+    width: calc(50% - 0.5rem) !important;
   }
   .hotelTour_item_image img:not(:nth-child(2n+1)) {
     margin-left: 1rem;
@@ -2091,7 +2093,7 @@ input, textarea {
 }
 @media (max-width: 577px) {
   .hotelTour_item_image img {
-    width: calc(50% - 0.5rem);
+    width: calc(50% - 0.5rem) !important;
   }
   .hotelTour_item_image img:not(:nth-child(2n+1)) {
     margin-left: 0.75rem;
@@ -2102,7 +2104,7 @@ input, textarea {
 }
 @media (max-width: 419px) {
   .hotelTour_item_image img {
-    width: 100%;
+    width: 100% !important;
     margin-left: 0 !important;
   }
   .hotelTour_item_image img:not(:first-child) {

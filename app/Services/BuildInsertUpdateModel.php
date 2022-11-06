@@ -3,7 +3,7 @@
 namespace App\Services;
 use App\Models\Seo;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\AdminImageController;
 use App\Models\Ship;
 use App\Models\ShipPort;
 use App\Models\ShipPrice;
@@ -167,14 +167,14 @@ class BuildInsertUpdateModel {
         $result     = [];
         if(!empty($dataForm)&&!empty($tourInfoId)){
             $result['tour_info_id']         = $tourInfoId;
-            $result['special_content']      = $dataForm['special_content'] ?? null;
-            $result['special_list']         = $dataForm['special_list'] ?? null;
-            $result['include']              = $dataForm['include'] ?? null;
-            $result['not_include']          = $dataForm['not_include'] ?? null;
-            $result['policy_child']         = $dataForm['policy_child'] ?? null;
-            $result['menu']                 = $dataForm['menu'] ?? null;
-            $result['hotel']                = $dataForm['hotel'] ?? null;
-            $result['policy_cancel']        = $dataForm['policy_cancel'] ?? null;
+            $result['special_content']      = !empty($dataForm['special_content']) ? AdminImageController::replaceImageInContentWithLoading($dataForm['special_content']) : null;
+            $result['special_list']         = !empty($dataForm['special_list']) ? AdminImageController::replaceImageInContentWithLoading($dataForm['special_list']) : null;
+            $result['include']              = !empty($dataForm['include']) ? AdminImageController::replaceImageInContentWithLoading($dataForm['include']) : null;
+            $result['not_include']          = !empty($dataForm['not_include']) ? AdminImageController::replaceImageInContentWithLoading($dataForm['not_include']) : null;
+            $result['policy_child']         = !empty($dataForm['policy_child']) ? AdminImageController::replaceImageInContentWithLoading($dataForm['policy_child']) : null;
+            $result['menu']                 = !empty($dataForm['menu']) ? AdminImageController::replaceImageInContentWithLoading($dataForm['menu']) : null;
+            $result['hotel']                = !empty($dataForm['hotel']) ? AdminImageController::replaceImageInContentWithLoading($dataForm['hotel']) : null;
+            $result['policy_cancel']        = !empty($dataForm['policy_cancel']) ? AdminImageController::replaceImageInContentWithLoading($dataForm['policy_cancel']) : null;
             $result['note']                 = $dataForm['note'] ?? null;
         }
         return $result;

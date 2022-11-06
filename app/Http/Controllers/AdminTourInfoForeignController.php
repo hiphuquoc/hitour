@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Helpers\Upload;
+use App\Http\Controllers\AdminImageController;
 use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\AdminGalleryController;
 use App\Models\TourContentForeign;
@@ -120,8 +121,8 @@ class AdminTourInfoForeignController extends Controller {
                     $insertTourTimetableForeign    = [
                         'tour_info_foreign_id'  => $idTourInfoForeign,
                         'title'                 => $timetable['tour_timetable_title'],
-                        'content'               => $timetable['tour_timetable_content'],
-                        'content_sort'          => $timetable['tour_timetable_content_sort']
+                        'content'               => AdminImageController::replaceImageInContentWithLoading($timetable['tour_timetable_content']),
+                        'content_sort'          => AdminImageController::replaceImageInContentWithLoading($timetable['tour_timetable_content_sort'])
                     ];
                     TourTimetableForeign::insertItem($insertTourTimetableForeign);
                 }

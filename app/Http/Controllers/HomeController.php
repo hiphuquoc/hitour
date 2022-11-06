@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\AdminImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\ShipLocation;
@@ -11,6 +12,10 @@ use App\Models\TourLocation;
 use App\Models\ShipPartner;
 use App\Models\AirPartner;
 use App\Models\Seo;
+use App\Models\TourTimetable;
+use App\Models\TourTimetableForeign;
+use App\Models\TourContent;
+use App\Models\TourContentForeign;
 use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller {
@@ -67,10 +72,63 @@ class HomeController extends Controller {
     public static function actionChangeImageInContentWithLoading($fileName){
         if(!empty($fileName)){
             $content        = file_get_contents($fileName);
-            $content        = \App\Http\Controllers\AdminImageController::replaceImageInContentWithLoading($content);
+            $content        = AdminImageController::replaceImageInContentWithLoading($content);
             return file_put_contents($fileName, $content);
         }
         return false;
     }
-    
+    public static function changeImageInContentWithLoadingTourInfo(){
+        /* cập nhật content bảng tour_timetable */
+        $data           = TourTimetable::select('*')
+                            ->get();
+        foreach($data as $item){
+            $params     = [
+                'content'           => AdminImageController::replaceImageInContentWithLoading($item->content),
+                'content_sort'      => AdminImageController::replaceImageInContentWithLoading($item->content_sort)
+            ];
+            TourTimetable::updateItem($item->id, $params);
+        }
+        /* cập nhật content bảng tour_timetable_foreign */
+        $data           = TourTimetableForeign::select('*')
+                            ->get();
+        foreach($data as $item){
+            $params     = [
+                'content'           => AdminImageController::replaceImageInContentWithLoading($item->content),
+                'content_sort'      => AdminImageController::replaceImageInContentWithLoading($item->content_sort)
+            ];
+            TourTimetableForeign::updateItem($item->id, $params);
+        }
+        /* cập nhật content bảng tour_content */
+        $data           = TourContent::select('*')
+                            ->get();
+        foreach($data as $item){
+            $params     = [
+                'special_content'   => AdminImageController::replaceImageInContentWithLoading($item->special_content),
+                'special_list'      => AdminImageController::replaceImageInContentWithLoading($item->special_list),
+                'include'           => AdminImageController::replaceImageInContentWithLoading($item->include),
+                'not_include'       => AdminImageController::replaceImageInContentWithLoading($item->not_include),
+                'policy_child'      => AdminImageController::replaceImageInContentWithLoading($item->policy_child),
+                'menu'              => AdminImageController::replaceImageInContentWithLoading($item->menu),
+                'hotel'             => AdminImageController::replaceImageInContentWithLoading($item->hotel),
+                'policy_cancel'     => AdminImageController::replaceImageInContentWithLoading($item->policy_cancel)
+            ];
+            TourContent::updateItem($item->id, $params);
+        }
+        /* cập nhật content bảng tour_content_foreign */
+        $data           = TourContentForeign::select('*')
+                            ->get();
+        foreach($data as $item){
+            $params     = [
+                'special_content'   => AdminImageController::replaceImageInContentWithLoading($item->special_content),
+                'special_list'      => AdminImageController::replaceImageInContentWithLoading($item->special_list),
+                'include'           => AdminImageController::replaceImageInContentWithLoading($item->include),
+                'not_include'       => AdminImageController::replaceImageInContentWithLoading($item->not_include),
+                'policy_child'      => AdminImageController::replaceImageInContentWithLoading($item->policy_child),
+                'menu'              => AdminImageController::replaceImageInContentWithLoading($item->menu),
+                'hotel'             => AdminImageController::replaceImageInContentWithLoading($item->hotel),
+                'policy_cancel'     => AdminImageController::replaceImageInContentWithLoading($item->policy_cancel)
+            ];
+            TourContentForeign::updateItem($item->id, $params);
+        }
+    }
 }

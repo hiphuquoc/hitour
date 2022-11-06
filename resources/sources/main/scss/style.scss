@@ -1778,9 +1778,10 @@ $tourGrid_radius : 5px;
             align-items: flex-start;
             flex-wrap: wrap;
             img {
-                width: calc(33.33% - 0.6666rem);
+                width: calc(33.33% - 0.6666rem) !important;
                 border-radius: 5px;
                 margin: 0;
+                object-fit: cover;
                 &:not(:nth-child(3n + 1)){
                     margin-left: 1rem;
                 }
@@ -1794,7 +1795,7 @@ $tourGrid_radius : 5px;
         &_item {
             &_image {
                 img {
-                    width: calc(50% - 0.5rem);
+                    width: calc(50% - 0.5rem) !important;
                     &:not(:nth-child(2n + 1)){
                         margin-left: 1rem;
                     }
@@ -1815,7 +1816,7 @@ $tourGrid_radius : 5px;
         &_item {
             &_image {
                 img {
-                    width: calc(50% - 0.5rem);
+                    width: calc(50% - 0.5rem) !important;
                     &:not(:nth-child(2n + 1)){
                         margin-left: 0.75rem;
                     }
@@ -1830,7 +1831,7 @@ $tourGrid_radius : 5px;
         &_item {
             &_image {
                 img {
-                    width: 100%;
+                    width: 100% !important;
                     margin-left: 0 !important;
                     &:not(:first-child){
                         margin-top: 0.75rem;

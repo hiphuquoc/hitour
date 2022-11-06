@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-
 use App\Helpers\Url;
 
 class TourTimetable extends Model {
@@ -19,22 +18,22 @@ class TourTimetable extends Model {
     public $timestamps      = false;
 
     public static function insertItem($params){
-        $id             = 0;
+        $id                 = 0;
         if(!empty($params)){
-            $model      = new TourTimetable();
+            $model          = new TourTimetable();
             foreach($params as $key => $value) $model->{$key}  = $value;
             $model->save();
-            $id         = $model->id;
+            $id             = $model->id;
         }
         return $id;
     }
 
     public static function updateItem($id, $params){
-        $flag           = false;
+        $flag               = false;
         if(!empty($id)&&!empty($params)){
-            $model      = self::find($id);
+            $model          = self::find($id);
             foreach($params as $key => $value) $model->{$key}  = $value;
-            $flag       = $model->update();
+            $flag           = $model->update();
         }
         return $flag;
     }
