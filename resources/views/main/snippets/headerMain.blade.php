@@ -79,7 +79,11 @@
             </ul>
         </div>
         <div class="headerMain_item" style="flex:0 0 70px;">
-            <div class="logoSquare"></div>
+            @if(Request::is('/'))
+                <a href="/" title="Trang chủ Hitour" class="logoSquare"><h1 style="display:none;">{{ config('main.description') }}</h1></a>
+            @else 
+                <a href="/" title="Trang chủ Hitour" class="logoSquare"></a>
+            @endif
         </div>
         <div class="headerMain_item">
             <ul style="justify-content:flex-end;">
@@ -191,19 +195,22 @@
 
 <div class="header">
     <div class="container">
-        @if(!Request::is('/'))
+        @if(Request::is('/'))
+            <div class="header_logo">
+                <a href="/" title="Trang chủ Hitour" class="logo">
+                    <h1 style="display:none;">{{ config('main.description') }}</h1>
+                </a>
+            </div>
+        @else 
             <div class="header_arrow">
                 <a href="javascript:history.back()" title="Quay lại trang trước">
                     <i class="fa-solid fa-arrow-left-long"></i>
                 </a>
             </div>
+            <div class="header_logo">
+                <a href="/" title="Trang chủ Hitour" class="logo"></a>
+            </div>
         @endif
-        <div class="header_logo">
-            <a href="/" title="Trang chủ Hitour" class="logo">
-                <!-- Background Image -->
-                <h1 style="display:none;">Trang chủ Hitour - Kênh du lịch trực tuyến hàng đầu Việt Nam</h1>
-            </a>
-        </div>
         <!-- Menu Mobile -->
         <div class="header_menuMobile">
             {{-- <div class="header_menuMobile_item">

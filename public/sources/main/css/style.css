@@ -614,6 +614,7 @@ input, textarea {
   background-repeat: no-repeat;
   width: 60px;
   height: 60px;
+  display: flex;
 }
 
 .breadcrumbBox {
