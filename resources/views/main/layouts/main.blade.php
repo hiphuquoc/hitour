@@ -30,8 +30,11 @@
     @include('main.snippets.footer')
     <!-- === END:: Footer === -->
 
-    <div id="gotoTop" class="gotoTop" onclick="javascript:gotoTop();" style="display: block;">
-        <i class="fas fa-chevron-up"></i>
+    <div class="bottom">
+        <div id="gotoTop" class="gotoTop" onclick="javascript:gotoTop();" style="display: block;">
+            <i class="fas fa-chevron-up"></i>
+        </div>
+        @stack('bottom')
     </div>
     
     <!-- === START:: Scripts Default === -->

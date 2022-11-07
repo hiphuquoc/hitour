@@ -61,7 +61,7 @@
     
                         <!-- content box -->
                         @include('main.tour.content', compact('item'))
-    
+                        
                     </div>
                     <div class="pageContent_body_sidebar">
     
@@ -79,9 +79,20 @@
         </div>
     </div>
 
-    
-    
 @endsection
+@push('bottom')
+    <!-- button book tour mobile -->
+    @if(!empty($item->price_show))
+        <div class="show-990">
+            <div class="callBookTourMobile">
+                <div class="callBookTourMobile_price">
+                    {{ number_format($item->price_show).config('main.unit_currency') }}
+                </div>
+                <h2>Đặt Tour ngay!</h2>
+            </div>
+        </div>
+    @endif
+@endpush
 @push('scripts-custom')
     <script type="text/javascript">
         $(window).on('load', function () {

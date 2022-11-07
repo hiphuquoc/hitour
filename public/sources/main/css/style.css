@@ -1090,6 +1090,17 @@ input, textarea {
 }
 
 /* ===== START: Footer */
+.bottom {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
 .footer {
   background: rgba(0, 123, 255, 0.2);
   padding: 2rem 0;
@@ -1321,10 +1332,7 @@ input, textarea {
 }
 
 .gotoTop {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 99;
+  align-self: flex-end;
   font-size: 1rem;
   border: none;
   outline: none;
@@ -1334,6 +1342,8 @@ input, textarea {
   border-radius: 4px;
   width: 40px;
   height: 40px;
+  margin-right: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 .gotoTop i {
   display: flex;
@@ -1343,6 +1353,12 @@ input, textarea {
 }
 .gotoTop:hover {
   background: rgba(0, 123, 255, 0.4);
+}
+@media (max-width: 767px) {
+  .gotoTop {
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
 }
 
 /* ===== END: Footer */
@@ -1789,6 +1805,37 @@ input, textarea {
   cursor: pointer;
 }
 .callBookTour_button_item.bookonline:hover {
+  background: rgb(241, 196, 15);
+}
+
+.callBookTourMobile {
+  padding: 0.5rem 0.75rem;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #dee2e6;
+}
+.callBookTourMobile_price {
+  width: 100%;
+  text-align: center;
+  font-family: "SVN-Gilroy Bold", serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+  color: #fd5056;
+}
+.callBookTourMobile h2, .callBookTourMobile h3, .callBookTourMobile h4 {
+  flex: 0 0 160px;
+  font-family: "SVN-Gilroy Bold", serif;
+  background: rgb(244, 208, 63);
+  color: #333;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  text-align: center;
+  cursor: pointer;
+  margin: 0 0 0 1.5rem;
+}
+.callBookTourMobile h2:hover, .callBookTourMobile h3:hover, .callBookTourMobile h4:hover {
   background: rgb(241, 196, 15);
 }
 
