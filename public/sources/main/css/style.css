@@ -471,6 +471,7 @@ input, textarea {
 .headerMain_item > ul > li:not(:first-child) > a > *, .headerMain_item > ul > li:not(:first-child) > div:not(.megaMenu, .normalMenu) > * {
   border-left: 1px solid rgba(244, 208, 63, 0.3);
   padding-left: 1.25rem;
+  color: #fff;
 }
 .headerMain_item > ul > li > a, .headerMain_item > ul > li > div:not(.megaMenu, .normalMenu) {
   align-items: center;
@@ -1883,81 +1884,81 @@ input, textarea {
   color: #678;
 }
 
-.contentTour {
+.contentTour, .contentShip {
   text-align: justify;
 }
-.contentTour_item:not(:first-child) {
+.contentTour_item:not(:first-child), .contentShip_item:not(:first-child) {
   margin-top: 1.5rem;
 }
-.contentTour_item_title {
+.contentTour_item_title, .contentShip_item_title {
   position: relative;
   display: flex;
   align-items: flex-start;
   margin-bottom: 0.75rem;
 }
-.contentTour_item_title.noBorder {
+.contentTour_item_title.noBorder, .contentShip_item_title.noBorder {
   border-bottom: none;
 }
-.contentTour_item_title h2, .contentTour_item_title h3 {
+.contentTour_item_title h2, .contentTour_item_title h3, .contentShip_item_title h2, .contentShip_item_title h3 {
   font-size: 1.3rem;
   font-family: "SVN-Gilroy Bold", serif;
   font-weight: 700;
   margin-top: 0 !important;
   margin-bottom: 0.5rem !important;
 }
-.contentTour_item_title > i {
+.contentTour_item_title > i, .contentShip_item_title > i {
   flex: 0 0 30px;
   color: #678;
   margin-top: 0.6rem;
 }
-.contentTour_item_title > div {
+.contentTour_item_title > div, .contentShip_item_title > div {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   right: 0;
   font-size: 0.95rem;
 }
-.contentTour_item_title > div > span:not(:first-child) {
+.contentTour_item_title > div > span:not(:first-child), .contentShip_item_title > div > span:not(:first-child) {
   margin-left: 0.75rem;
 }
-.contentTour_item_title > div > span.active {
+.contentTour_item_title > div > span.active, .contentShip_item_title > div > span.active {
   color: rgb(0, 90, 180);
   font-weight: 700;
 }
-.contentTour_item_text table.tableList {
+.contentTour_item_text table.tableList, .contentShip_item_text table.tableList {
   width: 100%;
   line-height: 1.8;
   margin-bottom: 1rem;
 }
-.contentTour_item_text table.tableList tbody tr:first-child td {
+.contentTour_item_text table.tableList tbody tr:first-child td, .contentShip_item_text table.tableList tbody tr:first-child td {
   border-top: none;
 }
-.contentTour_item_text table.tableList tbody tr td {
+.contentTour_item_text table.tableList tbody tr td, .contentShip_item_text table.tableList tbody tr td {
   margin-top: 0.5rem;
   padding-top: 0.5rem;
   padding-bottom: 0.25rem;
   border-top: 1px dotted #ced4da;
 }
-.contentTour_item_text table.tableList tbody tr td:first-child {
+.contentTour_item_text table.tableList tbody tr td:first-child, .contentShip_item_text table.tableList tbody tr td:first-child {
   font-weight: 700;
   font-size: 0.95rem;
 }
-.contentTour_item_text table.tableList tbody tr td:not(:first-child) {
+.contentTour_item_text table.tableList tbody tr td:not(:first-child), .contentShip_item_text table.tableList tbody tr td:not(:first-child) {
   padding-left: 0.5rem;
 }
 @media (max-width: 1023px) {
-  .contentTour_item:not(:first-child) {
+  .contentTour_item:not(:first-child), .contentShip_item:not(:first-child) {
     margin-top: 1.25rem;
   }
-  .contentTour_item_title h2, .contentTour_item_title h3 {
+  .contentTour_item_title h2, .contentTour_item_title h3, .contentShip_item_title h2, .contentShip_item_title h3 {
     font-size: 1.2rem;
   }
 }
 @media (max-width: 577px) {
-  .contentTour_item:not(:first-child) {
+  .contentTour_item:not(:first-child), .contentShip_item:not(:first-child) {
     margin-top: 1rem;
   }
-  .contentTour_item_title h2, .contentTour_item_title h3 {
+  .contentTour_item_title h2, .contentTour_item_title h3, .contentShip_item_title h2, .contentShip_item_title h3 {
     margin-bottom: 0.25rem !important;
     font-size: 1.1rem;
   }
@@ -2466,92 +2467,6 @@ blockquote em {
   }
   .shipGrid_item_content {
     padding: 0.5rem 0.75rem 0.75rem;
-  }
-}
-
-.contentShip_item:not(:first-child) {
-  margin-top: 1.5rem;
-}
-.contentShip_item_title {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid #ced4da;
-  margin-bottom: 0.75rem;
-}
-.contentShip_item_title.noBorder {
-  border-bottom: none;
-}
-.contentShip_item_title h2, .contentShip_item_title h3 {
-  font-size: 1.3rem;
-  font-family: "SVN-Gilroy Bold", serif;
-  font-weight: 700;
-  color: rgb(0, 90, 180);
-  margin: 0;
-}
-.contentShip_item_title > i {
-  flex: 0 0 30px;
-  color: #678;
-  margin-top: 0.3rem;
-}
-.contentShip_item_title > div {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 0;
-  font-size: 0.95rem;
-}
-.contentShip_item_title > div > span:not(:first-child) {
-  margin-left: 0.75rem;
-}
-.contentShip_item_title > div > span.active {
-  color: rgb(0, 90, 180);
-  font-weight: 700;
-}
-.contentShip_item_text table.tableList {
-  width: 100%;
-  line-height: 1.8;
-  margin-bottom: 1rem;
-}
-.contentShip_item_text table.tableList tbody tr:first-child td {
-  border-top: none;
-}
-.contentShip_item_text table.tableList tbody tr td {
-  margin-top: 0.5rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.25rem;
-  border-top: 1px dotted #ced4da;
-}
-.contentShip_item_text table.tableList tbody tr td:first-child {
-  font-weight: 700;
-  font-size: 0.95rem;
-}
-.contentShip_item_text table.tableList tbody tr td:not(:first-child) {
-  padding-left: 0.5rem;
-}
-.contentShip .highLight {
-  font-weight: 700;
-  color: #fd5056;
-}
-@media (max-width: 1023px) {
-  .contentShip_item:not(:first-child) {
-    margin-top: 1.25rem;
-  }
-  .contentShip_item_title h2, .contentShip_item_title h3 {
-    font-size: 1.275rem;
-  }
-}
-@media (max-width: 577px) {
-  .contentShip_item:not(:first-child) {
-    margin-top: 1rem;
-  }
-  .contentShip_item_title {
-    padding-bottom: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-  .contentShip_item_title h2, .contentShip_item_title h3 {
-    font-size: 1.25rem;
   }
 }
 

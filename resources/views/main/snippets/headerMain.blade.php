@@ -73,7 +73,7 @@
                 </li>
                 <li>
                     <div>
-                        <div style="padding-right:0;">Khách sạn</div>
+                        <a href="https://www.bestprice.vn/khach-san" title="Đặt phòng khách sạn" rel="nofollow" style="padding-right:0;">Khách sạn</a>
                     <div>
                 </li>
             </ul>
@@ -213,16 +213,7 @@
         @endif
         <!-- Menu Mobile -->
         <div class="header_menuMobile">
-            {{-- <div class="header_menuMobile_item">
-                <form id="formSearchMobile" method="get" action="/tim-kiem">
-                    <div class="searchHeaderMobile">
-                        <input type="text" name="search_name" placeholder="Tìm kiếm...">
-                        <i class="fa-solid fa-magnifying-glass noBackground" onclick="submitForm('formSearchMobile');"></i>
-                    </div>
-                </form>
-            </div> --}}
             <div class="header_menuMobile_item" onclick="javascript:openCloseElemt('nav-mobile');">
-                {{-- <img src="/images/svg/icon-menu-mobile.svg" alt="Menu Chuyến tàu văn học" title="Menu Chuyến tàu văn học"> --}}
                 <i class="fa-solid fa-bars" style="font-size:1.5rem;margin-top:0.25rem;color:#fff;"></i>
             </div>
         </div>
@@ -371,10 +362,10 @@
                     @endif
                 </li>
                 <li>
-                    <div>
+                    <a href="https://www.bestprice.vn/khach-san" title="Đặt phòng khách sạn">
                         <i class="fa-solid fa-hotel"></i>
                         <div>Khách sạn</div>
-                    </div>
+                    </a>
                 </li>
                 <li>
                     <div>
