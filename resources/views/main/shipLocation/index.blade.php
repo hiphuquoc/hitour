@@ -71,67 +71,69 @@
 
     <div class="pageContent">
 
-            <div class="sectionBox backgroundPrimaryGradiend">
-                <div class="container">
-                    <!-- title -->
-                    <h1 class="titlePage">{{ $item->name }}{{ !empty($item->district->district_name) ? ' - Vé tàu '.$item->district->district_name : null}}</h1>
-                    <!-- rating -->
-                    @include('main.template.rating', compact('item'))
-                    <!-- content -->
-                    @if(!empty($item->description))
-                        <div class="contentBox">
-                            <p>{!! $item->description !!}</p>
-                        </div>
-                    @endif
-                    <!-- ship box -->
-                    @include('main.shipLocation.shipGridMerge', ['list' => $item->ships])
-                </div>
+        <div class="sectionBox backgroundPrimaryGradiend">
+            <div class="container">
+                <!-- title -->
+                <h1 class="titlePage">{{ $item->name }}{{ !empty($item->district->district_name) ? ' - Vé tàu '.$item->district->district_name : null}}</h1>
+                <!-- rating -->
+                @include('main.template.rating', compact('item'))
+                <!-- content -->
+                @if(!empty($item->description))
+                    <div class="contentBox">
+                        <p>{!! $item->description !!}</p>
+                    </div>
+                @endif
+                <!-- ship box -->
+                @include('main.shipLocation.shipGridMerge', ['list' => $item->ships])
             </div>
+        </div>
 
-            <!-- START:: Video -->
-            @include('main.tourLocation.videoBox', [
-                'item'  => $item,
-                'title' => 'Video Tàu cao tốc '.$item->display_name
-            ])
-            <!-- END:: Video -->
-            
-            <div class="sectionBox noBackground">
-                <div class="container">
-                    <div class="pageContent_body">
-                        <div class="pageContent_body_content">
-                            <div id="js_autoLoadTocContentWithIcon_element" class="contentShip">
-                                <!-- Lịch tàu và Hãng tàu -->
-                                @include('main.shipLocation.headContent', ['keyWord' => $item->name])
-                                <!-- Nội dung tùy biến -->
-                                {!! $content ?? null !!}
-                                <!-- Câu hỏi thường gặp -->
-                                @if(!empty($item->questions)&&$item->questions->isNotEmpty())
-                                    <div id="cau-hoi-thuong-gap" class="contentShip_item">
-                                        <div class="contentShip_item_title">
-                                            <i class="fa-solid fa-circle-question"></i>
-                                            <h2>Câu hỏi thường gặp về {{ $item->name ?? null }}</h2>
-                                        </div>
-                                        <div class="contentShip_item_text">
-                                            @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
-                                        </div>
+        <!-- START:: Video -->
+        @include('main.tourLocation.videoBox', [
+            'item'  => $item,
+            'title' => 'Video Tàu cao tốc '.$item->display_name
+        ])
+        <!-- END:: Video -->
+        
+        <div class="sectionBox noBackground">
+            <div class="container">
+                <div class="pageContent_body">
+                    <div class="pageContent_body_content">
+                        <div id="js_buildTocContentSidebar_element" class="contentShip">
+                            <!-- tocContent main -->
+                            <div id="tocContentMain"></div>
+                            <!-- Lịch tàu và Hãng tàu -->
+                            @include('main.shipLocation.headContent', ['keyWord' => $item->name])
+                            <!-- Nội dung tùy biến -->
+                            {!! $content ?? null !!}
+                            <!-- Câu hỏi thường gặp -->
+                            @if(!empty($item->questions)&&$item->questions->isNotEmpty())
+                                <div id="cau-hoi-thuong-gap" class="contentShip_item">
+                                    <div class="contentShip_item_title">
+                                        <i class="fa-solid fa-circle-question"></i>
+                                        <h2>Câu hỏi thường gặp về {{ $item->name ?? null }}</h2>
                                     </div>
-                                @endif
-                            </div>
+                                    <div class="contentShip_item_text">
+                                        @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
+                                    </div>
+                                </div>
+                            @endif
                         </div>
-                        <div class="pageContent_body_sidebar">
-                            @include('main.shipLocation.sidebar')
-                        </div>
+                    </div>
+                    <div class="pageContent_body_sidebar">
+                        @include('main.shipLocation.sidebar')
                     </div>
                 </div>
             </div>
-            
+        </div>
+        
     </div>
 @endsection
 @push('scripts-custom')
     <script type="text/javascript">
         $(window).on('load', function () {
             
-            autoLoadTocContentWithIcon('js_autoLoadTocContentWithIcon_element');
+            buildTocContentMain('js_buildTocContentSidebar_element');
             
         });
     </script>

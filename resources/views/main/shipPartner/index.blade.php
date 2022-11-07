@@ -50,9 +50,9 @@
                         <!-- rating -->
                         @include('main.template.rating', compact('item'))
                         <!-- content -->
-                        <div id="js_autoLoadTocContentWithIcon_element" class="contentShip">
-                            {{-- <!-- Lịch tàu và Hãng tàu -->
-                            @include('main.shipPartner.headContent', ['keyWord' => $item->name]) --}}
+                        <div id="js_buildTocContentSidebar_element" class="contentShip">
+                            <!-- tocContent main -->
+                            <div id="tocContentMain" style="margin-top:1rem;"></div>
                             <!-- Nội dung tùy biến -->
                             {!! $content ?? null !!}
                             <!-- Câu hỏi thường gặp -->
@@ -81,7 +81,7 @@
     <script type="text/javascript">
         $(window).on('load', function () {
             
-            autoLoadTocContentWithIcon('js_autoLoadTocContentWithIcon_element');
+            buildTocContentMain('js_buildTocContentSidebar_element');
             
         });
     </script>

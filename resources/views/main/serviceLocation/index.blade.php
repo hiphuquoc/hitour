@@ -88,7 +88,9 @@
         <div class="sectionBox noBackground">
             <div class="container">
                 <div class="pageContent_body">
-                    <div id="js_autoLoadTocContentWithIcon_element" class="pageContent_body_content">
+                    <div id="js_buildTocContentSidebar_element" class="pageContent_body_content">
+                        <!-- tocContent main -->
+                        <div id="tocContentMain"></div>
                         <!-- Nội dung tùy biến -->
                         {!! $content ?? null !!}
                         <!-- Câu hỏi thường gặp -->
@@ -116,7 +118,7 @@
     <script type="text/javascript">
         $(window).on('load', function () {
             
-            autoLoadTocContentWithIcon('js_autoLoadTocContentWithIcon_element');
+            buildTocContentMain('js_buildTocContentSidebar_element');
             
         });
     </script>

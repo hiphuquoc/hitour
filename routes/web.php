@@ -49,7 +49,7 @@ use App\Http\Controllers\AdminRedirectController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\RoutingController;
-use App\Http\Controllers\ShipController;
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\ShipBookingController;
 use App\Http\Controllers\TourBookingController;
 
@@ -422,7 +422,7 @@ foreach(\App\Models\Redirect::all() as $redirect){
 }
 /* cập nhật hàng loạt iamge loading trong content */
 // Route::get('/changeImageInContentWithLoading', [HomeController::class, 'changeImageInContentWithLoading'])->name('main.changeImageInContentWithLoading');
-Route::get('/changeImageInContentWithLoadingTourInfo', [HomeController::class, 'changeImageInContentWithLoadingTourInfo'])->name('main.changeImageInContentWithLoadingTourInfo');
+// Route::get('/changeImageInContentWithLoadingTourInfo', [HomeController::class, 'changeImageInContentWithLoadingTourInfo'])->name('main.changeImageInContentWithLoadingTourInfo');
 
 Route::get('/', [HomeController::class, 'home'])->name('main.home');
 /* ===== SITEMAP ===== */
@@ -443,6 +443,7 @@ Route::prefix('tourBooking')->group(function(){
     Route::get('/loadTour', [TourBookingController::class, 'loadTour'])->name('main.tourBooking.loadTour');
 });
 /* ===== TOC CONTENT ===== */
-Route::post('/loadTocContent', [ShipController::class, 'loadTocContent'])->name('main.ship.loadTocContent');
+Route::get('/buildTocContentSidebar', [AjaxController::class, 'buildTocContentSidebar'])->name('main.buildTocContentSidebar');
+Route::get('/buildTocContentMain', [AjaxController::class, 'buildTocContentMain'])->name('main.buildTocContentMain');
 /* ===== ROUTING ALL ===== */
 Route::get("/{slug}/{slug2?}/{slug3?}/{slug4?}/{slug5?}", [RoutingController::class, 'routing'])->name('routing');

@@ -77,9 +77,9 @@
                 <div class="container">
                     <div class="pageContent_body">
                         <div class="pageContent_body_content">
-                            <div id="js_autoLoadTocContentWithIcon_element">
-                                <!-- Lịch tàu và Hãng tàu -->
-                                {{-- @include('main.airLocation.headContent', ['keyWord' => $item->name]) --}}
+                            <div id="js_buildTocContentSidebar_element">
+                                <!-- tocContent main -->
+                                <div id="tocContentMain"></div>
                                 <!-- Nội dung tùy biến -->
                                 {!! $content ?? null !!}
                                 <!-- Câu hỏi thường gặp -->
@@ -108,7 +108,8 @@
     <script type="text/javascript">
         $(window).on('load', function () {
             
-            autoLoadTocContentWithIcon('js_autoLoadTocContentWithIcon_element');
+            // buildTocContentSidebar('js_buildTocContentSidebar_element');
+            buildTocContentMain('js_buildTocContentSidebar_element');
             
         });
     </script>

@@ -262,6 +262,13 @@ button {
     }
 }
 
+.hide-990 {
+    display: block !important;
+    @media (max-width: 990px){
+        display: none !important;
+    }
+}
+
 .hide-1199 {
     display: block !important;
     @media (max-width: 1199px){
@@ -272,6 +279,13 @@ button {
 .show-767 {
     display: none !important;
     @media (max-width: 767px){
+        display: block !important;
+    }
+}
+
+.show-990 {
+    display: none !important;
+    @media (max-width: 990px){
         display: block !important;
     }
 }

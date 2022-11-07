@@ -39,7 +39,7 @@
         <div class="sectionBox">
             <div class="container">
                 <div class="pageContent_body">
-                    <div id="js_autoLoadTocContentWithIcon_element" class="pageContent_body_content">
+                    <div id="js_buildTocContentSidebar_element" class="pageContent_body_content">
                         <!-- title -->
                         <h1 class="titlePage">{{ $item->name ?? null }}</h1>
                         <!-- rating -->
@@ -76,7 +76,7 @@
 
         $(window).on('load', function () {
             
-            autoLoadTocContentWithIcon('js_autoLoadTocContentWithIcon_element');
+            buildTocContentSidebar('js_buildTocContentSidebar_element');
 
         });
     </script>

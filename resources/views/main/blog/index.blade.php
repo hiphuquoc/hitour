@@ -35,11 +35,13 @@
         <div class="sectionBox">
             <div class="container">
                 <div class="pageContent_body">
-                    <div id="js_autoLoadTocContentWithIcon_element" class="pageContent_body_content">
+                    <div id="js_buildTocContentSidebar_element" class="pageContent_body_content">
                         <!-- title -->
                         <h1 class="titlePage">{{ $item->name ?? null }}</h1>
                         <!-- rating -->
                         @include('main.template.rating', compact('item'))
+                        <!-- tocContent main -->
+                        <div id="tocContentMain" style="margin-top:1rem;"></div>
                         <!-- content -->
                         <div class="contentShip">
                             <!-- Nội dung tùy biến -->
@@ -61,7 +63,7 @@
 
         $(window).on('load', function () {
             
-            autoLoadTocContentWithIcon('js_autoLoadTocContentWithIcon_element');
+            buildTocContentMain('js_buildTocContentSidebar_element');
 
         });
     </script>

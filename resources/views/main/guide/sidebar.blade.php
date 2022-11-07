@@ -67,7 +67,7 @@
       </div>
    @endif
    
-   <div id="js_autoLoadTocContentWithIcon_idWrite" class="tocContentTour customScrollBar-y" style="{{ $flagMargin }}">
+   <div id="js_buildTocContentSidebar_idWrite" class="tocContentTour customScrollBar-y" style="{{ $flagMargin }}">
       <!-- loadTocContent ajax -->
    </div>
 

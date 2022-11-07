@@ -1,4 +1,4 @@
-<div id="js_autoLoadTocContentWithIcon_idWrite" class="tocContentTour customScrollBar-y" style="margin-top:1.5rem;">
+<div id="js_buildTocContentSidebar_idWrite" class="tocContentTour customScrollBar-y" style="margin-top:1.5rem;">
     <a href="#diem-noi-bat-chuong-trinh-tour" title="Điểm nổi bật Chương trình Tour" class="tocContentTour_item">
         <i class="fa-solid fa-award"></i>Điểm nổi bật CT Tour
     </a>
@@ -60,10 +60,10 @@
         $(window).ready(function(){
             /* tính toán chiều cao sidebar */
             const heightW       = $(window).height();
-            const heightBox     = $('#js_autoLoadTocContentWithIcon_idWrite').parent().outerHeight();
-            const heightElemt   = $('#js_autoLoadTocContentWithIcon_idWrite').outerHeight();
+            const heightBox     = $('#js_buildTocContentSidebar_idWrite').parent().outerHeight();
+            const heightElemt   = $('#js_buildTocContentSidebar_idWrite').outerHeight();
             const height        = parseInt(heightW) - parseInt(heightBox - heightElemt);
-            $('#js_autoLoadTocContentWithIcon_idWrite').css('max-height', 'calc('+height+'px - 3rem)');
+            $('#js_buildTocContentSidebar_idWrite').css('max-height', 'calc('+height+'px - 3rem)');
         });
     </script>
 @endpush

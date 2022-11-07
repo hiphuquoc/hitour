@@ -44,7 +44,7 @@
         <div class="sectionBox">
             <div class="container">
                 <div class="pageContent_body">
-                    <div id="js_autoLoadTocContentWithIcon_element" class="pageContent_body_content">
+                    <div id="js_buildTocContentSidebar_element" class="pageContent_body_content">
                         <!-- title -->
                         <h1 class="titlePage">Tàu cao tốc {{ $item->name ?? null }}</h1>
                         <!-- rating -->
@@ -52,11 +52,13 @@
                         <!-- video -->
                         @if(!empty($item->seo->video))
                             <div class="videoYoutubeBox">
-                                <p class="videoYoutubeBox_video">
+                                <div class="videoYoutubeBox_video">
                                     {!! $item->seo->video !!}
-                                </p>
+                                </div>
                             </div>
                         @endif
+                        <!-- tocContent main -->
+                        <div id="tocContentMain" style="margin-top:1rem;"></div>
                         <!-- content -->
                         <div class="contentShip">
                             <!-- Lịch tàu và Hãng tàu -->
@@ -90,7 +92,7 @@
 
         $(window).on('load', function () {
             
-            autoLoadTocContentWithIcon('js_autoLoadTocContentWithIcon_element');
+            buildTocContentMain('js_buildTocContentSidebar_element');
 
         });
     </script>
