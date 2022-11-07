@@ -5316,7 +5316,7 @@ blockquote em {
   z-index: 101;
 }
 .tocContentMain.tocFixed .tocContentMain_title {
-  padding: 0.75rem;
+  padding: 0.5rem 0.75rem;
 }
 .tocContentMain.tocFixed .tocContentMain_list {
   padding: 0 0.75rem;
