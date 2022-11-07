@@ -39,7 +39,7 @@ class HomeController extends Controller {
                                 ->with('seo')
                                 ->get();
         $specialLocations   = TourLocation::select('*')
-                                ->where('island', '1')
+                                ->where('special', '1')
                                 ->with('seo')
                                 ->get();
         $shipPartners       = ShipPartner::select('*')

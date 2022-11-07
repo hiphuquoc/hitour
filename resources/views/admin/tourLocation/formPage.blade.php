@@ -90,7 +90,14 @@
         <div class="formBox_full_item">
             <div class="form-check form-check-success">
                 <input type="checkbox" class="form-check-input" id="island" name="island" {{ !empty($item->island)&&($item->island==1) ? 'checked' : null }}>
-                <label class="form-check-label" for="island">Khu vực này là biển đảo</label>
+                <label class="form-check-label" for="island">Đây là biển đảo</label>
+            </div>
+        </div>
+        <!-- One Row -->
+        <div class="formBox_full_item">
+            <div class="form-check form-check-success">
+                <input type="checkbox" class="form-check-input" id="special" name="special" {{ !empty($item->special)&&($item->special==1) ? 'checked' : null }}>
+                <label class="form-check-label" for="special">Đây là điểm đến nổi bật</label>
             </div>
         </div>
         <!-- One Row -->

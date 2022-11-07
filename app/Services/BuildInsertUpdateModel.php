@@ -86,6 +86,7 @@ class BuildInsertUpdateModel {
             if(!empty($seoId)) $result['seo_id'] = $seoId;
             $result['region_id']            = $dataForm['region'];
             $result['island']               = !empty($dataForm['island']) ? 1 : 0;
+            $result['special']              = !empty($dataForm['special']) ? 1 : 0;
             $result['province_id']          = $dataForm['province'] ?? null;
             $result['district_id']          = $dataForm['district'] ?? null;
         }
