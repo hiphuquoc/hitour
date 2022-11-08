@@ -2394,7 +2394,7 @@ blockquote em {
   margin-bottom: 0.5rem;
 }
 .shipGrid_item_content_title a {
-  color: rgb(0, 123, 255);
+  color: rgb(0, 123, 255) !important;
 }
 .shipGrid_item_content_title a:hover {
   color: rgb(0, 90, 180);

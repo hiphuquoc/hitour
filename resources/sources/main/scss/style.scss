@@ -2071,7 +2071,7 @@ blockquote{
             &_title {
                 margin-bottom: 0.5rem;
                 a {
-                    color: $color-primary;
+                    color: $color-primary !important;
                     &:hover {
                         color: $color-primary-hover;
                     }
