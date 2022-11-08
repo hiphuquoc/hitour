@@ -198,6 +198,31 @@ $folderFont : '/fonts/';
         }
     }
 }
+@mixin slickArrowCircle {
+    position: absolute;
+    transform: translateY(-50%);
+    z-index: 99;
+    border: none;
+    border-radius: 50%;
+    text-align: center;
+    background: $color-secondary-08;
+    padding: 0.6rem 0.9rem;
+    &:hover {
+        background: $color-secondary;
+    }
+    &.slick-prev {
+        left: -0.5rem;
+        top: 50%;
+    }
+    &.slick-next {
+        right: -0.5rem;
+        top: 50%;
+    }
+    i {
+        margin: 0;
+        vertical-align: middle;
+    }
+}
 
 @mixin fontAwesome {
     font-family: "Font Awesome 6 Free";

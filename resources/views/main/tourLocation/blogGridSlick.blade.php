@@ -38,15 +38,17 @@
         $('.blogGridSlick_box').slick({
             infinite: false,
             slidesToShow: 3.6,
-            slidesToScroll: 1,
-            arrows: false,
+            slidesToScroll: 3,
+            arrows: true,
+            prevArrow: '<button class="slick-arrow slick-prev"><i class="fa-solid fa-angle-left"></i></button>',
+            nextArrow: '<button class="slick-arrow slick-next"><i class="fa-solid fa-angle-right"></i></button>',
             responsive: [
                 {
                     breakpoint: 1023,
                     settings: {
                         infinite: false,
                         slidesToShow: 2.6,
-                        slidesToScroll: 1,
+                        slidesToScroll: 2,
                         arrows: false,
                     }
                 },

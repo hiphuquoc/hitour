@@ -55,8 +55,10 @@
         $('.tourRelated').slick({
             infinite: false,
             slidesToShow: 2.5,
-            slidesToScroll: 1,
-            arrows: false,
+            slidesToScroll: 2,
+            arrows: true,
+            prevArrow: '<button class="slick-arrow slick-prev"><i class="fa-solid fa-angle-left"></i></button>',
+            nextArrow: '<button class="slick-arrow slick-next"><i class="fa-solid fa-angle-right"></i></button>',
             responsive: [
                 {
                     breakpoint: 1199,
@@ -72,7 +74,7 @@
                     settings: {
                         infinite: false,
                         slidesToShow: 2.5,
-                        slidesToScroll: 1,
+                        slidesToScroll: 2,
                         arrows: false,
                     }
                 },

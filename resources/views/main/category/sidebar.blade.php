@@ -89,7 +89,7 @@
          <div class="serviceRelatedSidebarBox_title">
             <h2>Chuyên mục</h2>
          </div>
-         <div class="serviceRelatedSidebarBox_box customScrollBar-y" style="max-height:250px;">
+         <div class="serviceRelatedSidebarBox_box customScrollBar-y" style="max-height:275px;">
             
             @foreach($listCategoryLv1 as $category)
                <a href="/{{ $category->seo->slug_full ?? null }}" title="{{ $category->name ?? $category->seo->title ?? $category->seo->seo_title ?? null }}" class="serviceRelatedSidebarBox_box_item">

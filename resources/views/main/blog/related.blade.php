@@ -39,14 +39,16 @@
                         infinite: false,
                         slidesToShow: 2.7,
                         slidesToScroll: 3,
-                        arrows: false,
+                        arrows: true,
+                        prevArrow: '<button class="slick-arrow slick-prev"><i class="fa-solid fa-angle-left"></i></button>',
+                        nextArrow: '<button class="slick-arrow slick-next"><i class="fa-solid fa-angle-right"></i></button>',
                         responsive: [
                             {
                                 breakpoint: 767,
                                 settings: {
                                     infinite: false,
                                     slidesToShow: 2.4,
-                                    slidesToScroll: 1,
+                                    slidesToScroll: 2,
                                     arrows: false,
                                 }
                             },

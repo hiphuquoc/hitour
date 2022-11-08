@@ -27,11 +27,11 @@
                 <div class="specialLocationBoxMobile_item">
                     <a href="{{ $specialLocation->seo->slug_full ?? null }}" title="{{ $specialLocation->name ?? $specialLocation->seo->title ?? $specialLocation->seo->seo_title ?? null }}">
                         <img src="{{ config('main.svg.loading_main') }}" data-src="{{ $specialLocation->seo->image ?? $specialLocation->seo->image_small ?? config('admin.images.default_750x460') }}" alt="{{ $specialLocation->name ?? $specialLocation->seo->title ?? $specialLocation->seo->seo_title ?? null }}" title="{{ $specialLocation->name ?? $specialLocation->seo->title ?? $specialLocation->seo->seo_title ?? null }}" />
+                        <div class="specialLocationBoxMobile_item_content">
+                            <h3>{{ $specialLocation->display_name ?? null }}</h3>
+                            <div>{{ $specialLocation->seo->rating_aggregate_count ?? 0 }} đánh giá</div>
+                        </div>
                     </a>
-                    <div class="specialLocationBoxMobile_item_content">
-                        <h3>{{ $specialLocation->display_name ?? null }}</h3>
-                        <div>{{ $specialLocation->seo->rating_aggregate_count ?? 0 }} đánh giá</div>
-                    </div>
                 </div>
                 @php
                     if($loop->index==12) break;
