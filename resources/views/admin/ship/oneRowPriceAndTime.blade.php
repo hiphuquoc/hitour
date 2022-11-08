@@ -18,16 +18,14 @@
                 $rowspan    = count($shipTime);
             @endphp
             <tr id="priceAndTime_{{ $shipTime[0]['id'] }}">
-                @if($loop->index==0)
-                    <td>
-                        <div class="oneLine" style="font-weight:bold;">{{ $price->partner->name }}</div>
-                        <div class="oneLine" style="color:rgb(0, 123, 255);">
-                            @foreach($shipTime[0]['date'] as $date)
-                                <div style="font-weight:700;">{{ date('d/m/Y', strtotime($date['date_start'])) }} - {{ date('d/m/Y', strtotime($date['date_end'])) }}</div>
-                            @endforeach
-                        </div>
-                    </td>
-                @endif
+                <td>
+                    <div class="oneLine" style="font-weight:bold;">{{ $price->partner->name }}</div>
+                    <div class="oneLine" style="color:rgb(0, 123, 255);">
+                        @foreach($shipTime[0]['date'] as $date)
+                            <div style="font-weight:700;">{{ date('d/m/Y', strtotime($date['date_start'])) }} - {{ date('d/m/Y', strtotime($date['date_end'])) }}</div>
+                        @endforeach
+                    </div>
+                </td>
                 <td>
                     @foreach($shipTime as $item)
                         <div class="oneLine">

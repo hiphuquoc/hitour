@@ -27,7 +27,7 @@
                         <tr>
                             <td>
                                 <div>
-                                    {{ $price->partner->partner_name }}
+                                    <h3 class="highLight">{{ $price->partner->name }}</h3>
                                 </div>
                                 <div>
                                     Ngày áp dụng:<br/>
@@ -47,11 +47,11 @@
                                 @endforeach
                             </td>
                             <td>
-                                <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{{ number_format($price['price_adult']).config('main.unit_currency') }}</span> /Người lớn</div>
-                                <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{{ number_format($price['price_child']).config('main.unit_currency') }}</span> /Trẻ em 6-11</div>
-                                <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{{ number_format($price['price_old']).config('main.unit_currency') }}</span> /Trên 60</div>
+                                <div><span class="highLight" style="font-size:1.1rem;">{{ number_format($price['price_adult']).config('main.unit_currency') }}</span> /Người lớn</div>
+                                <div><span class="highLight" style="font-size:1.1rem;">{{ number_format($price['price_child']).config('main.unit_currency') }}</span> /Trẻ em 6-11</div>
+                                <div><span class="highLight" style="font-size:1.1rem;">{{ number_format($price['price_old']).config('main.unit_currency') }}</span> /Trên 60</div>
                                 @if(!empty($price['price_vip']))
-                                    <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{{ number_format($price['price_vip']).config('main.unit_currency') }}</span> /Vé VIP</div>
+                                    <div><span class="highLight" style="font-size:1.1rem;">{{ number_format($price['price_vip']).config('main.unit_currency') }}</span> /Vé VIP</div>
                                 @endif
                             </td>
                         </tr>

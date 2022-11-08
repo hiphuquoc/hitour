@@ -1896,7 +1896,7 @@ $tourGrid_radius : 5px;
         }
     }
     thead {
-        font-size: 0.95rem;
+        font-size: 1rem;
         tr {
             background: $bg-03;
             font-weight: 700;
@@ -1918,6 +1918,10 @@ $tourGrid_radius : 5px;
             &:nth-child(even){
                 background: $bg-03;
             }
+        }
+        .highLight {
+            font-weight: 700;
+            color: $color-primary-hover;
         }
     }
     @media (max-width: 1023px){

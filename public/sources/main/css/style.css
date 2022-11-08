@@ -2189,7 +2189,7 @@ input, textarea {
   border-left: 1px solid #dee2e6;
 }
 .tableContentBorder thead {
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 .tableContentBorder thead tr {
   background: #e9ecef;
@@ -2208,6 +2208,10 @@ input, textarea {
 }
 .tableContentBorder tbody tr:nth-child(even) {
   background: #e9ecef;
+}
+.tableContentBorder tbody .highLight {
+  font-weight: 700;
+  color: rgb(0, 90, 180);
 }
 @media (max-width: 1023px) {
   .tableContentBorder {
