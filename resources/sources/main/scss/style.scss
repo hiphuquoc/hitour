@@ -1902,7 +1902,7 @@ $tourGrid_radius : 5px;
             font-weight: 700;
             font-family: $font-primary-title;
             td, th {
-                padding: 0.5rem ;
+                padding: 0.5rem 1rem;
                 text-align: center;
             }
         }
@@ -1910,7 +1910,7 @@ $tourGrid_radius : 5px;
     tbody {
         tr {
             td {
-                padding: 0.25rem 0.5rem;
+                padding: 0.5rem 1rem;
             }
             &:not(:first-child){
                 border-top: 1px solid $bg-04;

@@ -6,113 +6,70 @@
     <div class="contentTour_item_text">
         <p><a href="{{ URL::current() }}" title="{{ !empty($keyWord) ? 'Lịch '.$keyWord : 'Lịch tàu' }}">{{ !empty($keyWord) ? 'Lịch '.$keyWord : 'Lịch tàu' }}</a> bên dưới là lộ trình chính xác được Hitour cập nhật thường xuyên từ hãng tàu. Tuy nhiên, có một số trường hợp do thời tiết, bảo trì,... lịch tàu thay đổi đột xuất sẽ được thông báo riêng cho Quý khách khi đặt vé.</p>
         <p><strong>Giá vé {{ $keyWord ?? 'tàu' }}</strong> niêm yết theo bảng bên dưới áp dụng cho khách lẻ. Đối với khách đoàn lớn (20 khách trở lên) và đối tác vui lòng liện hệ <span style="font-size:1.4rem;font-weight:bold;color:rgb(0,123,255);">08.6868.4868</span> để biết thêm chi tiết.</p>
-        @php
-            /*
-                times:time          => [
-                    7:20 - 11:20,
-                ]
-                prices:price_adult  => 
-                prices:price_child  => 
-                prices:price_old    => 
-                prices:price_vip    => 
 
-                => nếu mảng time và các mức giá trùng thì gộp
-
-                prices:date         
-
-            */
-            $dataMerge              = [];
-            $i                      = 0;
-            foreach($item->ships as $ship){
-                foreach($ship->prices as $price){
-                    /* check có trùng giờ + giá? */
-                    /* tạo mảng time để so sánh */
-                    $tmp            = [];
-                    foreach($price->times as $time){
-                        $tmp[$time->ship_from.' - '.$time->ship_to][]      = $time->time_departure.' - '.$time->time_arrive;
-                    }
-                    /* tiến hành check */
-                    $keyMatch       = '';
-                    foreach($dataMerge as $key => $itemCheck){
-                        /* check giá */
-                        if(
-                            $itemCheck['price_adult']==$price->price_adult
-                            &&$itemCheck['price_child']==$price->price_child
-                            &&$itemCheck['price_old']==$price->price_old
-                            &&$itemCheck['price_vip']==$price->price_vip
-                        ){
-                            /* trùng giá => check tiếp giờ tàu */
-                            if(json_encode($tmp)==json_encode($itemCheck['time'])){ /* trùng thời gian */
-                                $keyMatch   = $key;
-                                break;
-                            }
-                        }
-                    }
-                    /* keyMatch tồn tại tức trùng 1 khung giá + thời gian => gộp ngày áp dụng */
-                    if($keyMatch!=''){
-                        $dataMerge[$keyMatch]['date'][]  = date('d/m/Y', strtotime($price->date_start)).' - '.date('d/m/Y', strtotime($price->date_end));
-                    }else {
-                        foreach($price->times as $time){
-                            $dataMerge[$i]['time'][$time->ship_from.' - '.$time->ship_to][]    = $time->time_departure.' - '.$time->time_arrive;
-                        }
-                        $dataMerge[$i]['partner_name']  = $price->partner->name;
-                        $dataMerge[$i]['partner_logo']  = $price->partner->company_logo;
-                        $dataMerge[$i]['price_adult']   = $price->price_adult;
-                        $dataMerge[$i]['price_child']   = $price->price_child;
-                        $dataMerge[$i]['price_old']     = $price->price_old;
-                        $dataMerge[$i]['price_vip']     = $price->price_vip;
-                        $dataMerge[$i]['date'][]        = date('d/m/Y', strtotime($price->date_start)).' - '.date('d/m/Y', strtotime($price->date_end));
-                        ++$i;
-                    }
-                }
-            }
-        @endphp
-
-        <table class="tableContentBorder" style="font-size:0.95rem;">
-            <thead>
-                <tr>
-                    <th>Hãng tàu</th>
-                    <th>Khởi hành - cập bến</th>
-                    <th>Giá vé</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($dataMerge as $data)
-                <tr>
-                    <td>
-                        <div>
-                            {{ $data['partner_name'] }}
-                        </div>
-                        <div>
-                            Ngày áp dụng:<br/>
-                            @foreach($data['date'] as $date)
-                                <div class="highLight">{{ $date }}</div>
-                            @endforeach
-                        </div>
-                    </td>
-                    <td>
-                        @foreach($data['time'] as $departure => $time)
-                        <div class="oneLine">
-                            <h3>{{ $departure }}</h3>
-                            @foreach($time as $t)
-                                <div>{{ $t }}</div>
-                            @endforeach
-                        </div>
+        @if(!empty($item->ships)&&$item->ships->isNotEmpty())
+            <table class="tableContentBorder" style="font-size:0.95rem;">
+                <thead>
+                    <tr>
+                        <th>Hãng tàu</th>
+                        <th>Khởi hành - cập bến</th>
+                        <th>Giá vé</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(!empty($item->ships)&&$item->ships->isNotEmpty())
+                        @foreach($item->ships as $ship)
+                            @if(!empty($ship->prices)&&$ship->prices->isNotEmpty())
+                                @foreach($ship->prices as $price)
+                                    @php
+                                        $shipTime = \App\Http\Controllers\AdminShipPriceController::mergeArrayShipPrice($price->times);
+                                    @endphp
+                                    <tr>
+                                        <td>
+                                            <div>
+                                                {{ $price->partner->partner_name }}
+                                            </div>
+                                            <div>
+                                                Ngày áp dụng:<br/>
+                                                @foreach($shipTime[0]['date'] as $date)
+                                                    <div class="highLight">{{ date('d/m/Y', strtotime($date['date_start'])) }} - {{ date('d/m/Y', strtotime($date['date_end'])) }}</div>
+                                                @endforeach
+                                            </div>
+                                        </td>
+                                        <td>
+                                            @foreach($shipTime as $time)
+                                                <div class="oneLine">
+                                                    <h3>{{ $time['name'] }}</h3>
+                                                    @foreach($shipTime[0]['time'] as $t)
+                                                        <div>{{ $t['time_departure'] }} - {{ $t['time_arrive'] }}</div>
+                                                    @endforeach
+                                                </div>
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{{ number_format($price['price_adult']).config('main.unit_currency') }}</span> /Người lớn</div>
+                                            <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{{ number_format($price['price_child']).config('main.unit_currency') }}</span> /Trẻ em 6-11</div>
+                                            <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{{ number_format($price['price_old']).config('main.unit_currency') }}</span> /Trên 60</div>
+                                            @if(!empty($price['price_vip']))
+                                                <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{{ number_format($price['price_vip']).config('main.unit_currency') }}</span> /Vé VIP</div>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else 
+                                <tr>
+                                    <td colspan="3">Chuyến <strong>{{ $ship->name }}</strong> hiện chưa có lịch chạy!</td>
+                                </tr>
+                            @endif
                         @endforeach
-                    </td>
-                    <td>
-                        <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{{ number_format($data['price_adult']).config('main.unit_currency') }}</span> /Người lớn</div>
-                        <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{{ number_format($data['price_child']).config('main.unit_currency') }}</span> /Trẻ em 6-11</div>
-                        <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{{ number_format($data['price_old']).config('main.unit_currency') }}</span> /Trên 60</div>
-                        @if(!empty($data['price_vip']))
-                            <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{{ number_format($data['price_vip']).config('main.unit_currency') }}</span> /Vé VIP</div>
-                        @endif
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-
+                    @else 
+                        <tr>
+                            <td colspan="3">Hiện không có lịch tàu nào!</td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
+        @endif
     </div>
 </div>
 
