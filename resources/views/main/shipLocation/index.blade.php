@@ -131,10 +131,6 @@
 @endsection
 @push('scripts-custom')
     <script type="text/javascript">
-        $(window).on('load', function () {
-            
-            buildTocContentMain('js_buildTocContentSidebar_element');
-            
-        });
+        buildTocContentMain('js_buildTocContentSidebar_element');
     </script>
 @endpush

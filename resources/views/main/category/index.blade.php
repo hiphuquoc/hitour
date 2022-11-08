@@ -73,11 +73,6 @@
 @endsection
 @push('scripts-custom')
     <script type="text/javascript">
-
-        $(window).on('load', function () {
-            
-            buildTocContentSidebar('js_buildTocContentSidebar_element');
-
-        });
+        buildTocContentSidebar('js_buildTocContentSidebar_element');
     </script>
 @endpush
