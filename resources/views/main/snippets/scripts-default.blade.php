@@ -168,7 +168,7 @@
                         $('.tocContentMain.tocFixed .tocContentMain_list').css('height', heightToc+'px');
                     }
 
-                    let element         = $('.tocContentMain');
+                    let element         = $('#tocContentMain');
                     let positionE       = element.offset().top;
                     let heightE         = element.outerHeight();
                     let boxContent      = $('#'+idElement);
