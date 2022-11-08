@@ -1571,6 +1571,9 @@ input, textarea {
   background: #fff;
   padding-bottom: 0.75rem;
 }
+.tourRelated_item:first-child {
+  margin-left: 2px;
+}
 .tourRelated_item:not(:first-child) {
   margin-left: 1.25rem;
 }
@@ -4045,6 +4048,9 @@ blockquote em {
   width: calc(33.33% - 0.8rem);
   margin-bottom: 2px;
 }
+.relatedBox_box_item:first-child {
+  margin-left: 2px;
+}
 .relatedBox_box_item:not(:first-child) {
   margin-left: 1.5rem;
 }
@@ -4439,6 +4445,9 @@ blockquote em {
   background: #fff;
   border-radius: 0 0 5px 5px;
   box-shadow: 0 0 5px #dee2e6;
+}
+.blogGridSlick_box_item:first-child {
+  margin-left: 2px;
 }
 .blogGridSlick_box_item:not(:first-child) {
   margin-left: 1.5rem;

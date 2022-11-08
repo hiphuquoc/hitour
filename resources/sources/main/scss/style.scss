@@ -1218,6 +1218,9 @@ $tourGrid_radius : 5px;
         box-shadow: 0 0 5px $bg-03;
         background: #fff;
         padding-bottom: 0.75rem;
+        &:first-child {
+            margin-left: 2px;
+        }
         &:not(:first-child){
             margin-left: 1.25rem;
         }
@@ -3887,6 +3890,9 @@ $width-single-menu  : 260px;
         &_item {
             width: calc(33.33% - 0.8rem);
             margin-bottom: 2px;
+            &:first-child{
+                margin-left: 2px;
+            }
             &:not(:first-child){
                 margin-left: 1.5rem;
             }
@@ -4286,6 +4292,9 @@ $width-single-menu  : 260px;
             background: #fff;
             border-radius: 0 0 5px 5px;
             box-shadow: 0 0 5px $bg-04;
+            &:first-child {
+                margin-left: 2px;
+            }
             &:not(:first-child){
                 margin-left: 1.5rem;
             }

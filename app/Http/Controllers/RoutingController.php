@@ -89,6 +89,7 @@ class RoutingController extends Controller {
                     foreach($item->locations as $location) $arrayIdTourLocation[]  = $location->infoLocation->id;
                     $related                = Tour::select('*')
                                                 ->where('id', '!=', $idTour)
+                                                ->where('status_show', 1)
                                                 ->whereHas('locations.infoLocation', function($query) use($arrayIdTourLocation){
                                                     $query->whereIn('id', $arrayIdTourLocation);
                                                 })
