@@ -2071,13 +2071,13 @@ blockquote{
             &_title {
                 margin-bottom: 0.5rem;
                 a {
-                    color: $color-primary !important;
-                    &:hover {
-                        color: $color-primary-hover;
-                    }
                     h2, h3 {
                         font-size: 1.15rem;
                         margin-bottom: 0;
+                        color: $color-primary !important;
+                        &:hover {
+                            color: $color-primary-hover;
+                        }
                     }
                 }
             }
