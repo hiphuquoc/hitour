@@ -2076,7 +2076,7 @@ blockquote{
                         margin-bottom: 0;
                         color: $color-primary !important;
                         &:hover {
-                            color: $color-primary-hover;
+                            color: $color-primary-hover !important;
                         }
                     }
                 }
@@ -3402,7 +3402,7 @@ $width-single-menu  : 260px;
     }
     a {
         .sectionBox_title {
-            color: $color-text;
+            color: $color-title;
             &:hover {
                 color: $color-primary-hover;
             }

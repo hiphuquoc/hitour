@@ -2399,7 +2399,7 @@ blockquote em {
   color: rgb(0, 123, 255) !important;
 }
 .shipGrid_item_content_title a h2:hover, .shipGrid_item_content_title a h3:hover {
-  color: rgb(0, 90, 180);
+  color: rgb(0, 90, 180) !important;
 }
 .shipGrid_item_content_table {
   font-size: 1rem;
@@ -3576,7 +3576,7 @@ blockquote em {
   }
 }
 .sectionBox a .sectionBox_title {
-  color: #567;
+  color: #345;
 }
 .sectionBox a .sectionBox_title:hover {
   color: rgb(0, 90, 180);
