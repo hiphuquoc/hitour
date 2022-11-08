@@ -4512,8 +4512,8 @@ blockquote em {
   vertical-align: middle;
 }
 @media (max-width: 577px) {
-  .blogGridSlick_box_item {
-    margin-left: 0 !important;
+  .blogGridSlick_box_item:not(:first-child) {
+    margin-left: 1rem !important;
   }
 }
 

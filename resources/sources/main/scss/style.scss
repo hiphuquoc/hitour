@@ -4350,7 +4350,9 @@ $width-single-menu  : 260px;
     @media (max-width: 577px){
         &_box {
             &_item {
-                margin-left: 0 !important;
+                &:not(:first-child){
+                    margin-left: 1rem !important;
+                }
             }
         }
     }
