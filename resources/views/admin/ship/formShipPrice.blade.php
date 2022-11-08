@@ -18,14 +18,30 @@
             </select>
         </div>
         <!-- One Row -->
-        <div class="formBox_full_item">
-            <label class="form-label inputRequired" for="date_range">Khoảng ngày</label>
-            @php
-                $dateRange  = null;
-                if(!empty($item->date_start)&&!empty($item->date_end)) $dateRange = date('Y-m-d', strtotime($item->date_start)).' to '.date('Y-m-d', strtotime($item->date_end))
-            @endphp
-            <input type="text" class="form-control flatpickr-disabled-range flatpickr-input active" id="date_range" name="date_range" value="{{ $dateRange }}" placeholder="YYYY-MM-DD" required>
+        <div class="formBox_full_item" data-repeater-list="date">
+            <div class="flexBox" data-repeater-item>
+                <div class="flexBox_item">
+                    <label class="form-label inputRequired" for="date_range">Khoảng ngày</label>
+                    @php
+                        $dateRange  = null;
+                        if(!empty($item->date_start)&&!empty($item->date_end)) $dateRange = date('Y-m-d', strtotime($item->date_start)).' to '.date('Y-m-d', strtotime($item->date_end))
+                    @endphp
+                    <input type="text" class="form-control flatpickr-disabled-range flatpickr-input active" name="date_range" value="{{ $dateRange }}" placeholder="YYYY-MM-DD" required>
+                </div>
+                <div class="flexBox_item btnRemoveRepeater" data-repeater-delete>
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
         </div>
+        <!-- One Row -->
+        <div class="formBox_full_item" style="text-align:right;">
+            <button class="btn btn-icon btn-primary waves-effect waves-float waves-light" type="button" aria-label="Thêm" data-repeater-create>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus me-25"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <span>Thêm</span>
+            </button>
+        </div>
+    </div>
+    <div class="formBox_full">
         <!-- One Row -->
         <div class="formBox_full_item">
             <div class="flexBox">
@@ -61,7 +77,7 @@
         <div class="formBox_full_item" data-repeater-list="time">
         @if(!empty($item->times))
             @foreach($item->times as $time)
-                <div class="flexBox" {{ $loop->last ? 'data-repeater-item' : null}}>
+                <div class="flexBox" {{ $loop->last ? 'data-repeater-item' : null }}>
                     <div class="flexBox_item">
                         <label class="form-label inputRequired" for="string_from_to">Khởi hành - Cập bến</label>
                         <select class="form-select" name="string_from_to" aria-hidden="true">
@@ -130,8 +146,19 @@
 </div>
 
 <script type="text/javascript">
-    $('.flatpickr-input').flatpickr({
-      mode: 'range'
-    });
+    // $('.flatpickr-input').flatpickr({
+    //   mode: 'range'
+    // });
     $('.formBox_full').repeater();
+    setInterval(() => {
+        $(document).find('.flatpickr-input').each(function(){
+            if($(this).hasClass('added')){
+                /* đã addListener thì thôi */
+            }else {
+                $('.flatpickr-input').addClass('added').flatpickr({
+                    mode: 'range'
+                });
+            }
+        })
+    }, 100);
 </script>

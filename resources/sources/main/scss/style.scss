@@ -5181,18 +5181,18 @@ $width-single-menu  : 260px;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-    &:before {
-        @include fontAwesome;
-        content: '\f077';
-        font-size: 0.8rem;
-    }
-    &.hidden {
-        display: flex !important;
-        &::before {
+        &:before {
             @include fontAwesome;
-            content: '\f054';
+            content: '\f077';
+            font-size: 0.8rem;
         }
-    }
+        &.hidden {
+            display: flex !important;
+            &::before {
+                @include fontAwesome;
+                content: '\f054';
+            }
+        }
     }
     &.tocFixed {
         display: none;

@@ -13,33 +13,30 @@
     </thead>
     <tbody>
         @foreach($item as $price)
-            <tr id="priceAndTime_{{ $price->id }}">
+            @php
+                $shipTime   = \App\Http\Controllers\AdminShipPriceController::mergeArrayShipPrice($price->times);
+                $rowspan    = count($shipTime);
+            @endphp
+            <tr id="priceAndTime_{{ $shipTime[0]['id'] }}">
+                @if($loop->index==0)
+                    <td>
+                        <div class="oneLine" style="font-weight:bold;">{{ $price->partner->name }}</div>
+                        <div class="oneLine" style="color:rgb(0, 123, 255);">
+                            @foreach($shipTime[0]['date'] as $date)
+                                <div style="font-weight:700;">{{ date('d/m/Y', strtotime($date['date_start'])) }} - {{ date('d/m/Y', strtotime($date['date_end'])) }}</div>
+                            @endforeach
+                        </div>
+                    </td>
+                @endif
                 <td>
-                    <div class="oneLine" style="color:rgb(0, 123, 255);">
-                        <span style="font-weight:700;">{{ date('d/m/Y', strtotime($price->date_start)) }} - {{ date('d/m/Y', strtotime($price->date_end)) }}</span>
-                    </div>
-                    <div class="oneLine">{{ $price->partner->name }}</div>
-                    <div class="oneLine"><img src="{{ $price->partner->company_logo }}" style="width:100px;" /></div>
-                    
-                    
-                </td>
-                <td>
-                    @if(!empty($price->times))
-                        @php
-                            $dataConvert        = [];
-                            foreach($price->times as $time){
-                                $dataConvert[$time->ship_from_sort][] = $time->toArray(); 
-                            }
-                        @endphp
-                        @foreach($dataConvert as $key => $value)
-                            <div class="oneLine">
-                                <div style="font-weight:700;">{{ $value[0]['name'] }}</div>
-                                @foreach($value as $time)
-                                    <div>{{ $time['time_departure'] }} - {{ $time['time_arrive'] }}</div>
-                                @endforeach
-                            </div>
-                        @endforeach
-                    @endif
+                    @foreach($shipTime as $item)
+                        <div class="oneLine">
+                            <div style="font-weight:700;">{{ $item['name'] }}</div>
+                            @foreach($item['time'] as $time)
+                                <div>{{ $time['time_departure'] }} - {{ $time['time_arrive'] }}</div>
+                            @endforeach
+                        </div>
+                    @endforeach
                 </td>
                 <td>
                     <div class="oneLine">

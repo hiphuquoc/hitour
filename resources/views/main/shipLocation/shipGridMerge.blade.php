@@ -1,6 +1,7 @@
 <div class="shipGrid">
     @foreach($list as $item)
         @php
+            // dd($item);
             $arrayBrandShip         = [];
             foreach($item->prices as $price){
                 if(!in_array($price->partner->name, $arrayBrandShip)) $arrayBrandShip[] = $price->partner->name;

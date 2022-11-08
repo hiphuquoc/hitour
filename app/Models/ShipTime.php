@@ -12,7 +12,9 @@ class ShipTime extends Model {
         'ship_price_id', 
         'time_departure',
         'time_arrive',
-        'time_move'
+        'time_move',
+        'date_start',
+        'date_end'
     ];
     public $timestamps      = false;
 

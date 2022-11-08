@@ -201,6 +201,11 @@
                 $('#formModal').find('[name*=time_arrive]').each(function(){
                     time_arrive.push($(this).val());
                 });
+                /* date range */
+                var date_range          = [];
+                $('#formModal').find('[name*=date]').each(function(){
+                    date_range.push($(this).val());
+                });
                 /* dataForm */
                 var dataForm            = {
                     ship_price_id   : $('#ship_price_id').val(),
@@ -208,7 +213,6 @@
                     ship_partner_id : $('#ship_partner_id').val(),
                     time_departure  : $('#time_departure').val(),
                     time_arrive     : $('#time_arrive').val(),
-                    date_range      : $('#date_range').val(),
                     price_adult     : $('#price_adult').val(),
                     price_child     : $('#price_child').val(),
                     price_old       : $('#price_old').val(),
@@ -216,7 +220,8 @@
                     profit_percent  : $('#profit_percent').val(),
                     string_from_to,
                     time_departure,
-                    time_arrive
+                    time_arrive,
+                    date_range
                 };            
                 if(typeof dataForm['ship_price_id']=='undefined' || dataForm['ship_price_id']==''){
                     /* insert */

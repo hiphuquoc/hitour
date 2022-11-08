@@ -11,8 +11,6 @@ class ShipPrice extends Model {
     protected $fillable     = [
         'ship_info_id', 
         'ship_partner_id',
-        'date_start',
-        'date_end',
         'price_adult',
         'price_child',
         'price_old',

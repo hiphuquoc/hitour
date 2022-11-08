@@ -28,7 +28,6 @@
                         </div>
                     </div>
                 @endforeach
-
             @else
                 <div class="flexBox" data-repeater-item>
                     <div class="flexBox_item">
@@ -115,6 +114,4 @@
             }
         })
     }, 100);
-    
-    
 </script>

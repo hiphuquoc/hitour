@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->integer('ship_info_id');
             $table->integer('ship_partner_id');
-            $table->date('date_start');
             $table->integer('price_adult');
             $table->integer('price_child');
             $table->integer('price_old');

@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('ship_price', function (Blueprint $table) {
-            $table->date('date_end');
+        Schema::table('ship_time', function (Blueprint $table) {
+            $table->date('date_start')->nullable();
+            $table->date('date_end')->nullable();
         });
     }
 
@@ -25,8 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('ship_price', function (Blueprint $table) {
-            $table->dropColumn('date_end');
+        Schema::table('ship_time', function (Blueprint $table) {
+            //
         });
     }
 };

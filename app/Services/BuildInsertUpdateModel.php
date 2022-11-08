@@ -499,8 +499,6 @@ class BuildInsertUpdateModel {
         /* 
             ship_info_id
             ship_partner_id
-            date_start *********
-            date_end *********
             price_adult
             price_child
             price_old
@@ -511,10 +509,6 @@ class BuildInsertUpdateModel {
         if(!empty($dataForm)){
             $result['ship_info_id']         = $dataForm['ship_info_id'];
             $result['ship_partner_id']      = $dataForm['ship_partner_id'];
-            /* date_start and date_end */
-            $arrDate                        = explode('to', $dataForm['date_range']);
-            $result['date_start']           = $arrDate[0];
-            $result['date_end']             = !empty($arrDate[1]) ? $arrDate[1] : $arrDate[0];
             $result['price_adult']          = $dataForm['price_adult'];
             $result['price_child']          = $dataForm['price_child'];
             $result['price_old']            = $dataForm['price_old'];
@@ -526,29 +520,38 @@ class BuildInsertUpdateModel {
 
     public static function buildArrayTableShipTime($idShipPrice, $dataForm){
         /* này khác những cái trên => trả về 1 mảng nhiều phần tử insert */
-        $result                                 = [];
+        $result                                         = [];
         if(!empty($idShipPrice)&&!empty($dataForm)){
-            for($i=0;$i<count($dataForm['time_departure']);++$i){
-                $result[$i]['ship_price_id']    = $idShipPrice;
-                $result[$i]['time_departure']   = date('H:i', strtotime($dataForm['time_departure'][$i]));
-                $result[$i]['time_arrive']      = date('H:i', strtotime($dataForm['time_arrive'][$i]));
-                /* time_move */
-                $result[$i]['time_move']        = \App\Helpers\Time::calcTimeMove($dataForm['time_departure'][$i], $dataForm['time_arrive'][$i]);
-                /* from and to */
-                $result[$i]['name']             = $dataForm['string_from_to'][$i];
-                $arrFromTo                      = explode('-', $dataForm['string_from_to'][$i]);
-                $from                           = trim($arrFromTo[0]);
-                $result[$i]['ship_from']        = $from;
-                $fromSort                       = null;
-                $tmp                            = explode(' ', $from);
-                foreach($tmp as $t) $fromSort   .= strtoupper(mb_substr($t, 0, 1));
-                $result[$i]['ship_from_sort']   = $fromSort;
-                $to                             = trim($arrFromTo[1]);
-                $result[$i]['ship_to']          = $to;
-                $toSort                         = null;
-                $tmp                            = explode(' ', $to);
-                foreach($tmp as $t) $toSort     .= strtoupper(mb_substr($t, 0, 1));
-                $result[$i]['ship_to_sort']     = $toSort;
+            $j                                          = 0;
+            foreach($dataForm['date_range'] as $dataRange){
+                /* date_start and date_end */
+                $arrDate                                = explode('to', $dataRange);
+                for($i=0;$i<count($dataForm['time_departure']);++$i){
+                    $result[$j.$i]['ship_price_id']     = $idShipPrice;
+                    $result[$j.$i]['time_departure']    = date('H:i', strtotime($dataForm['time_departure'][$i]));
+                    $result[$j.$i]['time_arrive']       = date('H:i', strtotime($dataForm['time_arrive'][$i]));
+                    /* time_move */
+                    $result[$j.$i]['time_move']         = \App\Helpers\Time::calcTimeMove($dataForm['time_departure'][$i], $dataForm['time_arrive'][$i]);
+                    /* from and to */
+                    $result[$j.$i]['name']              = $dataForm['string_from_to'][$i];
+                    $arrFromTo                          = explode('-', $dataForm['string_from_to'][$i]);
+                    $from                               = trim($arrFromTo[0]);
+                    $result[$j.$i]['ship_from']         = $from;
+                    $fromSort                           = null;
+                    $tmp                                = explode(' ', $from);
+                    foreach($tmp as $t) $fromSort       .= strtoupper(mb_substr($t, 0, 1));
+                    $result[$j.$i]['ship_from_sort']    = $fromSort;
+                    $to                                 = trim($arrFromTo[1]);
+                    $result[$j.$i]['ship_to']           = $to;
+                    $toSort                             = null;
+                    $tmp                                = explode(' ', $to);
+                    foreach($tmp as $t) $toSort         .= strtoupper(mb_substr($t, 0, 1));
+                    $result[$j.$i]['ship_to_sort']      = $toSort;
+                    /* date_start and date_end */
+                    $result[$j.$i]['date_start']        = $arrDate[0];
+                    $result[$j.$i]['date_end']          = !empty($arrDate[1]) ? $arrDate[1] : $arrDate[0];
+                }
+                ++$j;
             }
         }
         return $result;
