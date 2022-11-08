@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('ship_from_sort', 10);
             $table->string('ship_to', 50);
             $table->string('ship_to_sort', 10);
+            $table->date('date_start')->nullable();
+            $table->date('date_end')->nullable();
         });
     }
 
@@ -30,11 +32,11 @@ return new class extends Migration
     public function down()
     {
         Schema::table('ship_time', function (Blueprint $table) {
-            $table->dropColumn('name');
-            $table->dropColumn('ship_from');
-            $table->dropColumn('ship_from_sort');
-            $table->dropColumn('ship_to');
-            $table->dropColumn('ship_to_sort');
+            // $table->dropColumn('name');
+            // $table->dropColumn('ship_from');
+            // $table->dropColumn('ship_from_sort');
+            // $table->dropColumn('ship_to');
+            // $table->dropColumn('ship_to_sort');
         });
     }
 };
