@@ -179,7 +179,6 @@
                         let scrollNow   = $(document).scrollTop();
                         let minScroll   = parseInt(heightE + positionE);
                         let maxScroll   = parseInt(heightB + positionB - heightFooter);
-                        console.log('scrollNow', scrollNow);
                         if(scrollNow > minScroll && scrollNow < maxScroll){ 
                             $('.tocFixedIcon').css('display', 'block');
                         }else {

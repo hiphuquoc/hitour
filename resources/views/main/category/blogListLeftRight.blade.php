@@ -26,11 +26,11 @@
                 <div class="blogListLeftRight_box_right">
                     @for($i=1;$i<$infoCategory->childs->count();++$i)
                         <div class="blogListLeftRight_box_right_item">
-                            <a href="/{{ $infoCategory->childs[$i]->slug_full ?? null }}" title="{{ $infoCategory->childs[$i]->name ?? $infoCategory->childs[$i]->seo->title ?? $infoCategory->childs[$i]->seo->seo_title ?? null }}" class="blogListLeftRight_box_right_item_image">
+                            <a href="/{{ $infoCategory->childs[$i]->seo->slug_full ?? null }}" title="{{ $infoCategory->childs[$i]->name ?? $infoCategory->childs[$i]->seo->title ?? $infoCategory->childs[$i]->seo->seo_title ?? null }}" class="blogListLeftRight_box_right_item_image">
                                 <img src="{{ config('main.svg.loading_main') }}" data-src="{{ $infoCategory->childs[$i]->seo->image_small ?? $infoCategory->childs[$i]->seo->image ?? config('admin.images.default_750x460') }}" alt="{{ $infoCategory->childs[$i]->name ?? $infoCategory->childs[$i]->seo->title ?? $infoCategory->childs[$i]->seo->seo_title ?? null }}" title="{{ $infoCategory->childs[$i]->name ?? $infoCategory->childs[$i]->seo->title ?? $infoCategory->childs[$i]->seo->seo_title ?? null }}" />
                             </a>
                             <div class="blogListLeftRight_box_right_item_content">
-                                <a href="{{ $infoCategory->childs[$i]->slug_full ?? null }}" title="{{ $infoCategory->childs[$i]->name ?? $infoCategory->childs[$i]->seo->title ?? $infoCategory->childs[$i]->seo->seo_title ?? null }}">
+                                <a href="{{ $infoCategory->childs[$i]->seo->slug_full ?? null }}" title="{{ $infoCategory->childs[$i]->name ?? $infoCategory->childs[$i]->seo->title ?? $infoCategory->childs[$i]->seo->seo_title ?? null }}">
                                     <h3 class="maxLine_2">{{ $infoCategory->childs[$i]->name ?? $infoCategory->childs[$i]->seo->title ?? $infoCategory->childs[$i]->seo->seo_title ?? null }}</h3>
                                 </a>
                                 @if(!empty($infoCategory->childs[$i]->seo->updated_at))
