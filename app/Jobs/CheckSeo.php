@@ -65,7 +65,7 @@ class CheckSeo implements ShouldQueue {
                     $fullurl    = env('APP_URL').$link['href'];
                 }else { /* đường dẫn tương đối sai (không có / trước) */
                     $fullurl    = env('APP_URL').'/'.$link['href'];
-                    $error[]    = 'Đường dẫn tương đối đặt sai';
+                    $error[]    = 'Đường dẫn tương đối thiếu dấu / phía trước';
                     $errorType  = 3;
                 }
                 $res            = \App\Helpers\RestFull::execute($fullurl, 'GET');
@@ -158,7 +158,7 @@ class CheckSeo implements ShouldQueue {
             $i                              = 0;
             foreach($match[1] as $img){
                 /* src */
-                preg_match('#src="(.*)"#imsU', $img, $matchChild);
+                preg_match('#data-src="(.*)"#imsU', $img, $matchChild);
                 $arrayImage[$i]['src']      = $matchChild[1] ?? null;
                 /* alt */
                 preg_match('#alt="(.*)"#imsU', $img, $matchChild);

@@ -19,7 +19,7 @@ use App\Models\Category;
 use App\Models\Blog;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Blade;
-
+use Illuminate\Support\Facades\Redirect;
 use App\Helpers\Url;
 use App\Models\TourInfoForeign;
 
@@ -382,6 +382,8 @@ class RoutingController extends Controller {
                     $content            = Blade::render(Storage::get(config('admin.storage.contentBlog').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
                     return view('main.blog.index', compact('item', 'breadcrumb', 'parent', 'blogRelates', 'categoryRelates', 'content'));
+                default:
+                    return Redirect::to('/', 301);
             }
         }else {
             /* Error 404 */

@@ -2982,6 +2982,7 @@ blockquote em {
   background-repeat: no-repeat !important;
   padding: 15px 0 35px 0;
   height: 300px;
+  min-height: 150px;
 }
 .bookOnline_main_title {
   color: #000;

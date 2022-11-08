@@ -434,6 +434,9 @@ html .content {
 .modal-body {
   padding: 1rem 1.4rem;
 }
+.modal-content {
+  width: auto;
+}
 .modal-footer {
   padding: 1rem 1.4rem !important;
 }

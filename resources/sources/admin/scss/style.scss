@@ -509,6 +509,9 @@ html .content {
     &-body {
         padding: 1rem 1.4rem;
     }
+    &-content {
+        width: auto;
+    }
     &-footer {
         padding: 1rem 1.4rem !important;
         > * {

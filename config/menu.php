@@ -58,7 +58,7 @@ return [
             ]
         ],
         [
-            'name'      => 'Quản lí Bay',
+            'name'      => 'Vé máy bay',
             'route'     => '',
             'icon'      => '<i class="fa-solid fa-paper-plane"></i>',
             'child'     => [
@@ -90,7 +90,7 @@ return [
             ]
         ],
         [
-            'name'      => 'Quản lí Tàu',
+            'name'      => 'Vé tàu',
             'route'     => '',
             'icon'      => '<i class="fa-solid fa-ship"></i>',
             'child'     => [
@@ -213,13 +213,13 @@ return [
                     'name'  => '3. Check Onpage',
                     'route' => 'admin.toolSeo.listCheckSeo',
                     'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '4. Redirect 301',
+                    'route' => 'admin.redirect.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
                 ]
             ]
-        ],
-        [
-            'name'      => 'Redirect 301',
-            'route'     => 'admin.redirect.list',
-            'icon'      => '<i data-feather=\'refresh-cw\'></i>'
         ]
     ]
 ];

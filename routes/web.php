@@ -44,6 +44,7 @@ use App\Http\Controllers\AdminGuideController;
 use App\Http\Controllers\AdminCarrentalLocationController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminBlogController;
+use App\Http\Controllers\AdminPageController;
 use App\Http\Controllers\AdminRedirectController;
 
 use App\Http\Controllers\HomeController;
@@ -398,6 +399,15 @@ Route::prefix('admin')->group(function(){
             Route::post('/update', [AdminBlogController::class, 'update'])->name('admin.blog.update');
             /* Delete AJAX */
             Route::get('/delete', [AdminBlogController::class, 'delete'])->name('admin.blog.delete');
+        });
+        /* ===== BLOG ===== */
+        Route::prefix('page')->group(function(){
+            Route::get('/', [AdminPageController::class, 'list'])->name('admin.page.list');
+            Route::post('/create', [AdminPageController::class, 'create'])->name('admin.page.create');
+            Route::get('/view', [AdminPageController::class, 'view'])->name('admin.page.view');
+            Route::post('/update', [AdminPageController::class, 'update'])->name('admin.page.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminPageController::class, 'delete'])->name('admin.page.delete');
         });
         /* ===== REDIRECT ===== */
         Route::prefix('redirect')->group(function(){

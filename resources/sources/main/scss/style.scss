@@ -2803,6 +2803,7 @@ blockquote{
 	background-repeat: no-repeat !important;
 	padding: 15px 0 35px 0;
 	height: 300px;
+    min-height: 150px;
 	&_main {
 		&_title {
 			color: #000;
