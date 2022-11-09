@@ -8,8 +8,8 @@
 
 <script type="text/javascript">
     $(window).ready(function(){
-        loadImage();
-
+        loadImage()
+        addTableResponsive()
         /* fixed sidebar khi scroll */
         const elemt                 = $('.js_scrollFixed');
         const widthResponsive   = $(window).width();
@@ -187,5 +187,13 @@
                     });
                 }
             });
+        }
+
+        function addTableResponsive(){
+            $(document).find('table:not(.noResponsive)').each(function(){
+                $(this).wrap('<div class="customScrollBar-x"></div>');
+            })
+
+            // .wrap('<div class="tableResponsive"></div>')
         }
 </script>

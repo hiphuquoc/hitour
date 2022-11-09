@@ -1,5 +1,5 @@
 <div class="detailTourBox">
-    <table>
+    <table class="noResponsive">
         <tbody>
             <tr>
                 <td colspan="2"><h2>{{ $item->name }}</h2></td>

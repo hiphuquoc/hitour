@@ -13,9 +13,9 @@
         <table class="tableContentBorder" style="font-size:0.95rem;">
             <thead>
                 <tr>
-                    <th>Hãng tàu</th>
+                    <th style="min-width:210px;">Hãng tàu</th>
                     <th>Khởi hành - cập bến</th>
-                    <th>Giá vé</th>
+                    <th style="min-width:210px;">Giá vé</th>
                 </tr>
             </thead>
             <tbody>

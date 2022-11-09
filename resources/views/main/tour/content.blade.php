@@ -6,7 +6,7 @@
 			<h2>Điểm nổi bật của Tour</h2>
 		</div>
 		<div class="contentTour_item_text">
-			<table class="tableList">
+			<table class="tableList noResponsive">
 				<tbody>
 					<tr>
 						<td style="width:100px;">Hành trình</td>
