@@ -9,12 +9,25 @@ class Page extends Model {
     use HasFactory;
     protected $table        = 'page_info';
     protected $fillable     = [
-        'name', 
+        'seo_id',
+        'name',
         'description',
         'show_partner',
         'show_sidebar'
     ];
     public $timestamps      = false;
+
+    public static function getList($params = null){
+        $result     = self::select('*')
+                        /* tìm theo tên */
+                        ->when(!empty($params['search_name']), function($query) use($params){
+                            $query->where('name', 'like', '%'.$params['search_name'].'%');
+                        })
+                        ->orderBy('id', 'DESC')
+                        ->with('seo')
+                        ->paginate($params['paginate']);
+        return $result;
+    }
 
     public static function insertItem($params){
         $id                 = 0;
@@ -35,5 +48,9 @@ class Page extends Model {
             $flag           = $model->update();
         }
         return $flag;
+    }
+
+    public function seo() {
+        return $this->hasOne(\App\Models\Seo::class, 'id', 'seo_id');
     }
 }

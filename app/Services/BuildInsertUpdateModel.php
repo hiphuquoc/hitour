@@ -1104,4 +1104,29 @@ class BuildInsertUpdateModel {
         }
         return $result;
     }
+
+    public static function buildArrayTablePageInfo($dataForm, $seoId = null){
+        /*
+            seo_id
+            name
+            description
+            show_partner
+            show_sidebar
+        */
+        $result     = [];
+        if(!empty($dataForm)){
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
+            $result['name']             = $dataForm['title'] ?? null;
+            $result['description']      = $dataForm['description'] ?? null;
+            $result['show_partner']     = 0;
+            if(!empty($dataForm['show_partner'])) {
+                if($dataForm['show_partner']=='on') $result['show_partner'] = 1;
+            }
+            $result['show_sidebar']     = 0;
+            if(!empty($dataForm['show_sidebar'])) {
+                if($dataForm['show_sidebar']=='on') $result['show_sidebar'] = 1;
+            }
+        }
+        return $result;
+    }
 }

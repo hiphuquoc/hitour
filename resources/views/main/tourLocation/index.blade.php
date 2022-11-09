@@ -223,7 +223,7 @@
             <div class="sectionBox">
                 <div class="container">
                     <h2 class="sectionBox_title">Đặc sản {{ $item->display_name ?? null }}</h2>
-                    <p>Tổng hợp những món ngon, đặc sản nổi tiếng tại {{ $item->display_name ?? null }} bạn có thể mua làm quà hoặc thưởng thức ít nhất một lần.</p>
+                    <p>Tổng hợp những món ngon, đặc sản nổi tiếng tại {{ $item->display_name ?? null }} bạn nên mua làm quà hoặc thưởng thức ít nhất một lần.</p>
                     @include('main.tourLocation.blogGridSlick', ['list' => $specialList, 'link' => $item->specials[0]->infoCategory->seo->slug_full ?? null, 'limit' => 10])
                 </div>
             </div>

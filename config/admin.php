@@ -108,7 +108,8 @@ return [
         'contentAirLocation'        => 'public/contents/airLocations/',
         'contentAirPartner'         => 'public/contents/airPartners/',
         'contentAir'                => 'public/contents/airs/',
-        'contentBlog'               => 'public/contents/blogs/'
+        'contentBlog'               => 'public/contents/blogs/',
+        'contentPage'               => 'public/contents/pages/'
     ],
 
     'alert'     => [

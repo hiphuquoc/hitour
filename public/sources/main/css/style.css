@@ -1926,7 +1926,7 @@ input, textarea {
   position: relative;
   display: flex;
   align-items: flex-start;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 .contentTour_item_title.noBorder, .contentShip_item_title.noBorder {
   border-bottom: none;
@@ -1941,7 +1941,7 @@ input, textarea {
 .contentTour_item_title > i, .contentShip_item_title > i {
   flex: 0 0 30px;
   color: #678;
-  margin-top: 0.6rem;
+  margin-top: 0.55rem;
 }
 .contentTour_item_title > div, .contentShip_item_title > div {
   position: absolute;
@@ -1993,6 +1993,9 @@ input, textarea {
   .contentTour_item_title h2, .contentTour_item_title h3, .contentShip_item_title h2, .contentShip_item_title h3 {
     margin-bottom: 0.25rem !important;
     font-size: 1.1rem;
+  }
+  .contentTour_item_title i, .contentShip_item_title i {
+    margin-top: 0.35rem;
   }
 }
 
@@ -3530,6 +3533,7 @@ blockquote em {
 
 .sectionBox {
   padding-bottom: 3.5rem;
+  margin-top: -1px;
 }
 .sectionBox:not(:first-child) {
   padding-top: 2.5rem;
@@ -4466,7 +4470,6 @@ blockquote em {
 }
 .blogGridSlick_box_item_content {
   padding: 0.75rem 1rem;
-  text-align: justify;
 }
 .blogGridSlick_box_item_content_title h3 {
   color: #345;
@@ -5464,5 +5467,84 @@ blockquote em {
 @media (max-width: 767px) {
   .tocFixedIcon {
     left: 0.25rem !important;
+  }
+}
+
+.contactBox {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 1rem;
+}
+.contactBox_content {
+  width: 100%;
+}
+.contactBox_content_title {
+  text-transform: uppercase;
+}
+.contactBox_content_title h2, .contactBox_content_title h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #345;
+}
+.contactBox_content_desc {
+  margin-bottom: 1rem;
+  color: #678;
+}
+.contactBox_content_box {
+  display: flex;
+  flex-wrap: wrap;
+}
+.contactBox_content_box_item {
+  width: calc(50% - 0.75rem);
+}
+.contactBox_content_box_item:nth-child(2n+1) {
+  margin-left: 0;
+}
+.contactBox_content_box_item:not(:nth-child(2n+1)) {
+  margin-left: 1.5rem;
+}
+.contactBox_content_box_item:nth-child(n+3) {
+  margin-top: 1.5rem;
+}
+.contactBox_content_box_item_title {
+  background: linear-gradient(90deg, rgba(0, 123, 255, 0.2) 0, rgb(255, 255, 255) 100%);
+  padding: 0.5rem 1.25rem;
+  border-radius: 50px 0 0 50px;
+  margin-bottom: 0.5rem;
+  font-family: "SVN-Gilroy Bold", serif;
+  font-size: 1rem;
+  color: #345;
+}
+.contactBox_content_box_item_text {
+  line-height: 1.8;
+  color: #567;
+}
+.contactBox_content_box_item_text i {
+  width: 25px;
+  margin-right: 0.25rem;
+  color: #6c757d;
+}
+.contactBox_map {
+  flex: 0 0 350px;
+  margin-left: 1.5rem;
+}
+@media (max-width: 990px) {
+  .contactBox {
+    flex-wrap: wrap;
+  }
+  .contactBox_content_box_item {
+    width: 100%;
+    margin-left: 0rem !important;
+  }
+  .contactBox_content_box_item:not(:first-child) {
+    margin-top: 1rem;
+  }
+  .contactBox_map {
+    flex: 0 0 auto;
+    width: 100%;
+    margin-left: 0;
+    margin-top: 1.5rem;
+    min-height: 300px;
   }
 }

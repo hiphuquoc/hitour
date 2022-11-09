@@ -151,6 +151,11 @@ return [
             'icon'      => '<i class="fa-solid fa-car-side"></i>',    
         ],
         [
+            'name'      => 'Quản lí Trang',
+            'route'     => 'admin.page.list',
+            'icon'      => '<i class="fa-solid fa-bookmark"></i>'
+        ],
+        [
             'name'      => 'Quản lí Blog',
             'route'     => '',
             'icon'      => '<i class="fa-solid fa-blog"></i>',    

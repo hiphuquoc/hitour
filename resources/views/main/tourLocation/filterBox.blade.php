@@ -7,11 +7,11 @@
             <div class="filterBox_filter_item active" onClick="filterTour(this, 'tat-ca-tour');">
                 <div>Tất cả</div>
             </div>
-            <div class="filterBox_filter_item" onClick="filterTour(this, 'tour-tron-goi');">
-                <h3>Tour trọn gói</h3>
-            </div>
             <div class="filterBox_filter_item" onClick="filterTour(this, 'tour-trong-ngay');">
                 <h3>Tour trong ngày</h3>
+            </div>
+            <div class="filterBox_filter_item" onClick="filterTour(this, 'tour-nhieu-ngay');">
+                <h3>Tour nhiều ngày</h3>
             </div>
         </div>
         <div class="filterBox_view">
@@ -48,7 +48,7 @@
                     const valueDay  = $(this).data('filter-day'); /* dùng document để lấy cả trong hidden */
                     data.push($(this));
                 })
-            }else if(type=="tour-tron-goi"){
+            }else if(type=="tour-nhieu-ngay"){
                 $(document).find("[data-filter-day]").each(function(){
                     const valueDay  = $(this).data('filter-day');
                     if(parseInt(valueDay)>1) {

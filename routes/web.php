@@ -425,11 +425,11 @@ Route::prefix('admin')->group(function(){
 });
 
 /* redirect */
-// foreach(\App\Models\Redirect::all() as $redirect){
-//     Route::get($redirect->url_old, function() use($redirect){ 
-//         return Redirect::to($redirect->url_new, 301); 
-//     });
-// }
+foreach(\App\Models\Redirect::all() as $redirect){
+    Route::get($redirect->url_old, function() use($redirect){ 
+        return Redirect::to($redirect->url_new, 301); 
+    });
+}
 /* cập nhật hàng loạt iamge loading trong content */
 // Route::get('/changeImageInContentWithLoading', [HomeController::class, 'changeImageInContentWithLoading'])->name('main.changeImageInContentWithLoading');
 // Route::get('/changeImageInContentWithLoadingTourInfo', [HomeController::class, 'changeImageInContentWithLoadingTourInfo'])->name('main.changeImageInContentWithLoadingTourInfo');

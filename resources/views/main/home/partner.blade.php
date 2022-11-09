@@ -11,7 +11,9 @@
         <div class="partnerBox_list">
             @foreach($list as $item)
                 <div class="partnerBox_list_item">
-                    <img src="{{ config('main.svg.loading_main') }}" data-src="{{ $item->seo->image_small ?? $item->seo->image ?? config('admin.images.default_750x460') }}" alt="{{ $item->name ?? $item->seo->title ?? $item->seo->seo_title ?? null }}" title="{{ $item->name ?? $item->seo->title ?? $item->seo->seo_title ?? null }}" />
+                    <a href="/{{ $item->seo->slug_full ?? null }}" title="{{ $item->name ?? $item->seo->title ?? $item->seo->seo_title ?? null }}">
+                        <img src="{{ config('main.svg.loading_main') }}" data-src="{{ $item->seo->image_small ?? $item->seo->image ?? config('admin.images.default_750x460') }}" alt="{{ $item->name ?? $item->seo->title ?? $item->seo->seo_title ?? null }}" title="{{ $item->name ?? $item->seo->title ?? $item->seo->seo_title ?? null }}" />
+                    </a>
                 </div>
             @endforeach
         </div>

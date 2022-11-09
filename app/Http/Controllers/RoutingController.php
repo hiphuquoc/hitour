@@ -6,6 +6,7 @@ use App\Models\TourLocation;
 use App\Models\Tour;
 use App\Models\ShipLocation;
 use App\Models\ShipPartner;
+use App\Models\AirPartner;
 use App\Models\Ship;
 use App\Models\Guide;
 use App\Models\Service;
@@ -17,6 +18,7 @@ use App\Models\TourContinent;
 use App\Models\TourCountry;
 use App\Models\Category;
 use App\Models\Blog;
+use App\Models\Page;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Redirect;
@@ -382,6 +384,22 @@ class RoutingController extends Controller {
                     $content            = Blade::render(Storage::get(config('admin.storage.contentBlog').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
                     return view('main.blog.index', compact('item', 'breadcrumb', 'parent', 'blogRelates', 'categoryRelates', 'content'));
+                case 'page_info':
+                        $item           = Page::select('*')
+                                            ->whereHas('seo', function($q) use ($checkExists){
+                                                $q->where('slug', $checkExists['slug']);
+                                            })
+                                            ->with('seo')
+                                            ->first();
+                        $content        = Blade::render(Storage::get(config('admin.storage.contentPage').$item->seo->slug.'.blade.php'));
+                        $breadcrumb     = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
+                        $shipPartners   = ShipPartner::select('*')
+                                            ->with('seo')
+                                            ->get();
+                        $airPartners    = AirPartner::select('*')
+                                            ->with('seo')
+                                            ->get();
+                        return view('main.page.index', compact('item', 'breadcrumb', 'shipPartners', 'airPartners', 'content'));
                 default:
                     return Redirect::to('/', 301);
             }
