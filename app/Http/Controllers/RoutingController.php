@@ -348,7 +348,7 @@ class RoutingController extends Controller {
                             $query->whereIn('id', $arrayIdCategory);
                         })
                         ->with('seo')
-                        ->paginate(20);
+                        ->get();
                         return view('main.category.index', compact('item', 'breadcrumb', 'blogs', 'list', 'listCategoryLv1'));
                     }
                 case 'blog_info':

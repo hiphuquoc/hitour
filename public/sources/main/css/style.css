@@ -4155,7 +4155,6 @@ blockquote em {
 .blogListLeftRight_box {
   display: flex;
   justify-content: space-between;
-  text-align: justify;
 }
 .blogListLeftRight_box_left {
   width: 50%;
