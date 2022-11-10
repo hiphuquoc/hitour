@@ -43,4 +43,9 @@
             </div>
         </div>
     </div>
+@else 
+<div class="formBox_full_item">
+    <label class="form-label" for="quantity_adult">Giờ tàu và loại vé&nbsp;&nbsp;<span class="messageValidate_error" data-validate="dp{{ $code }}" style="font-weight:normal;margin-top:0;">Vui lòng chọn giờ khởi hành và loại vé!</span></label>
+    <div style="color:Red;">Hiện không có chuyến tàu theo lịch trình và ngày bạn chọn!</div>
+</div>
 @endif

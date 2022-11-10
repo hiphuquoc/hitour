@@ -105,7 +105,7 @@
             const idShipPort = $(element).val();
             $.ajax({
                 url         : '{{ route("main.shipBooking.loadShipLocation") }}',
-                type        : 'post',
+                type        : 'get',
                 dataType    : 'html',
                 data        : {
                     '_token'        	: '{{ csrf_token() }}',

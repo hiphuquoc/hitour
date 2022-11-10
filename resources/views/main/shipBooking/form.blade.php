@@ -344,7 +344,7 @@
             if(date!=''&&idPortShipDeparture!=0&&idPortShipLocation!=0){
                 $.ajax({
                     url         : '{{ route("main.shipBooking.loadDeparture") }}',
-                    type        : 'post',
+                    type        : 'get',
                     dataType    : 'json',
                     data        : {
                         '_token'                : '{{ csrf_token() }}',
@@ -354,7 +354,6 @@
                         date                    : date
                     },
                     success     : function(data){
-                        console.log(data);
                         $('#js_loadDeparture_dp'+code).html(data);
                         loadBookingSummary();
                     }
@@ -366,7 +365,7 @@
             const idShipPort = $(element).val();
             $.ajax({
                 url         : '{{ route("main.shipBooking.loadShipLocation") }}',
-                type        : 'post',
+                type        : 'get',
                 dataType    : 'html',
                 data        : {
                     '_token'            : '{{ csrf_token() }}',
@@ -416,7 +415,7 @@
             const dataForm = $("#formBooking").serializeArray();
             $.ajax({
                 url         : '{{ route("main.shipBooking.loadBookingSummary") }}',
-                type        : 'post',
+                type        : 'get',
                 dataType    : 'html',
                 data        : {
                     '_token'        : '{{ csrf_token() }}',
