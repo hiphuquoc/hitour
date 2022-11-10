@@ -65,7 +65,6 @@ class ShipBookingController extends Controller {
 
     public static function loadDeparture(Request $request){
         $result                     = null;
-        // dd($request->all());
         if(!empty($request->get('date')&&!empty($request->get('ship_port_departure_id')&&!empty($request->get('ship_port_location_id'))))){
             $code                   = $request->get('code');
             $date                   = $request->get('date');
@@ -91,43 +90,29 @@ class ShipBookingController extends Controller {
     }
 
     public static function getShipPricesAndTimeByDate($date, $namePortDeparture, $namePortLocation){
-        $collectionShip     = Ship::select('*')
-                                ->whereHas('prices.times', function($query) use($namePortDeparture, $namePortLocation){
-                                    $query->where('ship_from', $namePortDeparture)
-                                            ->where('ship_to', $namePortLocation);
-                                })
-                                ->with('portDeparture', 'portLocation', 'departure', 'location', 'prices.times', 'prices.partner')
-                                ->first();
-        $result             = [];
+        $collectionShip                 = Ship::select('*')
+                                            ->whereHas('prices.times', function($query) use($namePortDeparture, $namePortLocation){
+                                                $query->where('ship_from', $namePortDeparture)
+                                                        ->where('ship_to', $namePortLocation);
+                                            })
+                                            ->with('portDeparture', 'portLocation', 'departure', 'location', 'prices.times', 'prices.partner')
+                                            ->first();
+        $result                         = [];
         if(!empty($collectionShip->prices)){
+            $i                          = 0;
             foreach($collectionShip->prices as $price){
-                dd($price->toArray());
-                $mkDate         = strtotime($date);
-                $mkDateStart    = strtotime($price->date_start);
-                $mkDateEnd      = strtotime($price->date_end);
-                // if($mkDate>$mkDateStart&&$mkDate<$mkDateEnd){
-                //     if($namePortDeparture==$collectionShip->portDeparture->name&&$namePortLocation==$collectionShip->portLocation->name){
-                //         $result['departure']    = $collectionShip->departure->display_name;
-                //         $result['location']     = $collectionShip->location->display_name;
-                //     }else {
-                //         $result['departure']    = $collectionShip->location->display_name;
-                //         $result['location']     = $collectionShip->departure->display_name;
-                //     }
-                //     $result['ship_price_id']    = $price->id;
-                //     $result['ship_info_id']     = $collectionShip->id;
-                //     $result['partner']          = $price->partner->name;
-                //     $result['date_start']       = $price->date_start;
-                //     $result['date_end']         = $price->date_end;
-                //     $result['price_adult']      = $price->price_adult;
-                //     $result['price_child']      = $price->price_child;
-                //     $result['price_old']        = $price->price_old;
-                //     $result['price_vip']        = $price->price_vip;
-                //     foreach($price->times as $time){
-                //         if($time->ship_from==$namePortDeparture&&$time->ship_to==$namePortLocation) $result['times'][] = $time->toArray();
-                //     }
-                //     /* break để chỉ lấy duy nhất một ship_price (trường hợp sau này bổ sung lấy nhiều kết quả và lọc theo thuật toán để ra kết quả chuẩn trong 1 ngày có nhiều kết quả) */
-                //     break;
-                // }
+                $mkDate                 = strtotime($date);
+                $arrayTime              = new \Illuminate\Database\Eloquent\Collection;
+                foreach($price->times as $time){
+                    $mkDateStart        = strtotime($time->date_start);
+                    $mkDateEnd          = strtotime($time->date_end);
+                    if($mkDate>$mkDateStart&&$mkDate<$mkDateEnd&&$time->ship_from==$namePortDeparture&&$time->ship_to==$namePortLocation){
+                        $arrayTime[]    = $time;
+                    }
+                }
+                $result[$i]             = $price->toArray();
+                $result[$i]['times']    = $arrayTime->toArray();
+                ++$i;
             }
         }
         return $result;

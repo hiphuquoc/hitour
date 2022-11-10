@@ -40,7 +40,7 @@
 				@include('main.form.sortBooking.hotel')
 			</div> --}}
 			<!-- Tour booking form -->
-			<div id="ticketBookingForm" style="display: none;">
+			<div id="ticketBookingForm" {{ !empty($active)&&$active!='service' ? 'style=display:none;' : null }}>
 				@include('main.form.sortBooking.ticket')
 			</div>
 		</div>

@@ -11,13 +11,13 @@
         loadImage()
         addTableResponsive()
         /* fixed sidebar khi scroll */
-        const elemt                     = $('.js_scrollFixed');
-        const widthElemt                = elemt.parent().width();
-        const widthResponsive           = $(window).width();
+        const elemt                         = $('.js_scrollFixed');
+        const widthElemt                    = elemt.parent().width();
+        const widthResponsive               = $(window).width();
         if(elemt.length>0&&widthResponsive>991){
-            const positionTopElemt      = elemt.offset().top;
+            const positionTopElemt          = elemt.offset().top;
             $(window).scroll(function(){
-                const flagScroll        = $('#js_scrollFixed_flag').val();
+                const flagScroll            = $('#js_scrollFixed_flag').val();
                 if(flagScroll!='false'){
                     const heightFooter      = 500;
                     const positionScrollbar = $(window).scrollTop();
