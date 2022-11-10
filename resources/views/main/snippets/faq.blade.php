@@ -7,7 +7,7 @@
                         <h3>{{ ($loop->index+1).'. '.$faq->question }}</h3>
                     </div>
                     <div class="faqBox_content_item_answer">
-                        {{ $faq->answer }}
+                        {!! $faq->answer !!}
                     </div>
                 </div>
             @endforeach
