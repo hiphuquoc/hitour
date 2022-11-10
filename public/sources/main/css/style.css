@@ -1731,7 +1731,6 @@ input, textarea {
 
 .galleryBox {
   position: relative;
-  overflow: hidden;
   margin-bottom: 1.5rem;
 }
 .galleryBox_image img {
@@ -1739,6 +1738,31 @@ input, textarea {
   -o-object-fit: cover;
      object-fit: cover;
   margin: 0;
+}
+.galleryBox_image .slick-arrow {
+  position: absolute;
+  transform: translateY(-50%);
+  z-index: 99;
+  border: none;
+  border-radius: 50%;
+  text-align: center;
+  background: rgba(244, 208, 63, 0.8);
+  padding: 0.6rem 0.9rem;
+}
+.galleryBox_image .slick-arrow:hover {
+  background: rgb(244, 208, 63);
+}
+.galleryBox_image .slick-arrow.slick-prev {
+  left: -0.5rem;
+  top: 50%;
+}
+.galleryBox_image .slick-arrow.slick-next {
+  right: -0.5rem;
+  top: 50%;
+}
+.galleryBox_image .slick-arrow i {
+  margin: 0;
+  vertical-align: middle;
 }
 .galleryBox_button {
   display: flex;

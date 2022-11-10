@@ -1370,13 +1370,15 @@ $tourGrid_radius : 5px;
 }
 .galleryBox {
     position: relative;
-    overflow: hidden;
     margin-bottom: 1.5rem;
     &_image {
         img {
             width: 100%;
             object-fit: cover;
             margin: 0;
+        }
+        .slick-arrow {
+            @include slickArrowCircle
         }
     }
     &_button {

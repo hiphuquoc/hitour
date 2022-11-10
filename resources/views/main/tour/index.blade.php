@@ -66,11 +66,17 @@
                     <div class="pageContent_body_sidebar">
     
                         @include('main.tour.detailTour', compact('item'))
+
+                        @include('main.tour.price', compact('item'))
     
-                        <div class="js_scrollFixed">
-                            @include('main.tour.callBookTour', compact('item'))
-    
+                        <div class="js_scrollFixed" style="margin-top:0;">
+                            @include('main.template.callbook', [
+                                'flagButton'    => true,
+                                'button'        => 'Đặt Tour'
+                            ])
                             @include('main.tour.tocContentTour', compact('item'))
+                            <!-- đoạn này để xử lý trường hợp đang mở xem thêm điểm nổi bật tour thì không scroll -->
+                            <input type="hidden" id="js_scrollFixed_flag" value="true" />
                         </div>
                     </div>
                 </div>
@@ -95,12 +101,7 @@
 @endpush
 @push('scripts-custom')
     <script type="text/javascript">
-        $(window).on('load', function () {
-            setupSlick();
-            $(window).resize(function(){
-                setupSlick();
-            })
-
+        $(window).on('load', function (){
             $('.sliderHome').slick({
                 infinite: true,
                 autoplaySpeed: 5000,
@@ -117,15 +118,6 @@
                     }
                 ]
             });
-
-            function setupSlick(){
-                setTimeout(function(){
-                    $('.sliderHome .slick-prev').html('<i class="fa-solid fa-arrow-left-long"></i>');
-                    $('.sliderHome .slick-next').html('<i class="fa-solid fa-arrow-right-long"></i>');
-                    $('.sliderHome .slick-dots button').html('');
-                }, 0);
-            }
         });
-        
     </script>
 @endpush

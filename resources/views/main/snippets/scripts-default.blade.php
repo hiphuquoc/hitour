@@ -11,26 +11,29 @@
         loadImage()
         addTableResponsive()
         /* fixed sidebar khi scroll */
-        const elemt                 = $('.js_scrollFixed');
-        const widthResponsive   = $(window).width();
+        const elemt                     = $('.js_scrollFixed');
+        const widthElemt                = elemt.parent().width();
+        const widthResponsive           = $(window).width();
         if(elemt.length>0&&widthResponsive>991){
-            const widthElemt            = elemt.parent().width();
             const positionTopElemt      = elemt.offset().top;
-            const heightFooter          = 500;
             $(window).scroll(function(){
-                const positionScrollbar = $(window).scrollTop();
-                const scrollHeight      = $('body').prop('scrollHeight');
-                const heightLimit       = parseInt(scrollHeight - heightFooter - elemt.outerHeight());
-                if(positionScrollbar>positionTopElemt&&positionScrollbar<heightLimit){
-                    elemt.addClass('scrollFixedSidebar').css({
-                        'width'         : widthElemt,
-                        'margin-top'    : '1.5rem'
-                    });
-                }else {
-                    elemt.removeClass('scrollFixedSidebar').css({
-                        'width'         : 'unset',
-                        'margin-top'    : 0
-                    });
+                const flagScroll        = $('#js_scrollFixed_flag').val();
+                if(flagScroll=='true'){
+                    const heightFooter      = 500;
+                    const positionScrollbar = $(window).scrollTop();
+                    const scrollHeight      = $('body').prop('scrollHeight');
+                    const heightLimit       = parseInt(scrollHeight - heightFooter - elemt.outerHeight());
+                    if(positionScrollbar>positionTopElemt&&positionScrollbar<heightLimit){
+                        elemt.addClass('scrollFixedSidebar').css({
+                            'width'         : widthElemt,
+                            'margin-top'    : '1.5rem'
+                        });
+                    }else {
+                        elemt.removeClass('scrollFixedSidebar').css({
+                            'width'         : 'unset',
+                            'margin-top'    : 0
+                        });
+                    }
                 }
             });
         }

@@ -72,7 +72,7 @@ class ShipBookingController extends Controller {
             $portShipDeparture      = ShipPort::find($request->get('ship_port_departure_id'));
             $portShipLocation       = ShipPort::find($request->get('ship_port_location_id'));
             $data                   = self::getShipPricesAndTimeByDate($date, $portShipDeparture->name, $portShipLocation->name);
-            
+            dd($data);
             if(!empty($request->get('theme'))&&$request->get('theme')=='admin'){
                 /* thông tin booking (nếu có) => dùng đề active chuyến được chọn */
                 $booking                = [];
@@ -101,32 +101,33 @@ class ShipBookingController extends Controller {
         $result             = [];
         if(!empty($collectionShip->prices)){
             foreach($collectionShip->prices as $price){
+                dd($price->toArray());
                 $mkDate         = strtotime($date);
                 $mkDateStart    = strtotime($price->date_start);
                 $mkDateEnd      = strtotime($price->date_end);
-                if($mkDate>$mkDateStart&&$mkDate<$mkDateEnd){
-                    if($namePortDeparture==$collectionShip->portDeparture->name&&$namePortLocation==$collectionShip->portLocation->name){
-                        $result['departure']    = $collectionShip->departure->display_name;
-                        $result['location']     = $collectionShip->location->display_name;
-                    }else {
-                        $result['departure']    = $collectionShip->location->display_name;
-                        $result['location']     = $collectionShip->departure->display_name;
-                    }
-                    $result['ship_price_id']    = $price->id;
-                    $result['ship_info_id']     = $collectionShip->id;
-                    $result['partner']          = $price->partner->name;
-                    $result['date_start']       = $price->date_start;
-                    $result['date_end']         = $price->date_end;
-                    $result['price_adult']      = $price->price_adult;
-                    $result['price_child']      = $price->price_child;
-                    $result['price_old']        = $price->price_old;
-                    $result['price_vip']        = $price->price_vip;
-                    foreach($price->times as $time){
-                        if($time->ship_from==$namePortDeparture&&$time->ship_to==$namePortLocation) $result['times'][] = $time->toArray();
-                    }
-                    /* break để chỉ lấy duy nhất một ship_price (trường hợp sau này bổ sung lấy nhiều kết quả và lọc theo thuật toán để ra kết quả chuẩn trong 1 ngày có nhiều kết quả) */
-                    break;
-                }
+                // if($mkDate>$mkDateStart&&$mkDate<$mkDateEnd){
+                //     if($namePortDeparture==$collectionShip->portDeparture->name&&$namePortLocation==$collectionShip->portLocation->name){
+                //         $result['departure']    = $collectionShip->departure->display_name;
+                //         $result['location']     = $collectionShip->location->display_name;
+                //     }else {
+                //         $result['departure']    = $collectionShip->location->display_name;
+                //         $result['location']     = $collectionShip->departure->display_name;
+                //     }
+                //     $result['ship_price_id']    = $price->id;
+                //     $result['ship_info_id']     = $collectionShip->id;
+                //     $result['partner']          = $price->partner->name;
+                //     $result['date_start']       = $price->date_start;
+                //     $result['date_end']         = $price->date_end;
+                //     $result['price_adult']      = $price->price_adult;
+                //     $result['price_child']      = $price->price_child;
+                //     $result['price_old']        = $price->price_old;
+                //     $result['price_vip']        = $price->price_vip;
+                //     foreach($price->times as $time){
+                //         if($time->ship_from==$namePortDeparture&&$time->ship_to==$namePortLocation) $result['times'][] = $time->toArray();
+                //     }
+                //     /* break để chỉ lấy duy nhất một ship_price (trường hợp sau này bổ sung lấy nhiều kết quả và lọc theo thuật toán để ra kết quả chuẩn trong 1 ngày có nhiều kết quả) */
+                //     break;
+                // }
             }
         }
         return $result;

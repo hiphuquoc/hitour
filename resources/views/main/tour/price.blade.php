@@ -13,10 +13,6 @@
             </div>
         </div>
     </div>
-    @include('main.template.callbook', [
-        'flagButton'    => true,
-        'button'        => 'Đặt Tour'
-    ])
 </div>
 
 @push('scripts-custom')
@@ -27,9 +23,12 @@
             if(Math.floor(heightNow)<Math.floor(heightFull)){
                 $('#'+idContent).css('height', heightFull);
                 $(btn).html('Thu gọn<i class="fa-solid fa-arrow-left-long"></i>');
+                /* không cho scrol sidebar */
+                $('#js_scrollFixed_flag').val('false');
             }else {
                 $('#'+idContent).css('height', maxHeight);
                 $(btn).html('Xem thêm<i class="fa-solid fa-arrow-right-long"></i>');
+                $('#js_scrollFixed_flag').val('true');
             }
         }
     </script>

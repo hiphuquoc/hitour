@@ -4,7 +4,7 @@
          <div>giá từ: <span>1,250,000{{ config('main.unit_currency') }}</span></div>
       </div> --}}
       <div class="callBookTour_content" style="padding:0.5rem 1rem;">
-         <b style="font-size:1.2rem;font-family:'Roboto Slab', serif;font-weight:700;margin-bottom:0.4rem;display:block;">Tóm tắt booking</b>
+         <b style="font-size:1.2rem;font-weight:700;margin-bottom:0.4rem;display:block;">Tóm tắt booking</b>
          <div class="contentWithViewMore">
             <div class="contentWithViewMore_content">
                <div id="js_loadBookingSummary_idWrite" class="shipBookingTotalBox">

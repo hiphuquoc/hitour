@@ -15,188 +15,191 @@
     @csrf
     <input type="hidden" name="ship_booking_status_id" value="1" />
     <div class="pageContent">
-        <div class="container">
-            <!-- title -->
-            <h1 class="titlePage" style="margin-bottom:1.5rem;text-align:center;">Đặt vé tàu cao tốc</h1>
-            <!-- ship box -->
-            <div class="pageContent_body">
-                <div class="pageContent_body_content">
-                    
-                    <div class="bookingForm">
-
-                        <div class="bookingForm_item">
-                            <div class="bookingForm_item_head">
-                                Thông tin liên hệ
-                            </div>
-                            <div class="bookingForm_item_body">
-                                <div class="formBox">
-                                    <div class="formBox_full">
-                                        <!-- One Row -->
-                                        <div class="formBox_full_item">
-                                            <div class="flexBox">
-                                                <div class="flexBox_item">
-                                                    <div>
-                                                        <label class="form-label inputRequired" for="name">Họ và Tên</label>
-                                                        <input type="text" class="form-control" name="name" value="" required>
-                                                    </div>
-                                                    <div class="messageValidate_error" data-validate="name">{{ config('main.message_validate.not_empty') }}</div>
-                                                </div>
-                                                <div class="flexBox_item">
-                                                    <div class="inputWithIcon email">
-                                                        <label class="form-label" for="email">Email (nếu có)</label>
-                                                        <input type="text" class="form-control" name="email" value="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- One Row -->
-                                        <div class="formBox_full_item">
-                                            <div class="flexBox">
-                                                <div class="flexBox_item">
-                                                    <div class="inputWithIcon phone">
-                                                        <label class="form-label inputRequired" for="phone">Điện thoại</label>
-                                                        <input type="text" class="form-control" name="phone" value="" required>
-                                                    </div>
-                                                    <div class="messageValidate_error" data-validate="phone">{{ config('main.message_validate.not_empty') }}</div>
-                                                </div>
-                                                <div class="flexBox_item">
-                                                    <div class="inputWithIcon message">
-                                                        <label class="form-label" for="zalo">Zalo (nếu có)</label>
-                                                        <input type="text" class="form-control" name="zalo" value="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- One Row -->
-                                        <div class="formBox_full_item">
-                                            <label></label>
-                                            <input type="hidden" id="type_booking" name="type_booking" value="2">
-                                            <div class="chooseTripBox">
-                                                <div class="chooseTripBox_item active" onClick="changeValueTypeBooking(this, 2);">
-                                                    Khứ hồi
-                                                </div>
-                                                <div class="chooseTripBox_item" onClick="changeValueTypeBooking(this, 1);">
-                                                    Một chiều
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
+        <div class="sectionBox">
+            <div class="container">
+                <!-- title -->
+                <h1 class="titlePage" style="margin-bottom:1.5rem;text-align:center;">Đặt vé tàu cao tốc</h1>
+                <!-- ship box -->
+                <div class="pageContent_body">
+                    <div class="pageContent_body_content">
+                        
+                        <div class="bookingForm">
+    
+                            <div class="bookingForm_item">
+                                <div class="bookingForm_item_head">
+                                    Thông tin liên hệ
                                 </div>
-                            </div>
-                        </div>
-                        <!-- Departture 1 & 2 -->
-                        @php
-                            /* value mặc định ngày khởi hành */
-                            $valueDate_1        = null;
-                            $valueDate_2        = null;
-                            if(!empty(request('date_1'))) {
-                                $valueDate_1    = date('Y-m-d', strtotime(request('date_1')));
-                                $valueDate_2    = date('Y-m-d', strtotime(request('date_1')) + 86400);
-                            }
-                            /* lấy tên của cảng khởi hành - cảng đến để tải Ajax */
-                            $namePortDeparture  = null;
-                            $namePortLocation   = null;
-                            foreach($ports as $port){
-                                if(!empty(request('ship_port_departure_id'))&&request('ship_port_departure_id')==$port->id) $namePortDeparture  = $port->name;
-                                if(!empty(request('ship_port_location_id'))&&request('ship_port_location_id')==$port->id) $namePortLocation     = $port->name;
-                            }
-                        @endphp
-                        @for($i=1;$i<=2;++$i)
-                        @php
-                            $required       = $i==1 ? 'required' : null;
-                            $requiredClass  = $i==1 ? 'inputRequired' : null;
-                        @endphp
-                        <div id="js_filterForm_dp{{ $i }}" class="bookingForm_item">
-                            <div class="bookingForm_item_head">
-                                {{ $i==1 ? 'Chuyến đi' : 'Chuyến về' }}
-                            </div>
-                            <div class="bookingForm_item_body">
-                                <div class="formBox">
-                                    <div class="formBox_full">
-                                        <!-- One Row -->
-                                        <div class="formBox_full_item">
-                                            <label class="form-label {{ $requiredClass }}" for="date_{{ $i }}">Ngày khởi hành</label>
-                                            <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date_{{ $i }}" placeholder="YYYY-MM-DD" value="{{ $i==1 ? $valueDate_1 : $valueDate_2 }}" readonly="readonly" onChange="loadDeparture({{ $i }});" {{ $required }} />
-                                            <div class="messageValidate_error" data-validate="date_{{ $i }}">{{ config('main.message_validate.not_empty') }}</div>
-                                        </div>
-                                        <!-- One Row -->
-                                        <div class="formBox_full_item">
-                                            <div class="flexBox">
-                                                <div class="flexBox_item">
-                                                    <div class="inputWithIcon location">
-                                                        <label class="form-label {{ $requiredClass }}" for="ship_port_departure_id_{{ $i }}">Điểm khởi hành</label>
-                                                        <select id="js_loadShipLocationByShipDeparture_element_{{ $i }}" class="select2 form-select select2-hidden-accessible" name="ship_port_departure_id_{{ $i }}" onChange="loadShipLocationByShipDeparture(this, 'js_loadShipLocationByShipDeparture_idWrite_{{ $i }}', {{ $i }});">
-                                                            <option value="">- Lựa chọn -</option>
-                                                            @if(!empty($ports))
-                                                                @foreach($ports as $port)
-                                                                    @php
-                                                                        $selected   = null;
-                                                                        if(!empty(request('ship_port_departure_id'))&&$i==1&&request('ship_port_departure_id')==$port->id) $selected = 'selected';
-                                                                        if(!empty(request('ship_port_location_id'))&&$i==2&&request('ship_port_location_id')==$port->id) $selected = 'selected';
-                                                                        $portFull   = \App\Helpers\Build::buildFullShipPort($port);
-                                                                    @endphp
-                                                                    <option value="{{ $port->id }}"{{ $selected }}>
-                                                                        {!! $portFull !!}
-                                                                    </option>
-                                                                @endforeach
-                                                            @endif
-                                                        </select>
+                                <div class="bookingForm_item_body">
+                                    <div class="formBox">
+                                        <div class="formBox_full">
+                                            <!-- One Row -->
+                                            <div class="formBox_full_item">
+                                                <div class="flexBox">
+                                                    <div class="flexBox_item">
+                                                        <div>
+                                                            <label class="form-label inputRequired" for="name">Họ và Tên</label>
+                                                            <input type="text" class="form-control" name="name" value="" required>
+                                                        </div>
+                                                        <div class="messageValidate_error" data-validate="name">{{ config('main.message_validate.not_empty') }}</div>
                                                     </div>
-                                                    <div class="messageValidate_error" data-validate="ship_port_departure_id_{{ $i }}">{{ config('main.message_validate.not_empty') }}</div>
-                                                </div>
-                                                <div class="flexBox_item">
-                                                    <div class="inputWithIcon location">
-                                                        <label class="form-label {{ $requiredClass }}" for="ship_port_location_id_{{ $i }}">Điểm đến</label>
-                                                        <select id="js_loadShipLocationByShipDeparture_idWrite_{{ $i }}" class="select2 form-select select2-hidden-accessible" name="ship_port_location_id_{{ $i }}" onChange="loadDeparture({{ $i }});">
-                                                            <option value="">- Lựa chọn -</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="messageValidate_error" data-validate="ship_port_location_id_{{ $i }}">{{ config('main.message_validate.not_empty') }}</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- One Row -->
-                                        <div class="formBox_full_item">
-                                            <div class="flexBox">
-                                                <div class="flexBox_item">
-                                                    <div class="inputWithIcon adult">
-                                                        <label class="form-label" for="quantity_adult_{{ $i }}">Người lớn</label>
-                                                        <input type="text" class="form-control" name="quantity_adult_{{ $i }}" value="{{ !empty(request('adult_ship')) ? request('adult_ship') : null }}">
-                                                    </div>
-                                                </div>
-                                                <div class="flexBox_item">
-                                                    <div class="inputWithIcon child">
-                                                        <label class="form-label" for="quantity_child_{{ $i }}">Trẻ em (6 - 11 tuổi)</label>
-                                                        <input type="text" class="form-control" name="quantity_child_{{ $i }}" value="{{ !empty(request('child_ship')) ?  request('child_ship') : null }}">
-                                                    </div>
-                                                </div>
-                                                <div class="flexBox_item">
-                                                    <div class="inputWithIcon old">
-                                                        <label class="form-label" for="quantity_old_{{ $i }}">Cao tuổi (trên 60 tuổi)</label>
-                                                        <input type="text" class="form-control" name="quantity_old_{{ $i }}" value="{{ !empty(request('old_ship')) ? request('old_ship') : null }}">
+                                                    <div class="flexBox_item">
+                                                        <div class="inputWithIcon email">
+                                                            <label class="form-label" for="email">Email (nếu có)</label>
+                                                            <input type="text" class="form-control" name="email" value="">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="messageValidate_error" data-validate="quantity_{{ $i }}">Tổng số lượng vé phải lớn hơn 0!</div>
-                                        </div>
-                                        <!-- One Row -->
-                                        <div class="formBox_full_item">
-                                            <div id="js_loadDeparture_dp{{ $i }}">
-                                                <!-- AJAX: loadDeparture -->
+                                            <!-- One Row -->
+                                            <div class="formBox_full_item">
+                                                <div class="flexBox">
+                                                    <div class="flexBox_item">
+                                                        <div class="inputWithIcon phone">
+                                                            <label class="form-label inputRequired" for="phone">Điện thoại</label>
+                                                            <input type="text" class="form-control" name="phone" value="" required>
+                                                        </div>
+                                                        <div class="messageValidate_error" data-validate="phone">{{ config('main.message_validate.not_empty') }}</div>
+                                                    </div>
+                                                    <div class="flexBox_item">
+                                                        <div class="inputWithIcon message">
+                                                            <label class="form-label" for="zalo">Zalo (nếu có)</label>
+                                                            <input type="text" class="form-control" name="zalo" value="">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
+                                            <!-- One Row -->
+                                            <div class="formBox_full_item">
+                                                <label></label>
+                                                <input type="hidden" id="type_booking" name="type_booking" value="2">
+                                                <div class="chooseTripBox">
+                                                    <div class="chooseTripBox_item active" onClick="changeValueTypeBooking(this, 2);">
+                                                        Khứ hồi
+                                                    </div>
+                                                    <div class="chooseTripBox_item" onClick="changeValueTypeBooking(this, 1);">
+                                                        Một chiều
+                                                    </div>
+                                                </div>
+                                            </div>
+    
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- Departture 1 & 2 -->
+                            @php
+                                /* value mặc định ngày khởi hành */
+                                $valueDate_1        = null;
+                                $valueDate_2        = null;
+                                if(!empty(request('date_1'))) {
+                                    $valueDate_1    = date('Y-m-d', strtotime(request('date_1')));
+                                    $valueDate_2    = date('Y-m-d', strtotime(request('date_1')) + 86400);
+                                }
+                                /* lấy tên của cảng khởi hành - cảng đến để tải Ajax */
+                                $namePortDeparture  = null;
+                                $namePortLocation   = null;
+                                foreach($ports as $port){
+                                    if(!empty(request('ship_port_departure_id'))&&request('ship_port_departure_id')==$port->id) $namePortDeparture  = $port->name;
+                                    if(!empty(request('ship_port_location_id'))&&request('ship_port_location_id')==$port->id) $namePortLocation     = $port->name;
+                                }
+                            @endphp
+                            @for($i=1;$i<=2;++$i)
+                            @php
+                                $required       = $i==1 ? 'required' : null;
+                                $requiredClass  = $i==1 ? 'inputRequired' : null;
+                            @endphp
+                            <div id="js_filterForm_dp{{ $i }}" class="bookingForm_item">
+                                <div class="bookingForm_item_head">
+                                    {{ $i==1 ? 'Chuyến đi' : 'Chuyến về' }}
+                                </div>
+                                <div class="bookingForm_item_body">
+                                    <div class="formBox">
+                                        <div class="formBox_full">
+                                            <!-- One Row -->
+                                            <div class="formBox_full_item">
+                                                <label class="form-label {{ $requiredClass }}" for="date_{{ $i }}">Ngày khởi hành</label>
+                                                <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date_{{ $i }}" placeholder="YYYY-MM-DD" value="{{ $i==1 ? $valueDate_1 : $valueDate_2 }}" readonly="readonly" onChange="loadDeparture({{ $i }});" {{ $required }} />
+                                                <div class="messageValidate_error" data-validate="date_{{ $i }}">{{ config('main.message_validate.not_empty') }}</div>
+                                            </div>
+                                            <!-- One Row -->
+                                            <div class="formBox_full_item">
+                                                <div class="flexBox">
+                                                    <div class="flexBox_item">
+                                                        <div class="inputWithIcon location">
+                                                            <label class="form-label {{ $requiredClass }}" for="ship_port_departure_id_{{ $i }}">Điểm khởi hành</label>
+                                                            <select id="js_loadShipLocationByShipDeparture_element_{{ $i }}" class="select2 form-select select2-hidden-accessible" name="ship_port_departure_id_{{ $i }}" onChange="loadShipLocationByShipDeparture(this, 'js_loadShipLocationByShipDeparture_idWrite_{{ $i }}', {{ $i }});">
+                                                                <option value="">- Lựa chọn -</option>
+                                                                @if(!empty($ports))
+                                                                    @foreach($ports as $port)
+                                                                        @php
+                                                                            $selected   = null;
+                                                                            if(!empty(request('ship_port_departure_id'))&&$i==1&&request('ship_port_departure_id')==$port->id) $selected = 'selected';
+                                                                            if(!empty(request('ship_port_location_id'))&&$i==2&&request('ship_port_location_id')==$port->id) $selected = 'selected';
+                                                                            $portFull   = \App\Helpers\Build::buildFullShipPort($port);
+                                                                        @endphp
+                                                                        <option value="{{ $port->id }}"{{ $selected }}>
+                                                                            {!! $portFull !!}
+                                                                        </option>
+                                                                    @endforeach
+                                                                @endif
+                                                            </select>
+                                                        </div>
+                                                        <div class="messageValidate_error" data-validate="ship_port_departure_id_{{ $i }}">{{ config('main.message_validate.not_empty') }}</div>
+                                                    </div>
+                                                    <div class="flexBox_item">
+                                                        <div class="inputWithIcon location">
+                                                            <label class="form-label {{ $requiredClass }}" for="ship_port_location_id_{{ $i }}">Điểm đến</label>
+                                                            <select id="js_loadShipLocationByShipDeparture_idWrite_{{ $i }}" class="select2 form-select select2-hidden-accessible" name="ship_port_location_id_{{ $i }}" onChange="loadDeparture({{ $i }});">
+                                                                <option value="">- Lựa chọn -</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="messageValidate_error" data-validate="ship_port_location_id_{{ $i }}">{{ config('main.message_validate.not_empty') }}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- One Row -->
+                                            <div class="formBox_full_item">
+                                                <div class="flexBox">
+                                                    <div class="flexBox_item">
+                                                        <div class="inputWithIcon adult">
+                                                            <label class="form-label" for="quantity_adult_{{ $i }}">Người lớn</label>
+                                                            <input type="text" class="form-control" name="quantity_adult_{{ $i }}" value="{{ !empty(request('adult_ship')) ? request('adult_ship') : null }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="flexBox_item">
+                                                        <div class="inputWithIcon child">
+                                                            <label class="form-label" for="quantity_child_{{ $i }}">Trẻ em (6 - 11 tuổi)</label>
+                                                            <input type="text" class="form-control" name="quantity_child_{{ $i }}" value="{{ !empty(request('child_ship')) ?  request('child_ship') : null }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="flexBox_item">
+                                                        <div class="inputWithIcon old">
+                                                            <label class="form-label" for="quantity_old_{{ $i }}">Cao tuổi (trên 60 tuổi)</label>
+                                                            <input type="text" class="form-control" name="quantity_old_{{ $i }}" value="{{ !empty(request('old_ship')) ? request('old_ship') : null }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="messageValidate_error" data-validate="quantity_{{ $i }}">Tổng số lượng vé phải lớn hơn 0!</div>
+                                            </div>
+                                            <!-- One Row -->
+                                            <div class="formBox_full_item">
+                                                <div id="js_loadDeparture_dp{{ $i }}">
+                                                    <!-- AJAX: loadDeparture -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endfor
                         </div>
-                        @endfor
+    
                     </div>
-
+                    <div class="pageContent_body_sidebar">
+                        @include('main.shipBooking.sidebar')
+                    </div>
                 </div>
-                <div class="pageContent_body_sidebar">
-                    @include('main.shipBooking.sidebar')
-                </div>
+    
             </div>
 
         </div>
@@ -204,6 +207,13 @@
     </form>
 @endsection
 @push('scripts-custom')
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{{ asset('sources/admin/app-assets/vendors/js/pickers/pickadate/picker.js') }}"></script>
+    <script src="{{ asset('sources/admin/app-assets/vendors/js/pickers/pickadate/picker.date.js') }}"></script>
+    <script src="{{ asset('sources/admin/app-assets/vendors/js/pickers/pickadate/picker.time.js') }}"></script>
+    <script src="{{ asset('sources/admin/app-assets/vendors/js/pickers/pickadate/legacy.js') }}"></script>
+    <script src="{{ asset('sources/admin/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js') }}"></script>
+	<!-- ===== -->
     <script src="{{ asset('sources/admin/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js') }}"></script>
     <script src="{{ asset('sources/admin/app-assets/js/scripts/forms/pickers/form-pickers.js') }}"></script>
     <script src="{{ asset('sources/admin/app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
@@ -344,6 +354,7 @@
                         date                    : date
                     },
                     success     : function(data){
+                        console.log(data);
                         $('#js_loadDeparture_dp'+code).html(data);
                         loadBookingSummary();
                     }
