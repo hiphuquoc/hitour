@@ -365,7 +365,7 @@ input, textarea {
 .headerTop {
   position: relative;
   z-index: 103;
-  background: rgba(0, 123, 255, 0.8);
+  background: #3395ff;
   color: #fff;
   font-size: 0.95rem;
 }
