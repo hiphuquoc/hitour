@@ -18,7 +18,7 @@
             const positionTopElemt      = elemt.offset().top;
             $(window).scroll(function(){
                 const flagScroll        = $('#js_scrollFixed_flag').val();
-                if(flagScroll=='true'){
+                if(flagScroll!='false'){
                     const heightFooter      = 500;
                     const positionScrollbar = $(window).scrollTop();
                     const scrollHeight      = $('body').prop('scrollHeight');

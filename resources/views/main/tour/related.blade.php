@@ -16,8 +16,8 @@
                         @endif
                     @endif
                 </a>
-                <a href="/{{ $tour->seo->slug_full ?? null }}" title="{{ $tour->name ?? $tour->seo->title ?? $tour->seo->seo_title ?? null }}" class="tourRelated_item_title maxLine_1">
-                    <h2>{{ $tour->name ?? $tour->seo->title ?? null }}</h2>
+                <a href="/{{ $tour->seo->slug_full ?? null }}" title="{{ $tour->name ?? $tour->seo->title ?? $tour->seo->seo_title ?? null }}" class="tourRelated_item_title">
+                    <h2 class="maxLine_2">{{ $tour->name ?? $tour->seo->title ?? null }}</h2>
                 </a>
                 <a href="/{{ $tour->seo->slug_full ?? null }}" title="{{ $tour->name ?? $tour->seo->title ?? $tour->seo->seo_title ?? null }}" class="tourRelated_item_desc maxLine_4">
                     <h3 class="maxLine_3">{{ $tour->description ?? $tour->seo->description ?? null }}</h3>
@@ -28,7 +28,7 @@
                             Đón tại {{ $tour->pick_up ?? null }} {{ $tour->tour_departure_name ?? null }}
                         </div>
                         @if(!empty($tour->departure_schedule))
-                            <div class="tourRelated_item_departureSchedule">
+                            <div class="tourRelated_item_departureSchedule maxLine_1">
                                 {{ $tour->departure_schedule }}
                             </div>
                         @endif
