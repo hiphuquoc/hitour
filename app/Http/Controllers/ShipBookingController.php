@@ -71,7 +71,6 @@ class ShipBookingController extends Controller {
             $portShipDeparture      = ShipPort::find($request->get('ship_port_departure_id'));
             $portShipLocation       = ShipPort::find($request->get('ship_port_location_id'));
             $data                   = self::getShipPricesAndTimeByDate($date, $portShipDeparture->name, $portShipLocation->name);
-            dd($data);
             if(!empty($request->get('theme'))&&$request->get('theme')=='admin'){
                 /* thông tin booking (nếu có) => dùng đề active chuyến được chọn */
                 $booking                = [];

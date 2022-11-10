@@ -2413,6 +2413,12 @@ blockquote{
             }
         }
     }
+    input, textarea, .select2-container--default .select2-selection--single .select2-selection__rendered {
+        color: $color-primary !important;
+    }
+    label {
+        margin-bottom: 0.25rem;
+    }
 }
 .chooseTripBox {
     margin-top: 0.5rem;
@@ -2648,16 +2654,16 @@ blockquote{
                         }
                     }
                     .price {
-                        color: $color-primary-hover;
-                        font-weight: 500;
+                        font-family: $font-primary-title;
+                        color: $color-primary;
                         font-size: 1.2rem;
                         letter-spacing: 0.5px;
                     }
                 }
                 .highLight {
                     font-size: 1.2rem;
-                    font-weight: 500;
-                    color: $color-primary-hover;
+                    font-family: $font-primary-title;
+                    color: $color-primary;
                 }
                 &:first-child {
                     padding-left: 1rem !important;

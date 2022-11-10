@@ -2630,6 +2630,12 @@ blockquote em {
   padding-top: 0.5rem;
   border-top: 1px dashed #dee2e6;
 }
+.bookingForm input, .bookingForm textarea, .bookingForm .select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: rgb(0, 123, 255) !important;
+}
+.bookingForm label {
+  margin-bottom: 0.25rem;
+}
 
 .chooseTripBox {
   margin-top: 0.5rem;
@@ -2855,15 +2861,15 @@ blockquote em {
   color: rgb(244, 208, 63) !important;
 }
 .chooseDepartureShipBox_body_row_item .option .price {
-  color: rgb(0, 90, 180);
-  font-weight: 500;
+  font-family: "SVN-Gilroy Bold", serif;
+  color: rgb(0, 123, 255);
   font-size: 1.2rem;
   letter-spacing: 0.5px;
 }
 .chooseDepartureShipBox_body_row_item .highLight {
   font-size: 1.2rem;
-  font-weight: 500;
-  color: rgb(0, 90, 180);
+  font-family: "SVN-Gilroy Bold", serif;
+  color: rgb(0, 123, 255);
 }
 .chooseDepartureShipBox_body_row_item:first-child {
   padding-left: 1rem !important;

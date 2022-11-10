@@ -29,7 +29,7 @@
                         $priceChildReal = $tmp[3]=='vip' ? $infoShipPrice->price_vip : $infoShipPrice->price_child;
                         $priceOldReal   = $tmp[3]=='vip' ? $infoShipPrice->price_vip : $infoShipPrice->price_old;
                     @endphp
-                    <table>
+                    <table class="noResponsive">
                         <tbody>
                             @if(!empty($data['quantity_adult_1']))
                                 <tr>
@@ -88,7 +88,7 @@
                         $priceChildReal = $tmp[3]=='vip' ? $infoShipPrice->price_vip : $infoShipPrice->price_child;
                         $priceOldReal   = $tmp[3]=='vip' ? $infoShipPrice->price_vip : $infoShipPrice->price_old;
                     @endphp
-                    <table>
+                    <table class="noResponsive">
                         <tbody>
                             @if(!empty($data['quantity_adult_2']))
                                 <tr>
@@ -129,7 +129,7 @@
 @endif
 @if(!empty($total))
     <div class="shipBookingTotalBox_row">
-        <table>
+        <table class="noResponsive">
             <tbody>
                 <tr>
                     <td colspan="2">Tổng</td>

@@ -4,8 +4,8 @@
     <input type="hidden" name="ship_info_id_{{ $code }}" value="{{ $data['ship_info_id'] ?? null }}" />
     @php
         $nameDeparture      = null;
-        if(!empty($data['departure']&&!empty($data['location']))){
-            $nameDeparture  = $data['departure'].' - '.$data['location'];
+        if(!empty($data[0]['times'][0]['ship_from'])&&!empty($data[0]['times'][0]['ship_to'])){
+            $nameDeparture  = $data[0]['times'][0]['ship_from'].' - '.$data[0]['times'][0]['ship_to'];
         }
     @endphp
     <input type="hidden" name="name_dp{{ $code }}" value="{{ $nameDeparture }}" />
@@ -13,30 +13,32 @@
         <label class="form-label" for="quantity_adult">Giờ tàu và loại vé&nbsp;&nbsp;<span class="messageValidate_error" data-validate="dp{{ $code }}" style="font-weight:normal;margin-top:0;">Vui lòng chọn giờ khởi hành và loại vé!</span></label>
         <div class="chooseDepartureShipBox">
             <div class="chooseDepartureShipBox_body">
-                @foreach($data['times'] as $time)
-                <div class="chooseDepartureShipBox_body_row">
-                    <div class="chooseDepartureShipBox_body_row_item">
-                        @php
-                            $timeMove   = \App\Helpers\Time::convertMkToTimeMove($time['time_move']);
-                        @endphp
-                        <div><span class="highLight">{{ $time['time_departure'] }}</span> - <span class="highLight">{{ $time['time_arrive'] }}</span> ({{ $timeMove }})</div>
-                        <div style="font-weight:500;">{{ $data['partner'] }}</div>
-                    </div>
-                    <div class="chooseDepartureShipBox_body_row_item">
-                        <div class="option" onClick="chooseDeparture(this, {{ $code }}, '{{ $time['ship_price_id'] }}', '{{ $time['time_departure'] }}', '{{ $time['time_arrive'] }}', 'eco', '{{ $data['partner'] }}');">
-                            <div>ECO</div>
-                            <div class="price">{{ number_format($data['price_adult']).config('main.unit_currency') }}</div>
+                @foreach($data as $item)
+                    @foreach($item['times'] as $time)
+                    <div class="chooseDepartureShipBox_body_row">
+                        <div class="chooseDepartureShipBox_body_row_item">
+                            @php
+                                $timeMove   = \App\Helpers\Time::convertMkToTimeMove($time['time_move']);
+                            @endphp
+                            <div><span class="highLight">{{ $time['time_departure'] }}</span> - <span class="highLight">{{ $time['time_arrive'] }}</span> ({{ $timeMove }})</div>
+                            <div style="font-weight:500;">{{ $item['partner']['name'] }}</div>
+                        </div>
+                        <div class="chooseDepartureShipBox_body_row_item">
+                            <div class="option" onClick="chooseDeparture(this, {{ $code }}, '{{ $time['ship_price_id'] }}', '{{ $time['time_departure'] }}', '{{ $time['time_arrive'] }}', 'eco', '{{ $item['partner']['name'] }}');">
+                                <div>ECO</div>
+                                <div class="price">{{ number_format($item['price_adult']).config('main.unit_currency') }}</div>
+                            </div>
+                        </div>
+                        <div class="chooseDepartureShipBox_body_row_item">
+                            @if(!empty($data['price_vip']))
+                            <div class="option" onClick="chooseDeparture(this, {{ $code }}, '{{ $time['ship_price_id'] }}', '{{ $time['time_departure'] }}', '{{ $time['time_arrive'] }}', 'vip', '{{ $item['partner']['name'] }}');">
+                                <div>VIP</div>
+                                <div class="price">{{ number_format($item['price_vip']).config('main.unit_currency') }}</div>
+                            </div>
+                            @endif
                         </div>
                     </div>
-                    <div class="chooseDepartureShipBox_body_row_item">
-                        @if(!empty($data['price_vip']))
-                        <div class="option" onClick="chooseDeparture(this, {{ $code }}, '{{ $time['ship_price_id'] }}', '{{ $time['time_departure'] }}', '{{ $time['time_arrive'] }}', 'vip', '{{ $data['partner'] }}');">
-                            <div>VIP</div>
-                            <div class="price">{{ number_format($data['price_vip']).config('main.unit_currency') }}</div>
-                        </div>
-                        @endif
-                    </div>
-                </div>
+                    @endforeach
                 @endforeach
             </div>
         </div>
