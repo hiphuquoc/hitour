@@ -10,7 +10,7 @@
             {{-- <a href="#" class="headerTop_item_list_item">
                Tư vấn khách hàng
             </a> --}}
-            <a href="/" title="Liên hệ Hitour" class="headerTop_item_list_item">
+            <a href="/lien-he-hitour" title="Liên hệ Hitour" class="headerTop_item_list_item">
                Liên hệ
             </a>
             <a href="/admin" title="Đăng nhập" class="headerTop_item_list_item">

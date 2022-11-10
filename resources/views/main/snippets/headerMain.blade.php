@@ -181,7 +181,7 @@
                                 </a>
                             </li> --}}
                             <li>
-                                <a href="/" title="Liên hệ Hitour">
+                                <a href="/lien-he-hitour" title="Liên hệ Hitour">
                                     <div>Liên hệ</div>
                                 </a>
                             </li>
@@ -392,7 +392,7 @@
                     </div>
                 </li> --}}
                 <li>
-                    <a href="/" title="Liên hệ Hitour">
+                    <a href="/lien-he-hitour" title="Liên hệ Hitour">
                         <i class="fa-solid fa-phone"></i>
                         <div>Liên hệ</div>
                     </a>
