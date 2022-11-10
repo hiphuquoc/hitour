@@ -28,6 +28,7 @@ class TourBookingController extends Controller {
                                     ->whereHas('locations.infoLocation', function($query) use($idTourLocation){
                                         $query->where('id', $idTourLocation);
                                     })
+                                    ->where('status_show', 1)
                                     ->get();
             $result             = view('main.shipBooking.selectboxLocation', compact('data'));
         }

@@ -95,7 +95,7 @@
             <label for="bookFormSort_date">Ngày khởi hành</label>
             <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date" value="{{ date('Y-m-d', time() + 86400) }}" readonly="readonly" required>
         </div>
-        <div style="text-align:right;">
+        <div style="text-align:right;margin-top:1.5rem;">
             <div class="buttonSecondary" onClick="submitForm('tourBookingSort');">
                 <i class="fa-solid fa-check"></i>Đặt tour ngay
             </div>

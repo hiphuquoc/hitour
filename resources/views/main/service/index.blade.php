@@ -41,10 +41,10 @@
 @endpush
 @section('content')
 
-    @php
-        $active = 'tour';
-    @endphp
-    @include('main.form.sortBooking', compact('item', 'active'))
+    @include('main.form.sortBooking', [
+        'item'      => $item,
+        'active'    => 'service'
+    ]))
 
     @include('main.snippets.breadcrumb')
 

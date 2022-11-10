@@ -91,7 +91,7 @@
             <label for="bookFormSort_date">Ngày khởi hành</label>
             <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date_1" value="{{ date('Y-m-d', time() + 86400) }}" readonly="readonly" required>
         </div>
-        <div style="text-align:right;">
+        <div style="text-align:right;margin-top:1.5rem;">
             <div class="buttonSecondary" onClick="submitForm('shipBookingSort');">
                 <i class="fa-solid fa-magnifying-glass"></i>Tìm chuyến tàu
             </div>

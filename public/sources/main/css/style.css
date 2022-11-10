@@ -364,7 +364,7 @@ input, textarea {
 
 .headerTop {
   position: relative;
-  z-index: 102;
+  z-index: 103;
   background: rgba(0, 123, 255, 0.8);
   color: #fff;
   font-size: 0.95rem;
@@ -442,7 +442,7 @@ input, textarea {
 
 .headerMain {
   position: relative;
-  z-index: 102;
+  z-index: 103;
   background: rgb(0, 123, 255);
   color: #fff;
   font-family: "SVN-Gilroy Bold", serif;
@@ -3018,7 +3018,7 @@ blockquote em {
   font-family: "SVN-Gilroy Bold", serif;
   font-size: 0.95rem;
   font-weight: 500;
-  border-radius: 3px 3px 0 0;
+  border-radius: 5px 5px 0 0;
   cursor: pointer;
 }
 .bookFormSort_head > *:not(:first-child) {
@@ -3028,6 +3028,9 @@ blockquote em {
   opacity: 1;
   background: rgb(0, 123, 255);
   color: #fff;
+}
+.bookFormSort_head > *:hover {
+  opacity: 1;
 }
 .bookFormSort_head > * i {
   margin-right: 0.5rem;
@@ -3050,9 +3053,15 @@ blockquote em {
   margin-top: 1rem;
 }
 .bookFormSort_body_item > * {
-  width: 100%;
+  width: calc(50% - 0.5rem);
 }
 .bookFormSort_body_item > *:not(:first-child) {
+  margin-left: 1rem;
+}
+.bookFormSort_body_item .flexBox_item {
+  width: calc(50% - 0.5rem);
+}
+.bookFormSort_body_item .flexBox_item:not(:first-child) {
   margin-left: 1rem;
 }
 .bookFormSort_body label {
@@ -3074,9 +3083,20 @@ blockquote em {
     margin-top: 0.75rem;
   }
   .bookFormSort_body_item > * {
+    width: 100%;
     margin-left: 0 !important;
   }
   .bookFormSort_body_item > *:not(:first-child) {
+    margin-top: 0.75rem;
+  }
+  .bookFormSort_body_item .flexBox {
+    flex-wrap: wrap;
+  }
+  .bookFormSort_body_item .flexBox_item {
+    width: 100%;
+    margin-left: 0 !important;
+  }
+  .bookFormSort_body_item .flexBox_item:not(:first-child) {
     margin-top: 0.75rem;
   }
 }

@@ -11,17 +11,20 @@
 	<div class="bookFormSort" onClick="hideShowAround();">
 		<div class="bookFormSort_head">
 			<div {{ !empty($active)&&$active=='ship' ? 'class=active' : null }} data-tab="shipBookingForm" onClick="changeTab(this);">
-				<i class="fa-solid fa-ship"></i>Tàu cao tốc
+				<div class="hide-767"><i class="fa-solid fa-ship"></i>Tàu cao tốc</div>
+				<div class="show-767"><i class="fa-solid fa-ship"></i>Tàu</div>
 			</div>
 			<div {{ !empty($active)&&$active=='tour' ? 'class=active' : null }} data-tab="tourBookingForm" onClick="changeTab(this);">
-				<i class="fa-solid fa-suitcase-rolling"></i>Tour du lịch
+				<div class="hide-767"><i class="fa-solid fa-suitcase-rolling"></i>Tour du lịch</div>
+				<div class="show-767"><i class="fa-solid fa-suitcase-rolling"></i>Tour</div>
 			</div>
 			{{-- <div data-tab="hotelBookingForm" onClick="changeTab(this);">
 				<i class="fa-solid fa-hotel"></i>Khách sạn
-			</div>
-			<div data-tab="ticketBookingForm" onClick="changeTab(this);">
-				<i class="fa-solid fa-ticket"></i>Vé Vinpearl
 			</div> --}}
+			<div {{ !empty($active)&&$active=='service' ? 'class=active' : null }} data-tab="ticketBookingForm" onClick="changeTab(this);">
+				<div class="hide-767"><i class="fa-solid fa-ticket"></i>Vé vui chơi</div>
+				<div class="show-767"><i class="fa-solid fa-ticket"></i>Vui chơi</div>
+			</div>
 		</div>
 		<div class="bookFormSort_body">
 			<!-- Ship booking form -->
@@ -35,11 +38,11 @@
 			{{-- <!-- Tour booking form -->
 			<div id="hotelBookingForm" style="display: none;">
 				@include('main.form.sortBooking.hotel')
-			</div>
+			</div> --}}
 			<!-- Tour booking form -->
 			<div id="ticketBookingForm" style="display: none;">
 				@include('main.form.sortBooking.ticket')
-			</div> --}}
+			</div>
 		</div>
 	</div>
 </div>

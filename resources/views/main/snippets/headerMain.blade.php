@@ -50,6 +50,8 @@
                             })
                             ->get();
 @endphp
+
+<!-- START:: Menu Desktop -->
 <div class="headerMain">
     <div class="container">
         <div class="headerMain_item">
@@ -192,7 +194,11 @@
         </div>
     </div>
 </div>
+<!-- Background Hover -->
+{{-- <div class="backgroundHover"></div> --}}
+<!-- END:: Menu Desktop -->
 
+<!-- START:: Header Mobile -->
 <div class="header">
     <div class="container">
         @if(Request::is('/'))
@@ -219,7 +225,9 @@
         </div>
     </div>
 </div>
+<!-- END:: Header Mobile -->
 
+<!-- START:: Menu Mobile -->
 <div id="nav-mobile" style="display:none;">
     <div class="nav-mobile">
         <div class="nav-mobile_bg" onclick="javascript:openCloseElemt('nav-mobile');"></div>
@@ -401,6 +409,7 @@
         </div>
     </div>
 </div>
+<!-- END:: Menu Mobile -->
 
 @push('scripts-custom')
     <script type="text/javascript">

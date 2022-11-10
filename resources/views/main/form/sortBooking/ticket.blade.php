@@ -1,3 +1,3 @@
 <div class="bookFormSort_body_item">
-    Form đặt Vé Vinpearl đang cập nhật
+    Form đặt Vé vui chơi đang cập nhật...!
 </div>
