@@ -233,30 +233,9 @@
     <script src="{{ asset('sources/admin/app-assets/js/scripts/forms/form-select2.min.js') }}"></script>
     <script type="text/javascript">
         $(window).on('load', function () {
-            /* fixed sidebar khi scroll */
-            const elemt                 = $('.js_scrollFixed');
-            const widthElemt            = elemt.parent().width();
-            const positionTopElemt      = elemt.offset().top;
-            const heightFooter          = 500;
-            $(window).scroll(function(){
-                const positionScrollbar = $(window).scrollTop();
-                const scrollHeight      = $('body').prop('scrollHeight');
-                const heightLimit       = parseInt(scrollHeight - heightFooter - elemt.outerHeight());
-                if(positionScrollbar>positionTopElemt&&positionScrollbar<heightLimit){
-                    elemt.addClass('scrollFixedSidebar').css({
-                        'width'         : widthElemt,
-                        'margin-top'    : '1.5rem'
-                    });
-                }else {
-                    elemt.removeClass('scrollFixedSidebar').css({
-                        'width'         : 'unset',
-                        'margin-top'    : 0
-                    });
-                }
-            });
             /* tải selectbox điểm đến (nếu có điểm khởi hành) */
-            loadShipLocationByShipDeparture($('#js_loadShipLocationByShipDeparture_element_1'), 'js_loadShipLocationByShipDeparture_idWrite_1', 1, '{{ $namePortDeparture }}');
-            loadShipLocationByShipDeparture($('#js_loadShipLocationByShipDeparture_element_2'), 'js_loadShipLocationByShipDeparture_idWrite_2', 2, '{{ $namePortLocation }}');
+            loadShipLocationByShipDeparture($('#js_loadShipLocationByShipDeparture_element_1'), 'js_loadShipLocationByShipDeparture_idWrite_1', 1, '{{ $namePortLocation }}');
+            loadShipLocationByShipDeparture($('#js_loadShipLocationByShipDeparture_element_2'), 'js_loadShipLocationByShipDeparture_idWrite_2', 2, '{{ $namePortDeparture }}');
         });
 
         $('#formBooking').find('input, select').each(function(){

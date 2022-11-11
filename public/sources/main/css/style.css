@@ -46,7 +46,7 @@ body {
   line-height: 1.6rem;
   font-weight: 400;
   font-family: "SVN-Gilroy", sans-serif;
-  color: #444;
+  color: #567;
 }
 @media (max-width: 1023px) {
   body {
@@ -2974,6 +2974,41 @@ blockquote em {
   .chooseDepartureShipBox_body_row_item:first-child, .chooseDepartureShipBox_body_row_item:last-child {
     padding: 1rem !important;
   }
+}
+
+.chooseOptionTourBox {
+  background: #fff;
+}
+.chooseOptionTourBox_body {
+  display: flex;
+  flex-direction: column;
+}
+.chooseOptionTourBox_body_item {
+  display: flex;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+.chooseOptionTourBox_body_item:not(:first-child) {
+  border-top: 1px dashed #ced4da;
+}
+.chooseOptionTourBox_body_item.active {
+  background: #495057 !important;
+  color: #fff !important;
+  border-radius: 5px;
+}
+.chooseOptionTourBox_body_item.active .highLight {
+  color: rgb(244, 208, 63) !important;
+}
+.chooseOptionTourBox_body_item:hover {
+  background: rgba(0, 123, 255, 0.1);
+}
+.chooseOptionTourBox_body_item > * {
+  width: 100%;
+}
+.chooseOptionTourBox_body_item .highLight {
+  font-family: "SVN-Gilroy Bold", serif;
+  font-size: 1.1rem;
+  color: rgb(0, 123, 255);
 }
 
 .shipBookingTotalBox {

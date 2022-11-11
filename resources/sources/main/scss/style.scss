@@ -2783,6 +2783,40 @@ blockquote{
         }
     }
 }
+.chooseOptionTourBox {
+    background: #fff;
+    &_body {
+        display: flex;
+        flex-direction: column;
+        &_item {
+            display: flex;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            &:not(:first-child){
+                border-top: 1px dashed $bg-05;
+            }
+            &.active {
+                background: $bg-08 !important;
+                color: #fff !important;
+                border-radius: 5px;
+                .highLight {
+                    color: $color-secondary !important;
+                }
+            }
+            &:hover {
+                background: $color-primary-01;
+            }
+            > * {
+                width: 100%;
+            }
+            .highLight {
+                font-family: $font-primary-title;
+                font-size: 1.1rem;
+                color: $color-primary;
+            }
+        }
+    }
+}
 .shipBookingTotalBox {
     font-size: 0.95rem;
     &_row {

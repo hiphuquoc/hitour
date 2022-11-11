@@ -450,7 +450,9 @@ Route::prefix('shipBooking')->group(function(){
 /* ===== TOUR BOOKING ===== */
 Route::prefix('tourBooking')->group(function(){
     Route::get('/form', [TourBookingController::class, 'form'])->name('main.tourBooking.form');
+    Route::post('/create', [TourBookingController::class, 'create'])->name('main.tourBooking.create');
     Route::get('/loadTour', [TourBookingController::class, 'loadTour'])->name('main.tourBooking.loadTour');
+    Route::get('/loadOptionTour', [TourBookingController::class, 'loadOptionTour'])->name('main.tourBooking.loadOptionTour');
 });
 /* ===== TOC CONTENT ===== */
 Route::get('/buildTocContentSidebar', [AjaxController::class, 'buildTocContentSidebar'])->name('main.buildTocContentSidebar');

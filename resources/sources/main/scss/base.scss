@@ -9,7 +9,7 @@ body {
     line-height: 1.6rem;
     font-weight: 400;
     font-family: $font-primary-text;
-    color: #444;
+    color: $color-text;
     @media (max-width: 1023px) {
         background: #fff;
         font-size: 1rem;

@@ -75,7 +75,7 @@
                             </td>
                             <td>
                                 <div class="oneLine">
-                                    <span style="font-weight:bold;">{{ $item->tour->name }}</span>
+                                    <span style="font-weight:bold;">{{ $item->tour->name ?? null }}</span>
                                 </div>
                                 <div class="oneLine">
                                     {{ $item->quantiesAndPrices[0]->option_name }}
@@ -83,9 +83,11 @@
                                         // dd($list);
                                     @endphp
                                 </div>
-                                <div class="oneLine">
-                                    {{ date('d/m/Y', strtotime($item->departure_day)) }} - {{ date('d/m/Y', strtotime($item->departure_day)+(86400*($item->tour->days-1))) }}
-                                </div>
+                                @if(!empty($item->departure_day)&&!empty($item->tour->days))
+                                    <div class="oneLine">
+                                        {{ date('d/m/Y', strtotime($item->departure_day)) }} - {{ date('d/m/Y', strtotime($item->departure_day)+(86400*($item->tour->days-1))) }}
+                                    </div>
+                                @endif
                             </td>
                             <td>
                                 @php

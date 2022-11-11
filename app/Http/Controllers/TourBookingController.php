@@ -20,6 +20,10 @@ class TourBookingController extends Controller {
         return view('main.tourBooking.form', compact('tourLocations'));
     }
 
+    public static function create(Request $request){
+        dd($request->all());
+    }
+
     public static function loadTour(Request $request){
         $result                 = null;
         if(!empty($request->get('tour_location_id'))){
@@ -30,10 +34,35 @@ class TourBookingController extends Controller {
                                     })
                                     ->where('status_show', 1)
                                     ->get();
-            $result             = view('main.shipBooking.selectboxLocation', compact('data'));
+            $result             = view('main.tourBooking.selectbox', compact('data'));
         }
         return $result;
     }
 
-    
+    public static function loadOptionTour(Request $request){
+        $result                 = null;
+        if(!empty($request->get('tour_info_id'))){
+            $idTour             = $request->get('tour_info_id');
+            $infoTour           = Tour::select('*')
+                                    ->where('id', $idTour)
+                                    ->with('options.prices')
+                                    ->first();
+            $data               = self::getTourOptionByDate($request->get('date'), $infoTour->options->toArray());
+            $result             = view('main.tourBooking.formChooseOption', compact('data'));
+        }
+        echo $result;
+    }
+
+    public static function getTourOptionByDate($date, $options){
+        $result                 = [];
+        if(!empty($date)&&!empty($options)){
+            $mkDate             = strtotime($date);
+            foreach($options as $option){
+                $mkStart        = strtotime($option['prices'][0]['date_start']);
+                $mkEnd          = strtotime($option['prices'][0]['date_end']);
+                if($mkDate>$mkStart&&$mkDate<$mkEnd) $result[] = $option;
+            }
+        }
+        return $result;
+    }
 }
