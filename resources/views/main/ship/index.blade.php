@@ -87,6 +87,14 @@
         </div>
     </div>
 @endsection
+@push('bottom')
+    <!-- button book vé mobile -->
+    <div class="show-990">
+        <div class="callBookTourMobile" style="justify-content:center;width:100%;display:block;">
+            <h2 style="margin:0;" onclick="submitForm('shipBookingSort');">Đặt Vé</h2>
+        </div>
+    </div>
+@endpush
 @push('scripts-custom')
     <script type="text/javascript">
         buildTocContentMain('js_buildTocContentSidebar_element');

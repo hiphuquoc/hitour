@@ -209,15 +209,14 @@
 @push('bottom')
     <!-- button book tour mobile -->
     <div class="show-990">
-        <div class="callBookTourMobile" onclick="submitForm('formBooking');">
-            <div class="callBookTourMobile_textNormal">
+        <div class="callBookTourMobile">
+            <div class="callBookTourMobile_textNormal" onClick="showHideBox();">
                 <i class="fa-solid fa-eye"></i>Tóm tắt booking
             </div>
-            <h2>Xác nhận</h2>
+            <h2 onclick="submitForm('formBooking');">Xác nhận</h2>
         </div>
-        <div class="summaryBoxMobile">
-            coalsdkfnaldkf
-        </div>
+        <!-- Summary mobile -->
+        @include('main.shipBooking.summaryMobile')
     </div>
 @endpush
 @push('scripts-custom')
@@ -437,6 +436,7 @@
                 },
                 success     : function(data){
                     $('#js_loadBookingSummary_idWrite').html(data);
+                    $('#js_loadBookingSummaryMobile_idWrite').html(data);
                 }
             });
         }
