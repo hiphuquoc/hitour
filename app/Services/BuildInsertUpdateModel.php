@@ -592,6 +592,7 @@ class BuildInsertUpdateModel {
         $result = [];
         if(!empty($dataForm)){
             /* chỗ này cần lấy departure->display_name và location->display_name nên chỉ cần lấy 1 chuyến đi (chuyến về đảo lại) */
+            // dd($dataForm);
             $infoShip1                      = Ship::select('*')
                                                 ->where('id', $dataForm['ship_info_id_1'])
                                                 ->with('departure', 'location')

@@ -1872,6 +1872,8 @@ input, textarea {
   display: flex;
   align-items: center;
   border-top: 1px solid #dee2e6;
+  position: relative;
+  z-index: 103;
 }
 .callBookTourMobile_price {
   width: 100%;
@@ -1880,6 +1882,11 @@ input, textarea {
   font-size: 1.4rem;
   letter-spacing: 0.5px;
   color: #fd5056;
+}
+.callBookTourMobile_textNormal {
+  width: 100%;
+  text-align: center;
+  font-family: "SVN-Gilroy Bold", serif;
 }
 .callBookTourMobile h2, .callBookTourMobile h3, .callBookTourMobile h4 {
   flex: 0 0 160px;
@@ -1895,6 +1902,19 @@ input, textarea {
 }
 .callBookTourMobile h2:hover, .callBookTourMobile h3:hover, .callBookTourMobile h4:hover {
   background: rgb(241, 196, 15);
+}
+.callBookTourMobile i {
+  margin-right: 0.5rem;
+  color: #adb5bd;
+}
+
+.summaryBoxMobile {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: red;
+  padding: 1rem 1rem 70px 1rem;
 }
 
 .js_scrollFixed > *:not(:first-child) {
@@ -2630,11 +2650,54 @@ blockquote em {
   padding-top: 0.5rem;
   border-top: 1px dashed #dee2e6;
 }
+.bookingForm .formColumnCustom {
+  display: flex;
+}
+.bookingForm .formColumnCustom:not(:first-child) {
+  margin-top: 1.2rem;
+}
+.bookingForm .formColumnCustom_item {
+  width: 100%;
+}
+.bookingForm .formColumnCustom_item:not(:first-child) {
+  margin-left: 1rem;
+}
 .bookingForm input, .bookingForm textarea, .bookingForm .select2-container--default .select2-selection--single .select2-selection__rendered {
   color: rgb(0, 123, 255) !important;
 }
 .bookingForm label {
   margin-bottom: 0.25rem;
+  flex-wrap: wrap;
+}
+@media (max-width: 767px) {
+  .bookingForm_item:not(:first-child) {
+    margin-top: 1.5rem;
+  }
+}
+@media (max-width: 577px) {
+  .bookingForm_item:not(:first-child) {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #dee2e6;
+  }
+  .bookingForm_item_head {
+    margin-bottom: 0.75rem;
+  }
+  .bookingForm_item_body {
+    padding: 0;
+    background: unset;
+    box-shadow: unset;
+    border: none;
+  }
+  .bookingForm .formColumnCustom {
+    flex-wrap: wrap;
+  }
+  .bookingForm .formColumnCustom_item {
+    margin-left: 0 !important;
+  }
+  .bookingForm .formColumnCustom_item:not(:first-child) {
+    margin-top: 0.75rem;
+  }
 }
 
 .chooseTripBox {
@@ -2838,7 +2901,7 @@ blockquote em {
   background: #fff;
 }
 .chooseDepartureShipBox_body_row:nth-child(even) {
-  background: #fff;
+  background: rgba(244, 208, 63, 0.1);
 }
 .chooseDepartureShipBox_body_row_item {
   width: 100%;
@@ -2876,6 +2939,17 @@ blockquote em {
 }
 .chooseDepartureShipBox_body_row_item:last-child {
   padding-right: 1rem !important;
+}
+@media (max-width: 577px) {
+  .chooseDepartureShipBox_body_row {
+    flex-wrap: wrap;
+  }
+  .chooseDepartureShipBox_body_row_item {
+    padding: 0 1rem !important;
+  }
+  .chooseDepartureShipBox_body_row_item:first-child, .chooseDepartureShipBox_body_row_item:last-child {
+    padding: 1rem !important;
+  }
 }
 
 .shipBookingTotalBox {
@@ -2955,6 +3029,14 @@ blockquote em {
   font-size: 1.2rem;
   font-weight: 700;
   font-family: "SVN-Gilroy Bold", serif;
+}
+@media (max-width: 990px) {
+  .shipDepartureConfirmBox {
+    flex-wrap: wrap;
+  }
+  .shipDepartureConfirmBox_item {
+    width: 100%;
+  }
 }
 
 .timeShipDepartureBox {

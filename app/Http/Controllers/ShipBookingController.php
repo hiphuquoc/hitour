@@ -109,8 +109,10 @@ class ShipBookingController extends Controller {
                         $arrayTime[]    = $time;
                     }
                 }
-                $result[$i]             = $price->toArray();
-                $result[$i]['times']    = $arrayTime->toArray();
+                $result[$i]                 = $price->toArray();
+                $result[$i]['departure']    = $collectionShip->departure->display_name;
+                $result[$i]['location']     = $collectionShip->location->display_name;
+                $result[$i]['times']        = $arrayTime->toArray();
                 ++$i;
             }
         }

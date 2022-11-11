@@ -94,7 +94,7 @@
                 <div class="callBookTourMobile_price">
                     {{ number_format($item->price_show).config('main.unit_currency') }}
                 </div>
-                <h2>Đặt Tour ngay!</h2>
+                <h2>Đặt Tour này</h2>
             </div>
         </div>
     @endif

@@ -34,15 +34,15 @@
                                         <div class="formBox_full">
                                             <!-- One Row -->
                                             <div class="formBox_full_item">
-                                                <div class="flexBox">
-                                                    <div class="flexBox_item">
+                                                <div class="formColumnCustom">
+                                                    <div class="formColumnCustom_item">
                                                         <div>
                                                             <label class="form-label inputRequired" for="name">Họ và Tên</label>
                                                             <input type="text" class="form-control" name="name" value="" required>
                                                         </div>
                                                         <div class="messageValidate_error" data-validate="name">{{ config('main.message_validate.not_empty') }}</div>
                                                     </div>
-                                                    <div class="flexBox_item">
+                                                    <div class="formColumnCustom_item">
                                                         <div class="inputWithIcon email">
                                                             <label class="form-label" for="email">Email (nếu có)</label>
                                                             <input type="text" class="form-control" name="email" value="">
@@ -52,15 +52,15 @@
                                             </div>
                                             <!-- One Row -->
                                             <div class="formBox_full_item">
-                                                <div class="flexBox">
-                                                    <div class="flexBox_item">
+                                                <div class="formColumnCustom">
+                                                    <div class="formColumnCustom_item">
                                                         <div class="inputWithIcon phone">
                                                             <label class="form-label inputRequired" for="phone">Điện thoại</label>
                                                             <input type="text" class="form-control" name="phone" value="" required>
                                                         </div>
                                                         <div class="messageValidate_error" data-validate="phone">{{ config('main.message_validate.not_empty') }}</div>
                                                     </div>
-                                                    <div class="flexBox_item">
+                                                    <div class="formColumnCustom_item">
                                                         <div class="inputWithIcon message">
                                                             <label class="form-label" for="zalo">Zalo (nếu có)</label>
                                                             <input type="text" class="form-control" name="zalo" value="">
@@ -89,8 +89,8 @@
                             <!-- Departture 1 & 2 -->
                             @php
                                 /* value mặc định ngày khởi hành */
-                                $valueDate_1        = null;
-                                $valueDate_2        = null;
+                                $valueDate_1        = date('Y-m-d', time() + 86400);
+                                $valueDate_2        = date('Y-m-d', time() + 172800);
                                 if(!empty(request('date_1'))) {
                                     $valueDate_1    = date('Y-m-d', strtotime(request('date_1')));
                                     $valueDate_2    = date('Y-m-d', strtotime(request('date_1')) + 86400);
@@ -123,8 +123,8 @@
                                             </div>
                                             <!-- One Row -->
                                             <div class="formBox_full_item">
-                                                <div class="flexBox">
-                                                    <div class="flexBox_item">
+                                                <div class="formColumnCustom">
+                                                    <div class="formColumnCustom_item">
                                                         <div class="inputWithIcon location">
                                                             <label class="form-label {{ $requiredClass }}" for="ship_port_departure_id_{{ $i }}">Điểm khởi hành</label>
                                                             <select id="js_loadShipLocationByShipDeparture_element_{{ $i }}" class="select2 form-select select2-hidden-accessible" name="ship_port_departure_id_{{ $i }}" onChange="loadShipLocationByShipDeparture(this, 'js_loadShipLocationByShipDeparture_idWrite_{{ $i }}', {{ $i }});">
@@ -146,7 +146,7 @@
                                                         </div>
                                                         <div class="messageValidate_error" data-validate="ship_port_departure_id_{{ $i }}">{{ config('main.message_validate.not_empty') }}</div>
                                                     </div>
-                                                    <div class="flexBox_item">
+                                                    <div class="formColumnCustom_item">
                                                         <div class="inputWithIcon location">
                                                             <label class="form-label {{ $requiredClass }}" for="ship_port_location_id_{{ $i }}">Điểm đến</label>
                                                             <select id="js_loadShipLocationByShipDeparture_idWrite_{{ $i }}" class="select2 form-select select2-hidden-accessible" name="ship_port_location_id_{{ $i }}" onChange="loadDeparture({{ $i }});">
@@ -159,20 +159,20 @@
                                             </div>
                                             <!-- One Row -->
                                             <div class="formBox_full_item">
-                                                <div class="flexBox">
-                                                    <div class="flexBox_item">
+                                                <div class="formColumnCustom">
+                                                    <div class="formColumnCustom_item">
                                                         <div class="inputWithIcon adult">
                                                             <label class="form-label" for="quantity_adult_{{ $i }}">Người lớn</label>
                                                             <input type="text" class="form-control" name="quantity_adult_{{ $i }}" value="{{ !empty(request('adult_ship')) ? request('adult_ship') : null }}">
                                                         </div>
                                                     </div>
-                                                    <div class="flexBox_item">
+                                                    <div class="formColumnCustom_item">
                                                         <div class="inputWithIcon child">
                                                             <label class="form-label" for="quantity_child_{{ $i }}">Trẻ em (6 - 11 tuổi)</label>
                                                             <input type="text" class="form-control" name="quantity_child_{{ $i }}" value="{{ !empty(request('child_ship')) ?  request('child_ship') : null }}">
                                                         </div>
                                                     </div>
-                                                    <div class="flexBox_item">
+                                                    <div class="formColumnCustom_item">
                                                         <div class="inputWithIcon old">
                                                             <label class="form-label" for="quantity_old_{{ $i }}">Cao tuổi (trên 60 tuổi)</label>
                                                             <input type="text" class="form-control" name="quantity_old_{{ $i }}" value="{{ !empty(request('old_ship')) ? request('old_ship') : null }}">
@@ -206,6 +206,20 @@
     </div>
     </form>
 @endsection
+@push('bottom')
+    <!-- button book tour mobile -->
+    <div class="show-990">
+        <div class="callBookTourMobile" onclick="submitForm('formBooking');">
+            <div class="callBookTourMobile_textNormal">
+                <i class="fa-solid fa-eye"></i>Tóm tắt booking
+            </div>
+            <h2>Xác nhận</h2>
+        </div>
+        <div class="summaryBoxMobile">
+            coalsdkfnaldkf
+        </div>
+    </div>
+@endpush
 @push('scripts-custom')
     <!-- BEGIN: Page Vendor JS-->
     <script src="{{ asset('sources/admin/app-assets/vendors/js/pickers/pickadate/picker.js') }}"></script>

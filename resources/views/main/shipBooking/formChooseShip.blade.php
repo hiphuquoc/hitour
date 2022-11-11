@@ -1,11 +1,11 @@
 <!-- One Row -->
 @if(!empty($data))
     <input id="js_chooseDeparture_dp{{ $code }}" type="hidden" name="dp{{ $code }}" value="" required />
-    <input type="hidden" name="ship_info_id_{{ $code }}" value="{{ $data['ship_info_id'] ?? null }}" />
+    <input type="hidden" name="ship_info_id_{{ $code }}" value="{{ $data[0]['ship_info_id'] ?? null }}" />
     @php
         $nameDeparture      = null;
-        if(!empty($data[0]['times'][0]['ship_from'])&&!empty($data[0]['times'][0]['ship_to'])){
-            $nameDeparture  = $data[0]['times'][0]['ship_from'].' - '.$data[0]['times'][0]['ship_to'];
+        if(!empty($data[0]['departure'])&&!empty($data[0]['location'])){
+            $nameDeparture  = $data[0]['departure'].' - '.$data[0]['location'];
         }
     @endphp
     <input type="hidden" name="name_dp{{ $code }}" value="{{ $nameDeparture }}" />
@@ -30,11 +30,11 @@
                             </div>
                         </div>
                         <div class="chooseDepartureShipBox_body_row_item">
-                            @if(!empty($data['price_vip']))
-                            <div class="option" onClick="chooseDeparture(this, {{ $code }}, '{{ $time['ship_price_id'] }}', '{{ $time['time_departure'] }}', '{{ $time['time_arrive'] }}', 'vip', '{{ $item['partner']['name'] }}');">
-                                <div>VIP</div>
-                                <div class="price">{{ number_format($item['price_vip']).config('main.unit_currency') }}</div>
-                            </div>
+                            @if(!empty($item['price_vip']))
+                                <div class="option" onClick="chooseDeparture(this, {{ $code }}, '{{ $time['ship_price_id'] }}', '{{ $time['time_departure'] }}', '{{ $time['time_arrive'] }}', 'vip', '{{ $item['partner']['name'] }}');">
+                                    <div>VIP</div>
+                                    <div class="price">{{ number_format($item['price_vip']).config('main.unit_currency') }}</div>
+                                </div>
                             @endif
                         </div>
                     </div>
