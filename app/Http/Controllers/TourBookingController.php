@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\Tour;
 use App\Models\TourLocation;
+use App\Models\Customer;
+use App\Models\TourBooking;
+use App\Models\TourBookingQuantityAndPrice;
 use Illuminate\Http\Request;
 
 use App\Services\BuildInsertUpdateModel;
@@ -20,8 +23,23 @@ class TourBookingController extends Controller {
         return view('main.tourBooking.form', compact('tourLocations'));
     }
 
-    public static function create(Request $request){
-        dd($request->all());
+    public function create(Request $request){
+        /* insert customer_inf0 */
+        $insertCustomer             = $this->BuildInsertUpdateModel->buildArrayTableCustomerInfo($request->all());
+        // $idCustomer                 = Customer::insertItem($insertCustomer);
+        $idCustomer                 = 1;
+        /* insert tour_booking */
+        // dd($request->all());
+        $insertTourBooking          = $this->BuildInsertUpdateModel->buildArrayTableTourBooking($idCustomer, $request->all());
+        // $idBooking                  = TourBooking::insertItem($insertTourBooking);
+        $idBooking                  = 1;
+        /* insert tour_booking_quantity_and_price */
+        $arrayInsertTourQuantity    = $this->BuildInsertUpdateModel->buildArrayTableTourQuantityAndPrice($idBooking, $request->all());
+        
+        // foreach($arrayInsertTourQuantity as $insertTourQuantity){
+        //     TourBookingQuantityAndPrice::insertItem($insertTourQuantity);
+        // }
+        return redirect()->route('main.tourBooking.confirm', ['tour_booking_id' => $idBooking]);
     }
 
     public static function loadTour(Request $request){

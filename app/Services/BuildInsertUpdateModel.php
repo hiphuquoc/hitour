@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminImageController;
 use App\Models\Ship;
 use App\Models\ShipPort;
 use App\Models\ShipPrice;
+use App\Models\TourOption;
 
 class BuildInsertUpdateModel {
     public static function buildArrayTableSeo($dataForm, $type, $dataImage = null){
@@ -333,21 +334,43 @@ class BuildInsertUpdateModel {
             tour_info_id
             tour_booking_status_id
             tour_option_id
+            departure_day
             paid
             note_customer
             created_by
         */
-        $result                                 = [];
+        $result                                     = [];
         if(!empty($dataForm)){
-            if(!empty($noBooking)) $result['customer_info_id'] = $noBooking;
-            $result['customer_info_id']         = $idCustomer;
-            $result['tour_info_id']             = $dataForm['tour_info_id'];
+            $result['no']                           = \App\Helpers\Charactor::randomString(10);
+            if(!empty($noBooking)) $result['no']    = $noBooking;
+            $result['customer_info_id']             = $idCustomer;
+            $result['tour_info_id']                 = $dataForm['tour_info_id'];
             if(!empty($dataForm['tour_booking_status_id'])) $result['tour_booking_status_id'] = $dataForm['tour_booking_status_id'];
-            $result['tour_option_id']           = $dataForm['tour_option_id'] ?? null;
-            $result['departure_day']            = $dataForm['departure_day'];
-            $result['paid']                     = $dataForm['paid'] ?? null;
-            $result['note_customer']            = $dataForm['note_customer'] ?? null;
-            $result['created_by']               = Auth::id() ?? 0;
+            $result['tour_option_id']               = $dataForm['tour_option_id'] ?? null;
+            $result['departure_day']                = $dataForm['date'] ?? $dataForm['departure_day'];
+            $result['paid']                         = $dataForm['paid'] ?? null;
+            $result['note_customer']                = $dataForm['note_customer'] ?? null;
+            $result['created_by']                   = Auth::id() ?? 0;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableTourQuantityAndPrice($idBooking, $dataForm){
+        $result = [];
+        if(!empty($idBooking)&&!empty($dataForm)){
+            $infoTourOption                     = TourOption::select('*')
+                                                    ->where('id', $dataForm['tour_option_id'])
+                                                    ->with('prices')
+                                                    ->first();
+                                                    dd($infoTourOption->toArray());
+            /* người lớn */
+            if(!empty($dataForm['quantity_adult'])){
+                $result[0]['tour_booking_id']   = $idBooking;
+                $result[0]['option_name']       = $idBooking;
+                $result[0]['tour_booking_id']   = $idBooking;
+                $result[0]['tour_booking_id']   = $idBooking;
+                $result[0]['tour_booking_id']   = $idBooking;
+            }
         }
         return $result;
     }
@@ -592,7 +615,6 @@ class BuildInsertUpdateModel {
         $result = [];
         if(!empty($dataForm)){
             /* chỗ này cần lấy departure->display_name và location->display_name nên chỉ cần lấy 1 chuyến đi (chuyến về đảo lại) */
-            // dd($dataForm);
             $infoShip1                      = Ship::select('*')
                                                 ->where('id', $dataForm['ship_info_id_1'])
                                                 ->with('departure', 'location')
