@@ -115,20 +115,22 @@ class TourBookingController extends Controller {
                 $dataForm[$value['name']]   = $value['value'];
             }
             /* lấy thông tin tour gộp vào dataForm */
-            $infoTour       = Tour::select('*')
-                                ->where('id', $dataForm['tour_info_id'])
-                                ->with('options.prices')
-                                ->first();
-            $dataForm['tour'] = $infoTour->toArray();
+            $infoTour           = Tour::select('*')
+                                    ->where('id', $dataForm['tour_info_id'])
+                                    ->with('options.prices')
+                                    ->first();
+            $dataForm['tour']   = $infoTour->toArray();
+            /* lọc option theo ngày khởi hành */
+            $options            = self::getTourOptionByDate($dataForm['date'], $dataForm['tour']['options']);
+            $dataForm['tour']['options']   = $options; 
             /* tách name quantity và tour_price_id */
-            $arrayQuantity  = [];
+            $arrayQuantity      = [];
             foreach($dataForm as $key => $quantity){
                 preg_match('#quantity\[(.*)\]#imsU', $key, $match);
                 if(!empty($match[1])&&!empty($quantity)) $arrayQuantity[$match[1]] = $quantity;
             }
             /* gộp vào dataForm */
             $dataForm['quantity']   = $arrayQuantity;
-            dd($dataForm);
             $result                 = view('main.tourBooking.summary', ['data' => $dataForm]);
         }
         echo $result;

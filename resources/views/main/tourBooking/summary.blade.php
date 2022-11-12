@@ -9,21 +9,35 @@
         @endif
     </div>
 @endif
-@php
-    dd($data);
-@endphp
 <div class="shipBookingTotalBox_row">
-    <div style="font-weight:700;">Tour Phú Quốc 2 ngày 1 đêm</div>
-    <div>13/11/2022 - 15/11/2022</div>
-    <div>Đón cảng tàu/ sân bay</div>
-    <div style="font-weight:700;">Khách sạn 2*</div>
+    @php
+        $dateEndTour = date('d/m/Y', strtotime($data['date']) + ($data['tour']['days']-1)*86400);
+    @endphp
+    <div style="font-weight:700;">{{ $data['tour']['name'] }}</div>
+    <div>{{ date('d/m/Y', strtotime($data['date'])) }} - {{ $dateEndTour }}</div>
+    <div>{{ $data['tour']['pick_up'] }}</div>
+    <div style="font-weight:700;">{{ $data['tour']['options'][0]['option'] }}</div>
     <table class="noResponsive">
         <tbody>
-            <tr>
-                <td>Người lớn</td>
-                <td style="text-align:right;">1 * 560,000</td>
-                <td style="text-align:right;">560,000</td>
-            </tr>
+            @php
+                $total                  = 0;
+            @endphp 
+            @foreach($data['quantity'] as $idPrice => $quantity)
+                @foreach($data['tour']['options'] as $option)
+                    @foreach($option['prices'] as $price)
+                        @if($price['id']==$idPrice)
+                            <tr>
+                                <td>{{ $price['apply_age'] }}</td>
+                                <td style="text-align:right;">{{ $quantity }} * {{ number_format($price['price']) }}</td>
+                                <td style="text-align:right;">{{ number_format($quantity*$price['price']) }}</td>
+                            </tr>
+                            @php
+                                $total  += $quantity*$price['price'];
+                            @endphp
+                        @endif
+                    @endforeach
+                @endforeach
+            @endforeach
         </tbody>
     </table>
 </div>

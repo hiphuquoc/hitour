@@ -261,6 +261,7 @@
                 },
                 success     : function(data){
                     $('#js_loadFormQuantityByOption_idWrite').html(data);
+                    loadBookingSummary()
                 }
             });
         }
@@ -315,7 +316,7 @@
             });
             $(element).addClass('active');
             $('#tour_option_id').val(valueChange);
-            loadBookingSummary()
+            loadFormQuantityByOption()
         }
 
     </script>
