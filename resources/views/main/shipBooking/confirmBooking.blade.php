@@ -22,10 +22,44 @@
                                 <div>Đơn hàng của Quý khách đã được thông báo đến nhân viên Hitour. Sau khi kiểm tra xong nhân viên sẽ gửi xác nhận vào Email hoặc Zalo Quý khách đăng ký và liên hệ cho Quý khách.</div>
                             </div>
                         </div>
+                        <div class="bookingForm_item">
+                            <div class="bookingForm_item_head">
+                                Thông tin liên hệ
+                            </div>
+                            <table class="tableDetailShipBooking noResponsive">
+                                <tbody>
+                                    <tr>
+                                        <td style="width:200px;">Tên khách hàng</td>
+                                        <td>{{ $item->customer_contact->name ?? null }}</td>
+                                    </tr>
+                                    @if(!empty($item->customer_contact->zalo)&&$item->customer_contact->phone==$item->customer_contact->zalo)
+                                        <tr>
+                                            <td>Điện thoại</td>
+                                            <td>{{ $item->customer_contact->phone ?? null }} (Zalo)</td>
+                                        </tr>
+                                    @else
+                                        <tr>
+                                            <td>Điện thoại</td>
+                                            <td>{{ $item->customer_contact->phone ?? null }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Zalo</td>
+                                            <td>{{ $item->customer_contact->zalo ?? null }}</td>
+                                        </tr>
+                                    @endif
+                                    @if(!empty($item->customer_contact->email))
+                                        <tr>
+                                            <td>Email</td>
+                                            <td>{{ $item->customer_contact->email }}</td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
                         <!-- Thông tin liên hệ -->
                         <div class="bookingForm_item">
                             <div class="bookingForm_item_head">
-                                Thông tin booking
+                                Chi phí
                             </div>
                             <div class="bookingForm_item_body" style="padding:0;background:none;border:none;box-shadow:none;">
                                 <table class="tableDetailShipBooking noResponsive">

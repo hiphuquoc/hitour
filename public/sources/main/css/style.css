@@ -2693,6 +2693,12 @@ blockquote em {
   margin-bottom: 0.25rem;
   flex-wrap: wrap;
 }
+.bookingForm .flexBox.half .flexBox_item {
+  width: calc(50% - 0.5rem);
+}
+.bookingForm .flexBox.half .flexBox_item:not(:first-child) {
+  margin-left: 1rem;
+}
 @media (max-width: 767px) {
   .bookingForm_item:not(:first-child) {
     margin-top: 1.5rem;
@@ -3040,6 +3046,9 @@ blockquote em {
   letter-spacing: 0.3px;
 }
 
+.tableDetailShipBooking {
+  border: 1px solid #dee2e6;
+}
 .tableDetailShipBooking .head td {
   background: rgba(0, 123, 255, 0.3);
   font-weight: 500;
@@ -3050,7 +3059,8 @@ blockquote em {
   color: #495057;
 }
 .tableDetailShipBooking tr td {
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-left: 1px solid #dee2e6;
 }
 .tableDetailShipBooking tr:not(:first-child) td {
   margin-top: 0.5rem;

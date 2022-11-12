@@ -8,6 +8,7 @@ use App\Models\Ship;
 use App\Models\ShipPort;
 use App\Models\ShipPrice;
 use App\Models\TourOption;
+use App\Models\TourPrice;
 
 class BuildInsertUpdateModel {
     public static function buildArrayTableSeo($dataForm, $type, $dataImage = null){
@@ -355,21 +356,21 @@ class BuildInsertUpdateModel {
         return $result;
     }
 
-    public static function buildArrayTableTourQuantityAndPrice($idBooking, $dataForm){
+    public static function buildArrayTableTourQuantityAndPrice($idBooking, $idTourOption, $dataForm){
         $result = [];
+        $i      = 0;
         if(!empty($idBooking)&&!empty($dataForm)){
-            $infoTourOption                     = TourOption::select('*')
-                                                    ->where('id', $dataForm['tour_option_id'])
-                                                    ->with('prices')
-                                                    ->first();
-                                                    dd($infoTourOption->toArray());
-            /* người lớn */
-            if(!empty($dataForm['quantity_adult'])){
-                $result[0]['tour_booking_id']   = $idBooking;
-                $result[0]['option_name']       = $idBooking;
-                $result[0]['tour_booking_id']   = $idBooking;
-                $result[0]['tour_booking_id']   = $idBooking;
-                $result[0]['tour_booking_id']   = $idBooking;
+            $tourOption                         = TourOption::find($idTourOption);
+            foreach($dataForm['quantity'] as $idPrice => $quantity){
+                if($quantity>0){
+                    $tourPrice                      = TourPrice::find($idPrice);
+                    $result[$i]['tour_booking_id']  = $idBooking;
+                    $result[$i]['option_name']      = $tourOption->option;
+                    $result[$i]['option_age']       = $tourPrice->apply_age;
+                    $result[$i]['quantity']         = $quantity;
+                    $result[$i]['price']            = $tourPrice->price;
+                    ++$i;
+                }
             }
         }
         return $result;

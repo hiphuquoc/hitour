@@ -390,7 +390,6 @@
             if(valueQuantityAdult==0&&valueQuantityAdult==0&&valueQuantityAdult==0){
                 error.push('quantity_1');
             }
-            console.log(error);
             return error;
         }
 

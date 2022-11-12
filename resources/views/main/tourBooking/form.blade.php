@@ -34,7 +34,7 @@
                                         <div class="formBox_full">
                                             <!-- One Row -->
                                             <div class="formBox_full_item">
-                                                <div class="flexBox">
+                                                <div class="flexBox half">
                                                     <div class="flexBox_item">
                                                         <div>
                                                             <label class="form-label inputRequired" for="name">Họ và Tên</label>
@@ -52,7 +52,7 @@
                                             </div>
                                             <!-- One Row -->
                                             <div class="formBox_full_item">
-                                                <div class="flexBox">
+                                                <div class="flexBox half">
                                                     <div class="flexBox_item">
                                                         <div class="inputWithIcon phone">
                                                             <label class="form-label inputRequired" for="phone">Điện thoại</label>
@@ -79,25 +79,6 @@
                                 <div class="bookingForm_item_body">
                                     <div class="formBox">
                                         <div class="formBox_full">
-                                            <!-- One Row -->
-                                            <div class="formBox_full_item">
-                                                <div class="flexBox">
-                                                    <div class="flexBox_item">
-                                                        <div class="inputWithIcon adult">
-                                                            <label class="form-label" for="quantity_adult">Người lớn</label>
-                                                            <input type="text" class="form-control" name="quantity_adult" value="{{ !empty(request('adult_tour')) ? request('adult_tour') : null }}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="flexBox_item">
-                                                        <div class="inputWithIcon child">
-                                                            <label class="form-label" for="quantity_child">Trẻ em (6 - 11 tuổi)</label>
-                                                            <input type="text" class="form-control" name="quantity_child" value="{{ !empty(request('child_tour')) ?  request('child_tour') : null }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="messageValidate_error" data-validate="quantity">Tổng số lượng phải lớn hơn 0!</div>
-                                            </div>
-                                            <!-- One Row -->
                                             <div class="formBox_full_item">
                                                 <label class="form-label" for="date">Ngày khởi hành</label>
                                                 <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date" placeholder="YYYY-MM-DD" value="{{ request('date') ?? null }}" readonly="readonly" onChange="loadOptionTour();" />
@@ -105,7 +86,7 @@
                                             </div>
                                             <!-- One Row -->
                                             <div class="formBox_full_item">
-                                                <div class="flexBox">
+                                                <div class="flexBox half">
                                                     <div class="flexBox_item">
                                                         <div class="inputWithIcon location">
                                                             <label class="form-label" for="tour_location_id">Điểm đến</label>
@@ -145,14 +126,26 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
                                             <!-- One Row -->
                                             <div class="formBox_full_item">
                                                 <div id="js_loadOptionTour_idWrite">
                                                     <!-- AJAX: loadDeparture -->
                                                 </div>
                                             </div>
-                                            {{-- @include('main.tourBooking.formChooseOption') --}}
+                                            <!-- One Row -->
+                                            <div class="formBox_full_item">
+                                                <div id="js_loadFormQuantityByOption_idWrite">
+                                                    <!-- AJAX: loadDeparture -->
+                                                </div>
+                                            </div>
+                                            <!-- One Row -->
+                                            <div class="formBox_full_item">
+                                                <div>
+                                                    <label class="form-label" for="note_customer">Ghi chú của bạn</label>
+                                                    <textarea name="note_customer" rows="3"></textarea>
+                                                </div>
+                                                {{-- <div class="messageValidate_error" data-validate="name">{{ config('main.message_validate.not_empty') }}</div> --}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -187,6 +180,24 @@
         $(window).on('load', function () {
             loadTourByTourLocation($('#js_loadTourByTourLocation_element'), 'js_loadTourByTourLocation_idWrite');
         });
+
+        $('#formBooking').find('input, select').each(function(){
+            $(this).on('change', () => {
+                loadBookingSummary();
+                // const nameInput   = $(this).attr('name');
+                // showHideMessageValidate(nameInput, 'hide');
+                // if(nameInput=='quantity_adult'||nameInput=='quantity_child'||nameInput=='quantity_old'){
+                //     showHideMessageValidate('quantity', 'hide');
+                // }
+            })
+            // $(this).on('click', () => {
+            //     const nameInput   = $(this).attr('name');
+            //     showHideMessageValidate(nameInput, 'hide');
+            //     if(nameInput=='quantity_adult'||nameInput=='quantity_child'||nameInput=='quantity_old'){
+            //         showHideMessageValidate('quantity', 'hide');
+            //     }
+            // })
+        })
 
         function submitForm(idForm){
             event.preventDefault();
@@ -232,10 +243,26 @@
                     },
                     success     : function(data){
                         $('#js_loadOptionTour_idWrite').html(data);
-                        // loadBookingSummary();
+                        loadFormQuantityByOption();
+                        loadBookingSummary();
                     }
                 });
             }
+        }
+
+        function loadFormQuantityByOption(){
+            const idOption = $('#tour_option_id').val();
+            $.ajax({
+                url         : '{{ route("main.tourBooking.loadFormQuantityByOption") }}',
+                type        : 'get',
+                dataType    : 'html',
+                data        : {
+                    tour_option_id  : idOption
+                },
+                success     : function(data){
+                    $('#js_loadFormQuantityByOption_idWrite').html(data);
+                }
+            });
         }
 
         function validateForm(){
@@ -248,15 +275,13 @@
                 }
             })
             /* validate riêng cho số lượng */
-            const valueQuantityAdult    = $('#formBooking').find('[name=quantity_adult_1]').val();
-            const valueQuantityChild    = $('#formBooking').find('[name=quantity_child]_1').val();
-            const valueQuantityOld      = $('#formBooking').find('[name=quantity_old]_1').val();
-            if(valueQuantityAdult==''&&valueQuantityAdult==''&&valueQuantityAdult==''){
-                error.push('quantity_1');
-            }
-            if(valueQuantityAdult==0&&valueQuantityAdult==0&&valueQuantityAdult==0){
-                error.push('quantity_1');
-            }
+            var quantity        = 0;
+            $('#formBooking').find('[name^="quantity"]').each(function(){
+                let valInput    = $(this).val();
+                if(valInput=='') valInput = 0;
+                quantity        += parseInt(valInput) + parseInt(quantity);
+            })
+            if(quantity==0) error.push('quantity');
             return error;
         }
 
@@ -269,21 +294,20 @@
             }
         }
 
-        // function loadBookingSummary(){
-        //     const dataForm = $("#formBooking").serializeArray();
-        //     $.ajax({
-        //         url         : '{{ route("main.shipBooking.loadBookingSummary") }}',
-        //         type        : 'post',
-        //         dataType    : 'html',
-        //         data        : {
-        //             '_token'        : '{{ csrf_token() }}',
-        //             dataForm    : dataForm
-        //         },
-        //         success     : function(data){
-        //             $('#js_loadBookingSummary_idWrite').html(data);
-        //         }
-        //     });
-        // }
+        function loadBookingSummary(){
+            var dataForm = $("#formBooking").serializeArray();
+            $.ajax({
+                url         : '{{ route("main.tourBooking.loadBookingSummary") }}',
+                type        : 'get',
+                dataType    : 'html',
+                data        : {
+                    dataForm    : dataForm
+                },
+                success     : function(data){
+                    $('#js_loadBookingSummary_idWrite').html(data);
+                }
+            });
+        }
 
         function highLightChoose(element, valueChange){
             $(element).parent().children().each(function(){
@@ -291,6 +315,7 @@
             });
             $(element).addClass('active');
             $('#tour_option_id').val(valueChange);
+            loadBookingSummary()
         }
 
     </script>

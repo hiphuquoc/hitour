@@ -1,28 +1,26 @@
+<!-- One Row -->
 <div class="formBox_full_item">
-    <div id="js_loadDeparture_dp1">
-    <!-- One Row -->
     <input type="hidden" id="tour_option_id" name="tour_option_id" value="{{ $data[0]['id'] ?? null }}" />
-    <div class="formBox_full_item">
-        <label class="form-label" for="quantity_adult">Tiêu chuẩn Tour</label>
+    <label class="form-label" for="quantity_adult">Tiêu chuẩn Tour</label>
+    @if(!empty($data))
         <div class="chooseOptionTourBox">
             <div class="chooseOptionTourBox_body">
-                @if(!empty($data))
-                    @foreach($data as $option)
-                        @php
-                            $active = ($loop->index==0) ? 'active' : null;
-                        @endphp
-                        <div class="chooseOptionTourBox_body_item {{ $active }}" onClick="highLightChoose(this, '{{ $option['id'] ?? null }}');">
-                            <div>{{ $option['option'] ?? null }}</div>
-                            <div>
-                                @foreach($option['prices'] as $price)
-                                    <div><span class="highLight">{{ number_format($price['price']).config('main.unit_currency') }}</span> /{{ $price['apply_age'] }}</div>
-                                @endforeach
-                            </div>
+                @foreach($data as $option)
+                    @php
+                        $active = ($loop->index==0) ? 'active' : null;
+                    @endphp
+                    <div class="chooseOptionTourBox_body_item {{ $active }}" onClick="highLightChoose(this, '{{ $option['id'] ?? null }}');">
+                        <div>{{ $option['option'] ?? null }}</div>
+                        <div>
+                            @foreach($option['prices'] as $price)
+                                <div><span class="highLight">{{ number_format($price['price']).config('main.unit_currency') }}</span> /{{ $price['apply_age'] }}</div>
+                            @endforeach
                         </div>
-                    @endforeach
-                @endif
+                    </div>
+                @endforeach
             </div>
         </div>
-    </div>
-    </div>
+    @else 
+        <div style="color:red;">Hiện tour này chưa có lịch khởi hành vào ngày bạn chọn! Vui lòng chọn ngày khác</div>
+    @endif
 </div>

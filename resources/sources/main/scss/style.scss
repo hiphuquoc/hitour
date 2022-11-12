@@ -2479,6 +2479,16 @@ blockquote{
         margin-bottom: 0.25rem;
         flex-wrap: wrap;
     }
+    .flexBox {
+        &.half {
+            .flexBox_item {
+                width: calc(50% - 0.5rem);
+                &:not(:first-child){
+                    margin-left: 1rem;
+                }
+            }
+        }
+    }
     @media(max-width: 767px){
         &_item {
             &:not(:first-child){
@@ -2852,6 +2862,7 @@ blockquote{
     }
 }
 .tableDetailShipBooking {
+    border: 1px solid $bg-04;
     .head {
         td {
             background: $color-primary-03;
@@ -2865,7 +2876,8 @@ blockquote{
     }
     tr {
         td {
-            padding: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-left: 1px solid $bg-04;
         }
         &:not(:first-child){
             td {

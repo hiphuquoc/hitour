@@ -29,13 +29,14 @@ class ShipBookingController extends Controller {
         $idCustomer                 = Customer::insertItem($insertCustomer);
         /* insert ship_booking */
         $insertShipBooking          = $this->BuildInsertUpdateModel->buildArrayTableShipBooking($idCustomer, $request->all());
+        $noBooking                  = $insertShipBooking['no'];
         $idBooking                  = ShipBooking::insertItem($insertShipBooking);
         /* insert ship_booking_quantity_and_price */
         $arrayInsertShipQuantity    = $this->BuildInsertUpdateModel->buildArrayTableShipQuantityAndPrice($idBooking, $request->all());
         foreach($arrayInsertShipQuantity as $insertShipQuantity){
             ShipBookingQuantityAndPrice::insertItem($insertShipQuantity);
         }
-        return redirect()->route('main.shipBooking.confirm', ['ship_booking_id' => $idBooking]);
+        return redirect()->route('main.shipBooking.confirm', ['no' => $noBooking]);
     }
 
     public static function loadShipLocation(Request $request){
@@ -132,9 +133,9 @@ class ShipBookingController extends Controller {
     }
 
     public static function confirm(Request $request){
-        $idShipBooking      = $request->get('ship_booking_id') ?? 0;
+        $noBooking          = $request->get('no') ?? null;
         $item               = ShipBooking::select('*')
-                                ->where('id', $idShipBooking)
+                                ->where('no', $noBooking)
                                 ->with('infoDeparture', 'customer_contact')
                                 ->first();
         if(!empty($item)){
