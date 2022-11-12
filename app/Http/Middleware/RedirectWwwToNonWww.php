@@ -3,17 +3,12 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-class RedirectToNonWwwMiddleware{
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
-    public function handle($request, Closure $next){
+class RedirectWwwToNonWww {
+
+    public function handle(Request $request, Closure $next){
         if (substr($request->header('host'), 0, 4) == 'www.') {
             $domainName     = str_replace('https://', '', env('APP_URL'));
             $request->headers->set('host', $domainName);
@@ -21,4 +16,5 @@ class RedirectToNonWwwMiddleware{
         }
         return $next($request);
     }
+
 }
