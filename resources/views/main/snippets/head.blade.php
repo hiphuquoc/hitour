@@ -3,7 +3,8 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="fragment" content="!" />
-<title>Trang chủ Hitour.vn</title>
+
+@stack('head-custom')
 
 <!-- BEGIN: Custom CSS-->
 <link rel="stylesheet" type="text/css" href="{{ asset('sources/main/css/style.css?'.time()) }}">
@@ -16,5 +17,3 @@
 <!-- BEGIN: SLICK -->
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <!-- END: SLICK -->
-
-@stack('head-custom')

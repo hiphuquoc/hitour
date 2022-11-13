@@ -44,7 +44,7 @@
     @include('main.form.sortBooking', [
         'item'      => $item,
         'active'    => 'service'
-    ]))
+    ])
 
     @include('main.snippets.breadcrumb')
 

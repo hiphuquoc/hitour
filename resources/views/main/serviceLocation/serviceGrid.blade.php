@@ -1,5 +1,5 @@
 <div class="serviceGrid">
-    @if(!empty($list))
+    @if(!empty($list)&&$list->isNotEmpty())
         @foreach($list as $service)
             <div class="serviceGrid_item">
                 <a href="/{{ $service->seo->slug_full ?? null }}" title="{{ $service->name ?? $service->seo->title ?? $service->seo->seo_title ?? null }}" class="serviceGrid_item_image">
@@ -36,5 +36,7 @@
                 </div> --}}
             </div>
         @endforeach
+    @else 
+        <div style="color:rgb(0,123,255);">Hiện không có vé vui chơi giải trí tại {{ $item->display_name ?? null }} trên hệ thống Hitour!</div>
     @endif
 </div>

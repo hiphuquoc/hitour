@@ -9,6 +9,9 @@
                             ->get();
     /* Vé vui chơi */
     $dataService        = \App\Models\ServiceLocation::select('*')
+                            ->whereHas('services', function(){
+                                
+                            })
                             ->with('seo')
                             ->get();
     /* Tour trong nước */

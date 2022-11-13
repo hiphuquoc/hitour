@@ -85,7 +85,7 @@
         ])
         <!-- END:: Video -->
         
-        <div class="sectionBox noBackground">
+        {{-- <div class="sectionBox noBackground">
             <div class="container">
                 <div class="pageContent_body">
                     <div id="js_buildTocContentSidebar_element" class="pageContent_body_content">
@@ -111,7 +111,8 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
+
     </div>
 @endsection
 @push('scripts-custom')
