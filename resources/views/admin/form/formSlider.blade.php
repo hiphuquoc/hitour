@@ -4,7 +4,7 @@
         Đây là ảnh dùng làm slider hiển thị trên website ở phần đầu
     ">
         <i class="explainInput" data-feather='alert-circle'></i>
-        <label class="form-label" for="slider">Ảnh slider <span style="font-weight:700;">1920 * 500 px</span></label>
+        <label class="form-label" for="slider">Ảnh slider <span style="font-weight:700;">1920 * 300 px</span></label>
     </span>
     <input class="form-control" type="file" id="slider" name="slider[]" onChange="readURLs(this, 'sliderUpload');" multiple />
     <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
