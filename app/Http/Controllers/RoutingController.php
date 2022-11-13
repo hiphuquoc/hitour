@@ -32,6 +32,12 @@ class RoutingController extends Controller {
         /* loại bỏ phần tử rỗng */
         $arraySlug      = [];
         foreach($tmpSlug as $slug) if(!empty($slug)&&$slug!='public') $arraySlug[] = $slug;
+        /* redirect về URL đúng trước (loại bỏ public trong url) */
+        $arraySlugSorce = [];
+        foreach($tmpSlug as $slug) if(!empty($slug)) $arraySlugSorce[] = $slug;
+        $urlSource      = implode('/', $arraySlugSorce);
+        $urlReal        = implode('/', $arraySlug);
+        if($urlSource!=$urlReal) return Redirect::to('/'.$urlReal, 301);
         /* check url có tồn tại? => lấy thông tin */
         $checkExists    = Url::checkUrlExists($arraySlug);
         if(!empty($checkExists['type'])){
