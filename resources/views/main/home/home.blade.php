@@ -1,17 +1,20 @@
 @extends('main.layouts.main')
 @push('head-custom')
 <!-- ===== START:: SCHEMA ===== -->
+<!-- STRAT:: Title - Description - Social -->
+@include('main.schema.social', ['data' => $item])
+<!-- END:: Title - Description - Social -->
 
 <!-- STRAT:: Organization Schema -->
 @include('main.schema.organization')
 <!-- END:: Organization Schema -->
 
 <!-- STRAT:: Article Schema -->
-@include('main.schema.article', compact('item'))
+@include('main.schema.article', ['data' => $item])
 <!-- END:: Article Schema -->
 
 <!-- STRAT:: Article Schema -->
-@include('main.schema.creativeworkseries', compact('item'))
+@include('main.schema.creativeworkseries', ['data' => $item])
 <!-- END:: Article Schema -->
 
 <!-- ===== END:: SCHEMA ===== -->

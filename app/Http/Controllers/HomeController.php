@@ -22,7 +22,7 @@ class HomeController extends Controller {
 
     public function home(){
         $item               = Seo::select('*')
-                                ->where('slug', 'tour-du-lich-phu-quoc')
+                                ->where('slug', '')
                                 ->first();
         $shipLocations      = ShipLocation::select('*')
                                 ->with('seo')
