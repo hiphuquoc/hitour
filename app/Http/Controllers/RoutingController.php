@@ -31,7 +31,7 @@ class RoutingController extends Controller {
         $tmpSlug        = [$slug, $slug2, $slug3, $slug4, $slug5];
         /* loại bỏ phần tử rỗng */
         $arraySlug      = [];
-        foreach($tmpSlug as $slug) if(!empty($slug)) $arraySlug[] = $slug;
+        foreach($tmpSlug as $slug) if(!empty($slug)&&$slug!='public') $arraySlug[] = $slug;
         /* check url có tồn tại? => lấy thông tin */
         $checkExists    = Url::checkUrlExists($arraySlug);
         if(!empty($checkExists['type'])){

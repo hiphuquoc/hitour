@@ -104,8 +104,9 @@
                                                                         @foreach($tourLocationsByRegion as $tourLocation)
                                                                             @php
                                                                                 $selected   = null;
+                                                                                if(!empty(request('tour_location_id'))&&request('tour_location_id')==$tourLocation->id) $selected = 'selected';
                                                                             @endphp
-                                                                            <option value="{{ $tourLocation->id }}"{{ $selected }}>
+                                                                            <option value="{{ $tourLocation->id }}" {{ $selected }}>
                                                                                 {{ $tourLocation->display_name }}
                                                                             </option>
                                                                         @endforeach

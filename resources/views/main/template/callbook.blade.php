@@ -23,8 +23,10 @@
         @endif
     </div>
     @if(!empty($flagButton)&&$flagButton==true)
+    <a href="{{ route('main.tourBooking.form', ['tour_location_id' => 12]) }}">
         <h2 class="callBookTour_button_item bookonline">
             {{ $button ?? 'Đặt ngay' }}
         </h2>
+    </a>
     @endif
 </div>
