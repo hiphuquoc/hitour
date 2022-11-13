@@ -32,7 +32,7 @@ class HomeController extends Controller {
                                 ->get();
         $serviceLocations   = ServiceLocation::select('*')
                                 ->where('district_id', '!=', '0') /* vé giải trí trong nước */
-                                ->with('seo')
+                                ->with('seo', 'services')
                                 ->get();
         $islandLocations    = TourLocation::select('*')
                                 ->where('island', '1')

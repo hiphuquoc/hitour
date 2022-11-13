@@ -81,7 +81,16 @@
             <div class="container">
                 <h2 class="sectionBox_title">Vé vui chơi giải trí</h2>
                 <p>Tổng hợp vé vui chơi và hoạt động giải trí theo từng địa điểm cụ thể.</p>
-                @include('main.home.serviceLocationList', compact('serviceLocations'))
+                @php
+                    $services       = new \Illuminate\Database\Eloquent\Collection;
+                    foreach($serviceLocations as $serviceLocation){
+                        foreach($serviceLocation->services as $service){
+                            $services[] = $service;
+                        }
+                    }
+                @endphp
+                @include('main.home.servicesSlick', ['list' => $services])
+                {{-- @include('main.home.serviceLocationList', compact('serviceLocations')) --}}
             </div>
         </div>
     @endif
@@ -94,7 +103,7 @@
                 @include('main.home.partner', [
                     'list'          => $shipPartners,
                     'title'         => 'Đối tác tàu cao tốc',
-                    'description'   => 'Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ'
+                    'description'   => 'Những đối tác tàu cao tốc đang hoạt động các tuyến biển đảo tại Việt Nam'
                 ])
             </div>
         </div>
@@ -108,7 +117,7 @@
                 @include('main.home.partner', [
                     'list'          => $airPartners,
                     'title'         => 'Đối tác máy bay',
-                    'description'   => 'Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ'
+                    'description'   => 'Những đối tác hàng không toàn quốc sẽ chắp cánh đưa bạn đến mọi miền đất nước'
                 ])
             </div>
         </div>
@@ -124,8 +133,42 @@
 @endsection
 @push('scripts-custom')
     <script type="text/javascript">
-        // $(window).on('load', function () {
-            
-        // });
+        $('.serviceGrid').slick({
+            infinite: false,
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            arrows: true,
+            prevArrow: '<button class="slick-arrow slick-prev"><i class="fa-solid fa-angle-left"></i></button>',
+            nextArrow: '<button class="slick-arrow slick-next"><i class="fa-solid fa-angle-right"></i></button>',
+            responsive: [
+                {
+                    breakpoint: 1023,
+                    settings: {
+                        infinite: false,
+                        slidesToShow: 2.6,
+                        slidesToScroll: 2,
+                        arrows: false,
+                    }
+                },
+                {
+                    breakpoint: 767,
+                    settings: {
+                        infinite: false,
+                        slidesToShow: 1.7,
+                        slidesToScroll: 1,
+                        arrows: false,
+                    }
+                },
+                {
+                    breakpoint: 577,
+                    settings: {
+                        infinite: false,
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        arrows: false,
+                    }
+                }
+            ]
+        });
     </script>
 @endpush

@@ -52,7 +52,7 @@
                     <div class="signupReceiveEmail">
                         <div class="signupReceiveEmail_desc">Nhập email để nhận thông tin về các chương trình khuyến mãi của Hitour!</div>
                         <div class="signupReceiveEmail_input">
-                            <input type="text" name="email" placeholder="Email của bạn" />
+                            <input type="text" name="email" placeholder="Email của bạn" disabled />
                             <button type="submit" aria-label="Đăng ký email"><i class="fa-solid fa-envelope"></i></button>
                         </div>
                     </div>
@@ -86,6 +86,9 @@
                 <ul>
                     <li>
                         <a href="https://superdong.vn" title="Cẩm nang du lịch Việt" target="_blank" rel="nofollow">Cẩm nang du lịch Việt</a>
+                    </li>
+                    <li>
+                        <a href="https://tickets.com.vn" title="Trang vé toàn quốc" target="_blank" rel="nofollow">Trang vé toàn quốc</a>
                     </li>
                     <li>
                         <a href="https://name.com.vn" title="Đặc sản ba miền" target="_blank" rel="nofollow">Đặc sản ba miền</a>

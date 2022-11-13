@@ -131,6 +131,8 @@
                                             <div class="formBox_full_item">
                                                 <div id="js_loadOptionTour_idWrite">
                                                     <!-- AJAX: loadDeparture -->
+                                                    <label class="form-label" for="quantity_adult">Tiêu chuẩn Tour</label>
+                                                    <div style="color:rgb(0,123,255);">Vui lòng chọn Ngày khởi hành và Tour trước!</div>
                                                 </div>
                                             </div>
                                             <!-- One Row -->
@@ -179,7 +181,7 @@
     <script src="{{ asset('sources/admin/app-assets/js/scripts/forms/form-select2.min.js') }}"></script>
     <script type="text/javascript">
         $(window).on('load', function () {
-            loadTourByTourLocation($('#js_loadTourByTourLocation_element'), 'js_loadTourByTourLocation_idWrite');
+            loadTourByTourLocation($('#js_loadTourByTourLocation_element'), 'js_loadTourByTourLocation_idWrite', "{{ request('tour_info_id') ?? 0  }}");
         });
 
         $('#formBooking').find('input, select').each(function(){
@@ -213,15 +215,16 @@
             }
         }
 
-        function loadTourByTourLocation(element, idWrite){
-            const idTourLocation = $(element).val();
+        function loadTourByTourLocation(element, idWrite, idTourDefault = 0){
+            const idTourLocation    = $(element).val();
             $.ajax({
                 url         : '{{ route("main.tourBooking.loadTour") }}',
                 type        : 'get',
                 dataType    : 'html',
                 data        : {
                     '_token'        	: '{{ csrf_token() }}',
-                    tour_location_id    : idTourLocation
+                    tour_location_id    : idTourLocation,
+                    tour_info_id        : idTourDefault
                 },
                 success     : function(data){
                     $('#'+idWrite).html(data);

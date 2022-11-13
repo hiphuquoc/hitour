@@ -80,7 +80,13 @@
                         </div>
                     </div>
                     <div class="pageContent_body_sidebar">
-                        @include('main.ship.sidebar')
+                        @php
+                            $linkFull = route('main.shipBooking.form', [
+                                'ship_port_departure_id'    => $item->ship_port_departure_id,
+                                'ship_port_location_id'     => $item->ship_port_location_id
+                            ]);
+                        @endphp
+                        @include('main.ship.sidebar', compact('item', 'linkFull'))
                     </div>
                 </div>
             </div>
@@ -91,7 +97,7 @@
     <!-- button book vé mobile -->
     <div class="show-990">
         <div class="callBookTourMobile" style="justify-content:center;width:100%;display:block;">
-            <h2 style="margin:0;" onclick="submitForm('shipBookingSort');">Đặt Vé</h2>
+            <a href="{{ $linkFull ?? '/' }}"><h2 style="margin:0;" onclick="submitForm('shipBookingSort');">Đặt Vé</h2></a>
         </div>
     </div>
 @endpush

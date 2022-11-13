@@ -1107,7 +1107,7 @@ $tourGrid_radius : 5px;
         &_location {
             padding: 0.4rem 1rem;
             font-size: 0.95rem;
-            background: $bg-03;
+            background: $color-primary-01;
             text-align: center;
             color: #456;
             i {
@@ -1213,6 +1213,17 @@ $tourGrid_radius : 5px;
                     width: 100%;
                 }
             }
+        }
+    }
+    &.slickBox {
+        .serviceGrid_item {
+            margin-top: 0 !important;
+            &:not(:first-child){
+                margin-left: 1.5rem;
+            }
+        }
+        .slick-arrow {
+            @include slickArrowCircle
         }
     }
 }
@@ -1515,21 +1526,26 @@ $tourGrid_radius : 5px;
         text-align: center;
         font-family: $font-primary-title;
     }
-    h2, h3, h4 {
+    > a, > div {
+        display: flex;
         flex: 0 0 160px;
-        font-family: $font-primary-title;
-        background: $color-secondary;
-        color: #333;
-        padding: 0.5rem 1rem;
-        border-radius: 5px;
-        font-size: 1.1rem;
-        text-align: center;
-        cursor: pointer;
-        margin: 0 0 0 1.5rem;
-        &:hover {
-            background: $color-secondary-hover;
+        margin-left: 1.5rem;
+        justify-content: flex-end;
+        h2, h3, h4 {
+            font-family: $font-primary-title;
+            background: $color-secondary;
+            color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 0;
+            &:hover {
+                background: $color-secondary-hover;
+            }
         }
     }
+    
     i {
         margin-right: 0.5rem;
         color: $bg-06;
@@ -1766,7 +1782,7 @@ $tourGrid_radius : 5px;
             h3, h4 {
                 font-size: 1.05rem;
                 font-weight: 700;
-                margin-bottom: 0;
+                margin-bottom: 0.25rem;
             }   
         }
     }
@@ -4753,6 +4769,9 @@ $width-single-menu  : 260px;
         }
         &:nth-child(n + 5){
             margin-top: 1.5rem;
+        }
+        &:nth-child(n + 17){
+            display: none;
         }
         a {
             display: flex;

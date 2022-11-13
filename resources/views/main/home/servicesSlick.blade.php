@@ -1,4 +1,4 @@
-<div class="serviceGrid">
+<div class="serviceGrid slickBox">
     @if(!empty($list))
         @foreach($list as $service)
             <div class="serviceGrid_item">
@@ -12,10 +12,10 @@
                 </a>
                 <div class="serviceGrid_item_content">
                     <a href="/{{ $service->seo->slug_full }}" title="{{ $service->name ?? $service->seo->title ?? $service->seo->seo_title ?? null }}" class="serviceGrid_item_content_title maxLine_1">
-                        <h2>{{ $service->name ?? $service->seo->title ?? null }}</h2>
+                        <h3 class="maxLine_1">{{ $service->name ?? $service->seo->title ?? null }}</h3>
                     </a>
                     <a href="/{{ $service->seo->slug_full }}" title="{{ $service->name ?? $service->seo->title ?? $service->seo->seo_title ?? null }}" class="serviceGrid_item_content_desc maxLine_4">
-                        <h3>{{ $service->description ?? $service->seo->description ?? null }}</h3>
+                        <h4 class="maxLine_3">{{ $service->description ?? $service->seo->description ?? null }}</h4>
                     </a>
                     <div class="column">
                         <div class="column_item">
@@ -31,10 +31,13 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="serviceGrid_item_location">
-                    <i class="fa-solid fa-location-dot"></i> Phú Quốc
-                </div> --}}
+                <div class="serviceGrid_item_location">
+                    <i class="fa-solid fa-location-dot"></i>{{ $service->serviceLocation->display_name ?? null }}
+                </div>
             </div>
         @endforeach
     @endif
 </div>
+{{-- <div class="viewMore">
+    <a href="/{{ $link ?? null }}" title="Xem thêm"><i class="fa-solid fa-arrow-down-long"></i>Xem thêm</a>
+</div> --}}

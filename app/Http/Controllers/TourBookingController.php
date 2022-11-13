@@ -57,13 +57,17 @@ class TourBookingController extends Controller {
         $result                 = null;
         if(!empty($request->get('tour_location_id'))){
             $idTourLocation     = $request->get('tour_location_id');
+            $idTourInfo         = $request->get('tour_info_id') ?? 0;
             $data               = Tour::select('*')
                                     ->whereHas('locations.infoLocation', function($query) use($idTourLocation){
                                         $query->where('id', $idTourLocation);
                                     })
                                     ->where('status_show', 1)
                                     ->get();
-            $result             = view('main.tourBooking.selectbox', compact('data'));
+            $result             = view('main.tourBooking.selectbox', [
+                'data'          => $data, 
+                'idSelected'    => $idTourInfo
+            ]);
         }
         return $result;
     }

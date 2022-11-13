@@ -23,7 +23,7 @@
 			</div> --}}
 			<div {{ !empty($active)&&$active=='service' ? 'class=active' : null }} data-tab="ticketBookingForm" onClick="changeTab(this);">
 				<div class="hide-767"><i class="fa-solid fa-ticket"></i>Vé vui chơi</div>
-				<div class="show-767"><i class="fa-solid fa-ticket"></i>Vui chơi</div>
+				<div class="show-767"><i class="fa-solid fa-ticket"></i>Vé vui chơi</div>
 			</div>
 		</div>
 		<div class="bookFormSort_body">

@@ -70,9 +70,16 @@
                         @include('main.tour.price', compact('item'))
     
                         <div class="js_scrollFixed" style="margin-top:0;">
+                            @php
+                                $linkTourBooking = route('main.tourBooking.form', [
+                                    'tour_location_id'  => $item->locations[0]->infoLocation->id ?? 0,
+                                    'tour_info_id'      => $item->id ?? 0
+                                ]);
+                            @endphp 
                             @include('main.template.callbook', [
                                 'flagButton'    => true,
-                                'button'        => 'Đặt Tour'
+                                'button'        => 'Đặt Tour',
+                                'linkFull'      => $linkTourBooking
                             ])
                             @include('main.tour.tocContentTour', compact('item'))
                             <!-- đoạn này để xử lý trường hợp đang mở xem thêm điểm nổi bật tour thì không scroll -->
@@ -94,7 +101,7 @@
                 <div class="callBookTourMobile_price">
                     {{ number_format($item->price_show).config('main.unit_currency') }}
                 </div>
-                <h2>Đặt Tour này</h2>
+                <a href="{{ $linkTourBooking }}"><h2>Đặt Tour này</h2></a>
             </div>
         </div>
     @endif

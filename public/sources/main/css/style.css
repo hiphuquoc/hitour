@@ -325,6 +325,9 @@ input, textarea {
   outline: none;
   background: #fff !important;
 }
+input:disabled, textarea:disabled {
+  background: #e9ecef !important;
+}
 
 .select2-container--default .select2-selection--single {
   border: 1px solid #ced4da !important;
@@ -1463,7 +1466,7 @@ input, textarea {
 .tourGrid_item_location, .serviceGrid_item_location {
   padding: 0.4rem 1rem;
   font-size: 0.95rem;
-  background: #e9ecef;
+  background: rgba(0, 123, 255, 0.1);
   text-align: center;
   color: #456;
 }
@@ -1558,6 +1561,37 @@ input, textarea {
   .tourGrid.tourList .tourGrid_item, .serviceGrid.tourList .tourGrid_item {
     width: 100%;
   }
+}
+.tourGrid.slickBox .serviceGrid_item, .serviceGrid.slickBox .serviceGrid_item {
+  margin-top: 0 !important;
+}
+.tourGrid.slickBox .serviceGrid_item:not(:first-child), .serviceGrid.slickBox .serviceGrid_item:not(:first-child) {
+  margin-left: 1.5rem;
+}
+.tourGrid.slickBox .slick-arrow, .serviceGrid.slickBox .slick-arrow {
+  position: absolute;
+  transform: translateY(-50%);
+  z-index: 99;
+  border: none;
+  border-radius: 50%;
+  text-align: center;
+  background: rgba(244, 208, 63, 0.8);
+  padding: 0.6rem 0.9rem;
+}
+.tourGrid.slickBox .slick-arrow:hover, .serviceGrid.slickBox .slick-arrow:hover {
+  background: rgb(244, 208, 63);
+}
+.tourGrid.slickBox .slick-arrow.slick-prev, .serviceGrid.slickBox .slick-arrow.slick-prev {
+  left: -0.5rem;
+  top: 50%;
+}
+.tourGrid.slickBox .slick-arrow.slick-next, .serviceGrid.slickBox .slick-arrow.slick-next {
+  right: -0.5rem;
+  top: 50%;
+}
+.tourGrid.slickBox .slick-arrow i, .serviceGrid.slickBox .slick-arrow i {
+  margin: 0;
+  vertical-align: middle;
 }
 
 .tourRelated {
@@ -1888,8 +1922,13 @@ input, textarea {
   text-align: center;
   font-family: "SVN-Gilroy Bold", serif;
 }
-.callBookTourMobile h2, .callBookTourMobile h3, .callBookTourMobile h4 {
+.callBookTourMobile > a, .callBookTourMobile > div {
+  display: flex;
   flex: 0 0 160px;
+  margin-left: 1.5rem;
+  justify-content: flex-end;
+}
+.callBookTourMobile > a h2, .callBookTourMobile > a h3, .callBookTourMobile > a h4, .callBookTourMobile > div h2, .callBookTourMobile > div h3, .callBookTourMobile > div h4 {
   font-family: "SVN-Gilroy Bold", serif;
   background: rgb(244, 208, 63);
   color: #333;
@@ -1897,10 +1936,9 @@ input, textarea {
   border-radius: 5px;
   font-size: 1.1rem;
   text-align: center;
-  cursor: pointer;
-  margin: 0 0 0 1.5rem;
+  margin: 0;
 }
-.callBookTourMobile h2:hover, .callBookTourMobile h3:hover, .callBookTourMobile h4:hover {
+.callBookTourMobile > a h2:hover, .callBookTourMobile > a h3:hover, .callBookTourMobile > a h4:hover, .callBookTourMobile > div h2:hover, .callBookTourMobile > div h3:hover, .callBookTourMobile > div h4:hover {
   background: rgb(241, 196, 15);
 }
 .callBookTourMobile i {
@@ -2113,7 +2151,7 @@ input, textarea {
 .dayTourByList_item_title h3, .dayTourByList_item_title h4 {
   font-size: 1.05rem;
   font-weight: 700;
-  margin-bottom: 0;
+  margin-bottom: 0.25rem;
 }
 @media (max-width: 1023px) {
   .dayTourByList_item_title {
@@ -4919,6 +4957,9 @@ blockquote em {
 }
 .islandLocationBox_item:nth-child(n+5) {
   margin-top: 1.5rem;
+}
+.islandLocationBox_item:nth-child(n+17) {
+  display: none;
 }
 .islandLocationBox_item a {
   display: flex;

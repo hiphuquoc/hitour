@@ -262,6 +262,9 @@ input, textarea {
     padding: 0.57rem 1rem;
     outline: none;
     background: #fff !important;
+    &:disabled {
+        background: $bg-03 !important;
+    }
 }
 
 .select2-container--default {
