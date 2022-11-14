@@ -52,48 +52,55 @@
 
 @push('scripts-custom')
     <script type="text/javascript">
-        $('.tourRelated').slick({
-            infinite: false,
-            slidesToShow: 2.5,
-            slidesToScroll: 2,
-            arrows: true,
-            prevArrow: '<button class="slick-arrow slick-prev"><i class="fa-solid fa-angle-left"></i></button>',
-            nextArrow: '<button class="slick-arrow slick-next"><i class="fa-solid fa-angle-right"></i></button>',
-            responsive: [
-                {
-                    breakpoint: 1199,
-                    settings: {
-                        infinite: false,
-                        slidesToShow: 1.7,
-                        slidesToScroll: 1,
-                        arrows: false,
+        $(document).ready(function(){
+            setSlick();
+        })
+        $(window).resize(function(){
+            setSlick();
+        })
+        function setSlick(){
+            $('.tourRelated').slick({
+                infinite: false,
+                slidesToShow: 2.5,
+                slidesToScroll: 2,
+                arrows: true,
+                prevArrow: '<button class="slick-arrow slick-prev"><i class="fa-solid fa-angle-left"></i></button>',
+                nextArrow: '<button class="slick-arrow slick-next"><i class="fa-solid fa-angle-right"></i></button>',
+                responsive: [
+                    {
+                        breakpoint: 1199,
+                        settings: {
+                            infinite: false,
+                            slidesToShow: 1.7,
+                            slidesToScroll: 1,
+                            arrows: true,
+                        }
+                    },
+                    {
+                        breakpoint: 990,
+                        settings: {
+                            infinite: false,
+                            slidesToShow: 2.5,
+                            slidesToScroll: 2,
+                            arrows: true,
+                        }
+                    },
+                    {
+                        breakpoint: 767,
+                        settings: {
+                            infinite: false,
+                            slidesToShow: 1.7,
+                            slidesToScroll: 1,
+                            arrows: true,
+                        }
+                    },
+                    {
+                        breakpoint: 577,
+                        settings: 'unslick'
                     }
-                },
-                {
-                    breakpoint: 990,
-                    settings: {
-                        infinite: false,
-                        slidesToShow: 2.5,
-                        slidesToScroll: 2,
-                        arrows: false,
-                    }
-                },
-                {
-                    breakpoint: 767,
-                    settings: {
-                        infinite: false,
-                        slidesToShow: 1.7,
-                        slidesToScroll: 1,
-                        arrows: false,
-                    }
-                },
-                {
-                    breakpoint: 577,
-                    settings: 'unslick'
-                }
-            ]
-        });
-
+                ]
+            });
+        }
     </script>
 
 @endpush

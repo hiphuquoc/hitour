@@ -1579,6 +1579,15 @@ input:disabled, textarea:disabled {
 .tourGrid.slickBox .serviceGrid_item:not(:first-child), .serviceGrid.slickBox .serviceGrid_item:not(:first-child) {
   margin-left: 1.5rem;
 }
+@media (max-width: 577px) {
+  .tourGrid.slickBox .serviceGrid_item, .serviceGrid.slickBox .serviceGrid_item {
+    margin-left: 0 !important;
+  }
+  .tourGrid.slickBox .serviceGrid_item:not(:first-child), .serviceGrid.slickBox .serviceGrid_item:not(:first-child) {
+    margin-left: 0 !important;
+    margin-top: 1rem !important;
+  }
+}
 .tourGrid.slickBox .slick-arrow, .serviceGrid.slickBox .slick-arrow {
   position: absolute;
   transform: translateY(-50%);
@@ -4790,6 +4799,11 @@ blockquote em {
 @media (max-width: 577px) {
   .blogGridSlick_box_item:not(:first-child) {
     margin-left: 1rem !important;
+  }
+}
+@media (max-width: 419px) {
+  .blogGridSlick_box_item:not(:first-child) {
+    margin-left: 0.25rem !important;
   }
 }
 

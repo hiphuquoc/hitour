@@ -1172,8 +1172,6 @@ $tourGrid_radius : 5px;
                     }
                 }
             }
-            
-            
         }
     }
     &.tourList {
@@ -1220,6 +1218,13 @@ $tourGrid_radius : 5px;
             margin-top: 0 !important;
             &:not(:first-child){
                 margin-left: 1.5rem;
+            }
+            @media(max-width: 577px){
+                margin-left: 0 !important;
+                &:not(:first-child){
+                    margin-left: 0 !important;
+                    margin-top: 1rem !important;
+                }
             }
         }
         .slick-arrow {
@@ -4593,6 +4598,15 @@ $width-single-menu  : 260px;
             &_item {
                 &:not(:first-child){
                     margin-left: 1rem !important;
+                }
+            }
+        }
+    }
+    @media (max-width: 419px){
+        &_box {
+            &_item {
+                &:not(:first-child){
+                    margin-left: 0.25rem !important;
                 }
             }
         }

@@ -35,44 +35,51 @@
 {{-- @endif --}}
 @pushonce('scripts-custom')
     <script type="text/javascript">
-        $('.blogGridSlick_box').slick({
-            infinite: false,
-            slidesToShow: 3.6,
-            slidesToScroll: 3,
-            arrows: true,
-            prevArrow: '<button class="slick-arrow slick-prev"><i class="fa-solid fa-angle-left"></i></button>',
-            nextArrow: '<button class="slick-arrow slick-next"><i class="fa-solid fa-angle-right"></i></button>',
-            responsive: [
-                {
-                    breakpoint: 1023,
-                    settings: {
-                        infinite: false,
-                        slidesToShow: 2.6,
-                        slidesToScroll: 2,
-                        arrows: false,
+        $(document).ready(function(){
+            setSlick();
+        })
+        $(window).resize(function(){
+            setSlick();
+        })
+        function setSlick(){
+            $('.blogGridSlick_box').slick({
+                infinite: false,
+                slidesToShow: 3.6,
+                slidesToScroll: 3,
+                arrows: true,
+                prevArrow: '<button class="slick-arrow slick-prev"><i class="fa-solid fa-angle-left"></i></button>',
+                nextArrow: '<button class="slick-arrow slick-next"><i class="fa-solid fa-angle-right"></i></button>',
+                responsive: [
+                    {
+                        breakpoint: 1023,
+                        settings: {
+                            infinite: false,
+                            slidesToShow: 2.6,
+                            slidesToScroll: 2,
+                            arrows: true,
+                        }
+                    },
+                    {
+                        breakpoint: 767,
+                        settings: {
+                            infinite: false,
+                            slidesToShow: 1.7,
+                            slidesToScroll: 1,
+                            arrows: true,
+                        }
+                    },
+                    {
+                        breakpoint: 419,
+                        settings: {
+                            infinite: false,
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            arrows: true,
+                        }
                     }
-                },
-                {
-                    breakpoint: 767,
-                    settings: {
-                        infinite: false,
-                        slidesToShow: 1.7,
-                        slidesToScroll: 1,
-                        arrows: false,
-                    }
-                },
-                {
-                    breakpoint: 577,
-                    settings: {
-                        infinite: false,
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                        arrows: false,
-                    }
-                }
-            ]
-        });
-
+                ]
+            });
+        }
     </script>
 
 @endpushonce
