@@ -94,7 +94,7 @@
                 <div class="container">
                     <h2 class="sectionBox_title">Tour {{ $item->display_name }} - Danh sách Tour du lịch {{ $item->display_name ?? null }} chất lượng</h2>
                     <p>Tổng hợp các chương trình <strong>Tour {{ $item->display_name ?? null }}</strong> đa dạng, chất lượng hàng đầu được cung cấp và đảm bảo bởi Hitour cùng hệ thống đối tác.</p>
-                    @include('main.tourLocation.filterBox')
+                    {{-- @include('main.tourLocation.filterBox') --}}
                     @php
                         $dataTours              = new \Illuminate\Support\Collection();
                         foreach($item->tourCountries as $tourCountry){
