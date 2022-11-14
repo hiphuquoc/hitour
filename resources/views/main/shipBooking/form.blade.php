@@ -210,10 +210,10 @@
     <!-- button book tour mobile -->
     <div class="show-990">
         <div class="callBookTourMobile">
-            <div class="callBookTourMobile_textNormal" onClick="showHideBox();">
+            <div class="callBookTourMobile_textNormal maxLine_1" onClick="showHideBox();">
                 <i class="fa-solid fa-eye"></i>Tóm tắt booking
             </div>
-            <h2 onclick="submitForm('formBooking');">Xác nhận</h2>
+            <div class="callBookTourMobile_button"><h2 onclick="submitForm('formBooking');">Xác nhận</h2></div>
         </div>
         <!-- Summary mobile -->
         @include('main.shipBooking.summaryMobile')

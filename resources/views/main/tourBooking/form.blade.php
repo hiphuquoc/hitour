@@ -34,15 +34,15 @@
                                         <div class="formBox_full">
                                             <!-- One Row -->
                                             <div class="formBox_full_item">
-                                                <div class="flexBox half">
-                                                    <div class="flexBox_item">
+                                                <div class="formColumnCustom">
+                                                    <div class="formColumnCustom_item">
                                                         <div>
                                                             <label class="form-label inputRequired" for="name">Họ và Tên</label>
                                                             <input type="text" class="form-control" name="name" value="" required>
                                                         </div>
                                                         <div class="messageValidate_error" data-validate="name">{{ config('main.message_validate.not_empty') }}</div>
                                                     </div>
-                                                    <div class="flexBox_item">
+                                                    <div class="formColumnCustom_item">
                                                         <div class="inputWithIcon email">
                                                             <label class="form-label" for="email">Email (nếu có)</label>
                                                             <input type="text" class="form-control" name="email" value="">
@@ -52,15 +52,15 @@
                                             </div>
                                             <!-- One Row -->
                                             <div class="formBox_full_item">
-                                                <div class="flexBox half">
-                                                    <div class="flexBox_item">
+                                                <div class="formColumnCustom">
+                                                    <div class="formColumnCustom_item">
                                                         <div class="inputWithIcon phone">
                                                             <label class="form-label inputRequired" for="phone">Điện thoại</label>
                                                             <input type="text" class="form-control" name="phone" value="" required>
                                                         </div>
                                                         <div class="messageValidate_error" data-validate="phone">{{ config('main.message_validate.not_empty') }}</div>
                                                     </div>
-                                                    <div class="flexBox_item">
+                                                    <div class="formColumnCustom_item">
                                                         <div class="inputWithIcon message">
                                                             <label class="form-label" for="zalo">Zalo (nếu có)</label>
                                                             <input type="text" class="form-control" name="zalo" value="">
@@ -86,8 +86,8 @@
                                             </div>
                                             <!-- One Row -->
                                             <div class="formBox_full_item">
-                                                <div class="flexBox half">
-                                                    <div class="flexBox_item">
+                                                <div class="formColumnCustom">
+                                                    <div class="formColumnCustom_item">
                                                         <div class="inputWithIcon location">
                                                             <label class="form-label" for="tour_location_id">Điểm đến</label>
                                                             <select id="js_loadTourByTourLocation_element" class="select2 form-select select2-hidden-accessible" name="tour_location_id" onChange="loadTourByTourLocation(this, 'js_loadTourByTourLocation_idWrite');">
@@ -116,7 +116,7 @@
                                                         </div>
                                                         <div class="messageValidate_error" data-validate="tour_location_id">{{ config('main.message_validate.not_empty') }}</div>
                                                     </div>
-                                                    <div class="flexBox_item">
+                                                    <div class="formColumnCustom_item">
                                                         <div class="inputWithIcon location">
                                                             <label class="form-label" for="tour_info_id">Chương trình tour</label>
                                                             <select id="js_loadTourByTourLocation_idWrite" class="select2 form-select select2-hidden-accessible" name="tour_info_id" onChange="loadOptionTour();">
@@ -167,6 +167,19 @@
     </div>
     </form>
 @endsection
+@push('bottom')
+    <!-- button book tour mobile -->
+    <div class="show-990">
+        <div class="callBookTourMobile">
+            <div class="callBookTourMobile_textNormal maxLine_1" onClick="showHideBox();">
+                <i class="fa-solid fa-eye"></i>Tóm tắt booking
+            </div>
+            <div class="callBookTourMobile_button"><h2 onclick="submitForm('formBooking');">Xác nhận</h2></div>
+        </div>
+        <!-- Summary mobile -->
+        @include('main.shipBooking.summaryMobile')
+    </div>
+@endpush
 @push('scripts-custom')
     <!-- BEGIN: Page Vendor JS-->
     <script src="{{ asset('sources/admin/app-assets/vendors/js/pickers/pickadate/picker.js') }}"></script>
@@ -310,6 +323,7 @@
                 },
                 success     : function(data){
                     $('#js_loadBookingSummary_idWrite').html(data);
+                    $('#js_loadBookingSummaryMobile_idWrite').html(data);
                 }
             });
         }

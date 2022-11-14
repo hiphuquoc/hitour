@@ -90,6 +90,22 @@
         </div>
     </div>
 @endsection
+@push('bottom')
+    <!-- button book tour mobile -->
+    @if(!empty($item->price_show))
+        <div class="show-990">
+            <div class="callBookTourMobile">
+                <div class="callBookTourMobile_price">
+                    {{ number_format($item->price_show).config('main.unit_currency') }}
+                </div>
+                <a href="tel:0868684868" class="callBookTourMobile_phone">
+                    <div>08 6868 4868</div>
+                </a>
+                {{-- <div class="callBookTourMobile_button"><h2>Đặt Vé này</h2></div> --}}
+            </div>
+        </div>
+    @endif
+@endpush
 @push('scripts-custom')
     <script type="text/javascript">
         buildTocContentMain('js_buildTocContentSidebar_element');

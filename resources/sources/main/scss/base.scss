@@ -44,6 +44,12 @@ h2 {
 
 h3 {
     font-size: 1.2rem;
+    @media(max-width: 1023px){
+        font-size: 1.175rem;
+    }
+    @media(max-width: 577px){
+        font-size: 1.15rem;
+    }
 }
 
 h4 {
@@ -60,6 +66,7 @@ h3, h4, h5, h6 {
 }
 
 h1, h2, h3, h4, h5, h6 {
+    text-align: left;
     line-height: 1.5;
     @media(max-width: 1023px){
         line-height: 1.45;

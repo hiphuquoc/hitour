@@ -88,6 +88,16 @@ h2 {
 h3 {
   font-size: 1.2rem;
 }
+@media (max-width: 1023px) {
+  h3 {
+    font-size: 1.175rem;
+  }
+}
+@media (max-width: 577px) {
+  h3 {
+    font-size: 1.15rem;
+  }
+}
 
 h4 {
   font-size: 1.1rem;
@@ -103,6 +113,7 @@ h3, h4, h5, h6 {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  text-align: left;
   line-height: 1.5;
 }
 @media (max-width: 1023px) {
@@ -1906,27 +1917,39 @@ input:disabled, textarea:disabled {
   display: flex;
   align-items: center;
   border-top: 1px solid #dee2e6;
+  min-height: 55px;
   position: relative;
   z-index: 103;
 }
 .callBookTourMobile_price {
   width: 100%;
-  text-align: center;
+  justify-content: center;
   font-family: "SVN-Gilroy Bold", serif;
   font-size: 1.4rem;
   letter-spacing: 0.5px;
   color: #fd5056;
 }
+.callBookTourMobile_phone {
+  width: 100%;
+  justify-content: center;
+  font-family: "SVN-Gilroy Bold", serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+  color: rgb(0, 123, 255);
+}
 .callBookTourMobile_textNormal {
   width: 100%;
-  text-align: center;
+  justify-content: center;
   font-family: "SVN-Gilroy Bold", serif;
 }
-.callBookTourMobile > a, .callBookTourMobile > div {
-  display: flex;
+.callBookTourMobile_button {
   flex: 0 0 160px;
   margin-left: 1.5rem;
   justify-content: flex-end;
+}
+.callBookTourMobile > a, .callBookTourMobile > div {
+  display: flex;
+  align-items: center;
 }
 .callBookTourMobile > a h2, .callBookTourMobile > a h3, .callBookTourMobile > a h4, .callBookTourMobile > div h2, .callBookTourMobile > div h3, .callBookTourMobile > div h4 {
   font-family: "SVN-Gilroy Bold", serif;
@@ -1937,6 +1960,7 @@ input:disabled, textarea:disabled {
   font-size: 1.1rem;
   text-align: center;
   margin: 0;
+  width: 100%;
 }
 .callBookTourMobile > a h2:hover, .callBookTourMobile > a h3:hover, .callBookTourMobile > a h4:hover, .callBookTourMobile > div h2:hover, .callBookTourMobile > div h3:hover, .callBookTourMobile > div h4:hover {
   background: rgb(241, 196, 15);
@@ -2088,7 +2112,7 @@ input:disabled, textarea:disabled {
     margin-top: 1.25rem;
   }
   .contentTour_item_title h2, .contentTour_item_title h3, .contentShip_item_title h2, .contentShip_item_title h3 {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
 }
 @media (max-width: 577px) {
@@ -2097,7 +2121,7 @@ input:disabled, textarea:disabled {
   }
   .contentTour_item_title h2, .contentTour_item_title h3, .contentShip_item_title h2, .contentShip_item_title h3 {
     margin-bottom: 0.25rem !important;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
   .contentTour_item_title i, .contentShip_item_title i {
     margin-top: 0.35rem;
