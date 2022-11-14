@@ -136,8 +136,8 @@
                         <ul>
                             <li>Đơn hàng của Quý khách đã được gửi thành công. Quý khách vui lòng chờ nhân viên kiểm tra và gửi xác nhận vào Email hoặc Zalo sau.</li>
                             <li>Nếu chưa cung cấp thông tin hành hành khách Quý khách vui lòng chuẩn bị danh sách từng hành khách gồm: Họ tên đầy đủ + Năm sinh + Số một trong những giấy tờ tùy thân sau (Chứng minh nhân dân, Passport hoặc Bằng lái xe).</li>
-                            <li>Sau khi nhân viên gửi xác nhận Quý khách vui lòng chuyển khoản coc5 theo hướng dẫn có trong xác nhận.</li>
-                            <li>Phiếu dịch vụ và Vé dịch vụ (tùy vào chương trình Tour) sẽ được gửi qua Email hoặc Zalo để Quý khách mở tên điện thoại xác nhận với nhân viên trong quá trình đón.</li>
+                            <li>Sau khi nhân viên gửi xác nhận Quý khách vui lòng chuyển khoản cọc theo hướng dẫn có trong xác nhận.</li>
+                            <li>Phiếu dịch vụ và Vé dịch vụ (tùy vào chương trình Tour) sẽ được gửi qua Email hoặc Zalo để Quý khách mở trên điện thoại xác nhận với nhân viên trong quá trình đón.</li>
                         </ul>
                         </div>
                     </div>

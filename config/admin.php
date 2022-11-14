@@ -109,7 +109,9 @@ return [
         'contentAirPartner'         => 'public/contents/airPartners/',
         'contentAir'                => 'public/contents/airs/',
         'contentBlog'               => 'public/contents/blogs/',
-        'contentPage'               => 'public/contents/pages/'
+        'contentPage'               => 'public/contents/pages/',
+        'contentTourContinent'      => 'public/contents/tourContinents/',
+        'contentTourCountry'        => 'public/contents/tourCountries/'
     ],
 
     'alert'     => [

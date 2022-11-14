@@ -56,10 +56,10 @@ class AdminTourCountryController extends Controller {
         $guides             = Guide::all();
         $serviceLocations   = ServiceLocation::all();
         $airLocations       = AirLocation::all();
-        // $content        = null;
-        // if(!empty($item->seo->slug)){
-        //     $content    = Storage::get(config('admin.storage.contentTourCountry').$item->seo->slug.'.blade.php');
-        // }
+        $content        = null;
+        if(!empty($item->seo->slug)){
+            $content    = Storage::get(config('admin.storage.contentTourCountry').$item->seo->slug.'.blade.php');
+        }
         $message            = $request->get('message') ?? null; 
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
@@ -125,7 +125,7 @@ class AdminTourCountryController extends Controller {
                 }
             }
             /* lưu content vào file */
-            // Storage::put(config('admin.storage.contentTourCountry').$request->get('slug').'.blade.php', $request->get('content'));
+            Storage::put(config('admin.storage.contentTourCountry').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
@@ -230,7 +230,7 @@ class AdminTourCountryController extends Controller {
                 }
             }
             /* lưu content vào file */
-            // Storage::put(config('admin.storage.contentTourCountry').$request->get('slug').'.blade.php', $request->get('content'));
+            Storage::put(config('admin.storage.contentTourCountry').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();

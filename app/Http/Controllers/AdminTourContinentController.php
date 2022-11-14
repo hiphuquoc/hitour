@@ -51,10 +51,10 @@ class AdminTourContinentController extends Controller {
         $guides             = Guide::all();
         $serviceLocations   = ServiceLocation::all();
         $airLocations       = AirLocation::all();
-        // $content        = null;
-        // if(!empty($item->seo->slug)){
-        //     $content    = Storage::get(config('admin.storage.contentTourContinent').$item->seo->slug.'.blade.php');
-        // }
+        $content        = null;
+        if(!empty($item->seo->slug)){
+            $content    = Storage::get(config('admin.storage.contentTourContinent').$item->seo->slug.'.blade.php');
+        }
         $message            = $request->get('message') ?? null; 
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
@@ -77,7 +77,7 @@ class AdminTourContinentController extends Controller {
             $insertTourContinent = $this->BuildInsertUpdateModel->buildArrayTableTourContinent($request->all(), $seoId);
             $idTourContinent     = TourContinent::insertItem($insertTourContinent);
             /* lưu content vào file */
-            // Storage::put(config('admin.storage.contentTourContinent').$request->get('slug').'.blade.php', $request->get('content'));
+            Storage::put(config('admin.storage.contentTourContinent').$request->get('slug').'.blade.php', $request->get('content'));
             /* relation tour_continent và guide_info */
             if(!empty($request->get('guide_info_id'))){
                 foreach($request->get('guide_info_id') as $idGuideInfo){
@@ -169,7 +169,7 @@ class AdminTourContinentController extends Controller {
             $updateTourContinent = $this->BuildInsertUpdateModel->buildArrayTableTourContinent($request->all());
             TourContinent::updateItem($idTourContinent, $updateTourContinent);
             /* lưu content vào file */
-            // Storage::put(config('admin.storage.contentTourContinent').$request->get('slug').'.blade.php', $request->get('content'));
+            Storage::put(config('admin.storage.contentTourContinent').$request->get('slug').'.blade.php', $request->get('content'));
             /* relation tour_continent và guide_info */
             RelationTourContinentGuideInfo::select('*')
                 ->where('tour_continent_id', $idTourContinent)

@@ -56,7 +56,7 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="pageAdminWithRightSidebar_main_content_item width100">
+                    <div class="pageAdminWithRightSidebar_main_content_item width100">
                         <div class="card">
                             <div class="card-header border-bottom">
                                 <h4 class="card-title">
@@ -67,7 +67,7 @@
                                 @include('admin.form.formContent')
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                     <div class="pageAdminWithRightSidebar_main_content_item width100">
                         <div class="card">
                             <div class="card-header border-bottom">
