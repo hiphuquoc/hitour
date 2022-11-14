@@ -1,5 +1,11 @@
+@php
+    $flagHaveBlog = false;
+@endphp
 @foreach($infoCategoryChilds as $infoCategory)
     @if(!empty($infoCategory->childs)&&$infoCategory->childs->isNotEmpty())
+        @php
+            $flagHaveBlog = true;
+        @endphp
         <div class="blogListLeftRight">
             <div class="blogListLeftRight_title">
                 <a href="/{{ $infoCategory->seo->slug_full ?? null }}" title="{{ $infoCategory->name ?? $infoCategory->seo->title ?? null }}"><h2>{{ $infoCategory->name ?? $infoCategory->seo->title ?? null }}</h2></a>
@@ -57,3 +63,6 @@
         </div>
     @endif
 @endforeach
+@if($flagHaveBlog==false)
+    <div style="color:rgb(0,123,255);">Hiện chưa có bài viết nào trong chuyên mục này!</div>
+@endif

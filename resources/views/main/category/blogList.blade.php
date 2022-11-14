@@ -28,4 +28,6 @@
         </div>
     @endforeach
 </div>
+@else 
+    <div style="color:rgb(0,123,255);">Hiện chưa có bài viết nào trong chuyên mục này!</div>
 @endif
