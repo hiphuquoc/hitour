@@ -16,4 +16,6 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/.cpanel.yml
+cpanel.yml
 .cpanel.yml
