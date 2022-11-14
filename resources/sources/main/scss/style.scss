@@ -2500,7 +2500,7 @@ blockquote{
             margin-top: 1.2rem;
         }
         &_item {
-            width: 100%;
+            width: 50%;
             &:not(:first-child){
                 margin-left: 1rem;
             }
@@ -2550,6 +2550,7 @@ blockquote{
         .formColumnCustom {
             flex-wrap: wrap;
             &_item {
+                width: 100%;
                 margin-left: 0 !important;
                 &:not(:first-child){
                     margin-top: 0.75rem;

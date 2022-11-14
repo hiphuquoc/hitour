@@ -2758,7 +2758,7 @@ blockquote em {
   margin-top: 1.2rem;
 }
 .bookingForm .formColumnCustom_item {
-  width: 100%;
+  width: 50%;
 }
 .bookingForm .formColumnCustom_item:not(:first-child) {
   margin-left: 1rem;
@@ -2800,6 +2800,7 @@ blockquote em {
     flex-wrap: wrap;
   }
   .bookingForm .formColumnCustom_item {
+    width: 100%;
     margin-left: 0 !important;
   }
   .bookingForm .formColumnCustom_item:not(:first-child) {
