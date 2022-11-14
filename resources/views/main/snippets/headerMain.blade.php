@@ -146,7 +146,7 @@
                 </li>
                 <li>
                     <div>
-                        <div>Vé giải trí</div>
+                        <div>Vé vui chơi</div>
                     </div>
                     <div class="normalMenu">
                         <ul>
@@ -381,7 +381,7 @@
                 <li>
                     <div>
                         <i class="fa-solid fa-star"></i>
-                        <div>Vui chơi giải trí</div>
+                        <div>Vé vui chơi</div>
                     </div>
                     @if(!empty($dataService)&&$dataService->isNotEmpty())
                         <span class="right-icon" onclick="javascript:showHideListMenuMobile(this);"><i class="fas fa-chevron-right"></i></span>
