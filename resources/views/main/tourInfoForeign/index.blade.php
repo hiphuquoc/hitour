@@ -69,7 +69,10 @@
                         @include('main.tour.detailTour', compact('item'))
 
                         <div class="js_scrollFixed">
-                            @include('main.tour.callBookTour', compact('item'))
+                            @include('main.template.callbook', [
+                                'flagButton'    => true,
+                                'button'        => 'Đặt Tour'
+                            ])
 
                             @include('main.tour.tocContentTour', compact('item'))
                         </div>

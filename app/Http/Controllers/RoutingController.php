@@ -27,8 +27,8 @@ use App\Models\TourInfoForeign;
 
 class RoutingController extends Controller {
 
-    public function routing($slug, $slug2 = null, $slug3 = null, $slug4 = null, $slug5 = null){
-        $tmpSlug        = [$slug, $slug2, $slug3, $slug4, $slug5];
+    public function routing($slug, $slug2 = null, $slug3 = null, $slug4 = null, $slug5 = null, $slug6 = null, $slug7 = null, $slug8 = null, $slug9 = null, $slug10 = null){
+        $tmpSlug        = [$slug, $slug2, $slug3, $slug4, $slug5, $slug6, $slug7, $slug8, $slug9, $slug10];
         /* loại bỏ phần tử rỗng */
         $arraySlug      = [];
         foreach($tmpSlug as $slug) if(!empty($slug)&&$slug!='public') $arraySlug[] = $slug;
@@ -41,8 +41,18 @@ class RoutingController extends Controller {
         /* check url có tồn tại? => lấy thông tin */
         $checkExists    = Url::checkUrlExists($arraySlug);
         if(!empty($checkExists['type'])){
-            switch($checkExists['type']){
-                case 'tour_location': /* Tour Location */
+            $flagMatch              = false;
+            /* cache HTML */
+            $nameCache              = self::buildNameCache($checkExists['slug_full']).'.'.config('main.cache.extension');
+            $pathCache              = Storage::path(config('main.cache.folderSave')).$nameCache;
+            $cacheTime    	        = 1800;
+            if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
+                $xhtml = file_get_contents($pathCache);
+                echo $xhtml;
+            }else {
+                /* ===== TOUR LOCATION */
+                if($checkExists['type']=='tour_location'){
+                    $flagMatch          = true;
                     $item               = TourLocation::select('*')
                                             ->whereHas('seo', function($q) use ($checkExists){
                                                 $q->where('slug', $checkExists['slug']);
@@ -78,20 +88,23 @@ class RoutingController extends Controller {
                                             ->get();                    
                     $content            = Blade::render(Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                    return view('main.tourLocation.index', compact('item', 'breadcrumb', 'destinationList', 'specialList', 'content'));
-                case 'tour_info': /* Tour Info */
-                    $item               = Tour::select('*')
-                                            ->whereHas('seo', function($q) use ($checkExists){
-                                                $q->where('slug', $checkExists['slug']);
-                                            })
-                                            ->with(['files' => function($query){
-                                                $query->where('relation_table', 'tour_info');
-                                            }])
-                                            ->with(['questions' => function($q){
-                                                $q->where('relation_table', 'tour_info');
-                                            }])
-                                            ->with('seo', 'locations', 'staffs.infoStaff', 'options.prices', 'departure', 'content', 'timetables')
-                                            ->first();
+                    $xhtml              = view('main.tourLocation.index', compact('item', 'breadcrumb', 'destinationList', 'specialList', 'content'))->render();
+                }
+                /* ===== TOUR INFO */
+                if($checkExists['type']=='tour_info'){
+                    $flagMatch              = true;
+                    $item                   = Tour::select('*')
+                                                ->whereHas('seo', function($q) use ($checkExists){
+                                                    $q->where('slug', $checkExists['slug']);
+                                                })
+                                                ->with(['files' => function($query){
+                                                    $query->where('relation_table', 'tour_info');
+                                                }])
+                                                ->with(['questions' => function($q){
+                                                    $q->where('relation_table', 'tour_info');
+                                                }])
+                                                ->with('seo', 'locations', 'staffs.infoStaff', 'options.prices', 'departure', 'content', 'timetables')
+                                                ->first();
                     $idTour                 = $item->id ?? 0;
                     $arrayIdTourLocation    = [];
                     foreach($item->locations as $location) $arrayIdTourLocation[]  = $location->infoLocation->id;
@@ -103,26 +116,32 @@ class RoutingController extends Controller {
                                                 })
                                                 ->with('seo')
                                                 ->get();
-                    $content            = Blade::render(Storage::get(config('admin.storage.contentTour').$item->seo->slug.'.blade.php'));
-                    $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                    return view('main.tour.index', compact('item', 'breadcrumb', 'content', 'related'));
-                case 'ship_location': /* Ship Location */
-                    $item               = ShipLocation::select('*')
-                                            ->whereHas('seo', function($query) use($checkExists){
-                                                $query->where('slug', $checkExists['slug']);
-                                            })
-                                            ->with(['files' => function($query){
-                                                $query->where('relation_table', 'ship_location');
-                                            }])
-                                            ->with(['questions' => function($q){
-                                                $q->where('relation_table', 'ship_location');
-                                            }])
-                                            ->with('seo', 'district', 'ships', 'tourLocations')
-                                            ->first();
-                    $content            = Blade::render(Storage::get(config('admin.storage.contentShipLocation').$item->seo->slug.'.blade.php'));
-                    $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                    return view('main.shipLocation.index', compact('item', 'content', 'breadcrumb'));
-                case 'ship_partner': /* Ship Partner */
+                    $content                = Blade::render(Storage::get(config('admin.storage.contentTour').$item->seo->slug.'.blade.php'));
+                    $breadcrumb             = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
+                    $xhtml                  = view('main.tour.index', compact('item', 'breadcrumb', 'content', 'related'))->render();
+                }
+                /* ===== SHIP LOCATION */
+                if($checkExists['type']=='ship_location'){
+                    $flagMatch              = true;
+                    $item                   = ShipLocation::select('*')
+                                                ->whereHas('seo', function($query) use($checkExists){
+                                                    $query->where('slug', $checkExists['slug']);
+                                                })
+                                                ->with(['files' => function($query){
+                                                    $query->where('relation_table', 'ship_location');
+                                                }])
+                                                ->with(['questions' => function($q){
+                                                    $q->where('relation_table', 'ship_location');
+                                                }])
+                                                ->with('seo', 'district', 'ships', 'tourLocations')
+                                                ->first();
+                    $content                = Blade::render(Storage::get(config('admin.storage.contentShipLocation').$item->seo->slug.'.blade.php'));
+                    $breadcrumb             = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
+                    $xhtml                  = view('main.shipLocation.index', compact('item', 'content', 'breadcrumb'))->render();
+                }
+                /* ===== SHIP PARTNER */
+                if($checkExists['type']=='ship_partner'){
+                    $flagMatch          = true;
                     $item               = ShipPartner::select('*')
                                             ->whereHas('seo', function($query) use($checkExists){
                                                 $query->where('slug', $checkExists['slug']);
@@ -134,8 +153,11 @@ class RoutingController extends Controller {
                                             ->first();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentShipPartner').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                    return view('main.shipPartner.index', compact('item', 'content', 'breadcrumb'));
-                case 'ship_info': /* Ship Info */
+                    $xhtml              = view('main.shipPartner.index', compact('item', 'content', 'breadcrumb'))->render();
+                }
+                /* ===== SHIP INFO */
+                if($checkExists['type']=='ship_info'){
+                    $flagMatch          = true;
                     $item               = Ship::select('*')
                                             ->whereHas('seo', function($query) use($checkExists){
                                                 $query->where('slug', $checkExists['slug']);
@@ -150,8 +172,11 @@ class RoutingController extends Controller {
                                             ->first();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentShip').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                    return view('main.ship.index', compact('item', 'content', 'breadcrumb'));
-                case 'guide_info': /* Guide Info */
+                    $xhtml              = view('main.ship.index', compact('item', 'content', 'breadcrumb'))->render();
+                }
+                /* ===== GUIDE INFO */
+                if($checkExists['type']=='guide_info'){
+                    $flagMatch          = true;
                     $item               = Guide::select('*')
                                             ->whereHas('seo', function($query) use($checkExists){
                                                 $query->where('slug', $checkExists['slug']);
@@ -163,8 +188,11 @@ class RoutingController extends Controller {
                                             ->first();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentGuide').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                    return view('main.guide.index', compact('item', 'content', 'breadcrumb'));
-                case 'service_info': /* Service Info */
+                    $xhtml              = view('main.guide.index', compact('item', 'content', 'breadcrumb'))->render();
+                }
+                /* ===== SERVICE INFO */
+                if($checkExists['type']=='service_info'){
+                    $flagMatch          = true;
                     $item               = Service::select('*')
                                             ->whereHas('seo', function($query) use($checkExists){
                                                 $query->where('slug', $checkExists['slug']);
@@ -179,8 +207,11 @@ class RoutingController extends Controller {
                                             ->first();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentService').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                    return view('main.service.index', compact('item', 'content', 'breadcrumb'));
-                case 'service_location': /* Service Location */
+                    $xhtml              = view('main.service.index', compact('item', 'content', 'breadcrumb'))->render();
+                }
+                /* ===== SERVICE LOCATION */
+                if($checkExists['type']=='service_location'){
+                    $flagMatch          = true;
                     $item               = ServiceLocation::select('*')
                                             ->whereHas('seo', function($query) use($checkExists){
                                                 $query->where('slug', $checkExists['slug']);
@@ -195,8 +226,11 @@ class RoutingController extends Controller {
                                             ->first();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentServiceLocation').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                    return view('main.serviceLocation.index', compact('item', 'content', 'breadcrumb'));
-                case 'carrental_location': /* Carrental Location */
+                    $xhtml              = view('main.serviceLocation.index', compact('item', 'content', 'breadcrumb'))->render();
+                }
+                /* ===== CARRENTAL LOCATION */
+                if($checkExists['type']=='carrental_location'){
+                    $flagMatch          = true;
                     $item               = CarrentalLocation::select('*')
                                             ->whereHas('seo', function($query) use($checkExists){
                                                 $query->where('slug', $checkExists['slug']);
@@ -211,8 +245,11 @@ class RoutingController extends Controller {
                                             ->first();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentCarrentalLocation').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                    return view('main.carrentalLocation.index', compact('item', 'breadcrumb', 'content'));
-                case 'air_location': /* Air Location */
+                    $xhtml              = view('main.carrentalLocation.index', compact('item', 'breadcrumb', 'content'))->render();
+                }
+                /* ===== AIR LOCATION */
+                if($checkExists['type']=='air_location'){
+                    $flagMatch          = true;
                     $item               = AirLocation::select('*')
                                             ->whereHas('seo', function($query) use($checkExists){
                                                 $query->where('slug', $checkExists['slug']);
@@ -227,8 +264,11 @@ class RoutingController extends Controller {
                                             ->first();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentAirLocation').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                    return view('main.airLocation.index', compact('item', 'breadcrumb', 'content'));
-                case 'air_info': /* Air Info */
+                    $xhtml              = view('main.airLocation.index', compact('item', 'breadcrumb', 'content'))->render();
+                }
+                /* ===== AIR INFO */
+                if($checkExists['type']=='air_info'){
+                    $flagMatch          = true;
                     $item               = Air::select('*')
                                             ->whereHas('seo', function($query) use($checkExists){
                                                 $query->where('slug', $checkExists['slug']);
@@ -243,8 +283,11 @@ class RoutingController extends Controller {
                                             ->first();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentAir').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                    return view('main.air.index', compact('item', 'breadcrumb', 'content'));
-                case 'tour_continent':
+                    $xhtml              = view('main.air.index', compact('item', 'breadcrumb', 'content'))->render();
+                }
+                /* ===== TOUR CONTINENT */
+                if($checkExists['type']=='tour_continent'){
+                    $flagMatch          = true;
                     $item               = TourContinent::select('*')
                                             ->whereHas('seo', function($q) use ($checkExists){
                                                 $q->where('slug', $checkExists['slug']);
@@ -259,8 +302,11 @@ class RoutingController extends Controller {
                                             ->first();
                     // $content            = Blade::render(Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                    return view('main.tourContinent.index', compact('item', 'breadcrumb'));
-                case 'tour_country':
+                    $xhtml              = view('main.tourContinent.index', compact('item', 'breadcrumb'))->render();
+                }
+                /* ===== TOUR COUNTRY */
+                if($checkExists['type']=='tour_country'){
+                    $flagMatch          = true;
                     $item               = TourCountry::select('*')
                                             ->whereHas('seo', function($q) use ($checkExists){
                                                 $q->where('slug', $checkExists['slug']);
@@ -275,8 +321,11 @@ class RoutingController extends Controller {
                                             ->first();
                     // $content            = Blade::render(Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                    return view('main.tourCountry.index', compact('item', 'breadcrumb'));
-                case 'tour_info_foreign':
+                    $xhtml              = view('main.tourCountry.index', compact('item', 'breadcrumb'))->render();
+                }
+                /* ===== TOUR INFO FOREIGN */
+                if($checkExists['type']=='tour_info_foreign'){
+                    $flagMatch          = true;
                     $item               = TourInfoForeign::select('*')
                                             ->whereHas('seo', function($q) use ($checkExists){
                                                 $q->where('slug', $checkExists['slug']);
@@ -301,8 +350,11 @@ class RoutingController extends Controller {
                                                 ->get();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentTour').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                    return view('main.tourInfoForeign.index', compact('item', 'breadcrumb', 'content', 'related'));
-                case 'category_info':
+                    $xhtml              = view('main.tourInfoForeign.index', compact('item', 'breadcrumb', 'content', 'related'))->render();
+                }
+                /* ===== TOUR CATEGORY INFO */
+                if($checkExists['type']=='category_info'){
+                    $flagMatch          = true;
                     $item               = Category::select('*')
                                             ->whereHas('seo', function($q) use ($checkExists){
                                                 $q->where('slug', $checkExists['slug']);
@@ -346,7 +398,7 @@ class RoutingController extends Controller {
                                                             ->with('seo')
                                                             ->get();
                         }
-                        return view('main.category.indexParent', compact('item', 'breadcrumb', 'infoCategoryChilds', 'list', 'listCategoryLv1'));
+                        $xhtml          = view('main.category.indexParent', compact('item', 'breadcrumb', 'infoCategoryChilds', 'list', 'listCategoryLv1'))->render();
                     }else { /* trường hợp category là cấp cuối */
                         /* lấy danh sách blog bằng array id category */
                         $blogs              = Blog::select('*')
@@ -355,9 +407,12 @@ class RoutingController extends Controller {
                         })
                         ->with('seo')
                         ->get();
-                        return view('main.category.index', compact('item', 'breadcrumb', 'blogs', 'list', 'listCategoryLv1'));
+                        $xhtml          = view('main.category.index', compact('item', 'breadcrumb', 'blogs', 'list', 'listCategoryLv1'))->render();
                     }
-                case 'blog_info':
+                }
+                /* ===== TOUR BLOG INFO */
+                if($checkExists['type']=='blog_info'){
+                    $flagMatch          = true;
                     $item               = Blog::select('*')
                                             ->whereHas('seo', function($q) use ($checkExists){
                                                 $q->where('slug', $checkExists['slug']);
@@ -389,32 +444,50 @@ class RoutingController extends Controller {
                                             ->get();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentBlog').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                    return view('main.blog.index', compact('item', 'breadcrumb', 'parent', 'blogRelates', 'categoryRelates', 'content'));
-                case 'page_info':
-                        $item           = Page::select('*')
+                    $xhtml              = view('main.blog.index', compact('item', 'breadcrumb', 'parent', 'blogRelates', 'categoryRelates', 'content'))->render();
+                }
+                /* ===== TOUR PAGE INFO */
+                if($checkExists['type']=='page_info'){
+                    $flagMatch          = true;
+                    $item               = Page::select('*')
                                             ->whereHas('seo', function($q) use ($checkExists){
                                                 $q->where('slug', $checkExists['slug']);
                                             })
                                             ->with('seo')
                                             ->first();
-                        $content        = Blade::render(Storage::get(config('admin.storage.contentPage').$item->seo->slug.'.blade.php'));
-                        $breadcrumb     = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                        $shipPartners   = ShipPartner::select('*')
+                    $content            = Blade::render(Storage::get(config('admin.storage.contentPage').$item->seo->slug.'.blade.php'));
+                    $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
+                    $shipPartners       = ShipPartner::select('*')
                                             ->with('seo')
                                             ->get();
-                        $airPartners    = AirPartner::select('*')
+                    $airPartners        = AirPartner::select('*')
                                             ->with('seo')
                                             ->get();
-                        return view('main.page.index', compact('item', 'breadcrumb', 'shipPartners', 'airPartners', 'content'));
-                default:
-                    return Redirect::to('/', 301);
+                    $xhtml              = view('main.page.index', compact('item', 'breadcrumb', 'shipPartners', 'airPartners', 'content'))->render();
+                }
+                /* Ghi dữ liệu - Xuất kết quả */
+                if($flagMatch==true){
+                    echo $xhtml;
+                    // Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
+                }else {
+                    return \App\Http\Controllers\ErrorController::error404();
+                }
             }
         }else {
-            /* Error 404 */
-            // return view('main.error.404');
-            // return view('main.blog.detail');
-
             return \App\Http\Controllers\ErrorController::error404();
         }
+    }
+
+    public static function buildNameCache($slugFull){
+        $result     = null;
+        if(!empty($slugFull)){
+            $tmp    = explode('/', $slugFull);
+            $result = [];
+            foreach($tmp as $t){
+                if(!empty($t)) $result[] = $t;
+            }
+            $result = implode('-', $result);
+        }
+        return $result;
     }
 }

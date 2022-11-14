@@ -58,21 +58,40 @@ class CheckSeo implements ShouldQueue {
                     $error[]    = 'Đường dẫn không có Anchor Text';
                     $errorType  = 2;
                 }
-                /* kiểm tra lỗi 404 :: cấp 1 */
+                /* kiểm tra lỗi 404 :: cấp 1 (kiểm tra URL trong database) */
                 if(substr($link['href'], 0, 4)=='http'){ /* đường dẫn tuyệt dối */
-                    $fullurl    = $link['href'];
+                    $urlSort    = str_replace(env('APP_URL'), '', $link['href']);
                 }else if(substr($link['href'], 0, 1)=='/'){ /* đường dẫn tương đối đúng */
-                    $fullurl    = env('APP_URL').$link['href'];
+                    $urlSort    = $link['href'];
                 }else { /* đường dẫn tương đối sai (không có / trước) */
-                    $fullurl    = env('APP_URL').'/'.$link['href'];
+                    $urlSort    = '/'.$link['href'];
                     $error[]    = 'Đường dẫn tương đối thiếu dấu / phía trước';
                     $errorType  = 3;
                 }
-                $res            = \App\Helpers\RestFull::execute($fullurl, 'GET');
-                if(!empty($res['response'])&&$res['response']->status=='404'){
+                $check404       = \App\Models\Seo::select('*')
+                                    ->where('slug_full', substr($urlSort, 1))
+                                    ->first();
+                if(!empty($check404)){
                     $error[]    = 'Đường dẫn đến trang 404';
                     $errorType  = 3;
                 }
+
+                // /* kiểm tra lỗi 404 :: cấp 1 (kiểm tra URL bằng response) */
+                // if(substr($link['href'], 0, 4)=='http'){ /* đường dẫn tuyệt dối */
+                //     $fullurl    = $link['href'];
+                // }else if(substr($link['href'], 0, 1)=='/'){ /* đường dẫn tương đối đúng */
+                //     $fullurl    = env('APP_URL').$link['href'];
+                // }else { /* đường dẫn tương đối sai (không có / trước) */
+                //     $fullurl    = env('APP_URL').'/'.$link['href'];
+                //     $error[]    = 'Đường dẫn tương đối thiếu dấu / phía trước';
+                //     $errorType  = 3;
+                // }
+                // $res            = \App\Helpers\RestFull::execute($fullurl, 'GET');
+                // if(!empty($res['response'])&&$res['response']->status=='404'){
+                //     $error[]    = 'Đường dẫn đến trang 404';
+                //     $errorType  = 3;
+                // }
+
                 /* insert */
                 CheckSeoModel::insertItem([
                     'seo_id'        => $this->idSeo,

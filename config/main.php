@@ -15,5 +15,9 @@ return [
     ],
     'title_list_service_sidebar'        => 'Có thể bạn cần?',
     /* Background hỗ trợ loading */
-    'background_slider_home'            => '/images/main/background-slider-home.jpg'
+    'background_slider_home'            => '/images/main/background-slider-home.jpg',
+    'cache'     => [
+        'folderSave'    => 'public/caches/',
+        'extension'     => 'html',
+    ]
 ];
