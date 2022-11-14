@@ -94,7 +94,7 @@
                         $dataTours              = new \Illuminate\Support\Collection();
                         foreach($item->tours as $tour) if(!empty($tour->infoTourForeign)) $dataTours[] = $tour->infoTourForeign;
                     @endphp
-                    @if(!empty($item->tours)&&$item->tours->isNotEmpty())
+                    @if(!empty($dataTours)&&$dataTours->isNotEmpty())
                         @include('main.tourLocation.tourGrid', ['list' => $dataTours])
                     @else 
                         <div style="color:rgb(0,123,255);">Các chương trình <strong>Tour {{ $item->display_name ?? null }}</strong> đang được Hitour cập nhật và sẽ sớm giới thiệu đến Quý khách trong thời gian tới!</div>
