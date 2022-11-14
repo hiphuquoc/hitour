@@ -300,9 +300,9 @@ class RoutingController extends Controller {
                                             }])
                                             ->with('seo', 'tourCountries', 'airLocations', 'serviceLocations', 'guides.infoGuide.seo')
                                             ->first();
-                    // $content            = Blade::render(Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php'));
+                    $content            = Blade::render(Storage::get(config('admin.storage.contentTourContinent').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                    $xhtml              = view('main.tourContinent.index', compact('item', 'breadcrumb'))->render();
+                    $xhtml              = view('main.tourContinent.index', compact('item', 'breadcrumb', 'content'))->render();
                 }
                 /* ===== TOUR COUNTRY */
                 if($checkExists['type']=='tour_country'){
@@ -319,9 +319,9 @@ class RoutingController extends Controller {
                                             }])
                                             ->with('seo', 'tours', 'airLocations', 'serviceLocations', 'guides')
                                             ->first();
-                    // $content            = Blade::render(Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php'));
+                    $content            = Blade::render(Storage::get(config('admin.storage.contentTourCountry').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = !empty($checkExists['data']) ? Url::buildFullLinkArray($checkExists['data']) : null;
-                    $xhtml              = view('main.tourCountry.index', compact('item', 'breadcrumb'))->render();
+                    $xhtml              = view('main.tourCountry.index', compact('item', 'breadcrumb', 'content'))->render();
                 }
                 /* ===== TOUR INFO FOREIGN */
                 if($checkExists['type']=='tour_info_foreign'){

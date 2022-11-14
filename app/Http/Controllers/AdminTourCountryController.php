@@ -63,7 +63,7 @@ class AdminTourCountryController extends Controller {
         $message            = $request->get('message') ?? null; 
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.tourCountry.view', compact('item', 'type', 'parents', 'tourContinents', 'guides', 'serviceLocations', 'airLocations', 'message'));
+        return view('admin.tourCountry.view', compact('item', 'type', 'parents', 'tourContinents', 'guides', 'serviceLocations', 'airLocations', 'content', 'message'));
     }
 
     public function create(TourCountryRequest $request){
