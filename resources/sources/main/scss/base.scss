@@ -273,6 +273,11 @@ input, textarea {
         background: $bg-03 !important;
     }
 }
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
 
 .select2-container--default {
     .select2-selection--single {

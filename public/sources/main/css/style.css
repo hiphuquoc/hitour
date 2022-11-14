@@ -340,6 +340,12 @@ input:disabled, textarea:disabled {
   background: #e9ecef !important;
 }
 
+input[type=date]::-webkit-inner-spin-button,
+input[type=date]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
 .select2-container--default .select2-selection--single {
   border: 1px solid #ced4da !important;
   border-radius: 5px !important;
@@ -3987,7 +3993,7 @@ blockquote em {
   top: 0;
   left: 0;
   background: #fff;
-  z-index: 105;
+  z-index: 1001;
   display: none;
   width: 100%;
   height: 100%;
@@ -4046,11 +4052,13 @@ blockquote em {
   margin: 0 auto;
   background: #fff;
   justify-content: center;
+  align-items: center;
   padding: 0.35rem;
   border-top: 1px solid #dee2e6;
 }
 .guideBookBoxMobile_box_content .slick-dots li {
   list-style-type: none;
+  margin-top: auto;
 }
 .guideBookBoxMobile_box_content .slick-dots li button {
   background: none;

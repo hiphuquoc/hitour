@@ -1,13 +1,7 @@
 @php
-    $arrayImage = [
-        '/storage/images/upload/guide_book_tour_1-type-manager-upload.webp',
-        '/storage/images/upload/guide_book_tour_2-type-manager-upload.webp',
-        '/storage/images/upload/guide_book_tour_1-type-manager-upload.webp',
-        '/storage/images/upload/guide_book_tour_2-type-manager-upload.webp'
-    ];
     $arrayData  = [
         0 => [
-            'img'       => '/storage/images/upload/guide_book_tour_1-type-manager-upload.webp',
+            'img'       => '/storage/images/upload/huong-dan-dat-tour-1-type-manager-upload.webp',
             'title'     => 'Chọn các thông tin quan trọng của Tour',
             'content'   => '<ul>
                                 <li>Chọn Điểm đến và Tour Quý khách muốn đặt</li>
@@ -17,7 +11,7 @@
                             </ul>'
         ],
         1 => [
-            'img'       => '/storage/images/upload/guide_book_tour_2-type-manager-upload.webp',
+            'img'       => '/storage/images/upload/huong-dan-dat-tour-2-type-manager-upload.webp',
             'title'     => 'Vui lòng chờ hệ thống tìm kiếm Tour',
             'content'   => '<ul>
                                 <li>Hệ thống chuyển hướng Quý khách sang trang đặt Tour chi tiết</li>
@@ -27,7 +21,7 @@
                             </ul>'
         ],
         2 => [
-            'img'       => '/storage/images/upload/guide_book_tour_1-type-manager-upload.webp',
+            'img'       => '/storage/images/upload/huong-dan-dat-tour-3-type-manager-upload.webp',
             'title'     => 'Thanh toán và hoàn tất',
             'content'   => '<ul>
                                 <li>Nhân viên Hitour sẽ liên hệ lại và gửi xác nhận chi tiết</li>
@@ -37,7 +31,7 @@
                             </ul>'
         ],
         3 => [
-            'img'       => '/storage/images/upload/guide_book_tour_2-type-manager-upload.webp',
+            'img'       => '/storage/images/upload/huong-dan-dat-tour-4-type-manager-upload.webp',
             'title'     => 'Sử dụng dịch vụ Tour',
             'content'   => '<ul>
                                 <li>Trước ngày khởi hành Nhân viên sẽ liên hệ Quý khách để dặn dò chi tiết</li>
@@ -99,8 +93,8 @@
             <h2 class="sectionBox_title">{{ $title ?? null }}</h2>
             <div class="guideBookBoxMobile">
                 <div class="guideBookBoxMobile_image">
-                    @foreach($arrayImage as $image)
-                        <img src="{{ $image }}" alt="{{ $title ?? null }}" title="{{ $title ?? null }}" />
+                    @foreach($arrayData as $image)
+                        <img src="{{ $image['img'] }}" alt="{{ $title ?? null }}" title="{{ $title ?? null }}" />
                         @php
                             if($loop->index==2) break;
                         @endphp
