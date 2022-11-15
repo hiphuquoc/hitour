@@ -21,34 +21,44 @@ use Illuminate\Support\Facades\Storage;
 class HomeController extends Controller {
 
     public function home(){
-        $item               = Seo::select('*')
-                                ->where('slug', '')
-                                ->first();
-        $shipLocations      = ShipLocation::select('*')
-                                ->with('seo')
-                                ->get();
-        $airLocations       = AirLocation::select('*')
-                                ->with('seo')
-                                ->get();
-        $serviceLocations   = ServiceLocation::select('*')
-                                ->where('district_id', '!=', '0') /* vé giải trí trong nước */
-                                ->with('seo', 'services')
-                                ->get();
-        $islandLocations    = TourLocation::select('*')
-                                ->where('island', '1')
-                                ->with('seo')
-                                ->get();
-        $specialLocations   = TourLocation::select('*')
-                                ->where('special', '1')
-                                ->with('seo')
-                                ->get();
-        $shipPartners       = ShipPartner::select('*')
-                                ->with('seo')
-                                ->get();
-        $airPartners        = AirPartner::select('*')
-                                ->with('seo')
-                                ->get();
-        return view('main.home.home', compact('item', 'shipLocations', 'airLocations', 'serviceLocations', 'islandLocations', 'specialLocations', 'shipPartners', 'airPartners'));
+        /* cache HTML */
+        $nameCache              = 'home.'.config('main.cache.extension');
+        $pathCache              = Storage::path(config('main.cache.folderSave')).$nameCache;
+        $cacheTime    	        = 1800;
+        if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
+            $xhtml = file_get_contents($pathCache);
+        }else {
+            $item               = Seo::select('*')
+                                    ->where('slug', '')
+                                    ->first();
+            $shipLocations      = ShipLocation::select('*')
+                                    ->with('seo')
+                                    ->get();
+            $airLocations       = AirLocation::select('*')
+                                    ->with('seo')
+                                    ->get();
+            $serviceLocations   = ServiceLocation::select('*')
+                                    ->where('district_id', '!=', '0') /* vé giải trí trong nước */
+                                    ->with('seo', 'services')
+                                    ->get();
+            $islandLocations    = TourLocation::select('*')
+                                    ->where('island', '1')
+                                    ->with('seo')
+                                    ->get();
+            $specialLocations   = TourLocation::select('*')
+                                    ->where('special', '1')
+                                    ->with('seo')
+                                    ->get();
+            $shipPartners       = ShipPartner::select('*')
+                                    ->with('seo')
+                                    ->get();
+            $airPartners        = AirPartner::select('*')
+                                    ->with('seo')
+                                    ->get();
+            $xhtml  = view('main.home.home', compact('item', 'shipLocations', 'airLocations', 'serviceLocations', 'islandLocations', 'specialLocations', 'shipPartners', 'airPartners'))->render();
+            Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
+        }
+        echo $xhtml;
     }
 
     /* ===== Tính năng thay tất cả các ảnh hỗ trợ Loading ===== */
