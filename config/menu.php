@@ -225,6 +225,11 @@ return [
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ]
             ]
+        ],
+        [
+            'name'      => 'Xóa Cache',
+            'route'     => 'admin.cache.clearCache',
+            'icon'      => '<i class="fa-sharp fa-solid fa-xmark"></i>'
         ]
     ]
 ];

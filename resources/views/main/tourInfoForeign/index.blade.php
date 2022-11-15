@@ -68,7 +68,9 @@
 
                         @include('main.tour.detailTour', compact('item'))
 
-                        <div class="js_scrollFixed">
+                        @include('main.tour.price', compact('item'))
+
+                        <div class="js_scrollFixed" style="margin-top:0;">
                             @include('main.template.callbook', [
                                 'flagButton'    => true,
                                 'button'        => 'Đặt Tour'

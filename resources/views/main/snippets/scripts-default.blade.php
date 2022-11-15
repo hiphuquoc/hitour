@@ -208,4 +208,77 @@
 
             // .wrap('<div class="tableResponsive"></div>')
         }
+
+    /* ===== START:: MENU */
+    $(window).on('load', function () {
+        /* fixed headerMobile khi scroll */
+        const elemt                 = $('.header');
+        const positionTopElemt      = elemt.offset().top;
+        $(window).scroll(function(){
+            const positionScrollbar = $(window).scrollTop();
+            // const scrollHeight      = $('body').prop('scrollHeight');
+            // const heightLimit       = parseInt(scrollHeight - heightFooter - elemt.outerHeight());
+            if(positionScrollbar>parseInt(positionTopElemt+50)){
+                elemt.css({
+                    'top'       : '0',
+                    'position'  : 'fixed',
+                    'left'      : 0
+                });
+            }else {
+                elemt.css({
+                    'top'       : '0',
+                    'position'  : 'relative',
+                    'left'      : 0
+                });
+            }
+        });
+    });
+    function showHideListMenuMobile(thisD){
+        let elemtC      = $(thisD).parent().find('ul');
+        let displayC    = elemtC.css('display');
+        if(displayC=='none'){
+            elemtC.css('display', 'block');
+            $(thisD).html('<i class="fas fa-chevron-down"></i>');
+        }else {
+            elemtC.css('display', 'none');
+            $(thisD).html('<i class="fas fa-chevron-right"></i>');
+        }
+    }
+    function openCloseElemt(idElemt){
+        let displayE    = $('#' + idElemt).css('display');
+        if(displayE=='none'){
+            $('#' + idElemt).css('display', 'block');
+            $('body').css('overflow', 'hidden');
+        }else {
+            $('#' + idElemt).css('display', 'none');
+            $('body').css('overflow', 'unset');
+        }
+    }
+    function openMegaMenu(id){
+        var elemt	= $('#'+id);
+        elemt.siblings().removeClass('selected');
+        elemt.addClass('selected');
+        $('[data-menu]').each(function(){
+            var key	= $(this).attr('data-menu');
+            if(key==id){
+            $(this).css('display', 'flex');
+            }else {
+                $(this).css('display', 'none');
+            }
+        });
+    }
+    function openMegaMenuTourContinent(id){
+        var elemt	= $('#'+id);
+        elemt.siblings().removeClass('selected');
+        elemt.addClass('selected');
+        $('[data-menu-tourcontinent]').each(function(){
+            var key	= $(this).attr('data-menu-tourcontinent');
+            if(key==id){
+            $(this).css('display', 'flex');
+            }else {
+                $(this).css('display', 'none');
+            }
+        });
+    }
+    /* ===== END:: MENU */
 </script>

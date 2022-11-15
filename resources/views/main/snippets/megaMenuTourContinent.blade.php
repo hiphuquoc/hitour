@@ -29,7 +29,7 @@
         @endforeach       
     </div>
 </div>
-@push('scripts-custom')
+{{-- @push('scripts-custom') ===== dùng cache nên đoạn script này đặt ở script_default
     <script type="text/javascript">
         function openMegaMenuTourContinent(id){
             var elemt	= $('#'+id);
@@ -45,4 +45,4 @@
             });
         }
     </script>
-@endpush
+@endpush --}}

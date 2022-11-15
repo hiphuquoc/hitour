@@ -46,6 +46,7 @@ use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminBlogController;
 use App\Http\Controllers\AdminPageController;
 use App\Http\Controllers\AdminRedirectController;
+use App\Http\Controllers\AdminCacheController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SitemapController;
@@ -421,6 +422,8 @@ Route::prefix('admin')->group(function(){
         Route::post('/removeSlider', [AdminSliderController::class, 'removeSlider'])->name('admin.slider.removeSlider');
         Route::get('/removeGallery', [AdminGalleryController::class, 'removeGallery'])->name('admin.gallery.removeGallery');
         Route::get('/settingView', [AdminSettingController::class, 'settingView'])->name('admin.setting.settingView');
+        /* ===== CACHE ===== */
+        Route::get('/clearCacheHtml', [AdminCacheController::class, 'clear'])->name('admin.cache.clearCache');
     });
 });
 
