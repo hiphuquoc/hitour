@@ -30,8 +30,8 @@
             slidesToShow: 1,
             slidesToScroll: 1,
             arrows: true,
-            prevArrow: '<button class="slick-arrow slick-prev"><i class="fa-solid fa-angle-left" aria-label="Slide trước"></i></button>',
-            nextArrow: '<button class="slick-arrow slick-next"><i class="fa-solid fa-angle-right" aria-label="Slide tiếp theo"></i></button>',
+            prevArrow: '<button class="slick-arrow slick-prev" aria-label="Slide trước"><i class="fa-solid fa-angle-left"></i></button>',
+                nextArrow: '<button class="slick-arrow slick-next" aria-label="Slide tiếp theo"><i class="fa-solid fa-angle-right"></i></button>',
             dots: false,
             autoplaySpeed: 1000,
             // responsive: [
