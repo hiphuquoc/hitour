@@ -28,7 +28,7 @@
             $(window).scroll(function(){
                 const flagScroll            = $('#js_scrollFixed_flag').val();
                 if(flagScroll!='false'){
-                    const heightFooter      = 500;
+                    const heightFooter      = 700;
                     const positionScrollbar = $(window).scrollTop();
                     const scrollHeight      = $('body').prop('scrollHeight');
                     const heightLimit       = parseInt(scrollHeight - heightFooter - elemt.outerHeight());
