@@ -4,10 +4,10 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
-  <meta name="description" content="Hệ quản trị nội dung ®Hitour">
-  <meta name="keywords" content="Hệ quản trị nội dung ®Hitour">
-  <meta name="author" content="Pham Van Phu">
-  <title>Hệ quản trị nội dung ®Hitour</title>
+  <meta name="description" content="Trang quản trị nội dung ®Hitour">
+  <meta name="keywords" content="Trang quản trị nội dung ®Hitour">
+  <meta name="author" content="Hitour">
+  <title>Trang quản trị nội dung ®Hitour</title>
   
   <!-- BEGIN: Vendor CSS-->
   <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/vendors/css/vendors.min.css') }}">
