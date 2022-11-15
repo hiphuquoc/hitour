@@ -31,8 +31,8 @@
             slidesToShow: 3,
             slidesToScroll: 3,
             arrows: true,
-            prevArrow: '<button class="slick-arrow slick-prev"><i class="fa-solid fa-angle-left"></i></button>',
-            nextArrow: '<button class="slick-arrow slick-next"><i class="fa-solid fa-angle-right"></i></button>',
+            prevArrow: '<button class="slick-arrow slick-prev"><i class="fa-solid fa-angle-left" aria-label="Slide trước"></i></button>',
+            nextArrow: '<button class="slick-arrow slick-next"><i class="fa-solid fa-angle-right" aria-label="Slide tiếp theo"></i></button>',
             responsive: [
                 {
                     breakpoint: 1023,

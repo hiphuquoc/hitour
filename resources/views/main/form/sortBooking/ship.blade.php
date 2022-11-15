@@ -31,7 +31,7 @@
         <div class="inputWithIcon adult">
             <label for="bookFormSort_date">Số hành khách</label>
             <div class="inputWithForm">
-                <input type="text" id="js_setValueQuantityShip_idWrite" class="form-control inputWithForm_input" name="quantity" value="1 Người lớn, 0 Trẻ em, 0 Cao tuổi" readonly="readonly" required>
+                <input type="text" id="js_setValueQuantityShip_idWrite" class="form-control inputWithForm_input" name="quantity" value="1 Người lớn, 0 Trẻ em, 0 Cao tuổi" readonly="readonly" aria-label="Số khách đặt vé tàu cao tốc" required>
                 <div class="inputWithForm_form">
                     <div class="formBox">
                         <div class="formBox_labelOneRow">
@@ -44,7 +44,7 @@
                                     <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_nguoilon', 'minus');">
                                         <i class="fa-solid fa-minus"></i>
                                     </div>
-                                    <input id="js_changeValueInputShip_input_nguoilon" class="inputNumberCustom_input" type="text" name="adult_ship" value="1" />
+                                    <input id="js_changeValueInputShip_input_nguoilon" class="inputNumberCustom_input" type="text" name="adult_ship" value="1" aria-label="Số người lớn đặt vé tàu cao tốc" />
                                     <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_nguoilon', 'plus');">
                                         <i class="fa-solid fa-plus"></i>
                                     </div>
@@ -59,7 +59,7 @@
                                     <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_treem', 'minus');">
                                         <i class="fa-solid fa-minus"></i>
                                     </div>
-                                    <input id="js_changeValueInputShip_input_treem" class="inputNumberCustom_input" type="text" name="child_ship" value="0" />
+                                    <input id="js_changeValueInputShip_input_treem" class="inputNumberCustom_input" type="text" name="child_ship" value="0" aria-label="Số trẻ em đặt vé tàu cao tốc" />
                                     <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_treem', 'plus');">
                                         <i class="fa-solid fa-plus"></i>
                                     </div>
@@ -74,7 +74,7 @@
                                     <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_caotuoi', 'minus');">
                                         <i class="fa-solid fa-minus"></i>
                                     </div>
-                                    <input id="js_changeValueInputShip_input_caotuoi" class="inputNumberCustom_input" type="text" name="old_ship" value="0" />
+                                    <input id="js_changeValueInputShip_input_caotuoi" class="inputNumberCustom_input" type="text" name="old_ship" value="0" aria-label="Số người cao tuổi đặt vé tàu cao tốc" />
                                     <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_caotuoi', 'plus');">
                                         <i class="fa-solid fa-plus"></i>
                                     </div>
@@ -89,7 +89,7 @@
     <div class="bookFormSort_body_item">
         <div class="inputWithIcon date">
             <label for="bookFormSort_date">Ngày khởi hành</label>
-            <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date_1" value="{{ date('Y-m-d', time() + 86400) }}" readonly="readonly" required>
+            <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date_1" value="{{ date('Y-m-d', time() + 86400) }}" aria-label="Ngày đi tàu cao tốc" readonly="readonly" required>
         </div>
         <div style="text-align:right;margin-top:1.5rem;">
             <div class="buttonSecondary" onClick="submitForm('shipBookingSort');">

@@ -35,7 +35,7 @@
         <div class="inputWithIcon adult">
             <label for="bookFormSort_date">Số hành khách</label>
             <div class="inputWithForm">
-                <input type="text" id="js_setValueQuantityTour_idWrite" class="form-control inputWithForm_input" name="quantity" value="1 Người lớn, 0 Trẻ em, 0 Cao tuổi" readonly="readonly" required>
+                <input type="text" id="js_setValueQuantityTour_idWrite" class="form-control inputWithForm_input" name="quantity" value="1 Người lớn, 0 Trẻ em, 0 Cao tuổi" aria-label="Số khách đặt tour du lịch" readonly="readonly" required>
                 <div class="inputWithForm_form">
                     <div class="formBox">
                         <div class="formBox_labelOneRow">
@@ -48,7 +48,7 @@
                                     <div class="inputNumberCustom_button" onClick="changeValueInputTour('js_changeValueInputTour_input_nguoilon', 'minus');">
                                         <i class="fa-solid fa-minus"></i>
                                     </div>
-                                    <input id="js_changeValueInputTour_input_nguoilon" class="inputNumberCustom_input" type="text" name="adult_tour" value="1" />
+                                    <input id="js_changeValueInputTour_input_nguoilon" class="inputNumberCustom_input" type="text" name="adult_tour" value="1" aria-label="Số người lớn đặt tour du lịch" />
                                     <div class="inputNumberCustom_button" onClick="changeValueInputTour('js_changeValueInputTour_input_nguoilon', 'plus');">
                                         <i class="fa-solid fa-plus"></i>
                                     </div>
@@ -63,7 +63,7 @@
                                     <div class="inputNumberCustom_button" onClick="changeValueInputTour('js_changeValueInputTour_input_treem', 'minus');">
                                         <i class="fa-solid fa-minus"></i>
                                     </div>
-                                    <input id="js_changeValueInputTour_input_treem" class="inputNumberCustom_input" type="text" name="child_tour" value="0" />
+                                    <input id="js_changeValueInputTour_input_treem" class="inputNumberCustom_input" type="text" name="child_tour" value="0" aria-label="Số trẻ em đặt tour du lịch" />
                                     <div class="inputNumberCustom_button" onClick="changeValueInputTour('js_changeValueInputTour_input_treem', 'plus');">
                                         <i class="fa-solid fa-plus"></i>
                                     </div>
@@ -78,7 +78,7 @@
                                     <div class="inputNumberCustom_button" onClick="changeValueInputTour('js_changeValueInputTour_input_caotuoi', 'minus');">
                                         <i class="fa-solid fa-minus"></i>
                                     </div>
-                                    <input id="js_changeValueInputTour_input_caotuoi" class="inputNumberCustom_input" type="text" name="old_tour" value="0" />
+                                    <input id="js_changeValueInputTour_input_caotuoi" class="inputNumberCustom_input" type="text" name="old_tour" value="0" aria-label="Số người cao tuổi đặt tour du lịch" />
                                     <div class="inputNumberCustom_button" onClick="changeValueInputTour('js_changeValueInputTour_input_caotuoi', 'plus');">
                                         <i class="fa-solid fa-plus"></i>
                                     </div>
@@ -93,7 +93,7 @@
     <div class="bookFormSort_body_item">
         <div class="inputWithIcon date">
             <label for="bookFormSort_date">Ngày khởi hành</label>
-            <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date" value="{{ date('Y-m-d', time() + 86400) }}" readonly="readonly" required>
+            <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date" value="{{ date('Y-m-d', time() + 86400) }}" aria-label="Ngày khởi hành tour du lịch" readonly="readonly" required>
         </div>
         <div style="text-align:right;margin-top:1.5rem;">
             <div class="buttonSecondary" onClick="submitForm('tourBookingSort');">
