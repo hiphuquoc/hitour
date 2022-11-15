@@ -29,7 +29,7 @@ class RoutingController extends Controller {
 
     public function routing($slug, $slug2 = null, $slug3 = null, $slug4 = null, $slug5 = null, $slug6 = null, $slug7 = null, $slug8 = null, $slug9 = null, $slug10 = null){
         $tmpSlug        = [$slug, $slug2, $slug3, $slug4, $slug5, $slug6, $slug7, $slug8, $slug9, $slug10];
-        dd($tmpSlug);
+        dd($_SERVER);
         /* loại bỏ phần tử rỗng */
         $arraySlug      = [];
         foreach($tmpSlug as $slug) if(!empty($slug)&&$slug!='public') $arraySlug[] = $slug;
