@@ -32,7 +32,7 @@
                         <li>
                             <ul>
                     @endif
-                    <li><a href="/{{ $item->slug_full ?? null }}" title="{{ $item->name ?? $item->seo->title ?? null }}">{{ $item->name ?? $item->seo->title ?? null }}</a></li>
+                    <li><a href="/{{ $item->seo->slug_full ?? null }}" title="{{ $item->name ?? $item->seo->title ?? null }}">{{ $item->name ?? $item->seo->title ?? null }}</a></li>
                     @if(($loop->index+1)%7==0||($loop->index+1)==count($dataMB))
                             </ul>
                         </li>
@@ -48,7 +48,7 @@
                         <li>
                             <ul>
                     @endif
-                    <li><a href="/{{ $item->slug_full ?? null }}" title="{{ $item->name ?? $item->seo->title ?? null }}">{{ $item->name ?? $item->seo->title ?? null }}</a></li>
+                    <li><a href="/{{ $item->seo->slug_full ?? null }}" title="{{ $item->name ?? $item->seo->title ?? null }}">{{ $item->name ?? $item->seo->title ?? null }}</a></li>
                     @if(($loop->index+1)%7==0||($loop->index+1)==count($dataMT))
                             </ul>
                         </li>
@@ -64,7 +64,7 @@
                         <li>
                             <ul>
                     @endif
-                    <li><a href="/{{ $item->slug_full ?? null }}" title="{{ $item->name ?? $item->seo->title ?? null }}">{{ $item->name ?? $item->seo->title ?? null }}</a></li>
+                    <li><a href="/{{ $item->seo->slug_full ?? null }}" title="{{ $item->name ?? $item->seo->title ?? null }}">{{ $item->name ?? $item->seo->title ?? null }}</a></li>
                     @if(($loop->index+1)%7==0||($loop->index+1)==count($dataMN))
                             </ul>
                         </li>
@@ -80,7 +80,7 @@
                         <li>
                             <ul>
                     @endif
-                    <li><a href="/{{ $item->slug_full }}" title="{{ $item->name ?? $item->seo->title ?? null }}">{{ $item->name ?? $item->seo->title ?? null }}</a></li>
+                    <li><a href="/{{ $item->seo->slug_full }}" title="{{ $item->name ?? $item->seo->title ?? null }}">{{ $item->name ?? $item->seo->title ?? null }}</a></li>
                     @if(($loop->index+1)%7==0||($loop->index+1)==count($dataBD))
                             </ul>
                         </li>

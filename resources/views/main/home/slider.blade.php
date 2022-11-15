@@ -25,9 +25,8 @@
             'link'  => 'tour-du-lich-chau-au'
         ],
         [
-            'src'   => '/images/main/du-lich-chau-au-hitour-1-mobile.jpg',
-            'alt'   => 'Trang Tour du lịch Châu Âu Hitour',
-            'link'  => 'tour-du-lich-chau-au'
+            'src'   => '/images/main/du-lich-bien-dao-hitour-1-mobile.jpg',
+            'alt'   => 'Trang Tour du lịch biển đảo Hitour'
         ]
     ];
 @endphp

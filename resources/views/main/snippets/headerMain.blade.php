@@ -15,20 +15,16 @@
                             ->with('seo')
                             ->get();
     /* Tour trong nước */
-    $infoMenuByRegion   = \Illuminate\Support\Facades\DB::table('tour_location as tl')
-                            ->join('region_info as ri', 'ri.id', '=', 'tl.region_id')
-                            ->join('seo', 'seo.id', '=', 'tl.seo_id')
-                            ->select('ri.id as region_id', 'ri.name as region', 'tl.name', 'tl.island', 'seo.slug', 'seo.level', 'seo.parent')
-                            ->get()
-                            ->toArray();
-    $infoMenuByRegion   = \App\Helpers\Url::buildFullLinkArray($infoMenuByRegion);
+    $infoMenuByRegion   = \App\Models\TourLocation::select('*')
+                            ->with('seo', 'region')
+                            ->get();
     $dataMB             = [];
     $dataMT             = [];
     $dataMN             = [];
     $dataBD             = [];
     foreach($infoMenuByRegion as $item){
         /* vùng miền */
-        switch($item->region_id){
+        switch($item->region->id){
             case 1:
                 $dataMB[]   = $item;
                 break;
@@ -274,7 +270,7 @@
                         <ul style="display:none;">
                         @foreach($dataBD as $tourBD)
                             <li>
-                                <a href="/{{ $tourBD->slug_full ?? null }}" title="{{ $tourBD->name ?? $tourBD->seo->title ?? null }}">
+                                <a href="/{{ $tourBD->seo->slug_full ?? null }}" title="{{ $tourBD->name ?? $tourBD->seo->title ?? null }}">
                                     <div>{{ $tourBD->name ?? $tourBD->seo->title ?? null }}</div>
                                 </a>
                             </li>
@@ -292,7 +288,7 @@
                         <ul style="display:none;">
                         @foreach($dataMB as $tourMB)
                             <li>
-                                <a href="/{{ $tourMB->slug_full ?? null }}" title="{{ $tourMB->name ?? $tourMB->seo->title ?? null }}">
+                                <a href="/{{ $tourMB->seo->slug_full ?? null }}" title="{{ $tourMB->name ?? $tourMB->seo->title ?? null }}">
                                     <div>{{ $tourMB->name ?? $tourMB->seo->title ?? null }}</div>
                                 </a>
                             </li>
@@ -310,7 +306,7 @@
                         <ul style="display:none;">
                         @foreach($dataMT as $tourMT)
                             <li>
-                                <a href="/{{ $tourMT->slug_full ?? null }}" title="{{ $tourMT->name ?? $tourMT->seo->title ?? null }}">
+                                <a href="/{{ $tourMT->seo->slug_full ?? null }}" title="{{ $tourMT->name ?? $tourMT->seo->title ?? null }}">
                                     <div>{{ $tourMT->name ?? $tourMT->seo->title ?? null }}</div>
                                 </a>
                             </li>
@@ -328,7 +324,7 @@
                         <ul style="display:none;">
                         @foreach($dataMN as $tourMN)
                             <li>
-                                <a href="/{{ $tourMN->slug_full ?? null }}" title="{{ $tourMN->name ?? $tourMN->seo->title ?? null }}">
+                                <a href="/{{ $tourMN->seo->slug_full ?? null }}" title="{{ $tourMN->name ?? $tourMN->seo->title ?? null }}">
                                     <div>{{ $tourMN->name ?? $tourMN->seo->title ?? null }}</div>
                                 </a>
                             </li>

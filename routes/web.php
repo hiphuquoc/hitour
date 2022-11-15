@@ -466,4 +466,4 @@ Route::prefix('tourBooking')->group(function(){
 Route::get('/buildTocContentSidebar', [AjaxController::class, 'buildTocContentSidebar'])->name('main.buildTocContentSidebar');
 Route::get('/buildTocContentMain', [AjaxController::class, 'buildTocContentMain'])->name('main.buildTocContentMain');
 /* ===== ROUTING ALL ===== */
-Route::get("/{slug}/{slug2?}/{slug3?}/{slug4?}/{slug5?}", [RoutingController::class, 'routing'])->name('routing');
+Route::get("/{slug}/{slug2?}/{slug3?}/{slug4?}/{slug5?}/{slug6?}/{slug7?}/{slug8?}/{slug9?}/{slug10?}", [RoutingController::class, 'routing'])->name('routing');
