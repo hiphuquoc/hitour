@@ -1,8 +1,8 @@
 ---
 deployment:
   tasks:
-    # - export DEPLOYPATH=/home/rhawgejx/chophuquoc.net/
-    - export DEPLOYPATH=/home/jbfacbbt/public_html/
+    - export DEPLOYPATH=/home/rhawgejx/chophuquoc.net/
+    # - export DEPLOYPATH=/home/jbfacbbt/public_html/
     - /bin/cp -R * $DEPLOYPATH
     # - /bin/cp /app $DEPLOYPATH
     # - /bin/cp /bootstrap $DEPLOYPATH
