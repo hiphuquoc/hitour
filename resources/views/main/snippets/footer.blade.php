@@ -7,7 +7,7 @@
                             <b style="font-size:1.05rem;font-family:'SVN-Gilroy Bold', serif;display:flex;margin-top:-5px;">Cty TNHH du lịch biển đảo Hitour</b>
                         </li>
                         <li>
-                            <i class="fa-solid fa-location-dot"></i>trụ sở: Số 43 Nguyễn Tuân, Phường Vĩnh Quang, Rạch Giá, Kiên Giang
+                            <i class="fa-solid fa-location-dot"></i>trụ sở: Số 43 Nguyễn Tuân, Vĩnh Quang, Rạch Giá, Kiên Giang
                         </li>
                         <li>
                             <i class="fa-solid fa-phone"></i>hotline: <a href="tel:0868684868" title="Hotline Hitour">08 6868 4868</a>
