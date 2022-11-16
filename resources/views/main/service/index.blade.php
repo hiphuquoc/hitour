@@ -24,7 +24,7 @@
 <!-- STRAT:: Article Schema -->
 @php
     $highPrice  = $item->price_show ?? 1000000;
-    $lowPrice   = $highPrice - 200000;
+    $lowPrice   = $highPrice/2;
 @endphp
 @include('main.schema.product', ['data' => $dataSchema, 'files' => $item->files, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
 <!-- END:: Article Schema -->
