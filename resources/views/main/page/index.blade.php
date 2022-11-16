@@ -47,15 +47,15 @@
     @if(!empty($item->show_partner)&&$item->show_partner==1)
         <!-- START: Đối tác tàu cao tốc -->
         @if(!empty($shipPartners)&&$shipPartners->isNotEmpty())
-            <div class="sectionBox withBorder">
-                <div class="container">
-                    @include('main.home.partner', [
-                        'list'          => $shipPartners,
-                        'title'         => 'Đối tác tàu cao tốc',
-                        'description'   => 'Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ'
-                    ])
-                </div>
+        <div class="sectionBox withBorder">
+            <div class="container">
+                @include('main.home.partner', [
+                    'list'          => $shipPartners,
+                    'title'         => 'Đối tác tàu cao tốc',
+                    'description'   => 'Những đối tác tàu cao tốc đang hoạt động các tuyến biển đảo tại Việt Nam'
+                ])
             </div>
+        </div>
         @endif
         <!-- END: Đối tác tàu cao tốc -->
 
@@ -66,7 +66,7 @@
                     @include('main.home.partner', [
                         'list'          => $airPartners,
                         'title'         => 'Đối tác máy bay',
-                        'description'   => 'Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ Nếu cần phương tiện đưa đón, di chuyển và tham quan bạn có thể tham khảo thêm dịch vụ'
+                        'description'   => 'Những đối tác hàng không toàn quốc sẽ chắp cánh đưa bạn đến mọi miền đất nước'
                     ])
                 </div>
             </div>
