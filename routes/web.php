@@ -444,6 +444,7 @@ foreach(\App\Models\Redirect::all() as $redirect){
 
 Route::get('/', [HomeController::class, 'home'])->name('main.home');
 Route::get('/error', [\App\Http\Controllers\ErrorController::class, 'handle'])->name('error.handle');
+Route::get('/checkOnpageAll', [HomeController::class, 'checkOnpageAll'])->name('main.checkOnpageAll');
 /* ===== SITEMAP ===== */
 Route::get('sitemap.xml', [SitemapController::class, 'main'])->name('sitemap.main');
 Route::get('sitemap/{type}.xml', [SitemapController::class, 'child'])->name('sitemap.child');

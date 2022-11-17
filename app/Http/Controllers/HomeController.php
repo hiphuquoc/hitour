@@ -18,6 +18,9 @@ use App\Models\TourContent;
 use App\Models\TourContentForeign;
 use Illuminate\Support\Facades\Storage;
 
+use App\Jobs\CheckSeo;
+use App\Models\Redirect;
+
 class HomeController extends Controller {
 
     public function home(){
@@ -140,5 +143,14 @@ class HomeController extends Controller {
             ];
             TourContentForeign::updateItem($item->id, $params);
         }
+    }
+    /* reset tất cả checkOnpage đưa vào Job */
+    public static function checkOnpageAll(){
+        $seos   = Seo::select('id')
+                    ->get();
+        foreach($seos as $seo){
+            CheckSeo::dispatch($seo->id);
+        }
+        return \Illuminate\Support\Facades\Redirect::to(route('main.home'), 301);
     }
 }
