@@ -34,11 +34,16 @@ class RoutingController extends Controller {
         /* loại bỏ phần tử rỗng */
         $arraySlug      = [];
         foreach($tmpSlug as $slug) if(!empty($slug)&&$slug!='public') $arraySlug[] = $slug;
+        /* loại bỏ hashtag và request trước khi check */
+        $arraySlug[count($arraySlug)-1] = preg_replace('#([\?|\#]+).*$#imsU', '', end($arraySlug));
         $urlRequest     = implode('/', $arraySlug);
         /* check url có tồn tại? => lấy thông tin */
         $checkExists    = Url::checkUrlExists(end($arraySlug));
         /* nếu sai => redirect về link đúng */
-        if(!empty($checkExists->slug_full)&&$checkExists->slug_full!=$urlRequest) return Redirect::to($checkExists->slug_full, 301);
+        if(!empty($checkExists->slug_full)&&$checkExists->slug_full!=$urlRequest){
+            /* ko rút gọn trên 1 dòng được => lỗi */
+            return Redirect::to($checkExists->slug_full, 301);
+        }
         /* nếu đúng => xuất dữ liệu */
         if(!empty($checkExists->type)){
             $flagMatch              = false;
@@ -468,7 +473,7 @@ class RoutingController extends Controller {
                 /* Ghi dữ liệu - Xuất kết quả */
                 if($flagMatch==true){
                     echo $xhtml;
-                    Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
+                    // Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
                 }else {
                     return \App\Http\Controllers\ErrorController::error404();
                 }

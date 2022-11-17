@@ -48,6 +48,7 @@ use App\Http\Controllers\AdminPageController;
 use App\Http\Controllers\AdminRedirectController;
 use App\Http\Controllers\AdminCacheController;
 
+use App\Http\Controllers\RunTestController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\RoutingController;
@@ -437,6 +438,9 @@ foreach(\App\Models\Redirect::all() as $redirect){
 /* cập nhật hàng loạt iamge loading trong content */
 // Route::get('/changeImageInContentWithLoading', [HomeController::class, 'changeImageInContentWithLoading'])->name('main.changeImageInContentWithLoading');
 // Route::get('/changeImageInContentWithLoadingTourInfo', [HomeController::class, 'changeImageInContentWithLoadingTourInfo'])->name('main.changeImageInContentWithLoadingTourInfo');
+
+/* chạy test */
+// Route::get('/runTest', [RunTestController::class, 'run'])->name('main.test.run');
 
 Route::get('/', [HomeController::class, 'home'])->name('main.home');
 Route::get('/error', [\App\Http\Controllers\ErrorController::class, 'handle'])->name('error.handle');

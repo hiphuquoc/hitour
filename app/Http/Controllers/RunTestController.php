@@ -1,49 +1,29 @@
 <?php
 
-namespace App\Jobs;
-
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
-
+namespace App\Http\Controllers;
 use App\Models\Seo;
+use Illuminate\Http\Request;
 use App\Models\CheckSeo as CheckSeoModel;
+use Illuminate\Support\Facades\Redirect;
 
-class CheckSeo implements ShouldQueue {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+class RunTestController extends Controller {
 
-    private $idSeo;
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct($idSeo){
-        $this->idSeo   = $idSeo;
-    }
-
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
-    public function handle(){
+    public static function run(Request $request){
+        $idSeo          = $request->get('id');
+        $idSeo          = 120;
         $infoPage       = Seo::select('*')
-                            ->where('id', $this->idSeo)
+                            ->where('id', $idSeo)
                             ->first();
         /* xóa check_seo_info cũ */
         CheckSeoModel::select('*')
-                    ->where('seo_id', $this->idSeo)
+                    ->where('seo_id', $idSeo)
                     ->delete();
         if(!empty($infoPage)){
             $dataCheckSeo       = self::getDataCheckSeo(env('APP_URL').'/'.$infoPage->slug_full);
             /* insert danh sách heading */
             foreach($dataCheckSeo['heading'] as $heading){
                 CheckSeoModel::insertItem([
-                    'seo_id'    => $this->idSeo,
+                    'seo_id'    => $idSeo,
                     'name'      => $heading['name'],
                     'type'      => 'heading',
                     'text'      => $heading['text']
@@ -106,7 +86,7 @@ class CheckSeo implements ShouldQueue {
 
                 /* insert */
                 CheckSeoModel::insertItem([
-                    'seo_id'        => $this->idSeo,
+                    'seo_id'        => $idSeo,
                     'name'          => $link['name'],
                     'type'          => 'link',
                     'text'          => $link['text'],
@@ -142,7 +122,7 @@ class CheckSeo implements ShouldQueue {
                 // }
                 /* insert */
                 CheckSeoModel::insertItem([
-                    'seo_id'        => $this->idSeo,
+                    'seo_id'        => $idSeo,
                     'name'          => 'img',
                     'type'          => 'image',
                     'src'           => $image['src'],
