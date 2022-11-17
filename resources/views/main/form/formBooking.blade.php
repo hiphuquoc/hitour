@@ -73,7 +73,7 @@
         function hideShowAround(action = 'on'){
 			const elemt = $('#js_hideShowAround');
 			if(elemt.length==0){
-				$('<div id="js_hideShowAround" style="width:100%;height:100%;position:fixed;background:rgba(0, 0, 0, 0.5);top:0;left:0;z-index:100;" onClick="hideShowAround(\'off\');"></div>').appendTo('body');
+				$('<div id="js_hideShowAround" style="width:100%;height:100%;position:fixed;background-color:rgb(35, 42, 49);opacity: 0.8;top:0;left:0;z-index:100;" onClick="hideShowAround(\'off\');"></div>').appendTo('body');
 			}else {
 				if(action=='off') elemt.remove();
 			}
