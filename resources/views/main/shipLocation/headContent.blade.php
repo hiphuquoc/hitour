@@ -23,7 +23,7 @@
                                 @foreach($ship->prices as $price)
                                     @php
                                         $shipTime = \App\Http\Controllers\AdminShipPriceController::mergeArrayShipPrice($price->times);
-                                        dd($shipTime);
+                                        // dd($shipTime);
                                     @endphp
                                     <tr>
                                         <td>
@@ -32,15 +32,17 @@
                                             </div>
                                             <div>
                                                 Ngày áp dụng:<br/>
-                                                @php
-                                                    $dateStart  = date('d/m/Y', strtotime($shipTime['date_start']));
-                                                    $dateEnd    = date('d/m/Y', strtotime($shipTime['date_end']));
-                                                @endphp
-                                                @if($dateStart==$dateEnd)
-                                                    <div class="highLight">{{ $dateStart }}</div>
-                                                @else 
-                                                    <div class="highLight">{{ $dateStart }} - {{ $dateEnd }}</div>
-                                                @endif
+                                                @foreach($shipTime[0]['date'] as $date)
+                                                    @php
+                                                        $dateStart  = date('d/m/Y', strtotime($date['date_start']));
+                                                        $dateEnd    = date('d/m/Y', strtotime($date['date_end']));
+                                                    @endphp
+                                                    @if($dateStart==$dateEnd)
+                                                        <div class="highLight">{{ $dateStart }}</div>
+                                                    @else 
+                                                        <div class="highLight">{{ $dateStart }} - {{ $dateEnd }}</div>
+                                                    @endif
+                                                @endforeach
                                             </div>
                                         </td>
                                         <td>
