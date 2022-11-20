@@ -32,9 +32,15 @@
                                             </div>
                                             <div>
                                                 Ngày áp dụng:<br/>
-                                                @foreach($shipTime[0]['date'] as $date)
-                                                    <div class="highLight">{{ date('d/m/Y', strtotime($date['date_start'])) }} - {{ date('d/m/Y', strtotime($date['date_end'])) }}</div>
-                                                @endforeach
+                                                @php
+                                                    $dateStart  = date('d/m/Y', strtotime($date['date_start']));
+                                                    $dateEnd    = date('d/m/Y', strtotime($date['date_end']));
+                                                @endphp
+                                                @if($dateStart==$dateEnd)
+                                                    <div class="highLight">{{ $dateStart }}</div>
+                                                @else 
+                                                    <div class="highLight">{{ $dateStart }} - {{ $dateEnd }}</div>
+                                                @endif
                                             </div>
                                         </td>
                                         <td>

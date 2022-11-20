@@ -22,7 +22,15 @@
                     <div class="oneLine" style="font-weight:bold;">{{ $price->partner->name }}</div>
                     <div class="oneLine" style="color:rgb(0, 123, 255);">
                         @foreach($shipTime[0]['date'] as $date)
-                            <div style="font-weight:700;">{{ date('d/m/Y', strtotime($date['date_start'])) }} - {{ date('d/m/Y', strtotime($date['date_end'])) }}</div>
+                            @php
+                                $dateStart  = date('d/m/Y', strtotime($date['date_start']));
+                                $dateEnd    = date('d/m/Y', strtotime($date['date_end']));
+                            @endphp
+                            @if($dateStart==$dateEnd)
+                                <div style="font-weight:700;">{{ $dateStart }}</div>
+                            @else 
+                                <div style="font-weight:700;">{{ $dateStart }} - {{ $dateEnd }}</div>
+                            @endif
                         @endforeach
                     </div>
                 </td>

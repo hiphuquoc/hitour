@@ -55,7 +55,7 @@
             {{-- @if($infoCategory->childs->count()>=6) --}}
                 <div class="blogListLeftRight_footer">
                     <div class="blogListLeftRight_footer_text">
-                        Chuyên mục Đặc sản Phú Quốc có <span class="highLight">{{ $infoCategory->childs->count() }}</span> bài
+                        Chuyên mục {{ $infoCategory->name ?? $infoCategory->seo->title ?? null }} có <span class="highLight">{{ $infoCategory->childs->count() }}</span> bài
                     </div>
                     <a href="/{{ $infoCategory->seo->slug_full ?? null }}" title="{{ $infoCategory->name ?? $infoCategory->seo->title ?? null }}" class="blogListLeftRight_footer_button"><i class="fa-solid fa-arrow-down-long"></i>Xem tất cả</a>
                 </div>
