@@ -118,10 +118,7 @@
     </td>
     <td style="vertical-align:top;display:flex;">
         <div class="icon-wrapper iconAction">
-            @php
-                $tmp    = \App\Helpers\Url::buildFullLinkOne($item->seo);
-            @endphp
-            <a href="/{{ $tmp->slug_full }}" target="_blank">
+            <a href="/{{ $item->seo->slug_full }}" target="_blank">
                 <i data-feather='eye'></i>
                 <div>Xem</div>
             </a>

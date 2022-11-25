@@ -314,7 +314,6 @@
                 success     : function(data){
                     $('#js_loadFormModal_header').html(data.header);
                     $('#js_loadFormModal_body').html(data.body);
-                    console.log(data);
                 }
             });
         }

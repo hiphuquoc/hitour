@@ -19,6 +19,7 @@ use App\Http\Controllers\AdminShipController;
 use App\Http\Controllers\AdminShipPriceController;
 use App\Http\Controllers\AdminShipPortController;
 use App\Http\Controllers\AdminServiceController;
+use App\Http\Controllers\AdminServicePriceController;
 use App\Http\Controllers\AdminServiceLocationController;
 use App\Http\Controllers\AdminAirPortController;
 use App\Http\Controllers\AdminAirDepartureController;
@@ -225,7 +226,7 @@ Route::prefix('admin')->group(function(){
             /* Delete AJAX */
             Route::get('/delete', [AdminServiceLocationController::class, 'delete'])->name('admin.serviceLocation.delete');
         });
-        /* ===== SERVICE ===== */
+        /* ===== SERVICE INFO ===== */
         Route::prefix('service')->group(function(){
             Route::get('/', [AdminServiceController::class, 'list'])->name('admin.service.list');
             Route::post('/create', [AdminServiceController::class, 'create'])->name('admin.service.create');
@@ -233,11 +234,11 @@ Route::prefix('admin')->group(function(){
             Route::post('/update', [AdminServiceController::class, 'update'])->name('admin.service.update');
             /* Delete AJAX */
             Route::get('/delete', [AdminServiceController::class, 'delete'])->name('admin.service.delete');
-            // Route::post('/loadOptionPrice', [AdminTourOptionController::class, 'loadOptionPrice'])->name('admin.tourOption.loadOptionPrice');
-            // Route::post('/loadFormOption', [AdminTourOptionController::class, 'loadFormOption'])->name('admin.tourOption.loadFormOption');
-            // Route::post('/createOption', [AdminTourOptionController::class, 'create'])->name('admin.tourOption.createOption');
-            // Route::post('/updateOption', [AdminTourOptionController::class, 'update'])->name('admin.tourOption.updateOption');
-            // Route::post('/deleteOption', [AdminTourOptionController::class, 'delete'])->name('admin.tourOption.deleteOption');
+            Route::post('/loadPrice', [AdminServicePriceController::class, 'loadPrice'])->name('admin.servicePrice.loadPrice');
+            Route::post('/loadFormPrice', [AdminServicePriceController::class, 'loadFormPrice'])->name('admin.servicePrice.loadFormPrice');
+            Route::post('/createPrice', [AdminServicePriceController::class, 'createPrice'])->name('admin.servicePrice.create');
+            Route::post('/updatePrice', [AdminServicePriceController::class, 'updatePrice'])->name('admin.servicePrice.update');
+            Route::post('/deletePrice', [AdminServicePriceController::class, 'deletePrice'])->name('admin.servicePrice.delete');
         });
         /* ===== STAFF ===== */
         Route::prefix('staff')->group(function(){

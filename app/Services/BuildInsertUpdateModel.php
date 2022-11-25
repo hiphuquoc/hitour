@@ -757,6 +757,32 @@ class BuildInsertUpdateModel {
         return $result;
     }
 
+    public static function buildArrayTableServicePrice($idServiceOption, $dataForm){
+        /* 
+            service_option_id
+            promotion
+            date_start
+            date_end
+            apply_age
+            price
+            profit
+        */
+        $result     = [];
+        if(!empty($dataForm)){
+            for($i=0;$i<count($dataForm['apply_age']);++$i){
+                $result[$i]['service_option_id']    = $idServiceOption;
+                $result[$i]['promotion']            = $dataForm['promotion'] ?? null;
+                $arrayDate                          = explode('to', $dataForm['date_range']);
+                $result[$i]['date_start']           = date('Y-m-d', strtotime(trim($arrayDate[0])));
+                $result[$i]['date_end']             = !empty($arrayDate[1]) ? date('Y-m-d', strtotime(trim($arrayDate[1]))) : $result[$i]['date_start'];
+                $result[$i]['apply_age']            = $dataForm['apply_age'][$i];
+                $result[$i]['price']                = $dataForm['price'][$i];
+                $result[$i]['profit']               = $dataForm['profit'][$i];
+            }
+        }
+        return $result;
+    }
+
     public static function buildArrayTableCarrentalLocation($dataForm, $seoId = null){
         /* upload carrental_location
             + name
