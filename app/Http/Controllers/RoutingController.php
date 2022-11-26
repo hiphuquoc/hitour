@@ -473,7 +473,7 @@ class RoutingController extends Controller {
                 /* Ghi dữ liệu - Xuất kết quả */
                 if($flagMatch==true){
                     echo $xhtml;
-                    Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
+                    if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
                 }else {
                     return \App\Http\Controllers\ErrorController::error404();
                 }

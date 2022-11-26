@@ -3,6 +3,11 @@
     <div class="formBox_full">
         <!-- One Row -->
         <div class="formBox_full_item">
+            <label class="form-label" for="option_name">Loại vé</label>
+            <input type="text" class="form-control" id="option_name" name="option_name" value="{{ $item->name ?? null }}" required>
+        </div>
+        <!-- One Row -->
+        <div class="formBox_full_item">
             <label class="form-label" for="promotion">Khuyến mãi (Nếu có)</label>
             <textarea class="form-control" id="promotion" name="promotion" rows="5">{{ $item->prices[0]->promotion ?? null }}</textarea>
         </div>

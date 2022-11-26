@@ -67,6 +67,8 @@
                         @endif
                         <!-- tocContent main -->
                         <div id="tocContentMain" style="margin-top:1rem;"></div>
+                        <!-- bảng giá -->
+                        @include('main.service.prices', compact('item'))
                         <!-- content -->
                         {!! $content ?? null !!}
                         <!-- Câu hỏi thường gặp -->

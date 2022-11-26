@@ -32,7 +32,8 @@ class AdminServicePriceController extends Controller {
             $dataForm               = $request->get('dataForm');
             /* insert service_option */
             $idServiceOption        = ServiceOption::insertItem([
-                'service_info_id'   => $dataForm['service_info_id']
+                'service_info_id'   => $dataForm['service_info_id'],
+                'name'              => $dataForm['name']
             ]);
             /* insert service_price */
             $arrayInsert            = $this->BuildInsertUpdateModel->buildArrayTableServicePrice($idServiceOption, $dataForm);
@@ -50,7 +51,9 @@ class AdminServicePriceController extends Controller {
             $dataForm           = $request->get('dataForm');
             $idServiceOption    = $dataForm['service_option_id'];
             /* update service_option */
-            /* bảng này không có gì để update */
+            ServiceOption::updateItem($dataForm['service_option_id'], [
+                'name'              => $dataForm['name']
+            ]);
             /* delete ship_time old */
             ServicePrice::select('*')
                 ->where('service_option_id', $idServiceOption)

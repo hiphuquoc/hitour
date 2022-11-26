@@ -5,7 +5,7 @@
             $styleHeadTable     = 'background:none !important;color:#345 !important;text-align:center;';
         @endphp
         <tr>
-            <th style="{{ $styleHeadTable }}">Ngày áp dụng /Khuyến mãi</th>
+            <th style="{{ $styleHeadTable }}">Loại vé /Ghi chú</th>
             <th style="{{ $styleHeadTable }}">Giá vé</th>
             <th style="{{ $styleHeadTable }}width:60px;">-</th>
         </tr>
@@ -14,7 +14,12 @@
         @foreach($item as $option)
             <tr id="servicePrice_{{ $option->id }}">
                 <td>
-                    {{-- <div class="oneLine" style="font-weight:bold;">{{ $price->partner->name }}</div> --}}
+                    <div class="oneLine" style="font-weight:bold;">{{ $option->name }}</div>
+                    @if(!empty($option->prices[0]->promotion))
+                        <div class="oneLine">
+                            Ghi chú: {{ $option->prices[0]->promotion }}
+                        </div>
+                    @endif
                     <div class="oneLine" style="color:rgb(0, 123, 255);">
                         @php
                             $dateStart  = date('d/m/Y', strtotime($option->prices[0]['date_start']));
@@ -26,11 +31,6 @@
                             <div style="font-weight:700;">{{ $dateStart }} - {{ $dateEnd }}</div>
                         @endif
                     </div>
-                    @if(!empty($option->prices[0]->promotion))
-                        <div class="oneLine">
-                            {{ $option->prices[0]->promotion }}
-                        </div>
-                    @endif
                 </td>
                 <td>
                     @foreach($option->prices as $price)

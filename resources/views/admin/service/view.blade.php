@@ -223,6 +223,7 @@
                 /* dataForm */
                 var dataForm            = {
                     service_info_id     : $('#service_info_id').val(),
+                    name                : $('#option_name').val(),
                     service_option_id   : $('#service_option_id').val(),
                     promotion           : $('#promotion').val(),
                     date_range          : $('#date_range').val(),

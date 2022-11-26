@@ -79,6 +79,10 @@ class Service extends Model {
         return $this->hasOne(\App\Models\Seo::class, 'id', 'seo_id');
     }
 
+    public function options(){
+        return $this->hasMany(\App\Models\ServiceOption::class, 'service_info_id', 'id');
+    }
+
     public function files(){
         return $this->hasMany(\App\Models\SystemFile::class, 'attachment_id', 'id');
     }
