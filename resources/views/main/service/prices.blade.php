@@ -12,7 +12,7 @@
                 <thead>
                     <tr>
                         <th>Loại vé /Ghi chú</th>
-                        <th>Giá vé</th>
+                        <th style="min-width:200px;">Giá vé</th>
                     </tr>
                 </thead>
                 <tbody>
