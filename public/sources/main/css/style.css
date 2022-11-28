@@ -2799,12 +2799,6 @@ blockquote em {
   .bookingForm_item_head {
     margin-bottom: 0.75rem;
   }
-  .bookingForm_item_body {
-    padding: 0;
-    background: unset;
-    box-shadow: unset;
-    border: none;
-  }
   .bookingForm .formColumnCustom {
     flex-wrap: wrap;
   }
