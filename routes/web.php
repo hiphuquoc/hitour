@@ -55,6 +55,7 @@ use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\ShipBookingController;
+use App\Http\Controllers\ServiceBookingController;
 use App\Http\Controllers\TourBookingController;
 
 use Illuminate\Support\Facades\Redirect;
@@ -467,6 +468,16 @@ Route::prefix('tourBooking')->group(function(){
     Route::get('/loadFormQuantityByOption', [TourBookingController::class, 'loadFormQuantityByOption'])->name('main.tourBooking.loadFormQuantityByOption');
     Route::get('/loadBookingSummary', [TourBookingController::class, 'loadBookingSummary'])->name('main.tourBooking.loadBookingSummary');
     Route::get('/confirm', [TourBookingController::class, 'confirm'])->name('main.tourBooking.confirm');
+});
+/* ===== SERVICE BOOKING ===== */
+Route::prefix('serviceBooking')->group(function(){
+    Route::get('/form', [ServiceBookingController::class, 'form'])->name('main.serviceBooking.form');
+    Route::post('/create', [ServiceBookingController::class, 'create'])->name('main.serviceBooking.create');
+    Route::get('/loadService', [ServiceBookingController::class, 'loadService'])->name('main.serviceBooking.loadService');
+    Route::get('/loadOption', [ServiceBookingController::class, 'loadOption'])->name('main.serviceBooking.loadOption');
+    Route::get('/loadFormQuantityByOption', [ServiceBookingController::class, 'loadFormQuantityByOption'])->name('main.serviceBooking.loadFormQuantityByOption');
+    Route::get('/loadBookingSummary', [ServiceBookingController::class, 'loadBookingSummary'])->name('main.serviceBooking.loadBookingSummary');
+    Route::get('/confirm', [ServiceBookingController::class, 'confirm'])->name('main.serviceBooking.confirm');
 });
 /* ===== TOC CONTENT ===== */
 Route::get('/buildTocContentSidebar', [AjaxController::class, 'buildTocContentSidebar'])->name('main.buildTocContentSidebar');

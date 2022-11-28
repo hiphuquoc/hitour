@@ -1,6 +1,6 @@
 {
     "/js/bootstrap.js": "/js/bootstrap.js?id=b4112070cb22221e6e5b423fb99d5dce",
-    "/sources/main/css/style.css": "/sources/main/css/style.css?id=33cfb82f854d596b50ef1a9a0318829f",
+    "/sources/main/css/style.css": "/sources/main/css/style.css?id=249eb8c8c5449d0255270b67081ba9b4",
     "/sources/admin/css/style.css": "/sources/admin/css/style.css?id=6b3070de09663e74f5a7b3f25674d916",
     "/sources/admin/app-assets/css/bootstrap-extended.css": "/sources/admin/app-assets/css/bootstrap-extended.css?id=aa5e4c4e7f5ce9186b8379474b1ead5b",
     "/sources/admin/app-assets/css/bootstrap-extended.min.css": "/sources/admin/app-assets/css/bootstrap-extended.min.css?id=f50e71c841cfb4bb45d1609fd5d73c01",
@@ -816,6 +816,7 @@
     "/images/admin/slider-tour-1.jpg": "/images/admin/slider-tour-1.jpg?id=f01f103b8460e79abe6b57d1e5afa50a",
     "/images/main/background-slider-home.jpg": "/images/main/background-slider-home.jpg?id=dd09251105d59d7e57f7fcb4c7432175",
     "/images/main/dich-vu-lam-visa-hitour-1.png": "/images/main/dich-vu-lam-visa-hitour-1.png?id=9370cd03f3b8a709e9209255208bd56e",
+    "/images/main/du-lich-bien-dao-hitour-1-mobile.jpg": "/images/main/du-lich-bien-dao-hitour-1-mobile.jpg?id=d7e039f800e5203ad9deb3a9045d0444",
     "/images/main/du-lich-bien-dao-hitour-1.webp": "/images/main/du-lich-bien-dao-hitour-1.webp?id=b83bc1a309aa062844dd15a4919277ed",
     "/images/main/du-lich-chau-au-hitour-1-mobile.jpg": "/images/main/du-lich-chau-au-hitour-1-mobile.jpg?id=c07800c307a0ba53bb276e8dc779663f",
     "/images/main/du-lich-chau-au-hitour-1.jpg": "/images/main/du-lich-chau-au-hitour-1.jpg?id=0cb0c9a361944537db8d0a2360558ce1",
@@ -828,5 +829,6 @@
     "/fonts/svn-gilroy_medium.ttf": "/fonts/svn-gilroy_medium.ttf?id=92dafd7cb69e501cdbc588af22d92c20",
     "/fonts/svn-gilroy_regular.ttf": "/fonts/svn-gilroy_regular.ttf?id=325a02a5a525fc400885126ab4795c39",
     "/fonts/svn-gilroy_semibold.ttf": "/fonts/svn-gilroy_semibold.ttf?id=b3bbd646e15718ae2cb45421795211b8",
-    "/fonts/svn_segoe_ui.ttf": "/fonts/svn_segoe_ui.ttf?id=f430fe00af2edcc5cf39a7fbd79739d4"
+    "/fonts/svn_segoe_ui.ttf": "/fonts/svn_segoe_ui.ttf?id=f430fe00af2edcc5cf39a7fbd79739d4",
+    "/images/main/icon-certified.png": "/images/main/icon-certified.png?id=78150bd8553c3ede3a269410a4ec59bd"
 }

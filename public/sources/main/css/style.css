@@ -1055,6 +1055,9 @@ input[type=date]::-webkit-calendar-picker-indicator {
 .pageContent ul li:not(:first-child) {
   margin-top: 0.5rem;
 }
+.pageContent.background {
+  background: #f8f9fa;
+}
 @media (max-width: 1199px) {
   .pageContent {
     padding-top: 2rem;
@@ -1878,7 +1881,8 @@ input[type=date]::-webkit-calendar-picker-indicator {
 
 .callBookTour {
   background: #fff;
-  border: 1px solid rgb(0, 123, 255);
+  box-shadow: 0 0 5px #e9ecef;
+  border: 1px solid #e9ecef;
 }
 .callBookTour_price {
   background: linear-gradient(90deg, rgb(0, 123, 255) 0, rgb(0, 90, 180) 100%);
@@ -2735,21 +2739,25 @@ blockquote em {
   margin-top: 2rem;
 }
 .bookingForm_item_head {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-family: "SVN-Gilroy Bold", serif;
   font-weight: 700;
   margin-bottom: 1rem;
 }
 .bookingForm_item_body {
-  padding: 1rem;
-  background: #f8f9fa;
   box-shadow: 0 0 5px #e9ecef;
   border: 1px solid #e9ecef;
+  background: #fff;
+  border-radius: 3px;
+  padding: 1rem 1rem 1.5rem 1rem;
 }
 .bookingForm_item_body ul:not(.select2-results__options) li:not(:first-child) {
   margin-top: 0.5rem;
   padding-top: 0.5rem;
   border-top: 1px dashed #dee2e6;
+}
+.bookingForm_item_body_item:not(:first-child) {
+  margin-top: 1.5rem;
 }
 .bookingForm .formColumnCustom {
   display: flex;
@@ -2758,17 +2766,18 @@ blockquote em {
   margin-top: 1.2rem;
 }
 .bookingForm .formColumnCustom_item {
-  width: 50%;
+  width: calc(50% - 0.75rem);
 }
 .bookingForm .formColumnCustom_item:not(:first-child) {
-  margin-left: 1rem;
+  margin-left: 1.5rem;
 }
 .bookingForm input, .bookingForm textarea, .bookingForm .select2-container--default .select2-selection--single .select2-selection__rendered {
-  color: rgb(0, 123, 255) !important;
+  color: rgb(0, 90, 180) !important;
 }
 .bookingForm label {
   margin-bottom: 0.25rem;
   flex-wrap: wrap;
+  font-weight: bold;
 }
 .bookingForm .flexBox.half .flexBox_item {
   width: calc(50% - 0.5rem);
@@ -2999,17 +3008,11 @@ blockquote em {
   font-size: 1.2rem;
   letter-spacing: 0.5px;
 }
-.chooseDepartureShipBox_body {
-  border: 1px solid #dee2e6;
-}
 .chooseDepartureShipBox_body_row {
   display: flex;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px dashed #dee2e6;
   align-items: center;
-  background: #fff;
-}
-.chooseDepartureShipBox_body_row:nth-child(even) {
-  background: rgba(244, 208, 63, 0.1);
+  background: #f8f9fa;
 }
 .chooseDepartureShipBox_body_row_item {
   width: 100%;
@@ -3019,28 +3022,30 @@ blockquote em {
 .chooseDepartureShipBox_body_row_item .option {
   line-height: 1.4;
   padding: 0.35rem 0.5rem;
-  border: 1px solid #dee2e6;
-  background: #e9ecef;
+  border: 1px solid #e9ecef;
+  background: #fff;
   border-radius: 5px;
   cursor: pointer;
 }
 .chooseDepartureShipBox_body_row_item .option.active, .chooseDepartureShipBox_body_row_item .option:hover {
-  background: #495057;
-  color: #fff;
+  color: #183153;
 }
-.chooseDepartureShipBox_body_row_item .option.active .price, .chooseDepartureShipBox_body_row_item .option:hover .price {
-  color: rgb(244, 208, 63) !important;
+.chooseDepartureShipBox_body_row_item .option.active {
+  background: rgb(244, 208, 63) !important;
+}
+.chooseDepartureShipBox_body_row_item .option:hover {
+  background: rgba(0, 123, 255, 0.2);
 }
 .chooseDepartureShipBox_body_row_item .option .price {
   font-family: "SVN-Gilroy Bold", serif;
-  color: rgb(0, 123, 255);
+  color: rgb(0, 90, 180);
   font-size: 1.2rem;
   letter-spacing: 0.5px;
 }
 .chooseDepartureShipBox_body_row_item .highLight {
   font-size: 1.2rem;
   font-family: "SVN-Gilroy Bold", serif;
-  color: rgb(0, 123, 255);
+  color: rgb(0, 90, 180);
 }
 .chooseDepartureShipBox_body_row_item:first-child {
   padding-left: 1rem !important;
@@ -3061,7 +3066,7 @@ blockquote em {
 }
 
 .chooseOptionTourBox {
-  background: #fff;
+  background: #f8f9fa;
 }
 .chooseOptionTourBox_body {
   display: flex;
@@ -3073,15 +3078,17 @@ blockquote em {
   cursor: pointer;
 }
 .chooseOptionTourBox_body_item:not(:first-child) {
-  border-top: 1px dashed #ced4da;
+  border-top: 1px dashed #adb5bd;
 }
 .chooseOptionTourBox_body_item.active {
-  background: #495057 !important;
-  color: #fff !important;
-  border-radius: 5px;
+  background: rgb(244, 208, 63) !important;
+  color: #183153;
 }
 .chooseOptionTourBox_body_item.active .highLight {
-  color: rgb(244, 208, 63) !important;
+  color: #183153 !important;
+}
+.chooseOptionTourBox_body_item.active .chooseOptionTourBox_body_item_icon:before {
+  content: "\f058" !important;
 }
 .chooseOptionTourBox_body_item:hover {
   background: rgba(0, 123, 255, 0.1);
@@ -3089,10 +3096,21 @@ blockquote em {
 .chooseOptionTourBox_body_item > * {
   width: 100%;
 }
+.chooseOptionTourBox_body_item > *:not(:first-child) {
+  padding-left: 1rem;
+}
+.chooseOptionTourBox_body_item_icon {
+  width: 50px;
+}
+.chooseOptionTourBox_body_item_icon:before {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f1ce";
+}
 .chooseOptionTourBox_body_item .highLight {
-  font-family: "SVN-Gilroy Bold", serif;
+  font-weight: bold;
   font-size: 1.1rem;
-  color: rgb(0, 123, 255);
+  color: rgb(0, 90, 180);
 }
 
 .shipBookingTotalBox {
@@ -5834,5 +5852,57 @@ blockquote em {
     margin-left: 0;
     margin-top: 1.5rem;
     min-height: 300px;
+  }
+}
+
+.certifiedBox {
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem;
+  box-shadow: 0 0 5px #e9ecef;
+  border: 1px solid #e9ecef;
+  background: #fff;
+  border-radius: 3px;
+}
+.certifiedBox_image {
+  flex: 0 0 100px;
+}
+.certifiedBox_image img {
+  margin: 0;
+}
+.certifiedBox_content {
+  width: 100%;
+  margin-left: 1.5rem;
+}
+.certifiedBox_content_title {
+  font-weight: bold;
+  color: #345;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #25a244;
+}
+.certifiedBox_content_list {
+  font-size: 1rem;
+}
+.certifiedBox_content_list > * {
+  color: #183153;
+}
+.certifiedBox_content_list > *:before {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f00c";
+  margin-right: 0.5rem;
+  color: #25a244;
+}
+@media (max-width: 577px) {
+  .certifiedBox {
+    flex-wrap: wrap;
+  }
+  .certifiedBox_image {
+    margin: 0 auto;
+  }
+  .certifiedBox_content {
+    margin-top: 0.75rem;
+    margin-left: 0;
   }
 }

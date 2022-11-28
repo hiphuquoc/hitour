@@ -681,6 +681,9 @@ $width_normalMenu : 250px;
             }
         }
     }
+    &.background {
+        background: $bg-02;
+    }
     @media (max-width: 1199px){
         padding-top: 2rem;
     }
@@ -1459,7 +1462,8 @@ $tourGrid_radius : 5px;
 }
 .callBookTour {
     background: #fff;
-    border: 1px solid $color-primary;
+    box-shadow: 0 0 5px $bg-03;
+    border: 1px solid $bg-03;
     &_price {
         background: linear-gradient(90deg, $color-primary 0, $color-primary-hover 100%);
         padding: 0.5rem 1rem 0.75rem 1rem;
@@ -2473,16 +2477,17 @@ blockquote{
             margin-top: 2rem;
         }
         &_head {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-family: $font-primary-title;
             font-weight: 700;
             margin-bottom: 1rem;
         }
         &_body {
-            padding: 1rem;
-            background: $bg-02;
             box-shadow: 0 0 5px $bg-03;
             border: 1px solid $bg-03;
+            background: #fff;
+            border-radius: 3px;
+            padding: 1rem 1rem 1.5rem 1rem;
             ul:not(.select2-results__options) {
                 li {
                     &:not(:first-child){
@@ -2490,6 +2495,11 @@ blockquote{
                         padding-top: 0.5rem;
                         border-top: 1px dashed $bg-04;
                     }
+                }
+            }
+            &_item {
+                &:not(:first-child){
+                    margin-top: 1.5rem;
                 }
             }
         }
@@ -2500,18 +2510,19 @@ blockquote{
             margin-top: 1.2rem;
         }
         &_item {
-            width: 50%;
+            width: calc(50% - 0.75rem);
             &:not(:first-child){
-                margin-left: 1rem;
+                margin-left: 1.5rem;
             }
         }
     }
     input, textarea, .select2-container--default .select2-selection--single .select2-selection__rendered {
-        color: $color-primary !important;
+        color: $color-primary-hover !important;
     }
     label {
         margin-bottom: 0.25rem;
         flex-wrap: wrap;
+        font-weight: bold;
     }
     .flexBox {
         &.half {
@@ -2764,15 +2775,11 @@ blockquote{
         }
     }
     &_body {
-        border: 1px solid $bg-04;
         &_row {
             display: flex;
-            border-bottom: 1px solid $bg-04;
+            border-bottom: 1px dashed $bg-04;
             align-items: center;
-            background: #fff;
-            &:nth-child(even){
-                background: $color-secondary-01;
-            }
+            background: $bg-02;
             &_item {
                 width: 100%;
                 text-align: center;
@@ -2780,21 +2787,22 @@ blockquote{
                 .option {
                     line-height: 1.4;
                     padding: 0.35rem 0.5rem;
-                    border: 1px solid $bg-04;
-                    background: $bg-03;
+                    border: 1px solid $bg-03;
+                    background: #fff;
                     border-radius: 5px;
                     cursor: pointer;
                     &.active, &:hover {
-                        // background: linear-gradient(90deg, $color-primary 0, $color-primary-hover 100%);
-                        background: $bg-08;
-                        color: #fff;
-                        .price {
-                            color: $color-secondary !important;
-                        }
+                        color: $color-highlight;
+                    }
+                    &.active {
+                        background: $color-secondary !important;
+                    }
+                    &:hover {
+                        background: $color-primary-02;
                     }
                     .price {
                         font-family: $font-primary-title;
-                        color: $color-primary;
+                        color: $color-primary-hover;
                         font-size: 1.2rem;
                         letter-spacing: 0.5px;
                     }
@@ -2802,7 +2810,7 @@ blockquote{
                 .highLight {
                     font-size: 1.2rem;
                     font-family: $font-primary-title;
-                    color: $color-primary;
+                    color: $color-primary-hover;
                 }
                 &:first-child {
                     padding-left: 1rem !important;
@@ -2829,7 +2837,7 @@ blockquote{
     }
 }
 .chooseOptionTourBox {
-    background: #fff;
+    background: $bg-02;
     &_body {
         display: flex;
         flex-direction: column;
@@ -2838,14 +2846,18 @@ blockquote{
             padding: 0.5rem 1rem;
             cursor: pointer;
             &:not(:first-child){
-                border-top: 1px dashed $bg-05;
+                border-top: 1px dashed $bg-06;
             }
             &.active {
-                background: $bg-08 !important;
-                color: #fff !important;
-                border-radius: 5px;
+                background: $color-secondary !important;
+                color: $color-highlight;
                 .highLight {
-                    color: $color-secondary !important;
+                    color: $color-highlight !important;
+                }
+                .chooseOptionTourBox_body_item_icon {
+                    &:before {
+                        content: '\f058' !important;
+                    }
                 }
             }
             &:hover {
@@ -2853,11 +2865,21 @@ blockquote{
             }
             > * {
                 width: 100%;
+                &:not(:first-child){
+                    padding-left: 1rem;
+                }
+            }
+            &_icon {
+                width: 50px;
+                &:before {
+                    @include fontAwesome;
+                    content: '\f1ce';
+                }
             }
             .highLight {
-                font-family: $font-primary-title;
+                font-weight: bold;
                 font-size: 1.1rem;
-                color: $color-primary;
+                color: $color-primary-hover;
             }
         }
     }
@@ -5615,6 +5637,54 @@ $width-single-menu  : 260px;
             margin-left: 0;
             margin-top: 1.5rem;
             min-height: 300px;
+        }
+    }
+}
+.certifiedBox {
+    display: flex;
+    align-items: flex-start;
+    padding: 1rem;
+    box-shadow: 0 0 5px $bg-03;
+    border: 1px solid $bg-03;
+    background: #fff;
+    border-radius: 3px;
+    &_image {
+        flex: 0 0 100px;
+        img {
+            margin: 0;
+        }
+    }
+    &_content {
+        width: 100%;
+        margin-left: 1.5rem;
+        &_title {
+            font-weight: bold;
+            color: $color-title;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #25a244;
+        }
+        &_list {
+            font-size: 1rem;
+            > * {
+                color: $color-highlight;
+                &:before {
+                    @include fontAwesome;
+                    content: '\f00c';
+                    margin-right: 0.5rem;
+                    color: #25a244;
+                }
+            }
+        }
+    }
+    @media(max-width: 577px){
+        flex-wrap: wrap;
+        &_image {
+            margin: 0 auto;
+        }
+        &_content {
+            margin-top: 0.75rem;
+            margin-left: 0;
         }
     }
 }
