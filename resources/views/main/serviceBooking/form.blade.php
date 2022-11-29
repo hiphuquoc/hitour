@@ -88,15 +88,12 @@
                                     <div class="bookingForm_item_body_item">
                                         <div class="formColumnCustom">
                                             <div class="formColumnCustom_item">
-                                                {{-- <div class="inputWithIcon date"> --}}
-                                                    <div>
-                                                        <label class="form-label" for="date">Ngày khởi hành</label>
-                                                        <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date" placeholder="YYYY-MM-DD" value="{{ request('date') ?? null }}" readonly="readonly" onChange="loadOptionService();" />
-                                                    </div>
-                                                    <div class="messageValidate_error" data-validate="date">{{ config('main.message_validate.not_empty') }}</div>
-                                                {{-- </div> --}}
+                                                <div>
+                                                    <label class="form-label" for="date">Ngày khởi hành</label>
+                                                    <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date" placeholder="YYYY-MM-DD" value="{{ request('date') ?? null }}" readonly="readonly" onChange="loadOptionService();" />
+                                                </div>
+                                                <div class="messageValidate_error" data-validate="date">{{ config('main.message_validate.not_empty') }}</div>
                                             </div>
-                                            <div class="formColumnCustom_item"></div>
                                         </div>
                                     </div>
                                     <!-- One Row -->
@@ -295,15 +292,13 @@
                 }
             })
             /* validate riêng cho số lượng */
-            const valueQuantityAdult    = $('#formBooking').find('[name=quantity_adult_1]').val();
-            const valueQuantityChild    = $('#formBooking').find('[name=quantity_child]_1').val();
-            const valueQuantityOld      = $('#formBooking').find('[name=quantity_old]_1').val();
-            if(valueQuantityAdult==''&&valueQuantityAdult==''&&valueQuantityAdult==''){
-                error.push('quantity_1');
-            }
-            if(valueQuantityAdult==0&&valueQuantityAdult==0&&valueQuantityAdult==0){
-                error.push('quantity_1');
-            }
+            var quantity        = 0;
+            $('#formBooking').find('[name^="quantity"]').each(function(){
+                let valInput    = $(this).val();
+                if(valInput=='') valInput = 0;
+                quantity        += parseInt(valInput) + parseInt(quantity);
+            })
+            if(quantity==0) error.push('quantity');
             return error;
         }
 

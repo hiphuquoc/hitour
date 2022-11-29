@@ -1,82 +1,103 @@
 @php
     $dataShipPort 		= \App\Models\ShipPort::all();
 @endphp
-<form id="shipBookingSort" method="get" action="{{ route('main.shipBooking.form') }}">
-    <div class="bookFormSort_body_item">
-        <div class="flexBox">
-            <div class="flexBox_item inputWithIcon location">
-                <label for="ship_port_departure_id">Điểm đi</label>
-                <select  id="js_loadShipLocationByShipDeparture_element" class="select2 form-select select2-hidden-accessible" name="ship_port_departure_id" onchange="loadShipLocationByShipDeparture(this, 'js_loadShipLocationByShipDeparture_idWrite');" tabindex="-1" aria-hidden="true">
-                    {{-- <option value="">- Lựa chọn -</option> --}}
-                    @foreach($dataShipPort as $port)
-                        @php
-                            $selected	= null;
-                            /* kiểm tra cho trang ship_info */
-                            if(!empty($item->portDeparture->name)&&$item->portDeparture->name==$port->name) $selected = 'selected';
-                            /* kiểm tra cho trang ship_location */
-                            if(!empty($item->ships[0]->portDeparture->name)&&$item->ships[0]->portDeparture->name==$port->name) $selected = 'selected';
-                            $portName 	= \App\Helpers\Build::buildFullShipPort($port);
-                        @endphp
-                        <option value="{{ $port->id }}" {{ $selected }}>{{ $portName }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="flexBox_item inputWithIcon location">
-                <label for="ship_port_location_id">Điểm đến</label>
-                <select id="js_loadShipLocationByShipDeparture_idWrite" class="select2 form-select select2-hidden-accessible" name="ship_port_location_id" tabindex="-1" aria-hidden="true">
-                    {{-- <option value="">- Lựa chọn -</option> --}}
-                </select>
+<div class="bookFormSortShip">
+    <div class="bookFormSortShip_column">
+        <!-- One column -->
+        <div class="bookFormSortShip_column_item">
+            <div class="inputWithIconBetween">
+                <div class="inputWithIconBetween_item">
+                    <label for="ship_port_departure_id">Điểm đi</label>
+                    <select  id="js_loadShipLocationByShipDeparture_element" class="select2 form-select select2-hidden-accessible" name="ship_port_departure_id" onchange="loadShipLocationByShipDeparture(this, 'js_loadShipLocationByShipDeparture_idWrite');" tabindex="-1" aria-hidden="true">
+                        {{-- <option value="">- Lựa chọn -</option> --}}
+                        @foreach($dataShipPort as $port)
+                            @php
+                                $selected	= null;
+                                /* kiểm tra cho trang ship_info */
+                                if(!empty($item->portDeparture->name)&&$item->portDeparture->name==$port->name) $selected = 'selected';
+                                /* kiểm tra cho trang ship_location */
+                                if(!empty($item->ships[0]->portDeparture->name)&&$item->ships[0]->portDeparture->name==$port->name) $selected = 'selected';
+                                $portName 	= \App\Helpers\Build::buildFullShipPort($port);
+                            @endphp
+                            <option value="{{ $port->id }}" {{ $selected }}>{{ $portName }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="inputWithIconBetween_icon">
+                    <img src="/images/main/svg/icon-round.svg" alt="đặt vé tàu cao tốc" title="đặt vé tàu cao tốc" />
+                </div>
+                <div class="inputWithIconBetween_item">
+                    <label for="ship_port_location_id">Điểm đến</label>
+                    <select id="js_loadShipLocationByShipDeparture_idWrite" class="select2 form-select select2-hidden-accessible" name="ship_port_location_id" tabindex="-1" aria-hidden="true">
+                        {{-- <option value="">- Lựa chọn -</option> --}}
+                    </select>
+                </div>
             </div>
         </div>
-        <div class="inputWithIcon adult">
-            <label for="bookFormSort_date">Số hành khách</label>
-            <div class="inputWithForm">
-                <input type="text" id="js_setValueQuantityShip_idWrite" class="form-control inputWithForm_input" name="quantity" value="1 Người lớn, 0 Trẻ em, 0 Cao tuổi" readonly="readonly" aria-label="Số khách đặt vé tàu cao tốc" required>
-                <div class="inputWithForm_form">
-                    <div class="formBox">
-                        <div class="formBox_labelOneRow">
-                            <div class="formBox_labelOneRow_item">
-                                <div>
-                                    <label>Người lớn</label>
-                                    <div style="font-size: 0.95rem;">Năm sinh từ {{ date('Y', time()) - 12 }} - {{ date('Y', time()) - 59 }}</div>
-                                </div>
-                                <div class="inputNumberCustom"> 
-                                    <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_nguoilon', 'minus');">
-                                        <i class="fa-solid fa-minus"></i>
+        <!-- One column -->
+        <div class="bookFormSortShip_column_item">
+            <!-- One column -->
+            <div class="bookFormSortShip_input_item">
+                <div class="inputWithIcon date">
+                    <label for="bookFormSort_date">Ngày khởi hành</label>
+                    <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date_1" value="{{ date('Y-m-d', time() + 86400) }}" aria-label="Ngày đi tàu cao tốc" readonly="readonly" required>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bookFormSortShip_column">
+        <!-- One column -->
+        <div class="bookFormSortShip_column_item">
+            <div class="inputWithIcon adult">
+                <label for="bookFormSort_date">Số hành khách</label>
+                <div class="inputWithForm">
+                    <input type="text" id="js_setValueQuantityShip_idWrite" class="form-control inputWithForm_input" name="quantity" value="1 Người lớn, 0 Trẻ em, 0 Cao tuổi" readonly="readonly" aria-label="Số khách đặt vé tàu cao tốc" required>
+                    <div class="inputWithForm_form">
+                        <div class="formBox">
+                            <div class="formBox_labelOneRow">
+                                <div class="formBox_labelOneRow_item">
+                                    <div>
+                                        <label>Người lớn</label>
+                                        <div style="font-size: 0.95rem;">Năm sinh từ {{ date('Y', time()) - 12 }} - {{ date('Y', time()) - 59 }}</div>
                                     </div>
-                                    <input id="js_changeValueInputShip_input_nguoilon" class="inputNumberCustom_input" type="text" name="adult_ship" value="1" aria-label="Số người lớn đặt vé tàu cao tốc" />
-                                    <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_nguoilon', 'plus');">
-                                        <i class="fa-solid fa-plus"></i>
+                                    <div class="inputNumberCustom"> 
+                                        <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_nguoilon', 'minus');">
+                                            <i class="fa-solid fa-minus"></i>
+                                        </div>
+                                        <input id="js_changeValueInputShip_input_nguoilon" class="inputNumberCustom_input" type="text" name="adult_ship" value="1" aria-label="Số người lớn đặt vé tàu cao tốc" />
+                                        <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_nguoilon', 'plus');">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="formBox_labelOneRow_item">
-                                <div>
-                                    <label>Trẻ em</label>
-                                    <div style="font-size: 0.95rem;">Năm sinh từ {{ date('Y', time()) - 6 }} - {{ date('Y', time()) - 11 }}</div>
-                                </div>
-                                <div class="inputNumberCustom"> 
-                                    <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_treem', 'minus');">
-                                        <i class="fa-solid fa-minus"></i>
+                                <div class="formBox_labelOneRow_item">
+                                    <div>
+                                        <label>Trẻ em</label>
+                                        <div style="font-size: 0.95rem;">Năm sinh từ {{ date('Y', time()) - 6 }} - {{ date('Y', time()) - 11 }}</div>
                                     </div>
-                                    <input id="js_changeValueInputShip_input_treem" class="inputNumberCustom_input" type="text" name="child_ship" value="0" aria-label="Số trẻ em đặt vé tàu cao tốc" />
-                                    <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_treem', 'plus');">
-                                        <i class="fa-solid fa-plus"></i>
+                                    <div class="inputNumberCustom"> 
+                                        <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_treem', 'minus');">
+                                            <i class="fa-solid fa-minus"></i>
+                                        </div>
+                                        <input id="js_changeValueInputShip_input_treem" class="inputNumberCustom_input" type="text" name="child_ship" value="0" aria-label="Số trẻ em đặt vé tàu cao tốc" />
+                                        <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_treem', 'plus');">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="formBox_labelOneRow_item">
-                                <div>
-                                    <label>Cao tuổi</label>
-                                    <div style="font-size: 0.95rem;">Năm sinh từ {{ date('Y', time()) - 60 }}</div>
-                                </div>
-                                <div class="inputNumberCustom"> 
-                                    <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_caotuoi', 'minus');">
-                                        <i class="fa-solid fa-minus"></i>
+                                <div class="formBox_labelOneRow_item">
+                                    <div>
+                                        <label>Cao tuổi</label>
+                                        <div style="font-size: 0.95rem;">Năm sinh từ {{ date('Y', time()) - 60 }}</div>
                                     </div>
-                                    <input id="js_changeValueInputShip_input_caotuoi" class="inputNumberCustom_input" type="text" name="old_ship" value="0" aria-label="Số người cao tuổi đặt vé tàu cao tốc" />
-                                    <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_caotuoi', 'plus');">
-                                        <i class="fa-solid fa-plus"></i>
+                                    <div class="inputNumberCustom"> 
+                                        <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_caotuoi', 'minus');">
+                                            <i class="fa-solid fa-minus"></i>
+                                        </div>
+                                        <input id="js_changeValueInputShip_input_caotuoi" class="inputNumberCustom_input" type="text" name="old_ship" value="0" aria-label="Số người cao tuổi đặt vé tàu cao tốc" />
+                                        <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_caotuoi', 'plus');">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -85,19 +106,14 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="bookFormSort_body_item">
-        <div class="inputWithIcon date">
-            <label for="bookFormSort_date">Ngày khởi hành</label>
-            <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date_1" value="{{ date('Y-m-d', time() + 86400) }}" aria-label="Ngày đi tàu cao tốc" readonly="readonly" required>
-        </div>
-        <div style="text-align:right;margin-top:1.5rem;">
-            <div class="buttonSecondary" onClick="submitForm('shipBookingSort');">
+        <!-- One column -->
+        <div class="bookFormSortShip_column_item button">
+            <div class="buttonSecondary" onClick="submitForm('shipBookingSort');" style="padding-top:0.5rem !important;padding-bottom:0.5rem !important;">
                 <i class="fa-solid fa-magnifying-glass"></i>Tìm chuyến tàu
             </div>
         </div>
     </div>
-</form>
+</div>
 
 @push('scripts-custom')
     <script type="text/javascript">

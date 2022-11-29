@@ -88,7 +88,6 @@
                                                 </div>
                                                 <div class="messageValidate_error" data-validate="date">{{ config('main.message_validate.not_empty') }}</div>
                                             </div>
-                                            <div class="formColumnCustom_item"></div>
                                         </div>
                                     </div>
                                     <!-- One Row -->

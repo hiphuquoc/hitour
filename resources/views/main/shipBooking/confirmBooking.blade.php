@@ -10,51 +10,48 @@
         <div class="sectionBox">
             <div class="container">
                 <!-- title -->
-                <h1 class="titlePage" style="margin-bottom:1.5rem;text-align:center;">Đơn hàng thành công</h1>
+                <h1 class="titlePage" style="margin-bottom:1.5rem;text-align:center;">Đặt vé thành công</h1>
                 <!-- ship box -->
                 <div class="pageContent_body">
                     <div class="bookingForm">
                         <!-- Tình trạng booking -->
                         <div class="bookingForm_item">
                             <div class="bookingForm_item_body">
-                                <div>Quý khách vừa thực hiện đăng ký cho đơn hàng có MÃ: <span style="font-size:1.2rem;font-weight:700;color:rgb(0, 90, 180);">{{ $item->no ?? '-' }}</span></div>
-                                <div>Tình trạng đơn hàng: <span style="font-size:1.2rem;font-weight:700;color:#00C000;">Chờ nhân viên xác nhận</span></div>
-                                <div>Đơn hàng của Quý khách đã được thông báo đến nhân viên Hitour. Sau khi kiểm tra xong nhân viên sẽ gửi xác nhận vào Email hoặc Zalo Quý khách đăng ký và liên hệ cho Quý khách.</div>
+                                <div>Quý khách vừa thực hiện đăng ký cho booking có MÃ: <span style="font-size:1.2rem;font-weight:700;color:rgb(0, 90, 180);">{{ $item->no ?? null }}</span></div>
+                                <div>Tình trạng: <span style="font-size:1.2rem;font-weight:700;color:#00C000;">Chờ nhân viên xác nhận</span></div>
+                                <div>Thông tin booking của Quý khách đã được thông báo đến nhân viên Hitour. Sau khi kiểm tra xong nhân viên sẽ gửi xác nhận vào Email hoặc Zalo và liên hệ cho Quý khách.</div>
                             </div>
                         </div>
                         <div class="bookingForm_item">
                             <div class="bookingForm_item_head">
                                 Thông tin liên hệ
                             </div>
-                            <table class="tableDetailShipBooking noResponsive">
-                                <tbody>
-                                    <tr>
-                                        <td style="width:200px;">Tên khách hàng</td>
-                                        <td>{{ $item->customer_contact->name ?? null }}</td>
-                                    </tr>
-                                    @if(!empty($item->customer_contact->zalo)&&$item->customer_contact->phone==$item->customer_contact->zalo)
+                            <div class="bookingForm_item_body" style="padding:0;background:none;border:none;box-shadow:none;">
+                                <table class="tableDetailShipBooking noResponsive">
+                                    <tbody>
                                         <tr>
-                                            <td>Điện thoại</td>
-                                            <td>{{ $item->customer_contact->phone ?? null }} (Zalo)</td>
+                                            <td style="width:200px;">Tên khách hàng</td>
+                                            <td>{{ $item->customer_contact->name ?? null }}</td>
                                         </tr>
-                                    @else
                                         <tr>
                                             <td>Điện thoại</td>
                                             <td>{{ $item->customer_contact->phone ?? null }}</td>
                                         </tr>
-                                        <tr>
-                                            <td>Zalo</td>
-                                            <td>{{ $item->customer_contact->zalo ?? null }}</td>
-                                        </tr>
-                                    @endif
-                                    @if(!empty($item->customer_contact->email))
-                                        <tr>
-                                            <td>Email</td>
-                                            <td>{{ $item->customer_contact->email }}</td>
-                                        </tr>
-                                    @endif
-                                </tbody>
-                            </table>
+                                        @if(!empty($item->customer_contact->zalo))
+                                            <tr>
+                                                <td>Zalo</td>
+                                                <td>{{ $item->customer_contact->zalo }}</td>
+                                            </tr>
+                                        @endif
+                                        @if(!empty($item->customer_contact->email))
+                                            <tr>
+                                                <td>Email</td>
+                                                <td>{{ $item->customer_contact->email }}</td>
+                                            </tr>
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <!-- Thông tin liên hệ -->
                         <div class="bookingForm_item">
@@ -64,37 +61,6 @@
                             <div class="bookingForm_item_body" style="padding:0;background:none;border:none;box-shadow:none;">
                                 <table class="tableDetailShipBooking noResponsive">
                                     <tbody>
-                                        @if(!empty($item->customer->name))
-                                            <tr>
-                                                <td style="width:150px;">Họ tên</td>
-                                                <td colspan="2">{{ $item->customer->name }}</td>
-                                            </tr>
-                                        @endif
-                                        @if(!empty($item->customer->phone))
-                                            @if(!empty($item->customer->zalo)&&$item->customer->zalo==$item->customer->phone)
-                                                <tr>
-                                                    <td>Điện thoại</td>
-                                                    <td colspan="2">{{ $item->customer->phone }} (Zalo)</td>
-                                                </tr>
-                                            @else 
-                                                <tr>
-                                                    <td>Điện thoại</td>
-                                                    <td colspan="2">{{ $item->customer->phone }}</td>
-                                                </tr>
-                                                @if(!empty($item->customer->zalo))
-                                                    <tr>
-                                                        <td>Zalo</td>
-                                                        <td colspan="2">{{ $item->customer->zalo }}</td>
-                                                    </tr>
-                                                @endif
-                                            @endif
-                                        @endif
-                                        @if(!empty($item->customer->email))
-                                            <tr>
-                                                <td>Email</td>
-                                                <td colspan="2">{{ $item->customer->email }}</td>
-                                            </tr>
-                                        @endif
                                         <!-- Bảng tính tiền -->
                                         @php
                                             $total  = 0;
@@ -243,7 +209,7 @@
                             </div>
                             <div class="bookingForm_item_body" style="padding:0;background:none;border:none;box-shadow:none;">
                                 <ul>
-                                    <li>Đơn hàng của Quý khách đã được gửi thành công. Quý khách vui lòng chờ nhân viên kiểm tra và gửi xác nhận vào Email hoặc Zalo sau.</li>
+                                    <li>Thông tin đã được gửi thành công. Quý khách vui lòng chờ nhân viên kiểm tra và gửi xác nhận vào Email hoặc Zalo sau.</li>
                                     <li>Nếu chưa cung cấp thông tin hành hành khách Quý khách vui lòng chuẩn bị danh sách từng hành khách gồm: Họ tên đầy đủ + Năm sinh + Số một trong những giấy tờ tùy thân sau (Chứng minh nhân dân, Căn cước công dân, Passport hoặc Bằng lái xe).</li>
                                     <li>Sau khi nhân viên gửi xác nhận Quý khách vui lòng chuyển khoản theo hướng dẫn có trong xác nhận.</li>
                                     <li>Vé điện tử sẽ được gửi qua Email hoặc Zalo để Quý khách mở trên điện thoại và quét mã lên tàu.</li>

@@ -11,6 +11,6 @@
                 </div>
             @endforeach
         @endif
-        <div class="messageValidate_error" data-validate="quantity">Tổng số lượng phải lớn hơn 0!</div>
     </div>
+    <div class="messageValidate_error" data-validate="quantity">Tổng số lượng phải lớn hơn 0!</div>
 </div>

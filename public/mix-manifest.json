@@ -1,6 +1,6 @@
 {
     "/js/bootstrap.js": "/js/bootstrap.js?id=b4112070cb22221e6e5b423fb99d5dce",
-    "/sources/main/css/style.css": "/sources/main/css/style.css?id=b91217362f1ec0669d6ab8118eb29ec2",
+    "/sources/main/css/style.css": "/sources/main/css/style.css?id=c0d9c7033f2fb39feb2b58ed6e06abd9",
     "/sources/admin/css/style.css": "/sources/admin/css/style.css?id=6b3070de09663e74f5a7b3f25674d916",
     "/sources/admin/app-assets/css/bootstrap-extended.css": "/sources/admin/app-assets/css/bootstrap-extended.css?id=aa5e4c4e7f5ce9186b8379474b1ead5b",
     "/sources/admin/app-assets/css/bootstrap-extended.min.css": "/sources/admin/app-assets/css/bootstrap-extended.min.css?id=f50e71c841cfb4bb45d1609fd5d73c01",
@@ -830,5 +830,6 @@
     "/fonts/svn-gilroy_medium.ttf": "/fonts/svn-gilroy_medium.ttf?id=92dafd7cb69e501cdbc588af22d92c20",
     "/fonts/svn-gilroy_regular.ttf": "/fonts/svn-gilroy_regular.ttf?id=325a02a5a525fc400885126ab4795c39",
     "/fonts/svn-gilroy_semibold.ttf": "/fonts/svn-gilroy_semibold.ttf?id=b3bbd646e15718ae2cb45421795211b8",
-    "/fonts/svn_segoe_ui.ttf": "/fonts/svn_segoe_ui.ttf?id=f430fe00af2edcc5cf39a7fbd79739d4"
+    "/fonts/svn_segoe_ui.ttf": "/fonts/svn_segoe_ui.ttf?id=f430fe00af2edcc5cf39a7fbd79739d4",
+    "/images/main/svg/icon-round.svg": "/images/main/svg/icon-round.svg?id=4937e63b0dc9a81ef15ee8d3c7dbc5c9"
 }

@@ -356,26 +356,6 @@ class BuildInsertUpdateModel {
         return $result;
     }
 
-    public static function buildArrayTableTourQuantityAndPrice($idBooking, $idTourOption, $dataForm){
-        $result = [];
-        $i      = 0;
-        if(!empty($idBooking)&&!empty($dataForm)){
-            $tourOption                         = TourOption::find($idTourOption);
-            foreach($dataForm['quantity'] as $idPrice => $quantity){
-                if($quantity>0){
-                    $tourPrice                      = TourPrice::find($idPrice);
-                    $result[$i]['tour_booking_id']  = $idBooking;
-                    $result[$i]['option_name']      = $tourOption->option;
-                    $result[$i]['option_age']       = $tourPrice->apply_age;
-                    $result[$i]['quantity']         = $quantity;
-                    $result[$i]['price']            = $tourPrice->price;
-                    ++$i;
-                }
-            }
-        }
-        return $result;
-    }
-
     public static function buildArrayTableCitizenIdentityInfoTable($idBooking, $typeBooking, $dataForm){
         /*
             tour_booking_id | ship_booking_id | room_booking_id | service_booking_id
@@ -1175,6 +1155,84 @@ class BuildInsertUpdateModel {
             $result['show_sidebar']     = 0;
             if(!empty($dataForm['show_sidebar'])) {
                 if($dataForm['show_sidebar']=='on') $result['show_sidebar'] = 1;
+            }
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableBookingInfo($idCustomer, $type, $dataForm){
+        $result = [];
+        if(!empty($dataForm)){
+            $result['no']                   = \App\Helpers\Charactor::randomString(10);
+            if(!empty($idCustomer)) $result['customer_info_id'] = $idCustomer;
+            $result['reference_id']         = $dataForm['service_info_id'] ?? $dataForm['tour_info_id'] ?? $dataForm['ship_info_id'];
+            $result['type']                 = $type;
+            if(!empty($dataForm['status_id'])) $result['status_id'] = $dataForm['status_id'];
+            $result['date_from']            = date('Y-m-d', strtotime($dataForm['date']));
+            if($type=='service_info'||$type=='ship_info'){
+                /* trường hợp đặt vé vui chơi và vé tàu thì trong ngày */
+                $result['date_to']          = $result['date_from'];
+            }else {
+                /* trường hợp tour => lấy thông tin tour để tính ngày kết thúc */
+                $infoTour                   = \App\Models\Tour::select('*')
+                                                ->where('id', $dataForm['tour_info_id'])
+                                                ->first();
+                $result['date_to']          = date('Y-m-d', strtotime($dataForm['date']) + 86400*($infoTour->days - 1));
+            }
+            $result['note_customer']        = $dataForm['note_customer'] ?? null;
+            $result['created_by']           = Auth::id() ?? 0;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableServiceQuantityAndPrice($idBooking, $dataForm){
+        $result                                 = [];
+        if(!empty($dataForm)&&!empty($idBooking)){
+            $infoServiceOption                  = \App\Models\ServiceOption::select('*')
+                                                    ->where('id', $dataForm['service_option_id'])
+                                                    ->with('prices')
+                                                    ->first();
+            $i                                  = 0;
+            foreach($infoServiceOption->prices as $price){
+                foreach($dataForm['quantity'] as $idPrice => $quantity){
+                    if($price->id==$idPrice&&$quantity>0){
+                        $result[$i]['booking_info_id']  = $idBooking;
+                        $result[$i]['option_name']      = $infoServiceOption->name;
+                        $result[$i]['option_age']       = $price->apply_age;
+                        $result[$i]['quantity']         = $quantity;
+                        $result[$i]['price']            = $price->price;
+                        $result[$i]['profit']           = $price->profit;
+                        ++$i;
+                        break;
+                    }
+                }
+            }
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableTourQuantityAndPrice($idBooking, $dataForm){
+        $result = [];
+        $i      = 0;
+        if(!empty($idBooking)&&!empty($dataForm)){
+            $infoTourOption                     = TourOption::select('*')
+                                                    ->where('id', $dataForm['tour_option_id'])
+                                                    ->with('prices')
+                                                    ->first();
+            $i                                  = 0;
+            foreach($infoTourOption->prices as $price){
+                foreach($dataForm['quantity'] as $idPrice => $quantity){
+                    if($price->id==$idPrice&&$quantity>0){
+                        $result[$i]['booking_info_id']  = $idBooking;
+                        $result[$i]['option_name']      = $infoTourOption->option;
+                        $result[$i]['option_age']       = $price->apply_age;
+                        $result[$i]['quantity']         = $quantity;
+                        $result[$i]['price']            = $price->price;
+                        $result[$i]['profit']           = $price->profit;
+                        ++$i;
+                        break;
+                    }
+                }
             }
         }
         return $result;

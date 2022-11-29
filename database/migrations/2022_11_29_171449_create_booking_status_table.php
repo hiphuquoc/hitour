@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tour_booking_quantity_and_price', function (Blueprint $table) {
+        Schema::create('booking_status', function (Blueprint $table) {
             $table->id();
-            $table->integer('booking_info_id');
-            $table->string('option_name');
-            $table->string('option_age');
-            $table->integer('quantity');
-            $table->integer('price');
-            $table->integer('profit')->nullable();
+            $table->string('name');
+            $table->string('color', 10);
         });
     }
 
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('tour_booking_quantity_and_price');
+        // Schema::dropIfExists('booking_status');
     }
 };

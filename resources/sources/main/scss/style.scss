@@ -1422,7 +1422,7 @@ $tourGrid_radius : 5px;
     }
 }
 .detailTourBox {
-    padding: 0 1rem;
+    padding: 0 1.25rem;
     border: 1px solid $bg-04;
     table {
         line-height: 1.8;
@@ -1466,7 +1466,7 @@ $tourGrid_radius : 5px;
     border: 1px solid $bg-03;
     &_price {
         background: linear-gradient(90deg, $color-primary 0, $color-primary-hover 100%);
-        padding: 0.5rem 1rem 0.75rem 1rem;
+        padding: 0.75rem 1.25rem 1rem 1.25rem;
         color: #fff;
         span {
             font-size: 1.6rem;
@@ -1476,7 +1476,7 @@ $tourGrid_radius : 5px;
         }
     }
     &_content {
-        padding: 0.75rem 1rem;
+        padding: 0.75rem 1.25rem;
         line-height: 1.8;
         ul {
             margin-left: 1rem;
@@ -1484,7 +1484,7 @@ $tourGrid_radius : 5px;
     }
     &_button {
         background: linear-gradient(90deg, $color-primary 0, $color-primary-hover 100%);
-        padding: 1rem;
+        padding: 0.75rem 1.25rem;
         color: #fff;
         &_item {
             &:not(:first-child){
@@ -1507,6 +1507,7 @@ $tourGrid_radius : 5px;
                 font-size: 1.1rem;
                 text-align: center;
                 cursor: pointer;
+                margin: 1rem 0 0.75rem 0;
                 &:hover {
                     background: $color-secondary-hover;
                 }
@@ -2483,7 +2484,6 @@ blockquote{
 .bookingForm {
     display: flex;
     flex-direction: column;
-    
     &_item {
         width: 100%;
         &:not(:first-child){
@@ -2500,13 +2500,13 @@ blockquote{
             border: 1px solid $bg-03;
             background: #fff;
             border-radius: 3px;
-            padding: 1rem 1rem 1.5rem 1rem;
+            padding: 1rem 1.5rem 1.5rem;
             ul:not(.select2-results__options) {
                 li {
                     &:not(:first-child){
                         margin-top: 0.5rem;
                         padding-top: 0.5rem;
-                        border-top: 1px dashed $bg-04;
+                        border-top: 1px dashed $bg-05;
                     }
                 }
             }
@@ -2556,19 +2556,20 @@ blockquote{
     }
     @media(max-width: 577px){
         &_item {
-            &:not(:first-child){
-                margin-top: 1.5rem;
-                padding-top: 1rem;
-                border-top: 1px solid $bg-04;
-            }
+            // &:not(:first-child){
+            //     margin-top: 1.5rem;
+            //     padding-top: 1rem;
+            //     border-top: 1px solid $bg-04;
+            // }
             &_head {
                 margin-bottom: 0.75rem;
             }
             &_body {
-                // padding: 0;
-                // background: unset;
-                // box-shadow: unset;
-                // border: none;
+                &_item {
+                    &:not(:first-child){
+                        margin-top: 1rem;
+                    }
+                }
             }
         }
         .formColumnCustom {
@@ -2577,7 +2578,7 @@ blockquote{
                 width: 100%;
                 margin-left: 0 !important;
                 &:not(:first-child){
-                    margin-top: 0.75rem;
+                    margin-top: 1rem;
                 }
             }
         }
@@ -2766,7 +2767,7 @@ blockquote{
             text-align: center;
             padding: 0.5rem;
             &:not(:first-child){
-                border-left: 1px solid $bg-04;
+                border-left: 1px solid $bg-05;
             }
             &.active {
                 background: linear-gradient(90deg, $color-primary 0, $color-primary-hover 100%);
@@ -2790,7 +2791,7 @@ blockquote{
     &_body {
         &_row {
             display: flex;
-            border-bottom: 1px dashed $bg-04;
+            border-bottom: 1px dashed $bg-05;
             align-items: center;
             background: $bg-02;
             padding: 1rem;
@@ -2954,7 +2955,7 @@ blockquote{
     }
     tr {
         td {
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1rem;
             border-left: 1px solid $bg-04;
         }
         &:not(:first-child){
@@ -2975,7 +2976,7 @@ blockquote{
         width: 50%;
         border: 1px solid $bg-04;
         &_title {
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1rem;
             background: $color-primary-02;
             .highLight {
                 color: $color-primary-hover;
@@ -2984,10 +2985,10 @@ blockquote{
             }
         }
         &_body {
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1rem;
             &_item {
                 &:not(:first-child){
-                    margin-top: 0.5rem;
+                    margin-top: 1rem;
                     padding-top: 0.5rem;
                     border-top: 1px dashed $bg-04;
                 }
@@ -3041,18 +3042,18 @@ blockquote{
     }
 }
 .buttonSecondary {
-    background: $bg-04;
-    &:hover {
-        background: $bg-05;
-    }
+    color: $color-highlight;
     background: $color-secondary;
-    padding: 0.65rem 1rem;
+    padding: 0.75rem 1rem;
     display: inline-block;
     border-radius: 5px;
     font-size: 0.95rem;
-    font-family: $font-primary-title;
+    font-weight: bold;
     box-shadow: 0 0 5px $bg-03;
     cursor: pointer;
+    &:hover {
+        background: $bg-05;
+    }
     i {
         margin-right: 0.5rem;
     }
@@ -3089,15 +3090,16 @@ blockquote{
         display: flex;
         > * {
             opacity: 0.8;
-            background: #fff;
+            background: #f1f1f1;
             padding: 0.25rem 1rem;
             font-family: $font-primary-title;
             font-size: 0.95rem;
             font-weight: 500;
-            border-radius: 5px 5px 0 0;
             cursor: pointer;
+            border: 1px solid $color-primary-04;
+            border-radius: 7px 7px 0 0;
             &:not(:first-child){
-                margin-left: 0.25rem;
+                margin-left: -1px;
             }
             &.active {
                 opacity: 1;
@@ -3112,82 +3114,158 @@ blockquote{
             }
         }
     }
-	
     &_body {
         width: 100%;
-        background: #fff;
+        background: $bg-02;
         border: 1px solid $bg-04;
-        box-shadow: 0px 0px 5px $bg-04;
+        box-shadow: 0px 0px 5px $bg-05;
         border-top: 2px solid $color-primary;
-        padding: 1rem 1rem 2rem 1rem;
-        border-radius: 0 5px 5px 5px;
+        padding: 1rem 1.5rem 1.5rem 1.5rem;
+        border-radius: 0 7px 7px 7px;
         font-size: 1rem;
-        &_item {
-            display: flex;
-            align-items: flex-end;
-            &:not(:first-child){
-                margin-top: 1rem;
-            }
-            > * {
-                width: calc(50% - 0.5rem);
-                &:not(:first-child){
-                    margin-left: 1rem;
-                }
-            }
-            .flexBox {
-                &_item {
-                    width: calc(50% - 0.5rem);
-                    &:not(:first-child){
-                        margin-left: 1rem;
-                    }
-                }
-            }
-        }
         label {
-            font-size: 0.95rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
         }
     }
     @media (max-width: 767px){
         margin-top: -3rem;
         &_body {
-            padding: 0.5rem 1rem 1rem 1rem;
+            padding: 0.75rem 1rem 1.25rem 1rem;
+        }
+    }
+}
+.bookFormSortService {
+    display: flex;
+    align-items: flex-end;
+    &_input {
+        width: 100%;
+        display: flex;
+        &_item {
+            width: calc(33.33% - 1rem);
+            &:not(:first-child){
+                margin-left: 1.5rem;
+            }
+        }
+    }   
+    &_button {
+        flex: 0 0 140px;
+        margin-left: 1.5rem;
+    }
+    @media(max-width: 990px){
+        flex-wrap: wrap;
+        position: relative;
+        &_input {
+            flex-wrap: wrap;
             &_item {
-                flex-wrap: wrap;
+                width: calc(50% - 0.75rem);
+                &:nth-child(2n + 1){
+                    margin-left: 0 !important;
+                }
+                &:nth-child(n + 3){
+                    margin-top: 0.75rem;
+                }
+            }
+        }
+        &_button {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+    }
+    @media(max-width: 767px){
+        &_input {
+            &_item {
+                width: calc(50% - 0.5rem);
+                margin-left: 1rem !important;
+            }
+        }
+    }
+    @media(max-width: 577px){
+        flex-wrap: wrap;
+        &_input {
+            flex-wrap: wrap;
+            &_item {
+                width: 100%;
+                margin-left: 0 !important;
                 &:not(:first-child){
                     margin-top: 0.75rem;
                 }
+            }
+        }
+        &_button {
+            text-align: right;
+            margin-top: 1rem;
+            width: 100%;
+            flex: unset !important; 
+        }
+    }
+}
+.bookFormSortShip {
+    &_column {
+        width: 100%;
+        display: flex;
+        &_item {
+            width: calc(50% - 0.75rem);
+            &:not(:first-child){
+                margin-left: 1.5rem;
+            }
+            > * {
+                width: 100%;
+            }
+            &.button {
+                align-self: flex-end;
+                text-align: right;
                 > * {
-                    width: 100%;
-                    margin-left: 0 !important;
-                    &:not(:first-child){
-                        margin-top: 0.75rem;
-                    }
+                    width: auto;
                 }
-                .flexBox {
-                    flex-wrap: wrap;
-                    &_item {
-                        width: 100%;
-                        margin-left: 0 !important;
-                        &:not(:first-child){
-                            margin-top: 0.75rem;
-                        }
-                    }
+            }
+        }
+        &:not(:first-child){
+            margin-top: 0.75rem;
+        }
+    }
+    @media(max-width: 577px){
+        &_column {
+            flex-wrap: wrap;
+            &_item {
+                width: 100%;
+                margin-left: 0 !important;
+                &:not(:first-child){
+                    margin-top: 0.75rem;
+                }
+                &.button {
+                    margin-top: 1rem;
                 }
             }
         }
     }
-    @media (max-width: 577px){
-        
-        .flexBox {
-            flex-wrap: wrap;
-            &_item {
-                margin-left: 0;
-                &:not(:first-child){
-                    margin-top: 0.75rem;
-                }
-            }
+}
+.inputWithIconBetween {
+    position: relative;
+    width: 100%;
+    display: flex;
+    &_item {
+        width: calc(50% - 0.5rem);
+        &:last-child {
+            margin-left: 1rem;
+            // input, .select2-container--default .select2-selection--single .select2-selection__rendered {
+            //     padding-left: 1rem;
+            // }
+        }
+    }
+    &_icon {
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        left: 50%;
+        bottom: 0.5rem;
+        transform: translateX(-50%);
+        background: $color-primary;
+        z-index: 1;
+        border-radius: 50%;
+        img {
+            width: 100%;
         }
     }
 }
@@ -5667,7 +5745,7 @@ $width-single-menu  : 260px;
 .certifiedBox {
     display: flex;
     align-items: flex-start;
-    padding: 1rem;
+    padding: 1rem 1.25rem;
     box-shadow: 0 0 5px $bg-03;
     border: 1px solid $bg-03;
     background: #fff;

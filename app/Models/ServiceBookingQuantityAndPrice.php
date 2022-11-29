@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class TourBookingQuantityAndPrice extends Model {
+class ServiceBookingQuantityAndPrice extends Model {
     use HasFactory;
-    protected $table        = 'tour_booking_quantity_and_price';
+    protected $table        = 'service_booking_quantity_and_price';
     protected $fillable     = [
         'booking_info_id', 
         'option_name',
@@ -22,7 +22,7 @@ class TourBookingQuantityAndPrice extends Model {
     public static function insertItem($params){
         $id             = 0;
         if(!empty($params)){
-            $model      = new TourBookingQuantityAndPrice();
+            $model      = new ServiceBookingQuantityAndPrice();
             foreach($params as $key => $value) $model->{$key}  = $value;
             $model->save();
             $id         = $model->id;
@@ -38,15 +38,5 @@ class TourBookingQuantityAndPrice extends Model {
             $flag       = $model->update();
         }
         return $flag;
-    }
-
-    public static function getListByTourBookingId($idBooking){
-        $result         = [];
-        if(!empty($idBooking)){
-            $result     = self::select('*')
-                            ->where('tour_booking_id', $idBooking)
-                            ->get();
-        }
-        return $result;
     }
 }

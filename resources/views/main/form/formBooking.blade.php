@@ -29,19 +29,21 @@
 		<div class="bookFormSort_body">
 			<!-- Ship booking form -->
 			<div id="shipBookingForm" {{ !empty($active)&&$active!='ship' ? 'style=display:none;' : null }}>
-				@include('main.form.sortBooking.ship', compact('item'))
+				<form id="shipBookingSort" method="get" action="{{ route('main.shipBooking.form') }}">
+					@include('main.form.sortBooking.ship', compact('item'))
+				</form>
 			</div>
 			<!-- Tour booking form -->
 			<div id="tourBookingForm" {{ !empty($active)&&$active!='tour' ? 'style=display:none;' : null }}>
-				@include('main.form.sortBooking.tour', compact('item'))
+				<form id="tourBookingSort" method="get" action="{{ route('main.tourBooking.form') }}">
+					@include('main.form.sortBooking.tour', compact('item'))
+				</form>
 			</div>
-			{{-- <!-- Tour booking form -->
-			<div id="hotelBookingForm" style="display: none;">
-				@include('main.form.sortBooking.hotel')
-			</div> --}}
 			<!-- Tour booking form -->
 			<div id="ticketBookingForm" {{ !empty($active)&&$active!='service' ? 'style=display:none;' : null }}>
-				@include('main.form.sortBooking.ticket')
+				<form id="serviceBookingSort" method="get" action="{{ route('main.serviceBooking.form') }}">
+					@include('main.form.sortBooking.ticket')
+				</form>
 			</div>
 		</div>
 	</div>

@@ -5,7 +5,7 @@ use App\Models\Tour;
 use App\Models\TourLocation;
 use App\Models\TourPrice;
 use App\Models\Customer;
-use App\Models\TourBooking;
+use App\Models\Booking;
 use App\Models\TourBookingQuantityAndPrice;
 use Illuminate\Http\Request;
 
@@ -28,12 +28,12 @@ class TourBookingController extends Controller {
         /* insert customer_info */
         $insertCustomer             = $this->BuildInsertUpdateModel->buildArrayTableCustomerInfo($request->all());
         $idCustomer                 = Customer::insertItem($insertCustomer);
-        /* insert tour_booking */
-        $insertTourBooking          = $this->BuildInsertUpdateModel->buildArrayTableTourBooking($idCustomer, $request->all());
+        /* insert booking_info */
+        $insertTourBooking          = $this->BuildInsertUpdateModel->buildArrayTableBookingInfo($idCustomer, 'tour_info', $request->all());
         $noBooking                  = $insertTourBooking['no'];
-        $idBooking                  = TourBooking::insertItem($insertTourBooking);
+        $idBooking                  = Booking::insertItem($insertTourBooking);
         /* insert tour_booking_quantity_and_price */
-        $insertTourBookingQuantityAndPrice  = $this->BuildInsertUpdateModel->buildArrayTableTourQuantityAndPrice($idBooking, $request->get('tour_option_id'), $request->all());
+        $insertTourBookingQuantityAndPrice  = $this->BuildInsertUpdateModel->buildArrayTableTourQuantityAndPrice($idBooking, $request->all());
         foreach($insertTourBookingQuantityAndPrice as $itemInsert){
             TourBookingQuantityAndPrice::insertItem($itemInsert);
         }
@@ -42,9 +42,9 @@ class TourBookingController extends Controller {
 
     public static function confirm(Request $request){
         $noBooking  = $request->get('no') ?? null;
-        $item       = TourBooking::select('*')
+        $item       = Booking::select('*')
                         ->where('no', $noBooking)
-                        ->with('tour', 'customer_contact', 'customer_list', 'quantiesAndPrices')
+                        ->with('tour', 'tourQuantityAndPrice')
                         ->first();
         if(!empty($item)){
             return view('main.tourBooking.confirmBooking', compact('item'));

@@ -7,10 +7,11 @@
         $dataTourLocation[$tourLocation->region->name][] = $tourLocation;
     }
 @endphp
-<form id="tourBookingSort" method="get" action="{{ route('main.tourBooking.form') }}">
-    <div class="bookFormSort_body_item">
-        <div class="flexBox">
-            <div class="flexBox_item inputWithIcon location">
+<div class="bookFormSortService">
+    <div class="bookFormSortService_input">
+        <!-- One column -->
+        <div class="bookFormSortService_input_item">
+            <div class="inputWithIcon location">
                 <label for="ship_port_departure_id">Điểm đến</label>
                 <select id="js_loadTourByTourLocation_element" class="select2 form-select select2-hidden-accessible" name="tour_location_id" onchange="loadTourByTourLocation(this, 'js_loadTourByTourLocation_idWrite');" tabindex="-1" aria-hidden="true">
                     @foreach($dataTourLocation as $region => $tourLocations)
@@ -25,83 +26,30 @@
                     @endforeach
                 </select>
             </div>
-            <div class="flexBox_item inputWithIcon location">
+        </div>
+        <!-- One column -->
+        <div class="bookFormSortService_input_item">
+            <div>
                 <label for="ship_port_location_id">Danh sách tour</label>
                 <select id="js_loadTourByTourLocation_idWrite" class="select2 form-select select2-hidden-accessible" name="tour_info_id" tabindex="-1" aria-hidden="true">
                     {{-- <option value="">- Lựa chọn -</option> --}}
                 </select>
             </div>
         </div>
-        <div class="inputWithIcon adult">
-            <label for="bookFormSort_date">Số hành khách</label>
-            <div class="inputWithForm">
-                <input type="text" id="js_setValueQuantityTour_idWrite" class="form-control inputWithForm_input" name="quantity" value="1 Người lớn, 0 Trẻ em, 0 Cao tuổi" aria-label="Số khách đặt tour du lịch" readonly="readonly" required>
-                <div class="inputWithForm_form">
-                    <div class="formBox">
-                        <div class="formBox_labelOneRow">
-                            <div class="formBox_labelOneRow_item">
-                                <div>
-                                    <label>Người lớn</label>
-                                    <div style="font-size: 0.95rem;">Năm sinh từ {{ date('Y', time()) - 12 }} - {{ date('Y', time()) - 59 }}</div>
-                                </div>
-                                <div class="inputNumberCustom"> 
-                                    <div class="inputNumberCustom_button" onClick="changeValueInputTour('js_changeValueInputTour_input_nguoilon', 'minus');">
-                                        <i class="fa-solid fa-minus"></i>
-                                    </div>
-                                    <input id="js_changeValueInputTour_input_nguoilon" class="inputNumberCustom_input" type="text" name="adult_tour" value="1" aria-label="Số người lớn đặt tour du lịch" />
-                                    <div class="inputNumberCustom_button" onClick="changeValueInputTour('js_changeValueInputTour_input_nguoilon', 'plus');">
-                                        <i class="fa-solid fa-plus"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="formBox_labelOneRow_item">
-                                <div>
-                                    <label>Trẻ em</label>
-                                    <div style="font-size: 0.95rem;">Năm sinh từ {{ date('Y', time()) - 6 }} - {{ date('Y', time()) - 11 }}</div>
-                                </div>
-                                <div class="inputNumberCustom"> 
-                                    <div class="inputNumberCustom_button" onClick="changeValueInputTour('js_changeValueInputTour_input_treem', 'minus');">
-                                        <i class="fa-solid fa-minus"></i>
-                                    </div>
-                                    <input id="js_changeValueInputTour_input_treem" class="inputNumberCustom_input" type="text" name="child_tour" value="0" aria-label="Số trẻ em đặt tour du lịch" />
-                                    <div class="inputNumberCustom_button" onClick="changeValueInputTour('js_changeValueInputTour_input_treem', 'plus');">
-                                        <i class="fa-solid fa-plus"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="formBox_labelOneRow_item">
-                                <div>
-                                    <label>Cao tuổi</label>
-                                    <div style="font-size: 0.95rem;">Năm sinh từ {{ date('Y', time()) - 60 }}</div>
-                                </div>
-                                <div class="inputNumberCustom"> 
-                                    <div class="inputNumberCustom_button" onClick="changeValueInputTour('js_changeValueInputTour_input_caotuoi', 'minus');">
-                                        <i class="fa-solid fa-minus"></i>
-                                    </div>
-                                    <input id="js_changeValueInputTour_input_caotuoi" class="inputNumberCustom_input" type="text" name="old_tour" value="0" aria-label="Số người cao tuổi đặt tour du lịch" />
-                                    <div class="inputNumberCustom_button" onClick="changeValueInputTour('js_changeValueInputTour_input_caotuoi', 'plus');">
-                                        <i class="fa-solid fa-plus"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- One column -->
+        <div class="bookFormSortService_input_item">
+            <div class="inputWithIcon date">
+                <label for="bookFormSort_date">Ngày khởi hành</label>
+                <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date" value="{{ date('Y-m-d', time() + 86400) }}" aria-label="Ngày khởi hành tour du lịch" readonly="readonly" required>
             </div>
         </div>
     </div>
-    <div class="bookFormSort_body_item">
-        <div class="inputWithIcon date">
-            <label for="bookFormSort_date">Ngày khởi hành</label>
-            <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date" value="{{ date('Y-m-d', time() + 86400) }}" aria-label="Ngày khởi hành tour du lịch" readonly="readonly" required>
-        </div>
-        <div style="text-align:right;margin-top:1.5rem;">
-            <div class="buttonSecondary" onClick="submitForm('tourBookingSort');">
-                <i class="fa-solid fa-check"></i>Đặt tour ngay
-            </div>
+    <div class="bookFormSortService_button" style="flex:0 0 155px;">
+        <div class="buttonSecondary" onClick="submitForm('tourBookingSort');" style="padding-top:0.5rem !important;padding-bottom:0.5rem !important;">
+            <i class="fa-solid fa-check"></i>Đặt tour ngay
         </div>
     </div>
-</form>
+</div>
 
 @push('scripts-custom')
     <script type="text/javascript">
