@@ -1,7 +1,7 @@
 <!-- One Row -->
 @if(!empty($data->options))
     <input type="hidden" id="service_option_id" name="service_option_id" value="{{ $data->options[0]->id ?? 0 }}">
-    <div class="chooseOptionTourBox">
+    <div class="chooseOptionTourBox customScrollBar-x">
         <div class="chooseOptionTourBox_body">
             @foreach($data->options as $option)
                 @php

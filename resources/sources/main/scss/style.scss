@@ -2780,10 +2780,13 @@ blockquote{
             border-bottom: 1px dashed $bg-04;
             align-items: center;
             background: $bg-02;
+            padding: 1rem;
             &_item {
                 width: 100%;
                 text-align: center;
-                padding: 1rem 0.5rem;
+                &:not(:first-child){
+                    margin-left: 1rem;
+                }
                 .option {
                     line-height: 1.4;
                     padding: 0.35rem 0.5rem;
@@ -2812,12 +2815,6 @@ blockquote{
                     font-family: $font-primary-title;
                     color: $color-primary-hover;
                 }
-                &:first-child {
-                    padding-left: 1rem !important;
-                }
-                &:last-child {
-                    padding-right: 1rem !important;
-                }
             }
         }
     }
@@ -2826,11 +2823,19 @@ blockquote{
             &_row {
                 flex-wrap: wrap;
                 &_item {
-                    padding: 0 1rem !important;
-                    &:first-child, &:last-child {
-                        padding: 1rem !important;
+                    &:not(:last-child){
+                        margin-left: 0;
                     }
-
+                    &:nth-child(n + 2){
+                        margin-top: 0.5rem;
+                    }
+                    &.width50 {
+                        width: calc(50% - 0.5rem);
+                        
+                    }
+                }
+                &:not(:first-child){
+                    border-top: 1px dashed $bg-05;
                 }
             }
         }
@@ -2841,6 +2846,7 @@ blockquote{
     &_body {
         display: flex;
         flex-direction: column;
+        min-width: 550px;
         &_item {
             display: flex;
             padding: 0.5rem 1rem;

@@ -23,13 +23,13 @@
                             <div><span class="highLight">{{ $time['time_departure'] }}</span> - <span class="highLight">{{ $time['time_arrive'] }}</span> ({{ $timeMove }})</div>
                             <div style="font-weight:500;">{{ $item['partner']['name'] }}</div>
                         </div>
-                        <div class="chooseDepartureShipBox_body_row_item">
+                        <div class="chooseDepartureShipBox_body_row_item width50">
                             <div class="option" onClick="chooseDeparture(this, {{ $code }}, '{{ $time['ship_price_id'] }}', '{{ $time['time_departure'] }}', '{{ $time['time_arrive'] }}', 'eco', '{{ $item['partner']['name'] }}');">
                                 <div>ECO</div>
                                 <div class="price">{{ number_format($item['price_adult']).config('main.unit_currency') }}</div>
                             </div>
                         </div>
-                        <div class="chooseDepartureShipBox_body_row_item">
+                        <div class="chooseDepartureShipBox_body_row_item width50">
                             @if(!empty($item['price_vip']))
                                 <div class="option" onClick="chooseDeparture(this, {{ $code }}, '{{ $time['ship_price_id'] }}', '{{ $time['time_departure'] }}', '{{ $time['time_arrive'] }}', 'vip', '{{ $item['partner']['name'] }}');">
                                     <div>VIP</div>

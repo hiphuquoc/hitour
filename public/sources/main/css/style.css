@@ -3007,11 +3007,14 @@ blockquote em {
   border-bottom: 1px dashed #dee2e6;
   align-items: center;
   background: #f8f9fa;
+  padding: 1rem;
 }
 .chooseDepartureShipBox_body_row_item {
   width: 100%;
   text-align: center;
-  padding: 1rem 0.5rem;
+}
+.chooseDepartureShipBox_body_row_item:not(:first-child) {
+  margin-left: 1rem;
 }
 .chooseDepartureShipBox_body_row_item .option {
   line-height: 1.4;
@@ -3041,21 +3044,21 @@ blockquote em {
   font-family: "SVN-Gilroy Bold", serif;
   color: rgb(0, 90, 180);
 }
-.chooseDepartureShipBox_body_row_item:first-child {
-  padding-left: 1rem !important;
-}
-.chooseDepartureShipBox_body_row_item:last-child {
-  padding-right: 1rem !important;
-}
 @media (max-width: 577px) {
   .chooseDepartureShipBox_body_row {
     flex-wrap: wrap;
   }
-  .chooseDepartureShipBox_body_row_item {
-    padding: 0 1rem !important;
+  .chooseDepartureShipBox_body_row_item:not(:last-child) {
+    margin-left: 0;
   }
-  .chooseDepartureShipBox_body_row_item:first-child, .chooseDepartureShipBox_body_row_item:last-child {
-    padding: 1rem !important;
+  .chooseDepartureShipBox_body_row_item:nth-child(n+2) {
+    margin-top: 0.5rem;
+  }
+  .chooseDepartureShipBox_body_row_item.width50 {
+    width: calc(50% - 0.5rem);
+  }
+  .chooseDepartureShipBox_body_row:not(:first-child) {
+    border-top: 1px dashed #ced4da;
   }
 }
 
@@ -3065,6 +3068,7 @@ blockquote em {
 .chooseOptionTourBox_body {
   display: flex;
   flex-direction: column;
+  min-width: 550px;
 }
 .chooseOptionTourBox_body_item {
   display: flex;
