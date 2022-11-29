@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Service;
 use App\Models\ServiceLocation;
+use App\Models\ServiceOption;
 use App\Models\ServicePrice;
 // use App\Models\ShipBookingQuantityAndPrice;
 use Illuminate\Http\Request;
@@ -49,7 +50,7 @@ class ServiceBookingController extends Controller {
             $data                   = Service::select('*')
                                         ->where('service_location_id', $idServiceLocation)
                                         ->get();
-            $result                 = view('main.serviceBooking.selectboxLocation', compact('data', 'idServiceInfoActive'));
+            $result                 = view('main.serviceBooking.selectbox', compact('data', 'idServiceInfoActive'));
         }
         return $result;
     }
@@ -112,15 +113,30 @@ class ServiceBookingController extends Controller {
     // }
 
     public static function loadBookingSummary(Request $request){
-        // $result             = null;
-        // if(!empty($request->get('dataForm'))){
-        //     $dataForm       = [];
-        //     foreach($request->get('dataForm') as $value){
-        //         $dataForm[$value['name']]   = $value['value'];
-        //     }
-        //     $result         = view('main.serviceBooking.summary', ['data' => $dataForm]);
-        // }
-        // echo $result;
+        $result             = null;
+        if(!empty($request->get('dataForm'))){
+            $dataForm       = [];
+            foreach($request->get('dataForm') as $value){
+                $dataForm[$value['name']]   = $value['value'];
+            }
+            /* tách name quantity và tour_price_id */
+            $arrayQuantity      = [];
+            foreach($dataForm as $key => $quantity){
+                preg_match('#quantity\[(.*)\]#imsU', $key, $match);
+                if(!empty($match[1])&&!empty($quantity)) $arrayQuantity[$match[1]] = $quantity;
+            }
+            /* gộp vào dataForm */
+            $dataForm['quantity']   = $arrayQuantity;
+            /* lấy thông tin option */
+            $infoOption     = ServiceOption::select('*')
+                                ->where('id', $dataForm['service_option_id'])
+                                ->with('prices')
+                                ->first();
+            $dataForm['options'] = $infoOption->toArray();
+            
+            $result         = view('main.serviceBooking.summary', ['data' => $dataForm]);
+        }
+        echo $result;
     }
 
     public static function confirm(Request $request){

@@ -53,3 +53,8 @@
         </table>
     </div>
 @endif
+@if(!empty($data['note_customer']))
+    <div class="shipBookingTotalBox_row">
+        <div>Ghi chú của bạn: {{ $data['note_customer'] }}</div>
+    </div>
+@endif

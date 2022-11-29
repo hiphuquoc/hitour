@@ -4,7 +4,7 @@
     </div>
     <div class="certifiedBox_content">
         <div class="certifiedBox_content_title">
-            Danh hiệu Hitour được công nhận bởi khách hàng!
+            Danh hiệu Hitour được khách hàng công nhận!
         </div>
         <div class="certifiedBox_content_list">
             <div>

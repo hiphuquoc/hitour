@@ -160,7 +160,7 @@
                         </div>
                     </div>
                     <div class="pageContent_body_sidebar">
-                        @include('main.serviceBooking.sidebar')
+                        @include('main.shipBooking.sidebar')
                     </div>
                 </div>
     
@@ -180,7 +180,7 @@
             <div class="callBookTourMobile_button"><h2 onclick="submitForm('formBooking');">Xác nhận</h2></div>
         </div>
         <!-- Summary mobile -->
-        @include('main.serviceBooking.summaryMobile')
+        @include('main.shipBooking.summaryMobile')
     </div>
 @endpush
 @push('scripts-custom')
@@ -200,23 +200,23 @@
             loadServiceByLocation('js_loadServiceByLocation_idWrite', '{{ $idServiceInfo }}');
         })
 
-        // $('#formBooking').find('input, select').each(function(){
-        //     $(this).on('change', () => {
-        //         loadBookingSummary();
-        //         const nameInput   = $(this).attr('name');
-        //         showHideMessageValidate(nameInput, 'hide');
-        //         if(nameInput=='quantity_adult'||nameInput=='quantity_child'||nameInput=='quantity_old'){
-        //             showHideMessageValidate('quantity', 'hide');
-        //         }
-        //     })
-        //     $(this).on('click', () => {
-        //         const nameInput   = $(this).attr('name');
-        //         showHideMessageValidate(nameInput, 'hide');
-        //         if(nameInput=='quantity_adult'||nameInput=='quantity_child'||nameInput=='quantity_old'){
-        //             showHideMessageValidate('quantity', 'hide');
-        //         }
-        //     })
-        // })
+        $('#formBooking').find('input, select, textarea').each(function(){
+            $(this).on('change', () => {
+                loadBookingSummary();
+                const nameInput   = $(this).attr('name');
+                showHideMessageValidate(nameInput, 'hide');
+                // if(nameInput=='quantity_adult'||nameInput=='quantity_child'||nameInput=='quantity_old'){
+                //     showHideMessageValidate('quantity', 'hide');
+                // }
+            })
+            $(this).on('click', () => {
+                const nameInput   = $(this).attr('name');
+                showHideMessageValidate(nameInput, 'hide');
+                // if(nameInput=='quantity_adult'||nameInput=='quantity_child'||nameInput=='quantity_old'){
+                //     showHideMessageValidate('quantity', 'hide');
+                // }
+            })
+        })
 
         function submitForm(idForm){
             event.preventDefault();
@@ -230,22 +230,6 @@
                 });
             }
         }
-
-        // function chooseDeparture(elemt, code, idShipPrice, timeDeparture, timeArrive, typeTicket, partner){
-        //     $('#js_chooseDeparture_dp'+code).val(idShipPrice+'|'+timeDeparture+'|'+timeArrive+'|'+typeTicket+'|'+partner);
-        //     $(elemt).parent().parent().parent().find('.option').removeClass('active');
-        //     $(elemt).addClass('active');
-        //     loadBookingSummary();
-        // }
-
-        // function checkedInput(idSearch, elemt){
-        //     $('#'+idSearch).find('input[type=radio]').each(function(){
-        //         $(this).prop('checked', false);
-        //         $(this).parent().removeClass('active');
-        //     });
-        //     $(elemt).find('input[type=radio]').prop('checked', true);
-        //     $(elemt).addClass('active');
-        // }
 
         function loadServiceByLocation(idWrite, idServiceInfo = 0){
             const idServiceLocation = $('#service_location_id').val();
@@ -339,7 +323,6 @@
                 type        : 'get',
                 dataType    : 'html',
                 data        : {
-                    '_token'        : '{{ csrf_token() }}',
                     dataForm    : dataForm
                 },
                 success     : function(data){

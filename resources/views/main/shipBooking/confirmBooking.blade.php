@@ -6,7 +6,7 @@
 
     @include('main.snippets.breadcrumb')
 
-    <div class="pageContent">
+    <div class="pageContent background">
         <div class="sectionBox">
             <div class="container">
                 <!-- title -->
@@ -226,9 +226,9 @@
                                                     <div><span class="highLight">{{ $departure->quantity_old }}</span> người trên 60 tuổi ({{ $typeTicket }})</div>
                                                 @endif
                                             </div>
-                                            <div class="shipDepartureConfirmBox_item_body_item">
+                                            {{-- <div class="shipDepartureConfirmBox_item_body_item">
                                                 <div>Danh sách hành khách cập nhật sau</div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                     @endforeach
@@ -244,9 +244,9 @@
                             <div class="bookingForm_item_body" style="padding:0;background:none;border:none;box-shadow:none;">
                                 <ul>
                                     <li>Đơn hàng của Quý khách đã được gửi thành công. Quý khách vui lòng chờ nhân viên kiểm tra và gửi xác nhận vào Email hoặc Zalo sau.</li>
-                                    <li>Nếu chưa cung cấp thông tin hành hành khách Quý khách vui lòng chuẩn bị danh sách từng hành khách gồm: Họ tên đầy đủ + Năm sinh + Số một trong những giấy tờ tùy thân sau (Chứng minh nhân dân hoặc Passport hoặc Bằng lái xe).</li>
+                                    <li>Nếu chưa cung cấp thông tin hành hành khách Quý khách vui lòng chuẩn bị danh sách từng hành khách gồm: Họ tên đầy đủ + Năm sinh + Số một trong những giấy tờ tùy thân sau (Chứng minh nhân dân, Căn cước công dân, Passport hoặc Bằng lái xe).</li>
                                     <li>Sau khi nhân viên gửi xác nhận Quý khách vui lòng chuyển khoản theo hướng dẫn có trong xác nhận.</li>
-                                    <li>Vé điện tử sẽ được gửi qua Email hoặc Zalo để Quý khách mở tên điện thoại hoặc in ra dùng để quét mã lên tàu.</li>
+                                    <li>Vé điện tử sẽ được gửi qua Email hoặc Zalo để Quý khách mở trên điện thoại và quét mã lên tàu.</li>
                                 </ul>
                             </div>
                         </div>

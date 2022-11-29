@@ -6,7 +6,7 @@
 
     @include('main.snippets.breadcrumb')
 
-    <div class="pageContent">
+    <div class="pageContent background">
         <div class="sectionBox">
             <div class="container">
             <!-- title -->

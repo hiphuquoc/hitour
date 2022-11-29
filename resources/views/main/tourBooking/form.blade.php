@@ -204,22 +204,22 @@
             loadTourByTourLocation($('#js_loadTourByTourLocation_element'), 'js_loadTourByTourLocation_idWrite', "{{ request('tour_info_id') ?? 0  }}");
         });
 
-        $('#formBooking').find('input, select').each(function(){
+        $('#formBooking').find('input, select, textarea').each(function(){
             $(this).on('change', () => {
                 loadBookingSummary();
-                // const nameInput   = $(this).attr('name');
-                // showHideMessageValidate(nameInput, 'hide');
+                const nameInput   = $(this).attr('name');
+                showHideMessageValidate(nameInput, 'hide');
                 // if(nameInput=='quantity_adult'||nameInput=='quantity_child'||nameInput=='quantity_old'){
                 //     showHideMessageValidate('quantity', 'hide');
                 // }
             })
-            // $(this).on('click', () => {
-            //     const nameInput   = $(this).attr('name');
-            //     showHideMessageValidate(nameInput, 'hide');
-            //     if(nameInput=='quantity_adult'||nameInput=='quantity_child'||nameInput=='quantity_old'){
-            //         showHideMessageValidate('quantity', 'hide');
-            //     }
-            // })
+            $(this).on('click', () => {
+                const nameInput   = $(this).attr('name');
+                showHideMessageValidate(nameInput, 'hide');
+                // if(nameInput=='quantity_adult'||nameInput=='quantity_child'||nameInput=='quantity_old'){
+                //     showHideMessageValidate('quantity', 'hide');
+                // }
+            })
         })
 
         function submitForm(idForm){

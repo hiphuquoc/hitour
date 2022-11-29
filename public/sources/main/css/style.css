@@ -1931,12 +1931,12 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 
 .callBookTourMobile {
-  padding: 0.5rem 0.75rem;
+  padding: 0.75rem 0.75rem;
   background: #fff;
   display: flex;
   align-items: center;
   border-top: 1px solid #dee2e6;
-  min-height: 55px;
+  min-height: 60px;
   position: relative;
   z-index: 103;
 }
@@ -1975,7 +1975,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   background: rgb(244, 208, 63);
   color: #333;
   padding: 0.5rem 1rem;
-  border-radius: 5px;
+  border-radius: 7px;
   font-size: 1.1rem;
   text-align: center;
   margin: 0;
@@ -1987,24 +1987,37 @@ input[type=date]::-webkit-calendar-picker-indicator {
 .callBookTourMobile i {
   margin-right: 0.5rem;
   color: #adb5bd;
+  font-size: 1.2rem;
 }
 
 .summaryBoxMobile {
+  display: none;
+  align-items: flex-end;
   width: 100%;
-  height: 0;
+  height: 100%;
   position: fixed;
   bottom: 0;
   left: 0;
-  background: #fff;
+  background: rgba(0, 0, 0, 0.5);
   padding: 0;
   border-top: 1px solid #dee2e6;
-  transition: all 0.3s;
 }
 
 .js_scrollFixed > *:not(:first-child) {
   margin-top: inherit;
 }
 
+.contentWithViewMore {
+  transition: all 0.3s;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  background: #fff;
+  width: 100%;
+  padding: 0;
+  border-radius: 10px 10px 0 0;
+  position: relative;
+}
 .contentWithViewMore_title h2, .contentWithViewMore_title h3 {
   font-size: 1.2rem;
   font-weight: 700;
@@ -2015,11 +2028,12 @@ input[type=date]::-webkit-calendar-picker-indicator {
   padding-bottom: 0.75rem;
 }
 .contentWithViewMore_title_close {
-  width: 45px;
-  top: 0.75rem;
-  right: 0.75rem;
-  height: 45px;
+  width: 50px;
+  top: 0;
+  right: 0;
+  height: 50px;
   background: #e9ecef;
+  border-radius: 0 10px 0 0;
   justify-content: center;
   display: flex;
   align-items: center;
@@ -2039,6 +2053,11 @@ input[type=date]::-webkit-calendar-picker-indicator {
 .contentWithViewMore_btn i {
   margin-left: 0.5rem;
   vertical-align: middle;
+}
+@media (max-width: 990px) {
+  .contentWithViewMore {
+    padding: 0.75rem 1rem 80px;
+  }
 }
 
 .tocContentTour_item {
@@ -3142,11 +3161,13 @@ blockquote em {
 
 .tableDetailShipBooking {
   border: 1px solid #dee2e6;
+  box-shadow: 0 0 5px #e9ecef;
+  background: #fff;
+  font-size: 1rem;
 }
 .tableDetailShipBooking .head td {
-  background: rgba(0, 123, 255, 0.3);
-  font-weight: 500;
-  font-family: "SVN-Gilroy Bold", serif;
+  background: rgba(0, 123, 255, 0.2);
+  font-weight: bold;
 }
 .tableDetailShipBooking .head td i {
   margin-right: 0.5rem;
@@ -3164,6 +3185,9 @@ blockquote em {
 .shipDepartureConfirmBox {
   display: flex;
   line-height: 1.7;
+  background: #fff;
+  box-shadow: 0 0 5px #e9ecef;
+  font-size: 1rem;
 }
 .shipDepartureConfirmBox_item {
   width: 50%;
@@ -3171,12 +3195,11 @@ blockquote em {
 }
 .shipDepartureConfirmBox_item_title {
   padding: 0.5rem 1rem;
-  background: #e9ecef;
+  background: rgba(0, 123, 255, 0.2);
 }
 .shipDepartureConfirmBox_item_title .highLight {
   color: rgb(0, 90, 180);
-  font-weight: 700;
-  font-family: "SVN-Gilroy Bold", serif;
+  font-weight: bold;
   font-size: 1.2rem;
 }
 .shipDepartureConfirmBox_item_body {
@@ -3240,11 +3263,12 @@ blockquote em {
 .buttonSecondary {
   background: #dee2e6;
   background: rgb(244, 208, 63);
-  padding: 0.5rem 1rem;
+  padding: 0.65rem 1rem;
   display: inline-block;
   border-radius: 5px;
   font-size: 0.95rem;
   font-family: "SVN-Gilroy Bold", serif;
+  box-shadow: 0 0 5px #e9ecef;
   cursor: pointer;
 }
 .buttonSecondary:hover {

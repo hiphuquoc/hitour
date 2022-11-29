@@ -3,7 +3,7 @@
       {{-- <div class="callBookTour_price">
          <div>giá từ: <span>1,250,000{{ config('main.unit_currency') }}</span></div>
       </div> --}}
-      <div class="callBookTour_content" style="padding:0.5rem 1rem;">
+      <div class="callBookTour_content">
          <b style="font-size:1.2rem;font-weight:700;margin-bottom:0.4rem;display:block;">Tóm tắt booking</b>
          <div class="contentWithViewMore">
             <div class="contentWithViewMore_content">
