@@ -167,19 +167,19 @@
                                             <div class="formColumnCustom_item">
                                                 <div class="inputWithIcon adult">
                                                     <label class="form-label" for="quantity_adult_{{ $i }}">Người lớn</label>
-                                                    <input type="text" class="form-control" name="quantity_adult_{{ $i }}" value="{{ !empty(request('adult_ship')) ? request('adult_ship') : null }}">
+                                                    <input type="text" class="form-control" name="quantity_adult_{{ $i }}" placeholder="0" value="{{ !empty(request('adult_ship')) ? request('adult_ship') : null }}" onInput="loadBookingSummary();">
                                                 </div>
                                             </div>
                                             <div class="formColumnCustom_item">
                                                 <div class="inputWithIcon child">
                                                     <label class="form-label" for="quantity_child_{{ $i }}">Trẻ em (6 - 11 tuổi)</label>
-                                                    <input type="text" class="form-control" name="quantity_child_{{ $i }}" value="{{ !empty(request('child_ship')) ?  request('child_ship') : null }}">
+                                                    <input type="text" class="form-control" name="quantity_child_{{ $i }}" placeholder="0" value="{{ !empty(request('child_ship')) ?  request('child_ship') : null }}" onInput="loadBookingSummary();">
                                                 </div>
                                             </div>
                                             <div class="formColumnCustom_item">
                                                 <div class="inputWithIcon old">
                                                     <label class="form-label" for="quantity_old_{{ $i }}">Cao tuổi (trên 60 tuổi)</label>
-                                                    <input type="text" class="form-control" name="quantity_old_{{ $i }}" value="{{ !empty(request('old_ship')) ? request('old_ship') : null }}">
+                                                    <input type="text" class="form-control" name="quantity_old_{{ $i }}" placeholder="0" value="{{ !empty(request('old_ship')) ? request('old_ship') : null }}" onInput="loadBookingSummary();">
                                                 </div>
                                             </div>
                                         </div>
@@ -241,15 +241,8 @@
         });
 
         $('#formBooking').find('input, select').each(function(){
-            $(this).on('change', () => {
+            $(this).on('input', () => {
                 loadBookingSummary();
-                const nameInput   = $(this).attr('name');
-                showHideMessageValidate(nameInput, 'hide');
-                if(nameInput=='quantity_adult'||nameInput=='quantity_child'||nameInput=='quantity_old'){
-                    showHideMessageValidate('quantity', 'hide');
-                }
-            })
-            $(this).on('click', () => {
                 const nameInput   = $(this).attr('name');
                 showHideMessageValidate(nameInput, 'hide');
                 if(nameInput=='quantity_adult'||nameInput=='quantity_child'||nameInput=='quantity_old'){

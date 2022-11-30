@@ -7,7 +7,7 @@ use App\Models\ServiceLocation;
 use App\Models\ServiceOption;
 use App\Models\ServicePrice;
 use App\Models\Booking;
-use App\Models\ServiceBookingQuantityAndPrice;
+use App\Models\BookingQuantityAndPrice;
 use Illuminate\Http\Request;
 
 use App\Services\BuildInsertUpdateModel;
@@ -38,7 +38,7 @@ class ServiceBookingController extends Controller {
         /* insert service_booking_quantity_and_price */
         $arrayInsertServiceQuantity = $this->BuildInsertUpdateModel->buildArrayTableServiceQuantityAndPrice($idBooking, $request->all());
         foreach($arrayInsertServiceQuantity as $insertServiceQuantity){
-            ServiceBookingQuantityAndPrice::insertItem($insertServiceQuantity);
+            BookingQuantityAndPrice::insertItem($insertServiceQuantity);
         }
         return redirect()->route('main.serviceBooking.confirm', ['no' => $noBooking]);
     }
@@ -111,7 +111,7 @@ class ServiceBookingController extends Controller {
         $noBooking          = $request->get('no') ?? null;
         $item               = Booking::select('*')
                                 ->where('no', $noBooking)
-                                ->with('serviceQuantityAndPrice', 'service')
+                                ->with('quantityAndPrice', 'service')
                                 ->first();
         if(!empty($item)){
             return view('main.serviceBooking.confirmBooking', compact('item'));

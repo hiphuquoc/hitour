@@ -3,7 +3,7 @@
 
 <div class="titlePage">Danh sách Booking Tour</div>
 <!-- ===== START: SEARCH FORM ===== -->
-<form id="formSearch" method="get" action="{{ route('admin.tourBooking.list') }}">
+<form id="formSearch" method="get" action="{{ route('admin.booking.list') }}">
     <div class="searchBox">
         <div class="searchBox_item">
             <div class="input-group">
@@ -11,20 +11,13 @@
                 <button class="btn btn-primary waves-effect" id="button-addon2" type="submit" aria-label="Tìm">Tìm</button>
             </div>
         </div>
-        @if(!empty($tourLocations))
-            <div class="searchBox_item">
-                <select class="form-select select2" name="search_location" onChange="submitForm('formSearch');">
-                    <option value="0">- Tìm theo Khu vực -</option>
-                    @foreach($tourLocations as $location)
-                        @php
-                            $selected   = null;
-                            if(!empty($params['search_location'])&&$params['search_location']==$location->id) $selected = 'selected';
-                        @endphp
-                        <option value="{{ $location->id }}" {{ $selected }}>{{ $location->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-        @endif
+        <div class="searchBox_item">
+            <select class="form-select" name="search_type" onChange="submitForm('formSearch');">
+                <option value="0">- Tìm theo Loại -</option>
+                <option value="tour_info" {{ !empty($params['search_type'])&&$params['search_type']=='tour_info' ? 'selected' : null }}>Tour du lịch</option>
+                <option value="service_info" {{ !empty($params['search_type'])&&$params['search_type']=='service_info' ? 'selected' : null }}>Vé vui chơi</option>
+            </select>
+        </div>
         @if(!empty($status))
             <div class="searchBox_item">
                 <select class="form-select select2" name="search_status" onChange="submitForm('formSearch');">
@@ -75,17 +68,18 @@
                             </td>
                             <td>
                                 <div class="oneLine">
-                                    <span style="font-weight:bold;">{{ $item->tour->name ?? null }}</span>
+                                    <span style="font-weight:bold;">{{ $item->tour->name ?? $item->service->name ?? null }}</span>
                                 </div>
                                 <div class="oneLine">
-                                    {{ $item->quantiesAndPrices[0]->option_name }}
-                                    @php
-                                        // dd($list);
-                                    @endphp
+                                    {{ $item->quantityAndPrice[0]->option_name }}
                                 </div>
-                                @if(!empty($item->departure_day)&&!empty($item->tour->days))
+                                @if(!empty($item->date_from))
                                     <div class="oneLine">
-                                        {{ date('d/m/Y', strtotime($item->departure_day)) }} - {{ date('d/m/Y', strtotime($item->departure_day)+(86400*($item->tour->days-1))) }}
+                                        @if($item->date_from==$item->date_to)
+                                            {{ date('d/m/Y', strtotime($item->date_from)) }}
+                                        @else 
+                                            {{ date('d/m/Y', strtotime($item->date_from)) }} - {{ date('d/m/Y', strtotime($item->date_to)) }}
+                                        @endif
                                     </div>
                                 @endif
                             </td>
@@ -93,9 +87,9 @@
                                 @php
                                     $total                  = 0;
                                 @endphp
-                                @if(!empty($item->quantiesAndPrices))
+                                @if(!empty($item->quantityAndPrice))
                                     <div class="columnBox">
-                                            @foreach($item->quantiesAndPrices as $quantity)
+                                            @foreach($item->quantityAndPrice as $quantity)
                                                 @php
                                                     $total  += $quantity->quantity*$quantity->price;
                                                 @endphp
@@ -148,13 +142,13 @@
                             </td>
                             <td style="vertical-align:top;display:flex;">
                                 <div class="icon-wrapper iconAction">
-                                    <a href="{{ route('admin.tourBooking.viewExport', ['id' => $item->id]) }}">
+                                    <a href="{{ route('admin.booking.viewExport', ['id' => $item->id]) }}">
                                         <i data-feather='eye'></i>
                                         <div>Xem</div>
                                     </a>
                                 </div>
                                 <div class="icon-wrapper iconAction">
-                                    <a href="{{ route('admin.tourBooking.viewEdit', ['id' => $item->id]) }}">
+                                    <a href="{{ route('admin.booking.viewEdit', ['id' => $item->id]) }}">
                                         <i data-feather='edit'></i>
                                         <div>Sửa</div>
                                     </a>
@@ -176,7 +170,7 @@
     </div>
 </div>
 <!-- Nút thêm -->
-<a href="{{ route('admin.tourBooking.viewInsert') }}" class="addItemBox">
+<a href="{{ route('admin.booking.viewInsert') }}" class="addItemBox">
     <i class="fa-regular fa-plus"></i>
     <span>Thêm</span>
 </a>

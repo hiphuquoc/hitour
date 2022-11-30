@@ -6,7 +6,7 @@
                 <div class="formColumnCustom_item">
                     <div>
                         <label class="form-label">{{ $price->apply_age }}</label>
-                        <input type="number" class="form-control" name="quantity[{{ $price->id }}]" placeholder="0" value="" min="0" onChange="loadBookingSummary();">
+                        <input type="number" class="form-control" name="quantity[{{ $price->id }}]" placeholder="0" value="" min="0" onInput="loadBookingSummary();">
                     </div>
                 </div>
             @endforeach

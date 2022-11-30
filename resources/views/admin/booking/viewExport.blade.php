@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 @section('content')
 
-    @include('admin.tourBooking.confirmBooking', compact('item'))
+    @include('admin.booking.confirmBooking', compact('item'))
 
     @if(!empty($item->status->relationAction))
     <div class="actionBookingBox">

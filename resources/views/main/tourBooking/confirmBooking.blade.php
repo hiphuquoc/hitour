@@ -54,14 +54,6 @@
                                         <td>{{ $item->tour->name ?? null }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Ngày</td>
-                                        <td>{{ date('d/m/Y', strtotime($item->date_from)) }} - {{ date('d/m/Y', strtotime($item->date_to)) }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tiêu chuẩn</td>
-                                        <td>{{ $item->tourQuantityAndPrice[0]->option_name }}</td>
-                                    </tr>
-                                    <tr>
                                         @php
                                             $linkTour   = env('APP_URL').'/'.$item->tour->seo->slug_full;
                                         @endphp
@@ -71,13 +63,27 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td>Tiêu chuẩn</td>
+                                        <td>{{ $item->quantityAndPrice[0]->option_name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ngày</td>
+                                        @if($item->date_from==$item->date_to)
+                                            <td>{{ \App\Helpers\DateAndTime::convertMktimeToDayOfWeek(strtotime($item->date_from)) }}, {{ date('d/m/Y', strtotime($item->date_from)) }}</td>
+                                        @else 
+                                            <td>{{ \App\Helpers\DateAndTime::convertMktimeToDayOfWeek(strtotime($item->date_from)) }}, {{ date('d/m/Y', strtotime($item->date_from)) }} - {{ \App\Helpers\DateAndTime::convertMktimeToDayOfWeek(strtotime($item->date_to)) }}, {{ date('d/m/Y', strtotime($item->date_to)) }}</td>
+                                        @endif
+                                    </tr>
+                                    <tr>
                                         <td>Điểm đón</td>
                                         <td>{{ $item->tour->pick_up }}</td>
                                     </tr>
-                                    <tr>
-                                        <td>Ghi chú</td>
-                                        <td>{{ $item->note_customer ?? null }}</td>
-                                    </tr>
+                                    @if(!empty($item->note_customer))
+                                        <tr>
+                                            <td>Ghi chú</td>
+                                            <td>{{ $item->note_customer }}</td>
+                                        </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>                        
@@ -99,10 +105,10 @@
                                     @php
                                         $xhtmlTable = null;
                                         $total      = 0;
-                                        foreach($item->tourQuantityAndPrice as $quantityPrice){
+                                        foreach($item->quantityAndPrice as $quantityPrice){
                                             $xhtmlTable .= '<tr>
                                                                 <td>'.$quantityPrice->option_age.'</td>
-                                                                <td style="text-align:center;">'.$quantityPrice->quantity.' * '.number_format($quantityPrice->price).'</td>
+                                                                <td style="text-align:right;">'.$quantityPrice->quantity.' * '.number_format($quantityPrice->price).'</td>
                                                                 <td style="text-align:right;">'.number_format($quantityPrice->quantity*$quantityPrice->price).'</td>
                                                             </tr>';
                                             $total  += $quantityPrice->quantity*$quantityPrice->price;

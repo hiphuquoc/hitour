@@ -9,7 +9,7 @@ use App\Http\Controllers\AdminTourDepartureController;
 use App\Http\Controllers\AdminTourPartnerController;
 use App\Http\Controllers\AdminTourPartnerContactController;
 use App\Http\Controllers\AdminTourController;
-use App\Http\Controllers\AdminTourBookingController;
+use App\Http\Controllers\AdminBookingController;
 use App\Http\Controllers\AdminTourOptionController;
 use App\Http\Controllers\AdminShipLocationController;
 use App\Http\Controllers\AdminShipDepartureController;
@@ -125,15 +125,15 @@ Route::prefix('admin')->group(function(){
         });
         /* ===== TOUR BOOKING ===== */
         Route::prefix('tour_booking')->group(function(){
-            Route::get('/', [AdminTourBookingController::class, 'list'])->name('admin.tourBooking.list');
-            Route::get('/viewInsert', [AdminTourBookingController::class, 'viewInsert'])->name('admin.tourBooking.viewInsert');
-            Route::post('/create', [AdminTourBookingController::class, 'create'])->name('admin.tourBooking.create');
-            Route::get('/{id}/viewEdit', [AdminTourBookingController::class, 'viewEdit'])->name('admin.tourBooking.viewEdit');
-            Route::post('/update', [AdminTourBookingController::class, 'update'])->name('admin.tourBooking.update');
-            Route::get('/{id}/viewExport', [AdminTourBookingController::class, 'viewExport'])->name('admin.tourBooking.viewExport');
+            Route::get('/', [AdminBookingController::class, 'list'])->name('admin.booking.list');
+            Route::get('/viewInsert', [AdminBookingController::class, 'viewInsert'])->name('admin.booking.viewInsert');
+            Route::post('/create', [AdminBookingController::class, 'create'])->name('admin.booking.create');
+            Route::get('/{id}/viewEdit', [AdminBookingController::class, 'viewEdit'])->name('admin.booking.viewEdit');
+            Route::post('/update', [AdminBookingController::class, 'update'])->name('admin.booking.update');
+            Route::get('/{id}/viewExport', [AdminBookingController::class, 'viewExport'])->name('admin.booking.viewExport');
             /* Delete AJAX */
-            Route::get('/loadOptionTourList', [AdminTourBookingController::class, 'loadOptionTourList'])->name('admin.tourBooking.loadOptionTourList');
-            Route::get('/loadFormPriceQuantity', [AdminTourBookingController::class, 'loadFormPriceQuantity'])->name('admin.tourBooking.loadFormPriceQuantity');
+            Route::get('/loadOptionTourList', [AdminBookingController::class, 'loadOptionTourList'])->name('admin.booking.loadOptionTourList');
+            Route::get('/loadFormPriceQuantity', [AdminBookingController::class, 'loadFormPriceQuantity'])->name('admin.booking.loadFormPriceQuantity');
             // Route::get('/delete', [AdminTourController::class, 'delete'])->name('admin.tour.delete');
             // Route::post('/loadOptionPrice', [AdminTourOptionController::class, 'loadOptionPrice'])->name('admin.tourOption.loadOptionPrice');
             // Route::post('/loadFormOption', [AdminTourOptionController::class, 'loadFormOption'])->name('admin.tourOption.loadFormOption');
@@ -209,14 +209,14 @@ Route::prefix('admin')->group(function(){
         /* ===== SHIP BOOKING ===== */
         Route::prefix('ship_booking')->group(function(){
             Route::get('/', [AdminShipBookingController::class, 'list'])->name('admin.shipBooking.list');
-            // Route::post('/create', [AdminTourBookingController::class, 'create'])->name('admin.tourBooking.create');
+            // Route::post('/create', [AdminBookingController::class, 'create'])->name('admin.tourBooking.create');
             Route::get('/view', [AdminShipBookingController::class, 'view'])->name('admin.shipBooking.view');
             Route::post('/update', [AdminShipBookingController::class, 'update'])->name('admin.shipBooking.update');
             Route::get('/{id}/viewExport', [AdminShipBookingController::class, 'viewExport'])->name('admin.shipBooking.viewExport');
             Route::post('/delete', [AdminShipBookingController::class, 'delete'])->name('admin.shipBooking.delete');
             // /* Delete AJAX */
             // Route::get('/loadDeparture', [AdminShipBookingController::class, 'loadDeparture'])->name('admin.shipBooking.loadDeparture');
-            // Route::get('/loadFormPriceQuantity', [AdminTourBookingController::class, 'loadFormPriceQuantity'])->name('admin.tourBooking.loadFormPriceQuantity');
+            // Route::get('/loadFormPriceQuantity', [AdminBookingController::class, 'loadFormPriceQuantity'])->name('admin.tourBooking.loadFormPriceQuantity');
         });
         /* ===== SERVICE LOCATION ===== */
         Route::prefix('serviceLocation')->group(function(){

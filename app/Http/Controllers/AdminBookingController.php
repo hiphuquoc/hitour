@@ -13,20 +13,17 @@ use App\Models\Tour;
 use App\Models\TourPrice;
 use App\Models\TourOption;
 use App\Models\Customer;
-use App\Models\TourBooking;
+use App\Models\Booking;
 use App\Models\TourBookingQuantityAndPrice;
 use App\Models\VAT;
 
 use App\Services\BuildInsertUpdateModel;
-
-// use Illuminate\Support\Facades\DB;
-
 use App\Http\Requests\TourBookingRequest;
 use App\Models\CitizenIdentity;
 use App\Models\SystemFile;
-use App\Models\TourBookingStatus;
+use App\Models\BookingStatus;
 
-class AdminTourBookingController extends Controller {
+class AdminBookingController extends Controller {
 
     public function __construct(BuildInsertUpdateModel $BuildInsertUpdateModel){
         $this->BuildInsertUpdateModel  = $BuildInsertUpdateModel;
@@ -37,44 +34,42 @@ class AdminTourBookingController extends Controller {
         /* Search theo tên */
         if(!empty($request->get('search_customer'))) $params['search_customer'] = $request->get('search_customer');
         /* Search theo vùng miền */
-        if(!empty($request->get('search_location'))) $params['search_location'] = $request->get('search_location');
+        if(!empty($request->get('search_type'))) $params['search_type'] = $request->get('search_type');
         /* Search theo trang thái */
         if(!empty($request->get('search_status'))) $params['search_status'] = $request->get('search_status');
         /* lấy dữ liệu */
-        $list               = TourBooking::getList($params);
-        /* khu vực Tour */
-        $tourLocations      = TourLocation::all();
+        $list               = Booking::getList($params);
         /* status */
-        $status             = TourBookingStatus::all();
-        return view('admin.tourBooking.list', compact('list', 'params', 'tourLocations', 'status'));
+        $status             = BookingStatus::all();
+        return view('admin.booking.list', compact('list', 'params', 'status'));
     }
 
     public function viewEdit(Request $request, $id){
         if(!empty($id)){
-            $item           = TourBooking::select('*')
+            $item           = Booking::select('*')
                                 ->where('id', $id)
-                                ->with('customer_contact', 'quantiesAndPrices', 'customer_list', 'costMoreLess', 'vat')
+                                ->with('customer_contact', 'quantityAndPrice', 'customer_list', 'costMoreLess', 'vat')
                                 ->first();
             $tourList       = Tour::all();
             $message        = $request->get('message') ?? null;
             $type           = 'edit';
-            if(!empty($item)) return view('admin.tourBooking.view', compact('item', 'tourList', 'type', 'message'));
+            if(!empty($item)) return view('admin.booking.view', compact('item', 'tourList', 'type', 'message'));
         }
-        return redirect()->route('admin.tourBooking.list');
+        return redirect()->route('admin.booking.list');
     }
 
     public function viewInsert(Request $request){
         $tourList           = Tour::all();
         $type               = 'create';
-        return view('admin.tourBooking.view', compact('type', 'tourList'));
+        return view('admin.booking.view', compact('type', 'tourList'));
     }
 
     public function viewExport($id){
-        $item               = TourBooking::select('*')
+        $item               = Booking::select('*')
                                 ->where('id', $id)
-                                ->with('tour.seo', 'customer_contact', 'quantiesAndPrices', 'customer_list', 'costMoreLess', 'status.relationAction.action')
+                                ->with('customer_contact', 'customer_list', 'quantityAndPrice', 'tour', 'service', 'costMoreLess', 'vat')
                                 ->first();
-        return view('admin.tourBooking.viewExport', compact('item'));
+        return view('admin.booking.viewExport', compact('item'));
     }
 
     public function create(TourBookingRequest $request){
@@ -125,7 +120,7 @@ class AdminTourBookingController extends Controller {
             'type'      => 'success',
             'message'   => '<strong>Thành công!</strong> Đã tạo Booking mới'
         ];
-        return redirect()->route('admin.tourBooking.viewEdit', [
+        return redirect()->route('admin.booking.viewEdit', [
             'id'        => $idTourBooking,
             'message'   => $message
         ]);
@@ -191,7 +186,7 @@ class AdminTourBookingController extends Controller {
             'type'      => 'success',
             'message'   => '<strong>Thành công!</strong> Đã cập nhật Booking'
         ];
-        return redirect()->route('admin.tourBooking.viewEdit', [
+        return redirect()->route('admin.booking.viewEdit', [
             'id'        => $idTourBooking,
             'message'   => $message
         ]);
@@ -209,12 +204,12 @@ class AdminTourBookingController extends Controller {
                 if(!empty($request->get('type'))&&$request->get('type')=='admin'){
                     /* checked */
                     $optionChecked  = $options[0]->id;
-                    $content        = view('admin.tourBooking.optionTourList', compact('options', 'optionChecked'))->render();
+                    $content        = view('admin.booking.optionTourList', compact('options', 'optionChecked'))->render();
                 }else {
                     /* lọc lại theo ngày khởi hành */
                     $options        = self::filterOptionByDate($request->get('date'), $options);
                     /* lấy content */
-                    $content        = view('main.tourBooking.optionTourList', compact('options'))->render();
+                    $content        = view('main.booking.optionTourList', compact('options'))->render();
                 }
             }
         }
@@ -231,7 +226,7 @@ class AdminTourBookingController extends Controller {
                             ->get();
             $quantity   = [];
             if(!empty($request->get('tour_booking_id'))) $quantity  = TourBookingQuantityAndPrice::getListByTourBookingId($request->get('tour_booking_id'));
-            $result     = view('admin.tourBooking.formPriceQuantity', compact('prices', 'quantity'))->render();
+            $result     = view('admin.booking.formPriceQuantity', compact('prices', 'quantity'))->render();
         }
         echo $result;
     }

@@ -27,28 +27,26 @@ class Booking extends Model {
     public static function getList($params = null){
         $paginate       = $params['paginate'] ?? 20;
         $result         = self::select('*')
-                            // /* tìm theo khách hàng */
-                            // ->when(!empty($params['search_customer']), function($query) use($params){
-                            //     $query->whereHas('customer_contact', function($q) use ($params){
-                            //         $q->where('name', 'like', '%'.$params['search_customer'].'%')
-                            //         ->orwhere('phone', 'like', '%'.$params['search_customer'].'%')
-                            //         ->orwhere('zalo', 'like', '%'.$params['search_customer'].'%')
-                            //         ->orwhere('email', 'like', '%'.$params['search_customer'].'%');
-                            //     });
-                            // })
-                            // /* tìm theo khu vực */
-                            // ->when(!empty($params['search_location']), function($query) use($params){
-                            //     $query->whereHas('tour.locations', function($q) use ($params){
-                            //         $q->where('tour_location_id', $params['search_location']);
-                            //     });
-                            // })
-                            // /* tìm theo trạng thái */
-                            // ->when(!empty($params['search_status']), function($query) use($params){
-                            //     $query->whereHas('status', function($q) use ($params){
-                            //         $q->where('id', $params['search_status']);
-                            //     });
-                            // })
-                            ->with('status')
+                            /* tìm theo khách hàng */
+                            ->when(!empty($params['search_customer']), function($query) use($params){
+                                $query->whereHas('customer_contact', function($q) use ($params){
+                                    $q->where('name', 'like', '%'.$params['search_customer'].'%')
+                                    ->orwhere('phone', 'like', '%'.$params['search_customer'].'%')
+                                    ->orwhere('zalo', 'like', '%'.$params['search_customer'].'%')
+                                    ->orwhere('email', 'like', '%'.$params['search_customer'].'%');
+                                });
+                            })
+                            /* tìm theo loại */
+                            ->when(!empty($params['search_type']), function($query) use($params){
+                                $query->where('type', $params['search_type']);
+                            })
+                            /* tìm theo trạng thái */
+                            ->when(!empty($params['search_status']), function($query) use($params){
+                                $query->whereHas('status', function($q) use ($params){
+                                    $q->where('id', $params['search_status']);
+                                });
+                            })
+                            ->with('status', 'customer_contact', 'service', 'tour', 'quantityAndPrice')
                             ->orderBy('created_at', 'DESC')
                             ->paginate($paginate);
         return $result;
@@ -79,6 +77,10 @@ class Booking extends Model {
         return $this->hasOne(\App\Models\Customer::class, 'id', 'customer_info_id');
     }
 
+    public function customer_list(){
+        return $this->hasMany(\App\Models\CitizenIdentity::class, 'booking_id', 'id');
+    }
+
     public function status(){
         return $this->hasOne(\App\Models\BookingStatus::class, 'id', 'status_id');
     }
@@ -87,35 +89,19 @@ class Booking extends Model {
         return $this->hasOne(\App\Models\Service::class, 'id', 'reference_id');
     }
 
-    public function serviceQuantityAndPrice(){
-        return $this->hasMany(\App\Models\ServiceBookingQuantityAndPrice::class, 'booking_info_id', 'id');
-    }
-
     public function tour(){
         return $this->hasOne(\App\Models\Tour::class, 'id', 'reference_id');
     }
 
-    public function tourQuantityAndPrice(){
-        return $this->hasMany(\App\Models\TourBookingQuantityAndPrice::class, 'booking_info_id', 'id');
+    public function quantityAndPrice(){
+        return $this->hasMany(\App\Models\BookingQuantityAndPrice::class, 'booking_info_id', 'id');
     }
 
-    // public function option(){
-    //     return $this->hasOne(\App\Models\TourOption::class, 'id', 'tour_option_id');
-    // }
+    public function costMoreLess(){
+        return $this->hasMany(\App\Models\CostMoreLess::class, 'reference_id', 'id');
+    }
 
-    // public function quantiesAndPrices(){
-    //     return $this->hasMany(\App\Models\TourBookingQuantityAndPrice::class, 'tour_booking_id', 'id');
-    // }
-
-    // public function customer_list(){
-    //     return $this->hasMany(\App\Models\CitizenIdentity::class, 'tour_booking_id', 'id');
-    // }    
-
-    // public function costMoreLess(){
-    //     return $this->hasMany(\App\Models\CostMoreLess::class, 'reference_id', 'id');
-    // }
-
-    // public function vat(){
-    //     return $this->hasOne(\App\Models\VAT::class, 'reference_id', 'id');
-    // }
+    public function vat(){
+        return $this->hasOne(\App\Models\VAT::class, 'reference_id', 'id');
+    }
 }

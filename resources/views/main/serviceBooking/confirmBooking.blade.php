@@ -50,27 +50,30 @@
                                             <td>{{ $item->customer_contact->email }}</td>
                                         </tr>
                                     @endif
+                                    @if(!empty($item->service->serviceLocation->display_name))
+                                        <tr>
+                                            <td>Điểm đến</td>
+                                            <td>{{ $item->service->serviceLocation->display_name }}</td>
+                                        </tr>
+                                    @endif
                                     <tr>
-                                        @php
-                                            $linkTour   = env('APP_URL').'/'.$item->service->seo->slug_full;
-                                        @endphp
-                                        <td>URL dịch vụ</td>
-                                        <td>
-                                            <a href="{{ $linkTour }}" style="color:rgba(0,123,255,1);text-decoration:none" target="_blank">{{ $linkTour }}</a>
-                                        </td>
+                                        <td>Tên dịch vụ</td>
+                                        <td><a href="{{ env('APP_URL').'/'.$item->service->seo->slug_full }}" style="color:rgba(0,123,255,1);text-decoration:none" target="_blank">{{ $item->service->name ?? null }}</a></td>
                                     </tr>
                                     <tr>
-                                        <td>Loại dịch vụ</td>
-                                        <td>{{ $item->serviceQuantityAndPrice[0]->option_name }}</td>
+                                        <td>Loại</td>
+                                        <td>{{ $item->quantityAndPrice[0]->option_name }}</td>
                                     </tr>
                                     <tr>
                                         <td>Ngày</td>
-                                        <td>{{ date('d/m/Y', strtotime($item->date_from)) }}</td>
+                                        <td>{{ \App\Helpers\DateAndTime::convertMktimeToDayOfWeek(strtotime($item->date_from)) }}, {{ date('d/m/Y', strtotime($item->date_from)) }}</td>
                                     </tr>
-                                    <tr>
-                                        <td>Ghi chú</td>
-                                        <td>{{ $item->note_customer ?? null }}</td>
-                                    </tr>
+                                    @if(!empty($item->note_customer))
+                                        <tr>
+                                            <td>Ghi chú</td>
+                                            <td>{{ $item->note_customer }}</td>
+                                        </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -92,10 +95,10 @@
                                     @php
                                         $xhtmlTable = null;
                                         $total      = 0;
-                                        foreach($item->serviceQuantityAndPrice as $quantityPrice){
+                                        foreach($item->quantityAndPrice as $quantityPrice){
                                             $xhtmlTable .= '<tr>
                                                                 <td>'.$quantityPrice->option_age.'</td>
-                                                                <td style="text-align:center;">'.$quantityPrice->quantity.' * '.number_format($quantityPrice->price).'</td>
+                                                                <td style="text-align:right;">'.$quantityPrice->quantity.' * '.number_format($quantityPrice->price).'</td>
                                                                 <td style="text-align:right;">'.number_format($quantityPrice->quantity*$quantityPrice->price).'</td>
                                                             </tr>';
                                             $total  += $quantityPrice->quantity*$quantityPrice->price;

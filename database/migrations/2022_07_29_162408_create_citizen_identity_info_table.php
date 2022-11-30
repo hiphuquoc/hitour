@@ -16,10 +16,7 @@ return new class extends Migration
         Schema::create('citizen_identity_info', function (Blueprint $table) {
             /* tour_booking|ship|room|service */
             $table->id();
-            $table->integer('tour_booking_id')->nullable();
-            $table->integer('ship_booking_id')->nullable();
-            $table->integer('room_booking_id')->nullable();
-            $table->integer('service_booking_id')->nullable();
+            $table->integer('booking_id')->nullable();
             $table->string('customer_name');
             $table->string('customer_identity')->nullable();
             $table->string('customer_year_of_birth');

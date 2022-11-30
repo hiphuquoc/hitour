@@ -6,7 +6,7 @@ use App\Models\TourLocation;
 use App\Models\TourPrice;
 use App\Models\Customer;
 use App\Models\Booking;
-use App\Models\TourBookingQuantityAndPrice;
+use App\Models\BookingQuantityAndPrice;
 use Illuminate\Http\Request;
 
 use App\Services\BuildInsertUpdateModel;
@@ -35,7 +35,7 @@ class TourBookingController extends Controller {
         /* insert tour_booking_quantity_and_price */
         $insertTourBookingQuantityAndPrice  = $this->BuildInsertUpdateModel->buildArrayTableTourQuantityAndPrice($idBooking, $request->all());
         foreach($insertTourBookingQuantityAndPrice as $itemInsert){
-            TourBookingQuantityAndPrice::insertItem($itemInsert);
+            BookingQuantityAndPrice::insertItem($itemInsert);
         }
         return redirect()->route('main.tourBooking.confirm', ['no' => $noBooking]);
     }
@@ -44,7 +44,7 @@ class TourBookingController extends Controller {
         $noBooking  = $request->get('no') ?? null;
         $item       = Booking::select('*')
                         ->where('no', $noBooking)
-                        ->with('tour', 'tourQuantityAndPrice')
+                        ->with('tour', 'quantityAndPrice')
                         ->first();
         if(!empty($item)){
             return view('main.tourBooking.confirmBooking', compact('item'));

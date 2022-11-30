@@ -198,20 +198,13 @@
         })
 
         $('#formBooking').find('input, select, textarea').each(function(){
-            $(this).on('change', () => {
+            $(this).on('input', () => {
                 loadBookingSummary();
                 const nameInput   = $(this).attr('name');
                 showHideMessageValidate(nameInput, 'hide');
-                // if(nameInput=='quantity_adult'||nameInput=='quantity_child'||nameInput=='quantity_old'){
-                //     showHideMessageValidate('quantity', 'hide');
-                // }
-            })
-            $(this).on('click', () => {
-                const nameInput   = $(this).attr('name');
-                showHideMessageValidate(nameInput, 'hide');
-                // if(nameInput=='quantity_adult'||nameInput=='quantity_child'||nameInput=='quantity_old'){
-                //     showHideMessageValidate('quantity', 'hide');
-                // }
+                if(nameInput=='quantity_adult'||nameInput=='quantity_child'||nameInput=='quantity_old'){
+                    showHideMessageValidate('quantity', 'hide');
+                }
             })
         })
 

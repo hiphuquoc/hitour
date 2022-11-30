@@ -183,8 +183,8 @@ return [
             'icon'  => '<i class="fa-solid fa-file-pen"></i>',
             'child' => [
                 [
-                    'name'  => '1. Booking Tour',
-                    'route' => 'admin.tourBooking.list',
+                    'name'  => '1. Booking chung',
+                    'route' => 'admin.booking.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ], 
                 [

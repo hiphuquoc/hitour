@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tour_booking_quantity_and_price', function (Blueprint $table) {
+        Schema::create('booking_quantity_and_price', function (Blueprint $table) {
             $table->id();
             $table->integer('booking_info_id');
             $table->string('option_name');
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('tour_booking_quantity_and_price');
+        // Schema::dropIfExists('booking_quantity_and_price');
     }
 };
