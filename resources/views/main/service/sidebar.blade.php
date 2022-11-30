@@ -1,6 +1,10 @@
 <div class="js_scrollFixed">
    <div class="callBookTour">
-      @include('main.template.callbook', ['button' => 'Đặt vé', 'flagButton' => true])
+      @include('main.template.callbook', [
+         'flagButton'    => true,
+         'button'        => 'Đặt vé',
+         'linkFull'      => $linkBooking
+      ])
    </div>
 
    @php

@@ -85,7 +85,13 @@
                         @endif
                     </div>
                     <div class="pageContent_body_sidebar">
-                        @include('main.service.sidebar')
+                        @php
+                            $linkBooking = route('main.serviceBooking.form', [
+                                'service_location_id'   => $item->serviceLocation->id ?? 0,
+                                'service_info_id'       => $item->id ?? 0
+                            ]);
+                        @endphp 
+                        @include('main.service.sidebar', compact('linkBooking'))
                     </div>
                 </div>
             </div>
@@ -100,10 +106,7 @@
                 <div class="callBookTourMobile_price">
                     {{ number_format($item->price_show).config('main.unit_currency') }}
                 </div>
-                <a href="tel:0868684868" class="callBookTourMobile_phone">
-                    <div>08 6868 4868</div>
-                </a>
-                {{-- <div class="callBookTourMobile_button"><h2>Đặt Vé này</h2></div> --}}
+                <a href="{{ $linkBooking }}" class="callBookTourMobile_button"><h2>Đặt vé này</h2></a>
             </div>
         </div>
     @endif

@@ -3144,6 +3144,12 @@ blockquote{
             padding: 0.75rem 1rem 1.25rem 1rem;
         }
     }
+    @media (max-width: 767px){
+        margin-top: -3rem;
+        &_body {
+            padding: 0.75rem 1rem 1rem;
+        }
+    }
 }
 .bookFormSortService {
     display: flex;
@@ -3208,6 +3214,7 @@ blockquote{
             margin-top: 1rem;
             width: 100%;
             flex: unset !important; 
+            position: relative;
         }
     }
 }
