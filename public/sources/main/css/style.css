@@ -2762,7 +2762,7 @@ blockquote em {
   font-size: 1.3rem;
   font-family: "SVN-Gilroy Bold", serif;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 .bookingForm_item_body {
   box-shadow: 0 0 5px #e9ecef;
@@ -2805,14 +2805,20 @@ blockquote em {
 .bookingForm .flexBox.half .flexBox_item:not(:first-child) {
   margin-left: 1rem;
 }
-@media (max-width: 767px) {
+@media (max-width: 990px) {
+  .bookingForm_item_head {
+    font-size: 1.25rem;
+  }
   .bookingForm_item:not(:first-child) {
     margin-top: 1.5rem;
   }
 }
 @media (max-width: 577px) {
   .bookingForm_item_head {
-    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+  }
+  .bookingForm_item_body {
+    padding: 0.75rem 1rem 1rem;
   }
   .bookingForm_item_body_item:not(:first-child) {
     margin-top: 1rem;
@@ -3196,11 +3202,6 @@ blockquote em {
   padding: 0.75rem 1rem;
   background: rgba(0, 123, 255, 0.2);
 }
-.shipDepartureConfirmBox_item_title .highLight {
-  color: rgb(0, 90, 180);
-  font-weight: bold;
-  font-size: 1.2rem;
-}
 .shipDepartureConfirmBox_item_body {
   padding: 0.75rem 1rem;
 }
@@ -3209,18 +3210,28 @@ blockquote em {
   padding-top: 0.5rem;
   border-top: 1px dashed #dee2e6;
 }
-.shipDepartureConfirmBox_item_body .highLight {
+.shipDepartureConfirmBox_item .highLight {
   color: rgb(0, 90, 180);
+  font-weight: bold;
   font-size: 1.2rem;
-  font-weight: 700;
-  font-family: "SVN-Gilroy Bold", serif;
 }
 @media (max-width: 990px) {
   .shipDepartureConfirmBox {
     flex-wrap: wrap;
+    font-size: 0.95rem;
   }
   .shipDepartureConfirmBox_item {
     width: 100%;
+  }
+  .shipDepartureConfirmBox_item .highLight {
+    color: rgb(0, 90, 180);
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+}
+@media (max-width: 577px) {
+  .shipDepartureConfirmBox_item .highLight {
+    font-size: 1rem;
   }
 }
 
@@ -5998,6 +6009,7 @@ blockquote em {
 }
 @media (max-width: 577px) {
   .certifiedBox {
+    padding: 1rem;
     flex-wrap: wrap;
   }
   .certifiedBox_image {

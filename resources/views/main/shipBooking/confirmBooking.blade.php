@@ -10,7 +10,7 @@
         <div class="sectionBox">
             <div class="container">
                 <!-- title -->
-                <h1 class="titlePage" style="margin-bottom:1.5rem;text-align:center;">Đặt vé thành công</h1>
+                <h1 class="titlePage" style="margin-bottom:0.75rem;text-align:center;">Đặt vé thành công</h1>
                 <!-- ship box -->
                 <div class="pageContent_body">
                     <div class="bookingForm">

@@ -2493,7 +2493,7 @@ blockquote{
             font-size: 1.3rem;
             font-family: $font-primary-title;
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
         &_body {
             box-shadow: 0 0 5px $bg-03;
@@ -2547,8 +2547,11 @@ blockquote{
             }
         }
     }
-    @media(max-width: 767px){
+    @media(max-width: 990px){
         &_item {
+            &_head {
+                font-size: 1.25rem;
+            }
             &:not(:first-child){
                 margin-top: 1.5rem;
             }
@@ -2562,9 +2565,10 @@ blockquote{
             //     border-top: 1px solid $bg-04;
             // }
             &_head {
-                margin-bottom: 0.75rem;
+                font-size: 1.2rem;
             }
             &_body {
+                padding: 0.75rem 1rem 1rem;
                 &_item {
                     &:not(:first-child){
                         margin-top: 1rem;
@@ -2978,11 +2982,6 @@ blockquote{
         &_title {
             padding: 0.75rem 1rem;
             background: $color-primary-02;
-            .highLight {
-                color: $color-primary-hover;
-                font-weight: bold;
-                font-size: 1.2rem;
-            }
         }
         &_body {
             padding: 0.75rem 1rem;
@@ -2993,19 +2992,30 @@ blockquote{
                     border-top: 1px dashed $bg-04;
                 }
             }
-            .highLight {
-                color: $color-primary-hover;
-                font-size: 1.2rem;
-                font-weight: 700;
-                font-family: $font-primary-title;
-            }
+        }
+        .highLight {
+            color: $color-primary-hover;
+            font-weight: bold;
+            font-size: 1.2rem;
         }
     }
     @media(max-width: 990px){
         flex-wrap: wrap;
+        font-size: 0.95rem;
         &_item {
             width: 100%;
-            
+            .highLight {
+                color: $color-primary-hover;
+                font-weight: bold;
+                font-size: 1.1rem;
+            }
+        }
+    }
+    @media(max-width: 577px){
+        &_item {
+            .highLight {
+                font-size: 1rem;
+            }
         }
     }
 }
@@ -5780,6 +5790,7 @@ $width-single-menu  : 260px;
         }
     }
     @media(max-width: 577px){
+        padding: 1rem;
         flex-wrap: wrap;
         &_image {
             margin: 0 auto;
