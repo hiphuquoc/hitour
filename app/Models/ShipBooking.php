@@ -20,7 +20,7 @@ class ShipBooking extends Model {
     public $timestamps      = true;
 
     public static function getList($params = null){
-        $paginate       = $params['paginate'] ?? null;
+        $paginate       = $params['paginate'];
         $result         = self::select('*')
                             /* tìm theo khách hàng */
                             ->when(!empty($params['search_customer']), function($query) use($params){
@@ -89,6 +89,6 @@ class ShipBooking extends Model {
     }
 
     public function customer_list(){
-        return $this->hasMany(\App\Models\CitizenIdentity::class, 'ship_booking_id', 'id');
+        return $this->hasMany(\App\Models\CitizenIdentity::class, 'booking_id', 'id');
     }
 }

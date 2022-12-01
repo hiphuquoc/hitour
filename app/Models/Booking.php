@@ -25,7 +25,7 @@ class Booking extends Model {
     public $timestamps      = true;
 
     public static function getList($params = null){
-        $paginate       = $params['paginate'] ?? 20;
+        $paginate       = $params['paginate'];
         $result         = self::select('*')
                             /* tìm theo khách hàng */
                             ->when(!empty($params['search_customer']), function($query) use($params){

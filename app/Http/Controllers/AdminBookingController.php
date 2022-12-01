@@ -18,6 +18,7 @@ use App\Models\TourBookingQuantityAndPrice;
 use App\Models\VAT;
 
 use App\Services\BuildInsertUpdateModel;
+use Illuminate\Support\Facades\Cookie;
 use App\Http\Requests\TourBookingRequest;
 use App\Models\CitizenIdentity;
 use App\Models\SystemFile;
@@ -37,11 +38,14 @@ class AdminBookingController extends Controller {
         if(!empty($request->get('search_type'))) $params['search_type'] = $request->get('search_type');
         /* Search theo trang thái */
         if(!empty($request->get('search_status'))) $params['search_status'] = $request->get('search_status');
+        /* paginate */
+        $viewPerPage        = Cookie::get('viewBooking') ?? 50;
+        $params['paginate'] = $viewPerPage;
         /* lấy dữ liệu */
         $list               = Booking::getList($params);
         /* status */
         $status             = BookingStatus::all();
-        return view('admin.booking.list', compact('list', 'params', 'status'));
+        return view('admin.booking.list', compact('list', 'params', 'status', 'viewPerPage'));
     }
 
     // public function viewEdit(Request $request, $id){

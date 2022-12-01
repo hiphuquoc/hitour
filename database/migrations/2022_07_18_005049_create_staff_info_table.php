@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('zalo')->nullable();
             $table->string('email');
             $table->text('avatar')->nullable();
+            $table->integer('user_id');
         });
     }
 

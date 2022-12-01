@@ -10,7 +10,7 @@ use App\Models\ShipBooking;
 use App\Models\ShipBookingQuantityAndPrice;
 
 use App\Services\BuildInsertUpdateModel;
-
+use Illuminate\Support\Facades\Cookie;
 use App\Models\CitizenIdentity;
 use App\Models\ShipBookingStatus;
 
@@ -32,13 +32,16 @@ class AdminShipBookingController extends Controller {
         if(!empty($request->get('search_location'))) $params['search_location'] = $request->get('search_location');
         /* Search theo trạng thái */
         if(!empty($request->get('search_status'))) $params['search_status'] = $request->get('search_status');
+        /* paginate */
+        $viewPerPage        = Cookie::get('viewShipBooking') ?? 50;
+        $params['paginate'] = $viewPerPage;
         /* lấy dữ liệu */
         $list               = ShipBooking::getList($params);
         /* điểm khởi hành Tàu */
         $shipPorts          = ShipPort::all();
         /* status */
         $status             = ShipBookingStatus::all();
-        return view('admin.shipBooking.list', compact('list', 'params', 'shipPorts', 'status'));
+        return view('admin.shipBooking.list', compact('list', 'params', 'shipPorts', 'status', 'viewPerPage'));
     }
 
     public function view(Request $request){
