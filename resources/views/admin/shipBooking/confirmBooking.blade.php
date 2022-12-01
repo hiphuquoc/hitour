@@ -156,15 +156,15 @@
                                     <tbody>
                                         <tr>
                                             <td colspan="2" style="display:flex;padding:7px 12px !important;border:1px dashed #d1d1d1">
-                                                <div style="width:100%;display:inline-block;vertical-align:top">
+                                                <div style="width:calc(50% - 30px);display:inline-block;vertical-align:top">
                                                     <div style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">Sóc Trăng</div>
                                                     <div style="font-size:15px;font-weight:normal;color:#456">Sóc Trăng, Việt Nam</div>
                                                     <div><span style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">07:30</span> Xuất bến tại cảng cá Trần Đề</div>
                                                 </div>
-                                                <div style="flex:0 0 60px;margin-top:10px;display:inline-block;vertical-align:top;margin-left:15px;">
+                                                <div style="width:60px;margin-top:10px;display:inline-block;vertical-align:top;margin-left:15px;">
                                                     <img src="{{ config('main.icon-arrow-email') }}" style="width:100%;">
                                                 </div>
-                                                <div style="width:100%;display:inline-block;vertical-align:top;margin-left:15px;">
+                                                <div style="width:calc(50% - 30px);display:inline-block;vertical-align:top;margin-left:15px;">
                                                     <div style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">Côn đảo</div>
                                                     <div style="font-size:15px;font-weight:normal;color:#456">Bà Rịa Vũng Tàu, Việt Nam</div>
                                                     <div><span style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">10:00</span> Cập bến tại cảng Bến Đầm</div>
