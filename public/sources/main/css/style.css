@@ -3651,7 +3651,7 @@ blockquote em {
   margin-top: 0;
 }
 .serviceRelatedSidebarBox_box {
-  border: 1px solid #e9ecef;
+  border: 1px solid #dee2e6;
   border-radius: 5px;
 }
 .serviceRelatedSidebarBox_box_item {
@@ -3660,7 +3660,7 @@ blockquote em {
   align-items: center;
 }
 .serviceRelatedSidebarBox_box_item:not(:first-child) {
-  border-top: 1px dashed #dee2e6;
+  border-top: 1px dashed #ced4da;
 }
 .serviceRelatedSidebarBox_box_item:hover {
   background: #e9ecef;

@@ -2,15 +2,18 @@
 @section('content')
 
     @include('admin.booking.confirmBooking', compact('item'))
-
-    @if(!empty($item->status->relationAction))
+    {{-- @php
+        dd($item->status->actions->toArray());
+    @endphp --}}
+    @if(!empty($item->status->actions))
     <div class="actionBookingBox">
         <div class="actionBookingBox_item" style="text-align:center;font-size:1.1rem;background:{{ $item->status->color }};color:#fff;">
             {{ $item->status->name }}
         </div>
-        @foreach($item->status->relationAction as $action)
+        
+        @foreach($item->status->actions as $action)
             <div class="actionBookingBox_item">
-                <span style="color:{{ $action->action->color }};">{!! $action->action->icon !!}</span>{{ $action->action->name }}
+                <span style="color:{{ $action->infoAction->color }};">{!! $action->infoAction->icon !!}</span>{{ $action->infoAction->name }}
             </div>
         @endforeach
 

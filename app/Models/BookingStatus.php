@@ -35,4 +35,8 @@ class BookingStatus extends Model {
         }
         return $flag;
     }
+
+    public function actions(){
+        return $this->hasMany(\App\Models\RelationBookingStatusAction::class, 'booking_status_id', 'id');
+    }
 }

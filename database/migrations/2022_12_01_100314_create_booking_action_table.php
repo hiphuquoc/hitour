@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('relation_tour_status_action', function (Blueprint $table) {
+        Schema::create('booking_action', function (Blueprint $table) {
             $table->id();
-            $table->integer('tour_booking_status_id');
-            $table->integer('tour_booking_action_id');
+            $table->string('name');
+            $table->string('color', 10);
+            $table->string('icon', 100);
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('relation_tour_status_action');
+        // Schema::dropIfExists('booking_action');
     }
 };

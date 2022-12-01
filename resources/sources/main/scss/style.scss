@@ -3429,16 +3429,14 @@ blockquote{
         }
     }
     &_box {
-        border: 1px solid $bg-03;
+        border: 1px solid $bg-04;
         border-radius: 5px;
         &_item {
             display: flex;
             padding: 0.65rem 1rem;
             align-items: center;
             &:not(:first-child){
-                // margin-top: 0.65rem;
-                // padding-top: 0.65rem;
-                border-top: 1px dashed $bg-04;
+                border-top: 1px dashed $bg-05;
             }
             &:hover {
                 background: $bg-03;

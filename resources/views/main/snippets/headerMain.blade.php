@@ -74,7 +74,7 @@
                 </li>
                 <li>
                     <div>
-                        <a href="https://www.bestprice.vn/khach-san" title="Đặt phòng khách sạn" rel="nofollow" style="padding-right:0;">Khách sạn</a>
+                        <a href="https://www.booking.com" title="Đặt phòng khách sạn" rel="nofollow" style="padding-right:0;">Khách sạn</a>
                     <div>
                 </li>
             </ul>
@@ -369,7 +369,7 @@
                     @endif
                 </li>
                 <li>
-                    <a href="https://www.bestprice.vn/khach-san" title="Đặt phòng khách sạn">
+                    <a href="https://www.booking.com" title="Đặt phòng khách sạn">
                         <i class="fa-solid fa-hotel"></i>
                         <div>Khách sạn</div>
                     </a>
