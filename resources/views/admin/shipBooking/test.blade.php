@@ -1,8 +1,3 @@
-@php
-    use App\Helpers\DateAndTime;
-@endphp
-
-@if(!empty($item))
 <table class="sendEmail" style="font-family:'Roboto',Montserrat,-apple-system,'Segoe UI',sans-serif;width:100%;" width="100%" cellpadding="0" cellspacing="0" role="presentation">
     <tbody>
         <tr>
@@ -12,25 +7,15 @@
                         <tr>
                             <td style="box-sizing:border-box;padding:15px 15px 10px 15px;line-height:1">
                                 <div style="text-align:center">
-                                    <img width="70px" src="{{ config('main.logo_square') }}" style="display:inline-block;width:70px;">
+                                    <img width="70px" src="https://hitour.com/storage/images/upload/logo-share-type-manager-upload.png" style="display:inline-block;width:70px;">
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td style="box-sizing:border-box;text-align:center;line-height:1.68;color:#456;padding:10px 15px 0 15px;">
-                                @php
-                                    $dayOfWeekBooking           = DateAndTime::convertMktimeToDayOfWeek(strtotime($item->created_at));
-                                    $bookingAt                  = 'Đặt lúc '.date('H:i', strtotime($item->created_at)).' '.$dayOfWeekBooking.', '.date('d/m/Y', strtotime($item->created_at));
-                                    $expirationAt               = null;
-                                    if(!empty($item->expiration_at)){
-                                        $dayOfWeekExpiration    = DateAndTime::convertMktimeToDayOfWeek(strtotime($item->expiration_at));
-                                        $expirationAt           = '<div style="text-align:right;margin-right:10px;font-size:15px;">
-                                                                Hết hạn '.date('H:i', strtotime($item->expiration_at)).' '.$dayOfWeekExpiration.', '.date('d/m/Y', strtotime($item->expiration_at)).'</div>';
-                                    }
-                                @endphp
-                                <h1 style="font-size:20px;font-weight:bold;color:#345;margin-bottom:15px;">XÁC NHẬN DỊCH VỤ</h1>
-                                <div style="text-align:right;margin-right:10px;font-size:15px;">{{ $bookingAt }}</div>
-                                {{ $expirationAt }}
+                                                                <h1 style="font-size:20px;font-weight:bold;color:#345;margin-bottom:15px;">XÁC NHẬN DỊCH VỤ</h1>
+                                <div style="text-align:right;margin-right:10px;font-size:15px;">Đặt lúc 11:54 Thứ 4, 30/11/2022</div>
+                                
                             </td>
                         </tr>
                         <tr>
@@ -39,37 +24,30 @@
                                     <tbody>
                                         <tr>
                                             <td style="width:140px;font-size:15px;padding:5px;">Mã xác nhận</td>
-                                            <td style="padding:5px;font-weight:bold;color:rgba(0,123,255,1);font-size:20px;">{{ $item->no ?? null }}</td>
+                                            <td style="padding:5px;font-weight:bold;color:rgba(0,123,255,1);font-size:20px;">VWHT0PXNFO</td>
                                         </tr>
                                         <tr>
                                             <td style="font-size:15px;padding:5px;">Tên khách hàng</td>
-                                            <td style="font-weight:bold;font-size:15px;padding:5px;">{{ $item->customer_contact->name }}</td>
+                                            <td style="font-weight:bold;font-size:15px;padding:5px;">VAN PHU PHAM</td>
                                         </tr>
-                                        @if(!empty($item->customer_contact->phone))
-                                            <tr>
+                                                                                    <tr>
                                                 <td style="font-size:15px;padding:5px;">Điện thoại</td>
-                                                <td style="font-weight:bold;font-size:15px;padding:5px;">{{ $item->customer_contact->phone }}</td>
+                                                <td style="font-weight:bold;font-size:15px;padding:5px;">0968617168</td>
                                             </tr>
-                                        @endif
-                                        @if(!empty($item->customer_contact->zalo))
-                                            <tr>
+                                                                                                                            <tr>
                                                 <td style="font-size:15px;padding:5px;">Zalo</td>
-                                                <td style="font-weight:bold;font-size:15px;padding:5px;">{{ $item->customer_contact->zalo }}</td>
+                                                <td style="font-weight:bold;font-size:15px;padding:5px;">0968617168</td>
                                             </tr>
-                                        @endif
-                                        @if(!empty($item->customer_contact->email))
-                                            <tr>
+                                                                                                                            <tr>
                                                 <td style="font-size:15px;padding:5px;">Email</td>
-                                                <td style="font-weight:bold;font-size:15px;padding:5px;">{{ $item->customer_contact->email }}</td>
+                                                <td style="font-weight:bold;font-size:15px;padding:5px;">hiphuquoc@gmail.com</td>
                                             </tr>
-                                        @endif
-                                    </tbody>
+                                                                            </tbody>
                                 </table>
                             </td>
                         </tr>
                         <!-- GIÁ DỊCH VỤ & SỐ LƯỢNG -->
-                        @if($item->infoDeparture->isNotEmpty())
-                        <tr>
+                                                <tr>
                             <td style="box-sizing:border-box;font-weight:bold;padding:10px 15px 5px 15px;">
                                 <div style="font-size:18px;font-weight:bold;color:#345;">1. Chi tiết giá</div>
                             </td>
@@ -86,50 +64,47 @@
                                     </thead>
                                     <tbody>
                                         <!-- Thành tiền chính -->
-                                        @php
-                                            $total          = 0;
-                                        @endphp     
-                                        @foreach($item->infoDeparture as $departure)
-                                            @if(!empty($departure->departure)&&!empty($departure->location))
-                                                <tr>
-                                                    <td colspan="3" style="font-size:15px;padding:7px 12px !important;background:#EDF2F7;font-weight:bold;">Chuyến {{ $departure->departure }} - {{ $departure->location }}</td>
+                                             
+                                                                                                                                    <tr>
+                                                    <td colspan="3" style="font-size:15px;padding:7px 12px !important;background:#EDF2F7;font-weight:bold;">Chuyến Rạch Giá - Phú Quốc</td>
                                                 </tr>
-                                            @endif
-                                            @if(!empty($departure->quantity_adult)&&!empty($departure->price_adult))
-                                                <tr>
+                                                                                                                                        <tr>
                                                     <td style="font-size:15px;padding:7px 12px !important;border-top:1px dashed #d1d1d1;">Người lớn</td>
-                                                    <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ $departure->quantity_adult }} * {{ number_format($departure->price_adult) }}</td>
-                                                    <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ number_format($departure->quantity_adult*$departure->price_adult) }}</td>
+                                                    <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">1 * 340,000</td>
+                                                    <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">340,000</td>
                                                 </tr>
-                                                @php
-                                                    $total  += $departure->quantity_adult*$departure->price_adult;
-                                                @endphp
-                                            @endif
-                                            @if(!empty($departure->quantity_child)&&!empty($departure->price_child))
-                                                <tr>
+                                                                                                                                                                                        <tr>
                                                     <td style="font-size:15px;padding:7px 12px !important;border-top:1px dashed #d1d1d1;">Trẻ em</td>
-                                                    <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ $departure->quantity_child }} * {{ number_format($departure->price_child) }}</td>
-                                                    <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ number_format($departure->quantity_child*$departure->price_child) }}</td>
+                                                    <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">2 * 270,000</td>
+                                                    <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">540,000</td>
                                                 </tr>
-                                                @php
-                                                    $total  += $departure->quantity_child*$departure->price_child;
-                                                @endphp
-                                            @endif
-                                            @if(!empty($departure->quantity_old)&&!empty($departure->price_old))
-                                                <tr>
+                                                                                                                                                                                        <tr>
                                                     <td style="font-size:15px;padding:7px 12px !important;border-top:1px dashed #d1d1d1;">Cao tuổi</td>
-                                                    <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ $departure->quantity_old }} * {{ number_format($departure->price_old) }}</td>
-                                                    <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ number_format($departure->quantity_old*$departure->price_old) }}</td>
+                                                    <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">1 * 270,000</td>
+                                                    <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">270,000</td>
                                                 </tr>
-                                                @php
-                                                    $total  += $departure->quantity_old*$departure->price_old;
-                                                @endphp
-                                            @endif
-                                        @endforeach
-                                        <!-- Tổng -->
+                                                                                                                                                                                                                                <tr>
+                                                    <td colspan="3" style="font-size:15px;padding:7px 12px !important;background:#EDF2F7;font-weight:bold;">Chuyến Rạch Giá - Phú Quốc</td>
+                                                </tr>
+                                                                                                                                        <tr>
+                                                    <td style="font-size:15px;padding:7px 12px !important;border-top:1px dashed #d1d1d1;">Người lớn</td>
+                                                    <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">1 * 340,000</td>
+                                                    <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">340,000</td>
+                                                </tr>
+                                                                                                                                                                                        <tr>
+                                                    <td style="font-size:15px;padding:7px 12px !important;border-top:1px dashed #d1d1d1;">Trẻ em</td>
+                                                    <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">2 * 270,000</td>
+                                                    <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">540,000</td>
+                                                </tr>
+                                                                                                                                                                                        <tr>
+                                                    <td style="font-size:15px;padding:7px 12px !important;border-top:1px dashed #d1d1d1;">Cao tuổi</td>
+                                                    <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">1 * 270,000</td>
+                                                    <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">270,000</td>
+                                                </tr>
+                                                                                                                                                                            <!-- Tổng -->
                                         <tr>
                                             <td colspan="2" style="font-size:15px;padding:7px 12px !important;text-align:center;border-top:1px dashed #d1d1d1;font-weight:bold;">Tổng</td>
-                                            <td style="font-size:18px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;color:#E74C3C;font-weight:bold;">{{ number_format($total).config('main.unit_currency') }}</td>
+                                            <td style="font-size:18px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;color:#E74C3C;font-weight:bold;">2,300,000đ</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -142,12 +117,10 @@
                                 </table>
                             </td>
                         </tr>
-                        @endif
-                        <!-- THÔNG TIN CHUYẾN ĐI -->
-                        @for($i=2;$i<4;++$i)
-                        <tr>
+                                                <!-- THÔNG TIN CHUYẾN ĐI -->
+                                                <tr>
                             <td style="box-sizing:border-box;font-weight:bold;padding:10px 15px 5px 15px;">
-                                <div style="font-size:18px;font-weight:bold;color:#345;">{{ $i }}. Thông tin chuyến đi</div>
+                                <div style="font-size:18px;font-weight:bold;color:#345;">2. Thông tin chuyến đi</div>
                             </td>
                         </tr>
                         <tr>
@@ -162,7 +135,7 @@
                                                     <div><span style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">07:30</span> Xuất bến tại cảng cá Trần Đề</div>
                                                 </div>
                                                 <div style="flex:0 0 60px;margin-top:10px;display:inline-block;vertical-align:top;margin-left:15px;">
-                                                    <img src="{{ config('main.icon-arrow-email') }}" style="width:100%;">
+                                                    <img src="https://hitour.com/images/main/icon-arrow-email.png" style="width:100%;">
                                                 </div>
                                                 <div style="width:100%;display:inline-block;vertical-align:top;margin-left:15px;">
                                                     <div style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">Côn đảo</div>
@@ -196,8 +169,58 @@
                                 </table>
                             </td>
                         </tr>
-                        @endfor
-                        <!-- DANH SÁCH HÀNH KHÁCH -->
+                                                <tr>
+                            <td style="box-sizing:border-box;font-weight:bold;padding:10px 15px 5px 15px;">
+                                <div style="font-size:18px;font-weight:bold;color:#345;">3. Thông tin chuyến đi</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="box-sizing:border-box;padding:5px 15px 20px 15px;">
+                                <table width="100%" style="border:2px dashed #c1c1c1;border-collapse:collapse;font-size:15px;line-height:1.48">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="2" style="display:flex;padding:7px 12px !important;border:1px dashed #d1d1d1">
+                                                <div style="width:100%;display:inline-block;vertical-align:top">
+                                                    <div style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">Sóc Trăng</div>
+                                                    <div style="font-size:15px;font-weight:normal;color:#456">Sóc Trăng, Việt Nam</div>
+                                                    <div><span style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">07:30</span> Xuất bến tại cảng cá Trần Đề</div>
+                                                </div>
+                                                <div style="flex:0 0 60px;margin-top:10px;display:inline-block;vertical-align:top;margin-left:15px;">
+                                                    <img src="https://hitour.com/images/main/icon-arrow-email.png" style="width:100%;">
+                                                </div>
+                                                <div style="width:100%;display:inline-block;vertical-align:top;margin-left:15px;">
+                                                    <div style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">Côn đảo</div>
+                                                    <div style="font-size:15px;font-weight:normal;color:#456">Bà Rịa Vũng Tàu, Việt Nam</div>
+                                                    <div><span style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">10:00</span> Cập bến tại cảng Bến Đầm</div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding:7px 12px !important;border:1px dashed #d1d1d1">
+                                                <span style="width:70px;display:inline-block;">Ngày</span> : <span style="font-weight:bold;color:rgb(0,90,180);">Thứ 5, ngày 29-09-2022</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding:7px 12px !important;border:1px dashed #d1d1d1">
+                                                <span style="width:70px;display:inline-block;">Hãng tàu</span> : <span style="font-weight:bold;color:rgb(0,90,180);">Phú Quốc Express</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding:7px 12px !important;border:1px dashed #d1d1d1">
+                                                <span style="width:70px;display:inline-block;">Số lượng</span> : <span><span style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">5</span> người lớn, <span style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">5</span> trẻ em 6-11 tuổi, <span style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">5</span> người trên 60 tuổi</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding:7px 12px !important;border:1px dashed #d1d1d1">
+                                                <span style="width:70px;display:inline-block;">Loại vé</span> : <span style="font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">ECO</span>
+                                            </td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                                                <!-- DANH SÁCH HÀNH KHÁCH -->
                         <tr>
                             <td style="box-sizing:border-box;font-weight:bold;padding:10px 15px 5px 15px;">
                                 <div style="font-size:18px;font-weight:bold;color:#345;">4. Danh sách hành khách</div>
@@ -215,21 +238,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if($item->customer_list->isNotEmpty())
-                                            @foreach($item->customer_list as $infoCustomer)
-                                                <tr>
-                                                    <td style="font-size:15px;padding:7px 12px !important;border-top:1px dashed #d1d1d1;text-align:center;">{{ $loop->index+1 }}</td>
-                                                    <td style="font-size:15px;padding:7px 12px !important;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ $infocustomer_contact->customer_name }}</td>
-                                                    <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ $infocustomer_contact->customer_year_of_birth }}</td>
-                                                    <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ $infocustomer_contact->customer_identity ?? 'Chưa có'  }}</td>
-                                                </tr>
-                                            @endforeach
-                                        @else
-                                            <tr>
+                                                                                    <tr>
                                                 <td colspan="4" style="font-size:15px;padding:7px 12px !important;border-top:1px dashed #d1d1d1;text-align:center;">Chưa cập nhật!</td>
                                             </tr>
-                                        @endif
-                                    </tbody>
+                                                                            </tbody>
                                 </table>
                                 <table class="sendEmail" role="presentation" style="border-collapse:collapse;width:100%;line-height:1.68;font-size:15px;color:#456;">
                                     <tbody>
@@ -259,31 +271,22 @@
                                         </tr>
                                         <tr style="border-bottom:1px dashed #d1d1d1;color:#456;">
                                             <td style="padding:5px;">
-                                                @php
-                                                    $deadline       = '...';
-                                                    if(!empty($item->expiration_at)){
-                                                        $hour       = date('H:i', strtotime($item->expiration_at));
-                                                        $dayOfWeek  = \App\Helpers\DateAndTime::convertMktimeToDayOfWeek(strtotime($item->expiration_at));
-                                                        $date       = date('d/m/Y', strtotime($item->expiration_at));
-                                                        $deadline   = 'trước '.$hour.' '.$dayOfWeek.', ngày '.$date;
-                                                    }
-                                                @endphp
-                                                <div>
-                                                    2. Quý khách chuyển khoản theo thông tin bên dưới <span style="font-weight:bold;font-size:16px;">{{ $deadline }}</span>, trong nội dung chuyển khoản ghi <span style="font-weight:bold;font-size:16px;">{{ $item->customer_contact->phone }}</span>
+                                                                                                <div>
+                                                    2. Quý khách chuyển khoản theo thông tin bên dưới <span style="font-weight:bold;font-size:16px;">...</span>, trong nội dung chuyển khoản ghi <span style="font-weight:bold;font-size:16px;">0968617168</span>
                                                 </div>
-                                                @php
-                                                    $dataBank = config('company.bank');
-                                                    
-                                                @endphp
-                                                @foreach(config('company.bank') as $bank)
-                                                    <div>
-                                                        <div><b>{{ $bank['title'] }}</b></div>
-                                                        <div>Tên TK: {{ $bank['name'] }}</div>
-                                                        <div>Số TK: {{ $bank['number'] }}</div>
-                                                        <div>Chi nhánh: {{ $bank['department'] }}</div>
+                                                                                                                                                    <div>
+                                                        <div><b>- Tài khoản giám đốc:</b></div>
+                                                        <div>Tên TK: PHAM VAN PHU</div>
+                                                        <div>Số TK: 19036101422017</div>
+                                                        <div>Chi nhánh: Techcombank Kiên Giang</div>
                                                     </div>
-                                                @endforeach
-                                            </td>
+                                                                                                    <div>
+                                                        <div><b>- Tài khoản công ty:</b></div>
+                                                        <div>Tên TK: CONG TY TNHH DU LICH BIEN DAO HITOUR</div>
+                                                        <div>Số TK: 1016376662</div>
+                                                        <div>Chi nhánh: Vietcombank Kiên Giang</div>
+                                                    </div>
+                                                                                            </td>
                                         </tr>
                                         <tr style="color:#456;">
                                             <td style="padding:5px;">
@@ -305,16 +308,28 @@
                             <td style="box-sizing:border-box;padding:0 15px 5px 15px;">
                                 <table class="sendEmail" role="presentation" style="border-collapse:collapse;width:100%;line-height:1.68;font-size:15px;color:#456;">
                                     <tbody>
-                                        @foreach(config('company.cancelShipTicket') as $policy)
-                                            <tr style="border-bottom:1px dashed #d1d1d1;color:#456;">
+                                                                                    <tr style="border-bottom:1px dashed #d1d1d1;color:#456;">
                                                 <td style="padding:5px;">
                                                     <div>
-                                                        {!! $policy !!}
+                                                        - ĐỔI CHUYẾN sẽ chịu phí 20% (đối với các tuyến: Côn Đảo), miễn phí (đối với các tuyến: Phú Quốc, Nam Du, Hòn Sơn)
                                                     </div>
                                                 </td>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
+                                                                                    <tr style="border-bottom:1px dashed #d1d1d1;color:#456;">
+                                                <td style="padding:5px;">
+                                                    <div>
+                                                        - HỦY VÉ sẽ chịu phí 20% (đối với các tuyến: Côn Đảo, Phú Quốc, Nam Du, Hòn Sơn)
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                                                                    <tr style="border-bottom:1px dashed #d1d1d1;color:#456;">
+                                                <td style="padding:5px;">
+                                                    <div>
+                                                        - ĐỔI THÔNG TIN HÀNH KHÁCH sẽ chịu phí 10% (đối với các tuyến: Côn Đảo), miễn phí (đối với các tuyến: Phú Quốc, Nam Du, Hòn Sơn)
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                                                            </tbody>
                                 </table>
                             </td>
                         </tr>
@@ -328,14 +343,22 @@
                             <td style="box-sizing:border-box;padding:0 15px 5px 15px;">
                                 <table class="sendEmail" role="presentation" style="border-collapse:collapse;width:100%;line-height:1.68;font-size:15px;color:#456;">
                                     <tbody>
-                                        @foreach(config('company.noticeShipTicket') as $notice)
-                                            <tr style="border-bottom:1px dashed #d1d1d1;color:#456;">
+                                                                                    <tr style="border-bottom:1px dashed #d1d1d1;color:#456;">
                                                 <td style="padding:5px;">
-                                                    <div>{!! $notice !!}</div>
+                                                    <div>- Chính sách áp dụng đối với trường hợp quý khách đã nhận vé điện tử và phải báo <span style="font-weight:bold;">trước ít nhất 24 giờ</span> (đối với các tuyến: Côn Đảo), <span style="font-weight:bold;">trước ít nhất 3 giờ</span> (đối với các tuyến: Phú Quốc, Nam Du, Hòn Sơn)</div>
                                                 </td>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
+                                                                                    <tr style="border-bottom:1px dashed #d1d1d1;color:#456;">
+                                                <td style="padding:5px;">
+                                                    <div>- Thời gian nhân viên tiếp nhận và xử lý các yêu cầu Thay đổi vé, Đổi chuyến hoặc Hủy vé trong giờ hành chính</div>
+                                                </td>
+                                            </tr>
+                                                                                    <tr style="border-bottom:1px dashed #d1d1d1;color:#456;">
+                                                <td style="padding:5px;">
+                                                    <div>- Giai đoạn lễ, tết (cao điểm) có thể Thay đổi thông tin hành khách tuy nhiên không thể Đổi chuyến, không thể Hủy vé</div>
+                                                </td>
+                                            </tr>
+                                                                            </tbody>
                                 </table>
                             </td>
                         </tr>
@@ -352,4 +375,3 @@
         </tr>
     </tbody>
 </table>
-@endif

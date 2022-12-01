@@ -4,7 +4,8 @@
   margin: 0;
 }
 
-body {
+html, body {
+  background: #EDF2F7 !important;
   font-family: "Open Sans", "Verdana", "Tahoma", sans-serif;
 }
 
@@ -658,7 +659,7 @@ html .content {
   display: flex;
 }
 .chooseDepartureShipBox_row:nth-child(even) {
-  background: #f8f9fa;
+  background: #EDF2F7;
 }
 .chooseDepartureShipBox_row_item {
   width: 100%;

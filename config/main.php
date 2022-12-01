@@ -8,8 +8,9 @@ return [
         'not_empty'     => 'Không để trống trường này!',
     ],
     'unit_currency'     => 'đ',
-    'logo_square'       => env('APP_URL').'/storage/images/upload/logo-share-type-manager-upload.png',
-    'avatar_home'       => env('APP_URL').'/storage/images/upload/banner-hitour-1-type-manager-upload.webp',
+    'logo_square'       => 'https://hitour.vn/storage/images/upload/logo-share-type-manager-upload.png',
+    'icon-arrow-email'  => 'https://hitour.vn/images/main/icon-arrow-email.png',
+    'avatar_home'       => 'https://hitour.vn/storage/images/upload/banner-hitour-1-type-manager-upload.webp',
     'svg'               => [
         'loading_main'  => '/images/main/svg/loading_plane_bge9ecef.svg'
     ],

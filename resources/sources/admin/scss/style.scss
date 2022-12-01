@@ -35,7 +35,7 @@ $bg-06: 		#adb5bd;
 $bg-05: 		#ced4da;
 $bg-04: 		#dee2e6;
 $bg-03: 		#e9ecef;
-$bg-02: 		#f8f9fa;
+$bg-02: 		#EDF2F7;
 $color-link: #3498DB;
 $color-link-dark: #2E86C1;
 $color-des : #567;
@@ -66,7 +66,8 @@ $font-primary-text: "Open Sans", "Verdana", "Tahoma", sans-serif;
     margin: 0;
 }
 
-body {
+html, body {
+    background: $bg-02 !important;
     font-family: $font-primary-text;
 }
 

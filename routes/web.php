@@ -58,6 +58,8 @@ use App\Http\Controllers\ShipBookingController;
 use App\Http\Controllers\ServiceBookingController;
 use App\Http\Controllers\TourBookingController;
 
+use App\Http\Controllers\MailController;
+
 use Illuminate\Support\Facades\Redirect;
 
 /*
@@ -443,6 +445,8 @@ foreach(\App\Models\Redirect::all() as $redirect){
 
 /* chạy test */
 // Route::get('/runTest', [RunTestController::class, 'run'])->name('main.test.run');
+
+Route::get('/testMail', [MailController::class, 'test'])->name('main.testMail');
 
 Route::get('/', [HomeController::class, 'home'])->name('main.home');
 Route::get('/error', [\App\Http\Controllers\ErrorController::class, 'handle'])->name('error.handle');

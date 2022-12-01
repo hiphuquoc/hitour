@@ -12,7 +12,7 @@
                         <tr>
                             <td style="box-sizing:border-box;padding:15px 20px 10px 20px;line-height:1">
                                 <div style="text-align:center">
-                                    <img width="70px" src="{{ config('main.logo_square') }}" style="display:inline-block;width:70px;" class="CToWUd" data-bit="iit">
+                                    <img width="70px" src="{{ config('main.logo_square') }}" style="display:inline-block;width:70px;">
                                 </div>
                             </td>
                         </tr>
