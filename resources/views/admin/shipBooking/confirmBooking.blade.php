@@ -1,13 +1,13 @@
 @php
     use App\Helpers\DateAndTime;
 @endphp
-
+<!-- Hiển thị thông tin booking -->
 @if(!empty($item))
-<table class="sendEmail" style="font-family:'Roboto',Montserrat,-apple-system,'Segoe UI',sans-serif;width:100%;" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+<table class="sendEmail" style="font-family:'Roboto',Montserrat,-apple-system,'Segoe UI',sans-serif;width:100%;background-color:#EDF2F7;" width="100%" cellpadding="0" cellspacing="0" role="presentation">
     <tbody>
         <tr>
-            <td align="center" style="background-color:#EDF2F7;font-family:'Roboto',Montserrat,-apple-system,'Segoe UI',sans-serif;">
-                <table class="sendEmail" role="presentation" style="border-collapse:collapse;background:#ffffff;border-radius:3px;width:100%;max-width:640px;margin:20px auto 40px auto;box-shadow:0 0 10px #e9ecef;">
+            <td align="center" style="font-family:'Roboto',Montserrat,-apple-system,'Segoe UI',sans-serif;">
+                <table class="sendEmail" role="presentation" style="border-collapse:collapse;background:#ffffff;border-radius:3px;width:100%;max-width:640px;margin:0 auto 40px auto;">
                     <tbody>
                         <tr>
                             <td style="box-sizing:border-box;padding:15px 15px 10px 15px;line-height:1">
@@ -19,18 +19,30 @@
                         <tr>
                             <td style="box-sizing:border-box;text-align:center;line-height:1.68;color:#456;padding:10px 15px 0 15px;">
                                 @php
+                                    /* Thời gian book */
                                     $dayOfWeekBooking           = DateAndTime::convertMktimeToDayOfWeek(strtotime($item->created_at));
                                     $bookingAt                  = 'Đặt lúc '.date('H:i', strtotime($item->created_at)).' '.$dayOfWeekBooking.', '.date('d/m/Y', strtotime($item->created_at));
+                                    /* Thời hạn booking */
                                     $expirationAt               = null;
                                     if(!empty($item->expiration_at)){
                                         $dayOfWeekExpiration    = DateAndTime::convertMktimeToDayOfWeek(strtotime($item->expiration_at));
                                         $expirationAt           = '<div style="text-align:right;margin-right:10px;font-size:15px;">
                                                                 Hết hạn '.date('H:i', strtotime($item->expiration_at)).' '.$dayOfWeekExpiration.', '.date('d/m/Y', strtotime($item->expiration_at)).'</div>';
                                     }
+                                    /* Nhân viên xác nhận */
+                                    $idUser                     = Auth::id() ?? 0;
+                                    $infoStaff                  = \App\Models\Staff::select('*')
+                                                                    ->where('user_id', $idUser)
+                                                                    ->first();
+                                    $staffSupport               = null;
+                                    if(!empty($infoStaff)){
+                                        $staffSupport           = '<div style="text-align:right;margin-right:10px;font-size:15px;">Nhân viên hỗ trợ: '.$infoStaff->firstname.' '.$infoStaff->lastname.' - '.$infoStaff->phone.'</div>';
+                                    }
                                 @endphp
                                 <h1 style="font-size:20px;font-weight:bold;color:#345;margin-bottom:15px;">XÁC NHẬN DỊCH VỤ</h1>
                                 <div style="text-align:right;margin-right:10px;font-size:15px;">{{ $bookingAt }}</div>
-                                {{ $expirationAt }}
+                                {!! $expirationAt !!}
+                                {!! $staffSupport !!}
                             </td>
                         </tr>
                         <tr>
@@ -269,7 +281,7 @@
                                                     }
                                                 @endphp
                                                 <div>
-                                                    2. Quý khách chuyển khoản theo thông tin bên dưới <span style="font-weight:bold;font-size:16px;">{{ $deadline }}</span>, trong nội dung chuyển khoản ghi <span style="font-weight:bold;font-size:16px;">{{ $item->customer_contact->phone }}</span>
+                                                    2. Quý khách chuyển khoản theo thông tin bên dưới <span style="font-weight:bold;font-size:16px;color:red;">{{ $deadline }}</span>, trong nội dung chuyển khoản ghi <span style="font-weight:bold;font-size:16px;">{{ $item->customer_contact->phone }}</span>
                                                 </div>
                                                 @php
                                                     $dataBank = config('company.bank');

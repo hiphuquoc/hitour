@@ -70,6 +70,47 @@ class AdminShipBookingController extends Controller {
         return view('admin.shipBooking.viewExport', compact('item'));
     }
 
+    public function viewExportHtml($id){
+        $item               = ShipBooking::select('*')
+                                ->where('id', $id)
+                                ->with('customer_contact', 'infoDeparture', 'status', 'customer_list')
+                                ->first();
+        return view('admin.shipBooking.viewExportHtml', compact('item'));
+    }
+    
+    public static function getExpirationAt(Request $request){
+        $result             = null;
+        if(!empty($request->get('ship_booking_id'))){
+            $info           = ShipBooking::select('expiration_at')
+                                ->where('id', $request->get('ship_booking_id'))
+                                ->first();
+            $result         = date('Y-m-d H:i', strtotime($info->expiration_at));
+        }
+        echo $result;
+    }
+
+    public static function sendMailConfirm(Request $request){
+        if(!empty($request->get('ship_booking_id'))&&!empty($request->get('expiration_at'))){
+            /* cập nhật thời hạn booking */
+            ShipBooking::updateItem($request->get('ship_booking_id'), ['expiration_at' => $request->get('expiration_at')]);
+            /* tạo queue gửi email */
+            \App\Jobs\ConfirmShipBooking::dispatch($request->get('ship_booking_id'));
+            echo true;
+        }
+    }
+
+    public static function loadViewExport(Request $request){
+        $result             = null;
+        if(!empty($request->get('ship_booking_id'))){
+            $item           = ShipBooking::select('*')
+                                ->where('id', $request->get('ship_booking_id'))
+                                ->with('customer_contact', 'infoDeparture', 'status', 'customer_list')
+                                ->first();
+            $result         = view('admin.shipBooking.viewExportHtml', compact('item'));
+        }
+        echo $result;
+    }
+
     public function update(Request $request){
         try {
             DB::beginTransaction();

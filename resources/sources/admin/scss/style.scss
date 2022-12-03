@@ -26,6 +26,7 @@ $color-secondary-hover  : rgb(241, 196, 15);
 $color-price: rgb(255, 90, 50);
 $color-red: #E74C3C;
 $color-red-hover: #D04637;
+$color-green: rgb(38, 207, 142);
 
 $bg-1: 			#212529;
 $bg-09: 		#343a40;
@@ -59,6 +60,11 @@ $font-primary-text: "Open Sans", "Verdana", "Tahoma", sans-serif;
     letter-spacing: 0.5px;
     font-weight: 600 !important;
     margin-bottom: 0;
+}
+
+@mixin fontAwesome {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
 }
 
 * {
@@ -648,7 +654,7 @@ html .content {
 
 .actionBookingBox {
     position: fixed;
-    right: 1rem;
+    right: 1.75rem;
     top: 50%;
     transform: translateY(-50%);
     &_item {
@@ -659,8 +665,12 @@ html .content {
         border: 1px solid $bg-05;
         cursor: pointer;
         opacity: 0.925;
+        display: flex;
+        color: $color-text;
         &:hover {
             opacity: 1;
+            background: $bg-02;
+            color: $color-text;
         }
         &:not(:first-child){
             margin-top: 0.5rem;
@@ -668,6 +678,13 @@ html .content {
         i {
             margin-right: 0.75rem;
         }
+    }
+}
+
+.columnBox {
+    display: flex;
+    &_item {
+        width: 100%;
     }
 }
 
@@ -849,7 +866,7 @@ html .content {
         position: absolute;
         top: -10px;
         right: 0;
-        background: #27AE60;
+        background: $color-green;
         width: 25px;
         height: 25px;
         line-height: 25px;
@@ -860,3 +877,40 @@ html .content {
         color: #fff;
     }
 }
+
+.toastBox {
+    position: fixed;
+    top: 1.5rem;
+    right: 1rem;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px $bg-04;
+    padding: 1rem;
+    width: 300px;
+    &_title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+    &.success {
+        .toastBox_title {
+            color: $color-green;
+            &:before {
+                @include fontAwesome;
+                content: '\f00c';
+                margin-right: 0.5rem;
+            }
+        }
+    }
+}
+
+// @media print {
+//     *,
+//     *:before,
+//     *:after {
+//         background: $bg-02 !important;
+//         color: #000 !important; // Black prints faster: h5bp.com/s
+//         box-shadow: none !important;
+//         text-shadow: none !important;
+//     }
+// }
