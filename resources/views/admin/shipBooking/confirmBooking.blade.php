@@ -11,14 +11,14 @@
                 <table class="sendEmail" role="presentation" style="border-collapse:collapse;background:#ffffff;border-radius:3px;width:100%;max-width:640px;margin:20px auto 40px auto;">
                     <tbody>
                         <tr>
-                            <td style="box-sizing:border-box;padding:15px 15px 10px 15px;line-height:1">
+                            <td style="box-sizing:border-box;padding:20px 15px 15px 15px;line-height:1">
                                 <div style="text-align:center">
                                     <img width="70px" src="{{ config('main.logo_square') }}" style="display:inline-block;width:70px;">
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td style="box-sizing:border-box;text-align:center;line-height:1.68;color:#456;padding:10px 15px 0 15px;">
+                            <td style="box-sizing:border-box;text-align:center;line-height:1.68;color:#456;padding:0 15px 0 15px;">
                                 @php
                                     /* Thời gian book */
                                     $dayOfWeekBooking           = DateAndTime::convertMktimeToDayOfWeek(strtotime($item->created_at));
@@ -36,7 +36,7 @@
                                         $staffSupport           = '<div style="text-align:right;margin-right:10px;font-size:15px;">Nhân viên hỗ trợ: '.$infoStaff->firstname.' '.$infoStaff->lastname.' - '.$infoStaff->phone.'</div>';
                                     }
                                 @endphp
-                                <h1 style="font-size:20px;font-weight:bold;color:#345;margin-bottom:15px;">XÁC NHẬN DỊCH VỤ</h1>
+                                <h1 style="font-size:20px;font-weight:bold;color:#345;margin-bottom:15px;margin-top:0;">XÁC NHẬN DỊCH VỤ</h1>
                                 <div style="text-align:right;margin-right:10px;font-size:15px;">{{ $bookingAt }}</div>
                                 {!! $expirationAt !!}
                                 {!! $staffSupport !!}
