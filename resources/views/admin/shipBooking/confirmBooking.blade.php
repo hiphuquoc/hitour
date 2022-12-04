@@ -1,5 +1,6 @@
 @php
     use App\Helpers\DateAndTime;
+    $stt = 1;
 @endphp
 <!-- Hiển thị thông tin booking -->
 @if(!empty($item))
@@ -7,7 +8,7 @@
     <tbody>
         <tr>
             <td align="center" style="font-family:'Roboto',Montserrat,-apple-system,'Segoe UI',sans-serif;">
-                <table class="sendEmail" role="presentation" style="border-collapse:collapse;background:#ffffff;border-radius:3px;width:100%;max-width:640px;margin:0 auto 40px auto;">
+                <table class="sendEmail" role="presentation" style="border-collapse:collapse;background:#ffffff;border-radius:3px;width:100%;max-width:640px;margin:20px auto 40px auto;">
                     <tbody>
                         <tr>
                             <td style="box-sizing:border-box;padding:15px 15px 10px 15px;line-height:1">
@@ -30,10 +31,6 @@
                                                                 Hết hạn '.date('H:i', strtotime($item->expiration_at)).' '.$dayOfWeekExpiration.', '.date('d/m/Y', strtotime($item->expiration_at)).'</div>';
                                     }
                                     /* Nhân viên xác nhận */
-                                    $idUser                     = Auth::id() ?? 0;
-                                    $infoStaff                  = \App\Models\Staff::select('*')
-                                                                    ->where('user_id', $idUser)
-                                                                    ->first();
                                     $staffSupport               = null;
                                     if(!empty($infoStaff)){
                                         $staffSupport           = '<div style="text-align:right;margin-right:10px;font-size:15px;">Nhân viên hỗ trợ: '.$infoStaff->firstname.' '.$infoStaff->lastname.' - '.$infoStaff->phone.'</div>';
@@ -83,7 +80,10 @@
                         @if($item->infoDeparture->isNotEmpty())
                         <tr>
                             <td style="box-sizing:border-box;font-weight:bold;padding:10px 15px 5px 15px;">
-                                <div style="font-size:18px;font-weight:bold;color:#345;">1. Chi tiết giá</div>
+                                <div style="font-size:18px;font-weight:bold;color:#345;">{{ $stt }}. Chi tiết giá</div>
+                                @php
+                                    ++$stt;
+                                @endphp
                             </td>
                         </tr>
                         <tr>
@@ -156,63 +156,76 @@
                         </tr>
                         @endif
                         <!-- THÔNG TIN CHUYẾN ĐI -->
-                        @for($i=2;$i<4;++$i)
-                        <tr>
-                            <td style="box-sizing:border-box;font-weight:bold;padding:10px 15px 5px 15px;">
-                                <div style="font-size:18px;font-weight:bold;color:#345;">{{ $i }}. Thông tin chuyến đi</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="box-sizing:border-box;padding:5px 15px 20px 15px;">
-                                <table width="100%" style="border:2px dashed #c1c1c1;border-collapse:collapse;font-size:15px;line-height:1.48">
-                                    <tbody>
-                                        <tr>
-                                            <td colspan="2" style="display:flex;padding:7px 12px !important;border:1px dashed #d1d1d1">
-                                                <div style="width:calc(50% - 30px);display:inline-block;vertical-align:top">
-                                                    <div style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">Sóc Trăng</div>
-                                                    <div style="font-size:15px;font-weight:normal;color:#456">Sóc Trăng, Việt Nam</div>
-                                                    <div><span style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">07:30</span> Xuất bến tại cảng cá Trần Đề</div>
-                                                </div>
-                                                <div style="width:60px;margin-top:10px;display:inline-block;vertical-align:top;margin-left:15px;">
-                                                    <img src="{{ config('main.icon-arrow-email') }}" style="width:100%;">
-                                                </div>
-                                                <div style="width:calc(50% - 30px);display:inline-block;vertical-align:top;margin-left:15px;">
-                                                    <div style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">Côn đảo</div>
-                                                    <div style="font-size:15px;font-weight:normal;color:#456">Bà Rịa Vũng Tàu, Việt Nam</div>
-                                                    <div><span style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">10:00</span> Cập bến tại cảng Bến Đầm</div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2" style="padding:7px 12px !important;border:1px dashed #d1d1d1">
-                                                <span style="width:70px;display:inline-block;">Ngày</span> : <span style="font-weight:bold;color:rgb(0,90,180);">Thứ 5, ngày 29-09-2022</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2" style="padding:7px 12px !important;border:1px dashed #d1d1d1">
-                                                <span style="width:70px;display:inline-block;">Hãng tàu</span> : <span style="font-weight:bold;color:rgb(0,90,180);">Phú Quốc Express</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2" style="padding:7px 12px !important;border:1px dashed #d1d1d1">
-                                                <span style="width:70px;display:inline-block;">Số lượng</span> : <span><span style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">5</span> người lớn, <span style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">5</span> trẻ em 6-11 tuổi, <span style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">5</span> người trên 60 tuổi</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2" style="padding:7px 12px !important;border:1px dashed #d1d1d1">
-                                                <span style="width:70px;display:inline-block;">Loại vé</span> : <span style="font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">ECO</span>
-                                            </td>
-                                        </tr>
-                                        
-                                    </tbody>
-                                </table>
-                            </td>
-                        </tr>
-                        @endfor
+                        @if(!empty($item->infoDeparture)&&$item->infoDeparture->isNotEmpty())
+                            @foreach($item->infoDeparture as $departure)
+                                <tr>
+                                    <td style="box-sizing:border-box;font-weight:bold;padding:10px 15px 5px 15px;">
+                                        <div style="font-size:18px;font-weight:bold;color:#345;">{{ $stt }}. Thông tin chuyến {{ $loop->index==0 ? 'đi' : 'về' }}</div>
+                                        @php
+                                            ++$stt;
+                                        @endphp
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="box-sizing:border-box;padding:5px 15px 20px 15px;">
+                                        <table width="100%" style="border:2px dashed #c1c1c1;border-collapse:collapse;font-size:15px;line-height:1.48">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2" style="display:flex;padding:7px 12px !important;border:1px dashed #d1d1d1">
+                                                        <div style="width:calc(50% - 30px);display:inline-block;vertical-align:top">
+                                                            <div style="font-size:15px;font-weight:normal;color:#456"><span style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">{{ $departure->departure ?? '-' }}</span>, {{ $departure->port_departure_province ?? '-' }}</div>
+                                                            <div><span style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">{{ $departure->time_departure ?? '-' }}</span> Xuất bến tại {{ $departure->port_departure ?? '-' }}, {{ $departure->port_departure_address ?? '-' }}</div>
+                                                        </div>
+                                                        <div style="width:60px;margin-top:10px;display:inline-block;vertical-align:top;margin-left:15px;">
+                                                            <img src="{{ config('main.icon-arrow-email') }}" style="width:100%;">
+                                                        </div>
+                                                        <div style="width:calc(50% - 30px);display:inline-block;vertical-align:top;margin-left:15px;">
+                                                            <div style="font-size:15px;font-weight:normal;color:#456"><span style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">{{ $departure->location ?? '-' }}</span>, {{ $departure->port_location_province ?? '-' }}</div>
+                                                            <div><span style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">{{ $departure->time_arrive ?? '-' }}</span> Cập bến tại {{ $departure->port_location ?? '-' }}, {{ $departure->port_location_address ?? '-' }}</div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="padding:7px 12px !important;border:1px dashed #d1d1d1">
+                                                        <span style="width:70px;display:inline-block;">Ngày</span> : <span style="font-weight:bold;color:rgb(0,90,180);">{{ \App\Helpers\DateAndTime::convertMktimeToDayOfWeek(strtotime($departure->date)) }}, ngày {{ date('d-m-Y', strtotime($departure->date)) }}</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="padding:7px 12px !important;border:1px dashed #d1d1d1">
+                                                        <span style="width:70px;display:inline-block;">Hãng tàu</span> : <span style="font-weight:bold;color:rgb(0,90,180);">{{ $departure->partner_name ?? '-' }}</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="padding:7px 12px !important;border:1px dashed #d1d1d1">
+                                                        @php
+                                                            $tmp    = [];
+                                                            if(!empty($departure->quantity_adult)) $tmp[] = '<span style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">'.$departure->quantity_adult.'</span> người lớn';
+                                                            if(!empty($departure->quantity_child)) $tmp[] = '<span style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">'.$departure->quantity_child.'</span> trẻ em 6-11 tuổi';
+                                                            if(!empty($departure->quantity_old)) $tmp[] = '<span style="font-size:18px;font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">'.$departure->quantity_old.'</span> người trên 60 tuổi';
+                                                            $xhtmlQuantity = implode(', ', $tmp);
+                                                        @endphp
+                                                        <span style="width:70px;display:inline-block;">Số lượng</span> : <span>{!! $xhtmlQuantity !!}</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="padding:7px 12px !important;border:1px dashed #d1d1d1">
+                                                        <span style="width:70px;display:inline-block;">Loại vé</span> : <span style="font-weight:bold;color:rgb(0,90,180);text-transform:capitalize;">{{ $departure->type ?? '-' }}</span>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
                         <!-- DANH SÁCH HÀNH KHÁCH -->
                         <tr>
                             <td style="box-sizing:border-box;font-weight:bold;padding:10px 15px 5px 15px;">
-                                <div style="font-size:18px;font-weight:bold;color:#345;">4. Danh sách hành khách</div>
+                                <div style="font-size:18px;font-weight:bold;color:#345;">{{ $stt }}. Danh sách hành khách</div>
+                                @php
+                                    ++$stt;
+                                @endphp
                             </td>
                         </tr>
                         <tr>
@@ -255,7 +268,10 @@
                         <!-- STATUS -->
                         <tr>
                             <td style="box-sizing:border-box;font-weight:bold;padding:10px 15px 5px 15px;">
-                                <div style="font-size:18px;font-weight:bold;color:#345;">5. Yêu cầu</div>
+                                <div style="font-size:18px;font-weight:bold;color:#345;">{{ $stt }}. Yêu cầu</div>
+                                @php
+                                    ++$stt;
+                                @endphp
                             </td>
                         </tr>
                         <tr>
@@ -310,7 +326,10 @@
                         <!-- CHÍNH SÁCH -->
                         <tr>
                             <td style="box-sizing:border-box;font-weight:bold;padding:10px 15px 5px 15px;">
-                                <div style="font-size:18px;font-weight:bold;color:#345;">6. Chính sách hoàn - hủy</div>
+                                <div style="font-size:18px;font-weight:bold;color:#345;">{{ $stt }}. Chính sách hoàn - hủy</div>
+                                @php
+                                    ++$stt;
+                                @endphp
                             </td>
                         </tr>
                         <tr>
@@ -333,7 +352,10 @@
                         <!-- GHI CHÚ -->
                         <tr>
                             <td style="box-sizing:border-box;font-weight:bold;padding:10px 15px 5px 15px;">
-                                <div style="font-size:18px;font-weight:bold;color:#345;">7. Ghi chú</div>
+                                <div style="font-size:18px;font-weight:bold;color:#345;">{{ $stt }}. Ghi chú</div>
+                                @php
+                                    ++$stt;
+                                @endphp
                             </td>
                         </tr>
                         <tr>

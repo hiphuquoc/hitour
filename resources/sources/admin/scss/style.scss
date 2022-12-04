@@ -606,7 +606,7 @@ html .content {
     }
 }
 
-.columnBox {
+.rowBox {
     &:not(:first-child){
         margin-top: 0.5rem;
     }
@@ -898,6 +898,16 @@ html .content {
             &:before {
                 @include fontAwesome;
                 content: '\f00c';
+                margin-right: 0.5rem;
+            }
+        }
+    }
+    &.error {
+        .toastBox_title {
+            color: $color-red;
+            &:before {
+                @include fontAwesome;
+                content: '\f00d';
                 margin-right: 0.5rem;
             }
         }

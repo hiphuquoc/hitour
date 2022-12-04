@@ -3,10 +3,7 @@
     <input id="js_chooseDeparture_dp{{ $code }}" type="hidden" name="dp{{ $code }}" value="" required />
     <input type="hidden" name="ship_info_id_{{ $code }}" value="{{ $data[0]['ship_info_id'] ?? null }}" />
     @php
-        $nameDeparture      = null;
-        if(!empty($data[0]['departure'])&&!empty($data[0]['location'])){
-            $nameDeparture  = $data[0]['departure'].' - '.$data[0]['location'];
-        }
+        $nameDeparture  = $portShipDeparture->district->district_name.' - '.$portShipLocation->district->district_name;
     @endphp
     <input type="hidden" name="name_dp{{ $code }}" value="{{ $nameDeparture }}" />
     <div class="formBox_full_item">

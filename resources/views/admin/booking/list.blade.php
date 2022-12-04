@@ -94,19 +94,19 @@
                                     $total                  = 0;
                                 @endphp
                                 @if(!empty($item->quantityAndPrice))
-                                    <div class="columnBox">
+                                    <div class="rowBox">
                                             @foreach($item->quantityAndPrice as $quantity)
                                                 @php
                                                     $total  += $quantity->quantity*$quantity->price;
                                                 @endphp
-                                                <div class="oneLine columnBox_item">
-                                                    <div class="columnBox_item_column">
+                                                <div class="oneLine rowBox_item">
+                                                    <div class="rowBox_item_column">
                                                         {{ $quantity->option_age }}
                                                     </div>
-                                                    <div class="columnBox_item_column" style="text-align:right;">
+                                                    <div class="rowBox_item_column" style="text-align:right;">
                                                         {{ $quantity->quantity }} * {{ number_format($quantity->price) }}
                                                     </div>
-                                                    <div class="columnBox_item_column" style="text-align:right;">
+                                                    <div class="rowBox_item_column" style="text-align:right;">
                                                         {{ number_format($quantity->quantity*$quantity->price) }}
                                                     </div>
                                                 </div>
@@ -115,28 +115,28 @@
                                 @endif
                             </td>
                             <td>
-                                <div class="columnBox">
-                                    <div class="oneLine columnBox_item">
-                                        <div class="columnBox_item_column">
+                                <div class="rowBox">
+                                    <div class="oneLine rowBox_item">
+                                        <div class="rowBox_item_column">
                                             Tổng:
                                         </div>
-                                        <div class="columnBox_item_column" style="text-align:right;">
+                                        <div class="rowBox_item_column" style="text-align:right;">
                                             {{ number_format($total) }}
                                         </div>
                                     </div>
-                                    <div class="oneLine columnBox_item">
-                                        <div class="columnBox_item_column">
+                                    <div class="oneLine rowBox_item">
+                                        <div class="rowBox_item_column">
                                             Đã cọc:
                                         </div>
-                                        <div class="columnBox_item_column" style="text-align:right;">
+                                        <div class="rowBox_item_column" style="text-align:right;">
                                             {{ number_format($item->paid) }}
                                         </div>
                                     </div>
-                                    <div class="oneLine columnBox_item">
-                                        <div class="columnBox_item_column">
+                                    <div class="oneLine rowBox_item">
+                                        <div class="rowBox_item_column">
                                             Còn lại:
                                         </div>
-                                        <div class="columnBox_item_column" style="text-align:right;color:#E74C3C;font-weight:600;">
+                                        <div class="rowBox_item_column" style="text-align:right;color:#E74C3C;font-weight:600;">
                                             {{ number_format($total-$item->paid) }}
                                         </div>
                                     </div>

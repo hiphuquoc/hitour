@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\ShipPort;
 use App\Models\Customer;
 use App\Models\ShipBooking;
@@ -67,7 +67,11 @@ class AdminShipBookingController extends Controller {
                                 ->where('id', $id)
                                 ->with('customer_contact', 'infoDeparture', 'status', 'customer_list')
                                 ->first();
-        return view('admin.shipBooking.viewExport', compact('item'));
+        $idUser             = Auth::id() ?? 0;
+        $infoStaff          = \App\Models\Staff::select('*')
+                                ->where('user_id', $idUser)
+                                ->first();
+        return view('admin.shipBooking.viewExport', compact('item', 'infoStaff'));
     }
 
     public function viewExportHtml($id){
@@ -75,7 +79,11 @@ class AdminShipBookingController extends Controller {
                                 ->where('id', $id)
                                 ->with('customer_contact', 'infoDeparture', 'status', 'customer_list')
                                 ->first();
-        return view('admin.shipBooking.viewExportHtml', compact('item'));
+        $idUser             = Auth::id() ?? 0;
+        $infoStaff          = \App\Models\Staff::select('*')
+                                ->where('user_id', $idUser)
+                                ->first();
+        return view('admin.shipBooking.viewExportHtml', compact('item', 'infoStaff'));
     }
     
     public static function getExpirationAt(Request $request){
@@ -90,13 +98,34 @@ class AdminShipBookingController extends Controller {
     }
 
     public static function sendMailConfirm(Request $request){
+        $result                     = null;
         if(!empty($request->get('ship_booking_id'))&&!empty($request->get('expiration_at'))){
             /* cập nhật thời hạn booking */
             ShipBooking::updateItem($request->get('ship_booking_id'), ['expiration_at' => $request->get('expiration_at')]);
             /* tạo queue gửi email */
-            \App\Jobs\ConfirmShipBooking::dispatch($request->get('ship_booking_id'));
-            echo true;
+            $infoShipBooking        = \App\Models\ShipBooking::select('*')
+                                        ->where('id', $request->get('ship_booking_id'))
+                                        ->with('customer_contact', 'infoDeparture', 'status', 'customer_list')
+                                        ->first();
+            $addressMail            = $infoShipBooking->customer_contact->email ?? null;
+            if(!empty($addressMail)){
+                /* trường hợp booking có email */
+                $idUser             = Auth::id() ?? 0;
+                $infoStaff          = \App\Models\Staff::select('*')
+                                        ->where('user_id', $idUser)
+                                        ->first();
+                \App\Jobs\ConfirmShipBooking::dispatch($infoShipBooking, $infoStaff);
+                $result['title']    = 'Thành công!';
+                $result['content']  = 'Đã gửi email xác nhận cho khách';
+                $result['type']     = 'success';
+            }else {
+                /* trường hợp booking không có email */
+                $result['title']    = 'Thất bại!';
+                $result['content']  = 'Booking này không có email';
+                $result['type']     = 'error';
+            }
         }
+        return $result;
     }
 
     public static function loadViewExport(Request $request){
@@ -106,7 +135,11 @@ class AdminShipBookingController extends Controller {
                                 ->where('id', $request->get('ship_booking_id'))
                                 ->with('customer_contact', 'infoDeparture', 'status', 'customer_list')
                                 ->first();
-            $result         = view('admin.shipBooking.viewExportHtml', compact('item'));
+            $idUser         = Auth::id() ?? 0;
+            $infoStaff      = \App\Models\Staff::select('*')
+                                ->where('user_id', $idUser)
+                                ->first();
+            $result         = view('admin.shipBooking.viewExportHtml', compact('item', 'infoStaff'));
         }
         echo $result;
     }

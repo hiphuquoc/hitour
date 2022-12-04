@@ -619,8 +619,9 @@ class BuildInsertUpdateModel {
             $result[0]['port_location_address']     = $infoPortLocation1->address;
             $result[0]['port_location_district']    = $infoPortLocation1->district->district_name;
             $result[0]['port_location_province']    = $infoPortLocation1->province->province_name;
-            $result[0]['departure']         = $infoShip1->departure->display_name;
-            $result[0]['location']          = $infoShip1->location->display_name;
+            $tmp                            = explode(' - ', $dataForm['name_dp1']);
+            $result[0]['departure']         = $tmp[0];
+            $result[0]['location']          = $tmp[1];
             $result[0]['quantity_adult']    = $dataForm['quantity_adult_1'] ?? 0;
             $result[0]['quantity_child']    = $dataForm['quantity_child_1'] ?? 0;
             $result[0]['quantity_old']      = $dataForm['quantity_old_1'] ?? 0;
@@ -652,17 +653,18 @@ class BuildInsertUpdateModel {
                                                     ->with('district', 'province')
                                                     ->first();
                 if(!empty($idBooking)) $result[1]['ship_booking_id'] = $idBooking;
-                $result[1]['date']              = $dataForm['date_2'];
-                $result[1]['port_departure']    = $infoPortDeparture2->name;
+                $result[1]['date']                      = $dataForm['date_2'];
+                $result[1]['port_departure']            = $infoPortDeparture2->name;
                 $result[1]['port_departure_address']    = $infoPortDeparture2->address;
                 $result[1]['port_departure_district']   = $infoPortDeparture2->district->district_name;
                 $result[1]['port_departure_province']   = $infoPortDeparture2->province->province_name;
-                $result[1]['port_location']     = $infoPortLocation2->name;
+                $result[1]['port_location']             = $infoPortLocation2->name;
                 $result[1]['port_location_address']     = $infoPortLocation2->address;
                 $result[1]['port_location_district']    = $infoPortLocation2->district->district_name;
                 $result[1]['port_location_province']    = $infoPortLocation2->province->province_name;
-                $result[1]['departure']         = $infoShip2->departure->display_name;
-                $result[1]['location']          = $infoShip2->location->display_name;
+                $tmp                                    = explode(' - ', $dataForm['name_dp2']);
+                $result[1]['departure']                 = $tmp[0];
+                $result[1]['location']                  = $tmp[1];
                 if(!empty($dataForm['quantity_adult_2'])&&$dataForm['quantity_child_2']&&!empty($dataForm['quantity_old_2'])){
                     $result[1]['quantity_adult']        = $dataForm['quantity_adult_2'];
                     $result[1]['quantity_child']        = $dataForm['quantity_child_2'];

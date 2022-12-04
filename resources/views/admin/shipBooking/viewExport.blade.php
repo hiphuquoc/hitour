@@ -9,12 +9,12 @@
     <div class="columnBox">
         <!-- giao diện xác nhận -->
         <div class="columnBox_item" id="js_loadViewExport_idWrite">
-            @include('admin.shipBooking.confirmBooking', compact('item'))
+            @include('admin.shipBooking.confirmBooking', compact('item', 'infoStaff'))
         </div>
         <!-- Thanh sidebar thao tác -->
         @if(!empty($item->status->relationAction))
             <div class="columnBox_item" style="flex:0 0 200px;">
-                <div class="actionBookingBox">
+                <div class="actionBookingBox">  
                     <div class="actionBookingBox_item" style="text-align:center;font-size:1.1rem;background:{{ $item->status->color }};color:#fff;">
                         {{ $item->status->name }}
                     </div>
@@ -205,21 +205,21 @@
                         html: '<div style="margin-top:1rem;"><input id="expiration_at" name="expiration_at" text="text" class="form-control flatpickr-basic flatpickr-input active" placeholder="Chọn giờ - ngày - tháng" value="'+data+'" readonly="readonly" required /></div>',  
                         confirmButtonText: "Xác nhận"
                     }).then(result => {
-                        const shipBookingId     = $('#ship_booking_id').val();
-                        const expirationAt      = $('#expiration_at').val();
-                        if(expirationAt!=''){
-                            $.ajax({
-                                url         : '{{ route("admin.shipBooking.sendMailConfirm") }}',
-                                type        : 'get',
-                                dataType    : 'html',
-                                data        : {
-                                    ship_booking_id     : shipBookingId,
-                                    expiration_at       : expirationAt
-                                },
-                                success     : function(flag){
-                                    if(flag==true){
-                                        /* thành công */
-                                        showMessage('Thành công!', 'Đã gửi email xác nhận cho khách', 'success');
+                        if (result.isConfirmed) {
+                            const shipBookingId     = $('#ship_booking_id').val();
+                            const expirationAt      = $('#expiration_at').val();
+                            if(expirationAt!=''){
+                                $.ajax({
+                                    url         : '{{ route("admin.shipBooking.sendMailConfirm") }}',
+                                    type        : 'get',
+                                    dataType    : 'json',
+                                    data        : {
+                                        ship_booking_id     : shipBookingId,
+                                        expiration_at       : expirationAt
+                                    },
+                                    success     : function(data){
+                                        /* hiện thông báo */
+                                        showMessage(data['title'], data['content'], data['type']);
                                         /* tải lại trang để hiển thị mới ngày hết hạn booking */
                                         $.ajax({
                                             url         : '{{ route("admin.shipBooking.loadViewExport") }}',
@@ -232,14 +232,11 @@
                                                 $('#js_loadViewExport_idWrite').html(data);
                                             }
                                         });
-                                    }else {
-                                        /* thất bại */
-                                        // showMessage('Có lỗi xảy ra, vui lòng thử lại!', 'danger');
                                     }
-                                }
-                            });
-                        }else {
-                            /* thông báo lỗi */
+                                });
+                            }else {
+                                /* thông báo lỗi */
+                            }
                         }
                     });
                     $('#expiration_at').flatpickr({

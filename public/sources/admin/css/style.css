@@ -514,13 +514,13 @@ html .content {
   margin-top: 0.25rem;
 }
 
-.columnBox:not(:first-child) {
+.rowBox:not(:first-child) {
   margin-top: 0.5rem;
 }
-.columnBox_item {
+.rowBox_item {
   display: flex;
 }
-.columnBox_item_column {
+.rowBox_item_column {
   width: 100%;
 }
 
@@ -800,5 +800,14 @@ html .content {
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   content: "\f00c";
+  margin-right: 0.5rem;
+}
+.toastBox.error .toastBox_title {
+  color: #E74C3C;
+}
+.toastBox.error .toastBox_title:before {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f00d";
   margin-right: 0.5rem;
 }

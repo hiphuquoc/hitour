@@ -109,16 +109,16 @@
                                 @endphp
                                 @if($item->infoDeparture->isNotEmpty())
                                     @foreach($item->infoDeparture as $departure)
-                                        <div class="columnBox">
+                                        <div class="rowBox">
                                             @if(!empty($departure->quantity_adult)&&!empty($departure->price_adult))
-                                                <div class="columnBox_item">
-                                                    <div class="columnBox_item_column">
+                                                <div class="rowBox_item">
+                                                    <div class="rowBox_item_column">
                                                         Người lớn
                                                     </div>
-                                                    <div class="columnBox_item_column" style="text-align:right;">
+                                                    <div class="rowBox_item_column" style="text-align:right;">
                                                         {{ $departure->quantity_adult }} * {{ number_format($departure->price_adult) }}
                                                     </div>
-                                                    <div class="columnBox_item_column" style="text-align:right;">
+                                                    <div class="rowBox_item_column" style="text-align:right;">
                                                         {{ number_format($departure->quantity_adult*$departure->price_adult) }}
                                                     </div>
                                                 </div>
@@ -127,14 +127,14 @@
                                                 @endphp
                                             @endif
                                             @if(!empty($departure->quantity_child)&&!empty($departure->price_child))
-                                                <div class="columnBox_item">
-                                                    <div class="columnBox_item_column">
+                                                <div class="rowBox_item">
+                                                    <div class="rowBox_item_column">
                                                         Trẻ em
                                                     </div>
-                                                    <div class="columnBox_item_column" style="text-align:right;">
+                                                    <div class="rowBox_item_column" style="text-align:right;">
                                                         {{ $departure->quantity_child }} * {{ number_format($departure->price_child) }}
                                                     </div>
-                                                    <div class="columnBox_item_column" style="text-align:right;">
+                                                    <div class="rowBox_item_column" style="text-align:right;">
                                                         {{ number_format($departure->quantity_child*$departure->price_child) }}
                                                     </div>
                                                 </div>
@@ -143,14 +143,14 @@
                                                 @endphp
                                             @endif
                                             @if(!empty($departure->quantity_old)&&!empty($departure->price_old))
-                                                <div class="columnBox_item">
-                                                    <div class="columnBox_item_column">
+                                                <div class="rowBox_item">
+                                                    <div class="rowBox_item_column">
                                                         Trẻ em
                                                     </div>
-                                                    <div class="columnBox_item_column" style="text-align:right;">
+                                                    <div class="rowBox_item_column" style="text-align:right;">
                                                         {{ $departure->quantity_old }} * {{ number_format($departure->price_old) }}
                                                     </div>
-                                                    <div class="columnBox_item_column" style="text-align:right;">
+                                                    <div class="rowBox_item_column" style="text-align:right;">
                                                         {{ number_format($departure->quantity_old*$departure->price_old) }}
                                                     </div>
                                                     @php
@@ -163,28 +163,28 @@
                                 @endif
                             </td>
                             <td>
-                                <div class="columnBox">
-                                    <div class="oneLine columnBox_item">
-                                        <div class="columnBox_item_column">
+                                <div class="rowBox">
+                                    <div class="oneLine rowBox_item">
+                                        <div class="rowBox_item_column">
                                             Tổng:
                                         </div>
-                                        <div class="columnBox_item_column" style="text-align:right;">
+                                        <div class="rowBox_item_column" style="text-align:right;">
                                             {{ number_format($total) }}
                                         </div>
                                     </div>
-                                    <div class="oneLine columnBox_item">
-                                        <div class="columnBox_item_column">
+                                    <div class="oneLine rowBox_item">
+                                        <div class="rowBox_item_column">
                                             Đã cọc:
                                         </div>
-                                        <div class="columnBox_item_column" style="text-align:right;">
+                                        <div class="rowBox_item_column" style="text-align:right;">
                                             {{ number_format($item->paid) }}
                                         </div>
                                     </div>
-                                    <div class="oneLine columnBox_item">
-                                        <div class="columnBox_item_column">
+                                    <div class="oneLine rowBox_item">
+                                        <div class="rowBox_item_column">
                                             Còn lại:
                                         </div>
-                                        <div class="columnBox_item_column" style="text-align:right;color:#E74C3C;font-weight:600;">
+                                        <div class="rowBox_item_column" style="text-align:right;color:#E74C3C;font-weight:600;">
                                             {{ number_format($total-$item->paid) }}
                                         </div>
                                     </div>

@@ -81,9 +81,9 @@ class ShipBookingController extends Controller {
                                             ->with('infoDeparture')
                                             ->first();
                 }
-                $result             = view('admin.shipBooking.formChooseShip', compact('data', 'date', 'code', 'booking'))->render();
+                $result             = view('admin.shipBooking.formChooseShip', compact('data', 'portShipDeparture', 'portShipLocation', 'date', 'code', 'booking'))->render();
             }else {
-                $result             = view('main.shipBooking.formChooseShip', compact('data', 'date', 'code'))->render();
+                $result             = view('main.shipBooking.formChooseShip', compact('data', 'portShipDeparture', 'portShipLocation', 'date', 'code'))->render();
             }
         }
         return json_encode($result);
