@@ -631,9 +631,9 @@ class BuildInsertUpdateModel {
                                                 ->with('partner')
                                                 ->first();
             $result[0]['partner_name']      = $infoShipPrice->partner->name;
-            $result[0]['price_adult']       = $infoShipPrice->price_adult;
-            $result[0]['price_child']       = $infoShipPrice->price_child;
-            $result[0]['price_old']         = $infoShipPrice->price_old;
+            $result[0]['price_adult']       = !empty($tmp[3])&&$tmp[3]=='vip' ? $infoShipPrice->price_vip : $infoShipPrice->price_adult;
+            $result[0]['price_child']       = !empty($tmp[3])&&$tmp[3]=='vip' ? $infoShipPrice->price_vip : $infoShipPrice->price_child;
+            $result[0]['price_old']         = !empty($tmp[3])&&$tmp[3]=='vip' ? $infoShipPrice->price_vip : $infoShipPrice->price_old;
             $result[0]['time_departure']    = $tmp[1] ?? null;
             $result[0]['time_arrive']       = $tmp[2] ?? null;
             $result[0]['type']              = $tmp[3] ?? null;
@@ -680,9 +680,9 @@ class BuildInsertUpdateModel {
                                                 ->with('partner')
                                                 ->first();
                 $result[1]['partner_name']      = $infoShipPrice->partner->name;
-                $result[1]['price_adult']       = $infoShipPrice->price_adult;
-                $result[1]['price_child']       = $infoShipPrice->price_child;
-                $result[1]['price_old']         = $infoShipPrice->price_old;
+                $result[1]['price_adult']       = !empty($tmp[3])&&$tmp[3]=='vip' ? $infoShipPrice->price_vip : $infoShipPrice->price_adult;
+                $result[1]['price_child']       = !empty($tmp[3])&&$tmp[3]=='vip' ? $infoShipPrice->price_vip : $infoShipPrice->price_child;
+                $result[1]['price_old']         = !empty($tmp[3])&&$tmp[3]=='vip' ? $infoShipPrice->price_vip : $infoShipPrice->price_old;
                 $result[1]['time_departure']    = $tmp[1] ?? null;
                 $result[1]['time_arrive']       = $tmp[2] ?? null;
                 $result[1]['type']              = $tmp[3] ?? null;
