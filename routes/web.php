@@ -220,6 +220,10 @@ Route::prefix('admin')->group(function(){
             Route::get('/getExpirationAt', [AdminShipBookingController::class, 'getExpirationAt'])->name('admin.shipBooking.getExpirationAt');
             Route::get('/sendMailConfirm', [AdminShipBookingController::class, 'sendMailConfirm'])->name('admin.shipBooking.sendMailConfirm');
             Route::get('/loadViewExport', [AdminShipBookingController::class, 'loadViewExport'])->name('admin.shipBooking.loadViewExport');
+            Route::get('/createPdfConfirm', [AdminShipBookingController::class, 'createPdfConfirm'])->name('admin.shipBooking.createPdfConfirm');
+            Route::get('/paymentExtension', [AdminShipBookingController::class, 'paymentExtension'])->name('admin.shipBooking.paymentExtension');
+            Route::get('/cancelBooking', [AdminShipBookingController::class, 'cancelBooking'])->name('admin.shipBooking.cancelBooking');
+            Route::get('/restoreBooking', [AdminShipBookingController::class, 'restoreBooking'])->name('admin.shipBooking.restoreBooking');
             // /* Delete AJAX */
             // Route::get('/loadDeparture', [AdminShipBookingController::class, 'loadDeparture'])->name('admin.shipBooking.loadDeparture');
             // Route::get('/loadFormPriceQuantity', [AdminBookingController::class, 'loadFormPriceQuantity'])->name('admin.tourBooking.loadFormPriceQuantity');

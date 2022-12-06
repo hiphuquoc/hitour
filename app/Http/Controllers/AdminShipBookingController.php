@@ -92,16 +92,35 @@ class AdminShipBookingController extends Controller {
             $info           = ShipBooking::select('expiration_at')
                                 ->where('id', $request->get('ship_booking_id'))
                                 ->first();
-            $result         = date('Y-m-d H:i', strtotime($info->expiration_at));
+            if(empty($info->expiration_at)){
+                $time       = date('Y-m-d', time()).' 18:00';
+                $result     = date('Y-m-d H:i', strtotime($time));
+            }else {
+                $result     = date('Y-m-d H:i', strtotime($info->expiration_at));
+            }
         }
         echo $result;
     }
 
-    public static function sendMailConfirm(Request $request){
-        $result                     = null;
+    public static function createPdfConfirm(Request $request){
+        $flag               = false;
         if(!empty($request->get('ship_booking_id'))&&!empty($request->get('expiration_at'))){
-            /* cập nhật thời hạn booking */
-            ShipBooking::updateItem($request->get('ship_booking_id'), ['expiration_at' => $request->get('expiration_at')]);
+            /* cập nhật thời hạn booking && đổi trạng thái sang đã xác nhận Zalo */
+            $flag           = ShipBooking::updateItem($request->get('ship_booking_id'), [
+                'expiration_at'             => $request->get('expiration_at'),
+                'ship_booking_status_id'    => 3
+            ]);
+        }
+        echo $flag;
+    }
+
+    public static function sendMailConfirm(Request $request){
+        if(!empty($request->get('ship_booking_id'))&&!empty($request->get('expiration_at'))){
+            /* cập nhật thời hạn booking && đổi trạng thái đã xác nhận email */
+            ShipBooking::updateItem($request->get('ship_booking_id'), [
+                'expiration_at'             => $request->get('expiration_at'),
+                'ship_booking_status_id'    => 2
+            ]);
             /* tạo queue gửi email */
             $infoShipBooking        = \App\Models\ShipBooking::select('*')
                                         ->where('id', $request->get('ship_booking_id'))
@@ -115,17 +134,91 @@ class AdminShipBookingController extends Controller {
                                         ->where('user_id', $idUser)
                                         ->first();
                 \App\Jobs\ConfirmShipBooking::dispatch($infoShipBooking, $infoStaff);
-                $result['title']    = 'Thành công!';
-                $result['content']  = 'Đã gửi email xác nhận cho khách';
-                $result['type']     = 'success';
+                /* Message */
+                $toast              = [
+                    'title'     => 'Thành công!',
+                    'message'   => 'Đã gửi email xác nhận cho khách',
+                    'type'      => 'success'
+                ];
             }else {
-                /* trường hợp booking không có email */
-                $result['title']    = 'Thất bại!';
-                $result['content']  = 'Booking này không có email';
-                $result['type']     = 'error';
+                /* Message */
+                $toast              = [
+                    'title'     => 'Thất bại!',
+                    'message'   => 'Khách này không có email để thao tác',
+                    'type'      => 'error'
+                ];
             }
+            $request->session()->put('toast', $toast);
         }
-        return $result;
+    }
+
+    public static function paymentExtension(Request $request){
+        if(!empty($request->get('ship_booking_id'))&&!empty($request->get('expiration_at'))){
+            /* cập nhật thời hạn booking */
+            $flag           = ShipBooking::updateItem($request->get('ship_booking_id'), [
+                'expiration_at'             => $request->get('expiration_at')
+            ]);
+            /* Message */
+            $toast              = [
+                'title'     => 'Thành công!',
+                'message'   => 'Đã cập nhật thời hạn thanh toán mới',
+                'type'      => 'success'
+            ];
+        }else {
+            /* Message */
+            $toast              = [
+                'title'     => 'Thất bại!',
+                'message'   => 'Có lỗi xảy ra, vui lòng thử lại',
+                'type'      => 'error'
+            ];
+        }
+        $request->session()->put('toast', $toast);
+    }
+
+    public static function cancelBooking(Request $request){
+        if(!empty($request->get('ship_booking_id'))){
+            /* đổi trạng thái sang Hủy booking */
+            $flag           = ShipBooking::updateItem($request->get('ship_booking_id'), [
+                'ship_booking_status_id'    => 7
+            ]);
+            /* Message */
+            $toast              = [
+                'title'     => 'Thành công!',
+                'message'   => 'Đã hủy booking này',
+                'type'      => 'success'
+            ];
+        }else {
+            /* Message */
+            $toast              = [
+                'title'     => 'Thất bại!',
+                'message'   => 'Có lỗi xảy ra, vui lòng thử lại',
+                'type'      => 'error'
+            ];
+        }
+        $request->session()->put('toast', $toast);
+    }
+
+    public static function restoreBooking(Request $request){
+        if(!empty($request->get('ship_booking_id'))){
+            /* đổi trạng thái sang Hủy booking */
+            $flag           = ShipBooking::updateItem($request->get('ship_booking_id'), [
+                'ship_booking_status_id'    => 1
+            ]);
+            /* Message */
+            $toast              = [
+                'title'     => 'Thành công!',
+                'message'   => 'Đã khôi phục booking này',
+                'type'      => 'success'
+            ];
+        }else {
+            /* Message */
+            $toast              = [
+                'title'     => 'Thất bại!',
+                'message'   => 'Có lỗi xảy ra, vui lòng thử lại',
+                'type'      => 'error'
+            ];
+        }
+        $request->session()->put('toast', $toast);
     }
 
     public static function loadViewExport(Request $request){
