@@ -111,7 +111,7 @@
         <!-- END:: Video -->
 
         <!-- Hướng dẫn đặt Tour -->
-        @include('main.tourLocation.guideBookTour', ['title' => 'Quy trình đặt Tour '.$item->display_name.' và Sử dụng dịch vụ'])
+        @include('main.tourLocation.guideBook', ['title' => 'Hướng dẫn đặt Tour '.$item->display_name])
 
         <!-- Vé máy bay -->
         @php

@@ -84,6 +84,9 @@
             'title' => 'Video Vé vui chơi '.$item->display_name
         ])
         <!-- END:: Video -->
+
+        <!-- Hướng dẫn đặt Vé -->
+        @include('main.serviceLocation.guideBook', ['title' => 'Hướng dẫn đặt Vé vui chơi '.$item->display_name])
         
         {{-- <div class="sectionBox noBackground">
             <div class="container">

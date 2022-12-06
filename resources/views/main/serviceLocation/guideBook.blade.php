@@ -1,22 +1,21 @@
 @php
     $arrayData  = [
         0 => [
-            'img'       => '/storage/images/upload/huong-dan-dat-tour-1-type-manager-upload.webp',
-            'title'     => 'Chọn các thông tin quan trọng của Tour',
+            'img'       => '/storage/images/upload/huong-dan-dat-ve-vui-choi-giai-tri-1-type-manager-upload.webp',
+            'title'     => 'Chọn các thông tin quan trọng của vé',
             'content'   => '<ul>
-                                <li>Chọn Điểm đến và Tour Quý khách muốn đặt</li>
-                                <li>Chọn Số lượng hành khách tham gia Tour</li>
+                                <li>Chọn Điểm đến và Vé Quý khách muốn đặt</li>
                                 <li>Chọn Ngày khởi hành</li>
-                                <li>Click <strong>Đặt tour ngay</strong></li>
+                                <li>Click <strong>Đặt vé ngay</strong></li>
                             </ul>'
         ],
         1 => [
-            'img'       => '/storage/images/upload/huong-dan-dat-tour-2-type-manager-upload.webp',
-            'title'     => 'Vui lòng chờ hệ thống tìm kiếm Tour',
+            'img'       => '/storage/images/upload/huong-dan-dat-ve-vui-choi-giai-tri-2-type-manager-upload.webp',
+            'title'     => 'Vui lòng chờ hệ thống tìm kiếm Vé',
             'content'   => '<ul>
-                                <li>Hệ thống chuyển hướng Quý khách sang trang đặt Tour chi tiết</li>
-                                <li>Điền tiếp thông tin liên hệ của người đặt Tour</li>
-                                <li>Chọn option của Tour</li>
+                                <li>Hệ thống chuyển hướng Quý khách sang trang đặt Vé chi tiết</li>
+                                <li>Điền tiếp thông tin liên hệ của người đặt</li>
+                                <li>Chọn option của Vé</li>
                                 <li>Click <strong>Xác nhận</strong></li>
                             </ul>'
         ],
@@ -25,21 +24,19 @@
             'title'     => 'Thanh toán và hoàn tất',
             'content'   => '<ul>
                                 <li>Nhân viên Hitour sẽ liên hệ lại và gửi xác nhận chi tiết</li>
-                                <li>Quý khách thanh toán (hoặc cọc) theo hướng dẫn trong xác nhận</li>
-                                <li>Và cung cấp thông tin từng hành khách (nếu có yêu cầu)</li>
-                                <li>Hoàn tất các bước trên Quý khách sẽ nhận được một <strong>Phiếu xác nhận</strong></li>
+                                <li>Quý khách thanh toán theo hướng dẫn trong xác nhận</li>
+                                <li>Hoàn tất các bước trên nhân viên sẽ gửi Quý khách vé điện tử</li>
                             </ul>'
         ],
         3 => [
-            'img'       => '/storage/images/upload/huong-dan-dat-tour-4-type-manager-upload.webp',
-            'title'     => 'Sử dụng dịch vụ Tour',
+            'img'       => '/storage/images/upload/huong-dan-dat-ve-vui-choi-giai-tri-4-type-manager-upload.webp',
+            'title'     => 'Sử dụng dịch vụ',
             'content'   => '<ul>
                                 <li>Trước ngày khởi hành Nhân viên sẽ liên hệ Quý khách để dặn dò chi tiết</li>
-                                <li><strong>Phiếu xác nhận</strong> có giá trị sử dụng dịch vụ Tour của Hitour</li>
-                                <li>Tùy thuộc vào mỗi chương trình Tour mà Quý khách nhận thêm các <strong>Vé dịch vụ</strong> đi kèm khác nhau (Ví dụ: vé tàu cao tốc, vé máy bay,...)</li>
+                                <li><strong>Vé điện tử</strong> có giá trị sử dụng dịch vụ tương ứng</li>
                             </ul>
                             <p>
-                                <em>Ghi chú: Trường hợp làm lạc hoặc bất tiện trong việc dùng Phiếu xác nhận và Vé dịch vụ Quý khách có thể sử dụng <strong>số điện thoại đặt Tour</strong> để thay thế.</em>
+                                <em>Ghi chú: Trường hợp làm lạc Vé điện tử Quý khách có thể dùng số điện thoại đặt vé để được hỗ trợ gửi lại vé mới.</em>
                             </p>'
         ]
     ]
@@ -102,7 +99,7 @@
                 </div>
                 <div id="js_showHideElement_box" class="guideBookBoxMobile_box">
                     <div class="guideBookBoxMobile_box_title">
-                        <h2 class="maxLine_1">Hướng dẫn đặt Tour Phú Quốc</h2>
+                        <h2 class="maxLine_1">{{ $title ?? null }}</h2>
                         <div class="guideBookBoxMobile_box_title_close" onClick="showHideElement('js_showHideElement_box');"></div>
                     </div>
                     <div class="guideBookBoxMobile_box_content customScrollBar-y" style="height:calc(100% - 100px)">
