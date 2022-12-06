@@ -46,9 +46,6 @@
     <!-- Desktop --> 
     <div class="hide-767">
         <div class="container" style="margin: 1.5rem 0;">
-            {{-- <div style="text-align:center;">
-                <h2 class="sectionBox_title" style="margin-bottom:1.5rem !important;">{{ $title ?? null }}</h2>
-            </div> --}}
             <div class="guideBookBox">
                 <div class="guideBookBox_image">
                     <div class="galleryCustomBox">
@@ -87,7 +84,7 @@
     <!-- Mobile --> 
     <div class="show-767">
         <div class="container">
-            <h2 class="sectionBox_title">{{ $title ?? null }}</h2>
+            <h3 class="sectionBox_title">{{ $title ?? null }}</h3>
             <div class="guideBookBoxMobile">
                 <div class="guideBookBoxMobile_image">
                     @foreach($arrayData as $image)
@@ -99,7 +96,7 @@
                 </div>
                 <div id="js_showHideElement_box" class="guideBookBoxMobile_box">
                     <div class="guideBookBoxMobile_box_title">
-                        <h2 class="maxLine_1">{{ $title ?? null }}</h2>
+                        <h3 class="maxLine_1">{{ $title ?? null }}</h3>
                         <div class="guideBookBoxMobile_box_title_close" onClick="showHideElement('js_showHideElement_box');"></div>
                     </div>
                     <div class="guideBookBoxMobile_box_content customScrollBar-y" style="height:calc(100% - 100px)">
@@ -121,9 +118,9 @@
 
 {{-- @push('scripts-custom') --}}
     <script type="text/javascript">
-        // $(window).ready(function(){
+        $(window).ready(function(){
             prevNextGallery();
-        // })
+        })
 
         function prevNextGallery(action = null){
             const valueNow      = $('#js_prevNextGallery_input').val();
