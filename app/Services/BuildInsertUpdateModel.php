@@ -676,9 +676,9 @@ class BuildInsertUpdateModel {
                 }
                 $tmp                            = explode('|', $dataForm['dp2']);
                 $infoShipPrice                  = ShipPrice::select('*')
-                                                ->where('id', $tmp[0])
-                                                ->with('partner')
-                                                ->first();
+                                                    ->where('id', $tmp[0])
+                                                    ->with('partner')
+                                                    ->first();
                 $result[1]['partner_name']      = $infoShipPrice->partner->name;
                 $result[1]['price_adult']       = !empty($tmp[3])&&$tmp[3]=='vip'&&!empty($infoShipPrice->price_vip) ? $infoShipPrice->price_vip : $infoShipPrice->price_adult;
                 $result[1]['price_child']       = !empty($tmp[3])&&$tmp[3]=='vip'&&!empty($infoShipPrice->price_vip) ? $infoShipPrice->price_vip : $infoShipPrice->price_child;

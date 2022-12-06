@@ -11,73 +11,84 @@
                 break;
             }
         }
-        // dd($booking);
     @endphp
     {{-- @if(!empty($item)) --}}
         <label class="form-label">Giờ tàu & loại vé</label>
         <div class="chooseDepartureShipBox">
-            @foreach($data['times'] as $time)
-                <div class="chooseDepartureShipBox_row">
-                    <div class="chooseDepartureShipBox_row_item">
-                        <div class="highLight">{{ $time['time_departure'] }} - {{ $time['time_arrive'] }}</div>
-                        <div>{{ $data['partner'] ?? '-' }}</div>
-                    </div>
-                    <div class="chooseDepartureShipBox_row_item" style="padding-right:0 !important;">
-                        @php
-                            $active = null;
-                            foreach($booking->infoDeparture as $departure){
-                                if($departure->time_departure==$time['time_departure'] /* trùng giờ khởi hành */
-                                &&$departure->port_departure==$time['ship_from'] /* trùng giờ cảng khởi hành */
-                                &&$departure->partner_name==$data['partner'] /* trùng hãng tàu */
-                                &&$departure->type=='eco'){
-                                    $timeDepartureChoose    = $time['time_departure'];
-                                    $timeArriveChoose       = $time['time_arrive'];
-                                    $typeTicketChoose       = 'eco';
-                                    $partnerChoose          = $data['partner'];
-                                    $active                 = 'active';
-                                    break;
-                                }
-                            }
-                        @endphp
-                        <div class="chooseDepartureShipBox_row_item_choose option {{ $active }}" onClick="chooseDeparture(this, '{{ $code }}', '{{ $data['ship_price_id'] }}', '{{ $time['time_departure'] }}', '{{ $time['time_arrive'] }}', 'eco', '{{ $data['partner'] }}');">
-                            <div class="highLight">ECO</div>
-                            <div>{{ number_format($data['price_adult']).config('main.unit_currency') }}</div>
+            @foreach($data as $ship)
+                @foreach($ship['times'] as $time)
+                    <div class="chooseDepartureShipBox_row">
+                        <div class="chooseDepartureShipBox_row_item">
+                            <div class="highLight">{{ $time['time_departure'] }} - {{ $time['time_arrive'] }}</div>
+                            <div>{{ $ship['partner']['name'] ?? '-' }}</div>
                         </div>
-                    </div>
-                    <div class="chooseDepartureShipBox_row_item">
-                        @if(!empty($data['price_vip']))
+                        <div class="chooseDepartureShipBox_row_item" style="padding-right:0 !important;">
                             @php
                                 $active = null;
                                 foreach($booking->infoDeparture as $departure){
                                     if($departure->time_departure==$time['time_departure'] /* trùng giờ khởi hành */
-                                    &&$departure->port_departure==$time['ship_from'] /* trùng giờ cảng khởi hành */
-                                    &&$departure->partner_name==$data['partner'] /* trùng hãng tàu */
-                                    &&$departure->type=='vip'){
+                                    &&$departure->port_departure==$time['ship_from'] /* trùng cảng khởi hành */
+                                    &&$departure->partner_name==$ship['partner']['name'] /* trùng hãng tàu */
+                                    &&$departure->type=='eco'){
                                         $timeDepartureChoose    = $time['time_departure'];
                                         $timeArriveChoose       = $time['time_arrive'];
-                                        $typeTicketChoose       = 'vip';
-                                        $partnerChoose          = $data['partner'];
-                                        $active     = 'active';
+                                        $typeTicketChoose       = 'eco';
+                                        $partnerChoose          = $ship['partner']['name'];
+                                        $active                 = 'active';
                                         break;
                                     }
                                 }
                             @endphp
-                            <div class="chooseDepartureShipBox_row_item_choose option {{ $active }}" onClick="chooseDeparture(this, '{{ $code }}', '{{ $data['ship_price_id'] }}', '{{ $time['time_departure'] }}', '{{ $time['time_arrive'] }}', 'vip', '{{ $data['partner'] }}');">
-                                <div class="highLight">VIP</div>
-                                <div>{{ number_format($data['price_vip']).config('main.unit_currency') }}</div>
+                            <div class="chooseDepartureShipBox_row_item_choose option {{ $active }}" onClick="chooseDeparture(this, '{{ $code }}', '{{ $time['ship_price_id'] }}', '{{ $time['time_departure'] }}', '{{ $time['time_arrive'] }}', 'eco', '{{ $ship['partner']['name'] }}');">
+                                <div class="highLight">ECO</div>
+                                <div>{{ number_format($ship['price_adult']).config('main.unit_currency') }}</div>
                             </div>
-                        @endif
+                        </div>
+                        <div class="chooseDepartureShipBox_row_item">
+                            @if(!empty($ship['price_vip']))
+                                @php
+                                    $active = null;
+                                    foreach($booking->infoDeparture as $departure){
+                                        if($departure->time_departure==$time['time_departure'] /* trùng giờ khởi hành */
+                                        &&$departure->port_departure==$time['ship_from'] /* trùng giờ cảng khởi hành */
+                                        &&$departure->partner_name==$ship['partner']['name'] /* trùng hãng tàu */
+                                        &&$departure->type=='vip'){
+                                            $timeDepartureChoose    = $time['time_departure'];
+                                            $timeArriveChoose       = $time['time_arrive'];
+                                            $typeTicketChoose       = 'vip';
+                                            $partnerChoose          = $ship['partner']['name'];
+                                            $active     = 'active';
+                                            break;
+                                        }
+                                    }
+                                @endphp
+                                <div class="chooseDepartureShipBox_row_item_choose option {{ $active }}" onClick="chooseDeparture(this, '{{ $code }}', '{{ $time['ship_price_id'] }}', '{{ $time['time_departure'] }}', '{{ $time['time_arrive'] }}', 'vip', '{{ $ship['partner']['name'] }}');">
+                                    <div class="highLight">VIP</div>
+                                    <div>{{ number_format($ship['price_vip']).config('main.unit_currency') }}</div>
+                                </div>
+                            @endif
+                        </div>
                     </div>
-                </div>
+                @endforeach
             @endforeach
         </div>
         @php
-            $valueDp        = null;
+            $valueDp            = null;
             if(!empty($timeDepartureChoose)&&!empty($timeArriveChoose)&&!empty($typeTicketChoose)){
-                $valueDp    =  $data['ship_price_id'].'|'.$timeDepartureChoose.'|'.$timeArriveChoose.'|'.$typeTicketChoose.'|'.$partnerChoose;
+                $idShipPrice    = 0;
+                foreach($data as $ship){
+                    foreach($ship['times'] as $time){
+                        if(!empty($time['ship_price_id'])) {
+                            $idShipPrice    = $time['ship_price_id'];
+                            break;
+                        }
+                    }
+                }
+                $valueDp    =  $idShipPrice.'|'.$timeDepartureChoose.'|'.$timeArriveChoose.'|'.$typeTicketChoose;
             }
         @endphp
         <input id="js_chooseDeparture_dp{{ $code }}" name="dp{{ $code }}" type="hidden" value="{{ $valueDp }}" />
-        <input type="hidden" name="ship_info_id_{{ $code }}" value="{{ $data['ship_info_id'] ?? null }}" />
+        <input type="hidden" name="ship_info_id_{{ $code }}" value="{{ $data[0]['id'] }}" />
+        <input type="hidden" name="name_dp{{ $code }}" value="{{ $portShipDeparture->district->district_name }} - {{ $portShipLocation->district->district_name }}" />
     {{-- @endif --}}
 @endif

@@ -44,6 +44,11 @@
                                                         <span style="color:'.$action->action->color.';">'.$action->action->icon.'</span>'.$action->action->name.'
                                                     </div>';
                                     break;
+                                case 'Chỉnh sửa':
+                                    $xhtmlAction = '<a href="'.route('admin.shipBooking.view', ['id' => $item->id]).'" class="actionBookingBox_item">
+                                                        <span style="color:'.$action->action->color.';">'.$action->action->icon.'</span>'.$action->action->name.'
+                                                    </a>';
+                                    break;
                                 default:
                                     $xhtmlAction = '<a href="#" target="_blank" class="actionBookingBox_item">
                                                         <span style="color:'.$action->action->color.';">'.$action->action->icon.'</span>'.$action->action->name.'

@@ -45,7 +45,7 @@
                                 
                             </div>
                         </div>
-                        <div class="card">
+                        {{-- <div class="card">
                             <div class="card-header border-bottom">
                                 <h4 class="card-title">
                                     Thông tin hóa đơn
@@ -64,7 +64,7 @@
                             <div class="card-body">
                                 @include('admin.form.formCustomerList')
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="pageAdminWithRightSidebar_main_content_item">
                         @include('admin.shipBooking.formBookingTicket')

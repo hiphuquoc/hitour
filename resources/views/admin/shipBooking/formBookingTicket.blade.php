@@ -96,15 +96,15 @@
                     <div class="flexBox">
                         <div class="flexBox_item">
                             <label class="form-label">Người lớn ({{ $yearNow - 59 }} - {{ $yearNow - 12 }})</label>
-                            <input type="number" min="0" class="form-control" name="quantity_adult_{{ $code }}" placeholder="0" value="{{ $item->infoDeparture[$i]->quantity_adult ?? null }}">
+                            <input type="number" min="0" class="form-control" name="quantity_adult_{{ $code }}" placeholder="0" value="{{ !empty($item->infoDeparture[$i]->quantity_adult) ? $item->infoDeparture[$i]->quantity_adult : null }}">
                         </div>
                         <div class="flexBox_item">
                             <label class="form-label">Trẻ em ({{ $yearNow - 11 }} - {{ $yearNow - 6 }})</label>
-                            <input type="number" min="0" class="form-control" name="quantity_child_{{ $code }}" placeholder="0" value="{{ $item->infoDeparture[$i]->quantity_child ?? null }}">
+                            <input type="number" min="0" class="form-control" name="quantity_child_{{ $code }}" placeholder="0" value="{{ !empty($item->infoDeparture[$i]->quantity_child) ? $item->infoDeparture[$i]->quantity_child : null }}">
                         </div>
                         <div class="flexBox_item">
                             <label class="form-label">Cao tuổi ({{ $yearNow - 60 }})</label>
-                            <input type="number" min="0" class="form-control" name="quantity_old_{{ $code }}" placeholder="0" value="{{ $item->infoDeparture[$i]->quantity_old ?? null }}">
+                            <input type="number" min="0" class="form-control" name="quantity_old_{{ $code }}" placeholder="0" value="{{ !empty($item->infoDeparture[$i]->quantity_old) ? $item->infoDeparture[$i]->quantity_old : null }}">
                         </div>
                     </div>
                 </div>
@@ -136,10 +136,9 @@
             const idShipPort = $(element).val();
             $.ajax({
                 url         : '{{ route("main.shipBooking.loadShipLocation") }}',
-                type        : 'post',
+                type        : 'get',
                 dataType    : 'html',
                 data        : {
-                    '_token'            : '{{ csrf_token() }}',
                     ship_port_id        : idShipPort,
                     name_port_active    : namePortActive
                 },
@@ -160,10 +159,9 @@
             if(typeof date!=='undefined'&&idPortShipDeparture!=0&&idPortShipLocation!=0){
                 $.ajax({
                     url         : '{{ route("main.shipBooking.loadDeparture") }}',
-                    type        : 'post',
+                    type        : 'get',
                     dataType    : 'json',
                     data        : {
-                        '_token'                : '{{ csrf_token() }}',
                         ship_booking_id         : idShipBooking,
                         code                    : code,
                         ship_port_departure_id  : idPortShipDeparture,
