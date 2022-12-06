@@ -4091,6 +4091,7 @@ blockquote em {
 .guideBookBox_content {
   width: 60%;
   margin-left: 4rem;
+  text-align: left;
 }
 @media (max-width: 1023px) {
   .guideBookBox_content {
