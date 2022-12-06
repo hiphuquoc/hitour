@@ -127,76 +127,77 @@
                             <div class="bookingForm_item_body" style="padding:0;background:none;border:none;box-shadow:none;">
                                 <div class="shipDepartureConfirmBox">
                                     @foreach($item->infoDeparture as $departure)
-                                    <div class="shipDepartureConfirmBox_item">
-                                        <div class="shipDepartureConfirmBox_item_title">
-                                            @if(!empty($departure->departure)&&!empty($departure->location)&&!empty($departure->partner_name))
-                                                <div><span class="highLight">{{ $departure->departure }}</span> - <span class="highLight">{{ $departure->location }}</span> tàu {{ $departure->partner_name }}</div>
-                                            @endif
-                                            @if(!empty($departure->date))
-                                                @php
-                                                    $dayOfWeek  = \App\Helpers\DateAndTime::convertMktimeToDayOfWeek(strtotime($departure->date));
-                                                @endphp
-                                                <div>Khởi hành <span class="highLight">{{ $dayOfWeek }}, {{ date('d/m/Y', strtotime($departure->date)) }}</span></div>
-                                            @endif
-                                        </div>
-                                        <div class="shipDepartureConfirmBox_item_body">
-                                            <div class="shipDepartureConfirmBox_item_body_item">
-                                                <div class="timeShipDepartureBox">
-                                                    <div class="timeShipDepartureBox_departure">
-                                                        @if(!empty($departure->time_departure))
-                                                            <div>Xuất bến <span class="highLight">{{ $departure->time_departure }}</span></div>
-                                                        @endif
-                                                        @php
-                                                            $arrayPort              = [];
-                                                            if(!empty($departure->port_departure_address)) $arrayPort[]     = $departure->port_departure_address;
-                                                            if(!empty($departure->port_departure_district)) $arrayPort[]    = $departure->port_departure_district;
-                                                            if(!empty($departure->port_departure_province)) $arrayPort[]    = $departure->port_departure_province;
-                                                            $fullAddressDeparture   = implode(', ', $arrayPort);
-                                                        @endphp
-                                                        <div class="highLight">{{ $departure->port_departure ?? '-' }}</div>
-                                                        <div style="font-style:italic;">{{ $fullAddressDeparture }}</div>
-                                                    </div>
-                                                    <div class="timeShipDepartureBox_icon">
-                                                        <i class="fas fa-angle-double-right" style="font-size:1.6rem;vertical-align:middle;"></i>
-                                                    </div>
-                                                    <div class="timeShipDepartureBox_departure">
-                                                        @if(!empty($departure->time_arrive))
-                                                            <div>Cập bến <span class="highLight">09:20</span></div>
-                                                        @endif
-                                                        @php
-                                                            $arrayPort              = [];
-                                                            if(!empty($departure->port_location_address)) $arrayPort[]     = $departure->port_location_address;
-                                                            if(!empty($departure->port_location_district)) $arrayPort[]    = $departure->port_location_district;
-                                                            if(!empty($departure->port_location_province)) $arrayPort[]    = $departure->port_location_province;
-                                                            $fullAddressLocation    = implode(', ', $arrayPort);
-                                                        @endphp
-                                                        <div class="highLight">{{ $departure->port_location ?? '-' }}</div>
-                                                        <div style="font-style:italic;">{{ $fullAddressLocation }}</div>
+                                        <div class="shipDepartureConfirmBox_item">
+                                            {{-- <div class="shipDepartureConfirmBox_item_title">
+                                                @if(!empty($departure->departure)&&!empty($departure->location)&&!empty($departure->partner_name))
+                                                    <div><span class="highLight">{{ $departure->departure }}</span> - <span class="highLight">{{ $departure->location }}</span> tàu {{ $departure->partner_name }}</div>
+                                                @endif
+                                                @if(!empty($departure->date))
+                                                    @php
+                                                        $dayOfWeek  = \App\Helpers\DateAndTime::convertMktimeToDayOfWeek(strtotime($departure->date));
+                                                    @endphp
+                                                    <div>Khởi hành <span class="highLight">{{ $dayOfWeek }}, {{ date('d/m/Y', strtotime($departure->date)) }}</span></div>
+                                                @endif
+                                            </div>
+                                            <div class="shipDepartureConfirmBox_item_body">
+                                                <div class="shipDepartureConfirmBox_item_body_item">
+                                                    <div class="timeShipDepartureBox">
+                                                        <div class="timeShipDepartureBox_departure">
+                                                            @if(!empty($departure->time_departure))
+                                                                <div>Xuất bến <span class="highLight">{{ $departure->time_departure }}</span></div>
+                                                            @endif
+                                                            @php
+                                                                $arrayPort              = [];
+                                                                if(!empty($departure->port_departure_address)) $arrayPort[]     = $departure->port_departure_address;
+                                                                if(!empty($departure->port_departure_district)) $arrayPort[]    = $departure->port_departure_district;
+                                                                if(!empty($departure->port_departure_province)) $arrayPort[]    = $departure->port_departure_province;
+                                                                $fullAddressDeparture   = implode(', ', $arrayPort);
+                                                            @endphp
+                                                            <div class="highLight">{{ $departure->port_departure ?? '-' }}</div>
+                                                            <div style="font-style:italic;">{{ $fullAddressDeparture }}</div>
+                                                        </div>
+                                                        <div class="timeShipDepartureBox_icon">
+                                                            <i class="fas fa-angle-double-right" style="font-size:1.6rem;vertical-align:middle;"></i>
+                                                        </div>
+                                                        <div class="timeShipDepartureBox_departure">
+                                                            @if(!empty($departure->time_arrive))
+                                                                <div>Cập bến <span class="highLight">09:20</span></div>
+                                                            @endif
+                                                            @php
+                                                                $arrayPort              = [];
+                                                                if(!empty($departure->port_location_address)) $arrayPort[]     = $departure->port_location_address;
+                                                                if(!empty($departure->port_location_district)) $arrayPort[]    = $departure->port_location_district;
+                                                                if(!empty($departure->port_location_province)) $arrayPort[]    = $departure->port_location_province;
+                                                                $fullAddressLocation    = implode(', ', $arrayPort);
+                                                            @endphp
+                                                            <div class="highLight">{{ $departure->port_location ?? '-' }}</div>
+                                                            <div style="font-style:italic;">{{ $fullAddressLocation }}</div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="shipDepartureConfirmBox_item_body_item">
-                                                @php
-                                                    $typeTicket     = '-';
-                                                    if(!empty($departure->type)){
-                                                        $typeTicket = strtoupper($departure->type);
-                                                    }
-                                                @endphp
-                                                @if(!empty($departure->quantity_adult))
-                                                    <div><span class="highLight">{{ $departure->quantity_adult }}</span> người lớn ({{ $typeTicket }})</div>
-                                                @endif
-                                                @if(!empty($departure->quantity_child))
-                                                    <div><span class="highLight">{{ $departure->quantity_child }}</span> trẻ em 6-11 tuổi ({{ $typeTicket }})</div>
-                                                @endif
-                                                @if(!empty($departure->quantity_old))
-                                                    <div><span class="highLight">{{ $departure->quantity_old }}</span> người trên 60 tuổi ({{ $typeTicket }})</div>
-                                                @endif
-                                            </div>
-                                            {{-- <div class="shipDepartureConfirmBox_item_body_item">
-                                                <div>Danh sách hành khách cập nhật sau</div>
-                                            </div> --}}
+                                                <div class="shipDepartureConfirmBox_item_body_item">
+                                                    @php
+                                                        $typeTicket     = '-';
+                                                        if(!empty($departure->type)){
+                                                            $typeTicket = strtoupper($departure->type);
+                                                        }
+                                                    @endphp
+                                                    @if(!empty($departure->quantity_adult))
+                                                        <div><span class="highLight">{{ $departure->quantity_adult }}</span> người lớn ({{ $typeTicket }})</div>
+                                                    @endif
+                                                    @if(!empty($departure->quantity_child))
+                                                        <div><span class="highLight">{{ $departure->quantity_child }}</span> trẻ em 6-11 tuổi ({{ $typeTicket }})</div>
+                                                    @endif
+                                                    @if(!empty($departure->quantity_old))
+                                                        <div><span class="highLight">{{ $departure->quantity_old }}</span> người trên 60 tuổi ({{ $typeTicket }})</div>
+                                                    @endif
+                                                </div> --}}
+                                                {{-- <div class="shipDepartureConfirmBox_item_body_item">
+                                                    <div>Danh sách hành khách cập nhật sau</div>
+                                                </div> --}}
+                                            {{-- </div> --}}
+                                            @include('main.shipBooking.tableDeparture', compact('departure'))
                                         </div>
-                                    </div>
                                     @endforeach
                                 </div>
                             </div>
