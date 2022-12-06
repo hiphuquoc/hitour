@@ -12,8 +12,8 @@ return [
         [
             'title'         => '- Tài khoản công ty:',
             'name'          => 'CONG TY TNHH DU LICH BIEN DAO HITOUR',
-            'number'        => '1016376662',
-            'department'    => 'Vietcombank Kiên Giang'
+            'number'        => '19036246929012',
+            'department'    => 'Techcombank Kiên Giang'
         ]
     ],
     /* Chính sách hủy vé tàu */
