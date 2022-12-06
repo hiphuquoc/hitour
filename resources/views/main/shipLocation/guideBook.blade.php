@@ -44,7 +44,7 @@
     ]
 @endphp    
 
-<div class="sectionBox withBorder">
+<div class="sectionBox backgroundSecondary">
     <!-- Desktop --> 
     <div class="hide-767">
         <div class="container">
