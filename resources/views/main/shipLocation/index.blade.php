@@ -94,6 +94,9 @@
             'title' => 'Video Tàu cao tốc '.$item->display_name
         ])
         <!-- END:: Video -->
+
+        <!-- Hướng dẫn đặt Vé -->
+        @include('main.shipLocation.guideBook', ['title' => 'Hướng dẫn đặt Vé tàu '.$item->display_name])
         
         <div class="sectionBox noBackground">
             <div class="container">

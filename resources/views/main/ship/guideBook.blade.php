@@ -1,21 +1,22 @@
 @php
     $arrayData  = [
         0 => [
-            'img'       => '/storage/images/upload/huong-dan-dat-ve-vui-choi-giai-tri-1-type-manager-upload.webp',
+            'img'       => '/storage/images/upload/huong-dan-dat-ve-tau-1-type-manager-upload.webp',
             'title'     => 'Chọn các thông tin quan trọng của vé',
             'content'   => '<ul>
-                                <li>Chọn Điểm đến và Vé Quý khách muốn đặt</li>
+                                <li>Chọn chuyến tàu bạn muốn đặt</li>
+                                <li>Nhập số lượng hành khách</li>
                                 <li>Chọn Ngày khởi hành</li>
-                                <li>Click <strong>Đặt vé ngay</strong></li>
+                                <li>Click <strong>Tìm chuyến tàu</strong></li>
                             </ul>'
         ],
         1 => [
-            'img'       => '/storage/images/upload/huong-dan-dat-ve-vui-choi-giai-tri-2-type-manager-upload.webp',
+            'img'       => '/storage/images/upload/huong-dan-dat-ve-tau-2-type-manager-upload.webp',
             'title'     => 'Vui lòng chờ hệ thống tìm kiếm Vé',
             'content'   => '<ul>
                                 <li>Hệ thống chuyển hướng Quý khách sang trang đặt Vé chi tiết</li>
                                 <li>Điền tiếp thông tin liên hệ của người đặt</li>
-                                <li>Chọn option của Vé</li>
+                                <li>Chọn giờ tàu và loại vé</li>
                                 <li>Click <strong>Xác nhận</strong></li>
                             </ul>'
         ],
@@ -25,15 +26,16 @@
             'content'   => '<ul>
                                 <li>Nhân viên Hitour sẽ liên hệ lại và gửi xác nhận chi tiết</li>
                                 <li>Quý khách thanh toán theo hướng dẫn trong xác nhận</li>
-                                <li>Hoàn tất các bước trên nhân viên sẽ gửi vé điện tử cho Quý khách</li>
+                                <li>Và cung cấp thông tin từng hành khách gồm Họ tên + Năm sinh + số CMND/CCCD</li>
+                                <li>Hoàn tất các bước trên nhân viên sẽ gửi vé tàu điện tử cho Quý khách</li>
                             </ul>'
         ],
         3 => [
-            'img'       => '/storage/images/upload/huong-dan-dat-ve-vui-choi-giai-tri-4-type-manager-upload.webp',
+            'img'       => '/storage/images/upload/huong-dan-dat-ve-tau-4-type-manager-upload.webp',
             'title'     => 'Sử dụng dịch vụ',
             'content'   => '<ul>
                                 <li>Trước ngày khởi hành Nhân viên sẽ liên hệ Quý khách để dặn dò chi tiết</li>
-                                <li><strong>Vé điện tử</strong> có giá trị sử dụng dịch vụ tương ứng</li>
+                                <li><strong>Vé điện tử</strong> Quý khách mở trên điện thoại để nhân viên quét mã lúc lên tàu</li>
                             </ul>
                             <p>
                                 <em>Ghi chú: Trường hợp làm lạc Vé điện tử Quý khách có thể dùng số điện thoại đặt vé để được hỗ trợ gửi lại vé mới.</em>

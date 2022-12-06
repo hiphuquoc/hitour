@@ -1,21 +1,22 @@
 @php
     $arrayData  = [
         0 => [
-            'img'       => '/storage/images/upload/huong-dan-dat-ve-vui-choi-giai-tri-1-type-manager-upload.webp',
+            'img'       => '/storage/images/upload/huong-dan-dat-ve-tau-1-type-manager-upload.webp',
             'title'     => 'Chọn các thông tin quan trọng của vé',
             'content'   => '<ul>
-                                <li>Chọn Điểm đến và Vé Quý khách muốn đặt</li>
+                                <li>Chọn chuyến tàu bạn muốn đặt</li>
+                                <li>Nhập số lượng hành khách</li>
                                 <li>Chọn Ngày khởi hành</li>
-                                <li>Click <strong>Đặt vé ngay</strong></li>
+                                <li>Click <strong>Tìm chuyến tàu</strong></li>
                             </ul>'
         ],
         1 => [
-            'img'       => '/storage/images/upload/huong-dan-dat-ve-vui-choi-giai-tri-2-type-manager-upload.webp',
+            'img'       => '/storage/images/upload/huong-dan-dat-ve-tau-2-type-manager-upload.webp',
             'title'     => 'Vui lòng chờ hệ thống tìm kiếm Vé',
             'content'   => '<ul>
                                 <li>Hệ thống chuyển hướng Quý khách sang trang đặt Vé chi tiết</li>
                                 <li>Điền tiếp thông tin liên hệ của người đặt</li>
-                                <li>Chọn option của Vé</li>
+                                <li>Chọn giờ tàu và loại vé</li>
                                 <li>Click <strong>Xác nhận</strong></li>
                             </ul>'
         ],
@@ -25,15 +26,16 @@
             'content'   => '<ul>
                                 <li>Nhân viên Hitour sẽ liên hệ lại và gửi xác nhận chi tiết</li>
                                 <li>Quý khách thanh toán theo hướng dẫn trong xác nhận</li>
-                                <li>Hoàn tất các bước trên nhân viên sẽ gửi vé điện tử cho Quý khách</li>
+                                <li>Và cung cấp thông tin từng hành khách gồm Họ tên + Năm sinh + số CMND/CCCD</li>
+                                <li>Hoàn tất các bước trên nhân viên sẽ gửi vé tàu điện tử cho Quý khách</li>
                             </ul>'
         ],
         3 => [
-            'img'       => '/storage/images/upload/huong-dan-dat-ve-vui-choi-giai-tri-4-type-manager-upload.webp',
+            'img'       => '/storage/images/upload/huong-dan-dat-ve-tau-4-type-manager-upload.webp',
             'title'     => 'Sử dụng dịch vụ',
             'content'   => '<ul>
                                 <li>Trước ngày khởi hành Nhân viên sẽ liên hệ Quý khách để dặn dò chi tiết</li>
-                                <li><strong>Vé điện tử</strong> có giá trị sử dụng dịch vụ tương ứng</li>
+                                <li><strong>Vé điện tử</strong> Quý khách mở trên điện thoại để nhân viên quét mã lúc lên tàu</li>
                             </ul>
                             <p>
                                 <em>Ghi chú: Trường hợp làm lạc Vé điện tử Quý khách có thể dùng số điện thoại đặt vé để được hỗ trợ gửi lại vé mới.</em>
@@ -42,10 +44,13 @@
     ]
 @endphp    
 
-{{-- <div class="sectionBox"> --}}
+<div class="sectionBox">
     <!-- Desktop --> 
     <div class="hide-767">
-        <div class="container" style="margin: 1.5rem 0;">
+        <div class="container">
+            <div style="text-align:center;">
+                <h2 class="sectionBox_title" style="margin-bottom:1.5rem !important;">{{ $title ?? null }}</h2>
+            </div>
             <div class="guideBookBox">
                 <div class="guideBookBox_image">
                     <div class="galleryCustomBox">
@@ -83,7 +88,8 @@
     </div>
     <!-- Mobile --> 
     <div class="show-767">
-        <div class="container" style="margin-bottom:1.25rem;">
+        <div class="container">
+            <h2 class="sectionBox_title">{{ $title ?? null }}</h2>
             <div class="guideBookBoxMobile">
                 <div class="guideBookBoxMobile_image">
                     @foreach($arrayData as $image)
@@ -95,7 +101,7 @@
                 </div>
                 <div id="js_showHideElement_box" class="guideBookBoxMobile_box">
                     <div class="guideBookBoxMobile_box_title">
-                        <h3 class="maxLine_1">{{ $title ?? null }}</h3>
+                        <h2 class="maxLine_1">{{ $title ?? null }}</h2>
                         <div class="guideBookBoxMobile_box_title_close" onClick="showHideElement('js_showHideElement_box');"></div>
                     </div>
                     <div class="guideBookBoxMobile_box_content customScrollBar-y" style="height:calc(100% - 100px)">
@@ -113,9 +119,9 @@
             </div>
         </div>
     </div>
-{{-- </div> --}}
+</div>
 
-{{-- @push('scripts-custom') --}}
+@push('scripts-custom')
     <script type="text/javascript">
         $(window).ready(function(){
             prevNextGallery();
@@ -185,4 +191,4 @@
             });
         }
     </script>
-{{-- @endpush --}}
+@endpush
