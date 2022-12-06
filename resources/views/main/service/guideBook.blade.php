@@ -83,8 +83,7 @@
     </div>
     <!-- Mobile --> 
     <div class="show-767">
-        <div class="container">
-            <h3 class="sectionBox_title">{{ $title ?? null }}</h3>
+        <div class="container" style="margin-bottom:1.25rem;">
             <div class="guideBookBoxMobile">
                 <div class="guideBookBoxMobile_image">
                     @foreach($arrayData as $image)
