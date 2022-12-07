@@ -385,6 +385,11 @@
             if(valueQuantityAdult==0&&valueQuantityAdult==0&&valueQuantityAdult==0){
                 error.push('quantity_1');
             }
+            /* validate riêng cho giờ tàu */
+            const valueTimeShip         = $(document).find('[name^="dp1"]').val();
+            if(valueTimeShip==''||typeof valueTimeShip=='undefined'){
+                error.push('dp1');
+            }
             return error;
         }
 
