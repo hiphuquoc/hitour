@@ -261,6 +261,13 @@
                 error.map(function(nameInput){
                     showHideMessageValidate(nameInput, 'show');
                 });
+                /* scroll đến thông báo đầu tiên */
+                $('.messageValidate_error:visible').each(function(){
+                    $('html, body').animate({
+                        scrollTop: $(this).offset().top - 90
+                    }, 300); 
+                    return false;
+                });
             }
         }
 
