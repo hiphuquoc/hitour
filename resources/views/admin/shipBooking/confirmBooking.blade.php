@@ -187,7 +187,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2" style="padding:7px 12px !important;border:1px dashed #d1d1d1">
-                                                        <span style="width:70px;display:inline-block;">Ngày</span> : <span style="font-weight:bold;color:rgb(0,90,180);">{{ \App\Helpers\DateAndTime::convertMktimeToDayOfWeek(strtotime($departure->date)) }}, ngày {{ date('d-m-Y', strtotime($departure->date)) }}</span>
+                                                        <span style="width:70px;display:inline-block;">Ngày</span> : <span style="font-weight:bold;color:rgb(0,90,180);">{{ \App\Helpers\DateAndTime::convertMktimeToDayOfWeek(strtotime($departure->date)) }}, ngày {{ date('d/m/Y', strtotime($departure->date)) }}</span>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -268,7 +268,7 @@
                         <!-- STATUS -->
                         <tr>
                             <td style="box-sizing:border-box;font-weight:bold;padding:10px 15px 5px 15px;">
-                                <div style="font-size:18px;font-weight:bold;color:#345;">{{ $stt }}. Yêu cầu</div>
+                                <div style="font-size:18px;font-weight:bold;color:#345;">{{ $stt }}. Hướng dẫn hoàn tất</div>
                                 @php
                                     ++$stt;
                                 @endphp
@@ -297,7 +297,7 @@
                                                     }
                                                 @endphp
                                                 <div>
-                                                    2. Quý khách chuyển khoản theo thông tin bên dưới <span style="font-weight:bold;font-size:16px;color:red;">{{ $deadline }}</span>, trong nội dung chuyển khoản ghi <span style="font-weight:bold;font-size:16px;">{{ $item->customer_contact->phone }}</span>
+                                                    2. Quý khách chuyển khoản theo thông tin bên dưới <span style="font-weight:bold;background:yellow;">{{ $deadline }}</span>, trong nội dung chuyển khoản ghi <span style="font-weight:bold;font-size:16px;background:yellow;">{{ $item->customer_contact->phone }}</span>
                                                 </div>
                                                 @php
                                                     $dataBank = config('company.bank');
@@ -376,7 +376,7 @@
                         <tr>
                             <td style="padding:10px 15px 5px 15px;text-align:center;font-size:15px;color:#3498db">
                                 <div>
-                                    Mọi cập nhật/thay đổi thông tin hành khách, tăng/giảm vé, đổi chuyến/hủy vé, đóng góp ý kiến/khiếu nại,... Vui lòng gửi phản hồi bằng cách trả lời trực tiếp email này để được hỗ trợ nhanh chóng và chính xác nhất
+                                    Mọi cập nhật/thay đổi thông tin hành khách, đổi chuyến/hủy vé, tăng/giảm vé, đóng góp ý kiến/khiếu nại,... Vui lòng gửi phản hồi bằng cách trả lời trực tiếp email này để được hỗ trợ nhanh chóng và chính xác nhất
                                 </div>
                             </td>
                         </tr>

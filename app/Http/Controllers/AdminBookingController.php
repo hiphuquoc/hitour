@@ -16,7 +16,7 @@ use App\Models\Customer;
 use App\Models\Booking;
 use App\Models\TourBookingQuantityAndPrice;
 use App\Models\VAT;
-
+use Illuminate\Support\Facades\Auth;
 use App\Services\BuildInsertUpdateModel;
 use Illuminate\Support\Facades\Cookie;
 use App\Http\Requests\TourBookingRequest;
@@ -73,7 +73,162 @@ class AdminBookingController extends Controller {
                                 ->where('id', $id)
                                 ->with('customer_contact', 'customer_list', 'quantityAndPrice', 'tour', 'service', 'costMoreLess', 'vat', 'status')
                                 ->first();
-        return view('admin.booking.viewExport', compact('item'));
+        $idUser             = Auth::id() ?? 0;
+        $infoStaff          = \App\Models\Staff::select('*')
+                                ->where('user_id', $idUser)
+                                ->first();
+        return view('admin.booking.viewExport', compact('item', 'infoStaff'));
+    }
+
+    public function viewExportHtml($id){
+        $item               = Booking::select('*')
+                                ->where('id', $id)
+                                ->with('customer_contact', 'customer_list', 'quantityAndPrice', 'tour', 'service', 'costMoreLess', 'vat', 'status')
+                                ->first();
+        $idUser             = Auth::id() ?? 0;
+        $infoStaff          = \App\Models\Staff::select('*')
+                                ->where('user_id', $idUser)
+                                ->first();
+        return view('admin.booking.viewExportHtml', compact('item', 'infoStaff'));
+    }
+
+    public static function getExpirationAt(Request $request){
+        $result             = null;
+        if(!empty($request->get('booking_info_id'))){
+            $info           = Booking::select('required_deposit', 'expiration_at')
+                                ->where('id', $request->get('booking_info_id'))
+                                ->first();
+            if(empty($info->expiration_at)){
+                $time           = date('Y-m-d', time()).' 18:00';
+                $expirationAt   = date('Y-m-d H:i', strtotime($time));
+            }else {
+                $expirationAt   = date('Y-m-d H:i', strtotime($info->expiration_at));
+            }
+            $result['expiration_at']    = $expirationAt;
+            $result['required_deposit'] = $info->required_deposit;
+        }
+        return $result;
+    }
+
+    public static function createPdfConfirm(Request $request){
+        $flag               = false;
+        if(!empty($request->get('booking_info_id'))&&!empty($request->get('expiration_at'))){
+            /* cập nhật thời hạn booking && đổi trạng thái sang đã xác nhận Zalo */
+            $flag           = Booking::updateItem($request->get('booking_info_id'), [
+                'expiration_at'             => $request->get('expiration_at'),
+                'required_deposit'          => $request->get('required_deposit'),
+                'status_id'                 => 3
+            ]);
+        }
+        echo $flag;
+    }
+
+    public static function sendMailConfirm(Request $request){
+        if(!empty($request->get('booking_info_id'))&&!empty($request->get('expiration_at'))){
+            /* cập nhật thời hạn booking && đổi trạng thái đã xác nhận email */
+            Booking::updateItem($request->get('booking_info_id'), [
+                'expiration_at'             => $request->get('expiration_at'),
+                'required_deposit'          => $request->get('required_deposit'),
+                'status_id'                 => 2
+            ]);
+            /* tạo queue gửi email */
+            $infoBooking            = Booking::select('*')
+                                        ->where('id', $request->get('booking_info_id'))
+                                        ->with('customer_contact', 'customer_list', 'status', 'service', 'tour', 'quantityAndPrice', 'costMoreLess', 'vat')
+                                        ->first();
+            $addressMail            = $infoBooking->customer_contact->email ?? null;
+            if(!empty($addressMail)){
+                /* trường hợp booking có email */
+                $idUser             = Auth::id() ?? 0;
+                $infoStaff          = \App\Models\Staff::select('*')
+                                        ->where('user_id', $idUser)
+                                        ->first();
+                \App\Jobs\ConfirmBooking::dispatch($infoBooking, $infoStaff);
+                /* Message */
+                $toast              = [
+                    'title'     => 'Thành công!',
+                    'message'   => 'Đã gửi email xác nhận cho khách',
+                    'type'      => 'success'
+                ];
+            }else {
+                /* Message */
+                $toast              = [
+                    'title'     => 'Thất bại!',
+                    'message'   => 'Khách này không có email để thao tác',
+                    'type'      => 'error'
+                ];
+            }
+            $request->session()->put('toast', $toast);
+        }
+    }
+
+    public static function paymentExtension(Request $request){
+        if(!empty($request->get('booking_info_id'))&&!empty($request->get('expiration_at'))){
+            /* cập nhật thời hạn booking */
+            $flag           = Booking::updateItem($request->get('booking_info_id'), [
+                'expiration_at'             => $request->get('expiration_at')
+            ]);
+            /* Message */
+            $toast              = [
+                'title'     => 'Thành công!',
+                'message'   => 'Đã cập nhật thời hạn thanh toán mới',
+                'type'      => 'success'
+            ];
+        }else {
+            /* Message */
+            $toast              = [
+                'title'     => 'Thất bại!',
+                'message'   => 'Có lỗi xảy ra, vui lòng thử lại',
+                'type'      => 'error'
+            ];
+        }
+        $request->session()->put('toast', $toast);
+    }
+
+    public static function cancelBooking(Request $request){
+        if(!empty($request->get('booking_info_id'))){
+            /* đổi trạng thái sang Hủy booking */
+            $flag           = Booking::updateItem($request->get('booking_info_id'), [
+                'status_id'    => 7
+            ]);
+            /* Message */
+            $toast              = [
+                'title'     => 'Thành công!',
+                'message'   => 'Đã hủy booking này',
+                'type'      => 'success'
+            ];
+        }else {
+            /* Message */
+            $toast              = [
+                'title'     => 'Thất bại!',
+                'message'   => 'Có lỗi xảy ra, vui lòng thử lại',
+                'type'      => 'error'
+            ];
+        }
+        $request->session()->put('toast', $toast);
+    }
+
+    public static function restoreBooking(Request $request){
+        if(!empty($request->get('booking_info_id'))){
+            /* đổi trạng thái sang Hủy booking */
+            $flag           = Booking::updateItem($request->get('booking_info_id'), [
+                'status_id'    => 1
+            ]);
+            /* Message */
+            $toast              = [
+                'title'     => 'Thành công!',
+                'message'   => 'Đã khôi phục booking này',
+                'type'      => 'success'
+            ];
+        }else {
+            /* Message */
+            $toast              = [
+                'title'     => 'Thất bại!',
+                'message'   => 'Có lỗi xảy ra, vui lòng thử lại',
+                'type'      => 'error'
+            ];
+        }
+        $request->session()->put('toast', $toast);
     }
 
     // public function create(TourBookingRequest $request){

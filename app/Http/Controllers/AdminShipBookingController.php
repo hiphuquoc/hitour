@@ -122,7 +122,7 @@ class AdminShipBookingController extends Controller {
                 'ship_booking_status_id'    => 2
             ]);
             /* tạo queue gửi email */
-            $infoShipBooking        = \App\Models\ShipBooking::select('*')
+            $infoShipBooking        = ShipBooking::select('*')
                                         ->where('id', $request->get('ship_booking_id'))
                                         ->with('customer_contact', 'infoDeparture', 'status', 'customer_list')
                                         ->first();

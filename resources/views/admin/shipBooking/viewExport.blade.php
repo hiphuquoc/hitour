@@ -71,15 +71,15 @@
             $('.formBox_full').repeater();
         })
 
-        function validateFormModal(){
-            let error       = [];
-            $('#formCostMoreLess').find('input[required]').each(function(){
-                if($(this).val()==''){
-                    error.push($(this).attr('name'));
-                }
-            })
-            return error;
-        }
+        // function validateFormModal(){
+        //     let error       = [];
+        //     $('#formCostMoreLess').find('input[required]').each(function(){
+        //         if($(this).val()==''){
+        //             error.push($(this).attr('name'));
+        //         }
+        //     })
+        //     return error;
+        // }
 
         // function loadCostMoreLess(){
         //     $.ajax({
@@ -159,15 +159,15 @@
         //     }
         // }
 
-        function showMessage(idWrite, message, type = 'success'){
-            if(message!=''||message!=null){
-                let htmlMessage = '<div class="alert alert-'+type+'"><div class="alert-body">'+message+'</div></div>';
-                $('#'+idWrite).html(htmlMessage);
-                setTimeout(() => {
-                    $('#'+idWrite).html('');
-                }, 5000);
-            }
-        }
+        // function showMessage(idWrite, message, type = 'success'){
+        //     if(message!=''||message!=null){
+        //         let htmlMessage = '<div class="alert alert-'+type+'"><div class="alert-body">'+message+'</div></div>';
+        //         $('#'+idWrite).html(htmlMessage);
+        //         setTimeout(() => {
+        //             $('#'+idWrite).html('');
+        //         }, 5000);
+        //     }
+        // }
         // // ALERT WITH AJAX REQUEST
         // $('#testAjaxRequest').on('click', function(){
         //     Swal.fire({
