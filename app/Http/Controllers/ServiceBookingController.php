@@ -60,11 +60,19 @@ class ServiceBookingController extends Controller {
         $result                 = null;
         if(!empty($request->get('service_info_id'))){
             $idService          = $request->get('service_info_id');
-            $data               = Service::select('*')
+            $infoService        = Service::select('*')
                                     ->where('id', $idService)
                                     ->with('options.prices')
                                     ->first();
+            $data               = \App\Http\Controllers\TourBookingController::getTourOptionByDate($request->get('date'), $infoService->options->toArray());
             $result             = view('main.serviceBooking.formChooseOption', compact('data'));
+            /* dùng cho edit trong admin */
+            if(!empty($request->get('type'))&&$request->get('type')=='admin') {
+                $result                             = [];
+                $result['content']                  = view('admin.booking.optionService', ['options' => $data])->render();
+                $result['service_option_id_active'] = $data[0]['id'];
+                return $result;
+            }
         }
         echo $result;
     }
@@ -76,6 +84,14 @@ class ServiceBookingController extends Controller {
                             ->where('service_option_id', $request->get('service_option_id'))
                             ->get();
             $result     = view('main.serviceBooking.formQuantity', compact('prices'))->render();
+            /* dùng cho edit trong admin */
+            if(!empty($request->get('type'))&&$request->get('type')=='admin') {
+                $infoBooking    = Booking::select('*')
+                                    ->where('id', $request->get('booking_info_id'))
+                                    ->with('quantityAndPrice')
+                                    ->first();
+                $result         = view('admin.booking.formQuantity', ['prices' => $prices, 'quantity' => $infoBooking->quantityAndPrice])->render();
+            }
         }
         echo $result;
     }

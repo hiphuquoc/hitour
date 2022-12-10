@@ -79,6 +79,14 @@ class TourBookingController extends Controller {
                             ->where('tour_option_id', $request->get('tour_option_id'))
                             ->get();
             $result     = view('main.tourBooking.formQuantity', compact('prices'))->render();
+            /* dùng cho edit trong admin */
+            if(!empty($request->get('type'))&&$request->get('type')=='admin') {
+                $infoBooking    = Booking::select('*')
+                                    ->where('id', $request->get('booking_info_id'))
+                                    ->with('quantityAndPrice')
+                                    ->first();
+                $result         = view('admin.booking.formQuantity', ['prices' => $prices, 'quantity' => $infoBooking->quantityAndPrice])->render();
+            }
         }
         echo $result;
     }
@@ -92,7 +100,14 @@ class TourBookingController extends Controller {
                                     ->with('options.prices')
                                     ->first();
             $data               = self::getTourOptionByDate($request->get('date'), $infoTour->options->toArray());
-            $result             = view('main.tourBooking.formChooseOption', compact('data'));
+            $result             = view('main.tourBooking.formChooseOption', compact('data'))->render();
+            /* dùng cho edit trong admin */
+            if(!empty($request->get('type'))&&$request->get('type')=='admin') {
+                $result                             = [];
+                $result['content']                  = view('admin.booking.optionTour', ['options' => $data])->render();
+                $result['tour_option_id_active']    = $data[0]['id'];
+                return $result;
+            }
         }
         echo $result;
     }

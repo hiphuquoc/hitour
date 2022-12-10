@@ -4,8 +4,8 @@
     <div class="formBox_full">
         <!-- One Row -->
         <div class="formBox_full_item">
-            <label class="form-label inputRequired" for="title">Option</label>
-            <input type="text" class="form-control" id="tour_option" name="option" value="{{ $option['option'] ?? null }}" required>
+            <label class="form-label inputRequired" for="tour_option">Option</label>
+            <input type="text" class="form-control" id="tour_option" name="name" value="{{ $option['name'] ?? null }}" required>
         </div>
         <!-- One Row -->
         <div class="formBox_full_item" data-repeater-list="repeater_date_range">

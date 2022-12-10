@@ -154,7 +154,7 @@
                                     </a>
                                 </div>
                                 <div class="icon-wrapper iconAction">
-                                    <a href="{{ route('admin.booking.viewEdit', ['id' => $item->id]) }}">
+                                    <a href="{{ route('admin.booking.view', ['id' => $item->id]) }}">
                                         <i data-feather='edit'></i>
                                         <div>Sửa</div>
                                     </a>

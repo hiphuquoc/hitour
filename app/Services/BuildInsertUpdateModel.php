@@ -299,12 +299,12 @@ class BuildInsertUpdateModel {
     public static function buildArrayTableTourOption($dataForm){
         /*
             tour_info_id
-            option
+            name
         */
         $result     = [];
         if(!empty($dataForm)&&!empty($dataForm['tour_info_id'])){
             $result['tour_info_id']     = $dataForm['tour_info_id'];
-            $result['option']           = $dataForm['option'] ?? null;
+            $result['name']             = $dataForm['name'] ?? null;
         }
         return $result;
     }
@@ -1165,24 +1165,30 @@ class BuildInsertUpdateModel {
     public static function buildArrayTableBookingInfo($idCustomer, $type, $dataForm){
         $result = [];
         if(!empty($dataForm)){
-            $result['no']                   = \App\Helpers\Charactor::randomString(10);
-            if(!empty($idCustomer)) $result['customer_info_id'] = $idCustomer;
-            $result['reference_id']         = $dataForm['service_info_id'] ?? $dataForm['tour_info_id'] ?? $dataForm['ship_info_id'];
-            $result['type']                 = $type;
-            if(!empty($dataForm['status_id'])) $result['status_id'] = $dataForm['status_id'];
-            $result['date_from']            = date('Y-m-d', strtotime($dataForm['date']));
-            if($type=='service_info'||$type=='ship_info'){
-                /* trường hợp đặt vé vui chơi và vé tàu thì trong ngày */
-                $result['date_to']          = $result['date_from'];
+            if(!empty($idCustomer)) {
+                /* insert booking */
+                $result['customer_info_id']     = $idCustomer;
+                $result['no']                   = \App\Helpers\Charactor::randomString(10);
+                $result['created_by']           = Auth::id() ?? 0;
             }else {
-                /* trường hợp tour => lấy thông tin tour để tính ngày kết thúc */
-                $infoTour                   = \App\Models\Tour::select('*')
-                                                ->where('id', $dataForm['tour_info_id'])
-                                                ->first();
-                $result['date_to']          = date('Y-m-d', strtotime($dataForm['date']) + 86400*($infoTour->days - 1));
+                /* update booking */
             }
-            $result['note_customer']        = $dataForm['note_customer'] ?? null;
-            $result['created_by']           = Auth::id() ?? 0;
+            $result['reference_id']             = $dataForm['service_info_id'] ?? $dataForm['tour_info_id'];
+            $result['type']                     = $type;
+            $result['status_id']                = $dataForm['status_id'] ?? 1;
+            $result['date_from']                = date('Y-m-d', strtotime($dataForm['date']));
+            if($type=='service_info'){
+                /* trường hợp đặt vé vui chơi và vé tàu thì trong ngày */
+                $result['date_to']              = $result['date_from'];
+            }
+            if($type=='tour_info'){
+                /* trường hợp tour => lấy thông tin tour để tính ngày kết thúc */
+                $infoTour                       = \App\Models\Tour::select('*')
+                                                    ->where('id', $dataForm['tour_info_id'])
+                                                    ->first();
+                $result['date_to']              = date('Y-m-d', strtotime($dataForm['date']) + 86400*($infoTour->days - 1));
+            }
+            if(!empty($dataForm['note_customer'])) $result['note_customer'] = $dataForm['note_customer'];
         }
         return $result;
     }
@@ -1226,7 +1232,7 @@ class BuildInsertUpdateModel {
                 foreach($dataForm['quantity'] as $idPrice => $quantity){
                     if($price->id==$idPrice&&$quantity>0){
                         $result[$i]['booking_info_id']  = $idBooking;
-                        $result[$i]['option_name']      = $infoTourOption->option;
+                        $result[$i]['option_name']      = $infoTourOption->name;
                         $result[$i]['option_age']       = $price->apply_age;
                         $result[$i]['quantity']         = $quantity;
                         $result[$i]['price']            = $price->price;

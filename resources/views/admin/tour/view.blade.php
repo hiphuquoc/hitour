@@ -255,7 +255,7 @@
                 let dataForm            = {
                     tour_info_id    : $('#tour_info_id').val(),
                     tour_option_id  : $('#tour_option_id').val(),
-                    option          : $('#tour_option').val(),
+                    name            : $('#tour_option').val(),
                     date_range,
                     apply_age,
                     price,

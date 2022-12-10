@@ -44,11 +44,11 @@
                                                         <span style="color:'.$action->infoAction->color.';">'.$action->infoAction->icon.'</span>'.$action->infoAction->name.'
                                                     </div>';
                                     break;
-                                // case 'Chỉnh sửa':
-                                //     $xhtmlAction = '<a href="'.route('admin.shipBooking.view', ['id' => $item->id]).'" class="actionBookingBox_item">
-                                //                         <span style="color:'.$action->infoAction->color.';">'.$action->infoAction->icon.'</span>'.$action->infoAction->name.'
-                                //                     </a>';
-                                //     break;
+                                case 'Chỉnh sửa':
+                                    $xhtmlAction = '<a href="'.route('admin.booking.view', ['id' => $item->id]).'" class="actionBookingBox_item">
+                                                        <span style="color:'.$action->infoAction->color.';">'.$action->infoAction->icon.'</span>'.$action->infoAction->name.'
+                                                    </a>';
+                                    break;
                                 default:
                                     $xhtmlAction = '<a href="#" target="_blank" class="actionBookingBox_item">
                                                         <span style="color:'.$action->infoAction->color.';">'.$action->infoAction->icon.'</span>'.$action->infoAction->name.'

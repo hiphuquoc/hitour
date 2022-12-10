@@ -10,7 +10,7 @@
                     <div class="chooseOptionTourBox_body_item_icon">
                         
                     </div>
-                    <div>{{ $option['option'] ?? null }}</div>
+                    <div>{{ $option['name'] ?? null }}</div>
                     <div style="font-size:0.95rem;">
                         @foreach($option['prices'] as $price)
                             <div><span class="highLight">{{ number_format($price['price']).config('main.unit_currency') }}</span> /{{ $price['apply_age'] }}</div>

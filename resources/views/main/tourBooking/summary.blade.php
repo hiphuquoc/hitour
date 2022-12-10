@@ -16,7 +16,7 @@
     <div style="font-weight:700;">{{ $data['tour']['name'] }}</div>
     <div>{{ date('d/m/Y', strtotime($data['date'])) }} - {{ $dateEndTour }}</div>
     <div>Đón tại {{ $data['tour']['pick_up'] }}</div>
-    <div style="font-weight:700;">{{ $data['tour']['options'][0]['option'] }}</div>
+    <div style="font-weight:700;">{{ $data['tour']['options'][0]['name'] }}</div>
     <table class="noResponsive">
         <tbody>
             @php

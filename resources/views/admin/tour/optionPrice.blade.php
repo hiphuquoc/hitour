@@ -1,6 +1,6 @@
 <div id="optionPrice_{{ $option['tour_option_id'] }}" class="flexBox">
     <div class="flexBox_item">
-        <div><b>{{ $option['option'] }}</b></div>
+        <div><b>{{ $option['name'] }}</b></div>
         @foreach($option['date_apply'] as $dateApply)
             <!-- sẵn vòng lặp build giá -> do key bằng ngày nên ko lấy được -->
             @php

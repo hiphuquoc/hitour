@@ -128,14 +128,14 @@
                                                 <td style="width:140px;font-size:15px;padding:5px;">Điểm đón</td>
                                                 <td style="font-size:15px;padding:5px;">{{ $item->tour->pick_up ?? null }}</td>
                                             </tr>
-                                            <tr style="border-top:1px dotted #d1d1d1">
+                                            {{-- <tr style="border-top:1px dotted #d1d1d1">
                                                 <td style="width:140px;font-size:15px;padding:5px;">Ăn uống</td>
                                                 <td style="font-size:15px;padding:5px;">1 bữa ăn sáng (50,000{{ config('main.unit_currency') }} /suát) và 3 bữa ăn chính (150,000{{ config('main.unit_currency') }} /suát)</td>
                                             </tr>
                                             <tr style="border-top:1px dotted #d1d1d1">
                                                 <td style="width:140px;font-size:15px;padding:5px;">Khách sạn</td>
                                                 <td style="font-size:15px;padding:5px;">3 phòng 2 khách Villa hướng vườn (2 giường đơn) và 1 phòng 3 khách Villa hướng vườn (1 giường đôi và 1 giường đơn)</td>
-                                            </tr>
+                                            </tr> --}}
                                         @endif
                                         <!-- xử lý cho giao diện vé vui chơi -->
                                     </tbody>
@@ -201,7 +201,11 @@
                                 <table class="sendEmail" role="presentation" style="border-collapse:collapse;width:100%;line-height:1.68;font-size:15px;color:#456;">
                                     <tbody>
                                         <tr>
-                                            <td colspan="3" style="font-size:15px;padding:7px 12px !important;text-align:center;font-style:italic;font-size:14px;">Giá trên chưa gồm VAT 10% (nếu lấy hóa đơn)</td>
+                                            @if(!empty($item->tour))
+                                                <td colspan="3" style="font-size:15px;padding:7px 12px !important;text-align:center;font-style:italic;font-size:14px;">Giá trên chưa gồm VAT 10% (nếu lấy hóa đơn)</td>
+                                            @else 
+                                                <td colspan="3" style="font-size:15px;padding:7px 12px !important;text-align:center;font-style:italic;font-size:14px;">Giá trên đã bao gồm VAT 10%</td>
+                                            @endif
                                         </tr>
                                     </tbody>
                                 </table>

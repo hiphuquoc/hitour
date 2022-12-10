@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('tour_option', function (Blueprint $table) {
             $table->id();
             $table->integer('tour_info_id');
-            $table->string('option');
+            $table->string('name');
         });
     }
 

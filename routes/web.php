@@ -50,6 +50,7 @@ use App\Http\Controllers\AdminRedirectController;
 use App\Http\Controllers\AdminCacheController;
 
 use App\Http\Controllers\RunTestController;
+use App\Http\Controllers\ToolController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\RoutingController;
@@ -125,12 +126,12 @@ Route::prefix('admin')->group(function(){
             Route::post('/updateOption', [AdminTourOptionController::class, 'update'])->name('admin.tourOption.updateOption');
             Route::post('/deleteOption', [AdminTourOptionController::class, 'delete'])->name('admin.tourOption.deleteOption');
         });
-        /* ===== TOUR BOOKING ===== */
+        /* ===== BOOKING INFO (ChUNG) ===== */
         Route::prefix('booking')->group(function(){
             Route::get('/', [AdminBookingController::class, 'list'])->name('admin.booking.list');
             // Route::get('/viewInsert', [AdminBookingController::class, 'viewInsert'])->name('admin.booking.viewInsert');
             Route::post('/create', [AdminBookingController::class, 'create'])->name('admin.booking.create');
-            Route::get('/{id}/viewEdit', [AdminBookingController::class, 'viewEdit'])->name('admin.booking.viewEdit');
+            Route::get('/{id}/view', [AdminBookingController::class, 'view'])->name('admin.booking.view');
             Route::post('/update', [AdminBookingController::class, 'update'])->name('admin.booking.update');
             Route::get('/{id}/viewExport', [AdminBookingController::class, 'viewExport'])->name('admin.booking.viewExport');
             /* Delete AJAX */
@@ -461,9 +462,9 @@ foreach(\App\Models\Redirect::all() as $redirect){
 // Route::get('/changeImageInContentWithLoadingTourInfo', [HomeController::class, 'changeImageInContentWithLoadingTourInfo'])->name('main.changeImageInContentWithLoadingTourInfo');
 
 /* chạy test */
+Route::get('/mixKeyword', [ToolController::class, 'mixKeyword'])->name('main.tool.mixKeyword');
 // Route::get('/runTest', [RunTestController::class, 'run'])->name('main.test.run');
-
-Route::get('/testMail', [MailController::class, 'test'])->name('main.testMail');
+// Route::get('/testMail', [MailController::class, 'test'])->name('main.testMail');
 
 Route::get('/', [HomeController::class, 'home'])->name('main.home');
 Route::get('/error', [\App\Http\Controllers\ErrorController::class, 'handle'])->name('error.handle');

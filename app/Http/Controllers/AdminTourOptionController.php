@@ -130,11 +130,11 @@ class AdminTourOptionController extends Controller {
         $result = [];
         if(!empty($options)){
             foreach($options as $option){
-                $result[$option->option]['tour_info_id']    = $option->tour_info_id;
-                $result[$option->option]['tour_option_id']  = $option->id;
-                $result[$option->option]['option']          = $option->option;
+                $result[$option->name]['tour_info_id']    = $option->tour_info_id;
+                $result[$option->name]['tour_option_id']  = $option->id;
+                $result[$option->name]['name']            = $option->name;
                 foreach($option->prices as $price){
-                    $result[$option->option]['date_apply'][$price->date_start.'-'.$price->date_end][]    = $price->toArray();
+                    $result[$option->name]['date_apply'][$price->date_start.'-'.$price->date_end][]    = $price->toArray();
                 }
             }
         }

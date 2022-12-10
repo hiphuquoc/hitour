@@ -54,6 +54,7 @@
             <div class="contentTour_item_text">
                 @php
                     $options    = \App\Http\Controllers\AdminTourOptionController::margeTourPriceByDate($item->options);
+                    // dd($options);
                 @endphp
                 <table class="tableContentBorder">
                     <thead>
@@ -66,7 +67,7 @@
                         @foreach($options as $option)
                             <tr>
                                 <td>
-                                    <h3 style="font-weight:700;font-size:1.05rem;">{{ $option['option'] }}</h3>
+                                    <h3 style="font-weight:700;font-size:1.05rem;">{{ $option['name'] }}</h3>
                                     @foreach($option['date_apply'] as $price)
                                         @foreach($price as $applyAge)
                                             <div style="font-size:0.95rem;">từ <b>{{ !empty($applyAge['date_start']) ? date('d/m/Y', strtotime($applyAge['date_start'])) : '...' }}</b> đến <b>{{ !empty($applyAge['date_end']) ? date('d/m/Y', strtotime($applyAge['date_end'])) : '...' }}</b></div>
