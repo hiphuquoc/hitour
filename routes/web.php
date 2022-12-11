@@ -273,12 +273,10 @@ Route::prefix('admin')->group(function(){
         });
         /* ===== COST ===== */
         Route::prefix('cost')->group(function(){
-            /* AJAX */
-            Route::post('/loadCostMoreLess', [AdminCostController::class, 'loadCostMoreLess'])->name('admin.cost.loadCostMoreLess');
-            Route::post('/loadFormCostMoreLess', [AdminCostController::class, 'loadFormCostMoreLess'])->name('admin.cost.loadFormCostMoreLess');
-            Route::post('/create', [AdminCostController::class, 'create'])->name('admin.cost.create');
-            Route::post('/update', [AdminCostController::class, 'update'])->name('admin.cost.update');
-            Route::post('/delete', [AdminCostController::class, 'delete'])->name('admin.cost.delete');
+            Route::get('/loadFormCostMoreLess', [AdminCostController::class, 'loadFormCostMoreLess'])->name('admin.cost.loadFormCostMoreLess');
+            Route::get('/create', [AdminCostController::class, 'create'])->name('admin.cost.create');
+            // Route::post('/update', [AdminCostController::class, 'update'])->name('admin.cost.update');
+            // Route::post('/delete', [AdminCostController::class, 'delete'])->name('admin.cost.delete');
         });
         /* ===== IMAGE ===== */
         Route::prefix('image')->group(function(){

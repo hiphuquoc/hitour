@@ -49,6 +49,11 @@
                                                         <span style="color:'.$action->infoAction->color.';">'.$action->infoAction->icon.'</span>'.$action->infoAction->name.'
                                                     </a>';
                                     break;
+                                case 'Thêm /bớt giá':
+                                    $xhtmlAction = '<div id="costMoreLess" class="actionBookingBox_item">
+                                                        <span style="color:'.$action->infoAction->color.';">'.$action->infoAction->icon.'</span>'.$action->infoAction->name.'
+                                                    </div>';
+                                    break;
                                 default:
                                     $xhtmlAction = '<a href="#" target="_blank" class="actionBookingBox_item">
                                                         <span style="color:'.$action->infoAction->color.';">'.$action->infoAction->icon.'</span>'.$action->infoAction->name.'
@@ -248,120 +253,32 @@
                 }
             });
         });
+        /* Thêm /bớt chi phí */
+        $('#costMoreLess').on('click', function(){
+            const idBooking     = $('#booking_info_id').val();
+            $.ajax({
+                url         : '{{ route("admin.cost.loadFormCostMoreLess") }}',
+                type        : 'get',
+                dataType    : 'html',
+                data        : {
+                    booking_info_id     : idBooking,
+                    type                : 'booking_info'
+                },
+                success     : function(data){
+                    Swal.fire({
+                        title: '<div style="font-weight:bold;">Thêm /bớt chi phí booking</div>', 
+                        html: data,  
+                        customClass: 'swal-lg',
+                        confirmButtonText: "Xác nhận"
+                    }).then(result => {
+                        $('#formCost').submit();
+                    });
+                    $('#formCostMoreLess').repeater();
+                }
+            });
+            
+        });
+
         
-
-        // function loadFormCostMoreLess(idCost = 0){
-        //     $.ajax({
-        //         url         : '{{ route("admin.cost.loadFormCostMoreLess") }}',
-        //         type        : 'post',
-        //         dataType    : 'json',
-        //         data        : {
-        //             '_token'        : '{{ csrf_token() }}',
-        //             tour_booking_id : $('#tour_booking_id').val()
-        //         },
-        //         success     : function(data){
-        //             $('#js_loadFormOption_header').html(data.header);
-        //             $('#js_loadFormOption_body').html(data.body);
-        //         }
-        //     });
-        // }
-
-        // function validateFormModal(){
-        //     let error       = [];
-        //     $('#formCostMoreLess').find('input[required]').each(function(){
-        //         if($(this).val()==''){
-        //             error.push($(this).attr('name'));
-        //         }
-        //     })
-        //     return error;
-        // }
-
-        // function loadCostMoreLess(){
-        //     $.ajax({
-        //         url         : '{{ route("admin.cost.loadCostMoreLess") }}',
-        //         type        : 'post',
-        //         dataType    : 'html',
-        //         data        : {
-        //             '_token'            : '{{ csrf_token() }}',
-        //             tour_booking_id     : '{{ $item->id ?? 0 }}'
-        //         },
-        //         success     : function(data){
-        //             $('#js_loadCostMoreLess_idWrite').html(data);
-        //         }
-        //     });
-        // }
-
-        // function addAndUpdateCostMoreLess(){
-        //     /* dataForm */
-        //     let dataForm            = {
-        //         type            : $('#cost_type').val(),
-        //         name            : $('#cost_name').val(),
-        //         quantity        : $('#cost_quantity').val(),
-        //         unit_price      : $('#cost_unit_price').val()
-        //     };
-        //     const tmp               = validateFormModal();
-        //     if(tmp==''){
-        //         /* không có trường required bỏ trống */
-        //         // if(dataForm['tour_option_id']==null||dataForm['tour_option_id']==''){
-        //             /* insert */
-        //             $.ajax({
-        //                 url         : '{{ route("admin.cost.create") }}',
-        //                 type        : 'post',
-        //                 dataType    : 'html',
-        //                 data        : {
-        //                     '_token'    : '{{ csrf_token() }}',
-        //                     tour_booking_id : $('#tour_booking_id').val(),
-        //                     dataForm        : dataForm
-        //                 },
-        //                 success     : function(data){
-        //                     if(data==true){
-        //                         /* thành công */
-        //                         loadCostMoreLess();
-        //                         showMessage('js_showMessage', 'Thêm mới Chi phí thành công!', 'success');
-        //                     }else {
-        //                         /* thất bại */
-        //                         showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
-        //                     }
-        //                 }
-        //             });
-        //         // }else {
-        //         //     /* update */
-        //         //     $.ajax({
-        //         //         url         : '{{ route("admin.tourOption.updateOption") }}',
-        //         //         type        : 'post',
-        //         //         dataType    : 'html',
-        //         //         data        : {
-        //         //             '_token'    : '{{ csrf_token() }}',
-        //         //             dataForm    : dataForm
-        //         //         },
-        //         //         success     : function(data){
-        //         //             if(data==true){
-        //         //                 /* thành công */
-        //         //                 loadOptionPrice('js_loadOptionPrice');
-        //         //                 showMessage('js_showMessage', 'Cập nhật Option & Giá thành công!', 'success');
-        //         //             }else {
-        //         //                 /* thất bại */
-        //         //                 showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
-        //         //             }
-        //         //         }
-        //         //     });
-        //         // }
-        //         // $('#modalContact').modal('hide');
-        //     }else {
-        //         /* có 1 vài trường required bị bỏ trống */
-        //         let messageError        = 'Các trường bắt buộc không được để trống!';
-        //         $('#js_validateFormModal_message').css('display', 'block').html(messageError);
-        //     }
-        // }
-
-        // function showMessage(idWrite, message, type = 'success'){
-        //     if(message!=''||message!=null){
-        //         let htmlMessage = '<div class="alert alert-'+type+'"><div class="alert-body">'+message+'</div></div>';
-        //         $('#'+idWrite).html(htmlMessage);
-        //         setTimeout(() => {
-        //             $('#'+idWrite).html('');
-        //         }, 5000);
-        //     }
-        // }
     </script>
 @endpush

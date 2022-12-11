@@ -184,6 +184,9 @@ table:not(.sendEmail) {
                 margin-top: 1.2rem;
             }
         }
+        &:not(:first-child){
+            margin-top: 1.2rem;
+        }
     }
 }
 
@@ -910,6 +913,17 @@ html .content {
                 content: '\f00d';
                 margin-right: 0.5rem;
             }
+        }
+    }
+}
+.swal-lg {
+    width: 800px !important;
+}
+.formCostMoreLess {
+    &_item {
+        display: flex;
+        &:not(:first-child){
+            margin-top: 1.2rem;
         }
     }
 }

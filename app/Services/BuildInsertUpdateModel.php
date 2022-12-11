@@ -381,28 +381,6 @@ class BuildInsertUpdateModel {
         return $result;
     }
 
-    public static function buildArrayTableCostMoreLess($idReference, $typeReference, $dataForm, $type = 'insert'){
-        /*
-            type
-            name
-            quantity
-            unit_price
-            reference_id
-            reference_type
-            created_by
-        */
-        $result                                 = [];
-        if(!empty($dataForm)){
-            $result['name']                     = $dataForm['name'];
-            $result['quantity']                 = $dataForm['quantity'];
-            $result['unit_price']               = $dataForm['unit_price'];
-            $result['reference_id']             = $idReference;
-            $result['reference_type']           = $typeReference;
-            if($type=='insert') $result['created_by'] = Auth::id() ?? 0;
-        }
-        return $result;
-    }
-
     public static function buildArrayTableVatInfo($idTourBooking, $reference, $dataForm, $type = 'insert'){
         /*
             tour_booking_id

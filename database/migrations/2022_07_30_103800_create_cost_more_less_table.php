@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('cost_more_less', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('quantity');
-            $table->integer('unit_price');
+            $table->integer('value');
             $table->string('reference_type');
             $table->integer('reference_id');
             $table->integer('created_by');
+            $table->longText('note')->nullable();
             $table->timestamps();
         });
     }

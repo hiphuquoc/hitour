@@ -104,6 +104,9 @@ table:not(.sendEmail) tr th {
 .formBox_full_item:not(:first-child) {
   margin-top: 1.2rem;
 }
+.formBox_full:not(:first-child) {
+  margin-top: 1.2rem;
+}
 
 .inputWithNumberChacractor {
   display: flex;
@@ -810,4 +813,15 @@ html .content {
   font-weight: 900;
   content: "\f00d";
   margin-right: 0.5rem;
+}
+
+.swal-lg {
+  width: 800px !important;
+}
+
+.formCostMoreLess_item {
+  display: flex;
+}
+.formCostMoreLess_item:not(:first-child) {
+  margin-top: 1.2rem;
 }

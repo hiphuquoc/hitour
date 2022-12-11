@@ -9,12 +9,12 @@ class CostMoreLess extends Model {
     use HasFactory;
     protected $table        = 'cost_more_less';
     protected $fillable     = [
-        'name', 
-        'detail',
-        'cost',
+        'name',
+        'value',
         'reference_type',
         'reference_id',
-        'created_by'
+        'created_by',
+        'note'
     ];
     public $timestamps      = true;
 

@@ -182,12 +182,12 @@
                                         @if(!empty($item->costMoreLess))
                                             @foreach($item->costMoreLess as $cost)
                                                 @php
-                                                    $total  += $cost->quantity*$cost->unit_price;
+                                                    $total  += $cost->value;
                                                 @endphp 
                                                 <tr>
                                                     <td style="font-size:15px;padding:5px 10px;border-top:1px dashed #d1d1d1;">{{ $cost->name }}</td>
-                                                    <td style="font-size:15px;padding:5px 10px;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ $cost->quantity }} * {{ ($cost->unit_price>0) ? number_format($cost->unit_price) : '('.number_format($cost->unit_price).')' }}</td>
-                                                    <td style="font-size:15px;padding:5px 10px;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ ($cost->quantity*$cost->unit_price)>0 ? number_format($cost->quantity*$cost->unit_price) : '('.number_format($cost->quantity*$cost->unit_price).')' }}</td>
+                                                    <td style="font-size:15px;padding:5px 10px;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;"><!-- empty --></td>
+                                                    <td style="font-size:15px;padding:5px 10px;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ number_format($cost->value) }}</td>
                                                 </tr>
                                             @endforeach
                                         @endif
