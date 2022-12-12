@@ -47,7 +47,7 @@
         <table class="table table-bordered" style="min-width:900px;">
             <thead>
                 <tr>
-                    <th></th>
+                    <th style="width:60px;"></th>
                     <th class="text-center">Trạng thái</th>
                     <th class="text-center">Khách hàng</th>
                     <th class="text-center">Chi tiết</th>
