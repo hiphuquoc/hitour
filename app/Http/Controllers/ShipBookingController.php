@@ -86,6 +86,7 @@ class ShipBookingController extends Controller {
                 $result             = view('main.shipBooking.formChooseShip', compact('data', 'portShipDeparture', 'portShipLocation', 'date', 'code'))->render();
             }
         }
+        
         return json_encode($result);
     }
 
@@ -101,11 +102,11 @@ class ShipBookingController extends Controller {
         if(!empty($collectionShip->prices)){
             $i                          = 0;
             foreach($collectionShip->prices as $price){
-                $mkDate                 = strtotime($date);
+                $mkDate                 = strtotime($date.' 00:00:59');
                 $arrayTime              = new \Illuminate\Database\Eloquent\Collection;
                 foreach($price->times as $time){
-                    $mkDateStart        = strtotime($time->date_start);
-                    $mkDateEnd          = strtotime($time->date_end);
+                    $mkDateStart        = strtotime($time->date_start.' 00:00:00');
+                    $mkDateEnd          = strtotime($time->date_end.' 23:59:59');
                     if($mkDate>$mkDateStart&&$mkDate<$mkDateEnd&&$time->ship_from==$namePortDeparture&&$time->ship_to==$namePortLocation){
                         $arrayTime[]    = $time;
                     }
