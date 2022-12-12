@@ -44,13 +44,13 @@
 <div class="card">
     <!-- ===== Table ===== -->
     <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-bordered" style="min-width:900px;">
             <thead>
                 <tr>
                     <th></th>
                     <th class="text-center">Trạng thái</th>
                     <th class="text-center">Khách hàng</th>
-                    <th class="text-center" style="width:340px;">Chi tiết</th>
+                    <th class="text-center">Chi tiết</th>
                     <th class="text-center" width="60px">-</th>
                 </tr>
             </thead>
