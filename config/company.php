@@ -3,12 +3,12 @@
 return [
     /* Tài khoản ngân hàng */
     'bank'  => [
-        [
-            'title'         => '- Tài khoản giám đốc:',
-            'name'          => 'PHAM VAN PHU',
-            'number'        => '19036101422017',
-            'department'    => 'Techcombank Kiên Giang'
-        ],
+        // [
+        //     'title'         => '- Tài khoản giám đốc:',
+        //     'name'          => 'PHAM VAN PHU',
+        //     'number'        => '19036101422017',
+        //     'department'    => 'Techcombank Kiên Giang'
+        // ],
         [
             'title'         => '- Tài khoản công ty:',
             'name'          => 'CONG TY TNHH DU LICH BIEN DAO HITOUR',

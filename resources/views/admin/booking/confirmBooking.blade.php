@@ -128,16 +128,18 @@
                                                 <td style="width:140px;font-size:15px;padding:5px;">Điểm đón</td>
                                                 <td style="font-size:15px;padding:5px;">{{ $item->tour->pick_up ?? null }}</td>
                                             </tr>
-                                            {{-- <tr style="border-top:1px dotted #d1d1d1">
-                                                <td style="width:140px;font-size:15px;padding:5px;">Ăn uống</td>
-                                                <td style="font-size:15px;padding:5px;">1 bữa ăn sáng (50,000{{ config('main.unit_currency') }} /suát) và 3 bữa ăn chính (150,000{{ config('main.unit_currency') }} /suát)</td>
-                                            </tr>
-                                            <tr style="border-top:1px dotted #d1d1d1">
-                                                <td style="width:140px;font-size:15px;padding:5px;">Khách sạn</td>
-                                                <td style="font-size:15px;padding:5px;">3 phòng 2 khách Villa hướng vườn (2 giường đơn) và 1 phòng 3 khách Villa hướng vườn (1 giường đôi và 1 giường đơn)</td>
-                                            </tr> --}}
                                         @endif
                                         <!-- xử lý cho giao diện vé vui chơi -->
+
+                                        <!-- Xác nhận thêm vào -->
+                                        @if(!empty($item->detailMoreLess)&&$item->detailMoreLess->isNotEmpty())
+                                            @foreach($item->detailMoreLess as $detail)
+                                                <tr style="border-top:1px dotted #d1d1d1">
+                                                    <td style="width:140px;font-size:15px;padding:5px;">{{ $detail->name }}</td>
+                                                    <td style="font-size:15px;padding:5px;">{{ $detail->value }}</td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </td>

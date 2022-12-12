@@ -101,6 +101,10 @@ class Booking extends Model {
         return $this->hasMany(\App\Models\CostMoreLess::class, 'reference_id', 'id')->where('reference_type', 'booking_info');
     }
 
+    public function detailMoreLess(){
+        return $this->hasMany(\App\Models\DetailMoreLess::class, 'reference_id', 'id')->where('reference_type', 'booking_info');
+    }
+
     public function vat(){
         return $this->hasOne(\App\Models\VAT::class, 'reference_id', 'id');
     }

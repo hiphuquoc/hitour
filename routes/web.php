@@ -36,6 +36,7 @@ use App\Http\Controllers\AdminSettingController;
 use App\Http\Controllers\AdminCheckSeoController;
 use App\Http\Controllers\AdminStaffController;
 use App\Http\Controllers\AdminCostController;
+use App\Http\Controllers\AdminDetailController;
 use App\Http\Controllers\AdminImageController;
 use App\Http\Controllers\AdminFormController;
 use App\Http\Controllers\AdminSliderController;
@@ -271,12 +272,15 @@ Route::prefix('admin')->group(function(){
             /* Delete AJAX */
             Route::get('/delete', [AdminStaffController::class, 'delete'])->name('admin.staff.delete');
         });
-        /* ===== COST ===== */
+        /* ===== COST MORE LESS ===== */
         Route::prefix('cost')->group(function(){
             Route::get('/loadFormCostMoreLess', [AdminCostController::class, 'loadFormCostMoreLess'])->name('admin.cost.loadFormCostMoreLess');
             Route::get('/create', [AdminCostController::class, 'create'])->name('admin.cost.create');
-            // Route::post('/update', [AdminCostController::class, 'update'])->name('admin.cost.update');
-            // Route::post('/delete', [AdminCostController::class, 'delete'])->name('admin.cost.delete');
+        });
+        /* ===== DETAIL MORE LESS ===== */
+        Route::prefix('cost')->group(function(){
+            Route::get('/loadFormDetailMoreLess', [AdminDetailController::class, 'loadFormDetailMoreLess'])->name('admin.detail.loadFormDetailMoreLess');
+            Route::get('/create', [AdminDetailController::class, 'create'])->name('admin.detail.create');
         });
         /* ===== IMAGE ===== */
         Route::prefix('image')->group(function(){

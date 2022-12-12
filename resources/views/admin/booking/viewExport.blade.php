@@ -54,6 +54,11 @@
                                                         <span style="color:'.$action->infoAction->color.';">'.$action->infoAction->icon.'</span>'.$action->infoAction->name.'
                                                     </div>';
                                     break;
+                                case 'Thêm chi tiết':
+                                    $xhtmlAction = '<div id="detailMoreLess" class="actionBookingBox_item">
+                                                        <span style="color:'.$action->infoAction->color.';">'.$action->infoAction->icon.'</span>'.$action->infoAction->name.'
+                                                    </div>';
+                                    break;
                                 default:
                                     $xhtmlAction = '<a href="#" target="_blank" class="actionBookingBox_item">
                                                         <span style="color:'.$action->infoAction->color.';">'.$action->infoAction->icon.'</span>'.$action->infoAction->name.'
@@ -278,7 +283,31 @@
             });
             
         });
-
+        /* Thêm chi tiết xác nhận */
+        $('#detailMoreLess').on('click', function(){
+            const idBooking     = $('#booking_info_id').val();
+            $.ajax({
+                url         : '{{ route("admin.detail.loadFormDetailMoreLess") }}',
+                type        : 'get',
+                dataType    : 'html',
+                data        : {
+                    booking_info_id     : idBooking,
+                    type                : 'booking_info'
+                },
+                success     : function(data){
+                    Swal.fire({
+                        title: '<div style="font-weight:bold;">Thêm chi tiết xác nhận</div>', 
+                        html: data,  
+                        customClass: 'swal-lg',
+                        confirmButtonText: "Xác nhận"
+                    }).then(result => {
+                        $('#formDetail').submit();
+                    });
+                    $('#formDetailMoreLess').repeater();
+                }
+            });
+            
+        });
         
     </script>
 @endpush
