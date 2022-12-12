@@ -69,7 +69,7 @@
             <thead>
                 <tr>
                     <th style="width:60px;"></th>
-                    <th class="text-center">Trạng thái</th>
+                    <th class="text-center" style="width:180px;">Trạng thái</th>
                     <th class="text-center">Thông tin</th>
                     <th class="text-center">Chuyến tàu</th>
                     <th class="text-center" width="60px">-</th>
