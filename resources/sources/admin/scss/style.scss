@@ -890,6 +890,7 @@ html .content {
     box-shadow: 0 0 5px $bg-04;
     padding: 1rem;
     width: 300px;
+    z-index: 100;
     &_title {
         font-size: 1.2rem;
         font-weight: bold;

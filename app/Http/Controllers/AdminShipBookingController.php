@@ -282,6 +282,8 @@ class AdminShipBookingController extends Controller {
             $infoShipBooking->customer_contact()->delete();
             $infoShipBooking->customer_list()->delete();
             $infoShipBooking->infoDeparture()->delete();
+            $infoShipBooking->costMoreLess()->delete();
+            /* delete main */
             $infoShipBooking->delete();
             $result             = true;
         }

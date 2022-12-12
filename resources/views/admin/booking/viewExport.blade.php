@@ -16,7 +16,7 @@
                     <div class="actionBookingBox_item" style="text-align:center;font-size:1.1rem;background:{{ $item->status->color }};color:#fff;">
                         {{ $item->status->name }}
                     </div>
-                    @foreach($item->status->actions as $action)
+                    @foreach($item->status->actions->sortBy('infoAction.ordering') as $action)
                         @php
                             switch ($action->infoAction->name) {
                                 case 'Gửi xác nhận Email':
@@ -68,6 +68,10 @@
                             echo $xhtmlAction;
                         @endphp
                     @endforeach
+                    <!-- nút quay lại -->
+                    <a href="{{ route('admin.booking.list') }}" class="actionBookingBox_item">
+                        <span style="color:'.$action->action->color.';"><i class="fa-solid fa-arrow-left-long"></i></span>Quay lại
+                    </a>
                 </div>
             </div>
         @endif
@@ -266,8 +270,8 @@
                 type        : 'get',
                 dataType    : 'html',
                 data        : {
-                    booking_info_id     : idBooking,
-                    type                : 'booking_info'
+                    reference_id        : idBooking,
+                    reference_type      : 'booking_info'
                 },
                 success     : function(data){
                     Swal.fire({
@@ -276,7 +280,9 @@
                         customClass: 'swal-lg',
                         confirmButtonText: "Xác nhận"
                     }).then(result => {
-                        $('#formCost').submit();
+                        if(result.isConfirmed){
+                            $('#formCost').submit();
+                        }
                     });
                     $('#formCostMoreLess').repeater();
                 }
@@ -301,7 +307,9 @@
                         customClass: 'swal-lg',
                         confirmButtonText: "Xác nhận"
                     }).then(result => {
-                        $('#formDetail').submit();
+                        if(result.isConfirmed){
+                            $('#formDetail').submit();
+                        }
                     });
                     $('#formDetailMoreLess').repeater();
                 }

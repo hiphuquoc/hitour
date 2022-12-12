@@ -39,7 +39,7 @@ class LoginController extends Controller
 
     public function login(Request $request){
         if(Auth::attempt($request->only('email', 'password'))){
-            return redirect()->route('admin.tourLocation.list');
+            return redirect()->route('admin.booking.list');
         }
         session()->flash('error', 'Email và Password đăng nhập không hợp lệ!');
         return back();

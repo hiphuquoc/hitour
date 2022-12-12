@@ -16,7 +16,7 @@
                     <div class="actionBookingBox_item" style="text-align:center;font-size:1.1rem;background:{{ $item->status->color }};color:#fff;">
                         {{ $item->status->name }}
                     </div>
-                    @foreach($item->status->relationAction as $action)
+                    @foreach($item->status->relationAction->sortBy('action.ordering') as $action)
                         @php
                             switch ($action->action->name) {
                                 case 'Gửi xác nhận Email':
@@ -49,6 +49,11 @@
                                                         <span style="color:'.$action->action->color.';">'.$action->action->icon.'</span>'.$action->action->name.'
                                                     </a>';
                                     break;
+                                case 'Thêm /bớt giá':
+                                    $xhtmlAction = '<div id="costMoreLess" class="actionBookingBox_item">
+                                                        <span style="color:'.$action->action->color.';">'.$action->action->icon.'</span>'.$action->action->name.'
+                                                    </div>';
+                                    break;
                                 default:
                                     $xhtmlAction = '<a href="#" target="_blank" class="actionBookingBox_item">
                                                         <span style="color:'.$action->action->color.';">'.$action->action->icon.'</span>'.$action->action->name.'
@@ -58,6 +63,10 @@
                             echo $xhtmlAction;
                         @endphp
                     @endforeach
+                    <!-- nút quay lại -->
+                    <a href="{{ route('admin.shipBooking.list') }}" class="actionBookingBox_item">
+                        <span style="color:'.$action->action->color.';"><i class="fa-solid fa-arrow-left-long"></i></span>Quay lại
+                    </a>
                 </div>
             </div>
         @endif
@@ -219,7 +228,7 @@
                 }
             });
         });
-        /* Hủy booking */
+        /* Khôi phục booking */
         $('#restoreBooking').on('click', function(){
             const shipBookingId     = $('#ship_booking_id').val();
             $.ajax({
@@ -233,6 +242,33 @@
                     location.reload();
                 }
             });
+        });
+        /* Thêm /bớt chi phí */
+        $('#costMoreLess').on('click', function(){
+            const idBooking     = $('#ship_booking_id').val();
+            $.ajax({
+                url         : '{{ route("admin.cost.loadFormCostMoreLess") }}',
+                type        : 'get',
+                dataType    : 'html',
+                data        : {
+                    reference_id        : idBooking,
+                    reference_type      : 'ship_booking'
+                },
+                success     : function(data){
+                    Swal.fire({
+                        title: '<div style="font-weight:bold;">Thêm /bớt chi phí booking</div>', 
+                        html: data,  
+                        customClass: 'swal-lg',
+                        confirmButtonText: "Xác nhận"
+                    }).then(result => {
+                        if(result.isConfirmed){
+                            $('#formCost').submit();
+                        }
+                    });
+                    $('#formCostMoreLess').repeater();
+                }
+            });
+            
         });
 
         // function showMessage(title, message, type = 'success'){

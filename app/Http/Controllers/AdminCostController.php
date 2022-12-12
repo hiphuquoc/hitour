@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Auth;
 class AdminCostController extends Controller {
 
     public static function loadFormCostMoreLess(Request $request){
-        $idBooking  = $request->get('booking_info_id');
-        $type       = $request->get('type');
+        $idBooking  = $request->get('reference_id');
+        $type       = $request->get('reference_type');
         $data       = CostMoreLess::select('*')
                         ->where('reference_id', $idBooking)
                         ->where('reference_type', $type)
@@ -19,10 +19,10 @@ class AdminCostController extends Controller {
         echo $result;
     }
 
-    public function create(Request $request){
+    public static function create(Request $request){
         if(!empty($request->get('cost'))){
-            $idBooking  = $request->get('booking_info_id');
-            $type       = $request->get('type');
+            $idBooking  = $request->get('reference_id');
+            $type       = $request->get('reference_type');
             /* xóa bỏ chi phí trước đó của booking */
             CostMoreLess::select('*')
                 ->where('reference_id', $idBooking)

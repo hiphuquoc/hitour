@@ -247,6 +247,22 @@ class AdminBookingController extends Controller {
         return redirect()->route('admin.booking.view', ['id' => $idBooking]);
     }
 
+    public static function delete(Request $request){
+        $result                 = false;
+        if(!empty($request->get('id'))){
+            $infoShipBooking    = Booking::find($request->get('id'));
+            /* delete relation */
+            $infoShipBooking->customer_contact()->delete();
+            $infoShipBooking->customer_list()->delete();
+            $infoShipBooking->quantityAndPrice()->delete();
+            $infoShipBooking->costMoreLess()->delete();
+            /* delete main */
+            $infoShipBooking->delete();
+            $result             = true;
+        }
+        return $result;
+    }
+
     // public static function filterOptionByDate($date, $tourOptions){
     //     $result         = new \Illuminate\Database\Eloquent\Collection;
     //     if(!empty($date)&&!empty($tourOptions)){

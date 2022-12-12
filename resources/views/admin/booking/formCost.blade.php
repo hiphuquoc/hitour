@@ -1,6 +1,6 @@
-<form id="formCost" method="get" action="{{ route('admin.cost.create') }}">
-    <input type="hidden" name="booking_info_id" value="{{ $idBooking }}" />
-    <input type="hidden" name="type" value="{{ $type }}" />
+<form id="formCost" method="get" action="{{ route("admin.cost.create") }}">
+    <input type="hidden" name="reference_id" value="{{ $idBooking }}" />
+    <input type="hidden" name="reference_type" value="{{ $type }}" />
     <div id="formCostMoreLess">
         <div class="formCostMoreLess" data-repeater-list="cost">
             @foreach($data as $cost)

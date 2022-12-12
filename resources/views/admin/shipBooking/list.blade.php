@@ -237,7 +237,7 @@
             if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
                 $.ajax({
                     url         : "{{ route('admin.shipBooking.delete') }}",
-                    type        : "POST",
+                    type        : "get",
                     dataType    : "html",
                     data        : { 
                         '_token'    : '{{ csrf_token() }}',

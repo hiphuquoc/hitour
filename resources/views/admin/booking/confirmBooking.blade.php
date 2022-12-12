@@ -181,7 +181,7 @@
                                             @endif
                                         @endforeach
                                         <!-- Thành tiền phát sinh và trừ lại -->
-                                        @if(!empty($item->costMoreLess))
+                                        @if(!empty($item->costMoreLess)&&$item->costMoreLess->isNotEmpty())
                                             @foreach($item->costMoreLess as $cost)
                                                 @php
                                                     $total  += $cost->value;

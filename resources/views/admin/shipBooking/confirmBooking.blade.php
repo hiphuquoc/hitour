@@ -138,6 +138,18 @@
                                                 @endphp
                                             @endif
                                         @endforeach
+                                        <!-- Thành tiền phát sinh và trừ lại -->
+                                        @if(!empty($item->costMoreLess)&&$item->costMoreLess->isNotEmpty())
+                                            @foreach($item->costMoreLess as $cost)
+                                                @php
+                                                    $total  += $cost->value;
+                                                @endphp 
+                                                <tr style="background:#EDF2F7;">
+                                                    <td style="font-size:15px;padding:5px 10px;border-top:1px dashed #d1d1d1;" colspan="2">{{ $cost->name }}</td>
+                                                    <td style="font-size:15px;padding:5px 10px;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ number_format($cost->value) }}</td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                         <!-- Tổng -->
                                         <tr>
                                             <td colspan="2" style="font-size:15px;padding:7px 12px !important;text-align:center;border-top:1px dashed #d1d1d1;font-weight:bold;">Tổng</td>

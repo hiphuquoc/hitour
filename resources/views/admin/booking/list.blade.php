@@ -59,7 +59,7 @@
             <tbody>
                 @if(!empty($list)&&$list->isNotEmpty())
                     @foreach($list as $item)
-                        <tr>
+                        <tr id="booking_{{ $item->id }}">
                             <td class="text-center">{{ $loop->index+1 }}</td>
                             <td>
                                 <div class="oneLine">
@@ -160,7 +160,7 @@
                                     </a>
                                 </div>
                                 <div class="icon-wrapper iconAction">
-                                    <div class="actionDelete" onClick="deleteItem('{{ 0 }}');">
+                                    <div class="actionDelete" onClick="deleteItem('{{ $item->id }}');">
                                         <i data-feather='x-square'></i>
                                         <div>Xóa</div>
                                     </div>
@@ -187,13 +187,14 @@
     <script type="text/javascript">
         function deleteItem(id){
             if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
+                console.log(123);
                 $.ajax({
-                    url         : "{{ route('admin.tour.delete') }}",
-                    type        : "GET",
+                    url         : "{{ route('admin.booking.delete') }}",
+                    type        : "get",
                     dataType    : "html",
                     data        : { id : id }
                 }).done(function(data){
-                    if(data==true) $('#tour_'+id).remove();
+                    if(data==true) $('#booking_'+id).remove();
                 });
             }
         }

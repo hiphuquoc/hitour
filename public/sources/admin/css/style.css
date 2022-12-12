@@ -790,6 +790,7 @@ html .content {
   box-shadow: 0 0 5px #dee2e6;
   padding: 1rem;
   width: 300px;
+  z-index: 100;
 }
 .toastBox_title {
   font-size: 1.2rem;
