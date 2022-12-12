@@ -67,14 +67,14 @@
                                 <div class="oneLine">
                                     {{ $item->customer_contact->prefix_name ?? null }} {{ $item->customer_contact->name ?? null }} - {{ $item->customer_contact->phone }}
                                 </div>
-                                @if(!empty($item->customer_contact->zalo))
+                                @php
+                                    $arrayCustomer = [];
+                                    if(!empty($item->customer_contact->zalo)) $arrayInfo[] = 'Zalo: '.$item->customer_contact->zalo;
+                                    if(!empty($item->customer_contact->email)) $arrayInfo[] = 'Email: '.$item->customer_contact->email;
+                                @endphp
+                                @if(!empty($arrayCustomer))
                                     <div class="oneLine">
-                                        Zalo: {{ $item->customer_contact->zalo }}
-                                    </div>
-                                @endif
-                                @if(!empty($item->customer_contact->email))
-                                    <div class="oneLine">
-                                        Email: {{ $item->customer_contact->email }}
+                                        {!! implode(' - ', $arrayCustomer) !!}
                                     </div>
                                 @endif
                                 @if(!empty($item->note))
