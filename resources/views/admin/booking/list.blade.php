@@ -1,6 +1,6 @@
 @extends('admin.layouts.main')
 @section('content')
-
+{{-- <a class="menu-toggle" href="#">123</a> --}}
 <div class="titlePage">Danh sách Booking Tour</div>
 <!-- ===== START: SEARCH FORM ===== -->
 <form id="formSearch" method="get" action="{{ route('admin.booking.list') }}">
@@ -48,11 +48,9 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th class="text-center">Khách hàng</th>
-                    <th class="text-center">Tour</th>
-                    <th class="text-center" style="width:340px;">Chi tiết</th>
-                    <th class="text-center" style="width:180px;">Thanh toán</th>
                     <th class="text-center">Trạng thái</th>
+                    <th class="text-center">Khách hàng</th>
+                    <th class="text-center" style="width:340px;">Chi tiết</th>
                     <th class="text-center" width="60px">-</th>
                 </tr>
             </thead>
@@ -61,15 +59,49 @@
                     @foreach($list as $item)
                         <tr id="booking_{{ $item->id }}">
                             <td class="text-center">{{ $loop->index+1 }}</td>
+                            <td style="text-align:center;">
+                                <div style="margin-bottom:0.25rem;">{{ date('H:i d/m/Y', strtotime($item->created_at)) }}</div>
+                                <div class="badge" style="font-size:0.95rem;background:{{ $item->status->color }}">{{ $item->status->name }}</div>
+                            </td>
                             <td>
                                 <div class="oneLine">
-                                    {{ $item->customer_contact->prefix_name ?? null }} {{ $item->customer_contact->name ?? null }}
+                                    {{ $item->customer_contact->prefix_name ?? null }} {{ $item->customer_contact->name ?? null }} - {{ $item->customer_contact->phone }}
                                 </div>
+                                @if(!empty($item->customer_contact->zalo))
+                                    <div class="oneLine">
+                                        Zalo: {{ $item->customer_contact->zalo }}
+                                    </div>
+                                @endif
+                                @if(!empty($item->customer_contact->email))
+                                    <div class="oneLine">
+                                        Email: {{ $item->customer_contact->email }}
+                                    </div>
+                                @endif
+                                @if(!empty($item->note))
+                                    <div class="oneLine">
+                                        Ghi chú: {{ $item->note }}
+                                    </div>
+                                @endif
+                                <!-- số lượng -->
                                 <div class="oneLine">
-                                    {{ $item->customer_contact->phone ?? null }} - Zalo: {{ $item->customer_contact->zalo ?? null }}
+                                    @php
+                                        $arrayQuantity = [];
+                                        foreach($item->quantityAndPrice as $quantity){
+                                            if(!empty($quantity->quantity)) $arrayQuantity[] = '<span class="highLight">'.$quantity->quantity.'</span> '.$quantity->option_age;
+                                        }
+                                    @endphp
+                                    Số lượng: {!! implode(', ', $arrayQuantity) !!}
                                 </div>
+                                @php
+                                    $total                  = 0;
+                                    foreach($item->quantityAndPrice as $quantity){
+                                        $total  += $quantity->quantity*$quantity->price;
+                                    }
+                                    /* Chi phí phát sinh */
+                                    foreach($item->costMoreLess as $cost) $total  += $cost->value;    
+                                @endphp
                                 <div class="oneLine">
-                                    {{ $item->customer_contact->email ?? null }}
+                                    Thành tiền: <span class="highLight">{{ number_format($total) }}</span>
                                 </div>
                             </td>
                             <td>
@@ -77,7 +109,7 @@
                                     <span style="font-weight:bold;">{{ $item->tour->name ?? $item->service->name ?? null }}</span>
                                 </div>
                                 <div class="oneLine">
-                                    {{ $item->quantityAndPrice[0]->option_name }}
+                                    <span class="highLight">{{ $item->quantityAndPrice[0]->option_name }}</span>
                                 </div>
                                 @if(!empty($item->date_from))
                                     <div class="oneLine">
@@ -88,63 +120,6 @@
                                         @endif
                                     </div>
                                 @endif
-                            </td>
-                            <td>
-                                @php
-                                    $total                  = 0;
-                                @endphp
-                                @if(!empty($item->quantityAndPrice))
-                                    <div class="rowBox">
-                                            @foreach($item->quantityAndPrice as $quantity)
-                                                @php
-                                                    $total  += $quantity->quantity*$quantity->price;
-                                                @endphp
-                                                <div class="oneLine rowBox_item">
-                                                    <div class="rowBox_item_column">
-                                                        {{ $quantity->option_age }}
-                                                    </div>
-                                                    <div class="rowBox_item_column" style="text-align:right;">
-                                                        {{ $quantity->quantity }} * {{ number_format($quantity->price) }}
-                                                    </div>
-                                                    <div class="rowBox_item_column" style="text-align:right;">
-                                                        {{ number_format($quantity->quantity*$quantity->price) }}
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                    </div>
-                                @endif
-                            </td>
-                            <td>
-                                <div class="rowBox">
-                                    <div class="oneLine rowBox_item">
-                                        <div class="rowBox_item_column">
-                                            Tổng:
-                                        </div>
-                                        <div class="rowBox_item_column" style="text-align:right;">
-                                            {{ number_format($total) }}
-                                        </div>
-                                    </div>
-                                    <div class="oneLine rowBox_item">
-                                        <div class="rowBox_item_column">
-                                            Đã cọc:
-                                        </div>
-                                        <div class="rowBox_item_column" style="text-align:right;">
-                                            {{ number_format($item->paid) }}
-                                        </div>
-                                    </div>
-                                    <div class="oneLine rowBox_item">
-                                        <div class="rowBox_item_column">
-                                            Còn lại:
-                                        </div>
-                                        <div class="rowBox_item_column" style="text-align:right;color:#E74C3C;font-weight:600;">
-                                            {{ number_format($total-$item->paid) }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="text-align:center;vertical-align:middle;">
-                                <div>{{ date('H:i d/m/Y', strtotime($item->created_at)) }}</div>
-                                <div class="badge" style="font-size:0.95rem;background:{{ $item->status->color }}">{{ $item->status->name }}</div>
                             </td>
                             <td style="vertical-align:top;display:flex;">
                                 <div class="icon-wrapper iconAction">

@@ -826,3 +826,9 @@ html .content {
 .formCostMoreLess_item:not(:first-child) {
   margin-top: 1.2rem;
 }
+
+.highLight {
+  font-size: 1.2rem;
+  color: rgb(90, 88, 225);
+  font-weight: bold;
+}

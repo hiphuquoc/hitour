@@ -65,15 +65,13 @@
 <div class="card">
     <!-- ===== Table ===== -->
     <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-bordered" style="min-width:900px;">
             <thead>
                 <tr>
                     <th></th>
-                    <th class="text-center">Khách hàng</th>
-                    <th class="text-center">Tàu</th>
-                    <th class="text-center" style="width:340px;">Chi tiết</th>
-                    <th class="text-center" style="width:180px;">Thanh toán</th>
                     <th class="text-center">Trạng thái</th>
+                    <th class="text-center">Thông tin</th>
+                    <th class="text-center">Chuyến tàu</th>
                     <th class="text-center" width="60px">-</th>
                 </tr>
             </thead>
@@ -82,117 +80,58 @@
                     @foreach($list as $item)
                         <tr id="ship_booking_{{ $item->id }}">
                             <td class="text-center">{{ $loop->index+1 }}</td>
+                            <td style="text-align:center;">
+                                <div style="margin-bottom:0.25rem;">{{ date('H:i d/m/Y', strtotime($item->created_at)) }}</div>
+                                <div class="badge" style="font-size:0.95rem;background:{{ $item->status->color ?? null }}">{{ $item->status->name ?? null }}</div>
+                            </td>
                             <td>
                                 <div class="oneLine">
-                                    {{ !empty($item->customer_contact->prefix_name) ? $item->customer_contact->prefix_name.' ' : null }}{{ $item->customer_contact->name ?? null }}
+                                    {{ !empty($item->customer_contact->prefix_name) ? $item->customer_contact->prefix_name.' ' : null }}{{ $item->customer_contact->name ?? null }} - {{ $item->customer_contact->phone ?? null }}
                                 </div>
+                                @if(!empty($item->customer_contact->zalo))
+                                    <div class="oneLine">
+                                        Zalo: {{ $item->customer_contact->zalo }}
+                                    </div>
+                                @endif
+                                @if(!empty($item->customer_contact->email))
+                                    <div class="oneLine">
+                                        Email: {{ $item->customer_contact->email }}
+                                    </div>
+                                @endif
+                                <!-- số lượng -->
                                 <div class="oneLine">
-                                    {{ $item->customer_contact->phone ?? null }} - Zalo: {{ $item->customer_contact->zalo ?? null }}
+                                    @php
+                                        $arrayQuantity = [];
+                                        if(!empty($item->infoDeparture[0]->quantity_adult)) $arrayQuantity[] = '<span class="highLight">'.$item->infoDeparture[0]->quantity_adult.'</span> người lớn';
+                                        if(!empty($item->infoDeparture[0]->quantity_child)) $arrayQuantity[] = '<span class="highLight">'.$item->infoDeparture[0]->quantity_child.'</span> trẻ em 6-11 tuổi';
+                                        if(!empty($item->infoDeparture[0]->quantity_old)) $arrayQuantity[] = '<span class="highLight">'.$item->infoDeparture[0]->quantity_old.'</span> trên 60 tuổi';
+                                    @endphp
+                                    Số lượng: {!! implode(', ', $arrayQuantity) !!}
                                 </div>
+                                <!-- tính tiền -->
+                                @php
+                                    $total      = 0;
+                                    foreach($item->infoDeparture as $departure){
+                                        $total  += $departure->quantity_adult*$departure->price_adult;
+                                        $total  += $departure->quantity_child*$departure->price_child;
+                                        $total  += $departure->quantity_old*$departure->price_old;
+                                    }
+                                    /* Chi phí phát sinh */
+                                    foreach($item->costMoreLess as $cost) $total  += $cost->value;
+                                @endphp
                                 <div class="oneLine">
-                                    {{ $item->customer_contact->email ?? null }}
+                                    Thành tiền: <span class="highLight">{{ number_format($total) }}</span>
                                 </div>
                             </td>
                             <td>
                                 @if($item->infoDeparture->isNotEmpty())
                                     @foreach($item->infoDeparture as $departure)
                                         <div class="oneLine">
-                                            <div><span style="font-weight:bold;">{{ $departure->departure }} - {{ $departure->location }}</span> ({{ date('d/m/Y', strtotime($departure->date)) }})</div>
-                                            <div><span style="font-weight:bold;">{{ $departure->time_departure }} - {{ $departure->time_arrive }}</span> tàu {{ $departure->partner_name }} ({{ strtoupper($departure->type) }})</div>
+                                            <div><span style="font-weight:bold;">{{ $departure->departure }} - {{ $departure->location }}</span> ({{ $departure->partner_name }})</div>
+                                            <div>{{ $departure->time_departure }} - {{ date('d/m/Y', strtotime($departure->date)) }} <span class="highLight">{{ $departure->type }}</span></div>
                                         </div>
                                     @endforeach
                                 @endif
-                            </td>
-                            <td>
-                                @php
-                                    $total                  = 0;
-                                @endphp
-                                @if($item->infoDeparture->isNotEmpty())
-                                    @foreach($item->infoDeparture as $departure)
-                                        <div class="rowBox">
-                                            @if(!empty($departure->quantity_adult)&&!empty($departure->price_adult))
-                                                <div class="rowBox_item">
-                                                    <div class="rowBox_item_column">
-                                                        Người lớn
-                                                    </div>
-                                                    <div class="rowBox_item_column" style="text-align:right;">
-                                                        {{ $departure->quantity_adult }} * {{ number_format($departure->price_adult) }}
-                                                    </div>
-                                                    <div class="rowBox_item_column" style="text-align:right;">
-                                                        {{ number_format($departure->quantity_adult*$departure->price_adult) }}
-                                                    </div>
-                                                </div>
-                                                @php
-                                                    $total  += $departure->quantity_adult*$departure->price_adult;
-                                                @endphp
-                                            @endif
-                                            @if(!empty($departure->quantity_child)&&!empty($departure->price_child))
-                                                <div class="rowBox_item">
-                                                    <div class="rowBox_item_column">
-                                                        Trẻ em
-                                                    </div>
-                                                    <div class="rowBox_item_column" style="text-align:right;">
-                                                        {{ $departure->quantity_child }} * {{ number_format($departure->price_child) }}
-                                                    </div>
-                                                    <div class="rowBox_item_column" style="text-align:right;">
-                                                        {{ number_format($departure->quantity_child*$departure->price_child) }}
-                                                    </div>
-                                                </div>
-                                                @php
-                                                    $total  += $departure->quantity_child*$departure->price_child;
-                                                @endphp
-                                            @endif
-                                            @if(!empty($departure->quantity_old)&&!empty($departure->price_old))
-                                                <div class="rowBox_item">
-                                                    <div class="rowBox_item_column">
-                                                        Trẻ em
-                                                    </div>
-                                                    <div class="rowBox_item_column" style="text-align:right;">
-                                                        {{ $departure->quantity_old }} * {{ number_format($departure->price_old) }}
-                                                    </div>
-                                                    <div class="rowBox_item_column" style="text-align:right;">
-                                                        {{ number_format($departure->quantity_old*$departure->price_old) }}
-                                                    </div>
-                                                    @php
-                                                        $total  += $departure->quantity_old*$departure->price_old;
-                                                    @endphp
-                                                </div>
-                                            @endif
-                                        </div>
-                                    @endforeach
-                                @endif
-                            </td>
-                            <td>
-                                <div class="rowBox">
-                                    <div class="oneLine rowBox_item">
-                                        <div class="rowBox_item_column">
-                                            Tổng:
-                                        </div>
-                                        <div class="rowBox_item_column" style="text-align:right;">
-                                            {{ number_format($total) }}
-                                        </div>
-                                    </div>
-                                    <div class="oneLine rowBox_item">
-                                        <div class="rowBox_item_column">
-                                            Đã cọc:
-                                        </div>
-                                        <div class="rowBox_item_column" style="text-align:right;">
-                                            {{ number_format($item->paid) }}
-                                        </div>
-                                    </div>
-                                    <div class="oneLine rowBox_item">
-                                        <div class="rowBox_item_column">
-                                            Còn lại:
-                                        </div>
-                                        <div class="rowBox_item_column" style="text-align:right;color:#E74C3C;font-weight:600;">
-                                            {{ number_format($total-$item->paid) }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="text-align:center;vertical-align:middle;">
-                                <div>{{ date('H:i d/m/Y', strtotime($item->created_at)) }}</div>
-                                <div class="badge" style="font-size:0.95rem;background:{{ $item->status->color ?? null }}">{{ $item->status->name ?? null }}</div>
                             </td>
                             <td style="vertical-align:top;display:flex;">
                                 <div class="icon-wrapper iconAction">
