@@ -90,8 +90,8 @@
                                 </div>
                                 @php
                                     $arrayCustomer = [];
-                                    if(!empty($item->customer_contact->zalo)) $arrayInfo[] = 'Zalo: '.$item->customer_contact->zalo;
-                                    if(!empty($item->customer_contact->email)) $arrayInfo[] = 'Email: '.$item->customer_contact->email;
+                                    if(!empty($item->customer_contact->zalo)) $arrayCustomer[] = 'Zalo: '.$item->customer_contact->zalo;
+                                    if(!empty($item->customer_contact->email)) $arrayCustomer[] = 'Email: '.$item->customer_contact->email;
                                 @endphp
                                 @if(!empty($arrayCustomer))
                                     <div class="oneLine">
