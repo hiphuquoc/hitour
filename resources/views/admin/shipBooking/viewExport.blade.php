@@ -54,6 +54,11 @@
                                                         <span style="color:'.$action->action->color.';">'.$action->action->icon.'</span>'.$action->action->name.'
                                                     </div>';
                                     break;
+                                case 'Danh sách hành khách':
+                                    $xhtmlAction = '<div id="customerList" class="actionBookingBox_item">
+                                                        <span style="color:'.$action->action->color.';">'.$action->action->icon.'</span>'.$action->action->name.'
+                                                    </div>';
+                                    break;
                                 default:
                                     $xhtmlAction = '<a href="#" target="_blank" class="actionBookingBox_item">
                                                         <span style="color:'.$action->action->color.';">'.$action->action->icon.'</span>'.$action->action->name.'
@@ -268,7 +273,32 @@
                     $('#formCostMoreLess').repeater();
                 }
             });
-            
+        });
+        /* Danh sách hành khách */
+        $('#customerList').on('click', function(){
+            const idBooking     = $('#ship_booking_id').val();
+            $.ajax({
+                url         : '{{ route("admin.citizenidentity.loadFormCitizenidentity") }}',
+                type        : 'get',
+                dataType    : 'html',
+                data        : {
+                    reference_id        : idBooking,
+                    reference_type      : 'ship_booking'
+                },
+                success     : function(data){
+                    Swal.fire({
+                        title: '<div style="font-weight:bold;">Danh sách hành khách</div>', 
+                        html: data,  
+                        customClass: 'swal-lg',
+                        confirmButtonText: "Xác nhận"
+                    }).then(result => {
+                        if(result.isConfirmed){
+                            $('#formCitizenidentity').submit();
+                        }
+                    });
+                    $('#formCitizenidentity').repeater();
+                }
+            });
         });
 
         // function showMessage(title, message, type = 'success'){

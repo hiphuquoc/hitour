@@ -236,12 +236,12 @@
                                         </thead>
                                         <tbody>
                                             @if($item->customer_list->isNotEmpty())
-                                                @foreach($item->customer_list as $infoCustomer)
+                                                @foreach($item->customer_list as $citizenidentity)
                                                     <tr>
                                                         <td style="font-size:15px;padding:7px 12px !important;border-top:1px dashed #d1d1d1;text-align:center;">{{ $loop->index+1 }}</td>
-                                                        <td style="font-size:15px;padding:7px 12px !important;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ $infocustomer_contact->customer_name }}</td>
-                                                        <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ $infocustomer_contact->customer_year_of_birth }}</td>
-                                                        <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ $infocustomer_contact->customer_identity ?? 'Chưa có'  }}</td>
+                                                        <td style="font-size:15px;padding:7px 12px !important;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ $citizenidentity->name }}</td>
+                                                        <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ $citizenidentity->year_of_birth }}</td>
+                                                        <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ $citizenidentity->identity ?? 'Chưa có'  }}</td>
                                                     </tr>
                                                 @endforeach
                                             @else

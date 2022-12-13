@@ -36,6 +36,7 @@ use App\Http\Controllers\AdminSettingController;
 use App\Http\Controllers\AdminCheckSeoController;
 use App\Http\Controllers\AdminStaffController;
 use App\Http\Controllers\AdminCostController;
+use App\Http\Controllers\AdminCitizenidetityController;
 use App\Http\Controllers\AdminDetailController;
 use App\Http\Controllers\AdminImageController;
 use App\Http\Controllers\AdminFormController;
@@ -271,6 +272,11 @@ Route::prefix('admin')->group(function(){
         Route::prefix('detail')->group(function(){
             Route::get('/loadFormDetailMoreLess', [AdminDetailController::class, 'loadFormDetailMoreLess'])->name('admin.detail.loadFormDetailMoreLess');
             Route::get('/create', [AdminDetailController::class, 'create'])->name('admin.detail.create');
+        });
+        /* ===== COST MORE LESS ===== */
+        Route::prefix('citizenidentity')->group(function(){
+            Route::get('/loadFormCitizenidentity', [AdminCitizenidetityController::class, 'loadFormCitizenidentity'])->name('admin.citizenidentity.loadFormCitizenidentity');
+            Route::get('/create', [AdminCitizenidetityController::class, 'create'])->name('admin.citizenidentity.create');
         });
         /* ===== IMAGE ===== */
         Route::prefix('image')->group(function(){

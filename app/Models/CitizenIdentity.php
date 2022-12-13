@@ -10,11 +10,11 @@ class CitizenIdentity extends Model {
     use HasFactory;
     protected $table        = 'citizen_identity_info';
     protected $fillable     = [
-        'booking_id',
-        'customer_name',
-        'customer_identity',
-        'customer_year_of_birth',
-        'customer_sex'
+        'reference_id',
+        'reference_type',
+        'name',
+        'identity',
+        'year_of_birth'
     ];
     public $timestamps      = true;
 

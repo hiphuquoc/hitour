@@ -100,8 +100,15 @@
             <li>Được cập nhật thông tin trước nếu chuyến tàu có thay đổi do thời tiết giúp bạn linh động sắp xếp lại lịch trình của mình</li>
             <li>Được chọn chỗ ngồi tốt trên tàu, chỗ ngồi ít say sóng, gia đình được ngồi gần nhau,... Tránh được trường hợp mua phải các vé phụ hoặc vé chợ đen do đôi khi các vé này không có chỗ ngồi trên tàu (hoặc nếu còn chỗ mới được sắp vào)</li>
         </ul>
+    </div>
+</div>
 
+<div class="contentShip_item">
+    <div id="hang-tau-cao-toc-phu-quoc" class="contentShip_item_title" data-toccontent="">
+        <i class="fa-solid fa-award"></i>
         <h2 id="ve-tau-cao-toc-di-phu-quoc-3">Hướng dẫn đặt vé tàu cao tốc đi Phú Quốc</h2>
+    </div>
+    <div class="contentTour_item_text">
         @include('main.ship.guideBook', ['title' => 'Hướng dẫn đặt Vé tàu đi Phú Quốc'])
         <p>Hitour với đội ngũ nhân viên tận tâm, hệ thống chuyên nghiệp và đang là đối tác hàng đầu của các <strong>hãng tàu Phú Quốc</strong>, Chúng tôi tự tin có thể hỗ trợ Quý khách hoàn tất việc <strong>đặt vé tàu Phú Quốc</strong> và gửi vé điện tử cho bạn ngay.</p>
         <div class="imageBox">

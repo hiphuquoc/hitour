@@ -1,0 +1,47 @@
+<form id="formCitizenidentity" method="get" action="{{ route('admin.citizenidentity.create') }}">
+    <input type="hidden" name="reference_id" value="{{ $idBooking }}" />
+    <input type="hidden" name="reference_type" value="{{ $type }}" />
+    <div>
+        <div class="formCostMoreLess" data-repeater-list="citizenidentity">
+            @foreach($data as $citizenidentity)
+                <div class="formCostMoreLess_item" data-repeater-item>
+                    <div style="width:100%;">
+                        <label style="margin-bottom:0.5rem;font-size:1.1rem;font-weight:bold;float:left;">Họ và tên</label>
+                        <input name="name" type="text" class="form-control flatpickr-basic flatpickr-input active" value="{{ $citizenidentity->name }}" required />
+                    </div>
+                    <div style="width:100%;margin-left:1rem;">
+                        <label style="margin-bottom:0.5rem;font-size:1.1rem;font-weight:bold;float:left;">CMND /CCCD</label>
+                        <input name="identity" type="text" class="form-control flatpickr-basic flatpickr-input active" value="{{ $citizenidentity->identity }}" required />
+                    </div>
+                    <div style="width:100%;margin-left:1rem;">
+                        <label style="margin-bottom:0.5rem;font-size:1.1rem;font-weight:bold;float:left;">Năm sinh</label>
+                        <input name="year_of_birth" type="text" class="form-control flatpickr-basic flatpickr-input active" value="{{ $citizenidentity->year_of_birth }}" required />
+                    </div>
+                    <div class="btnRemoveRepeater" data-repeater-delete><i class="fa-solid fa-xmark"></i></div>
+                </div>
+            @endforeach
+            <div class="formCostMoreLess_item" data-repeater-item>
+                <div style="width:100%;">
+                    <label style="margin-bottom:0.5rem;font-size:1.1rem;font-weight:bold;float:left;">Họ và tên</label>
+                    <input name="name" type="text" class="form-control flatpickr-basic flatpickr-input active" value="" required />
+                </div>
+                <div style="width:100%;margin-left:1rem;">
+                    <label style="margin-bottom:0.5rem;font-size:1.1rem;font-weight:bold;float:left;">CMND /CCCD</label>
+                    <input name="identity" type="text" class="form-control flatpickr-basic flatpickr-input active" value="" required />
+                </div>
+                <div style="width:100%;margin-left:1rem;">
+                    <label style="margin-bottom:0.5rem;font-size:1.1rem;font-weight:bold;float:left;">Năm sinh</label>
+                    <input name="year_of_birth" type="text" class="form-control flatpickr-basic flatpickr-input active" value="" required />
+                </div>
+                <div class="btnRemoveRepeater" data-repeater-delete><i class="fa-solid fa-xmark"></i></div>
+            </div>
+        </div>
+        <!-- button thêm -->
+        <div style="text-align:right;margin-top:1.5rem;">
+            <button class="btn btn-icon btn-primary waves-effect waves-float waves-light" type="button" aria-label="Thêm" data-repeater-create>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus me-25"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <span>Thêm</span>
+            </button>
+        </div>
+    </div>
+</form>

@@ -89,7 +89,7 @@ class ShipBooking extends Model {
     }
 
     public function customer_list(){
-        return $this->hasMany(\App\Models\CitizenIdentity::class, 'booking_id', 'id');
+        return $this->hasMany(\App\Models\CitizenIdentity::class, 'reference_id', 'id')->where('reference_type', 'ship_booking');
     }
 
     public function costMoreLess(){

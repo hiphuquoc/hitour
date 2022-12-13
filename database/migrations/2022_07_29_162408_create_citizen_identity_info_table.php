@@ -14,13 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('citizen_identity_info', function (Blueprint $table) {
-            /* tour_booking|ship|room|service */
             $table->id();
-            $table->integer('booking_id')->nullable();
-            $table->string('customer_name');
-            $table->string('customer_identity')->nullable();
-            $table->string('customer_year_of_birth');
-            $table->boolean('customer_sex')->nullable();
+            $table->integer('reference_id');
+            $table->string('reference_type', 50);
+            $table->text('name');
+            $table->text('identity')->nullable();
+            $table->string('year_of_birth', 10);
             $table->timestamps();
         });
     }

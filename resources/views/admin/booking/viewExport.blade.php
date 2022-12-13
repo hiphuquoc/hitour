@@ -59,6 +59,11 @@
                                                         <span style="color:'.$action->infoAction->color.';">'.$action->infoAction->icon.'</span>'.$action->infoAction->name.'
                                                     </div>';
                                     break;
+                                case 'Danh sách hành khách':
+                                    $xhtmlAction = '<div id="customerList" class="actionBookingBox_item">
+                                                        <span style="color:'.$action->infoAction->color.';">'.$action->infoAction->icon.'</span>'.$action->infoAction->name.'
+                                                    </div>';
+                                    break;
                                 default:
                                     $xhtmlAction = '<a href="#" target="_blank" class="actionBookingBox_item">
                                                         <span style="color:'.$action->infoAction->color.';">'.$action->infoAction->icon.'</span>'.$action->infoAction->name.'
@@ -316,6 +321,31 @@
             });
             
         });
-        
+        /* Danh sách hành khách */
+        $('#customerList').on('click', function(){
+            const idBooking     = $('#booking_info_id').val();
+            $.ajax({
+                url         : '{{ route("admin.citizenidentity.loadFormCitizenidentity") }}',
+                type        : 'get',
+                dataType    : 'html',
+                data        : {
+                    reference_id        : idBooking,
+                    reference_type      : 'booking_info'
+                },
+                success     : function(data){
+                    Swal.fire({
+                        title: '<div style="font-weight:bold;">Danh sách hành khách</div>', 
+                        html: data,  
+                        customClass: 'swal-lg',
+                        confirmButtonText: "Xác nhận"
+                    }).then(result => {
+                        if(result.isConfirmed){
+                            $('#formCitizenidentity').submit();
+                        }
+                    });
+                    $('#formCitizenidentity').repeater();
+                }
+            });
+        });
     </script>
 @endpush
