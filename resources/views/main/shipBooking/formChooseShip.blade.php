@@ -9,11 +9,13 @@
 @endphp
 <!-- One Row -->
 @if(!empty($data)&&$flagHaveShip==true)
-    <input id="js_chooseDeparture_dp{{ $code }}" type="hidden" name="dp{{ $code }}" value="" required />
-    <input type="hidden" name="ship_info_id_{{ $code }}" value="{{ $data[0]['ship_info_id'] ?? null }}" />
     @php
         $nameDeparture  = $portShipDeparture->district->district_name.' - '.$portShipLocation->district->district_name;
+        $requiredDp1    = null;
+        if(!empty($code)&&$code==1) $requiredDp1    = 'required';
     @endphp
+    <input id="js_chooseDeparture_dp{{ $code }}" type="hidden" name="dp{{ $code }}" value="" {{ $requiredDp1 }} />
+    <input type="hidden" name="ship_info_id_{{ $code }}" value="{{ $data[0]['ship_info_id'] ?? null }}" />
     <input type="hidden" name="name_dp{{ $code }}" value="{{ $nameDeparture }}" />
     <div class="formBox_full_item">
         <label class="form-label" for="quantity_adult">Giờ tàu và loại vé&nbsp;&nbsp;<span class="messageValidate_error" data-validate="dp{{ $code }}" style="font-weight:normal;margin-top:0;">Vui lòng chọn giờ khởi hành và loại vé!</span></label>

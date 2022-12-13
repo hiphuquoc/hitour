@@ -379,7 +379,7 @@
             $('#formBooking').find('input[required], select[name="*_1"]').each(function(){
                 /* đưa vào mảng */
                 if($(this).val()==''){
-                    if($(this).attr('name')!='dp2') error.push($(this).attr('name'));
+                    error.push($(this).attr('name'));
                 }
             })
             /* validate riêng cho số lượng */
@@ -392,11 +392,11 @@
             if(valueQuantityAdult==0&&valueQuantityAdult==0&&valueQuantityAdult==0){
                 error.push('quantity_1');
             }
-            /* validate riêng cho giờ tàu */
-            const valueTimeShip         = $(document).find('[name^="dp1"]').val();
-            if(valueTimeShip==''||typeof valueTimeShip=='undefined'){
-                error.push('dp1');
-            }
+            // /* validate riêng cho giờ tàu */
+            // const valueTimeShip         = $(document).find('[name^="dp1"]').val();
+            // if(valueTimeShip==''||typeof valueTimeShip=='undefined'){
+            //     error.push('dp1');
+            // }
             return error;
         }
 
