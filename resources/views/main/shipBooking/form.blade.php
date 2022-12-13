@@ -379,7 +379,7 @@
             $('#formBooking').find('input[required], select[name="*_1"]').each(function(){
                 /* đưa vào mảng */
                 if($(this).val()==''){
-                    error.push($(this).attr('name'));
+                    if($(this).attr('name')!='dp2') error.push($(this).attr('name'));
                 }
             })
             /* validate riêng cho số lượng */

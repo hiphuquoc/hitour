@@ -61,8 +61,8 @@
 
     $run = [
         'type'  => 'utf8',
-        'name'  => 'vinpearl',
-        'local' => 'nha trang'
+        'name'  => 'cáp treo',
+        'local' => 'phú quốc'
     ];
 
     /* thực thi */
@@ -88,7 +88,8 @@
             $result[]   = $realKeyword.' '.$after;
         }
     }
-
-    dd($result);
+    foreach($result as $keyword){
+        echo $keyword.'<br/>';
+    }
 
 @endphp
