@@ -132,14 +132,21 @@
         
     </div>
 @endsection
-{{-- @push('bottom')
+@push('bottom')
+    @php
+        $linkFull = route('main.shipBooking.form', [
+            'ship_port_departure_id'    => $item->ships[0]->ship_port_departure_id,
+            'ship_port_location_id'     => $item->ships[0]->ship_port_location_id
+        ]);
+    @endphp
     <!-- button book vé mobile -->
     <div class="show-990">
-        <div class="callBookTourMobile" style="justify-content:center;width:100%;display:block;">
-            <div><h2 style="margin:0;" onclick="submitForm('shipBookingSort');">Đặt Vé</h2></div>
+        <div class="callBookTourMobile">
+            <a href="tel:0868684868" class="callBookTourMobile_phone maxLine_1">08 6868 4868</a>
+            <a href="{{ $linkFull ?? '/' }}" class="callBookTourMobile_button"><h2 style="margin:0;">Đặt vé</h2></a>
         </div>
     </div>
-@endpush --}}
+@endpush
 @push('scripts-custom')
     <script type="text/javascript">
         buildTocContentMain('js_buildTocContentSidebar_element');

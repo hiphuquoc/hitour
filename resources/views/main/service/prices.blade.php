@@ -13,6 +13,7 @@
                     <tr>
                         <th>Loại vé /Ghi chú</th>
                         <th style="min-width:200px;">Giá vé</th>
+                        <th>-</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,6 +48,12 @@
                                         <div>{{ $price->apply_age ?? null }} <span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{{ !empty($price->price) ? number_format($price->price).config('main.unit_currency') : 'Liên hệ' }}</span></div>
                                     @endforeach
                                 @endif
+                            </td>
+                            <td style="text-align:center;">
+                                <a href="{{ route('main.serviceBooking.form', [
+                                    'service_location_id'   => $item->serviceLocation->id ?? 0,
+                                    'service_info_id'       => $item->id ?? 0
+                                ]) }}" class="buttonSecondary" style="min-width:125px;padding:0.75rem;"><i class="fa-solid fa-check"></i>Đặt vé này</a>
                             </td>
                         </tr>
                     @endforeach

@@ -118,6 +118,20 @@
 
     </div>
 @endsection
+@push('bottom')
+    <!-- button book tour mobile -->
+    @php
+        $linkBooking = route('main.serviceBooking.form', [
+            'service_location_id'   => $item->id ?? 0
+        ]);
+    @endphp 
+    <div class="show-990">
+        <div class="callBookTourMobile">
+            <a href="tel:0868684868" class="callBookTourMobile_phone maxLine_1">08 6868 4868</a>
+            <a href="{{ $linkBooking ?? '/' }}" class="callBookTourMobile_button"><h2 style="margin:0;">Đặt vé</h2></a>
+        </div>
+    </div>
+@endpush
 @push('scripts-custom')
     <script type="text/javascript">
         buildTocContentMain('js_buildTocContentSidebar_element');

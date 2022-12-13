@@ -106,7 +106,7 @@
                 <div class="callBookTourMobile_price">
                     {{ number_format($item->price_show).config('main.unit_currency') }}
                 </div>
-                <a href="{{ $linkBooking }}" class="callBookTourMobile_button"><h2>Đặt vé này</h2></a>
+                <a href="{{ $linkBooking }}" class="callBookTourMobile_button"><h2>Đặt vé</h2></a>
             </div>
         </div>
     @endif
