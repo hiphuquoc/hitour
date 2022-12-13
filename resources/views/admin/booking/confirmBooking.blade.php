@@ -230,18 +230,24 @@
                                             <tr style="background:rgba(0,123,255,0.4);text-align:center;font-size:14px;font-weight:bold;">
                                                 <td style="font-size:15px;padding:7px 12px;width:50px;">STT</td>
                                                 <td style="font-size:15px;padding:7px 12px;border-left:1px dashed #d1d1d1;">Họ tên</td>
-                                                <td style="font-size:15px;padding:7px 12px;border-left:1px solid #d1d1d1;">Số CMND</td>
+                                                <td style="font-size:15px;padding:7px 12px;border-left:1px solid #d1d1d1;">CMND /CCCD</td>
                                                 <td style="font-size:15px;padding:7px 12px;border-left:1px solid #d1d1d1;">Năm sinh</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @if($item->customer_list->isNotEmpty())
-                                                @foreach($item->customer_list as $citizenidentity)
+                                                @foreach($item->customer_list as $infoCustomer)
+                                                    @php
+                                                        $customerNote   = null;
+                                                        $yearNow        = date('Y', time());
+                                                        if($yearNow-$infoCustomer->year_of_birth<=11) $customerNote = '(trẻ em)';
+                                                        if($yearNow-$infoCustomer->year_of_birth>=60) $customerNote = '(cao tuổi)';
+                                                    @endphp 
                                                     <tr>
                                                         <td style="font-size:15px;padding:7px 12px !important;border-top:1px dashed #d1d1d1;text-align:center;">{{ $loop->index+1 }}</td>
-                                                        <td style="font-size:15px;padding:7px 12px !important;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ $citizenidentity->name }}</td>
-                                                        <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ $citizenidentity->year_of_birth }}</td>
-                                                        <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ $citizenidentity->identity ?? 'Chưa có'  }}</td>
+                                                        <td style="font-size:15px;padding:7px 12px !important;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ $infoCustomer->name }} {{ $customerNote }}</td>
+                                                        <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ $infoCustomer->identity ?? 'Chưa có'  }}</td>
+                                                        <td style="font-size:15px;padding:7px 12px !important;text-align:right;border-left:1px dashed #d1d1d1;border-top:1px dashed #d1d1d1;">{{ $infoCustomer->year_of_birth }}</td>
                                                     </tr>
                                                 @endforeach
                                             @else
