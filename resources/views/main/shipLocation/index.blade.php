@@ -135,8 +135,8 @@
 @push('bottom')
     @php
         $linkFull = route('main.shipBooking.form', [
-            'ship_port_departure_id'    => $item->ships[0]->ship_port_departure_id,
-            'ship_port_location_id'     => $item->ships[0]->ship_port_location_id
+            'ship_port_departure_id'    => $item->ships[0]->ship_port_departure_id ?? 0,
+            'ship_port_location_id'     => $item->ships[0]->ship_port_location_id ?? 0
         ]);
     @endphp
     <!-- button book vé mobile -->
