@@ -18,20 +18,35 @@ class ConfirmBooking implements ShouldQueue
 
     private $infoBooking;
     private $infoStaff;
+    private $typeEmail;
     
-    public function __construct($infoBooking, $infoStaff){
+    public function __construct($infoBooking, $infoStaff, $typeEmail='confirm'){
         $this->infoBooking          = $infoBooking;
         $this->infoStaff            = $infoStaff;
+        $this->typeEmail            = $typeEmail;
     }
     
     public function handle(){
-        $addressMail        = $this->infoBooking->customer_contact->email;
         /* Hitour.VN - Xác nhận đặt Tour số ... - 12:20 07/12/2022 */
         $typeBooking        = 'dịch vụ';
         if(!empty($this->infoBooking->service)) $typeBooking = 'Vé vui chơi';
         if(!empty($this->infoBooking->tour)) $typeBooking = 'Tour';
-        $titleMail          = 'Hitour.VN - Xác nhận đặt '.$typeBooking.' số '.$this->infoBooking->no.' - '.date('H:i d/m/Y', time());
-        $bodyMail           = view('admin.booking.confirmBooking', ['item' => $this->infoBooking, 'infoStaff' => $this->infoStaff]);
+        if($this->typeEmail=='notice'){
+            $addressMail        = config('company.email');
+            $titleMail          = 'Thông báo booking '.$typeBooking.' số '.$this->infoBooking->no.' - '.date('H:i d/m/Y', time());
+            $bodyMail           = view('admin.booking.confirmBooking', [
+                'item'      => $this->infoBooking, 
+                'infoStaff' => $this->infoStaff,
+                'type'      => $this->typeEmail
+            ]);
+        }else {
+            $addressMail        = $this->infoBooking->customer_contact->email;
+            $titleMail          = 'Hitour.VN - Xác nhận đặt '.$typeBooking.' số '.$this->infoBooking->no.' - '.date('H:i d/m/Y', time());
+            $bodyMail           = view('admin.booking.confirmBooking', [
+                'item' => $this->infoBooking, 
+                'infoStaff' => $this->infoStaff
+            ]);
+        }
         $dataMail           = [
             'title' => $titleMail,
             'body'  => $bodyMail

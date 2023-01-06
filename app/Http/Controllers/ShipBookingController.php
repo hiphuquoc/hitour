@@ -36,6 +36,13 @@ class ShipBookingController extends Controller {
         foreach($arrayInsertShipQuantity as $insertShipQuantity){
             ShipBookingQuantityAndPrice::insertItem($insertShipQuantity);
         }
+        /* gửi email thông báo cho nhân viên */
+        $infoShipBooking            = ShipBooking::select('*')
+                                        ->where('id', $idBooking)
+                                        ->with('customer_contact', 'infoDeparture', 'status', 'customer_list')
+                                        ->first();
+        \App\Jobs\ConfirmShipBooking::dispatch($infoShipBooking, null, 'notice');
+        /* chuyển hướng sang trang chi tiết booking */
         return redirect()->route('main.shipBooking.confirm', ['no' => $noBooking]);
     }
 

@@ -37,6 +37,12 @@ class TourBookingController extends Controller {
         foreach($insertTourBookingQuantityAndPrice as $itemInsert){
             BookingQuantityAndPrice::insertItem($itemInsert);
         }
+        /* thông báo email cho nhân viên */
+        $infoBooking                = Booking::select('*')
+                                        ->where('id', $idBooking)
+                                        ->with('customer_contact', 'customer_list', 'status', 'service', 'tour', 'quantityAndPrice', 'costMoreLess', 'vat')
+                                        ->first();
+        \App\Jobs\ConfirmBooking::dispatch($infoBooking, null, 'notice');
         return redirect()->route('main.tourBooking.confirm', ['no' => $noBooking]);
     }
 

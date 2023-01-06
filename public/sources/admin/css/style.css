@@ -1,4 +1,16 @@
 @charset "UTF-8";
+@font-face {
+  font-family: "SVN-Gilroy";
+  font-style: normal;
+  font-weight: 500;
+  src: url("/fonts/svn-gilroy_medium.ttf");
+}
+@font-face {
+  font-family: "SVN-Gilroy Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/fonts/svn-gilroy_semibold.ttf");
+}
 * {
   padding: 0;
   margin: 0;
@@ -6,7 +18,8 @@
 
 html, body {
   background: #EDF2F7 !important;
-  font-family: "Open Sans", "Verdana", "Tahoma", sans-serif;
+  font-family: "SVN-Gilroy", "Roboto", "Tahoma", sans-serif;
+  font-size: 1rem;
 }
 
 textarea::-webkit-scrollbar {
@@ -211,7 +224,7 @@ table:not(.sendEmail) tr th {
 
 /* ===== Viết đè CSS Theme ===== */
 .navigation {
-  font-family: "Open Sans", "Verdana", "Tahoma", sans-serif !important;
+  font-family: "SVN-Gilroy", "Roboto", "Tahoma", sans-serif !important;
 }
 
 .main-menu.menu-light .navigation > li > a i, .main-menu.menu-light .navigation > li > a svg {

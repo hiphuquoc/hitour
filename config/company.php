@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'email' => 'hiphuquoc@gmail.com',
     /* Tài khoản ngân hàng */
     'bank'  => [
         // [

@@ -42,9 +42,9 @@ $color-link-dark: #2E86C1;
 $color-des : #567;
 $color-text: #456;
 
-$font-primary-title: "SVN-Gilroy", "Verdana", "Roboto", "Tahoma", sans-serif;
-$font-primary-title-bold: "SVN-Gilroy Bold", "Verdana", "Roboto", "Tahoma", sans-serif;
-$font-primary-text: "Open Sans", "Verdana", "Tahoma", sans-serif;
+$font-primary-title: "SVN-Gilroy", "Roboto", "Tahoma", sans-serif;
+$font-primary-title-bold: "SVN-Gilroy Bold", "Roboto", "Tahoma", sans-serif;
+$font-primary-text: "SVN-Gilroy", "Roboto", "Tahoma", sans-serif;
 
 @mixin titlePage {
     font-size: 1.3rem;
@@ -67,6 +67,56 @@ $font-primary-text: "Open Sans", "Verdana", "Tahoma", sans-serif;
     font-weight: 900;
 }
 
+$folderFont : '/fonts/';
+// @font-face{
+// 	font-family:'mt';
+// 	font-style:normal;
+// 	font-weight:400;
+// 	src:url($folderFont+"mt-regular.otf")
+// }
+
+// @font-face{
+// 	font-family:'SVN-Gilroy Thin';
+// 	font-style:normal;
+// 	font-weight:400;
+// 	src:url($folderFont+"svn-gilroy_regular.ttf")
+// }
+
+// @font-face{
+// 	font-family:'SVN-Gilroy Light';
+// 	font-style:normal;
+// 	font-weight:400;
+// 	src:url($folderFont+"svn-gilroy_regular.ttf")
+// }
+
+@font-face{
+	font-family:'SVN-Gilroy';
+	font-style:normal;
+	font-weight:500;
+	src:url($folderFont+"svn-gilroy_medium.ttf")
+}
+
+@font-face{
+	font-family:'SVN-Gilroy Bold';
+	font-style:normal;
+	font-weight:700;
+	src:url($folderFont+"svn-gilroy_semibold.ttf")
+}
+
+// @font-face{
+// 	font-family:'SVN-Gilroy Med';
+// 	font-style:normal;
+// 	font-weight:700;
+// 	src:url($folderFont+"svn-gilroy_med.ttf")
+// }
+
+// @font-face{
+// 	font-family:'SVN-Gilroy Semi';
+// 	font-style:normal;
+// 	font-weight:700;
+// 	src:url($folderFont+"svn-gilroy_semibold.ttf")
+// }
+
 * {
     padding: 0;
     margin: 0;
@@ -75,6 +125,7 @@ $font-primary-text: "Open Sans", "Verdana", "Tahoma", sans-serif;
 html, body {
     background: $bg-02 !important;
     font-family: $font-primary-text;
+    font-size: 1rem;
 }
 
 textarea {

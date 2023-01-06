@@ -40,6 +40,12 @@ class ServiceBookingController extends Controller {
         foreach($arrayInsertServiceQuantity as $insertServiceQuantity){
             BookingQuantityAndPrice::insertItem($insertServiceQuantity);
         }
+        /* thông báo email cho nhân viên */
+        $infoBooking                = Booking::select('*')
+                                        ->where('id', $idBooking)
+                                        ->with('customer_contact', 'customer_list', 'status', 'service', 'tour', 'quantityAndPrice', 'costMoreLess', 'vat')
+                                        ->first();
+        \App\Jobs\ConfirmBooking::dispatch($infoBooking, null, 'notice');
         return redirect()->route('main.serviceBooking.confirm', ['no' => $noBooking]);
     }
 
