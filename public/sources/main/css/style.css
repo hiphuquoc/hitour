@@ -346,6 +346,16 @@ input[type=date]::-webkit-calendar-picker-indicator {
   -webkit-appearance: none;
 }
 
+input[type=number] {
+  /* Firefox */
+  -moz-appearance: textfield;
+  /* Chrome, Safari, Edge, Opera */
+}
+input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .select2-container--default .select2-selection--single {
   border: 1px solid #ced4da !important;
   border-radius: 5px !important;

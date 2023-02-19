@@ -278,6 +278,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
     -webkit-appearance: none;
 }
+input[type="number"]{
+    /* Firefox */
+    -moz-appearance: textfield;
+    /* Chrome, Safari, Edge, Opera */
+    &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+}
 
 .select2-container--default {
     .select2-selection--single {

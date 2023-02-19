@@ -64,7 +64,7 @@
                                         <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_nguoilon', 'minus');">
                                             <i class="fa-solid fa-minus"></i>
                                         </div>
-                                        <input id="js_changeValueInputShip_input_nguoilon" class="inputNumberCustom_input" type="text" name="adult_ship" value="1" aria-label="Số người lớn đặt vé tàu cao tốc" onkeyup="setValueQuantityShip()" />
+                                        <input id="js_changeValueInputShip_input_nguoilon" class="inputNumberCustom_input" type="number" name="adult_ship" value="1" aria-label="Số người lớn đặt vé tàu cao tốc" onkeyup="setValueQuantityShip()" />
                                         <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_nguoilon', 'plus');">
                                             <i class="fa-solid fa-plus"></i>
                                         </div>
@@ -79,7 +79,7 @@
                                         <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_treem', 'minus');">
                                             <i class="fa-solid fa-minus"></i>
                                         </div>
-                                        <input id="js_changeValueInputShip_input_treem" class="inputNumberCustom_input" type="text" name="child_ship" value="0" aria-label="Số trẻ em đặt vé tàu cao tốc" onkeyup="setValueQuantityShip()" />
+                                        <input id="js_changeValueInputShip_input_treem" class="inputNumberCustom_input" type="number" name="child_ship" value="0" aria-label="Số trẻ em đặt vé tàu cao tốc" onkeyup="setValueQuantityShip()" />
                                         <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_treem', 'plus');">
                                             <i class="fa-solid fa-plus"></i>
                                         </div>
@@ -94,7 +94,7 @@
                                         <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_caotuoi', 'minus');">
                                             <i class="fa-solid fa-minus"></i>
                                         </div>
-                                        <input id="js_changeValueInputShip_input_caotuoi" class="inputNumberCustom_input" type="text" name="old_ship" value="0" aria-label="Số người cao tuổi đặt vé tàu cao tốc" onkeyup="setValueQuantityShip()" />
+                                        <input id="js_changeValueInputShip_input_caotuoi" class="inputNumberCustom_input" type="number" name="old_ship" value="0" aria-label="Số người cao tuổi đặt vé tàu cao tốc" onkeyup="setValueQuantityShip()" />
                                         <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_caotuoi', 'plus');">
                                             <i class="fa-solid fa-plus"></i>
                                         </div>
