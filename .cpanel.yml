@@ -1,8 +1,7 @@
 ---
 deployment:
   tasks:
-    # - export DEPLOYPATH=/home/rhawgejx/chophuquoc.net/
-    - export DEPLOYPATH=/home/rhawgejx/hitour.vn/
+    - export DEPLOYPATH=/home/hitourvn/public_html/
     - /bin/cp -R * $DEPLOYPATH
     # - /bin/cp /app $DEPLOYPATH
     # - /bin/cp /bootstrap $DEPLOYPATH
