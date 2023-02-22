@@ -47,7 +47,7 @@ class Booking extends Model {
                                 });
                             })
                             ->with('status', 'customer_contact', 'service', 'tour', 'quantityAndPrice')
-                            ->orderBy('created_at', 'DESC')
+                            ->orderBy('id', 'DESC')
                             ->paginate($paginate);
         return $result;
     }

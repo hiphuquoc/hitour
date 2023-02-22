@@ -50,7 +50,7 @@ class ShipBooking extends Model {
                                 });
                             })
                             ->with('customer_contact', 'infoDeparture')
-                            ->orderBy('created_at', 'DESC')
+                            ->orderBy('id', 'DESC')
                             ->paginate($paginate);
         return $result;
     }
