@@ -277,4 +277,32 @@
         });
     }
     /* ===== END:: MENU */
+
+    /* ===== In Tour */
+    function printContent(el) {
+        var restorepage = document.body.innerHTML;
+        var printableArea = document.getElementById(el);
+        var notToPrints = document.getElementsByClassName("notPrint");
+
+        // // Thêm header và footer vào trang
+        // var header      = '<div id="print-header"></div>';
+        // var footer      = '<div id="print-footer"></div>';
+        // document.body.innerHTML = header + printableArea.innerHTML + footer;
+
+        // Thêm header và footer vào trang
+        var header      = '<div id="print-header"></div>';
+        document.body.innerHTML = header + '<div style="padding-top:100px">' + printableArea.innerHTML + '</div>';
+
+        while (notToPrints.length > 0) {
+            notToPrints[0].parentNode.removeChild(notToPrints[0]);
+        }
+
+        window.print();
+
+        // Đặt lại nội dung trang
+        document.body.innerHTML = restorepage;
+
+        // print xong không thực hiện được các chức năng => reload() lại
+        location.reload();
+    }
 </script>

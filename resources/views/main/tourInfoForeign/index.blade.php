@@ -44,8 +44,10 @@
     @include('main.snippets.breadcrumb')
 
     <div class="pageContent">
-        <div class="sectionBox">
+        <div id="elementPrint" class="sectionBox">
             <div class="container">
+                <!-- ảnh header của phần in => do trong chrome phải tải trước bản in mới hiển thị -->
+                <img src="https://hitour.vn/storage/images/upload/blue-modern-tour-and-travel-twitter-header-type-manager-upload.webp" style="display:none;" />
 
                 <div class="pageContent_head">
                     <!-- title -->
