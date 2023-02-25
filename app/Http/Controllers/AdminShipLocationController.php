@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ShipLocationRequest;
 use App\Jobs\CheckSeo;
+use App\Models\Category;
+use App\Models\RelationShipLocationCategoryInfo;
 
 class AdminShipLocationController extends Controller {
 
@@ -47,6 +49,7 @@ class AdminShipLocationController extends Controller {
                             ->first();
         $provinces      = Province::getItemByIdRegion($item->region_id ?? 0);
         $districts      = District::getItemByIdProvince($item->province_id ?? 0);
+        $categories     = Category::all();
         $content        = null;
         if(!empty($item->seo->slug)){
             $content    = Storage::get(config('admin.storage.contentShipLocation').$item->seo->slug.'.blade.php');
@@ -54,7 +57,7 @@ class AdminShipLocationController extends Controller {
         $message        = $request->get('message') ?? null; 
         $type           = !empty($item) ? 'edit' : 'create';
         $type           = $request->get('type') ?? $type;
-        return view('admin.shipLocation.view', compact('item', 'content', 'type', 'provinces', 'districts', 'message'));
+        return view('admin.shipLocation.view', compact('item', 'categories', 'content', 'type', 'provinces', 'districts', 'message'));
     }
 
     public function create(ShipLocationRequest $request){
@@ -76,6 +79,17 @@ class AdminShipLocationController extends Controller {
             $content            = $request->get('content') ?? null;
             $content            = AdminImageController::replaceImageInContentWithLoading($content);
             Storage::put(config('admin.storage.contentShipLocation').$request->get('slug').'.blade.php', $content);
+            /* insert realtion ship_location và category_info */
+            if(!empty($request->get('category_info_id'))){
+                foreach($request->get('category_info_id') as $idCategory){
+                    if(!empty($idCategory)){
+                        RelationShipLocationCategoryInfo::insertItem([
+                            'ship_location_id'  => $idShipLocation,
+                            'category_info_id'  => $idCategory
+                        ]);
+                    }
+                }
+            }
             /* insert câu hỏi thường gặp */
             if(!empty($request->get('question_answer'))){
                 foreach($request->get('question_answer') as $itemQues){
@@ -140,6 +154,20 @@ class AdminShipLocationController extends Controller {
             $content            = $request->get('content') ?? null;
             $content            = AdminImageController::replaceImageInContentWithLoading($content);
             Storage::put(config('admin.storage.contentShipLocation').$request->get('slug').'.blade.php', $content);
+            /* update realtion ship_location và category_info */
+            RelationShipLocationCategoryInfo::select('*')
+                ->where('ship_location_id', $idShipLocation)
+                ->delete();
+            if(!empty($request->get('category_info_id'))){
+                foreach($request->get('category_info_id') as $idCategory){
+                    if(!empty($idCategory)){
+                        RelationShipLocationCategoryInfo::insertItem([
+                            'ship_location_id'  => $idShipLocation,
+                            'category_info_id'  => $idCategory
+                        ]);
+                    }
+                }
+            }
             /* update câu hỏi thường gặp */
             QuestionAnswer::select('*')
                             ->where('relation_table', 'ship_location')

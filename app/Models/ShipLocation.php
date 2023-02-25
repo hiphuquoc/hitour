@@ -81,6 +81,10 @@ class ShipLocation extends Model {
         return $this->hasOne(\App\Models\District::class, 'id', 'district_id');
     }
 
+    public function categories(){
+        return $this->hasMany(\App\Models\RelationShipLocationCategoryInfo::class, 'ship_location_id', 'id');
+    }
+
     public function ships(){
         return $this->hasMany(\App\Models\Ship::class, 'ship_location_id', 'id');
     }

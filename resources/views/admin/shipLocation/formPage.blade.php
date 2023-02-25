@@ -86,6 +86,28 @@
             <input type="text" class="form-control" id="display_name" name="display_name" value="{{ old('display_name') ?? $item->display_name ?? '' }}" required>
             <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
         </div>
+        <!-- One Row -->
+        <div class="formBox_full_item">
+            <label class="form-label" for="category_info_id">Liên kết Blog</label>
+            <select class="select2 form-select select2-hidden-accessible" id="category_info_id" name="category_info_id[]" tabindex="-1" aria-hidden="true" multiple>
+                @if(!empty($categories))
+                    @foreach($categories as $category)
+                        @php
+                            $selected           = null;
+                            if(!empty($item->categories)&&$item->categories->isNotEmpty()){
+                                foreach($item->categories as $c){
+                                    if(!empty($c->infoCategory->id)&&$c->infoCategory->id==$category->id){
+                                        $selected   = ' selected';
+                                        break;
+                                    }
+                                }
+                            }
+                        @endphp
+                        <option value="{{ $category->id }}"{{ $selected }}>{{ $category->name }}</option>
+                    @endforeach
+                @endif
+            </select>
+        </div>
     </div>
 </div>
 

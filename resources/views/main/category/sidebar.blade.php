@@ -1,4 +1,4 @@
-<div class="js_scrollFixed">
+<div class="stickyBox">
 
    @php
        $flagMargin  = null;

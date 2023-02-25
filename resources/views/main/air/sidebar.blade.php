@@ -1,4 +1,4 @@
-<div class="js_scrollFixed">
+<div class="stickyBox">
 
    <div class="callBookTour">
       @include('main.template.callbook', ['button' => 'Đặt vé bay', 'flagButton' => false])  

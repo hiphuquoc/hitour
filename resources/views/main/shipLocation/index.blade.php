@@ -129,6 +129,22 @@
                 </div>
             </div>
         </div>
+
+        <!-- Chuyên mục blogs -->
+        @if(!empty($item->categories))
+            @foreach($item->categories as $category)
+                <div class="sectionBox {{ $loop->index==0 ? 'backgroundSecondary' : null }}">
+                    <div class="container">
+                        <h2 class="sectionBox_title">{{ $category->infoCategory->name ?? null }}</h2>
+                        <p>Tham khảo thêm thông tin các bài blog liên quan dịch vụ {{ $item->name ?? null }}.</p>
+                        @include('main.tourLocation.blogGridSlick', [
+                            'list' => $category->blogs, 
+                            'link' => $item->infoCategory->seo->slug_full ?? null, 
+                            'limit' => 10])
+                    </div>
+                </div>
+            @endforeach
+        @endif
         
     </div>
 @endsection

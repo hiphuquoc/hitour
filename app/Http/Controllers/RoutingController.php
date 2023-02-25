@@ -138,8 +138,25 @@ class RoutingController extends Controller {
                                                 ->with(['questions' => function($q){
                                                     $q->where('relation_table', 'ship_location');
                                                 }])
-                                                ->with('seo', 'district', 'ships', 'tourLocations')
+                                                ->with('seo', 'district', 'ships', 'tourLocations', 'categories')
                                                 ->first();
+                    /* lấy blog liên quan ghép vào từng category liên kết với ship_location */
+                    $i                          = 0;
+                    foreach($item->categories as $category){
+                        /* lấy id category từ cấp hiện tại & tất cả cấp con */
+                        $arrayIdCategoryChild   = Category::getArrayCategoryChildByIdSeo($category->infoCategory->seo->id);
+                        $arrayIdCategory        = array_merge($arrayIdCategoryChild, [$category->infoCategory->id]);
+                        /* lấy blogs thuộc tất cả category trên ghép vào collection */
+                        $blogs                  = Blog::select('*')
+                                                    ->whereHas('categories.infoCategory', function($query) use($arrayIdCategory){
+                                                        $query->whereIn('id', $arrayIdCategory);
+                                                    })
+                                                    ->with('seo')
+                                                    ->get();
+                        $item->categories[$i]->blogs = $blogs;
+                        ++$i;
+                    }
+                    /* nội dung */
                     $content                = Blade::render(Storage::get(config('admin.storage.contentShipLocation').$item->seo->slug.'.blade.php'));
                     $breadcrumb             = Url::buildBreadcrumb($checkExists->slug_full);
                     $xhtml                  = view('main.shipLocation.index', compact('item', 'content', 'breadcrumb'))->render();

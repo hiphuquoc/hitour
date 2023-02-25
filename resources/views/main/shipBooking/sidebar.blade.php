@@ -1,4 +1,4 @@
-<div class="js_scrollFixed" style="width: unset; margin-top: 0px;">
+<div class="stickyBox" style="width: unset; margin-top: 0px;">
    <div class="callBookTour">
       {{-- <div class="callBookTour_price">
          <div>giá từ: <span>1,250,000{{ config('main.unit_currency') }}</span></div>
