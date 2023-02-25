@@ -135,7 +135,7 @@ Route::prefix('admin')->group(function(){
             Route::get('/{id}/view', [AdminBookingController::class, 'view'])->name('admin.booking.view');
             Route::post('/update', [AdminBookingController::class, 'update'])->name('admin.booking.update');
             Route::get('/{id}/viewExport', [AdminBookingController::class, 'viewExport'])->name('admin.booking.viewExport');
-            Route::get('/{id}/viewExportHtml', [AdminBookingController::class, 'viewExportHtml'])->name('admin.booking.viewExportHtml');
+            Route::get('/viewExportHtml', [AdminBookingController::class, 'viewExportHtml'])->name('admin.booking.viewExportHtml');
             Route::get('/delete', [AdminBookingController::class, 'delete'])->name('admin.booking.delete');
             Route::get('/getExpirationAt', [AdminBookingController::class, 'getExpirationAt'])->name('admin.booking.getExpirationAt');
             Route::get('/sendMailConfirm', [AdminBookingController::class, 'sendMailConfirm'])->name('admin.booking.sendMailConfirm');
@@ -217,7 +217,7 @@ Route::prefix('admin')->group(function(){
             Route::get('/view', [AdminShipBookingController::class, 'view'])->name('admin.shipBooking.view');
             Route::post('/update', [AdminShipBookingController::class, 'update'])->name('admin.shipBooking.update');
             Route::get('/{id}/viewExport', [AdminShipBookingController::class, 'viewExport'])->name('admin.shipBooking.viewExport');
-            Route::get('/{id}/viewExportHtml', [AdminShipBookingController::class, 'viewExportHtml'])->name('admin.shipBooking.viewExportHtml');
+            Route::get('/viewExportHtml', [AdminShipBookingController::class, 'viewExportHtml'])->name('admin.shipBooking.viewExportHtml');
             Route::get('/delete', [AdminShipBookingController::class, 'delete'])->name('admin.shipBooking.delete');
             Route::get('/getExpirationAt', [AdminShipBookingController::class, 'getExpirationAt'])->name('admin.shipBooking.getExpirationAt');
             Route::get('/sendMailConfirm', [AdminShipBookingController::class, 'sendMailConfirm'])->name('admin.shipBooking.sendMailConfirm');

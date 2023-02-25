@@ -6,7 +6,7 @@
     <input type="hidden" id="ship_booking_id" name="ship_booking_id" value="{{ $item->id }}" />
     <div class="columnBox">
         <!-- giao diện xác nhận -->
-        <div class="columnBox_item" id="js_loadViewExport_idWrite">
+        <div class="columnBox_item" id="js_loadViewExport_idWrite" style="background:none !important;">
             @include('admin.shipBooking.confirmBooking', compact('item', 'infoStaff'))
         </div>
         <!-- Thanh sidebar thao tác -->
@@ -159,7 +159,18 @@
                                         expiration_at       : expirationAt
                                     },
                                     success     : function(data){
-                                        window.location.href = "{{ route('admin.shipBooking.viewExportHtml', ['id' => $item->id]) }}";
+                                        $.ajax({
+                                            url         : "{{ route('admin.shipBooking.viewExportHtml') }}",
+                                            type        : 'get',
+                                            dataType    : 'html',
+                                            data        : {
+                                                id  : shipBookingId
+                                            },
+                                            success     : function(response){
+                                                $('#js_loadViewExport_idWrite').html(response);
+                                                printContent('js_loadViewExport_idWrite');
+                                            }
+                                        });
                                     }
                                 });
                             }

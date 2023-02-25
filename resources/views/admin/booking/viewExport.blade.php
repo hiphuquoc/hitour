@@ -178,7 +178,18 @@
                                         required_deposit    : requiredDeposit
                                     },
                                     success     : function(data){
-                                        window.location.href = "{{ route('admin.booking.viewExportHtml', ['id' => $item->id]) }}";
+                                        $.ajax({
+                                            url         : "{{ route('admin.booking.viewExportHtml') }}",
+                                            type        : 'get',
+                                            dataType    : 'html',
+                                            data        : {
+                                                id  : idBooking
+                                            },
+                                            success     : function(response){
+                                                $('#js_loadViewExport_idWrite').html(response);
+                                                printContent('js_loadViewExport_idWrite');
+                                            }
+                                        });
                                     }
                                 });
                             }

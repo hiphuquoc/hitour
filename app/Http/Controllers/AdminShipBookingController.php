@@ -74,16 +74,17 @@ class AdminShipBookingController extends Controller {
         return view('admin.shipBooking.viewExport', compact('item', 'infoStaff'));
     }
 
-    public function viewExportHtml($id){
+    public function viewExportHtml(Request $request){
         $item               = ShipBooking::select('*')
-                                ->where('id', $id)
+                                ->where('id', $request->get('id'))
                                 ->with('customer_contact', 'infoDeparture', 'status', 'customer_list')
                                 ->first();
         $idUser             = Auth::id() ?? 0;
         $infoStaff          = \App\Models\Staff::select('*')
                                 ->where('user_id', $idUser)
                                 ->first();
-        return view('admin.shipBooking.viewExportHtml', compact('item', 'infoStaff'));
+        $xhtml              = view('admin.shipBooking.viewExportHtml', compact('item', 'infoStaff'))->render();
+        echo $xhtml;
     }
     
     public static function getExpirationAt(Request $request){

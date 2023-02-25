@@ -64,16 +64,17 @@ class AdminBookingController extends Controller {
         return view('admin.booking.viewExport', compact('item', 'infoStaff'));
     }
 
-    public function viewExportHtml($id){
+    public function viewExportHtml(Request $request){
         $item               = Booking::select('*')
-                                ->where('id', $id)
+                                ->where('id', $request->get('id'))
                                 ->with('customer_contact', 'customer_list', 'quantityAndPrice', 'tour', 'service', 'costMoreLess', 'vat', 'status')
                                 ->first();
         $idUser             = Auth::id() ?? 0;
         $infoStaff          = \App\Models\Staff::select('*')
                                 ->where('user_id', $idUser)
                                 ->first();
-        return view('admin.booking.viewExportHtml', compact('item', 'infoStaff'));
+        $xhtml              = view('admin.booking.viewExportHtml', compact('item', 'infoStaff'))->render();
+        echo $xhtml;
     }
 
     public static function getExpirationAt(Request $request){

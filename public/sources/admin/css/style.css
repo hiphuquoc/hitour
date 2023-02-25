@@ -1,4 +1,10 @@
 @charset "UTF-8";
+@media print {
+  /* Định dạng margin cho mỗi trang */
+  @page {
+    margin: 0;
+  }
+}
 @font-face {
   font-family: "SVN-Gilroy";
   font-style: normal;
