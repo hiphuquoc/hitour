@@ -12,13 +12,13 @@
             @endforeach
         @endif
     </div>
-    <div class="galleryBox_button">
-        <div class="galleryBox_button_item">
+    <div class="galleryBox_button notPrint">
+        <div class="galleryBox_button_item" onClick="printContent('elementPrint')">
             <i class="fa-solid fa-print"></i>
         </div>
-        <div class="galleryBox_button_item">
+        {{-- <div class="galleryBox_button_item">
             <i class="fa-solid fa-envelope"></i>
-        </div>
+        </div> --}}
     </div>
 </div>
 @endif

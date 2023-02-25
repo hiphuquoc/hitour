@@ -392,6 +392,41 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
   padding: 0.5rem !important;
 }
 
+@media print {
+  /* Tạo phần tử giả bao bọc nội dung */
+  #elementPrint {
+    position: relative;
+    page-break-inside: avoid;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  #print-header {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px !important;
+    width: 100% !important;
+    background-image: url("https://hitour.vn/storage/images/upload/blue-modern-tour-and-travel-twitter-header-type-manager-upload.webp");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  #print-footer {
+    position: absolute;
+    z-index: 999;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px !important;
+    width: 100% !important;
+    background-image: url("https://hitour.vn/storage/images/upload/blue-modern-tour-and-travel-twitter-header-type-manager-upload.webp");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+}
 .headerTop {
   position: relative;
   z-index: 103;

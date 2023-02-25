@@ -1,6 +1,6 @@
 <div class="contentTour">
     <!-- Điểm nổi bật của Tour -->
-	<div id="diem-noi-bat-chuong-trinh-tour" class="contentTour_item">
+	<div id="diem-noi-bat-chuong-trinh-tour" class="contentTour_item notPrint">
 		<div class="contentTour_item_title">
 			<i class="fa-solid fa-award"></i>
 			<h2>Điểm nổi bật của Tour</h2>
@@ -98,7 +98,7 @@
             <div class="contentTour_item_title noBorder">
                 <i class="fa-solid fa-bookmark"></i>
                 <h2>Lịch trình Tour</h2>
-                <div>
+                <div class="notPrint">
                     <span class="active" data-tabcontent="timeTables_full" onClick="tabContent(this);" style="cursor:pointer;">Bản đầy đủ</span>
                     <span data-tabcontent="timeTables_sort" onClick="tabContent(this);" style="cursor:pointer;">Bản tóm tắt</span>
                 </div>
@@ -238,7 +238,7 @@
 
     <!-- Tour liên quan -->
     @if(!empty($related)&&$related->isNotEmpty())
-        <div id="tour-lien-quan" class="contentTour_item">
+        <div id="tour-lien-quan" class="contentTour_item notPrint">
             <div class="contentTour_item_title">
                 <i class="fa-solid fa-person-walking-luggage"></i>
                 <h2>Tour liên quan</h2>
