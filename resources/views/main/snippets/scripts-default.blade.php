@@ -289,9 +289,9 @@
         // var footer      = '<div id="print-footer"></div>';
         // document.body.innerHTML = header + printableArea.innerHTML + footer;
 
-        // Thêm header và footer vào trang
-        var header      = '<div id="print-header"></div>';
-        document.body.innerHTML = header + '<div style="padding-top:100px">' + printableArea.innerHTML + '</div>';
+        // Thêm image header vào trang
+        var header      = '<img src="https://hitour.vn/storage/images/upload/blue-modern-tour-and-travel-twitter-header-type-manager-upload.webp" style="width:100%;margin-bottom:20px;" />';
+        document.body.innerHTML = header + printableArea.innerHTML;
 
         while (notToPrints.length > 0) {
             notToPrints[0].parentNode.removeChild(notToPrints[0]);
