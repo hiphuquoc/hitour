@@ -11,7 +11,7 @@
         </div>
         <!-- Thanh sidebar thao tác -->
         @if(!empty($item->status->actions))
-            <div class="columnBox_item" style="flex:0 0 200px;">
+            <div class="columnBox_item notPrint" style="flex:0 0 200px;">
                 <div class="actionBookingBox">  
                     <div class="actionBookingBox_item" style="text-align:center;font-size:1.1rem;background:{{ $item->status->color }};color:#fff;">
                         {{ $item->status->name }}
