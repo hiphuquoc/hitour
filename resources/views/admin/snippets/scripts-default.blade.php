@@ -84,13 +84,11 @@
             notToPrints[0].parentNode.removeChild(notToPrints[0]);
         }
 
-        window.print();
-
-        // // Đặt lại nội dung trang
-        // document.body.innerHTML = restorepage;
-
-        // print xong không thực hiện được các chức năng => reload() lại
-        location.reload();
+        setTimeout(() => {
+            window.print();
+            // print xong không thực hiện được các chức năng => reload() lại
+            location.reload();
+        }, 0);
     }
     
 </script>
