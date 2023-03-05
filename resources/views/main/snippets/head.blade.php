@@ -18,6 +18,21 @@
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <!-- END: SLICK -->
 
+<style type="text/css">
+    @font-face{
+        font-family:'SVN-Gilroy';
+        font-style:normal;
+        font-weight:500;
+        src:url("/fonts/svn-gilroy_medium.ttf")
+    }
+    @font-face{
+        font-family:'SVN-Gilroy Bold';
+        font-style:normal;
+        font-weight:700;
+        src:url("/fonts/svn-gilroy_semibold.ttf")
+    }
+</style>
+
 <!-- BEGIN: Jquery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <!-- END: Jquery -->

@@ -34,7 +34,7 @@
         <div class="sectionBox withBorder">
             <div class="container">
                 <h2 class="sectionBox_title">Điểm đến nổi bật</h2>
-                <p>Điểm đến hot nhất do khách du lịch bình chọn.</p>
+                <p class="sectionBox_desc">Điểm đến hot nhất do khách du lịch bình chọn.</p>
                 @include('main.home.specialLocation', compact('specialLocations'))
             </div>
         </div>
@@ -46,7 +46,7 @@
         <div class="sectionBox withBorder">
             <div class="container">
                 <h2 class="sectionBox_title">Điểm đến biển đảo</h2>
-                <p>Danh sách điểm đến biển đảo hấp dẫn tại Việt Nam với đầy đủ thông tin du lịch bạn cần.</p>
+                <p class="sectionBox_desc">Danh sách điểm đến biển đảo hấp dẫn tại Việt Nam với đầy đủ thông tin du lịch bạn cần.</p>
                 @include('main.home.islandLocation', compact('islandLocations'))
             </div>
         </div>
@@ -59,7 +59,7 @@
         <div class="sectionBox withBorder">
             <div class="container">
                 <h2 class="sectionBox_title">Vé máy bay trong nước</h2>
-                <p>Tổng hợp các chuyến bay trong nước của tất cả các hãng máy bay đang hoạt động tại Việt Nam.</p>
+                <p class="sectionBox_desc">Tổng hợp các chuyến bay trong nước của tất cả các hãng máy bay đang hoạt động tại Việt Nam.</p>
                 @include('main.home.airLocationList', compact('airLocations'))
             </div>
         </div>
@@ -71,7 +71,7 @@
         <div class="sectionBox withBorder">
             <div class="container">
                 <h2 class="sectionBox_title">Vé tàu cao tốc</h2>
-                <p>Tổng hợp các chuyến tàu cao tốc biển đảo của tất cả các hãng tàu đang hoạt động tại Việt Nam.</p>
+                <p class="sectionBox_desc">Tổng hợp các chuyến tàu cao tốc biển đảo của tất cả các hãng tàu đang hoạt động tại Việt Nam.</p>
                 @include('main.home.shipLocationList', compact('shipLocations'))
             </div>
         </div>
@@ -83,7 +83,7 @@
         <div class="sectionBox withBorder">
             <div class="container">
                 <h2 class="sectionBox_title">Vé vui chơi giải trí</h2>
-                <p>Tổng hợp vé vui chơi và hoạt động giải trí theo từng địa điểm cụ thể.</p>
+                <p class="sectionBox_desc">Tổng hợp vé vui chơi và hoạt động giải trí theo từng địa điểm cụ thể.</p>
                 @php
                     $services       = new \Illuminate\Database\Eloquent\Collection;
                     foreach($serviceLocations as $serviceLocation){
