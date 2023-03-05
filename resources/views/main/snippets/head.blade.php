@@ -7,7 +7,7 @@
 @stack('head-custom')
 
 <!-- BEGIN: Custom CSS-->
-<link rel="stylesheet" type="text/css" href="{{ asset('sources/main/css/style.css?'.time()) }}">
+@vite(['resources/sources/main/style.scss'])
 <!-- END: Custom CSS-->
 
 <!-- BEGIN: FONT AWESOME -->
