@@ -72,6 +72,12 @@
         var restorepage = document.body.innerHTML;
         var printableArea = document.getElementById(el);
         var notToPrints = document.getElementsByClassName("notPrint");
+
+        // Lọc các phần tử có thuộc tính position: fixed và xóa chúng khỏi nội dung in ra
+        $(printableArea).find("*").filter(function() {
+            return $(this).css("position") === "fixed";
+        }).remove();
+
         document.body.innerHTML = printableArea.innerHTML;
 
         while (notToPrints.length > 0) {
@@ -80,8 +86,8 @@
 
         window.print();
 
-        // Đặt lại nội dung trang
-        document.body.innerHTML = restorepage;
+        // // Đặt lại nội dung trang
+        // document.body.innerHTML = restorepage;
 
         // print xong không thực hiện được các chức năng => reload() lại
         location.reload();

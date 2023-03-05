@@ -283,15 +283,13 @@
         var restorepage = document.body.innerHTML;
         var printableArea = document.getElementById(el);
         var notToPrints = document.getElementsByClassName("notPrint");
-
-        // // Thêm header và footer vào trang
-        // var header      = '<div id="print-header"></div>';
-        // var footer      = '<div id="print-footer"></div>';
-        // document.body.innerHTML = header + printableArea.innerHTML + footer;
-
         // Thêm image header vào trang
         var header      = '<img src="https://hitour.vn/storage/images/upload/blue-modern-tour-and-travel-twitter-header-type-manager-upload.webp" style="width:100%;margin-bottom:20px;" />';
         document.body.innerHTML = header + printableArea.innerHTML;
+        // Lọc các phần tử có thuộc tính position: fixed và xóa chúng khỏi nội dung in ra
+        $(printableArea).find("*").filter(function() {
+            return $(this).css("position") === "fixed";
+        }).remove();
 
         while (notToPrints.length > 0) {
             notToPrints[0].parentNode.removeChild(notToPrints[0]);
@@ -299,8 +297,8 @@
 
         window.print();
 
-        // Đặt lại nội dung trang
-        document.body.innerHTML = restorepage;
+        // // Đặt lại nội dung trang
+        // document.body.innerHTML = restorepage;
 
         // print xong không thực hiện được các chức năng => reload() lại
         location.reload();
