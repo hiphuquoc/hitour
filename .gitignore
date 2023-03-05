@@ -1,6 +1,6 @@
 /node_modules
 /storage
-/public/build
+# /public/build
 /public/hot
 /public/storage
 /public/upload
