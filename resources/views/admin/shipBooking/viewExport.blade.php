@@ -159,18 +159,7 @@
                                         expiration_at       : expirationAt
                                     },
                                     success     : function(data){
-                                        $.ajax({
-                                            url         : "{{ route('admin.shipBooking.viewExportHtml') }}",
-                                            type        : 'get',
-                                            dataType    : 'html',
-                                            data        : {
-                                                id  : shipBookingId
-                                            },
-                                            success     : function(response){
-                                                $('#js_loadViewExport_idWrite').html(response);
-                                                printContent('js_loadViewExport_idWrite');
-                                            }
-                                        });
+                                        window.location.href = "{{ route('admin.shipBooking.viewExportHtml', ['id' => $item->id]) }}";
                                     }
                                 });
                             }

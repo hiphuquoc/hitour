@@ -69,7 +69,6 @@
     }
 
     function printContent(el) {
-        var restorepage = document.body.innerHTML;
         var printableArea = document.getElementById(el);
         var notToPrints = document.getElementsByClassName("notPrint");
 
@@ -84,11 +83,9 @@
             notToPrints[0].parentNode.removeChild(notToPrints[0]);
         }
 
-        setTimeout(() => {
-            window.print();
-            // print xong không thực hiện được các chức năng => reload() lại
-            location.reload();
-        }, 0);
+        window.print();
+        // print xong không thực hiện được các chức năng => reload() lại
+        location.reload();
     }
     
 </script>

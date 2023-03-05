@@ -73,8 +73,7 @@ class AdminBookingController extends Controller {
         $infoStaff          = \App\Models\Staff::select('*')
                                 ->where('user_id', $idUser)
                                 ->first();
-        $xhtml              = view('admin.booking.viewExportHtml', compact('item', 'infoStaff'))->render();
-        echo $xhtml;
+        return view('admin.booking.viewExportHtml', compact('item', 'infoStaff'));
     }
 
     public static function getExpirationAt(Request $request){
