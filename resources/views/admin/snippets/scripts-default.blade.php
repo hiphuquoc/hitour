@@ -67,25 +67,5 @@
             }
         });
     }
-
-    function printContent(el) {
-        var printableArea = document.getElementById(el);
-        var notToPrints = document.getElementsByClassName("notPrint");
-
-        // Lọc các phần tử có thuộc tính position: fixed và xóa chúng khỏi nội dung in ra
-        $(printableArea).find("*").filter(function() {
-            return $(this).css("position") === "fixed";
-        }).remove();
-
-        document.body.innerHTML = printableArea.innerHTML;
-
-        while (notToPrints.length > 0) {
-            notToPrints[0].parentNode.removeChild(notToPrints[0]);
-        }
-
-        window.print();
-        // print xong không thực hiện được các chức năng => reload() lại
-        location.reload();
-    }
     
 </script>
