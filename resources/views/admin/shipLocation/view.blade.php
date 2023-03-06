@@ -60,6 +60,18 @@
                         <div class="card">
                             <div class="card-header border-bottom">
                                 <h4 class="card-title">
+                                    Bảng giá & Lịch tàu mặc định
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                                @include('admin.form.formSchedule')
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pageAdminWithRightSidebar_main_content_item width100">
+                        <div class="card">
+                            <div class="card-header border-bottom">
+                                <h4 class="card-title">
                                     Nội dung
                                 </h4>
                             </div>

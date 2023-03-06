@@ -111,7 +111,8 @@ return [
         'contentBlog'               => 'public/contents/blogs/',
         'contentPage'               => 'public/contents/pages/',
         'contentTourContinent'      => 'public/contents/tourContinents/',
-        'contentTourCountry'        => 'public/contents/tourCountries/'
+        'contentTourCountry'        => 'public/contents/tourCountries/',
+        'contentSchedule'           => 'public/contents/shipSchedule/'
     ],
 
     'alert'     => [

@@ -105,8 +105,17 @@
                         <div id="js_buildTocContentSidebar_element" class="contentShip">
                             <!-- tocContent main -->
                             <div id="tocContentMain"></div>
-                            <!-- Lịch tàu và Hãng tàu -->
-                            @include('main.shipLocation.headContent', ['keyWord' => $item->name])
+                            <!-- Lịch tàu -->
+                            @include('main.shipLocation.schedule', [
+                                'item'      => $item,
+                                'keyWord'   => $item->name,
+                                'schedule'  => $schedule ?? null
+                            ])
+                            <!-- Hãng tàu -->
+                            @include('main.shipLocation.brand', [
+                                'item'  => $item,
+                                'keyWord' => $item->name
+                            ])
                             <!-- Nội dung tùy biến -->
                             {!! $content ?? null !!}
                             <!-- Câu hỏi thường gặp -->

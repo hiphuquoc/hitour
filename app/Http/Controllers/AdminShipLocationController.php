@@ -50,6 +50,10 @@ class AdminShipLocationController extends Controller {
         $provinces      = Province::getItemByIdRegion($item->region_id ?? 0);
         $districts      = District::getItemByIdProvince($item->province_id ?? 0);
         $categories     = Category::all();
+        $schedule       = null;
+        if(!empty($item->seo->slug)){
+            $schedule   = Storage::get(config('admin.storage.contentSchedule').$item->seo->slug.'.blade.php');
+        }
         $content        = null;
         if(!empty($item->seo->slug)){
             $content    = Storage::get(config('admin.storage.contentShipLocation').$item->seo->slug.'.blade.php');
@@ -57,7 +61,7 @@ class AdminShipLocationController extends Controller {
         $message        = $request->get('message') ?? null; 
         $type           = !empty($item) ? 'edit' : 'create';
         $type           = $request->get('type') ?? $type;
-        return view('admin.shipLocation.view', compact('item', 'categories', 'content', 'type', 'provinces', 'districts', 'message'));
+        return view('admin.shipLocation.view', compact('item', 'categories', 'schedule', 'content', 'type', 'provinces', 'districts', 'message'));
     }
 
     public function create(ShipLocationRequest $request){
@@ -75,6 +79,13 @@ class AdminShipLocationController extends Controller {
             /* insert ship_location */
             $insertShipLocation = $this->BuildInsertUpdateModel->buildArrayTableShipLocation($request->all(), $seoId);
             $idShipLocation     = ShipLocation::insertItem($insertShipLocation);
+            /* lưu schedule vào file */
+            $schedule           = $request->get('schedule') ?? null;
+            if(!empty($schedule)) {
+                Storage::put(config('admin.storage.contentSchedule').$request->get('slug').'.blade.php', $schedule);
+            }else {
+                @unlink(Storage::path(config('admin.storage.contentSchedule').$request->get('slug').'.blade.php', $schedule));
+            }
             /* lưu content vào file */
             $content            = $request->get('content') ?? null;
             $content            = AdminImageController::replaceImageInContentWithLoading($content);
@@ -150,6 +161,13 @@ class AdminShipLocationController extends Controller {
             /* update ShipLocation */
             $updateShipLocation = $this->BuildInsertUpdateModel->buildArrayTableShipLocation($request->all());
             ShipLocation::updateItem($idShipLocation, $updateShipLocation);
+            /* lưu schedule vào file */
+            $schedule           = $request->get('schedule') ?? null;
+            if(!empty($schedule)) {
+                Storage::put(config('admin.storage.contentSchedule').$request->get('slug').'.blade.php', $schedule);
+            }else {
+                @unlink(Storage::path(config('admin.storage.contentSchedule').$request->get('slug').'.blade.php', $schedule));
+            }
             /* lưu content vào file */
             $content            = $request->get('content') ?? null;
             $content            = AdminImageController::replaceImageInContentWithLoading($content);

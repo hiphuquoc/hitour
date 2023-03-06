@@ -32,8 +32,23 @@
   <!-- END: Page CSS-->
 
   <!-- BEGIN: Custom CSS-->
-  <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/css/style.css?'.time()) }}">
+  @vite(['resources/sources/admin/style.scss'])
   <!-- END: Custom CSS-->
+  <style type="text/css">
+    @font-face{
+        font-family:'SVN-Gilroy';
+        font-style:normal;
+        font-weight:500;
+        src:url("/fonts/svn-gilroy_medium.ttf")
+    }
+    @font-face{
+        font-family:'SVN-Gilroy Bold';
+        font-style:normal;
+        font-weight:700;
+        src:url("/fonts/svn-gilroy_semibold.ttf")
+    }
+</style>
+
   <!-- BEGIN: FONT AWESOME -->
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <!-- END: FONT AWESOME -->

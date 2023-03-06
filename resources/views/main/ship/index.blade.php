@@ -61,8 +61,17 @@
                         <div id="tocContentMain" style="margin-top:1rem;"></div>
                         <!-- content -->
                         <div class="contentShip">
-                            <!-- Lịch tàu và Hãng tàu -->
-                            @include('main.ship.headContent', ['keyWord' => $item->name])
+                            <!-- Lịch tàu -->
+                            @include('main.ship.schedule', [
+                                'item'      => $item,
+                                'keyWord'   => $item->name,
+                                'schedule'  => $schedule ?? null
+                            ])
+                            <!-- Hãng tàu -->
+                            @include('main.ship.brand', [
+                                'item'  => $item,
+                                'keyWord' => $item->name
+                            ])
                             <!-- Nội dung tùy biến -->
                             {!! $content ?? null !!}
                             <!-- Câu hỏi thường gặp -->

@@ -156,10 +156,12 @@ class RoutingController extends Controller {
                         $item->categories[$i]->blogs = $blogs;
                         ++$i;
                     }
+                    /* lịch tàu & bảng giá mặc định */
+                    $schedule               = Blade::render(Storage::get(config('admin.storage.contentSchedule').$item->seo->slug.'.blade.php'));
                     /* nội dung */
                     $content                = Blade::render(Storage::get(config('admin.storage.contentShipLocation').$item->seo->slug.'.blade.php'));
                     $breadcrumb             = Url::buildBreadcrumb($checkExists->slug_full);
-                    $xhtml                  = view('main.shipLocation.index', compact('item', 'content', 'breadcrumb'))->render();
+                    $xhtml                  = view('main.shipLocation.index', compact('item', 'schedule', 'content', 'breadcrumb'))->render();
                 }
                 /* ===== SHIP PARTNER */
                 if($checkExists->type=='ship_partner'){
@@ -192,9 +194,12 @@ class RoutingController extends Controller {
                                             }])
                                             ->with('seo', 'partners', 'portDeparture', 'portLocation', 'location')
                                             ->first();
+                    /* lịch tàu & bảng giá mặc định */
+                    $schedule           = Blade::render(Storage::get(config('admin.storage.contentSchedule').$item->seo->slug.'.blade.php'));
+                    /* nội dung */
                     $content            = Blade::render(Storage::get(config('admin.storage.contentShip').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full);
-                    $xhtml              = view('main.ship.index', compact('item', 'content', 'breadcrumb'))->render();
+                    $xhtml              = view('main.ship.index', compact('item', 'schedule', 'content', 'breadcrumb'))->render();
                 }
                 /* ===== GUIDE INFO */
                 if($checkExists->type=='guide_info'){
