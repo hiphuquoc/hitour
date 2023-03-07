@@ -11,7 +11,7 @@
     <div class="bookFormSortService_input">
         <!-- One column -->
         <div class="bookFormSortService_input_item">
-            <div class="inputWithIcon location">
+            <div class="inputWithLabelInside location">
                 <label for="ship_port_departure_id">Điểm đến</label>
                 <select id="js_loadTourByTourLocation_element" class="select2 form-select select2-hidden-accessible" name="tour_location_id" onchange="loadTourByTourLocation(this, 'js_loadTourByTourLocation_idWrite');" tabindex="-1" aria-hidden="true">
                     @foreach($dataTourLocation as $region => $tourLocations)
@@ -29,7 +29,7 @@
         </div>
         <!-- One column -->
         <div class="bookFormSortService_input_item">
-            <div>
+            <div class="inputWithLabelInside">
                 <label for="ship_port_location_id">Danh sách tour</label>
                 <select id="js_loadTourByTourLocation_idWrite" class="select2 form-select select2-hidden-accessible" name="tour_info_id" tabindex="-1" aria-hidden="true">
                     {{-- <option value="">- Lựa chọn -</option> --}}
@@ -38,14 +38,14 @@
         </div>
         <!-- One column -->
         <div class="bookFormSortService_input_item">
-            <div class="inputWithIcon date">
+            <div class="inputWithLabelInside date">
                 <label for="bookFormSort_date">Ngày khởi hành</label>
                 <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date" value="{{ date('Y-m-d', time() + 86400) }}" aria-label="Ngày khởi hành tour du lịch" readonly="readonly" required>
             </div>
         </div>
     </div>
     <div class="bookFormSortService_button" style="flex:0 0 155px;">
-        <div class="buttonSecondary" onClick="submitForm('tourBookingSort');" style="padding-top:0.5rem !important;padding-bottom:0.5rem !important;">
+        <div class="buttonSecondary" onClick="submitForm('tourBookingSort');">
             <i class="fa-solid fa-check"></i>Đặt tour ngay
         </div>
     </div>

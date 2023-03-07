@@ -2707,7 +2707,7 @@ blockquote{
         border: 1px solid $bg-04;
         box-shadow: 0px 0px 5px $bg-05;
         border-top: 2px solid $colorLv1;
-        padding: 1rem 1.5rem 1.5rem 1.5rem;
+        padding: 1.5rem;
         border-radius: 0 7px 7px 7px;
         font-size: 1rem;
         label {
@@ -2730,20 +2730,26 @@ blockquote{
 }
 .bookFormSortService {
     display: flex;
-    align-items: flex-end;
+    align-items: stretch;
     &_input {
         width: 100%;
         display: flex;
         &_item {
-            width: calc(33.33% - 1rem);
+            width: calc(33.33% - 0.6666rem);
             &:not(:first-child){
-                margin-left: 1.5rem;
+                margin-left: 1rem;
             }
         }
     }   
     &_button {
-        flex: 0 0 140px;
+        flex: 0 0 150px;
         margin-left: 1.5rem;
+        > * {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     }
     @media(max-width: 990px){
         flex-wrap: wrap;
@@ -2816,7 +2822,7 @@ blockquote{
             }
         }
         &:not(:first-child){
-            margin-top: 0.75rem;
+            margin-top: 1rem;
         }
     }
     @media(max-width: 577px){
@@ -2841,6 +2847,7 @@ blockquote{
     display: flex;
     &_item {
         width: calc(50% - 0.5rem);
+        margin-top: 0 !important;
         &:last-child {
             margin-left: 1rem;
             // input, .select2-container--default .select2-selection--single .select2-selection__rendered {
@@ -2888,7 +2895,7 @@ blockquote{
     &_form {
         display: none;
         position: absolute;
-        top: 39px;
+        top: 54px;
         left: 0;
         width: 100%;
         background: #fff;

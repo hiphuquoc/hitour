@@ -12,7 +12,7 @@
     <div class="bookFormSortService_input">
         <!-- One column -->
         <div class="bookFormSortService_input_item">
-            <div class="inputWithIcon location">
+            <div class="inputWithLabelInside location">
                 @php
                     /* xác định service_info_id active (trong trang service_info) */
                     $idServiceInfo      = 0;
@@ -35,7 +35,7 @@
         </div>
         <!-- One column -->
         <div class="bookFormSortService_input_item">
-            <div>
+            <div class="inputWithLabelInside">
                 <label for="service_info_id">Chọn dịch vụ</label>
                 <select id="js_loadServiceByLocation_idWrite" class="select2 form-select select2-hidden-accessible" name="service_info_id" tabindex="-1" aria-hidden="true">
                 </select>
@@ -43,14 +43,14 @@
         </div>
         <!-- One column -->
         <div class="bookFormSortService_input_item">
-            <div class="inputWithIcon date">
+            <div class="inputWithLabelInside date">
                 <label for="bookFormSort_date">Ngày khởi hành</label>
                 <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date" value="{{ date('Y-m-d', time() + 86400) }}" aria-label="Ngày đi tàu cao tốc" readonly="readonly" required>
             </div>
         </div>
     </div>
     <div class="bookFormSortService_button">
-        <div class="buttonSecondary" onClick="submitForm('serviceBookingSort');" style="padding-top:0.5rem !important;padding-bottom:0.5rem !important;">
+        <div class="buttonSecondary" onClick="submitForm('serviceBookingSort');">
             <i class="fa-solid fa-check"></i>Đặt vé ngay
         </div>
     </div>

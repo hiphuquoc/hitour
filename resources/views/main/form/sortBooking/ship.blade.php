@@ -6,9 +6,9 @@
         <!-- One column -->
         <div class="bookFormSortShip_column_item">
             <div class="inputWithIconBetween">
-                <div class="inputWithIconBetween_item">
-                    <label for="ship_port_departure_id">Điểm đi</label>
-                    <select  id="js_loadShipLocationByShipDeparture_element" class="select2 form-select select2-hidden-accessible" name="ship_port_departure_id" onchange="loadShipLocationByShipDeparture(this, 'js_loadShipLocationByShipDeparture_idWrite');" tabindex="-1" aria-hidden="true">
+                <div class="inputWithIconBetween_item inputWithLabelInside">
+                    <label for="js_loadShipLocationByShipDeparture_element">Điểm đi</label>
+                    <select id="js_loadShipLocationByShipDeparture_element" class="select2 form-select select2-hidden-accessible" name="ship_port_departure_id" onchange="loadShipLocationByShipDeparture(this, 'js_loadShipLocationByShipDeparture_idWrite');" tabindex="-1" aria-hidden="true">
                         {{-- <option value="">- Lựa chọn -</option> --}}
                         @foreach($dataShipPort as $port)
                             @php
@@ -26,8 +26,8 @@
                 <div class="inputWithIconBetween_icon">
                     <img src="/images/main/svg/icon-round.svg" alt="đặt vé tàu cao tốc" title="đặt vé tàu cao tốc" />
                 </div>
-                <div class="inputWithIconBetween_item">
-                    <label for="ship_port_location_id">Điểm đến</label>
+                <div class="inputWithIconBetween_item inputWithLabelInside">
+                    <label for="js_loadShipLocationByShipDeparture_idWrite">Điểm đến</label>
                     <select id="js_loadShipLocationByShipDeparture_idWrite" class="select2 form-select select2-hidden-accessible" name="ship_port_location_id" tabindex="-1" aria-hidden="true">
                         {{-- <option value="">- Lựa chọn -</option> --}}
                     </select>
@@ -38,9 +38,9 @@
         <div class="bookFormSortShip_column_item">
             <!-- One column -->
             <div class="bookFormSortShip_input_item">
-                <div class="inputWithIcon date">
-                    <label for="bookFormSort_date">Ngày khởi hành</label>
-                    <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date_1" value="{{ date('Y-m-d', time() + 86400) }}" aria-label="Ngày đi tàu cao tốc" readonly="readonly" required>
+                <div class="inputWithLabelInside date">
+                    <label for="input_date_ship_1">Ngày khởi hành</label>
+                    <input type="text" class="form-control flatpickr-basic flatpickr-input active" id="input_date_ship_1" name="date_1" value="{{ date('Y-m-d', time() + 86400) }}" aria-label="Ngày đi tàu cao tốc" readonly="readonly" required>
                 </div>
             </div>
         </div>
@@ -48,9 +48,9 @@
     <div class="bookFormSortShip_column">
         <!-- One column -->
         <div class="bookFormSortShip_column_item">
-            <div class="inputWithIcon adult">
+            <div class="inputWithLabelInside adult inputWithForm">
                 <label for="bookFormSort_date">Số hành khách</label>
-                <div class="inputWithForm">
+                {{-- <div class="inputWithForm"> --}}
                     <input type="text" id="js_setValueQuantityShip_idWrite" class="form-control inputWithForm_input" name="quantity" value="1 Người lớn, 0 Trẻ em, 0 Cao tuổi" readonly="readonly" aria-label="Số khách đặt vé tàu cao tốc" required>
                     <div class="inputWithForm_form">
                         <div class="formBox">
@@ -103,7 +103,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                {{-- </div> --}}
             </div>
         </div>
         <!-- One column -->
