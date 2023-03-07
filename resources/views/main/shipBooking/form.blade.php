@@ -319,7 +319,9 @@
                     /* thông báo lỗi riêng => cho số lượng */
                     showHideMessageValidate(nameInput, 'show');
                     /* thông báo lỗi chung empty */
-                    $('input[name*='+nameInput+']').parent().addClass('validateErrorEmpty');
+                    $('input[name='+nameInput+']').parent().addClass('validateErrorEmpty');
+
+                    console.log(nameInput);
                 });
                 /* scroll đến thông báo đầu tiên */
                 $('[class*=validateErrorEmpty]').each(function(){
@@ -337,6 +339,7 @@
             $(elemt).parent().parent().parent().find('.option').removeClass('active');
             $(elemt).addClass('active');
             loadBookingSummary();
+            $(elemt).closest('[class*=validateError]').removeClass('validateErrorEmpty');
         }
 
         function checkedInput(idSearch, elemt){
