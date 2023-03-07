@@ -80,7 +80,7 @@
                                                     <label class="form-label" for="zalo">Zalo (nếu có)</label>
                                                     <input type="text" class="form-control" name="zalo" value="">
                                                 </div> --}}
-                                                <div class="inputWithLabelInside zalo">
+                                                <div class="inputWithLabelInside message">
                                                     <label for="zalo">Zalo (nếu có)</label>
                                                     <input type="text" id="zalo" name="zalo" value="" />
                                                 </div>

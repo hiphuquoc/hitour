@@ -2805,6 +2805,7 @@ blockquote{
     &_column {
         width: 100%;
         display: flex;
+        align-items: stretch;
         &_item {
             width: calc(50% - 0.75rem);
             &:not(:first-child){
@@ -2816,6 +2817,7 @@ blockquote{
             &.button {
                 align-self: flex-end;
                 text-align: right;
+                height: 100%;
                 > * {
                     width: auto;
                 }

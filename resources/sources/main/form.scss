@@ -40,9 +40,13 @@
         color: $colorLv1;
         font-weight: bold;
         cursor: pointer;
-        &:focus {
+        z-index: 2;
+        &:focus, &:-webkit-autofill, &:-webkit-autofill:focus, &:-webkit-autofill:hover, &:-webkit-autofill:active {
             border: none;
             outline: none;
+            background: transparent !important;
+            -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+            -webkit-transition-delay: 9999s;
         }
     }
     &:not(:first-child){
@@ -56,6 +60,7 @@
         transform: translateY(-50%);
         color: $bg-06;
         font-size: 0.95rem;
+        z-index: 1;
     }
     &.email {
         &:after {
@@ -142,6 +147,8 @@
         .select2-selection--single .select2-selection__rendered {
             margin-top: -45px;
             padding: 22px 0.75rem 10px 0.75rem !important;
+            z-index: 2;
+            position: relative;
         }
     }
 }
@@ -149,6 +156,7 @@
     height: auto !important;
     textarea {
         border: none;
+        padding: 0 0.75rem 0.75rem;
     }
 }
 .validateErrorEmpty {

@@ -79,7 +79,7 @@
                                                     <label class="form-label" for="zalo">Zalo (nếu có)</label>
                                                     <input type="text" class="form-control" name="zalo" value="">
                                                 </div> --}}
-                                                <div class="inputWithLabelInside zalo">
+                                                <div class="inputWithLabelInside message">
                                                     <label for="zalo">Zalo (nếu có)</label>
                                                     <input type="text" id="zalo" name="zalo" value="" />
                                                 </div>
@@ -151,14 +151,7 @@
                                                 </div>
                                             </div>
                                             <div class="formColumnCustom_item">
-                                                {{-- <div>
-                                                    <label class="form-label" for="tour_info_id">Chương trình tour</label>
-                                                    <select id="js_loadTourByTourLocation_idWrite" class="select2 form-select select2-hidden-accessible" name="tour_info_id" onChange="loadOptionTour();">
-                                                        <!-- loadAjax : loadTourByTourLocation -->
-                                                    </select>
-                                                </div>
-                                                <div class="messageValidate_error" data-validate="tour_info_id">{{ config('main.message_validate.not_empty') }}</div> --}}
-                                                <div class="inputWithLabelInside location">
+                                                <div class="inputWithLabelInside">
                                                     <label class="form-label" for="tour_info_id">Chương trình tour</label>
                                                     <select id="js_loadTourByTourLocation_idWrite" class="select2 form-select select2-hidden-accessible" name="tour_info_id" onChange="loadOptionTour();">
                                                         <!-- loadAjax : loadTourByTourLocation -->

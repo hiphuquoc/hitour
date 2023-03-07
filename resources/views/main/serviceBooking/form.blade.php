@@ -18,7 +18,7 @@
         /* xác định service_info_id */
         $idServiceInfo      = request('service_info_id') ?? 0;
     @endphp
-    <div class="pageContent background">
+    <div class="pageContent">
         <div class="sectionBox">
             <div class="container">
                 <!-- title -->
@@ -32,7 +32,7 @@
                             <div class="bookingForm_item">
                                 @include('main.serviceBooking.certifiedService')
                             </div>
-                            <!-- Thông tin liên hệ -->
+                            <!-- thông tin liên hệ -->
                             <div class="bookingForm_item">
                                 <div class="bookingForm_item_head">
                                     Thông tin liên hệ
@@ -42,37 +42,50 @@
                                     <div class="bookingForm_item_body_item">
                                         <div class="formColumnCustom">
                                             <div class="formColumnCustom_item">
-                                                <div>
+                                                {{-- <div>
                                                     <label class="form-label inputRequired" for="name">Họ và Tên</label>
                                                     <input type="text" class="form-control" name="name" value="" required>
                                                 </div>
-                                                <div class="messageValidate_error" data-validate="name">{{ config('main.message_validate.not_empty') }}</div>
+                                                <div class="messageValidate_error" data-validate="name">{{ config('main.message_validate.not_empty') }}</div> --}}
+                                                <div class="inputWithLabelInside">
+                                                    <label class="inputRequired" for="name">Họ tên</label>
+                                                    <input type="text" id="name" name="name" value="" onkeyup="validateWhenType(this)" required />
+                                                </div>
                                             </div>
                                             <div class="formColumnCustom_item">
-                                                {{-- <div class="inputWithIcon email"> --}}
+                                                {{-- <div>
                                                     <label class="form-label" for="email">Email (nếu có)</label>
                                                     <input type="text" class="form-control" name="email" value="">
-                                                {{-- </div> --}}
+                                                </div> --}}
+                                                <div class="inputWithLabelInside email">
+                                                    <label for="email">Email (nếu có)</label>
+                                                    <input type="text" id="email" name="email" value="" onkeyup="validateWhenType(this, 'email')" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- One Row -->
                                     <div class="bookingForm_item_body_item">
                                         <div class="formColumnCustom">
                                             <div class="formColumnCustom_item">
-                                                <div>
-                                                {{-- <div class="inputWithIcon phone"> --}}
+                                                {{-- <div>
                                                     <label class="form-label inputRequired" for="phone">Điện thoại</label>
                                                     <input type="text" class="form-control" name="phone" value="" required>
-                                                {{-- </div> --}}
                                                 </div>
-                                                <div class="messageValidate_error" data-validate="phone">{{ config('main.message_validate.not_empty') }}</div>
+                                                <div class="messageValidate_error" data-validate="phone">{{ config('main.message_validate.not_empty') }}</div> --}}
+                                                <div class="inputWithLabelInside phone">
+                                                    <label class="inputRequired" for="phone">Điện thoại</label>
+                                                    <input type="text" id="phone" name="phone" value="" onkeyup="validateWhenType(this, 'phone')" required />
+                                                </div>
                                             </div>
                                             <div class="formColumnCustom_item">
-                                                {{-- <div class="inputWithIcon message"> --}}
+                                                {{-- <div>
                                                     <label class="form-label" for="zalo">Zalo (nếu có)</label>
                                                     <input type="text" class="form-control" name="zalo" value="">
-                                                {{-- </div> --}}
+                                                </div> --}}
+                                                <div class="inputWithLabelInside message">
+                                                    <label for="zalo">Zalo (nếu có)</label>
+                                                    <input type="text" id="zalo" name="zalo" value="" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -88,19 +101,7 @@
                                     <div class="bookingForm_item_body_item">
                                         <div class="formColumnCustom">
                                             <div class="formColumnCustom_item">
-                                                <div>
-                                                    <label class="form-label" for="date">Ngày khởi hành</label>
-                                                    <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date" placeholder="YYYY-MM-DD" value="{{ request('date') ?? null }}" readonly="readonly" onChange="loadOptionService();" />
-                                                </div>
-                                                <div class="messageValidate_error" data-validate="date">{{ config('main.message_validate.not_empty') }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- One Row -->
-                                    <div class="bookingForm_item_body_item">
-                                        <div class="formColumnCustom">
-                                            <div class="formColumnCustom_item">
-                                                <div class="inputWithIcon location">
+                                                <div class="inputWithLabelInside location">
                                                     <label class="form-label" for="service_location_id">Điểm đến</label>
                                                     <select class="select2 form-select select2-hidden-accessible" id="service_location_id" name="service_location_id" onChange="loadServiceByLocation('js_loadServiceByLocation_idWrite', {{ $idServiceInfo }});">
                                                         @if(!empty($serviceLocations)&&$serviceLocations->isNotEmpty())
@@ -119,15 +120,23 @@
                                                 <div class="messageValidate_error" data-validate="service_location_id">{{ config('main.message_validate.not_empty') }}</div>
                                             </div>
                                             <div class="formColumnCustom_item">
-                                                <div>
-                                                {{-- <div class="inputWithIcon location"> --}}
+                                                <div class="inputWithLabelInside">
                                                     <label class="form-label" for="service_info_id">Chọn dịch vụ</label>
                                                     <select id="js_loadServiceByLocation_idWrite" class="select2 form-select select2-hidden-accessible" name="service_info_id" onChange="loadOptionService();">
                                                         <!-- loadAjax : loadServiceByLocation -->
                                                     </select>
-                                                {{-- </div> --}}
                                                 </div>
-                                                <div class="messageValidate_error" data-validate="service_info_id">{{ config('main.message_validate.not_empty') }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- One Row -->
+                                    <div class="bookingForm_item_body_item">
+                                        <div class="formColumnCustom">
+                                            <div class="formColumnCustom_item">
+                                                <div class="inputWithLabelInside date">
+                                                    <label class="form-label" for="date">Ngày khởi hành</label>
+                                                    <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date" placeholder="YYYY-MM-DD" value="{{ request('date') ?? null }}" readonly="readonly" onChange="loadOptionService();" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -147,7 +156,7 @@
                                     </div>
                                     <!-- One Row -->
                                     <div class="bookingForm_item_body_item">
-                                        <div>
+                                        <div class="textareaWithLabelInside">
                                             <label class="form-label" for="note_customer">Ghi chú của bạn</label>
                                             <textarea name="note_customer" rows="3" placeholder="Nếu có ghi chú đặc biệt cho booking của bạn, hãy điền ở đây!"></textarea>
                                         </div>
@@ -216,13 +225,17 @@
             }else {
                 /* xuất thông báo */
                 error.map(function(nameInput){
+                    /* thông báo lỗi riêng => cho số lượng */
                     showHideMessageValidate(nameInput, 'show');
+                    /* thông báo lỗi chung empty */
+                    if(nameInput!='quantity') $('input[name*='+nameInput+']').parent().addClass('validateErrorEmpty');
                 });
                 /* scroll đến thông báo đầu tiên */
-                $('.messageValidate_error:visible').each(function(){
+                $('[class*=validateErrorEmpty]').each(function(){
                     $('html, body').animate({
                         scrollTop: $(this).offset().top - 90
-                    }, 300); 
+                    }, 300);
+                    // $(window).scrollTop(parseInt($(this).offset().top - 90));
                     return false;
                 });
             }
@@ -294,11 +307,10 @@
             /* validate riêng cho số lượng */
             var quantity        = 0;
             $('#formBooking').find('[name^="quantity"]').each(function(){
-                let valInput    = $(this).val();
-                if(valInput=='') valInput = 0;
+                let valInput    = parseInt($(this).val()) || 0;
                 quantity        += parseInt(valInput) + parseInt(quantity);
             })
-            if(quantity==0) error.push('quantity');
+            if(quantity<=0) error.push('quantity');
             return error;
         }
 

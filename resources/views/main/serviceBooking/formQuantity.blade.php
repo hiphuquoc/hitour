@@ -4,7 +4,7 @@
         @if(!empty($prices)&&$prices->isNotEmpty())
             @foreach($prices as $price)
                 <div class="formColumnCustom_item">
-                    <div>
+                    <div class="inputWithLabelInside">
                         <label class="form-label">{{ $price->apply_age }}</label>
                         <input type="number" class="form-control" name="quantity[{{ $price->id }}]" placeholder="0" value="" min="0" onInput="loadBookingSummary();">
                     </div>

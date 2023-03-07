@@ -108,7 +108,7 @@
         </div>
         <!-- One column -->
         <div class="bookFormSortShip_column_item button">
-            <div class="buttonSecondary" onClick="submitForm('shipBookingSort');" style="padding-top:0.5rem !important;padding-bottom:0.5rem !important;">
+            <div class="buttonSecondary" onClick="submitForm('shipBookingSort');">
                 <i class="fa-solid fa-magnifying-glass"></i>Tìm chuyến tàu
             </div>
         </div>
