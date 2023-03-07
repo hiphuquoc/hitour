@@ -8,8 +8,8 @@ body {
     font-size: 1.05rem;
     line-height: 1.6rem;
     font-weight: 400;
-    font-family: $font-primary-text;
-    color: $color-text;
+    font-family: $fontText;
+    color: $colorText;
     @media (max-width: 1023px) {
         background: #fff;
         font-size: 1rem;
@@ -22,20 +22,20 @@ body {
 
 p {
     margin-bottom: 0.5rem;
-    color: $color-text;
+    color: $colorText;
 }
 
 a {
     text-decoration: none;
-    color: $color-primary;
+    color: $colorLv1;
     &:hover {
-        color: $color-primary-hover;
+        color: $colorLv1-hover;
     }
 }
 
 h2 {
     margin-bottom: 0.5rem;
-    font-family: $font-primary-title;
+    font-family: $fontTitle;
     line-height: 1.4;
 }
 
@@ -59,7 +59,7 @@ h5 {
 
 h3, h4, h5, h6 {
     margin-bottom: 0.5rem;
-    font-family: $font-primary-title;
+    font-family: $fontTitle;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -181,7 +181,7 @@ table {
 }
 
 button {
-    background: $color-secondary;
+    background: $colorSLv1;
     // border: 1px solid $bg-05;
     border: none;
     padding: 10px 12px;
@@ -191,7 +191,7 @@ button {
     box-shadow: 0 1px 3px $bg-07;
     cursor: pointer;
     &:hover {
-        background: $color-secondary-hover;
+        background: $colorSLv1-hover;
     }
     i {
         margin-right: 5px;
@@ -259,7 +259,7 @@ label {
 
 input, textarea {
     font-size: 1rem;
-    font-family: $font-primary-text;
+    font-family: $fontText;
     width: 100%;
     border-radius: 7px;
     border: 1px solid $bg-05;

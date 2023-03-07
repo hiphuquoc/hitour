@@ -14,7 +14,7 @@
     <form id="formBooking" action="{{ route('main.tourBooking.create') }}" method="POST">
     @csrf
     {{-- <input type="hidden" name="ship_booking_status_id" value="1" /> --}}
-    <div class="pageContent background">
+    <div class="pageContent">
         <div class="sectionBox">
             <div class="container">
                 <!-- title -->
@@ -39,16 +39,24 @@
                                     <div class="bookingForm_item_body_item">
                                         <div class="formColumnCustom">
                                             <div class="formColumnCustom_item">
-                                                <div>
+                                                {{-- <div>
                                                     <label class="form-label inputRequired" for="name">Họ và Tên</label>
                                                     <input type="text" class="form-control" name="name" value="" required>
                                                 </div>
-                                                <div class="messageValidate_error" data-validate="name">{{ config('main.message_validate.not_empty') }}</div>
+                                                <div class="messageValidate_error" data-validate="name">{{ config('main.message_validate.not_empty') }}</div> --}}
+                                                <div class="inputWithLabelInside">
+                                                    <label class="inputRequired" for="name">Họ tên</label>
+                                                    <input type="text" id="name" name="name" value="" onkeyup="validateWhenType(this)" required />
+                                                </div>
                                             </div>
                                             <div class="formColumnCustom_item">
-                                                <div>
+                                                {{-- <div>
                                                     <label class="form-label" for="email">Email (nếu có)</label>
                                                     <input type="text" class="form-control" name="email" value="">
+                                                </div> --}}
+                                                <div class="inputWithLabelInside email">
+                                                    <label for="email">Email (nếu có)</label>
+                                                    <input type="text" id="email" name="email" value="" onkeyup="validateWhenType(this, 'email')" />
                                                 </div>
                                             </div>
                                         </div>
@@ -56,16 +64,24 @@
                                     <div class="bookingForm_item_body_item">
                                         <div class="formColumnCustom">
                                             <div class="formColumnCustom_item">
-                                                <div>
+                                                {{-- <div>
                                                     <label class="form-label inputRequired" for="phone">Điện thoại</label>
                                                     <input type="text" class="form-control" name="phone" value="" required>
                                                 </div>
-                                                <div class="messageValidate_error" data-validate="phone">{{ config('main.message_validate.not_empty') }}</div>
+                                                <div class="messageValidate_error" data-validate="phone">{{ config('main.message_validate.not_empty') }}</div> --}}
+                                                <div class="inputWithLabelInside phone">
+                                                    <label class="inputRequired" for="phone">Điện thoại</label>
+                                                    <input type="text" id="phone" name="phone" value="" onkeyup="validateWhenType(this, 'phone')" required />
+                                                </div>
                                             </div>
                                             <div class="formColumnCustom_item">
-                                                <div>
+                                                {{-- <div>
                                                     <label class="form-label" for="zalo">Zalo (nếu có)</label>
                                                     <input type="text" class="form-control" name="zalo" value="">
+                                                </div> --}}
+                                                <div class="inputWithLabelInside zalo">
+                                                    <label for="zalo">Zalo (nếu có)</label>
+                                                    <input type="text" id="zalo" name="zalo" value="" />
                                                 </div>
                                             </div>
                                         </div>
@@ -82,22 +98,9 @@
                                     <div class="bookingForm_item_body_item">
                                         <div class="formColumnCustom">
                                             <div class="formColumnCustom_item">
-                                                <div>
-                                                    <label class="form-label" for="date">Ngày khởi hành</label>
-                                                    <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date" placeholder="YYYY-MM-DD" value="{{ request('date') ?? null }}" readonly="readonly" onChange="loadOptionTour();" />
-                                                </div>
-                                                <div class="messageValidate_error" data-validate="date">{{ config('main.message_validate.not_empty') }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- One Row -->
-                                    <div class="bookingForm_item_body_item">
-                                        <div class="formColumnCustom">
-                                            <div class="formColumnCustom_item">
-                                                <div class="inputWithIcon location">
+                                                {{-- <div class="inputWithIcon location">
                                                     <label class="form-label" for="tour_location_id">Điểm đến</label>
                                                     <select id="js_loadTourByTourLocation_element" class="select2 form-select select2-hidden-accessible" name="tour_location_id" onChange="loadTourByTourLocation(this, 'js_loadTourByTourLocation_idWrite');">
-                                                        {{-- <option value="">- Lựa chọn -</option> --}}
                                                         @if(!empty($tourLocations))
                                                             @php
                                                                 $dataTourLocation   = [];
@@ -120,16 +123,63 @@
                                                         @endif
                                                     </select>
                                                 </div>
-                                                <div class="messageValidate_error" data-validate="tour_location_id">{{ config('main.message_validate.not_empty') }}</div>
+                                                <div class="messageValidate_error" data-validate="tour_location_id">{{ config('main.message_validate.not_empty') }}</div> --}}
+                                                <div class="inputWithLabelInside location">
+                                                    <label class="form-label" for="tour_location_id">Điểm đến</label>
+                                                    <select id="js_loadTourByTourLocation_element" class="select2 form-select select2-hidden-accessible" name="tour_location_id" onChange="loadTourByTourLocation(this, 'js_loadTourByTourLocation_idWrite');">
+                                                        @if(!empty($tourLocations))
+                                                            @php
+                                                                $dataTourLocation   = [];
+                                                                foreach($tourLocations as $tourLocation){
+                                                                    $dataTourLocation[$tourLocation->region->name][] = $tourLocation;
+                                                                }
+                                                            @endphp         
+                                                            @foreach($dataTourLocation as $region => $tourLocationsByRegion)
+                                                                <optgroup label="{{ $region }}, Việt Nam">
+                                                                @foreach($tourLocationsByRegion as $tourLocation)
+                                                                    @php
+                                                                        $selected   = null;
+                                                                        if(!empty(request('tour_location_id'))&&request('tour_location_id')==$tourLocation->id) $selected = 'selected';
+                                                                    @endphp
+                                                                    <option value="{{ $tourLocation->id }}" {{ $selected }}>
+                                                                        {{ $tourLocation->display_name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                </div>
                                             </div>
                                             <div class="formColumnCustom_item">
-                                                <div>
+                                                {{-- <div>
                                                     <label class="form-label" for="tour_info_id">Chương trình tour</label>
                                                     <select id="js_loadTourByTourLocation_idWrite" class="select2 form-select select2-hidden-accessible" name="tour_info_id" onChange="loadOptionTour();">
                                                         <!-- loadAjax : loadTourByTourLocation -->
                                                     </select>
                                                 </div>
-                                                <div class="messageValidate_error" data-validate="tour_info_id">{{ config('main.message_validate.not_empty') }}</div>
+                                                <div class="messageValidate_error" data-validate="tour_info_id">{{ config('main.message_validate.not_empty') }}</div> --}}
+                                                <div class="inputWithLabelInside location">
+                                                    <label class="form-label" for="tour_info_id">Chương trình tour</label>
+                                                    <select id="js_loadTourByTourLocation_idWrite" class="select2 form-select select2-hidden-accessible" name="tour_info_id" onChange="loadOptionTour();">
+                                                        <!-- loadAjax : loadTourByTourLocation -->
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- One Row -->
+                                    <div class="bookingForm_item_body_item">
+                                        <div class="formColumnCustom">
+                                            <div class="formColumnCustom_item">
+                                                {{-- <div>
+                                                    <label class="form-label" for="date">Ngày khởi hành</label>
+                                                    <input type="text" class="form-control flatpickr-basic flatpickr-input active" name="date" placeholder="YYYY-MM-DD" value="{{ request('date') ?? null }}" readonly="readonly" onChange="loadOptionTour();" />
+                                                </div>
+                                                <div class="messageValidate_error" data-validate="date">{{ config('main.message_validate.not_empty') }}</div> --}}
+                                                <div class="inputWithLabelInside date">
+                                                    <label class="form-label" for="date">Ngày khởi hành</label>
+                                                    <input type="text" class="form-control flatpickr-basic flatpickr-input active" id="date" name="date" placeholder="YYYY-MM-DD" value="{{ request('date') ?? null }}" readonly="readonly" onChange="loadOptionTour();" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -151,11 +201,10 @@
                                     </div>
                                      <!-- One Row -->
                                      <div class="bookingForm_item_body_item">
-                                        <div>
+                                        <div class="textareaWithLabelInside">
                                             <label class="form-label" for="note_customer">Ghi chú của bạn</label>
                                             <textarea name="note_customer" rows="3" placeholder="Nếu có ghi chú đặc biệt cho booking của bạn, hãy điền ở đây!"></textarea>
                                         </div>
-                                        {{-- <div class="messageValidate_error" data-validate="name">{{ config('main.message_validate.not_empty') }}</div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -222,13 +271,17 @@
             }else {
                 /* xuất thông báo */
                 error.map(function(nameInput){
+                    /* thông báo lỗi riêng => cho số lượng */
                     showHideMessageValidate(nameInput, 'show');
+                    /* thông báo lỗi chung empty */
+                    if(nameInput!='quantity') $('input[name*='+nameInput+']').parent().addClass('validateErrorEmpty');
                 });
                 /* scroll đến thông báo đầu tiên */
-                $('.messageValidate_error:visible').each(function(){
+                $('[class*=validateErrorEmpty]').each(function(){
                     $('html, body').animate({
                         scrollTop: $(this).offset().top - 90
-                    }, 300); 
+                    }, 300);
+                    // $(window).scrollTop(parseInt($(this).offset().top - 90));
                     return false;
                 });
             }
@@ -301,11 +354,10 @@
             /* validate riêng cho số lượng */
             var quantity        = 0;
             $('#formBooking').find('[name^="quantity"]').each(function(){
-                let valInput    = $(this).val();
-                if(valInput=='') valInput = 0;
+                let valInput    = parseInt($(this).val()) || 0;
                 quantity        += parseInt(valInput) + parseInt(quantity);
             })
-            if(quantity==0) error.push('quantity');
+            if(quantity<=0) error.push('quantity');
             return error;
         }
 

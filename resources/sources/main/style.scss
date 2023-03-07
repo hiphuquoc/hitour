@@ -1,5 +1,6 @@
 @import 'variable.scss';
 @import 'base.scss';
+@import 'form.scss';
 @import 'print.scss';
 
 .headerTop {
@@ -33,7 +34,7 @@
                 font-size: 1.6rem;
                 margin-left: 0.5rem;
                 letter-spacing: 0.5px;
-                color: $color-secondary;
+                color: $colorSLv1;
                 text-shadow: 1px 0.1px #333;
             }
         }
@@ -56,7 +57,7 @@
         &_language {
             display: flex;
             &_item {
-                background: url($background-image);
+                background: url($backgroundImage);
                 width: 40px;
                 height: 25px;
                 &:not(:first-child){
@@ -89,10 +90,10 @@ $height_headerMain : 80px;
 .headerMain {
     position: relative;
     z-index: 103;
-    background: $color-primary;
+    background: $colorLv1;
     color: #fff;
-    font-family: $font-primary-title;
-    border-bottom: 4px solid $color-secondary;
+    font-family: $fontTitle;
+    border-bottom: 4px solid $colorSLv1;
     .container {
         display: flex;
         justify-content: space-between;
@@ -120,7 +121,7 @@ $height_headerMain : 80px;
                 &:not(:first-child){
                     > a, > div:not(.megaMenu,.normalMenu) {
                         > * {
-                            border-left: 1px solid $color-secondary-03;
+                            border-left: 1px solid $colorSLv1-03;
                             padding-left: 1.25rem;
                             color: #fff;
                         }
@@ -298,7 +299,7 @@ $height_headerMain : 80px;
     }
 }
 .logoSquare {
-    background-image: url($background-image);
+    background-image: url($backgroundImage);
     background-size: 1110px auto;
     background-position: 0 -244.5px;
     background-repeat: no-repeat;
@@ -312,9 +313,9 @@ $height_headerMain : 80px;
         font-size: 1rem;
         overflow: hidden;
         a {
-            color: $color-primary;
+            color: $colorLv1;
             &:hover {
-                color: $color-primary-hover;
+                color: $colorLv1-hover;
             }
             &:after {
                 @include fontAwesome;
@@ -333,9 +334,9 @@ $height_headerMain : 80px;
 .titlePage {
     font-size: 1.5rem;
     font-weight: 800;
-    font-family: $font-primary-title;
+    font-family: $fontTitle;
     margin-bottom: 0.5rem;
-    color: $color-title;
+    color: $colorTitle;
     @media (max-width: 1023px){
         font-size: 1.45rem;
     }
@@ -351,7 +352,7 @@ $height_headerMain : 80px;
 	&_star {
         min-width: 100px;
 		&_on {
-			color: $color-secondary !important;
+			color: $colorSLv1 !important;
 		}
 		&_off {
 			color: #789;
@@ -363,9 +364,9 @@ $height_headerMain : 80px;
         margin-left: 1rem;
         a {
             font-size: 15px;
-            color: $color-primary;
+            color: $colorLv1;
             &:hover {
-                color: $color-primary-hover;
+                color: $colorLv1-hover;
             }
         }
 	}
@@ -401,9 +402,9 @@ $height_headerMain : 80px;
     display: none;
     justify-content: space-between;
     font-size: 1rem;
-    font-family: $font-primary-text;
+    font-family: $fontText;
     box-shadow: 1px 1px 10px rgba(0,0,0,0.4);
-    border-top: 4px solid $color-secondary;
+    border-top: 4px solid $colorSLv1;
     top: $height_headerMain;
     z-index: 100;
     &_title, &_content {
@@ -419,7 +420,7 @@ $height_headerMain : 80px;
         &:first-child {
             ul {
                 > li:not(:last-child) {
-                    border-bottom: 1px dashed $color-primary-02;
+                    border-bottom: 1px dashed $colorLv1-02;
                 }
             }
         }
@@ -427,7 +428,7 @@ $height_headerMain : 80px;
     &_title {
         > ul {
             > li {
-                font-family: $font-primary-title;
+                font-family: $fontTitle;
 
                 > a, > div {
                     color: #567;
@@ -447,20 +448,20 @@ $height_headerMain : 80px;
                 }
 
                 &:hover {
-                    background: $color-primary-01;
+                    background: $colorLv1-01;
                     cursor: pointer;
 
                     a {
-                        color: $color-primary;
+                        color: $colorLv1;
                     }
                 }
 
                 &.selected {
-                    background: $color-primary-01;
+                    background: $colorLv1-01;
                     cursor: pointer;
 
                     > a, > div {
-                        color: $color-primary;
+                        color: $colorLv1;
                     }
                 }
             }
@@ -468,7 +469,7 @@ $height_headerMain : 80px;
     }
 
     &_content {
-        border-left: 1px solid $color-primary-02;
+        border-left: 1px solid $colorLv1-02;
 
         > ul {
             width: 100%;
@@ -485,7 +486,7 @@ $height_headerMain : 80px;
 
                 a {
                     font-weight: normal;
-                    color: $color-primary;
+                    color: $colorLv1;
                     border: none;
                     box-shadow: none;
                 }
@@ -496,7 +497,7 @@ $height_headerMain : 80px;
 
                     > li {
                         &:hover {
-                            background: $color-primary-01;
+                            background: $colorLv1-01;
                         }
 
                         a {
@@ -507,7 +508,7 @@ $height_headerMain : 80px;
                 }
 
                 &:not(:first-child){
-                    border-left: 1px solid $color-primary-02;
+                    border-left: 1px solid $colorLv1-02;
                 }
             }
 
@@ -520,10 +521,10 @@ $height_headerMain : 80px;
 $width_normalMenu : 250px;
 .normalMenu {
     font-size: 1rem;
-    font-family: $font-primary-title;
+    font-family: $fontTitle;
     background: #fff;
     box-shadow: 1px 1px 3px $bg-06;
-    border-top: 5px solid $color-secondary;
+    border-top: 5px solid $colorSLv1;
     position: absolute;
     width: $width_normalMenu;
     z-index: 1;
@@ -557,7 +558,7 @@ $width_normalMenu : 250px;
             }
             
             &:hover {
-                background: $color-primary-01;
+                background: $colorLv1-01;
                 ul {
                     display: block;
                 }
@@ -566,7 +567,7 @@ $width_normalMenu : 250px;
             > a, > div {
                 display: block;
                 padding: 8px 10px;
-                color: $color-text;
+                color: $colorText;
                 font-weight: 500;
                 i {
                     font-size: 0.85rem;
@@ -584,22 +585,22 @@ $width_normalMenu : 250px;
                 background: #fff;
                 box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
                 display: none;
-                border-top: 5px solid $color-secondary;
+                border-top: 5px solid $colorSLv1;
                 
                 li {
                     list-style: none;
-                    border-bottom: 1px dashed $color-primary-02;
+                    border-bottom: 1px dashed $colorLv1-02;
                     cursor: pointer;
                     position: relative;
                     
                     &:hover {
-                        background: $color-primary-01;
+                        background: $colorLv1-01;
                     }
                     
                     a {
                         display: block;
                         padding: 8px 10px;
-                        color: $color-text;
+                        color: $colorText;
                         font-weight: 500;
                         
                     }
@@ -626,9 +627,9 @@ $width_normalMenu : 250px;
                 > div, > a {
                     position: relative;
                     left: -0.25rem;
-                    color: $color-text;
+                    color: $colorText;
                     &:hover {
-                        color: $color-primary;
+                        color: $colorLv1;
                     }
                 }
             }
@@ -648,7 +649,7 @@ $width_normalMenu : 250px;
             font-size: 1.6rem;
             text-align: center;
             margin-bottom: 1.5rem;
-            font-family: $font-primary-title;
+            font-family: $fontTitle;
         }
     }
     &_body {
@@ -671,7 +672,7 @@ $width_normalMenu : 250px;
         margin: 1rem 0 1.5rem 0;
     }
     h2 {
-        color: $color-title;
+        color: $colorTitle;
         font-size: 1.4rem;
         margin: 0.5rem 0;
     }
@@ -751,9 +752,9 @@ $width_normalMenu : 250px;
     justify-content: flex-end;
 }
 .footer {
-    background: $color-primary-02;
+    background: $colorLv1-02;
     padding: 2rem 0;
-    border-top: 3px solid $color-secondary;
+    border-top: 3px solid $colorSLv1;
     @media (max-width: 1023px){
         padding: 1.75rem 0;
     }
@@ -775,7 +776,7 @@ $width_normalMenu : 250px;
         }
         &_title {
             font-size: 1.05rem;
-            font-family: $font-primary-title;
+            font-family: $fontTitle;
             margin-bottom: 0.5rem !important;
         }
         &_list {
@@ -806,9 +807,9 @@ $width_normalMenu : 250px;
             }
         }
         a {
-            color: $color-text;
+            color: $colorText;
             &:hover {
-                color: $color-primary;
+                color: $colorLv1;
             }
         }
         i {
@@ -871,14 +872,14 @@ $width_normalMenu : 250px;
 .copyright {
     font-size: 0.9rem;
     padding: 0.4rem 0;
-    background: $color-primary-03;
+    background: $colorLv1-03;
 }
 .socialBox {
     display: flex;
     &_item {
         width: 40px;
         height: 40px;
-        background: url($background-image) no-repeat;
+        background: url($backgroundImage) no-repeat;
         background-size: 863.33px;
         border-radius: 10px;
         &:not(:first-child){
@@ -908,7 +909,7 @@ $width_normalMenu : 250px;
         &_icon {
             width: 40px;
             height: 40px;
-            background: url($background-image) no-repeat;
+            background: url($backgroundImage) no-repeat;
             background-size: 1036px;
             &.paymentBank {
                 background-position: 0 -168px;
@@ -954,9 +955,9 @@ $width_normalMenu : 250px;
             border: none;
             box-shadow: none;
             border-radius: 0 5px 5px 0;
-            background: $color-secondary-09;
+            background: $colorSLv1-09;
             &:hover {
-                background: $color-secondary;
+                background: $colorSLv1;
             }
             i {
                 width: unset;
@@ -969,7 +970,7 @@ $width_normalMenu : 250px;
     &_item {
         width: 185px;
         height: 70px;
-        background-image: url($background-image);
+        background-image: url($backgroundImage);
         background-repeat: no-repeat;
         &:not(:first-child){
             margin-top: 0.5rem;
@@ -987,7 +988,7 @@ $width_normalMenu : 250px;
     font-size: 1rem;
     border: none;
     outline: none;
-    background-color: $color-primary-02;
+    background-color: $colorLv1-02;
     color: #789;
     cursor: pointer;
     border-radius: 4px;
@@ -1002,7 +1003,7 @@ $width_normalMenu : 250px;
       height: 100%;
     }
     &:hover {
-        background: $color-primary-04;
+        background: $colorLv1-04;
     }
     @media(max-width: 767px){
         margin-right: 0.5rem;
@@ -1044,11 +1045,11 @@ $tourGrid_radius : 5px;
                 position: absolute;
                 bottom: 0;
                 left: 0;
-                color: $color-text;
+                color: $colorText;
                 font-weight: 500;
                 font-size: 0.95rem;
-                font-family: $font-primary-title;
-                background: $color-secondary; 
+                font-family: $fontTitle;
+                background: $colorSLv1; 
                 padding: 0.1rem 1rem;
             }
         }
@@ -1061,9 +1062,9 @@ $tourGrid_radius : 5px;
                 display: flex;
                 margin-bottom: 0.5rem;
                 h2, h3 {
-                    font-family: $font-primary-title;
+                    font-family: $fontTitle;
                     font-size: 1.1rem;
-                    color: $color-primary;
+                    color: $colorLv1;
                     margin: 0;
                 }
                 i {
@@ -1076,7 +1077,7 @@ $tourGrid_radius : 5px;
                 margin-bottom: 0.5rem;
                 h3, h4 {
                     font-size: 1.2rem;
-                    font-family: $font-primary-title;
+                    font-family: $fontTitle;
                     color: #003B7B;
                     margin: 0;
                     &.maxLine_4 {
@@ -1095,7 +1096,7 @@ $tourGrid_radius : 5px;
             &_price {
                 font-size: 1.2rem;
                 font-weight: 800;
-                color: $color-price;
+                color: $colorPrice;
                 letter-spacing: 0.5px;
             }
             > * {
@@ -1107,7 +1108,7 @@ $tourGrid_radius : 5px;
         &_location {
             padding: 0.4rem 1rem;
             font-size: 0.95rem;
-            background: $color-primary-01;
+            background: $colorLv1-01;
             text-align: center;
             color: #456;
             i {
@@ -1264,11 +1265,11 @@ $tourGrid_radius : 5px;
                 position: absolute;
                 bottom: 0;
                 left: 0;
-                color: $color-text;
+                color: $colorText;
                 font-weight: 500;
                 font-size: 0.95rem;
-                font-family: $font-primary-title;
-                background: $color-secondary; 
+                font-family: $fontTitle;
+                background: $colorSLv1; 
                 padding: 0.1rem 1rem;
             }
         }
@@ -1277,9 +1278,9 @@ $tourGrid_radius : 5px;
             margin-bottom: 0.5rem;
             padding: 0 0.75rem;
             h2, h3 {
-                font-family: $font-primary-title;
+                font-family: $fontTitle;
                 font-size: 1.1rem;
-                color: $color-primary;
+                color: $colorLv1;
                 margin: 0;
             }
             i {
@@ -1293,7 +1294,7 @@ $tourGrid_radius : 5px;
             padding: 0 0.75rem;
             h3, h4 {
                 font-size: 1.1rem;
-                font-family: $font-primary-title;
+                font-family: $fontTitle;
                 color: #003B7B;
                 margin: 0;
             }
@@ -1313,7 +1314,7 @@ $tourGrid_radius : 5px;
             padding: 0 0.75rem;
             font-size: 1.2rem;
             font-weight: 800;
-            color: $color-price;
+            color: $colorPrice;
             letter-spacing: 0.5px;
         }
         &_location {
@@ -1410,7 +1411,7 @@ $tourGrid_radius : 5px;
             cursor: pointer;
             &:hover {
                 background: rgba(0,0,0,0.3);
-                color: $color-secondary;
+                color: $colorSLv1;
             }
             &:not(:first-child){
                 border-left: 1px solid $bg-06;
@@ -1427,8 +1428,8 @@ $tourGrid_radius : 5px;
             &:first-child {
                 td {
                     h2 {
-                        color: $color-primary;
-                        font-family: $font-primary-title;
+                        color: $colorLv1;
+                        font-family: $fontTitle;
                         font-size: 1.2rem;
                         font-weight: 700;
                         margin: 0;
@@ -1462,12 +1463,12 @@ $tourGrid_radius : 5px;
     box-shadow: 0 0 5px $bg-03;
     border: 1px solid $bg-03;
     &_price {
-        background: linear-gradient(90deg, $color-primary 0, $color-primary-hover 100%);
+        background: linear-gradient(90deg, $colorLv1 0, $colorLv1-hover 100%);
         padding: 0.75rem 1rem 1rem;
         color: #fff;
         span {
             font-size: 1.6rem;
-            font-family: $font-primary-title;
+            font-family: $fontTitle;
             letter-spacing: 0.5px;
             font-weight: 700;
         }
@@ -1480,7 +1481,7 @@ $tourGrid_radius : 5px;
         }
     }
     &_button {
-        background: linear-gradient(90deg, $color-primary 0, $color-primary-hover 100%);
+        background: linear-gradient(90deg, $colorLv1 0, $colorLv1-hover 100%);
         padding: 0.75rem 1rem;
         color: #fff;
         &_item {
@@ -1495,8 +1496,8 @@ $tourGrid_radius : 5px;
                 }
             }
             &.bookonline {
-                font-family: $font-primary-title;
-                background: $color-secondary;
+                font-family: $fontTitle;
+                background: $colorSLv1;
                 color: #333;
                 padding: 0.5rem 1rem;
                 border-radius: 5px;
@@ -1506,7 +1507,7 @@ $tourGrid_radius : 5px;
                 cursor: pointer;
                 margin: 1rem 0 0.75rem 0;
                 &:hover {
-                    background: $color-secondary-hover;
+                    background: $colorSLv1-hover;
                 }
             }
         }
@@ -1524,23 +1525,23 @@ $tourGrid_radius : 5px;
     &_price {
         width: 100%;
         justify-content: center;
-        font-family: $font-primary-title;
+        font-family: $fontTitle;
         font-size: 1.4rem;
         letter-spacing: 0.5px;
-        color: $color-price;
+        color: $colorPrice;
     }
     &_phone {
         width: 100%;
         justify-content: center;
-        font-family: $font-primary-title;
+        font-family: $fontTitle;
         font-size: 1.4rem;
         letter-spacing: 0.5px;
-        color: $color-primary;
+        color: $colorLv1;
     }
     &_textNormal {
         width: 100%;
         justify-content: center;
-        font-family: $font-primary-title;
+        font-family: $fontTitle;
     }
     &_button {
         flex: 0 0 160px;
@@ -1551,8 +1552,8 @@ $tourGrid_radius : 5px;
         display: flex;
         align-items: center;
         h2, h3, h4 {
-            font-family: $font-primary-title;
-            background: $color-secondary;
+            font-family: $fontTitle;
+            background: $colorSLv1;
             color: #333;
             padding: 0.5rem 1rem;
             border-radius: 7px;
@@ -1561,7 +1562,7 @@ $tourGrid_radius : 5px;
             margin: 0;
             width: 100%;
             &:hover {
-                background: $color-secondary-hover;
+                background: $colorSLv1-hover;
             }
         }
     }
@@ -1633,7 +1634,7 @@ $tourGrid_radius : 5px;
         cursor: pointer;
         font-weight: 700;
         padding-top: 0.5rem;
-        color: $color-primary-hover;
+        color: $colorLv1-hover;
         i {
             margin-left: 0.5rem;
             vertical-align: middle;
@@ -1649,13 +1650,13 @@ $tourGrid_radius : 5px;
         padding: 0.65rem 1rem;
         background: $bg-03;
         border: 1px solid $bg-04;
-        color: $color-text;
+        color: $colorText;
         align-items: flex-start;
         font-weight: 500;
         font-size: 1rem;
 
         &:hover, &.active {
-            color: $color-primary;
+            color: $colorLv1;
             background: $bg-04;
         }
         &:not(:first-child){
@@ -1684,7 +1685,7 @@ $tourGrid_radius : 5px;
             }
             h2, h3 {
                 font-size: 1.3rem;
-                font-family: $font-primary-title;
+                font-family: $fontTitle;
                 font-weight: 700;
                 margin-top: 0 !important;
                 margin-bottom: 0.5rem !important;
@@ -1705,7 +1706,7 @@ $tourGrid_radius : 5px;
                         margin-left: 0.75rem;
                     }
                     &.active {
-                        color: $color-primary-hover;
+                        color: $colorLv1-hover;
                         font-weight: 700;
                     }
                 }
@@ -1783,7 +1784,7 @@ $tourGrid_radius : 5px;
         }
         &_title {
             position: relative;
-            background-color: $color-secondary;
+            background-color: $colorSLv1;
             padding: 0.35rem 1rem;
             border-radius: 5px;
             cursor: pointer;
@@ -1794,7 +1795,7 @@ $tourGrid_radius : 5px;
                 width: 23px;
                 height: 23px;
                 border-radius: 100%;
-                border: solid 1px $color-red;
+                border: solid 1px $colorRed;
                 background-color: #fff;
                 top: 0.5rem;
                 left: -2.1rem;
@@ -1805,7 +1806,7 @@ $tourGrid_radius : 5px;
                 width: 7px;
                 height: 7px;
                 border-radius: 100%;
-                background: $color-red;
+                background: $colorRed;
                 top: 16px;
                 left: -26px;
             }
@@ -2012,7 +2013,7 @@ $tourGrid_radius : 5px;
         tr {
             background: $bg-03;
             font-weight: 700;
-            font-family: $font-primary-title;
+            font-family: $fontTitle;
             td, th {
                 padding: 0.5rem 1rem;
                 text-align: center;
@@ -2033,7 +2034,7 @@ $tourGrid_radius : 5px;
         }
         .highLight {
             font-weight: 700;
-            color: $color-primary-hover;
+            color: $colorLv1-hover;
         }
     }
     @media (max-width: 1023px){
@@ -2078,7 +2079,7 @@ blockquote{
 	position: relative;
 	font-size: inherit;
 	text-align: justify;
-	border-left: 5px solid $color-primary-06;
+	border-left: 5px solid $colorLv1-06;
 	
 	&::before{
 		content: "\201C";
@@ -2122,7 +2123,7 @@ blockquote{
         -webkit-transition: 500ms ease-in-out all;
         -o-transition: 500ms ease-in-out all;
         transition: 500ms ease-in-out all;
-        border: 1px solid $color-primary-02;
+        border: 1px solid $colorLv1-02;
         border-radius: 5px;
         box-shadow: 0 0 10px $bg-04;
         background: #fff;
@@ -2150,7 +2151,7 @@ blockquote{
                 position: absolute;
                 top: 10px;
                 left: 10px;
-                background: $color-primary-05;
+                background: $colorLv1-05;
                 color: #fff;
                 padding: 0.1rem 0.5rem;
                 font-size: 0.95rem;
@@ -2163,7 +2164,7 @@ blockquote{
                 padding: 1rem 0.5rem 0.25rem 0.5rem;
                 background: linear-gradient(to bottom,rgba(0,0,0,.01),#1b1b1b);
                 width: 100%;
-                color: $color-secondary;
+                color: $colorSLv1;
                 font-size: 0.95rem;
             }
         }
@@ -2176,9 +2177,9 @@ blockquote{
                     h2, h3 {
                         font-size: 1.15rem;
                         margin-bottom: 0;
-                        color: $color-primary !important;
+                        color: $colorLv1 !important;
                         &:hover {
-                            color: $color-primary-hover !important;
+                            color: $colorLv1-hover !important;
                         }
                     }
                 }
@@ -2199,7 +2200,7 @@ blockquote{
                     }
                     
                     &__dp {
-                        font-family: $font-primary-title;
+                        font-family: $fontTitle;
                         text-align: center;
                         background: $bg-04;
                         padding: 5px;
@@ -2219,13 +2220,13 @@ blockquote{
                 width: 100%;
                 text-align: center;
                 padding: 0.5rem 1rem;
-                background: $color-primary-08;
+                background: $colorLv1-08;
                 color: #fff;
                 font-size: 0.95rem;
                 font-weight: 500;
                 cursor: pointer;
                 &:hover {
-                    background: $color-primary;
+                    background: $colorLv1;
                     color: #fff;
                 }
                 &:not(:last-child){
@@ -2239,7 +2240,7 @@ blockquote{
         }
         
         h2 {
-            font-family: $font-primary-title;
+            font-family: $fontTitle;
             font-size: 1.1rem;
             font-weight: 500;
             margin: 0;
@@ -2308,9 +2309,9 @@ blockquote{
 //             }
 //             h2, h3 {
 //                 font-size: 1.3rem;
-//                 font-family: $font-primary-title;
+//                 font-family: $fontTitle;
 //                 font-weight: 700;
-//                 color: $color-primary-hover;
+//                 color: $colorLv1-hover;
 //                 margin: 0;
 //             }
 //             > i {
@@ -2329,7 +2330,7 @@ blockquote{
 //                         margin-left: 0.75rem;
 //                     }
 //                     &.active {
-//                         color: $color-primary-hover;
+//                         color: $colorLv1-hover;
 //                         font-weight: 700;
 //                     }
 //                 }
@@ -2369,7 +2370,7 @@ blockquote{
 //     }
 //     .highLight {
 //         font-weight: 700;
-//         color: $color-price;
+//         color: $colorPrice;
 //     }
 //     @media (max-width: 1023px){
 //         &_item {
@@ -2431,7 +2432,7 @@ blockquote{
             }
             &_desc {
                 font-size: 0.95rem;
-                color: $color-des;
+                color: $colorDesc;
             }
         }
     }
@@ -2472,183 +2473,6 @@ blockquote{
         }
     }
 }
-.bookingForm {
-    display: flex;
-    flex-direction: column;
-    &_item {
-        width: 100%;
-        &:not(:first-child){
-            margin-top: 2rem;
-        }
-        &_head {
-            font-size: 1.3rem;
-            font-family: $font-primary-title;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-        }
-        &_body {
-            box-shadow: 0 0 5px $bg-03;
-            border: 1px solid $bg-03;
-            background: #fff;
-            border-radius: 3px;
-            padding: 1rem 1.5rem 1.5rem;
-            ul:not(.select2-results__options) {
-                li {
-                    &:not(:first-child){
-                        margin-top: 0.5rem;
-                        padding-top: 0.5rem;
-                        border-top: 1px dashed $bg-05;
-                    }
-                }
-            }
-            &_item {
-                &:not(:first-child){
-                    margin-top: 1.5rem;
-                }
-            }
-        }
-    }
-    .formColumnCustom {
-        display: flex;
-        &:not(:first-child){
-            margin-top: 1.2rem;
-        }
-        &_item {
-            width: calc(50% - 0.75rem);
-            &:not(:first-child){
-                margin-left: 1.5rem;
-            }
-        }
-    }
-    input, textarea, .select2-container--default .select2-selection--single .select2-selection__rendered {
-        color: $color-primary-hover !important;
-    }
-    label {
-        margin-bottom: 0.25rem;
-        flex-wrap: wrap;
-        font-weight: bold;
-    }
-    .flexBox {
-        &.half {
-            .flexBox_item {
-                width: calc(50% - 0.5rem);
-                &:not(:first-child){
-                    margin-left: 1rem;
-                }
-            }
-        }
-    }
-    @media(max-width: 990px){
-        &_item {
-            &_head {
-                font-size: 1.25rem;
-            }
-            &:not(:first-child){
-                margin-top: 1.5rem;
-            }
-        }
-    }
-    @media(max-width: 577px){
-        &_item {
-            // &:not(:first-child){
-            //     margin-top: 1.5rem;
-            //     padding-top: 1rem;
-            //     border-top: 1px solid $bg-04;
-            // }
-            &_head {
-                font-size: 1.2rem;
-            }
-            &_body {
-                padding: 0.75rem 1rem 1rem;
-                &_item {
-                    &:not(:first-child){
-                        margin-top: 1rem;
-                    }
-                }
-            }
-        }
-        .formColumnCustom {
-            flex-wrap: wrap;
-            &_item {
-                width: 100%;
-                margin-left: 0 !important;
-                &:not(:first-child){
-                    margin-top: 1rem;
-                }
-            }
-        }
-    }
-}
-.chooseTripBox {
-    margin-top: 0.5rem;
-    display: flex;
-    &_item {
-        width: 100%;
-        max-width: 120px;
-        border: 1px solid $bg-04;
-        padding: 0.25rem 1rem;
-        text-align: center;
-        border-radius: 5px;
-        font-size: 0.95rem;
-        font-weight: bold;
-        cursor: pointer;
-        &:not(:first-child){
-            border-left: 1px solid $bg-04;
-        }
-        &:hover {
-            background: $color-primary-03;
-        }
-        &.active {
-            background: linear-gradient(90deg, $color-primary 0, $color-primary-hover 100%);
-            color: #fff;
-        }
-    }
-}
-.formBox {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    &_full {
-        width: 100%;
-        &_item {
-            width: inherit;
-            &:not(:first-child){
-                margin-top: 0.75rem;
-            }
-        }
-    }
-    &_labelOneRow {
-        width: 100%;
-        &_item {
-            display: flex;
-            width: 100%;
-            justify-content: space-between;
-            line-height: 1.4;
-            &:not(:first-child){
-                margin-top: 1rem;
-            }
-            > * {
-                width: 100%;
-            }
-        }
-    }
-}
-.inputRequired {
-    &:after {
-        margin-left: 0.5rem;
-        content: '*';
-        color: $color-price;
-        font-weight: bold;
-    }
-}
-.messageValidate_error {
-    display: none;
-    margin-top: 0.25rem;
-    font-size: 0.95rem;
-    color: $color-red;
-    font-style: italic;
-}
 .flexBox {
     display: flex;
     &:not(:first-child){
@@ -2658,244 +2482,6 @@ blockquote{
         width: 100%;
         &:not(:first-child){
             margin-left: 1rem;
-        }
-    }
-}
-.inputWithIcon {
-    position: relative;
-    &:after {
-        @include fontAwesome;
-        position: absolute;
-        right: 0.25rem;
-        top: 50%;
-        transform: translateX(-50%);
-        color: $bg-06;
-        font-size: 0.95rem;
-    }
-    &.email {
-        &:after {
-            content: "\f0e0";
-        }
-    }
-    &.phone {
-        &:after {
-            content: "\f095";
-        }
-    }
-    &.location {
-        &:after {
-            content: "\f3c5";
-        }
-    }
-    &.date {
-        &:after {
-            content: "\f073";
-        }
-    }  
-    &.adult {
-        &:after {
-            content: "\f183";
-            font-size: 1.1rem;
-        }
-    }  
-    &.child {
-        &:after {
-            content: "\f1ae";
-            font-size: 1.1rem;
-        }
-    } 
-    &.old {
-        &:after {
-            content: "\e53c";
-            font-size: 1.1rem;
-        }
-    } 
-    &.message {
-        &:after {
-            content: "\f4ad";
-            font-size: 1.1rem;
-        }
-    }
-}
-.inputNumberCustom {
-    display: flex;
-    width: 220px;
-    &_button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        background: $bg-02;
-        border: 1px solid $bg-04;
-        font-size: 0.9rem;
-        border-radius: 5px;
-        color: $color-primary;
-    }
-    &_input {
-        flex: 0 0 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 500;
-        border: 1px solid $bg-04;
-        border-radius: 5px;
-        padding-left: 0.65rem;
-        padding-right: 0.65rem;
-        text-align: center;
-    }
-    > * {
-        &:not(:first-child){
-            margin-left: 0.5rem;
-        }
-    }
-}
-.chooseDepartureShipBox {
-    &_head {
-        display: flex;
-        align-items: center;
-        background: $bg-02;
-        line-height: 1.5;
-        border: 1px solid $bg-03;
-        border-radius: 5px;
-        &_item {
-            width: 100%;
-            text-align: center;
-            padding: 0.5rem;
-            &:not(:first-child){
-                border-left: 1px solid $bg-05;
-            }
-            &.active {
-                background: linear-gradient(90deg, $color-primary 0, $color-primary-hover 100%);
-                color: #fff;
-                .chooseDepartureShipBox_head_item_price {
-                    color: $color-secondary;
-                }
-            }
-            &_day {
-                font-size: 0.9rem;
-                font-weight: 500;
-            }
-            &_price {
-                color: $color-primary-hover;
-                font-weight: 500;
-                font-size: 1.2rem;
-                letter-spacing: 0.5px;
-            }
-        }
-    }
-    &_body {
-        &_row {
-            display: flex;
-            border-bottom: 1px dashed $bg-05;
-            align-items: center;
-            background: $bg-02;
-            padding: 1rem;
-            &_item {
-                width: 100%;
-                text-align: center;
-                &:not(:first-child){
-                    margin-left: 1rem;
-                }
-                .option {
-                    line-height: 1.4;
-                    padding: 0.35rem 0.5rem;
-                    border: 1px solid $bg-03;
-                    background: #fff;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    &.active, &:hover {
-                        color: $color-highlight;
-                    }
-                    &.active {
-                        background: $color-secondary !important;
-                    }
-                    &:hover {
-                        background: $color-primary-02;
-                    }
-                    .price {
-                        font-family: $font-primary-title;
-                        color: $color-primary-hover;
-                        font-size: 1.2rem;
-                        letter-spacing: 0.5px;
-                    }
-                }
-                .highLight {
-                    font-size: 1.2rem;
-                    font-family: $font-primary-title;
-                    color: $color-primary-hover;
-                }
-            }
-        }
-    }
-    @media(max-width: 577px){
-        &_body {
-            &_row {
-                flex-wrap: wrap;
-                &_item {
-                    &:not(:last-child){
-                        margin-left: 0;
-                    }
-                    &:nth-child(n + 2){
-                        margin-top: 0.5rem;
-                    }
-                    &.width50 {
-                        width: calc(50% - 0.5rem);
-                        
-                    }
-                }
-                &:not(:first-child){
-                    border-top: 1px dashed $bg-05;
-                }
-            }
-        }
-    }
-}
-.chooseOptionTourBox {
-    background: $bg-02;
-    &_body {
-        display: flex;
-        flex-direction: column;
-        min-width: 550px;
-        &_item {
-            display: flex;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            &:not(:first-child){
-                border-top: 1px dashed $bg-06;
-            }
-            &.active {
-                background: $color-secondary !important;
-                color: $color-highlight;
-                .highLight {
-                    color: $color-highlight !important;
-                }
-                .chooseOptionTourBox_body_item_icon {
-                    &:before {
-                        content: '\f058' !important;
-                    }
-                }
-            }
-            &:hover {
-                background: $color-primary-01;
-            }
-            > * {
-                width: 100%;
-                &:not(:first-child){
-                    padding-left: 1rem;
-                }
-            }
-            &_icon {
-                width: 50px;
-                &:before {
-                    @include fontAwesome;
-                    content: '\f1ce';
-                }
-            }
-            .highLight {
-                font-weight: bold;
-                font-size: 1.1rem;
-                color: $color-primary-hover;
-            }
         }
     }
 }
@@ -2925,7 +2511,7 @@ blockquote{
             color: $bg-07;
         }
         .highLight {
-            font-family: $font-primary-title;
+            font-family: $fontTitle;
             font-weight: 700;
             font-size: 1.2rem;
             color: $bg-08;
@@ -2940,7 +2526,7 @@ blockquote{
     font-size: 1rem;
     .head {
         td {
-            background: $color-primary-02;
+            background: $colorLv1-02;
             font-weight: bold;
             i {
                 margin-right: 0.5rem;
@@ -2972,7 +2558,7 @@ blockquote{
         border: 1px solid $bg-04;
         &_title {
             padding: 0.75rem 1rem;
-            background: $color-primary-02;
+            background: $colorLv1-02;
         }
         &_body {
             padding: 0.75rem 1rem;
@@ -2985,7 +2571,7 @@ blockquote{
             }
         }
         .highLight {
-            color: $color-primary-hover;
+            color: $colorLv1-hover;
             font-weight: bold;
             font-size: 1.2rem;
         }
@@ -2996,7 +2582,7 @@ blockquote{
         &_item {
             width: 100%;
             .highLight {
-                color: $color-primary-hover;
+                color: $colorLv1-hover;
                 font-weight: bold;
                 font-size: 1.1rem;
             }
@@ -3027,24 +2613,24 @@ blockquote{
     text-align: right;
 }
 .buttonPrimary {
-    background: $color-primary;
+    background: $colorLv1;
     color: #fff;
     padding: 0.5rem 1rem;
     display: inline-block;
     border-radius: 5px;
     font-size: 0.95rem;
-    font-family: $font-primary-title;
+    font-family: $fontTitle;
     cursor: pointer;
     i {
         margin-right: 0.5rem;
     }
     &:hover {
-        background: $color-primary-hover;
+        background: $colorLv1-hover;
     }
 }
 .buttonSecondary {
-    color: $color-highlight;
-    background: $color-secondary;
+    color: $colorHighlight;
+    background: $colorSLv1;
     padding: 0.75rem 1rem;
     display: inline-block;
     border-radius: 5px;
@@ -3059,7 +2645,7 @@ blockquote{
         margin-right: 0.5rem;
     }
     &:hover {
-        background: $color-secondary-hover;
+        background: $colorSLv1-hover;
     }
 }
 .bookOnline {
@@ -3074,7 +2660,7 @@ blockquote{
 			color: #000;
 			font-size: 30px;
 			font-weight: bold;
-			font-family: $font-primary-title;
+			font-family: $fontTitle;
 			margin-bottom: 10px;
 		}
 	}
@@ -3093,18 +2679,18 @@ blockquote{
             opacity: 0.8;
             background: #f1f1f1;
             padding: 0.25rem 1rem;
-            font-family: $font-primary-title;
+            font-family: $fontTitle;
             font-size: 0.95rem;
             font-weight: 500;
             cursor: pointer;
-            border: 1px solid $color-primary-04;
+            border: 1px solid $colorLv1-04;
             border-radius: 7px 7px 0 0;
             &:not(:first-child){
                 margin-left: -1px;
             }
             &.active {
                 opacity: 1;
-                background: $color-primary;
+                background: $colorLv1;
                 color: #fff;
             }
             &:hover {
@@ -3120,7 +2706,7 @@ blockquote{
         background: $bg-02;
         border: 1px solid $bg-04;
         box-shadow: 0px 0px 5px $bg-05;
-        border-top: 2px solid $color-primary;
+        border-top: 2px solid $colorLv1;
         padding: 1rem 1.5rem 1.5rem 1.5rem;
         border-radius: 0 7px 7px 7px;
         font-size: 1rem;
@@ -3269,7 +2855,7 @@ blockquote{
         left: 50%;
         bottom: 0.5rem;
         transform: translateX(-50%);
-        background: $color-primary;
+        background: $colorLv1;
         z-index: 1;
         border-radius: 50%;
         img {
@@ -3323,7 +2909,7 @@ blockquote{
             border-top: 1px dashed $bg-05;
         }
         &:hover, &.active {
-            background: $color-secondary-03;
+            background: $colorSLv1-03;
         }
         > * {
             width: 100%;
@@ -3332,14 +2918,14 @@ blockquote{
             .highLight {
                 font-weight: 700;
                 font-size: 1.05rem;
-                color: $color-primary-hover;
+                color: $colorLv1-hover;
             }
         }
         &_price {
             .highLight {
                 font-weight: 700;
                 font-size: 1.05rem;
-                color: $color-primary-hover;
+                color: $colorLv1-hover;
             }
         }
         &_radio {
@@ -3374,7 +2960,7 @@ blockquote{
                     margin-bottom: 0.75rem;
                     letter-spacing: 0.3px;
                     font-size: 1.05rem;
-                    font-family: $font-primary-title;
+                    font-family: $fontTitle;
                     border-radius: 5px;
                     padding-right: 2rem;
                 }
@@ -3414,7 +3000,7 @@ blockquote{
     &_title {
         h2, h3 {
             font-size: 1.25rem;
-            font-family: $font-primary-title;
+            font-family: $fontTitle;
             margin-bottom: 1rem;
             margin-top: 0;
         }
@@ -3435,14 +3021,14 @@ blockquote{
             h2, h3, h4 {
                 font-size: 1rem;
                 font-weight: 500;
-                color: $color-title;
+                color: $colorTitle;
                 margin: 0;
             }
             i {
                 width: 25px;
                 margin-right: 1rem;
                 font-size: 1.2rem;
-                color: $color-primary-hover;
+                color: $colorLv1-hover;
                 text-align: center;
             }
         }
@@ -3455,10 +3041,10 @@ $width-single-menu  : 260px;
     display: none;
     position: relative;
     width: 100%;    
-    background: $color-primary;
+    background: $colorLv1;
     height: $height-header;
     box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
-    font-family: $font-primary-title;
+    font-family: $fontTitle;
     z-index: 103;
     .container {
         display: flex;
@@ -3521,7 +3107,7 @@ $width-single-menu  : 260px;
             position: relative;
             > a {
                 display: flex;
-                color: $color-title;
+                color: $colorTitle;
                 text-decoration: none;
                 font-weight: 500;
                 text-transform: capitalize;
@@ -3532,7 +3118,7 @@ $width-single-menu  : 260px;
                 border-bottom: 3px solid transparent;
                 font-size: 1.05rem;
                 &:hover {
-                    border-bottom: 3px solid $color-primary;
+                    border-bottom: 3px solid $colorLv1;
                 }
                 @media (min-width: 1024px) and (max-width: 1199px){
                     padding: 0 1.2rem;
@@ -3549,11 +3135,11 @@ $width-single-menu  : 260px;
             ul {
                 background: #fff;
                 width: $width-single-menu;
-                box-shadow: 0 1px 5px $color-primary-02;
+                box-shadow: 0 1px 5px $colorLv1-02;
                 display: none;
             }
             > ul {
-                border-top: 3px solid $color-primary;
+                border-top: 3px solid $colorLv1;
                 position: absolute;
                 top: calc($height-header - 3px);
                 left: 0;
@@ -3568,11 +3154,11 @@ $width-single-menu  : 260px;
                     a {
                         text-transform: capitalize;
                         text-decoration: none;
-                        color: $color-title;
+                        color: $colorTitle;
                         padding: 0 15px 5px 15px;
                         display: flex;
                         &:hover {
-                            background: $color-primary-01;
+                            background: $colorLv1-01;
                         }
                     }
                     &:hover {
@@ -3771,9 +3357,9 @@ $width-single-menu  : 260px;
     }
     a {
         .sectionBox_title {
-            color: $color-title;
+            color: $colorTitle;
             &:hover {
-                color: $color-primary-hover;
+                color: $colorLv1-hover;
             }
         }
     }
@@ -3802,15 +3388,15 @@ $width-single-menu  : 260px;
         margin: 1.5rem auto 0 auto;
         > * {
             display: inline-block;
-            border: 1px solid $color-primary;
+            border: 1px solid $colorLv1;
             width: auto;
             padding: 0.25rem 1.5rem;
             border-radius: 100px;
             font-size: 1rem;
-            color: $color-primary;
+            color: $colorLv1;
             cursor: pointer;
             &:hover {
-                background: $color-primary-01;
+                background: $colorLv1-01;
             }
         }
         i {
@@ -3907,7 +3493,7 @@ $width-single-menu  : 260px;
                 font-size: 1.05rem;
                 font-weight: bold;
                 margin: 0;
-                color: $color-primary-hover;
+                color: $colorLv1-hover;
             }
             &_close {
                 flex: 0 0 50px;
@@ -3961,7 +3547,7 @@ $width-single-menu  : 260px;
                     }
                     &.slick-active {
                         button {
-                            background: $color-secondary;
+                            background: $colorSLv1;
                             border-radius: 100%;
                             padding: 8px 12px;
                         }
@@ -3997,7 +3583,7 @@ $width-single-menu  : 260px;
                 width: 30px;
                 height: 30px;
                 border-radius: 100%;
-                border: solid 1px $color-secondary;
+                border: solid 1px $colorSLv1;
                 background-color: $bg-04;
                 top: 0;
                 left: -63px;
@@ -4028,7 +3614,7 @@ $width-single-menu  : 260px;
                 &_item {
                     &_title {
                         &:before {
-                            background-color: $color-secondary;
+                            background-color: $colorSLv1;
                         }
                     }
                     &_text {
@@ -4145,9 +3731,9 @@ $width-single-menu  : 260px;
                 h2 {
                     font-size: 1.25rem !important;
                     margin: 0 0 0.5rem 0;
-                    color: $color-title;
+                    color: $colorTitle;
                     &:hover {
-                        color: $color-primary;
+                        color: $colorLv1;
                     }
                 }
             }
@@ -4165,7 +3751,7 @@ $width-single-menu  : 260px;
                 }
             }
             &_des {
-                color: $color-des;
+                color: $colorDesc;
                 font-size: 1rem;
                 margin-top: 0.25rem;
             }
@@ -4247,7 +3833,7 @@ $width-single-menu  : 260px;
     margin: 2rem 0 1rem 0;
     &_title {
         font-size: 1.3rem;
-        font-family: $font-primary-title;
+        font-family: $fontTitle;
         margin-bottom: 1rem;
     }
     &_box {
@@ -4278,18 +3864,18 @@ $width-single-menu  : 260px;
                 padding: 0.75rem 0;
                 &_title {
                     h3 {
-                        color: $color-title;
+                        color: $colorTitle;
                         font-size: 1.1rem;
                         margin-bottom: 0.5rem;
-                        font-family: $font-primary-title;
+                        font-family: $fontTitle;
                         &:hover {
-                            color: $color-primary;
+                            color: $colorLv1;
                         }
                     }
                 }
                 &_time {
                     font-size: 0.95rem;
-                    color: $color-des;
+                    color: $colorDesc;
                     margin-bottom: 0.25rem;
                     i {
                         margin-right: 0.5rem;
@@ -4335,7 +3921,7 @@ $width-single-menu  : 260px;
         background: linear-gradient(90deg, rgba(0, 123, 255, 0.2) 0, rgb(255, 255, 255) 100%);
         h2, h3 {
             font-size: 1.2rem;
-            color: $color-title;
+            color: $colorTitle;
             margin-top: 0;
             margin-bottom: 0;
             display: inline-block;
@@ -4363,22 +3949,22 @@ $width-single-menu  : 260px;
                     h2, h3 {
                         font-size: 1.2rem;
                         margin-bottom: 0.75rem;
-                        color: $color-title;
+                        color: $colorTitle;
                         &:hover {
-                            color: $color-primary-hover;
+                            color: $colorLv1-hover;
                         }
                     }
                 }
                 &_time {
                     font-size: 0.95rem;
-                    color: $color-des;
+                    color: $colorDesc;
                     margin-bottom: 0.25rem;
                     i {
                         margin-right: 0.5rem;
                     }
                 }
                 &_desc {
-                    color: $color-des;
+                    color: $colorDesc;
                     font-size: 1rem;
                 }
             }
@@ -4411,16 +3997,16 @@ $width-single-menu  : 260px;
                     // display: flex;
                     h2, h3 {
                         font-size: 1.05rem;
-                        color: $color-title;
+                        color: $colorTitle;
                         margin-bottom: 0.5rem;
                         margin-top: -0.25rem;
                         &:hover {
-                            color: $color-primary-hover;
+                            color: $colorLv1-hover;
                         }
                     }
                     &_time {
                         font-size: 0.95rem;
-                        color: $color-des;
+                        color: $colorDesc;
                         i {
                             margin-right: 0.5rem;
                         }
@@ -4439,15 +4025,15 @@ $width-single-menu  : 260px;
         }
         &_button {
             display: inline-block;
-            border: 1px solid $color-primary;
+            border: 1px solid $colorLv1;
             width: auto;
             padding: 0.25rem 1.5rem;
             border-radius: 100px;
             font-size: 1rem;
-            color: $color-primary;
+            color: $colorLv1;
             cursor: pointer;
             &:hover {
-                background: $color-primary-01;
+                background: $colorLv1-01;
             }
             i {
                 margin-right: 0.5rem;
@@ -4456,7 +4042,7 @@ $width-single-menu  : 260px;
         .highLight {
             font-size: 1.2rem;
             font-weight: bold;
-            color: $color-primary-hover;
+            color: $colorLv1-hover;
         }
     }
     @media(max-width: 767px){
@@ -4525,7 +4111,7 @@ $width-single-menu  : 260px;
     margin: 2rem 0 1rem 0;
     &_title {
         font-size: 1.3rem;
-        font-family: $font-primary-title;
+        font-family: $fontTitle;
         margin-bottom: 1rem;
     }
     &_box {
@@ -4562,18 +4148,18 @@ $width-single-menu  : 260px;
                 text-align: justify;
                 &_title {
                     h3 {
-                        color: $color-title;
+                        color: $colorTitle;
                         font-size: 1.1rem;
                         margin-bottom: 0.5rem;
-                        font-family: $font-primary-title;
+                        font-family: $fontTitle;
                         &:hover {
-                            color: $color-primary;
+                            color: $colorLv1;
                         }
                     }
                 }
                 &_time {
                     font-size: 0.95rem;
-                    color: $color-des;
+                    color: $colorDesc;
                     margin-bottom: 0.25rem;
                     i {
                         margin-right: 0.5rem;
@@ -4644,7 +4230,7 @@ $width-single-menu  : 260px;
 .blogGridSlick {
     &_title {
         font-size: 1.3rem;
-        font-family: $font-primary-title;
+        font-family: $fontTitle;
         margin-bottom: 1rem;
     }
     &_box {
@@ -4678,18 +4264,18 @@ $width-single-menu  : 260px;
                 padding: 0.75rem 1rem;
                 &_title {
                     h3 {
-                        color: $color-title;
+                        color: $colorTitle;
                         font-size: 1.1rem;
                         margin-bottom: 0.5rem;
-                        font-family: $font-primary-title;
+                        font-family: $fontTitle;
                         &:hover {
-                            color: $color-primary;
+                            color: $colorLv1;
                         }
                     }
                 }
                 &_time {
                     font-size: 0.95rem;
-                    color: $color-des;
+                    color: $colorDesc;
                     margin-bottom: 0.25rem;
                     i {
                         margin-right: 0.5rem;
@@ -4758,11 +4344,11 @@ $width-single-menu  : 260px;
             border-radius: 50px 0 0 50px;
             h2, h3, h4 {
                 font-size: 1.05rem;
-                font-family: $font-primary-title;
+                font-family: $fontTitle;
                 margin-bottom: 0;
-                color: $color-title;
+                color: $colorTitle;
                 &:hover {
-                    color: $color-primary-hover;
+                    color: $colorLv1-hover;
                 }
             }
         }
@@ -4771,17 +4357,17 @@ $width-single-menu  : 260px;
             line-height: 2;
             li {
                 list-style-type: none;
-                color: $color-text;
+                color: $colorText;
                 display: flex;
                 a {
-                    color: $color-text;
+                    color: $colorText;
                     display: inline-block;
                     &:hover {
-                        color: $color-primary-hover;
+                        color: $colorLv1-hover;
                     }
                     h3, h4 {
                         font-size: inherit;
-                        font-family: $font-primary-text;
+                        font-family: $fontText;
                         font-weight: normal;
                     }
                 }
@@ -4846,11 +4432,11 @@ $width-single-menu  : 260px;
             border-radius: 50px 0 0 50px;
             h2, h3, h4 {
                 font-size: 1.05rem;
-                font-family: $font-primary-title;
+                font-family: $fontTitle;
                 margin-bottom: 0;
-                color: $color-title;
+                color: $colorTitle;
                 &:hover {
-                    color: $color-primary-hover;
+                    color: $colorLv1-hover;
                 }
             }
         }
@@ -4859,17 +4445,17 @@ $width-single-menu  : 260px;
             line-height: 1.8;
             li {
                 list-style-type: none;
-                color: $color-text;
+                color: $colorText;
                 display: flex;
                 a {
-                    color: $color-text;
+                    color: $colorText;
                     display: inline-block;
                     &:hover {
-                        color: $color-primary-hover;
+                        color: $colorLv1-hover;
                     }
                     h3, h4 {
                         font-size: inherit;
-                        font-family: $font-primary-text;
+                        font-family: $fontText;
                         font-weight: normal;
                     }
                 }
@@ -5138,7 +4724,7 @@ $width-single-menu  : 260px;
             h2, h3, h4 {
                 margin: 0;
                 font-size: 1.1rem;
-                color: $color-secondary;
+                color: $colorSLv1;
             }
             div {
                 font-size: 1rem;
@@ -5245,11 +4831,11 @@ $width-single-menu  : 260px;
             border-radius: 50px;
             font-size: 0.95rem;
             background: #fff;
-            color: $color-title;
-            border: 1px solid $color-primary-03;
+            color: $colorTitle;
+            border: 1px solid $colorLv1-03;
             cursor: pointer;
             &:hover {
-                background: $color-primary-01;
+                background: $colorLv1-01;
             }
             &.active {
                 background: $bg-08;
@@ -5280,7 +4866,7 @@ $width-single-menu  : 260px;
             }
             &:hover:not(.active) {
                 i {
-                    color: $color-primary-03;
+                    color: $colorLv1-03;
                 }
             }
         }
@@ -5674,12 +5260,12 @@ $width-single-menu  : 260px;
             h2, h3 {
                 font-size: 1.2rem;
                 margin-bottom: 0.5rem;
-                color: $color-title;
+                color: $colorTitle;
             }
         }
         &_desc {
             margin-bottom: 1rem;
-            color: $color-des;
+            color: $colorDesc;
         }
         &_box {
             display: flex;
@@ -5700,13 +5286,13 @@ $width-single-menu  : 260px;
                     padding: 0.5rem 1.25rem;
                     border-radius: 50px 0 0 50px;
                     margin-bottom: 0.5rem;
-                    font-family: $font-primary-title;
+                    font-family: $fontTitle;
                     font-size: 1rem;
-                    color: $color-title;
+                    color: $colorTitle;
                 }
                 &_text {
                     line-height: 1.8;
-                    color: $color-text;
+                    color: $colorText;
                     i {
                         width: 25px;
                         margin-right: 0.25rem;
@@ -5761,7 +5347,7 @@ $width-single-menu  : 260px;
         margin-left: 1.5rem;
         &_title {
             font-weight: bold;
-            color: $color-title;
+            color: $colorTitle;
             font-size: 1.1rem;
             margin-bottom: 0.5rem;
             color: #25a244;
@@ -5769,7 +5355,7 @@ $width-single-menu  : 260px;
         &_list {
             font-size: 1rem;
             > * {
-                color: $color-highlight;
+                color: $colorHighlight;
                 &:before {
                     @include fontAwesome;
                     content: '\f00c';

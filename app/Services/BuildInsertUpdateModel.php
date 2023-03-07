@@ -648,9 +648,9 @@ class BuildInsertUpdateModel {
                     $result[1]['quantity_child']        = $dataForm['quantity_child_2'];
                     $result[1]['quantity_old']          = $dataForm['quantity_old_2'];
                 }else {
-                    $result[1]['quantity_adult']        = $dataForm['quantity_adult_1'] ?? 0;
-                    $result[1]['quantity_child']        = $dataForm['quantity_child_1'] ?? 0;
-                    $result[1]['quantity_old']          = $dataForm['quantity_old_1'] ?? 0;
+                    $result[1]['quantity_adult']        = $dataForm['quantity_adult_2'] ?? 0;
+                    $result[1]['quantity_child']        = $dataForm['quantity_child_2'] ?? 0;
+                    $result[1]['quantity_old']          = $dataForm['quantity_old_2'] ?? 0;
                 }
                 $tmp                            = explode('|', $dataForm['dp2']);
                 $infoShipPrice                  = ShipPrice::select('*')

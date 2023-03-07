@@ -1,0 +1,561 @@
+/* form */
+.inputRequired {
+    &:after {
+        content: '\f621';
+        font-weight: 900;
+        @include fontAwesome;
+        font-size: 0.55rem;
+        color: $colorRed;
+        margin-left: 0.3rem;
+        opacity: 0.6;
+    }
+}
+.inputWithLabelInside, .textareaWithLabelInside {
+    height: 55px;
+    border: 1px solid $bg-05;
+    width: 100%;
+    position: relative;
+    padding: 0;
+    background: #fff;
+    label {
+        cursor: pointer;
+        margin-bottom: 0;
+        font-weight: normal;
+        font-size: 0.85rem;
+        padding: 0 0.75rem;
+    }
+    input {
+        display: flex;
+        margin-top: -2px;
+        font-size: 1.05rem;
+        padding: 0;
+        border: none;
+        outline: none;
+        padding: 0 0.75rem;
+        &:focus {
+            border: none;
+            outline: none;
+        }
+    }
+    &:not(:first-child){
+        margin-top: 1rem;
+    }
+    &:after {
+        @include fontAwesome;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $bg-06;
+        font-size: 0.95rem;
+    }
+    &.email {
+        &:after {
+            content: "\f0e0";
+        }
+    }
+    &.phone {
+        &:after {
+            content: "\f095";
+        }
+    }
+    &.location {
+        &:after {
+            content: "\f3c5";
+        }
+    }
+    &.date {
+        &:after {
+            content: "\f073";
+        }
+    }  
+    &.adult {
+        &:after {
+            content: "\f183";
+            font-size: 1.1rem;
+        }
+    }  
+    &.child {
+        &:after {
+            content: "\f1ae";
+            font-size: 1.1rem;
+        }
+    } 
+    &.old {
+        &:after {
+            content: "\e53c";
+            font-size: 1.1rem;
+        }
+    } 
+    &.message {
+        &:after {
+            content: "\f4ad";
+            font-size: 1.1rem;
+        }
+    }
+    select {
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
+    }
+    .select2-container .select2-selection--single {
+        // height: 45px !important;
+        padding: 0 !important;    
+    }
+    .select2-container--default .select2-selection--single {
+        border: none !important;
+        background: none;
+        margin-top: -12px;
+        font-weight: bold;
+        height: 28px !important;
+        
+        .select2-selection__arrow {
+        display: none;
+        }
+    }
+    .select2-selection__arrow {
+        top: 50% !important;
+        transform: translateY(-50%);
+    }
+    .select2-search--dropdown {
+        border-top: 1px solid $bg-05;
+        input {
+        margin: 0 !important;
+        }
+    }
+    .select2-search--dropdown .select2-search__field, .select2-results__option {
+        padding: 7px !important;
+    }
+    .select2-container {
+        left: 0 !important;
+        .select2-selection--single .select2-selection__rendered {
+        padding: 0 0.75rem !important;
+        }
+    }
+}
+.textareaWithLabelInside {
+    height: auto !important;
+    textarea {
+        border: none;
+    }
+}
+.validateErrorEmpty {
+    border: 1px solid $colorRed;
+    label {
+        &:after {
+            content: 'Trường này không được bỏ trống';
+            font-family: $fontText;
+            font-size: inherit;
+            color: $colorRed;
+            margin-left: 0.3rem;
+        }
+    }
+    &.errorCustomLocation {
+        border: none !important;
+        label {
+            &:after {
+                content: 'Vui lòng chọn chuyến đi và loại vé!' !important;
+            }
+        }
+    }
+}
+.validateErrorPhone {
+    border: 1px solid $colorRed;
+    label {
+    &:after {
+        content: 'Số điện thoại không hợp lệ';
+        font-family: $fontText;
+        font-size: inherit;
+        color: $colorRed;
+        margin-left: 0.3rem;
+    }
+    }
+}
+.validateErrorEmail {
+    border: 1px solid $colorRed;
+    label {
+        &:after {
+        content: 'Email không hợp lệ';
+        font-family: $fontText;
+        font-size: inherit;
+        color: $colorRed;
+        margin-left: 0.3rem;
+        }
+    }
+    }
+.validateSuccess {
+    border: 1px solid $colorSuccess;
+    label {
+    &:after {
+        content: '\f00c';
+        @include fontAwesome;
+        color: $colorSuccess;
+        font-size: 0.9rem;
+        margin-left: 0.3rem;
+    }
+    }
+}
+
+.bookingForm {
+    display: flex;
+    flex-direction: column;
+    &_item {
+        width: 100%;
+        &:not(:first-child){
+            margin-top: 2rem;
+        }
+        &_head {
+            font-size: 1.3rem;
+            font-family: $fontTitle;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        &_body {
+            // box-shadow: 0 0 5px $bg-03;
+            // border: 1px solid $bg-03;
+            // background: #fff;
+            // border-radius: 3px;
+            // padding: 1rem 1.5rem 1.5rem;
+            ul:not(.select2-results__options) {
+                li {
+                    &:not(:first-child){
+                        margin-top: 0.5rem;
+                        padding-top: 0.5rem;
+                        border-top: 1px dashed $bg-05;
+                    }
+                }
+            }
+            &_item {
+                &:not(:first-child){
+                    margin-top: 1.5rem;
+                }
+            }
+        }
+    }
+    .formColumnCustom {
+        display: flex;
+        &:not(:first-child){
+            margin-top: 1.2rem;
+        }
+        &_item {
+            width: calc(50% - 0.75rem);
+            &:not(:first-child){
+                margin-left: 1.5rem;
+            }
+        }
+    }
+    input, textarea, .select2-container--default .select2-selection--single .select2-selection__rendered {
+        color: $colorLv1-hover !important;
+    }
+    label {
+        margin-bottom: 0.25rem;
+        flex-wrap: wrap;
+        font-weight: bold;
+    }
+    .flexBox {
+        &.half {
+            .flexBox_item {
+                width: calc(50% - 0.5rem);
+                &:not(:first-child){
+                    margin-left: 1rem;
+                }
+            }
+        }
+    }
+    @media(max-width: 990px){
+        &_item {
+            &_head {
+                font-size: 1.25rem;
+            }
+            &:not(:first-child){
+                margin-top: 1.5rem;
+            }
+        }
+    }
+    @media(max-width: 577px){
+        &_item {
+            // &:not(:first-child){
+            //     margin-top: 1.5rem;
+            //     padding-top: 1rem;
+            //     border-top: 1px solid $bg-04;
+            // }
+            &_head {
+                font-size: 1.2rem;
+            }
+            &_body {
+                // padding: 0.75rem 1rem 1rem;
+                &_item {
+                    &:not(:first-child){
+                        margin-top: 1rem;
+                    }
+                }
+            }
+        }
+        .formColumnCustom {
+            flex-wrap: wrap;
+            &_item {
+                width: 100%;
+                margin-left: 0 !important;
+                &:not(:first-child){
+                    margin-top: 1rem;
+                }
+            }
+        }
+    }
+}
+.chooseTripBox {
+    // margin-top: 0.5rem;
+    display: flex;
+    &_item {
+        width: 100%;
+        max-width: 120px;
+        border: 1px solid $bg-04;
+        padding: 0.25rem 1rem;
+        text-align: center;
+        border-radius: 5px;
+        font-size: 0.95rem;
+        font-weight: bold;
+        cursor: pointer;
+        &:not(:first-child){
+            border-left: 1px solid $bg-04;
+        }
+        &:hover {
+            background: $colorLv1-03;
+        }
+        &.active {
+            background: linear-gradient(90deg, $colorLv1 0, $colorLv1-hover 100%);
+            color: #fff;
+        }
+    }
+}
+.formBox {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    &_full {
+        width: 100%;
+        &_item {
+            width: inherit;
+            &:not(:first-child){
+                margin-top: 0.75rem;
+            }
+        }
+    }
+    &_labelOneRow {
+        width: 100%;
+        &_item {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            line-height: 1.4;
+            &:not(:first-child){
+                margin-top: 1rem;
+            }
+            > * {
+                width: 100%;
+            }
+        }
+    }
+}
+.inputRequired {
+    &:after {
+        margin-left: 0.5rem;
+        content: '*';
+        color: $colorPrice;
+        font-weight: bold;
+    }
+}
+.messageValidate_error {
+    display: none;
+    margin-top: 0.25rem;
+    font-size: 0.95rem;
+    color: $colorRed;
+    font-style: italic;
+}
+// .inputWithIcon {
+//     position: relative;
+    
+// }
+.inputNumberCustom {
+    display: flex;
+    width: 220px;
+    &_button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        background: $bg-02;
+        border: 1px solid $bg-04;
+        font-size: 0.9rem;
+        border-radius: 5px;
+        color: $colorLv1;
+    }
+    &_input {
+        flex: 0 0 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 500;
+        border: 1px solid $bg-04;
+        border-radius: 5px;
+        padding-left: 0.65rem;
+        padding-right: 0.65rem;
+        text-align: center;
+    }
+    > * {
+        &:not(:first-child){
+            margin-left: 0.5rem;
+        }
+    }
+}
+.chooseDepartureShipBox {
+    &_head {
+        display: flex;
+        align-items: center;
+        background: $bg-02;
+        line-height: 1.5;
+        border: 1px solid $bg-03;
+        border-radius: 5px;
+        &_item {
+            width: 100%;
+            text-align: center;
+            padding: 0.5rem;
+            &:not(:first-child){
+                border-left: 1px solid $bg-05;
+            }
+            &.active {
+                background: linear-gradient(90deg, $colorLv1 0, $colorLv1-hover 100%);
+                color: #fff;
+                .chooseDepartureShipBox_head_item_price {
+                    color: $colorSLv1;
+                }
+            }
+            &_day {
+                font-size: 0.9rem;
+                font-weight: 500;
+            }
+            &_price {
+                color: $colorLv1-hover;
+                font-weight: 500;
+                font-size: 1.2rem;
+                letter-spacing: 0.5px;
+            }
+        }
+    }
+    &_body {
+        &_row {
+            display: flex;
+            border-bottom: 1px dashed $bg-05;
+            align-items: center;
+            background: $bg-02;
+            padding: 1rem;
+            &_item {
+                width: 100%;
+                text-align: center;
+                &:not(:first-child){
+                    margin-left: 1rem;
+                }
+                .option {
+                    line-height: 1.4;
+                    padding: 0.35rem 0.5rem;
+                    border: 1px solid $bg-03;
+                    background: #fff;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    &.active, &:hover {
+                        color: $colorHighlight;
+                    }
+                    &.active {
+                        background: $colorSLv1 !important;
+                    }
+                    &:hover {
+                        background: $colorLv1-02;
+                    }
+                    .price {
+                        font-family: $fontTitle;
+                        color: $colorLv1-hover;
+                        font-size: 1.2rem;
+                        letter-spacing: 0.5px;
+                    }
+                }
+                .highLight {
+                    font-size: 1.2rem;
+                    font-family: $fontTitle;
+                    color: $colorLv1-hover;
+                }
+            }
+        }
+    }
+    @media(max-width: 577px){
+        &_body {
+            &_row {
+                flex-wrap: wrap;
+                &_item {
+                    &:not(:last-child){
+                        margin-left: 0;
+                    }
+                    &:nth-child(n + 2){
+                        margin-top: 0.5rem;
+                    }
+                    &.width50 {
+                        width: calc(50% - 0.5rem);
+                        
+                    }
+                }
+                &:not(:first-child){
+                    border-top: 1px dashed $bg-05;
+                }
+            }
+        }
+    }
+}
+.chooseOptionTourBox {
+    background: $bg-02;
+    &_body {
+        display: flex;
+        flex-direction: column;
+        min-width: 550px;
+        &_item {
+            display: flex;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            &:not(:first-child){
+                border-top: 1px dashed $bg-06;
+            }
+            &.active {
+                background: $colorSLv1 !important;
+                color: $colorHighlight;
+                .highLight {
+                    color: $colorHighlight !important;
+                }
+                .chooseOptionTourBox_body_item_icon {
+                    &:before {
+                        content: '\f058' !important;
+                    }
+                }
+            }
+            &:hover {
+                background: $colorLv1-01;
+            }
+            > * {
+                width: 100%;
+                &:not(:first-child){
+                    padding-left: 1rem;
+                }
+            }
+            &_icon {
+                width: 50px;
+                &:before {
+                    @include fontAwesome;
+                    content: '\f1ce';
+                }
+            }
+            .highLight {
+                font-weight: bold;
+                font-size: 1.1rem;
+                color: $colorLv1-hover;
+            }
+        }
+    }
+}

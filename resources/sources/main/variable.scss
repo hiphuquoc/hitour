@@ -1,31 +1,31 @@
-$color-title            : #345;
-$color-primary          : rgb(0, 123, 255);
-$color-primary-hover    : rgb(0, 90, 180);
-$color-primary-01       : rgba(0, 123, 255, 0.1);
-$color-primary-02       : rgba(0, 123, 255, 0.2);
-$color-primary-03       : rgba(0, 123, 255, 0.3);
-$color-primary-04       : rgba(0, 123, 255, 0.4);
-$color-primary-05       : rgba(0, 123, 255, 0.5);
-$color-primary-06       : rgba(0, 123, 255, 0.6);
-$color-primary-07       : rgba(0, 123, 255, 0.7);
-$color-primary-08       : rgba(0, 123, 255, 0.8);
-$color-primary-09       : rgba(0, 123, 255, 0.9);
-$color-primary-light    : rgb(23, 115, 206);
+$colorTitle             : #345;
+$colorLv1          : rgb(0, 123, 255);
+$colorLv1-hover    : rgb(0, 90, 180);
+$colorLv1-01       : rgba(0, 123, 255, 0.1);
+$colorLv1-02       : rgba(0, 123, 255, 0.2);
+$colorLv1-03       : rgba(0, 123, 255, 0.3);
+$colorLv1-04       : rgba(0, 123, 255, 0.4);
+$colorLv1-05       : rgba(0, 123, 255, 0.5);
+$colorLv1-06       : rgba(0, 123, 255, 0.6);
+$colorLv1-07       : rgba(0, 123, 255, 0.7);
+$colorLv1-08       : rgba(0, 123, 255, 0.8);
+$colorLv1-09       : rgba(0, 123, 255, 0.9);
+$colorLv1-light    : rgb(23, 115, 206);
 
-$color-secondary        : rgb(244, 208, 63);
-$color-secondary-01     : rgba(244, 208, 63, 0.1);
-$color-secondary-02     : rgba(244, 208, 63, 0.2);
-$color-secondary-03     : rgba(244, 208, 63, 0.3);
-$color-secondary-04     : rgba(244, 208, 63, 0.4);
-$color-secondary-05     : rgba(244, 208, 63, 0.5);
-$color-secondary-06     : rgba(244, 208, 63, 0.6);
-$color-secondary-07     : rgba(244, 208, 63, 0.7);
-$color-secondary-08     : rgba(244, 208, 63, 0.8);
-$color-secondary-09     : rgba(244, 208, 63, 0.9);
-$color-secondary-hover  : rgb(241, 196, 15);
-$color-price: #fd5056;
-$color-red: #E74C3C;
-$color-green: rgb(38, 207, 142);
+$colorSLv1        : rgb(244, 208, 63);
+$colorSLv1-01     : rgba(244, 208, 63, 0.1);
+$colorSLv1-02     : rgba(244, 208, 63, 0.2);
+$colorSLv1-03     : rgba(244, 208, 63, 0.3);
+$colorSLv1-04     : rgba(244, 208, 63, 0.4);
+$colorSLv1-05     : rgba(244, 208, 63, 0.5);
+$colorSLv1-06     : rgba(244, 208, 63, 0.6);
+$colorSLv1-07     : rgba(244, 208, 63, 0.7);
+$colorSLv1-08     : rgba(244, 208, 63, 0.8);
+$colorSLv1-09     : rgba(244, 208, 63, 0.9);
+$colorSLv1-hover  : rgb(241, 196, 15);
+$colorPrice: #fd5056;
+$colorRed: #E74C3C;
+$colorSuccess: rgb(38, 207, 142);
 
 $bg-1: 			#212529;
 $bg-09: 		#343a40;
@@ -35,18 +35,17 @@ $bg-06: 		#adb5bd;
 $bg-05: 		#ced4da;
 $bg-04: 		#dee2e6;
 $bg-03: 		#e9ecef;
-// $bg-02: 		#f8f9fa;
 $bg-02: 		#EDF2F7;
 $color-link: #3498DB;
 $color-link-dark: #2E86C1;
-$color-des : #678;
-$color-text: #567;
-$color-highlight: #183153;
+$colorDesc : #678;
+$colorText: #567;
+$colorHighlight: #183153;
 
-$font-primary-title: "SVN-Gilroy Bold", serif;
-$font-primary-text: "SVN-Gilroy", sans-serif;
+$fontTitle: "SVN-Gilroy Bold", serif;
+$fontText: "SVN-Gilroy", sans-serif;
 
-$background-image: '/images/main/hitour-background.png';
+$backgroundImage: '/images/main/hitour-background.png';
 
 // font Gilroy
 $folderFont : '/fonts/';
@@ -100,7 +99,7 @@ $folderFont : '/fonts/';
 }
 
 @mixin titleOfBox {
-    font-family: $font-primary-title;
+    font-family: $fontTitle;
     text-transform: uppercase;
     font-size: 1.2rem;
     font-weight: 700;
@@ -110,7 +109,7 @@ $folderFont : '/fonts/';
 @mixin titleSection {
     font-size: 1.5rem !important;
     margin: 0 0 0.5rem 0 !important;
-    color: $color-title;
+    color: $colorTitle;
     display: inline-block;
     @media (min-width: 768px) and (max-width: 1023px){
         font-size: 1.45rem !important;
@@ -166,7 +165,7 @@ $folderFont : '/fonts/';
                 padding: 0;
                 height: 5px;
                 width: 35px;
-                background: $color-primary-03;
+                background: $colorLv1-03;
                 border: none !important;
                 box-shadow: none !important;
                 &::selection {
@@ -180,7 +179,7 @@ $folderFont : '/fonts/';
         }
         .slick-active {
             button {
-                background: $color-primary;
+                background: $colorLv1;
             }
         }
         @media (max-width: 767px){
@@ -208,10 +207,10 @@ $folderFont : '/fonts/';
     border: none;
     border-radius: 50%;
     text-align: center;
-    background: $color-secondary-08;
+    background: $colorSLv1-08;
     padding: 0.6rem 0.9rem;
     &:hover {
-        background: $color-secondary;
+        background: $colorSLv1;
     }
     &.slick-prev {
         left: -0.5rem;

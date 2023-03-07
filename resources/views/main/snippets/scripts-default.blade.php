@@ -303,4 +303,61 @@
         // print xong không thực hiện được các chức năng => reload() lại
         location.reload();
     }
+    /* validate form khi nhập */
+    function validateWhenType(elementInput, type = 'empty'){
+        const idElement         = $(elementInput).attr('id');
+        const parent            = $(document).find('[for*="'+idElement+'"]').parent();
+        /* validate empty */
+        if(type=='empty'){
+            const valueElement  = $.trim($(elementInput).val());
+            if(valueElement!=''&&valueElement!='0'){
+                parent.removeClass('validateErrorEmpty');
+                parent.addClass('validateSuccess');
+            }else {
+                parent.removeClass('validateSuccess');
+                parent.addClass('validateErrorEmpty');
+            }
+        }
+        /* validate phone */ 
+        if(type=='phone'){
+            const valueElement = $.trim($(elementInput).val());
+            if(valueElement.length>=10&&/^\d+$/.test(valueElement)){
+                parent.removeClass('validateErrorPhone');
+                parent.addClass('validateSuccess');
+            }else {
+                parent.removeClass('validateSuccess');
+                parent.addClass('validateErrorPhone');
+            }
+        }
+        /* validate email */ 
+        if(type=='email'){
+            const valueElement = $.trim($(elementInput).val());
+            /* check empty (nếu required) */
+            if($(elementInput).prop('required')){
+                if(valueElement==''){
+                    parent.removeClass('validateSuccess');
+                    parent.removeClass('validateErrorEmail');
+                    parent.addClass('validateErrorEmpty');
+                    return false;
+                }
+                /* check email hợp lệ */
+                if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valueElement)){
+                    parent.removeClass('validateErrorEmail');
+                    parent.removeClass('validateErrorEmpty');
+                    parent.addClass('validateSuccess');
+                }else {
+                    parent.removeClass('validateSuccess');
+                    parent.removeClass('validateErrorEmpty');
+                    parent.addClass('validateErrorEmail');
+                }
+            }else {
+                /* check email hợp lệ */
+                if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valueElement)){
+                    parent.removeClass('validateErrorEmail');
+                    parent.removeClass('validateErrorEmpty');
+                    parent.addClass('validateSuccess');
+                }
+            }
+        }
+    }
 </script>
