@@ -67,7 +67,7 @@
             </div>
         @endif
     </td>
-    <td style="vertical-align:top;display:flex;">
+    <td style="vertical-align:top;display:flex;font-size:0.95rem;">
         @if(!empty($item->seo->slug))
             <div class="icon-wrapper iconAction">
                 <a href="{{ url($item->seo->slug_full) }}" target="_blank">

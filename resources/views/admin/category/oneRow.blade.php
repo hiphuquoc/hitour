@@ -51,7 +51,7 @@
             {{ date('H:i, d/m/Y', strtotime($item->seo->updated_at)) }}
         </div>
     </td>
-    <td style="vertical-align:top;display:flex;">
+    <td style="vertical-align:top;display:flex;font-size:0.95rem;">
         <div class="icon-wrapper iconAction">
             <a href="{{ url($item->seo->slug_full) }}" target="_blank">
                 <i data-feather='eye'></i>

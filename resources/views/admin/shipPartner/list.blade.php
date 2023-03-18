@@ -60,7 +60,7 @@
                                 @endforeach
                             @endif
                         </td>
-                        <td style="vertical-align:top;display:flex;">
+                        <td style="vertical-align:top;display:flex;font-size:0.95rem;">
                             <div class="icon-wrapper iconAction">
                                 <a href="{{ route('admin.shipPartner.view', ['id' => $item->id]) }}">
                                     <i data-feather='edit'></i>

@@ -39,7 +39,7 @@
                                 Điện thoại: {{ $item->phone }} ({{ $item->zalo }}) - Email: {{ $item->email }}
                             </div>
                         </td>
-                        <td style="vertical-align:top;display:flex;">
+                        <td style="vertical-align:top;display:flex;font-size:0.95rem;">
                             <div class="icon-wrapper iconAction">
                                 <a href="{{ route('admin.staff.viewEdit', ['id' => $item->id]) }}">
                                     <i data-feather='edit'></i>
