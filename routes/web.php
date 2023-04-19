@@ -76,7 +76,7 @@ use Illuminate\Support\Facades\Redirect;
 |
 */
 
-Route::prefix('admin')->group(function(){
+Route::prefix('he-thong')->group(function(){
     Route::get('/', [LoginController::class, 'showLoginForm'])->name('admin.showLoginForm');
     Route::post('/login', [LoginController::class, 'login'])->name('admin.login');
     Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');

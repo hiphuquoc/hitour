@@ -320,8 +320,6 @@
                     showHideMessageValidate(nameInput, 'show');
                     /* thông báo lỗi chung empty */
                     $('input[name='+nameInput+']').parent().addClass('validateErrorEmpty');
-
-                    console.log(nameInput);
                 });
                 /* scroll đến thông báo đầu tiên */
                 $('[class*=validateErrorEmpty]').each(function(){
