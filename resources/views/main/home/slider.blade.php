@@ -1,11 +1,6 @@
 @php
     $dataSlider = [
         [
-            'src'   => '/images/main/du-lich-chau-au-hitour-1.jpg',
-            'alt'   => 'Trang Tour du lịch Châu Âu Hitour',
-            'link'  => 'tour-du-lich-chau-au'
-        ],
-        [
             'src'   => '/images/main/du-lich-bien-dao-hitour-1.webp',
             'alt'   => 'Trang Tour du lịch biển đảo Hitour'
         ],
@@ -13,6 +8,12 @@
             'src'   => '/images/main/dich-vu-lam-visa-hitour-1.png',
             'alt'   => 'Dịch vụ làm Visa Hitour'
         ],
+        [
+            'src'   => '/images/main/du-lich-chau-au-hitour-1.jpg',
+            'alt'   => 'Trang Tour du lịch Châu Âu Hitour',
+            'link'  => 'tour-du-lich-chau-au'
+        ],
+        
         // [
         //     'src'   => '/images/main/du-lich-nuoc-ngoai-hitour-1.jpg',
         //     'alt'   => 'Trang Tour du lịch Nước ngoài Hitour'
@@ -20,14 +21,15 @@
     ];
     $dataSliderMobile = [
         [
+            'src'   => '/images/main/du-lich-bien-dao-hitour-1-mobile.jpg',
+            'alt'   => 'Trang Tour du lịch biển đảo Hitour'
+        ],
+        [
             'src'   => '/images/main/du-lich-chau-au-hitour-1-mobile.jpg',
             'alt'   => 'Trang Tour du lịch Châu Âu Hitour',
             'link'  => 'tour-du-lich-chau-au'
         ],
-        [
-            'src'   => '/images/main/du-lich-bien-dao-hitour-1-mobile.jpg',
-            'alt'   => 'Trang Tour du lịch biển đảo Hitour'
-        ]
+        
     ];
 @endphp
 <!-- START: Home slider Desktop -->
