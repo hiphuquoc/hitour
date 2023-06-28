@@ -251,10 +251,47 @@ button {
     }
 }
 
+.blurBackground {
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+}
+
 label {
-    font-size: 0.95rem;
-    // margin-bottom: 0.2rem;
+    // font-weight: 600;
+    font-size: 0.925rem;
     display: flex;
+    margin-bottom: 0.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    &.required {
+      &:after {
+        content: '*';
+        color: $colorPrice;
+        font-size: 1.1rem;
+        margin-left: 0.25rem;
+      }
+    }
+    &.error {
+      &:after {
+        content: 'Vui lòng kiểm tra lại trường này';
+        color: $colorPrice;
+        font-size: 0.9rem;
+        font-family: $fontTitle;
+        margin-left: 0.25rem;
+      }
+    }
+    &.checkBox {
+        cursor: pointer;
+        margin-bottom: 0;
+        input {
+            width: 20px;
+        }
+        > * {
+            &:not(:first-child){
+            margin-left: 0.5rem;
+            }
+        }
+    }
 }
 
 input, textarea {

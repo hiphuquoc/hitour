@@ -13,9 +13,14 @@
             <a href="/lien-he-hitour" title="Liên hệ Hitour" class="headerTop_item_list_item">
                Liên hệ
             </a>
-            <a href="/admin" title="Đăng nhập" class="headerTop_item_list_item">
+            {{-- <a href="/admin" title="Đăng nhập" class="headerTop_item_list_item">
                Đăng nhập
-            </a>
+            </a> --}}
+            <div id="js_checkLoginAndSetShow_button" class="headerTop_item_list_item js_toggleModalLogin"><div class="loginBox" onclick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');">
+               <img src="/storage/images/svg/sign-in-alt.svg" alt="đăng nhập " title="đăng nhập" />
+               <div class="maxLine_1">Đăng nhập</div>
+               </div>
+            </div>
          </div>
          <div class="headerTop_item_language">
             <div class="headerTop_item_language_item vi"></div>

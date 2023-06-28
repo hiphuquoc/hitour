@@ -15,6 +15,7 @@
     $(window).ready(function(){
         loadImage()
         addTableResponsive()
+        checkLoginAndSetShow()
         /* fixed sidebar khi scroll */
         const elemt                         = $('.js_scrollFixed');
         const widthElemt                    = elemt.parent().width();
@@ -43,6 +44,28 @@
             });
         }
     });
+    /* check đăng nhập */
+    function checkLoginAndSetShow(){
+        const language = $('#language').val();
+        $.ajax({
+            url         : '{{ route("ajax.checkLoginAndSetShow") }}',
+            type        : 'get',
+            dataType    : 'json',
+            data        : {
+                '_token'            : '{{ csrf_token() }}',
+                language
+            },
+            success     : function(response){
+                /* button desktop */
+                $('#js_checkLoginAndSetShow_button').html(response.button);
+                $('#js_checkLoginAndSetShow_button').css('display', 'flex');
+                /* button mobile */
+                $('#js_checkLoginAndSetShow_buttonMobile').html(response.button_mobile);
+                /* modal chung */
+                $('#js_checkLoginAndSetShow_modal').html(response.modal);
+            }
+        });
+    }
     /* Go to top */
     mybutton 					    = document.getElementById("gotoTop");
     window.onscroll                 = function() {scrollFunction()};
@@ -358,6 +381,64 @@
                     parent.addClass('validateSuccess');
                 }
             }
+        }
+    }
+    /* tính năng registry email ở footer */
+    function submitFormRegistryEmail(idForm){
+        event.preventDefault();
+        const inputEmail = $('#'+idForm).find('[name*=registry_email]');
+        const valueEmail = inputEmail.val();
+        if(isValidEmail(valueEmail)){
+            $.ajax({
+                url         : '{{ route("ajax.registryEmail") }}',
+                type        : 'get',
+                dataType    : 'json',
+                data        : {
+                    registry_email : valueEmail
+                },
+                success     : function(response){
+                    /* bật thông báo */
+                    setMessageModal(response.title, response.content);
+                    /* clear value input */
+                    inputEmail.val('');
+                }
+            });
+        }else {
+            inputEmail.val('');
+            inputEmail.attr('placeholder', 'Email không hợp lệ!');
+        }
+    }
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+    /* hiện thông báo modal thành công */
+    function openCloseModal(idModal, action = null){
+        const elementModal  = $('#'+idModal);
+        const flag          = elementModal.css('display');
+        /* tooggle */
+        if(action==null){
+            if(flag=='none'){
+                elementModal.css('display', 'flex');
+                $('#js_openCloseModal_blur').addClass('blurBackground');
+                $('body').css('overflow', 'hidden');
+            }else {
+                elementModal.css('display', 'none');
+                $('#js_openCloseModal_blur').removeClass('blurBackground');
+                $('body').css('overflow', 'unset');
+            }
+        }
+        /* đóng */
+        if(action=='close'){
+            elementModal.css('display', 'none');
+            $('#js_openCloseModal_blur').removeClass('blurBackground');
+            $('body').css('overflow', 'unset');
+        }
+        /* mở */
+        if(action=='open'){
+            elementModal.css('display', 'flex');
+            $('#js_openCloseModal_blur').addClass('blurBackground');
+            $('body').css('overflow', 'hidden');
         }
     }
 </script>

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Auth\LoginController;
 
 use App\Http\Controllers\AdminTourLocationController;
 use App\Http\Controllers\AdminTourDepartureController;
@@ -62,6 +62,7 @@ use App\Http\Controllers\ServiceBookingController;
 use App\Http\Controllers\TourBookingController;
 
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\Auth\ProviderController;
 
 use Illuminate\Support\Facades\Redirect;
 
@@ -77,11 +78,16 @@ use Illuminate\Support\Facades\Redirect;
 */
 
 Route::prefix('he-thong')->group(function(){
+    // Route::get('/', [LoginController::class, 'showLoginForm'])->name('admin.showLoginForm');
+    // Route::post('/login', [LoginController::class, 'login'])->name('admin.login');
+    // Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
+    /* login */
     Route::get('/', [LoginController::class, 'showLoginForm'])->name('admin.showLoginForm');
-    Route::post('/login', [LoginController::class, 'login'])->name('admin.login');
+    Route::post('/loginAdmin', [LoginController::class, 'loginAdmin'])->name('admin.loginAdmin');
     Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
+    Route::post('/loginCustomer', [LoginController::class, 'loginCustomer'])->name('admin.loginCustomer');
 
-    Route::middleware(['auth'])->group(function () {
+    Route::middleware('auth', 'role:admin')->group(function (){
         /* ===== TOUR LOCATION ===== */
         Route::prefix('tourLocation')->group(function(){
             Route::get('/', [AdminTourLocationController::class, 'list'])->name('admin.tourLocation.list');
@@ -499,6 +505,16 @@ Route::prefix('serviceBooking')->group(function(){
     Route::get('/loadBookingSummary', [ServiceBookingController::class, 'loadBookingSummary'])->name('main.serviceBooking.loadBookingSummary');
     Route::get('/confirm', [ServiceBookingController::class, 'confirm'])->name('main.serviceBooking.confirm');
 });
+/* login với google */
+// Route::get('/setCsrfFirstTime', [CookieController::class, 'setCsrfFirstTime'])->name('main.setCsrfFirstTime');
+Route::post('/auth/google/callback', [ProviderController::class, 'googleCallback'])->name('main.google.callback');
+/* login với facebook */
+Route::get('/auth/facebook/redirect', [ProviderController::class, 'facebookRedirect'])->name('main.facebook.redirect');
+Route::get('/auth/facebook/callback', [ProviderController::class, 'facebookCallback'])->name('main.facebook.callback');
+/* ===== AJAX ===== */
+Route::get('/checkLoginAndSetShow', [AjaxController::class, 'checkLoginAndSetShow'])->name('ajax.checkLoginAndSetShow');
+Route::get('/registryEmail', [AjaxController::class, 'registryEmail'])->name('ajax.registryEmail');
+Route::get('/setMessageModal', [AjaxController::class, 'setMessageModal'])->name('ajax.setMessageModal');
 /* ===== TOC CONTENT ===== */
 Route::get('/buildTocContentSidebar', [AjaxController::class, 'buildTocContentSidebar'])->name('main.buildTocContentSidebar');
 Route::get('/buildTocContentMain', [AjaxController::class, 'buildTocContentMain'])->name('main.buildTocContentMain');

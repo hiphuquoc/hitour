@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Admin\Auth;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -37,16 +37,38 @@ class LoginController extends Controller
         return view('admin.auth.login');
     }
 
-    public function login(Request $request){
+    public function loginAdmin(Request $request){
+        /* Đăng nhập */
         if(Auth::attempt($request->only('email', 'password'))){
-            return redirect()->route('admin.booking.list');
+            $user       = Auth::user();
+            if($user->hasRole('admin')){
+                return redirect()->route('admin.booking.list');
+            } else {
+                Auth::logout();
+                session()->flash('error', 'Bạn không có quyền truy cập vào khu vực này!');
+                return back();
+            }
         }
         session()->flash('error', 'Email và Password đăng nhập không hợp lệ!');
         return back();
     }
 
-    public function logout(){
+    public function loginCustomer(Request $request){
+        $flag       = false;
+        $message    = 'Email và Password không hợp lệ!';
+        $dataForm   = [];
+        foreach($request->get('data') as $value){
+            $dataForm[$value['name']] = $value['value'];
+        }
+        /* đăng nhập */
+        if(Auth::attempt($dataForm)) $flag   = true;
+        $result['flag']     = $flag;
+        $result['message']  = $message;
+        return json_encode($result);
+    }
+
+    public static function logout(){
         Auth::logout();
-        return redirect()->route('admin.showLoginForm');
+        return redirect($_SERVER['HTTP_REFERER']);
     }
 }

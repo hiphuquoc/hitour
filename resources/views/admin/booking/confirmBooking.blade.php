@@ -89,17 +89,37 @@
                             <td style="box-sizing:border-box;padding:5px 15px;">
                                 <table class="sendEmail" role="presentation" style="border-collapse:collapse;width:100%;line-height:1.68;font-size:15px;color:#456;">
                                     <tbody>
-                                        @if(!empty($item->service->serviceLocation->display_name))
-                                            <tr>
-                                                <td style="width:140px;font-size:15px;padding:5px;">Điểm đến</td>
+                                        <tr>
+                                            <td style="width:140px;font-size:15px;padding:5px;">Điểm đến</td>
+                                            {{-- <td style="font-size:15px;padding:5px;">{{ $item->service->serviceLocation->display_name }}</td> --}}
+                                            @if($item->type=='combo_info')
+                                                @php
+                                                    $xhtmlLocation = [];
+                                                    foreach($item->combo->locations as $location){
+                                                        if(!in_array($location->infoLocation->display_name, $xhtmlLocation)) $xhtmlLocation[] = $location->infoLocation->display_name;
+                                                    }
+                                                    $xhtmlLocation = implode(', ', $xhtmlLocation);
+                                                @endphp
+                                                <td style="font-size:15px;padding:5px;">{{ $xhtmlLocation }}</td>
+                                            @elseif($item->type=='tour_info')
+                                                @php
+                                                    $xhtmlLocation = [];
+                                                    foreach($item->tour->locations as $tour){
+                                                        if(!in_array($tour->infoLocation->display_name, $xhtmlLocation)) $xhtmlLocation[] = $tour->infoLocation->display_name;
+                                                    }
+                                                    $xhtmlLocation = implode(', ', $xhtmlLocation);
+                                                @endphp
+                                                <td style="font-size:15px;padding:5px;">{{ $xhtmlLocation }}</td>
+                                                {{-- <td style="font-size:15px;padding:5px;">{{ $item->tour->tourLocation->display_name }}</td> --}}
+                                            @else
                                                 <td style="font-size:15px;padding:5px;">{{ $item->service->serviceLocation->display_name }}</td>
-                                            </tr>
-                                        @endif
+                                            @endif
+                                        </tr>
                                         <tr>
                                             <td style="width:140px;font-size:15px;padding:5px;">Tên dịch vụ</td>
                                             <td style="font-size:15px;padding:5px;"><a href="{{ env('APP_URL') }}/{{ $item->service->seo->slug_full ?? $item->tour->seo->slug_full ?? null }}" style="color:rgba(0,123,255,1);text-decoration:none" target="_blank">{{ $item->tour->name ?? $item->service->name }}</a></td>
                                         </tr>
-                                        @if(!empty($item->tour))
+                                        @if($item->type=='tour_info')
                                             <tr style="border-top:1px dotted #d1d1d1;">
                                                 <td style="width:140px;font-size:15px;padding:5px;">Lịch trình</td>
                                                 <td style="font-size:15px;padding:5px;">
@@ -123,7 +143,7 @@
                                         </tr>
                                         
                                         <!-- xử lý cho giao diện tour -->
-                                        @if(!empty($item->tour))
+                                        @if($item->type=='tour_info')
                                             <tr style="border-top:1px dotted #d1d1d1">
                                                 <td style="width:140px;font-size:15px;padding:5px;">Điểm đón</td>
                                                 <td style="font-size:15px;padding:5px;">{{ $item->tour->pick_up ?? null }}</td>
@@ -203,7 +223,7 @@
                                 <table class="sendEmail" role="presentation" style="border-collapse:collapse;width:100%;line-height:1.68;font-size:15px;color:#456;">
                                     <tbody>
                                         <tr>
-                                            @if(!empty($item->tour))
+                                            @if($item->type=='tour_info')
                                                 <td colspan="3" style="font-size:15px;padding:7px 12px !important;text-align:center;font-style:italic;font-size:14px;">Giá trên chưa gồm VAT 10% (nếu lấy hóa đơn)</td>
                                             @else 
                                                 <td colspan="3" style="font-size:15px;padding:7px 12px !important;text-align:center;font-style:italic;font-size:14px;">Giá trên đã bao gồm VAT 10%</td>

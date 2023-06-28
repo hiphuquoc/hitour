@@ -46,7 +46,7 @@
                             {{-- @php
                                 dd($error);
                             @endphp --}}
-                            <form class="auth-login-form mt-2" action="{{ route('admin.login') }}" method="POST">
+                            <form class="auth-login-form mt-2" action="{{ route('admin.loginAdmin') }}" method="POST">
                                 @csrf
                                 <div class="mb-1">
                                 <label for="email" class="form-label">Địa chỉ Email</label>

@@ -47,7 +47,7 @@
                         <div class="certificateBox_item certificateDMCA"></div>
                     </div>
                 </div>
-                <div class="footerBox_item">
+                {{-- <div class="footerBox_item">
                     <div class="footerBox_item_title">Đăng ký nhận khuyến mãi</div>
                     <div class="signupReceiveEmail">
                         <div class="signupReceiveEmail_desc">Nhập email để nhận thông tin về các chương trình khuyến mãi của Hitour!</div>
@@ -56,7 +56,21 @@
                             <button type="submit" aria-label="Đăng ký email"><i class="fa-solid fa-envelope"></i></button>
                         </div>
                     </div>
-                    
+                </div> --}}
+                <div class="footerBox_item">
+                    <div class="footerBox_item_title">Đăng ký nhận khuyến mãi</div>
+                    <div class="signupReceiveEmail">
+                        <div class="signupReceiveEmail_desc">Nhập email để nhận thông tin về các chương trình khuyến mãi của {{ config('main.name') }}!</div>
+                        <div class="signupReceiveEmail_input">
+                            <form id="registryEmailForm" action="#" method="get">
+                                <div class="registryEmailBox">
+                                    <input type="text" name="registry_email" placeholder="Email của bạn" />
+                                    <button type="button" aria-label="Đăng ký email" onclick="submitFormRegistryEmail('registryEmailForm')" aria-label="Gửi email đăng ký nhận tin"><i class="fa-solid fa-envelope"></i></button>
+                                </div>
+                            </form>
+                            
+                        </div>
+                    </div>
                 </div>
         </div>
         <div class="footerBox">

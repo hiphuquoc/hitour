@@ -59,7 +59,7 @@ class HomeController extends Controller {
                                     ->with('seo')
                                     ->get();
             $xhtml  = view('main.home.home', compact('item', 'shipLocations', 'airLocations', 'serviceLocations', 'islandLocations', 'specialLocations', 'shipPartners', 'airPartners'))->render();
-            Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
+            if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
         }
         echo $xhtml;
     }
