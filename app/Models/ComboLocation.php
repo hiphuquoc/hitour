@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TourLocation extends Model {
+class ComboLocation extends Model {
     use HasFactory;
-    protected $table        = 'tour_location';
+    protected $table        = 'combo_location';
     protected $fillable     = [
         'name', 
         'display_name',
@@ -42,7 +42,7 @@ class TourLocation extends Model {
     public static function insertItem($params){
         $id             = 0;
         if(!empty($params)){
-            $model      = new TourLocation();
+            $model      = new ComboLocation();
             foreach($params as $key => $value) $model->{$key}  = $value;
             $model->save();
             $id         = $model->id;
@@ -80,44 +80,15 @@ class TourLocation extends Model {
         return $this->hasOne(\App\Models\District::class, 'id', 'district_id');
     }
 
-    public function tours(){
-        return $this->hasMany(\App\Models\RelationTourLocation::class, 'tour_location_id', 'id');
-    }
-
-    public function guides() {
-        return $this->hasMany(\App\Models\RelationTourLocationGuide::class, 'tour_location_id', 'id');
+    public function combos(){
+        return $this->hasMany(\App\Models\RelationComboLocation::class, 'combo_location_id', 'id');
     }
 
     public function questions(){
         return $this->hasMany(\App\Models\QuestionAnswer::class, 'reference_id', 'id');
     }
 
-    public function shipLocations(){
-        return $this->hasMany(\App\Models\RelationTourLocationShipLocation::class, 'tour_location_id', 'id');
+    public function tourLocations(){
+        return $this->hasMany(\App\Models\RelationTourLocationComboLocation::class, 'combo_location_id', 'id');
     }
-
-    public function carrentalLocations(){
-        return $this->hasMany(\App\Models\RelationTourLocationCarrentalLocation::class, 'tour_location_id', 'id');
-    }
-
-    public function serviceLocations() {
-        return $this->hasMany(\App\Models\RelationTourLocationServiceLocation::class, 'tour_location_id', 'id');
-    }
-
-    public function airLocations() {
-        return $this->hasMany(\App\Models\RelationTourLocationAirLocation::class, 'tour_location_id', 'id');
-    }
-
-    public function destinations() {
-        return $this->hasMany(\App\Models\RelationTourLocationDestinationList::class, 'tour_location_id', 'id');
-    }
-
-    public function specials() {
-        return $this->hasMany(\App\Models\RelationTourLocationSpecialList::class, 'tour_location_id', 'id');
-    }
-
-    public function comboLocations(){
-        return $this->hasMany(\App\Models\RelationTourLocationComboLocation::class, 'tour_location_id', 'id');
-    }
-
 }

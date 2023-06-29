@@ -112,7 +112,8 @@ return [
         'contentPage'               => 'public/contents/pages/',
         'contentTourContinent'      => 'public/contents/tourContinents/',
         'contentTourCountry'        => 'public/contents/tourCountries/',
-        'contentSchedule'           => 'public/contents/shipSchedule/'
+        'contentSchedule'           => 'public/contents/shipSchedule/',
+        'contentComboLocation'      => 'public/contents/comboLocations/',
     ],
 
     'alert'     => [

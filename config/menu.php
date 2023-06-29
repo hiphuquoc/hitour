@@ -58,33 +58,23 @@ return [
             ]
         ],
         [
-            'name'      => 'Vé máy bay',
+            'name'      => 'Combo du lịch',
             'route'     => '',
-            'icon'      => '<i class="fa-solid fa-paper-plane"></i>',
+            'icon'      => '<i class="fa-solid fa-award"></i>',
             'child'     => [
                 [
-                    'name'  => '1. Sân Bay',
-                    'route' => 'admin.airPort.list',
+                    'name'  => '1. Điểm đến',
+                    'route' => 'admin.comboLocation.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '2. Điểm khởi hành',
-                    'route' => 'admin.airDeparture.list',
+                    'name'  => '2. Chi tiết Combo',
+                    'route' => 'admin.combo.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '3. Điểm đến',
-                    'route' => 'admin.airLocation.list',
-                    'icon'  => '<i data-feather=\'circle\'></i>'
-                ],
-                [
-                    'name'  => '4. Hãng Bay',
-                    'route' => 'admin.airPartner.list',
-                    'icon'  => '<i data-feather=\'circle\'></i>'
-                ],
-                [
-                    'name'  => '5. Chi tiết Bay',
-                    'route' => 'admin.air.list',
+                    'name'  => '3. Đối tác Combo',
+                    'route' => 'admin.comboPartner.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ]
             ]
@@ -136,6 +126,38 @@ return [
                 [
                     'name'  => '2. Chi tiết dịch vụ',
                     'route'     => 'admin.service.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ]
+            ]
+        ],
+        [
+            'name'      => 'Vé máy bay',
+            'route'     => '',
+            'icon'      => '<i class="fa-solid fa-paper-plane"></i>',
+            'child'     => [
+                [
+                    'name'  => '1. Sân Bay',
+                    'route' => 'admin.airPort.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '2. Điểm khởi hành',
+                    'route' => 'admin.airDeparture.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '3. Điểm đến',
+                    'route' => 'admin.airLocation.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '4. Hãng Bay',
+                    'route' => 'admin.airPartner.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '5. Chi tiết Bay',
+                    'route' => 'admin.air.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ]
             ]

@@ -78,7 +78,39 @@ class Upload {
             $result         = Storage::url($fileUrl);
         }
         return $result;
-    }
+    }    
 
-    
+    public static function uploadCustom($requestImage, $name = null){
+        $result             = null;
+        if(!empty($requestImage)){
+            // ===== folder upload
+            $folderUpload   = config('admin.images.folderUpload');
+            // ===== image upload
+            $image          = $requestImage;
+            $extension      = config('admin.images.extension');
+            // ===== set filename & checkexists
+            $name           = $name ?? time();
+            $filename       = $name.'-normal.'.$extension;
+            $fileUrl        = $folderUpload.$filename;
+            // save image (unresize)
+            ImageManagerStatic::make($image->getRealPath())
+                ->encode($extension, config('admin.images.quality'))
+                ->save(Storage::path($fileUrl));
+            $result['filePathNormal']   = Storage::url($fileUrl);
+            
+            /* lấy width và height của ảnh truyền vào để tính percenter resize */
+            $imageTmp       = ImageManagerStatic::make($requestImage);
+            $percentPixel   = $imageTmp->width()/$imageTmp->height();
+            /* save image resize (small) */
+            $widthImageNormal   = config('admin.images.smallResize_width');
+            $heightImageNormal  = $widthImageNormal/$percentPixel;
+            $filenameNormal     = $folderUpload.$name.'-small.'.$extension;
+            ImageManagerStatic::make($image->getRealPath())
+                ->encode($extension, config('admin.images.quality'))
+                ->resize($widthImageNormal, $heightImageNormal)
+                ->save(Storage::path($filenameNormal));
+            $result['filePathSmall']    = $filenameNormal;
+        }
+        return $result;
+    }
 }

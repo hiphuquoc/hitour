@@ -8,7 +8,7 @@ use App\Models\Ship;
 use App\Models\ShipPort;
 use App\Models\ShipPrice;
 use App\Models\TourOption;
-use App\Models\TourPrice;
+use App\Models\ComboOption;
 
 class BuildInsertUpdateModel {
     public static function buildArrayTableSeo($dataForm, $type, $dataImage = null){
@@ -1151,7 +1151,7 @@ class BuildInsertUpdateModel {
             }else {
                 /* update booking */
             }
-            $result['reference_id']             = $dataForm['service_info_id'] ?? $dataForm['tour_info_id'];
+            $result['reference_id']             = $dataForm['service_info_id'] ?? $dataForm['tour_info_id'] ?? $dataForm['combo_info_id'];
             $result['type']                     = $type;
             $result['status_id']                = $dataForm['status_id'] ?? 1;
             $result['date_from']                = date('Y-m-d', strtotime($dataForm['date']));
@@ -1165,6 +1165,17 @@ class BuildInsertUpdateModel {
                                                     ->where('id', $dataForm['tour_info_id'])
                                                     ->first();
                 $result['date_to']              = date('Y-m-d', strtotime($dataForm['date']) + 86400*($infoTour->days - 1));
+            }
+            if($type=='combo_info'){
+                /* trường hợp combo => lấy thông tin combo để tính ngày kết thúc */
+                $idOptionChoose                 = $dataForm['combo_option_id'];
+                $infoCombo                      = \App\Models\Combo::select('*')
+                                                    ->where('id', $dataForm['combo_info_id'])
+                                                    ->with('options', function($query) use($idOptionChoose){
+                                                        $query->where('id', $idOptionChoose);
+                                                    })
+                                                    ->first();
+                $result['date_to']              = date('Y-m-d', strtotime($dataForm['date']) + 86400*($infoCombo->options[0]->days - 1));
             }
             if(!empty($dataForm['note_customer'])) $result['note_customer'] = $dataForm['note_customer'];
         }
@@ -1211,6 +1222,86 @@ class BuildInsertUpdateModel {
                     if($price->id==$idPrice&&$quantity>0){
                         $result[$i]['booking_info_id']  = $idBooking;
                         $result[$i]['option_name']      = $infoTourOption->name;
+                        $result[$i]['option_age']       = $price->apply_age;
+                        $result[$i]['quantity']         = $quantity;
+                        $result[$i]['price']            = $price->price;
+                        $result[$i]['profit']           = $price->profit;
+                        ++$i;
+                        break;
+                    }
+                }
+            }
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableComboLocation($dataForm, $seoId = null){
+        /* upload combo_location */
+        $result                             = [];
+        if(!empty($dataForm)){
+            $result['name']                 = $dataForm['title'] ?? null;
+            $result['description']          = $dataForm['description'] ?? null;
+            $result['display_name']         = $dataForm['display_name'] ?? null;
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
+            $result['region_id']            = $dataForm['region'];
+            $result['island']               = !empty($dataForm['island']) ? 1 : 0;
+            $result['special']              = !empty($dataForm['special']) ? 1 : 0;
+            $result['province_id']          = $dataForm['province'] ?? null;
+            $result['district_id']          = $dataForm['district'] ?? null;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableComboInfo($dataForm, $seoId = null){
+        $result     = [];
+        if(!empty($dataForm)){
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
+            $result['code']                 = $dataForm['code'] ?? null;
+            $result['name']                 = $dataForm['title'] ?? null;
+            $result['price_show']           = $dataForm['price_show'] ?? 0;
+            $result['price_del']            = $dataForm['price_del'] ?? 0;
+            // $result['days']                 = $dataForm['days'] ?? 0;
+            // $result['nights']               = $dataForm['nights'] ?? 0;
+            // $result['time_start']           = $dataForm['time_start'] ?? null;
+            // $result['time_end']             = $dataForm['time_end'] ?? null;
+            $result['departure_schedule']   = $dataForm['departure_schedule'];
+            $result['status_show']          = !empty($dataForm['status_show']) ? 1 : 0;
+            $result['status_sidebar']       = !empty($dataForm['status_sidebar']) ? 1 : 0;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableComboOption($dataForm){
+        /*
+            combo_info_id
+            name
+            days
+            nights
+        */
+        $result     = [];
+        if(!empty($dataForm)&&!empty($dataForm['combo_info_id'])){
+            $result['combo_info_id']    = $dataForm['combo_info_id'];
+            $result['name']             = $dataForm['name'] ?? null;
+            $result['days']             = $dataForm['days'] ?? null;
+            $result['nights']           = $dataForm['nights'] ?? null;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableComboQuantityAndPrice($idBooking, $dataForm){
+        $result = [];
+        $i      = 0;
+        if(!empty($idBooking)&&!empty($dataForm)){
+            $infoComboOption                     = ComboOption::select('*')
+                                                    ->where('id', $dataForm['combo_option_id'])
+                                                    ->with('prices')
+                                                    ->first();
+            $i                                  = 0;
+            foreach($infoComboOption->prices as $price){
+                foreach($dataForm['quantity'] as $idPrice => $quantity){
+                    if($price->id==$idPrice&&$quantity>0){
+                        $result[$i]['booking_info_id']  = $idBooking;
+                        $result[$i]['option_name']      = $infoComboOption->name;
                         $result[$i]['option_age']       = $price->apply_age;
                         $result[$i]['quantity']         = $quantity;
                         $result[$i]['price']            = $price->price;

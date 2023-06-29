@@ -102,6 +102,28 @@
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
+            <label class="form-label" for="combo_location_id">Liên kết combo</label>
+            <select class="select2 form-select select2-hidden-accessible" id="combo_location_id" name="combo_location_id[]" tabindex="-1" aria-hidden="true" multiple>
+                @if(!empty($comboLocations))
+                    @foreach($comboLocations as $comboLocation)
+                        @php
+                            $selected           = null;
+                            if(!empty($item->comboLocations)&&$item->comboLocations->isNotEmpty()){
+                                foreach($item->comboLocations as $s){
+                                    if(!empty($s->infoComboLocation->id)&&$s->infoComboLocation->id==$comboLocation->id){
+                                        $selected   = ' selected';
+                                        break;
+                                    }
+                                }
+                            }
+                        @endphp
+                        <option value="{{ $comboLocation->id }}"{{ $selected }}>{{ $comboLocation->name }}</option>
+                    @endforeach
+                @endif
+            </select>
+        </div>
+        <!-- One Row -->
+        <div class="formBox_full_item">
             <label class="form-label" for="guide_info_id">Liên kết cẩm nang du lịch</label>
             <select class="select2 form-select select2-hidden-accessible" id="guide_info_id" name="guide_info_id[]" tabindex="-1" aria-hidden="true" multiple>
                 @if(!empty($guides))

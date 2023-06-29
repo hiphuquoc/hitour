@@ -63,6 +63,6 @@
 </div>
 @push('scripts-custom')
     <script type="text/javascript">
-        $('.repeater').repeater();
+        $('.jd_repeater').repeater();
     </script>
 @endpush

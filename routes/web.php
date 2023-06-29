@@ -31,6 +31,11 @@ use App\Http\Controllers\AdminTourContinentController;
 use App\Http\Controllers\AdminTourCountryController;
 use App\Http\Controllers\AdminTourInfoForeignController;
 use App\Http\Controllers\AdminTourOptionForeignController;
+use App\Http\Controllers\AdminComboLocationController;
+use App\Http\Controllers\AdminComboInfoController;
+use App\Http\Controllers\AdminComboOptionController;
+use App\Http\Controllers\AdminComboPartnerController;
+use App\Http\Controllers\AdminComboPartnerContactController;
 use App\Http\Controllers\AdminToolSeoController;
 use App\Http\Controllers\AdminSettingController;
 use App\Http\Controllers\AdminCheckSeoController;
@@ -392,6 +397,43 @@ Route::prefix('he-thong')->group(function(){
             Route::post('/createOption', [AdminTourOptionForeignController::class, 'create'])->name('admin.tourOptionForeign.createOption');
             Route::post('/updateOption', [AdminTourOptionForeignController::class, 'update'])->name('admin.tourOptionForeign.updateOption');
             Route::post('/deleteOption', [AdminTourOptionForeignController::class, 'delete'])->name('admin.tourOptionForeign.deleteOption');
+        });
+        /* ===== COMBO LOCATION ===== */
+        Route::prefix('comboLocation')->group(function(){
+            Route::get('/', [AdminComboLocationController::class, 'list'])->name('admin.comboLocation.list');
+            Route::post('/create', [AdminComboLocationController::class, 'create'])->name('admin.comboLocation.create');
+            Route::get('/view', [AdminComboLocationController::class, 'view'])->name('admin.comboLocation.view');
+            Route::post('/update', [AdminComboLocationController::class, 'update'])->name('admin.comboLocation.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminComboLocationController::class, 'delete'])->name('admin.comboLocation.delete');
+        });
+        /* ===== Combo Info ===== */
+        Route::prefix('combo')->group(function(){
+            Route::get('/', [AdminComboInfoController::class, 'list'])->name('admin.combo.list');
+            Route::post('/create', [AdminComboInfoController::class, 'create'])->name('admin.combo.create');
+            Route::get('/view', [AdminComboInfoController::class, 'view'])->name('admin.combo.view');
+            Route::post('/update', [AdminComboInfoController::class, 'update'])->name('admin.combo.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminComboInfoController::class, 'delete'])->name('admin.combo.delete');
+            Route::post('/loadOptionPrice', [AdminComboOptionController::class, 'loadOptionPrice'])->name('admin.comboOption.loadOptionPrice');
+            Route::post('/loadFormOption', [AdminComboOptionController::class, 'loadFormOption'])->name('admin.comboOption.loadFormOption');
+            Route::post('/createOption', [AdminComboOptionController::class, 'create'])->name('admin.comboOption.createOption');
+            Route::post('/updateOption', [AdminComboOptionController::class, 'update'])->name('admin.comboOption.updateOption');
+            Route::post('/deleteOption', [AdminComboOptionController::class, 'delete'])->name('admin.comboOption.deleteOption');
+        });
+        /* ===== Combo PARTNER ===== */
+        Route::prefix('comboPartner')->group(function(){
+            Route::get('/', [AdminComboPartnerController::class, 'list'])->name('admin.comboPartner.list');
+            Route::post('/create', [AdminComboPartnerController::class, 'create'])->name('admin.comboPartner.create');
+            Route::get('/view', [AdminComboPartnerController::class, 'view'])->name('admin.comboPartner.view');
+            Route::post('/update', [AdminComboPartnerController::class, 'update'])->name('admin.comboPartner.update');
+            /* Delete AJAX */
+            Route::get('/delete', [AdminComboPartnerController::class, 'delete'])->name('admin.comboPartner.delete');
+            Route::post('/createContact', [AdminComboPartnerContactController::class, 'create'])->name('admin.comboPartner.createContact');
+            Route::post('/updateContact', [AdminComboPartnerContactController::class, 'update'])->name('admin.comboPartner.updateContact');
+            Route::post('/loadContact', [AdminComboPartnerContactController::class, 'loadContact'])->name('admin.comboPartner.loadContact');
+            Route::post('/loadFormContact', [AdminComboPartnerContactController::class, 'loadFormContact'])->name('admin.comboPartner.loadFormContact');
+            Route::post('/deleteContact', [AdminComboPartnerContactController::class, 'delete'])->name('admin.comboPartner.deleteContact');
         });
         /* ===== TOOL SEO ===== */
         Route::prefix('toolSeo')->group(function(){
