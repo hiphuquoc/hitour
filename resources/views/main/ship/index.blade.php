@@ -106,7 +106,7 @@
     <!-- button book vé mobile -->
     <div class="show-990">
         <div class="callBookTourMobile">
-            <a href="tel:0868684868" class="callBookTourMobile_phone maxLine_1">08 6868 4868</a>
+            <a href="tel:0868684868" class="callBookTourMobile_phone maxLine_1">{{ config('company.hotline') }}</a>
             <a href="{{ $linkFull ?? '/' }}" class="callBookTourMobile_button"><h2 style="margin:0;">Đặt vé</h2></a>
         </div>
     </div>

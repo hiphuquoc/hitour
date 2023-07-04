@@ -46,7 +46,7 @@
             </div>
         @endforeach
     @else 
-        <div style="color:rgb(0,123,255);">Hiện không có Combo {{ $item->display_name ?? null }} phù hợp trên hệ thống {{ config('main.name') }}!</div>
+        <div style="color:rgb(0,123,255);">Hiện không có Combo {{ $item->display_name ?? null }} phù hợp trên hệ thống {{ config('company.sortname') }}!</div>
     @endif
 </div>
 <div id="js_filterTour_hidden" style="display:none;">

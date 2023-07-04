@@ -7,7 +7,7 @@
         "@type": "Article",
         "@id": "{{ URL::current() }}#website",
         "inLanguage": "vi",
-        "headline": "Hitour.vn Article",
+        "headline": "{{ config('company.webname') }} Article",
         "datePublished": "{{ !empty($data->created_at) ? date('c', strtotime($data->created_at)) : null }}",
         "dateModified": "{{ !empty($data->updated_at) ? date('c', strtotime($data->updated_at)) : null }}",
         "name": "{{ $data->seo_title ?? $data->title ?? null }}",
@@ -19,7 +19,7 @@
         },
         "author":{
             "@type": "Person",
-            "name": "Hitour.vn"
+            "name": "{{ config('company.webname') }}"
         },
         "image":{
             "@type": "ImageObject",
@@ -29,7 +29,7 @@
         },
         "publisher": {
             "@type": "Organization",
-            "name": "Hitour.vn",
+            "name": "{{ config('company.webname') }}",
             "logo": {
                 "@type": "ImageObject",
                 "url": "{{ config('main.logo_square') }}",

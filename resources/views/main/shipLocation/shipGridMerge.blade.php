@@ -160,7 +160,7 @@
             @endphp
         @endforeach
     @else 
-        <div style="color:rgb(0,123,255);">Hiện không có lịch tàu đi {{ $item->display_name ?? null }} trên hệ thống Hitour!</div>
+        <div style="color:rgb(0,123,255);">Hiện không có lịch tàu đi {{ $item->display_name ?? null }} trên hệ thống {{ config('company.sortname') }}!</div>
     @endif
  </div>
  @if(!empty($limit)&&$list->count()>$limit)

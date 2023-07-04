@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Models\Tour;
+use App\Models\Combo;
 use App\Models\Booking;
 use App\Models\BookingQuantityAndPrice;
 use App\Models\Customer;
@@ -41,13 +42,18 @@ class AdminBookingController extends Controller {
         if(!empty($id)){
             $item           = Booking::select('*')
                                 ->where('id', $id)
-                                ->with('customer_contact', 'quantityAndPrice', 'customer_list', 'tour.options.prices', 'service.options.prices', 'costMoreLess', 'vat')
+                                ->with('customer_contact', 'quantityAndPrice', 'customer_list', 'tour.options.prices', 'service.options.prices', 'combo.options.prices', 'costMoreLess', 'vat')
                                 ->first();
-            $tourList       = Tour::all();
-            $serviceList    = Service::all();
+            if(!empty($item->type)&&$item->type=='tour_info'){
+                $list       = Tour::all();
+            }else if(!empty($item->type)&&$item->type=='service_info'){
+                $list       = Service::all();
+            }else {
+                $list       = Combo::all();
+            }
             $message        = $request->get('message') ?? null;
             $type           = 'edit';
-            if(!empty($item)) return view('admin.booking.view', compact('item', 'tourList', 'serviceList', 'type', 'message'));
+            if(!empty($item)) return view('admin.booking.view', compact('item', 'list', 'type', 'message'));
         }
         return redirect()->route('admin.booking.list');
     }
@@ -241,6 +247,16 @@ class AdminBookingController extends Controller {
                 ->where('booking_info_id', $idBooking)
                 ->delete();
             $insertBookingQuantityAndPrice  = $this->BuildInsertUpdateModel->buildArrayTableServiceQuantityAndPrice($idBooking, $request->all());
+        }
+        /* trường hợp là combo */
+        if(!empty($request->get('combo_option_id'))){
+            $updateBooking              = $this->BuildInsertUpdateModel->buildArrayTableBookingInfo(0, 'combo_info', $request->all());
+            Booking::updateItem($idBooking, $updateBooking);
+            /* insert combo_booking_quantity_and_price */
+            BookingQuantityAndPrice::select('*')
+                ->where('booking_info_id', $idBooking)
+                ->delete();
+            $insertBookingQuantityAndPrice  = $this->BuildInsertUpdateModel->buildArrayTableComboQuantityAndPrice($idBooking, $request->all());
         }
         /* ===== */
         foreach($insertBookingQuantityAndPrice as $itemInsert) BookingQuantityAndPrice::insertItem($itemInsert);

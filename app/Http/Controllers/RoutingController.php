@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Redirect;
 use App\Helpers\Url;
 use App\Models\TourInfoForeign;
+use App\Models\ComboLocation;
+use App\Models\Combo;
 
 class RoutingController extends Controller {
 
@@ -491,6 +493,55 @@ class RoutingController extends Controller {
                                             ->with('seo')
                                             ->get();
                     $xhtml              = view('main.page.index', compact('item', 'breadcrumb', 'shipPartners', 'airPartners', 'content'))->render();
+                }
+                /* ===== COMBO LOCATION */
+                if($checkExists->type=='combo_location'){
+                    $flagMatch          = true;
+                    $item               = ComboLocation::select('*')
+                                            ->whereHas('seo', function($query) use($checkExists){
+                                                $query->where('slug', $checkExists->slug);
+                                            })
+                                            ->with(['files' => function($query){
+                                                $query->where('relation_table', 'combo_location');
+                                            }])
+                                            ->with(['questions' => function($q){
+                                                $q->where('relation_table', 'combo_location');
+                                            }])
+                                            ->with('seo', 'combos')
+                                            ->first();
+                    $content            = Blade::render(Storage::get(config('admin.storage.contentComboLocation').$item->seo->slug.'.blade.php'));
+                    $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full);
+                    $xhtml              = view('main.comboLocation.index', compact('item', 'content', 'breadcrumb'))->render();
+                }
+                /* ===== COMBO INFO */
+                if($checkExists->type=='combo_info'){
+                    $flagMatch              = true;
+                    $item                   = Combo::select('*')
+                                                ->whereHas('seo', function($q) use ($checkExists){
+                                                    $q->where('slug', $checkExists->slug);
+                                                })
+                                                ->with(['files' => function($query){
+                                                    $query->where('relation_table', 'combo_info');
+                                                }])
+                                                ->with(['questions' => function($q){
+                                                    $q->where('relation_table', 'combo_info');
+                                                }])
+                                                ->with('seo', 'locations', 'staffs.infoStaff', 'options.prices')
+                                                ->first();
+                    $idCombo                = $item->id ?? 0;
+                    $arrayidComboLocation   = [];
+                    foreach($item->locations as $location) $arrayidComboLocation[]  = $location->infoLocation->id;
+                    $related                = Combo::select('*')
+                                                // ->where('id', '!=', $idCombo)
+                                                ->where('status_show', 1)
+                                                ->whereHas('locations.infoLocation', function($query) use($arrayidComboLocation){
+                                                    $query->whereIn('id', $arrayidComboLocation);
+                                                })
+                                                ->with('seo')
+                                                ->get();
+                    // $content                = Blade::render(Storage::get(config('admin.storage.contentTour').$item->seo->slug.'.blade.php'));
+                    $breadcrumb             = Url::buildBreadcrumb($checkExists->slug_full);
+                    $xhtml                  = view('main.combo.index', compact('item', 'breadcrumb', 'related'))->render();
                 }
                 /* Ghi dữ liệu - Xuất kết quả */
                 if($flagMatch==true){

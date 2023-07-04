@@ -1,5 +1,8 @@
 @php
     $tmp                = \App\Models\TourLocation::select('*')
+                            ->whereHas('tours', function($query){
+                                
+                            })
                             ->with('region')
                             ->get();
     $dataTourLocation   = [];

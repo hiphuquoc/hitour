@@ -48,6 +48,35 @@
                                 });
                             })
                             ->get();
+    /* Combo du lịch */
+    $dataComboLocation  = \App\Models\ComboLocation::select('*')
+                            ->whereHas('combos', function($query){
+                                
+                            })
+                            ->with('seo', 'region', 'combos')
+                            ->get();
+    $combosMB           = [];
+    $combosMT           = [];
+    $combosMN           = [];
+    $combosBD           = [];
+    foreach($dataComboLocation as $item){
+        /* vùng miền */
+        switch($item->region->id){
+            case 1:
+                $combosMB[] = $item;
+                break;
+            case 2:
+                $combosMT[] = $item;
+                break;
+            case 3:
+                $combosMN[] = $item;
+                break;
+            default:
+                break;
+        }
+        /* biển đảo */
+        if($item->island==true) $combosBD[] = $item;
+    }
 @endphp
 
 <!-- START:: Menu Desktop -->
@@ -56,8 +85,8 @@
         <div class="headerMain_item">
             <ul>
                 <li>
-                    <a href="/" title="Trang chủ Hitour">
-                        <img src="/images/main/svg/home-fff.svg" alt="Trang chủ Hitour" title="Trang chủ Hitour" />
+                    <a href="/" title="Trang chủ {{ config('company.sortname') }}">
+                        <img src="/images/main/svg/home-fff.svg" alt="Trang chủ {{ config('company.sortname') }}" title="Trang chủ {{ config('company.sortname') }}" />
                     </a>
                 </li>
                 <li>
@@ -72,18 +101,26 @@
                     </div>
                     @include('main.snippets.megaMenuTourContinent', compact('dataTourContinent'))
                 </li>
-                <li>
+                {{-- <li>
                     <div>
                         <a href="https://www.booking.com" title="Đặt phòng khách sạn" rel="nofollow" style="padding-right:0;">Khách sạn</a>
                     <div>
-                </li>
+                </li> --}}
+                @if(!empty($dataComboLocation)&&$dataComboLocation->isNotEmpty())
+                    <li>
+                        <div>
+                            <div>Combo</div>
+                        </div>
+                        @include('main.snippets.megaMenuCombo', compact('combosMB', 'combosMT', 'combosMN', 'combosBD'))
+                    </li>
+                @endif
             </ul>
         </div>
         <div class="headerMain_item" style="flex:0 0 70px;">
             @if(Request::is('/'))
-                <a href="/" title="Trang chủ Hitour" class="logoSquare"><h1 style="display:none;">{{ config('main.description') }}</h1></a>
+                <a href="/" title="Trang chủ {{ config('company.sortname') }}" class="logoSquare"><h1 style="display:none;">{{ config('main.description') }}</h1></a>
             @else 
-                <a href="/" title="Trang chủ Hitour" class="logoSquare"></a>
+                <a href="/" title="Trang chủ {{ config('company.sortname') }}" class="logoSquare"></a>
             @endif
         </div>
         <div class="headerMain_item">
@@ -182,7 +219,7 @@
                                 </a>
                             </li> --}}
                             <li>
-                                <a href="/lien-he-hitour" title="Liên hệ Hitour">
+                                <a href="/lien-he-hitour" title="Liên hệ {{ config('company.sortname') }}">
                                     <div>Liên hệ</div>
                                 </a>
                             </li>
@@ -202,7 +239,7 @@
     <div class="container">
         @if(Request::is('/'))
             <div class="header_logo">
-                <a href="/" title="Trang chủ Hitour" class="logo">
+                <a href="/" title="Trang chủ {{ config('company.sortname') }}" class="logo">
                     <h1 style="display:none;">{{ config('main.description') }}</h1>
                 </a>
             </div>
@@ -213,7 +250,7 @@
                 </a>
             </div>
             <div class="header_logo">
-                <a href="/" title="Trang chủ Hitour" class="logo"></a>
+                <a href="/" title="Trang chủ {{ config('company.sortname') }}" class="logo"></a>
             </div>
         @endif
         <!-- Menu Mobile -->
@@ -234,12 +271,12 @@
             <div class="nav-mobile_main__exit" onclick="javascript:openCloseElemt('nav-mobile');">
                 <i class="fas fa-times"></i>
             </div>
-            <a href="/" title="Trang chủ Hitour" style="display:flex;justify-content:center;margin-top:5px;margin-bottom:-10px;">
+            <a href="/" title="Trang chủ {{ config('company.sortname') }}" style="display:flex;justify-content:center;margin-top:5px;margin-bottom:-10px;">
                 <div class="logoSquare"></div>
             </a>
             <ul>
                 <li>
-                    <a href="/" title="Trang chủ Hitour">
+                    <a href="/" title="Trang chủ {{ config('company.sortname') }}">
                         <div><i class="fas fa-home"></i>Trang chủ</div>
                         <div class="right-icon"></div>
                     </a>
@@ -399,7 +436,7 @@
                     </div>
                 </li> --}}
                 <li>
-                    <a href="/lien-he-hitour" title="Liên hệ Hitour">
+                    <a href="/lien-he-hitour" title="Liên hệ {{ config('company.sortname') }}">
                         <i class="fa-solid fa-phone"></i>
                         <div>Liên hệ</div>
                     </a>

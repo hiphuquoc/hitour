@@ -23,7 +23,7 @@
             'img'       => '/storage/images/upload/huong-dan-dat-tour-3-type-manager-upload.webp',
             'title'     => 'Thanh toán và hoàn tất',
             'content'   => '<ul>
-                                <li>Nhân viên Hitour sẽ liên hệ lại và gửi xác nhận chi tiết</li>
+                                <li>Nhân viên '.config('company.sortname').' sẽ liên hệ lại và gửi xác nhận chi tiết</li>
                                 <li>Quý khách thanh toán theo hướng dẫn trong xác nhận</li>
                                 <li>Hoàn tất các bước trên nhân viên sẽ gửi vé điện tử cho Quý khách</li>
                             </ul>'

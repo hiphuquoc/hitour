@@ -117,7 +117,21 @@
                                         </tr>
                                         <tr>
                                             <td style="width:140px;font-size:15px;padding:5px;">Tên dịch vụ</td>
-                                            <td style="font-size:15px;padding:5px;"><a href="{{ env('APP_URL') }}/{{ $item->service->seo->slug_full ?? $item->tour->seo->slug_full ?? null }}" style="color:rgba(0,123,255,1);text-decoration:none" target="_blank">{{ $item->tour->name ?? $item->service->name }}</a></td>
+                                            <td style="font-size:15px;padding:5px;">
+                                                @if($item->type=='combo_info')
+                                                    <a href="{{ env('APP_URL') }}/{{ $item->combo->seo->slug_full ?? null }}" style="color:rgba(0,123,255,1);text-decoration:none" target="_blank">
+                                                        {{ $item->combo->name ?? null }}
+                                                    </a>
+                                                @elseif($item->type=='tour_info')
+                                                    <a href="{{ env('APP_URL') }}/{{ $item->tour->seo->slug_full ?? null }}" style="color:rgba(0,123,255,1);text-decoration:none" target="_blank">
+                                                        {{ $item->tour->name ?? null }}
+                                                    </a>
+                                                @else
+                                                    <a href="{{ env('APP_URL') }}/{{ $item->service->seo->slug_full ?? null }}" style="color:rgba(0,123,255,1);text-decoration:none" target="_blank">
+                                                        {{ $item->service->name ?? null }}
+                                                    </a>
+                                                @endif
+                                            </td>
                                         </tr>
                                         @if($item->type=='tour_info')
                                             <tr style="border-top:1px dotted #d1d1d1;">

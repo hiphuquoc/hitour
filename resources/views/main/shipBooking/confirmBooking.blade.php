@@ -19,7 +19,7 @@
                             <div class="bookingForm_item_body">
                                 <div>Quý khách vừa thực hiện đăng ký cho booking có MÃ: <span style="font-size:1.2rem;font-weight:700;color:rgb(0, 90, 180);">{{ $item->no ?? null }}</span></div>
                                 <div>Tình trạng: <span style="font-size:1.2rem;font-weight:700;color:#00C000;">Chờ nhân viên xác nhận</span></div>
-                                <div>Thông tin booking của Quý khách đã được thông báo đến nhân viên Hitour. Sau khi kiểm tra xong nhân viên sẽ gửi xác nhận vào Email hoặc Zalo và liên hệ cho Quý khách.</div>
+                                <div>Thông tin booking của Quý khách đã được thông báo đến nhân viên {{ config('company.sortname') }}. Sau khi kiểm tra xong nhân viên sẽ gửi xác nhận vào Email hoặc Zalo và liên hệ cho Quý khách.</div>
                             </div>
                         </div>
                         <div class="bookingForm_item">

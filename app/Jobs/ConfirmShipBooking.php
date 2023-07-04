@@ -40,7 +40,7 @@ class ConfirmShipBooking implements ShouldQueue
         }else {
             /* trường hợp gửi xác nhận cho khách */
             $addressMail        = $this->infoShipBooking->customer_contact->email;
-            $titleMail          = 'HItour.VN - Xác nhận đặt vé '.$this->infoShipBooking->infoDeparture[0]->departure.' - '.$this->infoShipBooking->infoDeparture[0]->location.$typeDeparture.' số '.$this->infoShipBooking->no.' - '.date('H:i d/m/Y', time());
+            $titleMail          = config('company.webname').' - Xác nhận đặt vé '.$this->infoShipBooking->infoDeparture[0]->departure.' - '.$this->infoShipBooking->infoDeparture[0]->location.$typeDeparture.' số '.$this->infoShipBooking->no.' - '.date('H:i d/m/Y', time());
             $bodyMail           = view('admin.shipBooking.confirmBooking', [
                 'item' => $this->infoShipBooking, 
                 'infoStaff' => $this->infoStaff

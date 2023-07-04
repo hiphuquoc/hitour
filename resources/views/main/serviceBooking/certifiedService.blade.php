@@ -1,10 +1,10 @@
 <div class="certifiedBox">
     <div class="certifiedBox_image">
-        <img src="/images/main/icon-certified.png" alt="chứng nhận Hitour đại lý uy tín" title="chứng nhận Hitour đại lý uy tín" />
+        <img src="/images/main/icon-certified.png" alt="chứng nhận {{ config('company.sortname') }} đại lý uy tín" title="chứng nhận {{ config('company.sortname') }} đại lý uy tín" />
     </div>
     <div class="certifiedBox_content">
         <div class="certifiedBox_content_title">
-            Danh hiệu Hitour được khách hàng công nhận!
+            Danh hiệu {{ config('company.sortname') }} được khách hàng công nhận!
         </div>
         <div class="certifiedBox_content_list">
             <div>

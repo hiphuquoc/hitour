@@ -4,19 +4,19 @@
                 <div class="footerBox_item">
                     <ul style="margin:0;">
                         <li>
-                            <b style="font-size:1.05rem;font-family:'SVN-Gilroy Bold', serif;display:flex;margin-top:-5px;">Cty TNHH du lịch biển đảo Hitour</b>
+                            <b style="font-size:1.05rem;font-family:'SVN-Gilroy Bold', serif;display:flex;margin-top:-5px;">{{ config('company.name') }}</b>
                         </li>
                         <li>
-                            <i class="fa-solid fa-location-dot"></i>trụ sở: Số 43 Nguyễn Tuân, Vĩnh Quang, Rạch Giá, Kiên Giang
+                            <i class="fa-solid fa-location-dot"></i>trụ sở: {{ config('main.address') }}
                         </li>
                         <li>
-                            <i class="fa-solid fa-phone"></i>hotline: <a href="tel:0868684868" title="Hotline Hitour">08 6868 4868</a>
+                            <i class="fa-solid fa-phone"></i>hotline: <a href="tel:{{ \App\Helpers\Charactor::removeSpecialCharacters(config('company.hotline')) }}" title="Hotline {{ config('company.sortname') }}">{{ config('company.hotline') }}</a>
                         </li>
                         <li>
-                            <i class="fa-solid fa-globe"></i>website: <a href="https://hitour.vn" title="Trang chủ Hitour">hitour.vn</a> - <a href="https://hitour.vn" title="Trang chủ Hitour">hitour.com.vn</a>
+                            <i class="fa-solid fa-globe"></i>website: <a href="https://hitour.vn" title="Trang chủ {{ config('company.sortname') }}">hitour.vn</a> - <a href="https://hitour.vn" title="Trang chủ {{ config('company.sortname') }}">hitour.com.vn</a>
                         </li>
                         <li>
-                            <i class="fa-solid fa-envelope"></i>email: <a href="mailTo:hiphuquoc@gmail.com" title="Email Hitour">hiphuquoc@gmail.com</a>
+                            <i class="fa-solid fa-envelope"></i>email: <a href="mailTo:{{ config('company.email') }}" title="Email {{ config('company.sortname') }}">{{ config('company.email') }}</a>
                         </li>
                     </ul>
                 </div>
@@ -50,7 +50,7 @@
                 {{-- <div class="footerBox_item">
                     <div class="footerBox_item_title">Đăng ký nhận khuyến mãi</div>
                     <div class="signupReceiveEmail">
-                        <div class="signupReceiveEmail_desc">Nhập email để nhận thông tin về các chương trình khuyến mãi của Hitour!</div>
+                        <div class="signupReceiveEmail_desc">Nhập email để nhận thông tin về các chương trình khuyến mãi của {{ config('company.sortname') }}!</div>
                         <div class="signupReceiveEmail_input">
                             <input type="text" name="email" placeholder="Email của bạn" disabled />
                             <button type="submit" aria-label="Đăng ký email"><i class="fa-solid fa-envelope"></i></button>
@@ -60,7 +60,7 @@
                 <div class="footerBox_item">
                     <div class="footerBox_item_title">Đăng ký nhận khuyến mãi</div>
                     <div class="signupReceiveEmail">
-                        <div class="signupReceiveEmail_desc">Nhập email để nhận thông tin về các chương trình khuyến mãi của {{ config('main.name') }}!</div>
+                        <div class="signupReceiveEmail_desc">Nhập email để nhận thông tin về các chương trình khuyến mãi của {{ config('company.sortname') }}!</div>
                         <div class="signupReceiveEmail_input">
                             <form id="registryEmailForm" action="#" method="get">
                                 <div class="registryEmailBox">
@@ -96,7 +96,7 @@
                 </div>
             </div>
             <div class="footerBox_item">
-                <div class="footerBox_item_title">Hệ thống Hitour</div>
+                <div class="footerBox_item_title">Hệ thống {{ config('company.sortname') }}</div>
                 <ul>
                     <li>
                         <a href="https://superdong.vn" title="Cẩm nang du lịch Việt" target="_blank" rel="nofollow">Cẩm nang du lịch Việt</a>
@@ -127,6 +127,6 @@
 </section>
 <div class="copyright">
     <div class="container">
-        © 2022 - Bản quyền <b><a href="https://hitour.vn" title="Trang chủ Hitour">HITOUR</a></b> - Thiết kế và phát triển bởi Phạm Văn Phú. Ghi rõ nguồn "hitour.vn" khi sử dụng thông tin từ website này!
+        © Bản quyền <b><a href="{{ config('company.website') }}" title="Trang chủ {{ config('company.sortname') }}">{{ config('company.sortname') }}</a></b> - Thiết kế và phát triển bởi Phạm Văn Phú. Ghi rõ nguồn "{{ config('company.webname') }}" khi sử dụng thông tin từ website này!
     </div>
 </div>

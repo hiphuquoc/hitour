@@ -2,7 +2,7 @@
    <div class="container">
       <div class="headerTop_item">
          <div class="headerTop_item_hotline">
-            <i class="fa-solid fa-phone"></i>hotline<span>08 6868 4868</span>
+            <i class="fa-solid fa-phone"></i>hotline<span>{{ config('company.hotline') }}</span>
          </div>
       </div>
       <div class="headerTop_item">
@@ -10,7 +10,7 @@
             {{-- <a href="#" class="headerTop_item_list_item">
                Tư vấn khách hàng
             </a> --}}
-            <a href="/lien-he-hitour" title="Liên hệ Hitour" class="headerTop_item_list_item">
+            <a href="/lien-he-hitour" title="Liên hệ {{ config('company.sortname') }}" class="headerTop_item_list_item">
                Liên hệ
             </a>
             {{-- <a href="/admin" title="Đăng nhập" class="headerTop_item_list_item">

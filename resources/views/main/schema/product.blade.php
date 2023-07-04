@@ -21,7 +21,7 @@
         "sku": "WW202022M{{ !empty($data->created_at) ? strtotime($data->created_at) : 00 }}YK/VN",
         "brand": {
             "@type": "Brand",
-            "name": "Hitour.vn"
+            "name": "{{ config('company.webname') }}"
         },
         "review":
             {
@@ -33,7 +33,7 @@
                     },
                 "author": {
                     "@type": "Thing",
-                    "name": "Hitour.vn"
+                    "name": "{{ config('company.webname') }}"
                 }
             },
         "aggregateRating":
@@ -56,7 +56,7 @@
                 "seller":
                     {
                         "@type": "Organization",
-                        "name": "Hitour.vn",
+                        "name": "{{ config('company.webname') }}",
                         "url": "{{ env('APP_URL') }}"
                     }
             }

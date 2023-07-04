@@ -88,7 +88,7 @@
             <div class="sectionBox backgroundPrimaryGradiend">
                 <div class="container">
                     <h2 class="sectionBox_title">Tour {{ $item->display_name ?? null }} - Danh sách Tour du lịch {{ $item->display_name ?? null }} chất lượng</h2>
-                    <p class="sectionBox_desc">Tổng hợp các chương trình <strong>Tour {{ $item->display_name ?? null }}</strong> đa dạng, chất lượng hàng đầu được cung cấp và đảm bảo bởi Hitour cùng hệ thống đối tác.</p>
+                    <p class="sectionBox_desc">Tổng hợp các chương trình <strong>Tour {{ $item->display_name ?? null }}</strong> đa dạng, chất lượng hàng đầu được cung cấp và đảm bảo bởi {{ config('company.sortname') }} cùng hệ thống đối tác.</p>
                     {{-- @include('main.tourLocation.filterBox') --}}
                     @php
                         $dataTours              = new \Illuminate\Support\Collection();
@@ -97,7 +97,7 @@
                     @if(!empty($dataTours)&&$dataTours->isNotEmpty())
                         @include('main.tourLocation.tourGrid', ['list' => $dataTours])
                     @else 
-                        <div style="color:rgb(0,123,255);">Các chương trình <strong>Tour {{ $item->display_name ?? null }}</strong> đang được Hitour cập nhật và sẽ sớm giới thiệu đến Quý khách trong thời gian tới!</div>
+                        <div style="color:rgb(0,123,255);">Các chương trình <strong>Tour {{ $item->display_name ?? null }}</strong> đang được {{ config('company.sortname') }} cập nhật và sẽ sớm giới thiệu đến Quý khách trong thời gian tới!</div>
                     @endif
                 </div>
             </div>
@@ -167,7 +167,7 @@
                 <div class="sectionBox withBorder">
                     <div class="container">
                         <h2 class="sectionBox_title">Cẩm nang du lịch {{ $item->display_name ?? null }}</h2>
-                        <p class="sectionBox_desc">Nếu các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> của Hitour không đáp ứng được nhu cầu của bạn hoặc là người ưu thích du lịch tự túc,... Bạn có thể tham khảo <strong>Cẩm nang du lịch</strong> bên dưới để có đầy đủ thông tin, tự do lên kế hoạch, sắp xếp lịch trình cho chuyến đi của mình được chu đáo nhất.</p>
+                        <p class="sectionBox_desc">Nếu các chương trình <strong>Tour du lịch {{ $item->display_name ?? null }}</strong> của {{ config('company.sortname') }} không đáp ứng được nhu cầu của bạn hoặc là người ưu thích du lịch tự túc,... Bạn có thể tham khảo <strong>Cẩm nang du lịch</strong> bên dưới để có đầy đủ thông tin, tự do lên kế hoạch, sắp xếp lịch trình cho chuyến đi của mình được chu đáo nhất.</p>
                         <div class="guideList">
                             @foreach($item->guides as $guide)
                                 <div class="guideList_item">

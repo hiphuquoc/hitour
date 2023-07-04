@@ -17,7 +17,7 @@
                     Tư vấn:
                 </div>
                 <div style="margin-left:0.75rem;">
-                    <div><span>{{ config('main.hotline') }}</span> (hotline)</div>
+                    <div><span>{{ config('company.hotline') }}</span> (hotline)</div>
                 </div>
             </div>
         @endif

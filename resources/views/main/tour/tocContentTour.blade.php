@@ -55,6 +55,41 @@
     </a> --}}
 </div>
 
+@php
+    $flagQcCombo        = false;
+    foreach($item->locations as $location){
+        if(!empty($location->infoLocation->comboLocations)&&$location->infoLocation->comboLocations->isNotEmpty()){
+            $flagQcCombo  = true;
+            break;
+        }
+    }
+@endphp
+@if($flagQcCombo==true)
+    <div class="serviceRelatedSidebarBox">
+        <div class="serviceRelatedSidebarBox_title callUseService">
+            @php
+                $flagIsland         = false;
+                foreach($item->locations as $location){
+                    if($location->infoLocation->island==1) {
+                        $flagIsland = true;
+                    }
+                }
+            @endphp
+        <h2><i class="fa-solid fa-star"></i> Nếu bạn yêu thích việc du lịch tự túc, {{ config('company.sortname') }} cũng có các Combo gồm khách sạn + {{ $flagIsland==true ? 'vé tàu cao tốc' : 'vé dịch vụ' }} nữa nhé!</h2>
+        </div>
+        <div class="serviceRelatedSidebarBox_box">
+            @foreach($item->locations as $location)
+                @foreach($location->infoLocation->comboLocations as $comboLocation)
+                    <!-- combo du lịch -->
+                    <a href="/{{ $comboLocation->infoCombolocation->seo->slug_full }}" title="{{ $comboLocation->infoCombolocation->name }}" class="serviceRelatedSidebarBox_box_item">
+                        <i class="fa-solid fa-award"></i><h3>{{ $comboLocation->infoCombolocation->name }}</h3>
+                    </a>
+                @endforeach
+            @endforeach
+        </div>
+    </div>
+@endif
+
 @push('scripts-custom')
     <script type="text/javascript">
         $(window).ready(function(){

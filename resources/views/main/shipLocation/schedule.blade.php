@@ -4,8 +4,8 @@
         <h2>Lịch trình và giá vé {{ $keyWord ?? null }}</h2>
     </div>
     <div class="contentTour_item_text">
-        <p><a href="{{ URL::current() }}" title="{{ !empty($keyWord) ? 'Lịch '.$keyWord : 'Lịch tàu' }}">{{ !empty($keyWord) ? 'Lịch '.$keyWord : 'Lịch tàu' }}</a> bên dưới là lộ trình chính xác được Hitour cập nhật thường xuyên từ hãng tàu. Tuy nhiên, có một số trường hợp do thời tiết, bảo trì,... lịch tàu thay đổi đột xuất sẽ được thông báo riêng cho Quý khách khi đặt vé.</p>
-        <p><strong>Giá vé {{ $keyWord ?? 'tàu' }}</strong> niêm yết theo bảng bên dưới áp dụng cho khách lẻ. Đối với khách đoàn lớn (20 khách trở lên) và đối tác vui lòng liện hệ <span style="font-size:1.4rem;font-weight:bold;"><a href="tel:0868684868">08 6868 4868</a></span> để biết thêm chi tiết.</p>
+        <p><a href="{{ URL::current() }}" title="{{ !empty($keyWord) ? 'Lịch '.$keyWord : 'Lịch tàu' }}">{{ !empty($keyWord) ? 'Lịch '.$keyWord : 'Lịch tàu' }}</a> bên dưới là lộ trình chính xác được {{ config('company.sortname') }} cập nhật thường xuyên từ hãng tàu. Tuy nhiên, có một số trường hợp do thời tiết, bảo trì,... lịch tàu thay đổi đột xuất sẽ được thông báo riêng cho Quý khách khi đặt vé.</p>
+        <p><strong>Giá vé {{ $keyWord ?? 'tàu' }}</strong> niêm yết theo bảng bên dưới áp dụng cho khách lẻ. Đối với khách đoàn lớn (20 khách trở lên) và đối tác vui lòng liện hệ <span style="font-size:1.4rem;font-weight:bold;"><a href="tel:0868684868">{{ config('company.hotline') }}</a></span> để biết thêm chi tiết.</p>
 
         @if(!empty($schedule))
             {!! $schedule !!}

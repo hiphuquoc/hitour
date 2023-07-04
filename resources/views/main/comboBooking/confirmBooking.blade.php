@@ -10,7 +10,7 @@
         <div class="sectionBox">
             <div class="container">
             <!-- title -->
-            <h1 class="titlePage" style="margin-bottom:0.75rem;text-align:center;">Đặt vé thành công</h1>
+            <h1 class="titlePage" style="margin-bottom:0.75rem;text-align:center;">Đặt combo thành công</h1>
             <!-- ship box -->
             <div class="pageContent_body">
                 <div class="bookingForm">
@@ -50,15 +50,15 @@
                                             <td>{{ $item->customer_contact->email }}</td>
                                         </tr>
                                     @endif
-                                    @if(!empty($item->service->serviceLocation->display_name))
+                                    @if(!empty($item->combo->comboLocation->display_name))
                                         <tr>
                                             <td>Điểm đến</td>
-                                            <td>{{ $item->service->serviceLocation->display_name }}</td>
+                                            <td>{{ $item->combo->comboLocation->display_name }}</td>
                                         </tr>
                                     @endif
                                     <tr>
                                         <td>Tên dịch vụ</td>
-                                        <td><a href="{{ env('APP_URL').'/'.$item->service->seo->slug_full }}" style="color:rgba(0,123,255,1);text-decoration:none" target="_blank">{{ $item->service->name ?? null }}</a></td>
+                                        <td><a href="{{ env('APP_URL').'/'.$item->combo->seo->slug_full }}" style="color:rgba(0,123,255,1);text-decoration:none" target="_blank">{{ $item->combo->name ?? null }}</a></td>
                                     </tr>
                                     <tr>
                                         <td>Loại</td>
@@ -66,7 +66,11 @@
                                     </tr>
                                     <tr>
                                         <td>Ngày</td>
-                                        <td>{{ \App\Helpers\DateAndTime::convertMktimeToDayOfWeek(strtotime($item->date_from)) }}, {{ date('d/m/Y', strtotime($item->date_from)) }}</td>
+                                        @if($item->date_from==$item->date_to)
+                                            <td>{{ \App\Helpers\DateAndTime::convertMktimeToDayOfWeek(strtotime($item->date_from)) }}, {{ date('d/m/Y', strtotime($item->date_from)) }}</td>
+                                        @else 
+                                            <td>{{ \App\Helpers\DateAndTime::convertMktimeToDayOfWeek(strtotime($item->date_from)) }}, {{ date('d/m/Y', strtotime($item->date_from)) }} - {{ \App\Helpers\DateAndTime::convertMktimeToDayOfWeek(strtotime($item->date_to)) }}, {{ date('d/m/Y', strtotime($item->date_to)) }}</td>
+                                        @endif
                                     </tr>
                                     @if(!empty($item->note_customer))
                                         <tr>

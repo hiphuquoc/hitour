@@ -6,7 +6,7 @@
         </div>
         <div class="contentTour_item_text">
             <p>
-                <strong>Bảng giá vé</strong> sẽ được cập nhật liên tục theo chính sách của các hãng vui chơi, đơn vị tổ chức. Đây là bảng giá tham khảo áp dụng cho khách lẻ. Đối với khách đoàn lớn (20 khách trở lên) và đối tác vui lòng liện hệ <a href="tel:0868684868"><span style="font-size:1.4rem;font-weight:bold;color:rgb(0,123,255);">08 6868 4868</span></a> để biết thêm chi tiết.
+                <strong>Bảng giá vé</strong> sẽ được cập nhật liên tục theo chính sách của các hãng vui chơi, đơn vị tổ chức. Đây là bảng giá tham khảo áp dụng cho khách lẻ. Đối với khách đoàn lớn (20 khách trở lên) và đối tác vui lòng liện hệ <a href="tel:0868684868"><span style="font-size:1.4rem;font-weight:bold;color:rgb(0,123,255);">{{ config('company.hotline') }}</span></a> để biết thêm chi tiết.
             </p>
             <table class="tableContentBorder" style="margin-bottom:0;font-size:0.95rem;">
                 <thead>

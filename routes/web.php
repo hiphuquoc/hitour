@@ -65,6 +65,7 @@ use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\ShipBookingController;
 use App\Http\Controllers\ServiceBookingController;
 use App\Http\Controllers\TourBookingController;
+use App\Http\Controllers\ComboBookingController;
 
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\Auth\ProviderController;
@@ -518,6 +519,16 @@ Route::get('/checkOnpageAll', [HomeController::class, 'checkOnpageAll'])->name('
 /* ===== SITEMAP ===== */
 Route::get('sitemap.xml', [SitemapController::class, 'main'])->name('sitemap.main');
 Route::get('sitemap/{type}.xml', [SitemapController::class, 'child'])->name('sitemap.child');
+/* ===== COMBO BOOKING ===== */
+Route::prefix('comboBooking')->group(function(){
+    Route::get('/form', [ComboBookingController::class, 'form'])->name('main.comboBooking.form');
+    Route::post('/create', [ComboBookingController::class, 'create'])->name('main.comboBooking.create');
+    Route::get('/loadCombo', [ComboBookingController::class, 'loadCombo'])->name('main.comboBooking.loadCombo');
+    Route::get('/loadOption', [ComboBookingController::class, 'loadOption'])->name('main.comboBooking.loadOption');
+    Route::get('/loadFormQuantityByOption', [ComboBookingController::class, 'loadFormQuantityByOption'])->name('main.comboBooking.loadFormQuantityByOption');
+    Route::get('/loadBookingSummary', [ComboBookingController::class, 'loadBookingSummary'])->name('main.comboBooking.loadBookingSummary');
+    Route::get('/confirm', [ComboBookingController::class, 'confirm'])->name('main.comboBooking.confirm');
+});
 /* ===== SHIP BOOKING ===== */
 Route::prefix('shipBooking')->group(function(){
     Route::get('/form', [ShipBookingController::class, 'form'])->name('main.shipBooking.form');

@@ -59,7 +59,7 @@ class AjaxController extends Controller {
                     $result['type']     = 'success';
                     $result['title']    = 'Đăng ký email thành công!';
                     $result['content']  = '<div>Cảm ơn bạn đã đăng ký nhận tin!</div>
-                                            <div>Trong thời gian tới nếu có bất kỳ chương trình khuyến mãi nào '.config('main.name').' sẽ gửi cho bạn đầu tiên.</div>'; 
+                                            <div>Trong thời gian tới nếu có bất kỳ chương trình khuyến mãi nào '.config('company.sortname').' sẽ gửi cho bạn đầu tiên.</div>'; 
                 }else {
                     $result['type']     = 'error';
                     $result['title']    = 'Đăng ký email thất bại!';
@@ -69,7 +69,7 @@ class AjaxController extends Controller {
                 $result['type']     = 'success';
                 $result['title']    = 'Email này đã được đăng ký trước đó!';
                 $result['content']  = '<div>Cảm ơn bạn đã đăng ký nhận tin!</div>
-                                        <div>Trong thời gian tới nếu có bất kỳ chương trình khuyến mãi nào '.config('main.name').' sẽ gửi cho bạn đầu tiên.</div>'; 
+                                        <div>Trong thời gian tới nếu có bất kỳ chương trình khuyến mãi nào '.config('company.sortname').' sẽ gửi cho bạn đầu tiên.</div>'; 
             }
             return json_encode($result);
         }

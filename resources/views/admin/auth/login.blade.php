@@ -36,7 +36,7 @@
                                     </g>
                                 </g>
                                 </svg>
-                                <h2 class="brand-text text-primary ms-1">Hitour.vn</h2>
+                                <h2 class="brand-text text-primary ms-1">{{ config('company.webname') }}</h2>
                             </a>
                             <h4 class="card-title mb-1">Chào mừng bạn! 👋</h4>
                             <p class="card-text mb-2">Nếu bạn là thành viên của ban quản trị vui lòng đăng nhập trước khi thao tác!</p>

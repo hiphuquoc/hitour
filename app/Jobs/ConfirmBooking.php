@@ -27,7 +27,7 @@ class ConfirmBooking implements ShouldQueue
     }
     
     public function handle(){
-        /* Hitour.VN - Xác nhận đặt Tour số ... - 12:20 07/12/2022 */
+        /* webname - Xác nhận đặt Tour số ... - 12:20 07/12/2022 */
         $typeBooking        = 'dịch vụ';
         if(!empty($this->infoBooking->service)) $typeBooking = 'Vé vui chơi';
         if(!empty($this->infoBooking->tour)) $typeBooking = 'Tour';
@@ -41,7 +41,7 @@ class ConfirmBooking implements ShouldQueue
             ]);
         }else {
             $addressMail        = $this->infoBooking->customer_contact->email;
-            $titleMail          = 'Hitour.VN - Xác nhận đặt '.$typeBooking.' số '.$this->infoBooking->no.' - '.date('H:i d/m/Y', time());
+            $titleMail          = config('company.webname').' - Xác nhận đặt '.$typeBooking.' số '.$this->infoBooking->no.' - '.date('H:i d/m/Y', time());
             $bodyMail           = view('admin.booking.confirmBooking', [
                 'item' => $this->infoBooking, 
                 'infoStaff' => $this->infoStaff

@@ -18,7 +18,7 @@
                     @endif
                     <span class="articleBox_item_content_subtitle_author">
                         <i class="fa-solid fa-user-pen"></i>
-                        Hitour.vn
+                        {{ config('company.webname') }}
                     </span>
                 </div>
                 <div class="articleBox_item_content_des maxLine_3">

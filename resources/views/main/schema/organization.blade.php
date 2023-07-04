@@ -5,7 +5,7 @@
         "url": "https://hitour.vn",
         "logo": "{{ config('main.logo_square') }}",
         "image": "{{ config('main.avatar_home') }}",
-        "description": "Trang Tour du lịch trực tuyến hàng đầu Việt Nam | Hitour.vn",
+        "description": "Trang Tour du lịch trực tuyến hàng đầu Việt Nam | {{ config('company.webname') }}",
         "founder": "Phạm Văn Phú",
         "address": "43 Nguyễn Tuân, Thành phố Rạch Giá, Tỉnh Kiên Giang",
         "contactPoint":

@@ -46,6 +46,9 @@ class Booking extends Model {
                                     $q->where('id', $params['search_status']);
                                 });
                             })
+                            ->whereHas('quantityAndPrice', function($query){
+                                
+                            })
                             ->with('status', 'customer_contact', 'service', 'tour', 'quantityAndPrice')
                             ->orderBy('id', 'DESC')
                             ->paginate($paginate);
@@ -91,6 +94,10 @@ class Booking extends Model {
 
     public function tour(){
         return $this->hasOne(\App\Models\Tour::class, 'id', 'reference_id');
+    }
+
+    public function combo(){
+        return $this->hasOne(\App\Models\Combo::class, 'id', 'reference_id');
     }
 
     public function quantityAndPrice(){

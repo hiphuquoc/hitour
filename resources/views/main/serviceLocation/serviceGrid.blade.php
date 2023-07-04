@@ -37,6 +37,6 @@
             </div>
         @endforeach
     @else 
-        <div style="color:rgb(0,123,255);">Hiện không có vé vui chơi giải trí tại {{ $item->display_name ?? null }} trên hệ thống Hitour!</div>
+        <div style="color:rgb(0,123,255);">Hiện không có vé vui chơi giải trí tại {{ $item->display_name ?? null }} trên hệ thống {{ config('company.sortname') }}!</div>
     @endif
 </div>

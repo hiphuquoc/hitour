@@ -29,7 +29,7 @@
                      </g>
                   </svg>
                </span>
-               <h2 class="brand-text">Hitour</h2>
+               <h2 class="brand-text">{{ config('company.sortname') }}</h2>
             </a>
          </li>
          <li class="nav-item nav-toggle">

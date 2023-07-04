@@ -8,13 +8,13 @@
         </div>
         <div class="certifiedBox_content_list">
             <div>
-                Đơn vị cung cấp Tour uy tín, chất lượng.
+                Đơn vị cung cấp Combo uy tín, chất lượng.
             </div>
             <div> 
-                Hệ thống đặt Tour 2 bước tiện lợi, nhanh chóng.
+                Hệ thống đặt tiện lợi, nhanh chóng.
             </div>
             <div> 
-                Hỗ trợ chu đáo trước và sau quá trình tham gia Tour.
+                Hỗ trợ chu đáo trước, trong và sau quá trình sử dụng dịch vụ.
             </div>
         </div>
     </div>

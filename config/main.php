@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'hotline'           => '08 6868 4868',
+    'name'              => 'Hitour',
+    'webname'           => 'Hitour.vn',
     'description'       => 'Trang Tour du lịch trực tuyến hàng đầu Việt Nam ®Hitour',
     /* Thông báo validate form */
     'message_validate'  => [

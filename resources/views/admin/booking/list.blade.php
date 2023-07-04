@@ -106,7 +106,13 @@
                             </td>
                             <td>
                                 <div class="oneLine">
-                                    <span style="font-weight:bold;">{{ $item->tour->name ?? $item->service->name ?? null }}</span>
+                                    @if($item->type=='combo_info')
+                                        <span style="font-weight:bold;">{{ $item->combo->name ?? null }}</span>
+                                    @elseif($item->type=='tour_info') 
+                                        <span style="font-weight:bold;">{{ $item->tour->name ?? null }}</span>
+                                    @else 
+                                        <span style="font-weight:bold;">{{ $item->service->name ?? null }}</span>
+                                    @endif
                                 </div>
                                 <div class="oneLine">
                                     <span class="highLight">{{ $item->quantityAndPrice[0]->option_name }}</span>
@@ -162,7 +168,6 @@
     <script type="text/javascript">
         function deleteItem(id){
             if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
-                console.log(123);
                 $.ajax({
                     url         : "{{ route('admin.booking.delete') }}",
                     type        : "get",

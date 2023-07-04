@@ -18,6 +18,9 @@
 				<div class="hide-767"><i class="fa-solid fa-suitcase-rolling"></i>Tour du lịch</div>
 				<div class="show-767"><i class="fa-solid fa-suitcase-rolling"></i>Tour</div>
 			</div>
+			<div {{ !empty($active)&&$active=='combo' ? 'class=active' : null }} data-tab="comboBookingForm" onClick="changeTab(this);">
+				<div><i class="fa-solid fa-ship"></i>Combo</div>
+			</div>
 			{{-- <div data-tab="hotelBookingForm" onClick="changeTab(this);">
 				<i class="fa-solid fa-hotel"></i>Khách sạn
 			</div> --}}
@@ -37,6 +40,12 @@
 			<div id="tourBookingForm" {{ !empty($active)&&$active!='tour' ? 'style=display:none;' : null }}>
 				<form id="tourBookingSort" method="get" action="{{ route('main.tourBooking.form') }}">
 					@include('main.form.sortBooking.tour', compact('item'))
+				</form>
+			</div>
+			<!-- Combo booking form -->
+			<div id="comboBookingForm" {{ !empty($active)&&$active!='combo' ? 'style=display:none;' : null }}>
+				<form id="comboBookingSort" method="get" action="{{ route('main.comboBooking.form') }}">
+					@include('main.form.sortBooking.combo', compact('item'))
 				</form>
 			</div>
 			<!-- Tour booking form -->

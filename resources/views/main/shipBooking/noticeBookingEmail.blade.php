@@ -185,18 +185,14 @@
                                         1. Quý khách chuyển khoản cọc số tiền <span style="font-weight:bold;color:#E74C3C;font-size:17px;">23,900,000{{ config('main.unit_currency') }}</span> (<span style="font-weight:bold;font-size:16px;">trước 18:00 Chủ nhật, ngày 31-07-2022</span>), trong nội dung chuyển khoản ghi
                                         <span style="font-weight:bold;font-size:16px;">0909449924</span>
                                     </div>
-                                    <div>
-                                        <div><b>- Tài khoản giám đốc:</b></div>
-                                        <div>Tên TK: PHAM VAN PHU</div>
-                                        <div>Số TK: 19036101422017</div>
-                                        <div>Chi nhánh: Techcombank Kiên Giang</div>
-                                    </div>
-                                    <div>
-                                        <div><b>- Tài khoản công ty:</b></div>
-                                        <div>Tên TK: CONG TY TNHH DU LICH BIEN DAO HITOUR</div>
-                                        <div>Số TK: 1016376662</div>
-                                        <div>Chi nhánh: Vietcombank Kiên Giang</div>
-                                    </div>
+                                    @foreach(config('company.bank') as $bank)
+                                        <div>
+                                            <div><b>{{ $bank['title'] }}</b></div>
+                                            <div>Tên TK: {{ $bank['name'] }}</div>
+                                            <div>Số TK: {{ $bank['number'] }}</div>
+                                            <div>Chi nhánh: {{ $bank['department'] }}</div>
+                                        </div>
+                                    @endforeach
                                 </td>
                             </tr>
                             <tr style="color:#456;">
