@@ -1,12 +1,12 @@
 @extends('admin.layouts.main')
 @section('content')
     @php
-        $titlePage      = 'Thêm Đối tác Combo mới';
-        $submit         = 'admin.comboPartner.create';
+        $titlePage      = 'Thêm Đối tác Hotel mới';
+        $submit         = 'admin.hotelPartner.create';
         $checkImage     = 'required';
         if(!empty($type)&&$type=='edit'){
-            $titlePage  = 'Chỉnh sửa Đối tác Combo';
-            $submit     = 'admin.comboPartner.update';
+            $titlePage  = 'Chỉnh sửa Đối tác Hotel';
+            $submit     = 'admin.hotelPartner.update';
             $checkImage = null;
         }
     @endphp
@@ -66,7 +66,7 @@
                     <div class="pageAdminWithRightSidebar_main_content_item">
                         <div class="card">
                             <!-- Thông tin đối tác -->
-                            @include('admin.comboPartner.formInfo')
+                            @include('admin.hotelPartner.formInfo')
                         </div>
                     </div>
                     <!-- END:: Main content -->
@@ -74,13 +74,13 @@
                 <div class="pageAdminWithRightSidebar_main_rightSidebar">
                     <!-- Button Save -->
                     <div class="pageAdminWithRightSidebar_main_rightSidebar_item buttonAction" style="padding-bottom:1rem;">
-                        <a href="{{ route('admin.comboPartner.list') }}" type="button" class="btn btn-secondary waves-effect waves-float waves-light">Quay lại</a>
+                        <a href="{{ route('admin.hotelPartner.list') }}" type="button" class="btn btn-secondary waves-effect waves-float waves-light">Quay lại</a>
                         <button type="submit" class="btn btn-success waves-effect waves-float waves-light" onClick="javascript:submitForm('formAction');" style="width:100px;" aria-label="Lưu">Lưu</button>
                     </div>
                     <div class="customScrollBar-y" style="height: calc(100% - 70px);border-top: 1px dashed #adb5bd;">
                         <!-- Form Upload -->
                         <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
-                            @include('admin.comboPartner.formLogo')
+                            @include('admin.hotelPartner.formLogo')
                         </div>
                     </div>
                 </div>
@@ -146,7 +146,7 @@
                 if(dataForm['partner_contact_id']==null){
                     /* insert */
                     $.ajax({
-                        url         : '{{ route("admin.comboPartner.createContact") }}',
+                        url         : '{{ route("admin.hotelPartner.createContact") }}',
                         type        : 'post',
                         dataType    : 'html',
                         data        : {
@@ -167,7 +167,7 @@
                 }else {
                     /* update */
                     $.ajax({
-                        url         : '{{ route("admin.comboPartner.updateContact") }}',
+                        url         : '{{ route("admin.hotelPartner.updateContact") }}',
                         type        : 'post',
                         dataType    : 'html',
                         data        : {
@@ -216,7 +216,7 @@
 
         function loadContactOfPartner(idWrite){
             $.ajax({
-                url         : '{{ route("admin.comboPartner.loadContact") }}',
+                url         : '{{ route("admin.hotelPartner.loadContact") }}',
                 type        : 'post',
                 dataType    : 'html',
                 data        : {
@@ -233,7 +233,7 @@
 
         function loadFormPartnerContact(id){
             $.ajax({
-                url         : '{{ route("admin.comboPartner.loadFormContact") }}',
+                url         : '{{ route("admin.hotelPartner.loadFormContact") }}',
                 type        : 'post',
                 dataType    : 'json',
                 data        : {
@@ -250,7 +250,7 @@
         function deletePartnerContact(id){
             if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
                 $.ajax({
-                    url         : '{{ route("admin.comboPartner.deleteContact") }}',
+                    url         : '{{ route("admin.hotelPartner.deleteContact") }}',
                     type        : 'post',
                     dataType    : 'html',
                     data        : {

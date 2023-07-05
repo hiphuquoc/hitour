@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ComboLocation extends Model {
+class HotelLocation extends Model {
     use HasFactory;
-    protected $table        = 'combo_location';
+    protected $table        = 'hotel_location';
     protected $fillable     = [
         'name', 
         'display_name',
@@ -32,7 +32,7 @@ class ComboLocation extends Model {
                             $query->where('region_id', $params['search_region']);
                         })
                         ->with(['files' => function($query){
-                            $query->where('relation_table', 'combo_location');
+                            $query->where('relation_table', 'hotel_location');
                         }])
                         ->with('seo')
                         ->paginate($params['paginate']);
@@ -42,7 +42,7 @@ class ComboLocation extends Model {
     public static function insertItem($params){
         $id             = 0;
         if(!empty($params)){
-            $model      = new ComboLocation();
+            $model      = new HotelLocation();
             foreach($params as $key => $value) $model->{$key}  = $value;
             $model->save();
             $id         = $model->id;
@@ -80,8 +80,8 @@ class ComboLocation extends Model {
         return $this->hasOne(\App\Models\District::class, 'id', 'district_id');
     }
 
-    public function combos(){
-        return $this->hasMany(\App\Models\RelationComboLocation::class, 'combo_location_id', 'id');
+    public function hotels(){
+        return $this->hasMany(\App\Models\Hotel::class, 'hotel_location_id', 'id');
     }
 
     public function questions(){
@@ -89,6 +89,6 @@ class ComboLocation extends Model {
     }
 
     public function tourLocations(){
-        return $this->hasMany(\App\Models\RelationTourLocationComboLocation::class, 'combo_location_id', 'id');
+        return $this->hasMany(\App\Models\RelationTourLocationHotelLocation::class, 'hotel_location_id', 'id');
     }
 }

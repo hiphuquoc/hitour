@@ -36,6 +36,13 @@ use App\Http\Controllers\AdminComboInfoController;
 use App\Http\Controllers\AdminComboOptionController;
 use App\Http\Controllers\AdminComboPartnerController;
 use App\Http\Controllers\AdminComboPartnerContactController;
+
+// use App\Http\Controllers\AdminComboLocationController;
+// use App\Http\Controllers\AdminComboInfoController;
+// use App\Http\Controllers\AdminComboOptionController;
+// use App\Http\Controllers\AdminHotelPartnerController;
+use App\Http\Controllers\AdminHotelContactController;
+
 use App\Http\Controllers\AdminToolSeoController;
 use App\Http\Controllers\AdminSettingController;
 use App\Http\Controllers\AdminCheckSeoController;
@@ -435,6 +442,20 @@ Route::prefix('he-thong')->group(function(){
             Route::post('/loadContact', [AdminComboPartnerContactController::class, 'loadContact'])->name('admin.comboPartner.loadContact');
             Route::post('/loadFormContact', [AdminComboPartnerContactController::class, 'loadFormContact'])->name('admin.comboPartner.loadFormContact');
             Route::post('/deleteContact', [AdminComboPartnerContactController::class, 'delete'])->name('admin.comboPartner.deleteContact');
+        });
+        /* ===== Hotel PARTNER ===== */
+        Route::prefix('hotelContact')->group(function(){
+            // Route::get('/', [AdminHotelPartnerController::class, 'list'])->name('admin.hotelContact.list');
+            // Route::post('/create', [AdminHotelPartnerController::class, 'create'])->name('admin.hotelContact.create');
+            // Route::get('/view', [AdminHotelPartnerController::class, 'view'])->name('admin.hotelContact.view');
+            // Route::post('/update', [AdminHotelPartnerController::class, 'update'])->name('admin.hotelContact.update');
+            // /* Delete AJAX */
+            // Route::get('/delete', [AdminHotelPartnerController::class, 'delete'])->name('admin.hotelContact.delete');
+            Route::post('/createContact', [AdminHotelContactController::class, 'create'])->name('admin.hotelContact.createContact');
+            Route::post('/updateContact', [AdminHotelContactController::class, 'update'])->name('admin.hotelContact.updateContact');
+            Route::post('/loadContact', [AdminHotelContactController::class, 'loadContact'])->name('admin.hotelContact.loadContact');
+            Route::post('/loadFormContact', [AdminHotelContactController::class, 'loadFormContact'])->name('admin.hotelContact.loadFormContact');
+            Route::post('/deleteContact', [AdminHotelContactController::class, 'delete'])->name('admin.hotelContact.deleteContact');
         });
         /* ===== TOOL SEO ===== */
         Route::prefix('toolSeo')->group(function(){

@@ -58,6 +58,28 @@ return [
             ]
         ],
         [
+            'name'      => 'Khách sạn',
+            'route'     => '',
+            'icon'      => '<i class="fa-solid fa-award"></i>',
+            'child'     => [
+                // [
+                //     'name'  => '1. Điểm đến',
+                //     'route' => 'admin.comboLocation.list',
+                //     'icon'  => '<i data-feather=\'circle\'></i>'
+                // ],
+                // [
+                //     'name'  => '2. Chi tiết Combo',
+                //     'route' => 'admin.combo.list',
+                //     'icon'  => '<i data-feather=\'circle\'></i>'
+                // ],
+                [
+                    'name'  => '3. Đối tác hotel',
+                    'route' => 'admin.hotelPartner.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ]
+            ]
+        ],
+        [
             'name'      => 'Combo du lịch',
             'route'     => '',
             'icon'      => '<i class="fa-solid fa-award"></i>',

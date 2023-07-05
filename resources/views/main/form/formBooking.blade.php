@@ -18,9 +18,9 @@
 				<div class="hide-767"><i class="fa-solid fa-suitcase-rolling"></i>Tour du lịch</div>
 				<div class="show-767"><i class="fa-solid fa-suitcase-rolling"></i>Tour</div>
 			</div>
-			<div {{ !empty($active)&&$active=='combo' ? 'class=active' : null }} data-tab="comboBookingForm" onClick="changeTab(this);">
+			{{-- <div {{ !empty($active)&&$active=='combo' ? 'class=active' : null }} data-tab="comboBookingForm" onClick="changeTab(this);">
 				<div><i class="fa-solid fa-ship"></i>Combo</div>
-			</div>
+			</div> --}}
 			{{-- <div data-tab="hotelBookingForm" onClick="changeTab(this);">
 				<i class="fa-solid fa-hotel"></i>Khách sạn
 			</div> --}}
@@ -42,12 +42,12 @@
 					@include('main.form.sortBooking.tour', compact('item'))
 				</form>
 			</div>
-			<!-- Combo booking form -->
+			{{-- <!-- Combo booking form -->
 			<div id="comboBookingForm" {{ !empty($active)&&$active!='combo' ? 'style=display:none;' : null }}>
 				<form id="comboBookingSort" method="get" action="{{ route('main.comboBooking.form') }}">
 					@include('main.form.sortBooking.combo', compact('item'))
 				</form>
-			</div>
+			</div> --}}
 			<!-- Tour booking form -->
 			<div id="ticketBookingForm" {{ !empty($active)&&$active!='service' ? 'style=display:none;' : null }}>
 				<form id="serviceBookingSort" method="get" action="{{ route('main.serviceBooking.form') }}">
