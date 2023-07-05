@@ -72,11 +72,11 @@ return [
                 //     'route' => 'admin.combo.list',
                 //     'icon'  => '<i data-feather=\'circle\'></i>'
                 // ],
-                [
-                    'name'  => '3. Đối tác hotel',
-                    'route' => 'admin.hotelPartner.list',
-                    'icon'  => '<i data-feather=\'circle\'></i>'
-                ]
+                // [
+                //     'name'  => '3. Đối tác hotel',
+                //     'route' => 'admin.hotelPartner.list',
+                //     'icon'  => '<i data-feather=\'circle\'></i>'
+                // ]
             ]
         ],
         [
