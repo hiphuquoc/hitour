@@ -1314,4 +1314,40 @@ class BuildInsertUpdateModel {
         }
         return $result;
     }
+
+    public static function buildArrayTableHotelLocation($dataForm, $seoId = null){
+        /* upload hotel_location */
+        $result                             = [];
+        if(!empty($dataForm)){
+            $result['name']                 = $dataForm['title'] ?? null;
+            $result['description']          = $dataForm['description'] ?? null;
+            $result['display_name']         = $dataForm['display_name'] ?? null;
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
+            $result['region_id']            = $dataForm['region'];
+            $result['island']               = !empty($dataForm['island']) ? 1 : 0;
+            $result['special']              = !empty($dataForm['special']) ? 1 : 0;
+            $result['province_id']          = $dataForm['province'] ?? null;
+            $result['district_id']          = $dataForm['district'] ?? null;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableHotelInfo($dataForm, $seoId = null){
+        $result     = [];
+        if(!empty($dataForm)){
+            if(!empty($seoId)) $result['seo_id'] = $seoId;
+            $result['hotel_location_id']    = $dataForm['location'];
+            $result['name']                 = $dataForm['title'];
+            $result['code']                 = $dataForm['code'] ?? null;
+            $result['company_name']         = $dataForm['company_name'] ?? null;
+            $result['company_code']         = $dataForm['company_code'] ?? null;
+            $result['address']              = $dataForm['address'] ?? null;
+            $result['website']              = $dataForm['website'] ?? null;
+            $result['hotline']              = $dataForm['hotline'] ?? null;
+            $result['email']                = $dataForm['email'] ?? null;
+            $result['status_show']          = !empty($dataForm['status_show']) ? 1 : 0;
+            $result['status_sidebar']       = !empty($dataForm['status_sidebar']) ? 1 : 0;
+        }
+        return $result;
+    }
 }

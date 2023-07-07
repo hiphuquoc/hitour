@@ -16,30 +16,50 @@ class AdminHotelContactController extends Controller {
 
     public function loadContact(Request $request){
         $result                     = null;
-        if(!empty($request->get('partner_id'))&&$request->get('type')=='edit'){
-            $data                   = HotelContact::getListByPartnerId($request->get('partner_id'));
-            foreach($data as $item) $result .= view('admin.hotelPartner.contactRow', compact('item'))->render();
+        if(!empty($request->get('hotel_info_id'))&&$request->get('type')=='edit'){
+            $data                   = HotelContact::select('*')
+                                        ->where('hotel_info_id', $request->get('hotel_info_id'))
+                                        ->get();
+            foreach($data as $item) $result .= view('admin.hotel.contactRow', compact('item'))->render();
         }
         if(empty($result)) $result  = config('admin.message_data_empty');
         echo $result;
     }
 
     public function create(Request $request){
-        if(!empty($request->get('dataForm'))){
-            /* insert partner_contact */
-            $insertPartnerContact   = $this->BuildInsertUpdateModel->buildArrayTableHotelContact($request->get('dataForm'));
-            $idPartner              = HotelContact::insertItem($insertPartnerContact);
+        $flag   = false;
+        if(!empty($request->get('dataForm'))&&!empty($request->get('hotel_info_id'))){
+            /* insert hotel_contact */
+            $dataForm           = $request->get('dataForm');
+            $idHotelContact     = HotelContact::insertItem([
+                'hotel_info_id'     => $request->get('hotel_info_id'), 
+                'name'              => $dataForm['name'],
+                'address'           => $dataForm['address'],
+                'phone'             => $dataForm['phone'], 
+                'zalo'              => $dataForm['zalo'],
+                'email'             => $dataForm['email'],
+                'default'           => 0
+            ]);
             /* Message */
-            $flag                   = !empty($idPartner) ? true : false;
-            echo $flag;
+            if(!empty($idHotelContact)) $flag = true;
         }
+        echo $flag;
     }
 
     public function update(Request $request){
         $flag               = false;
-        if(!empty($request->get('dataForm'))){
-            $updatePartnerContact   = $this->BuildInsertUpdateModel->buildArrayTableHotelContact($request->get('dataForm'));
-            $flag           = HotelContact::updateItem($request->get('dataForm')['hotel_contact_id'], $updatePartnerContact);
+        if(!empty($request->get('dataForm'))&&!empty($request->get('hotel_info_id'))){
+            $dataForm           = $request->get('dataForm');
+            HotelContact::updateItem($dataForm['hotel_contact_id'], [
+                'name'              => $dataForm['name'],
+                'address'           => $dataForm['address'],
+                'phone'             => $dataForm['phone'], 
+                'zalo'              => $dataForm['zalo'],
+                'email'             => $dataForm['email'],
+                'default'           => 0
+            ]);
+            /* Message */
+            $flag = true;
         }
         echo $flag;
     }
@@ -54,7 +74,7 @@ class AdminHotelContactController extends Controller {
         $item               = [];
         if(!empty($request->get('id'))) $item   = HotelContact::find($request->get('id'));
         $result['header']   = !empty($item) ? 'Chỉnh sửa liên hệ' : 'Thêm liên hệ';
-        $result['body']     = view('admin.hotelPartner.formModal', compact('item'))->render();
+        $result['body']     = view('admin.hotel.formContact', compact('item'))->render();
         return json_encode($result);
     }
 }

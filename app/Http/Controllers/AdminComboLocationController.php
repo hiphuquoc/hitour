@@ -7,28 +7,16 @@ use App\Helpers\Upload;
 
 use App\Http\Controllers\AdminSliderController;
 use App\Models\ComboLocation;
-use App\Models\ShipLocation;
-use App\Models\CarrentalLocation;
-use App\Models\ServiceLocation;
-use App\Models\AirLocation;
 use App\Models\Seo;
 use App\Services\BuildInsertUpdateModel;
 use App\Models\District;
 use App\Models\Province;
-use App\Models\Guide;
-use App\Models\Category;
-use App\Models\RelationTourLocationGuide;
 use App\Models\QuestionAnswer;
+use App\Models\RelationTourLocationComboLocation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Cookie;
 use App\Http\Requests\ComboLocationRequest;
-use App\Models\RelationTourLocationShipLocation;
-use App\Models\RelationTourLocationCarrentalLocation;
-use App\Models\RelationTourLocationServiceLocation;
-use App\Models\RelationTourLocationAirLocation;
-use App\Models\RelationTourLocationDestinationList;
-use App\Models\RelationTourLocationSpecialList;
 use App\Jobs\CheckSeo;
 
 class AdminComboLocationController extends Controller {
@@ -227,6 +215,15 @@ class AdminComboLocationController extends Controller {
                 if(!empty($info->files)){
                     foreach($info->files as $file) AdminSliderController::removeSliderById($file->id);
                 }
+                /* xóa question */
+                QuestionAnswer::select('*')
+                        ->where('relation_table', 'combo_location')
+                        ->where('reference_id', $info->id)
+                        ->delete();
+                /* xóa relation_tour_location_combo_location */
+                RelationTourLocationComboLocation::select('*')
+                    ->where('combo_location_id', $info->id)
+                    ->delete();
                 DB::commit();
                 return true;
             } catch (\Exception $exception){

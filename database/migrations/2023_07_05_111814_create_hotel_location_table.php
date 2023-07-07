@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('province_id')->nullable();
             $table->integer('region_id')->nullable();
             $table->boolean('island')->default(0);
+            $table->boolean('special')->default(0);
             $table->text('note')->nullable();
             $table->timestamps();
         });

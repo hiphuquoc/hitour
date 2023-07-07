@@ -6,58 +6,64 @@ use Illuminate\Http\Request;
 use App\Helpers\Upload;
 
 use App\Http\Controllers\AdminSliderController;
-use App\Models\ServiceLocation;
+use App\Models\HotelLocation;
 use App\Models\Seo;
 use App\Services\BuildInsertUpdateModel;
 use App\Models\District;
 use App\Models\Province;
 use App\Models\QuestionAnswer;
-use App\Models\RelationTourLocationServiceLocation;
+use App\Models\RelationTourLocationHotelLocation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\ServiceLocationRequest;
+use Illuminate\Support\Facades\Cookie;
+use App\Http\Requests\HotelLocationRequest;
 use App\Jobs\CheckSeo;
 
-class AdminServiceLocationController extends Controller {
+class AdminHotelLocationController extends Controller {
 
     public function __construct(BuildInsertUpdateModel $BuildInsertUpdateModel){
         $this->BuildInsertUpdateModel  = $BuildInsertUpdateModel;
     }
 
     public function list(Request $request){
-        $params         = [];
+        $params             = [];
         /* Search theo tên */
         if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
+        /* Search theo vùng miền */
+        if(!empty($request->get('search_region'))) $params['search_region'] = $request->get('search_region');
+        /* paginate */
+        $viewPerPage        = Cookie::get('viewHotelLocation') ?? 50;
+        $params['paginate'] = $viewPerPage;
         /* lấy dữ liệu */
-        $list           = ServiceLocation::getList($params);
-        return view('admin.serviceLocation.list', compact('list', 'params'));
+        $list               = HotelLocation::getList($params);
+        return view('admin.hotelLocation.list', compact('list', 'params', 'viewPerPage'));
     }
 
     public function view(Request $request){
         $id                 = $request->get('id') ?? 0;
-        $item               = ServiceLocation::select('*')
+        $item               = HotelLocation::select('*')
                                 ->where('id', $id)
                                 ->with(['files' => function($query){
-                                    $query->where('relation_table', 'service_location');
+                                    $query->where('relation_table', 'hotel_location');
                                 }])
                                 ->with(['questions' => function($query){
-                                    $query->where('relation_table', 'service_location');
+                                    $query->where('relation_table', 'hotel_location');
                                 }])
                                 ->with('seo')
                                 ->first();
         $provinces          = Province::getItemByIdRegion($item->region_id ?? 0);
         $districts          = District::getItemByIdProvince($item->province_id ?? 0);
-        $content            = null;
+        $content        = null;
         if(!empty($item->seo->slug)){
-            $content        = Storage::get(config('admin.storage.contentServiceLocation').$item->seo->slug.'.blade.php');
+            $content    = Storage::get(config('admin.storage.contentHotelLocation').$item->seo->slug.'.blade.php');
         }
         $message            = $request->get('message') ?? null; 
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.serviceLocation.view', compact('item', 'type', 'provinces', 'districts', 'content', 'message'));
+        return view('admin.hotelLocation.view', compact('item', 'type', 'provinces', 'districts', 'content', 'message'));
     }
 
-    public function create(ServiceLocationRequest $request){
+    public function create(HotelLocationRequest $request){
         try {
             DB::beginTransaction();
             /* upload image */
@@ -67,11 +73,11 @@ class AdminServiceLocationController extends Controller {
                 $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
             }
             /* insert page */
-            $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'service_location', $dataPath);
-            $seoId             = Seo::insertItem($insertPage);
-            /* insert service_location */
-            $insertServiceLocation = $this->BuildInsertUpdateModel->buildArrayTableServiceLocation($request->all(), $seoId);
-            $idServiceLocation     = ServiceLocation::insertItem($insertServiceLocation);
+            $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'hotel_location', $dataPath);
+            $seoId              = Seo::insertItem($insertPage);
+            /* insert hotel_location */
+            $insertHotelLocation    = $this->BuildInsertUpdateModel->buildArrayTableHotelLocation($request->all(), $seoId);
+            $idHotelLocation        = HotelLocation::insertItem($insertHotelLocation);
             /* insert câu hỏi thường gặp */
             if(!empty($request->get('question_answer'))){
                 foreach($request->get('question_answer') as $itemQues){
@@ -79,22 +85,20 @@ class AdminServiceLocationController extends Controller {
                         QuestionAnswer::insertItem([
                             'question'          => $itemQues['question'],
                             'answer'            => $itemQues['answer'],
-                            'relation_table'    => 'service_location',
-                            'reference_id'      => $idServiceLocation
+                            'relation_table'    => 'hotel_location',
+                            'reference_id'      => $idHotelLocation
                         ]);
                     }
                 }
             }
             /* lưu content vào file */
-            $content            = $request->get('content') ?? null;
-            $content            = AdminImageController::replaceImageInContentWithLoading($content);
-            Storage::put(config('admin.storage.contentServiceLocation').$request->get('slug').'.blade.php', $content);
+            Storage::put(config('admin.storage.contentHotelLocation').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
                 $params         = [
-                    'attachment_id'     => $idServiceLocation,
-                    'relation_table'    => 'service_location',
+                    'attachment_id'     => $idHotelLocation,
+                    'relation_table'    => 'hotel_location',
                     'name'              => $name
                 ];
                 AdminSliderController::uploadSlider($request->file('slider'), $params);
@@ -103,7 +107,7 @@ class AdminServiceLocationController extends Controller {
             /* Message */
             $message        = [
                 'type'      => 'success',
-                'message'   => '<strong>Thành công!</strong> Đã tạo Điểm đến dịch vụ mới'
+                'message'   => '<strong>Thành công!</strong> Đã tạo Điểm đến Hotel mới'
             ];
         } catch (\Exception $exception){
             DB::rollBack();
@@ -117,10 +121,10 @@ class AdminServiceLocationController extends Controller {
         CheckSeo::dispatch($seoId);
         /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
-        return redirect()->route('admin.serviceLocation.view', ['id' => $idServiceLocation]);
+        return redirect()->route('admin.hotelLocation.view', ['id' => $idHotelLocation]);
     }
 
-    public function update(ServiceLocationRequest $request){
+    public function update(HotelLocationRequest $request){
         try {
             DB::beginTransaction();
             /* upload image */
@@ -130,16 +134,16 @@ class AdminServiceLocationController extends Controller {
                 $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
             }
             /* update page */
-            $updatePage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'service_location', $dataPath);
+            $updatePage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'hotel_location', $dataPath);
             Seo::updateItem($request->get('seo_id'), $updatePage);
-            /* update ServiceLocation */
-            $idServiceLocation     = $request->get('service_location_id');
-            $updateServiceLocation = $this->BuildInsertUpdateModel->buildArrayTableServiceLocation($request->all());
-            ServiceLocation::updateItem($idServiceLocation, $updateServiceLocation);
+            /* update TourLocation */
+            $idHotelLocation     = $request->get('hotel_location_id');
+            $updateHotelLocation = $this->BuildInsertUpdateModel->buildArrayTableHotelLocation($request->all());
+            HotelLocation::updateItem($idHotelLocation, $updateHotelLocation);
             /* update câu hỏi thường gặp */
             QuestionAnswer::select('*')
-                        ->where('relation_table', 'service_location')
-                        ->where('reference_id', $idServiceLocation)
+                        ->where('relation_table', 'hotel_location')
+                        ->where('reference_id', $idHotelLocation)
                         ->delete();
             if(!empty($request->get('question_answer'))){
                 foreach($request->get('question_answer') as $itemQues){
@@ -147,22 +151,20 @@ class AdminServiceLocationController extends Controller {
                         QuestionAnswer::insertItem([
                             'question'          => $itemQues['question'],
                             'answer'            => $itemQues['answer'],
-                            'relation_table'    => 'service_location',
-                            'reference_id'      => $idServiceLocation
+                            'relation_table'    => 'hotel_location',
+                            'reference_id'      => $idHotelLocation
                         ]);
                     }
                 }
             }
             /* lưu content vào file */
-            $content            = $request->get('content') ?? null;
-            $content            = AdminImageController::replaceImageInContentWithLoading($content);
-            Storage::put(config('admin.storage.contentServiceLocation').$request->get('slug').'.blade.php', $content);
+            Storage::put(config('admin.storage.contentHotelLocation').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
                 $params         = [
-                    'attachment_id'     => $idServiceLocation,
-                    'relation_table'    => 'service_location',
+                    'attachment_id'     => $idHotelLocation,
+                    'relation_table'    => 'hotel_location',
                     'name'              => $name
                 ];
                 AdminSliderController::uploadSlider($request->file('slider'), $params);
@@ -185,7 +187,7 @@ class AdminServiceLocationController extends Controller {
         CheckSeo::dispatch($request->get('seo_id'));
         /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
-        return redirect()->route('admin.serviceLocation.view', ['id' => $idServiceLocation]);
+        return redirect()->route('admin.hotelLocation.view', ['id' => $idHotelLocation]);
     }
 
     public function delete(Request $request){
@@ -193,15 +195,15 @@ class AdminServiceLocationController extends Controller {
             try {
                 DB::beginTransaction();
                 $id         = $request->get('id');
-                $info       = ServiceLocation::select('*')
+                $info       = HotelLocation::select('*')
                                 ->where('id', $id)
                                 ->with(['files' => function($query){
-                                    $query->where('relation_table', 'service_location');
+                                    $query->where('relation_table', 'hotel_location');
                                 }])
                                 ->with('seo')
                                 ->first();
-                /* delete bảng service_location */
-                ServiceLocation::find($id)->delete();
+                /* delete bảng hotel_location */
+                HotelLocation::find($id)->delete();
                 /* delete bảng seo */
                 Seo::find($info->seo->id)->delete();
                 /* xóa ảnh đại diện trong thư mục */
@@ -215,13 +217,14 @@ class AdminServiceLocationController extends Controller {
                 }
                 /* xóa question */
                 QuestionAnswer::select('*')
-                        ->where('relation_table', 'service_location')
+                        ->where('relation_table', 'hotel_location')
                         ->where('reference_id', $info->id)
                         ->delete();
-                /* xóa relation_tour_location_service_location */
-                RelationTourLocationServiceLocation::select('*')
-                    ->where('service_location_id', $info->id)
+                /* xóa relation_tour_location_hotel_location */
+                RelationTourLocationHotelLocation::select('*')
+                    ->where('hotel_location_id', $info->id)
                     ->delete();
+                /* commit */
                 DB::commit();
                 return true;
             } catch (\Exception $exception){

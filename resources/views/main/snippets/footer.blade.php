@@ -7,7 +7,7 @@
                             <b style="font-size:1.05rem;font-family:'SVN-Gilroy Bold', serif;display:flex;margin-top:-5px;">{{ config('company.name') }}</b>
                         </li>
                         <li>
-                            <i class="fa-solid fa-location-dot"></i>trụ sở: {{ config('main.address') }}
+                            <i class="fa-solid fa-location-dot"></i>trụ sở: {{ config('company.address') }}
                         </li>
                         <li>
                             <i class="fa-solid fa-phone"></i>hotline: <a href="tel:{{ \App\Helpers\Charactor::removeSpecialCharacters(config('company.hotline')) }}" title="Hotline {{ config('company.sortname') }}">{{ config('company.hotline') }}</a>

@@ -11,6 +11,7 @@ use App\Services\BuildInsertUpdateModel;
 use App\Models\District;
 use App\Models\Province;
 use App\Models\QuestionAnswer;
+use App\Models\RelationTourLocationCarrentalLocation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\CarrentalLocationRequest;
@@ -214,6 +215,15 @@ class AdminCarrentalLocationController extends Controller {
                 if(!empty($info->files)){
                     foreach($info->files as $file) AdminSliderController::removeSliderById($file->id);
                 }
+                /* xóa question */
+                QuestionAnswer::select('*')
+                        ->where('relation_table', 'carrental_location')
+                        ->where('reference_id', $info->id)
+                        ->delete();
+                /* xóa relation_tour_location_carrental_location */
+                RelationTourLocationCarrentalLocation::select('*')
+                    ->where('carrental_location_id', $info->id)
+                    ->delete();
                 DB::commit();
                 return true;
             } catch (\Exception $exception){

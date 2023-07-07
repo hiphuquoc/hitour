@@ -11,6 +11,7 @@ use App\Services\BuildInsertUpdateModel;
 use App\Models\District;
 use App\Models\Province;
 use App\Models\QuestionAnswer;
+use App\Models\RelationTourLocationAirLocation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\AirLocationRequest;
@@ -213,6 +214,15 @@ class AdminAirLocationController extends Controller {
                 if(!empty($info->files)){
                     foreach($info->files as $file) AdminSliderController::removeSliderById($file->id);
                 }
+                /* xóa question */
+                QuestionAnswer::select('*')
+                        ->where('relation_table', 'air_location')
+                        ->where('reference_id', $info->id)
+                        ->delete();
+                /* xóa relation_tour_location_air_location */
+                RelationTourLocationAirLocation::select('*')
+                    ->where('air_location_id', $info->id)
+                    ->delete();
                 DB::commit();
                 return true;
             } catch (\Exception $exception){

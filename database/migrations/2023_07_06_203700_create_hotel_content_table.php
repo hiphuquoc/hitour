@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('relation_hotel_info_staff', function (Blueprint $table) {
+        Schema::create('hotel_content', function (Blueprint $table) {
             $table->id();
             $table->integer('hotel_info_id');
-            $table->integer('staff_info_id');   
+            $table->text('name');
+            $table->longText('content');
+            $table->integer('ordering')->default(0);
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('relation_hotel_info_staff');
+        // Schema::dropIfExists('hotel_content');
     }
 };

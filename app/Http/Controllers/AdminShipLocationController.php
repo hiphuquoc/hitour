@@ -11,6 +11,7 @@ use App\Services\BuildInsertUpdateModel;
 use App\Models\District;
 use App\Models\Province;
 use App\Models\QuestionAnswer;
+use App\Models\RelationTourLocationShipLocation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ShipLocationRequest;
@@ -259,6 +260,15 @@ class AdminShipLocationController extends Controller {
                 if(!empty($info->files)){
                     foreach($info->files as $file) AdminSliderController::removeSliderById($file->id);
                 }
+                /* xóa question */
+                QuestionAnswer::select('*')
+                        ->where('relation_table', 'ship_location')
+                        ->where('reference_id', $info->id)
+                        ->delete();
+                /* xóa relation_tour_location_ship_location */
+                RelationTourLocationShipLocation::select('*')
+                    ->where('ship_location_id', $info->id)
+                    ->delete();
                 DB::commit();
                 return true;
             } catch (\Exception $exception){

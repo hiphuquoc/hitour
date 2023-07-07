@@ -19,23 +19,6 @@ class HotelContact extends Model {
     ];
     public $timestamps      = false;
 
-    // public static function getList($params = null){
-    //     $paginate   = $params['paginate'] ?? null;
-    //     $result     = self::select('*')
-    //                     ->paginate($paginate);
-    //     return $result;
-    // }
-
-    public static function getListByPartnerId($partnerId){
-        $result         = null;
-        if(!empty($partnerId)){
-            $result     = HotelContact::select('*')
-                                ->where('partner_id', $partnerId)
-                                ->get();
-        }
-        return $result;
-    }
-
     public static function insertItem($params){
         $id             = 0;
         if(!empty($params)){

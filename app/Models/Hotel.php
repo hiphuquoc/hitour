@@ -35,13 +35,7 @@ class Hotel extends Model {
                         /* tìm theo khu vực */
                         ->when(!empty($params['search_location']), function($query) use($params){
                             $query->whereHas('locations', function($q) use ($params){
-                                $q->where('combo_location_id', $params['search_location']);
-                            });
-                        })
-                        /* tìm theo đối tác */
-                        ->when(!empty($params['search_partner']), function($query) use($params){
-                            $query->whereHas('partners', function($q) use ($params){
-                                $q->where('partner_info_id', $params['search_partner']);
+                                $q->where('hotel_location_id', $params['search_location']);
                             });
                         })
                         /* tìm theo nhân viên */
@@ -54,7 +48,7 @@ class Hotel extends Model {
                         ->with(['files' => function($query){
                             $query->where('relation_table', 'hotel_info');
                         }])
-                        ->with('seo', 'locations.infoLocation', 'staffs.infoStaff', 'partners.infoPartner')
+                        ->with('seo', 'location', 'staffs.infoStaff')
                         ->paginate($params['paginate']);
         return $result;
     }
@@ -84,8 +78,8 @@ class Hotel extends Model {
         $result         = null;
         if(!empty($slug)){
             $result     = DB::table('seo')
-                            ->join('combo_location', 'combo_location.seo_id', '=', 'seo.id')
-                            ->select(array_merge(config('table.seo'), config('table.combo_location')))
+                            ->join('hotel_location', 'hotel_location.seo_id', '=', 'seo.id')
+                            ->select(array_merge(config('table.seo'), config('table.hotel_location')))
                             ->where('slug', $slug)
                             ->first();
         }
@@ -95,9 +89,9 @@ class Hotel extends Model {
     public static function getItemById($id = null){
         $result         = null;
         if(!empty($id)){
-            $result     = Combo::select('*')
+            $result     = Hotel::select('*')
                             ->where('id', $id)
-                            ->with('seo', 'files', 'staffs', 'partners.infoPartner', 'options.prices', 'contents')
+                            ->with('seo', 'files', 'staffs', 'options.prices', 'contents')
                             ->first();
         }
         return $result;
@@ -127,11 +121,7 @@ class Hotel extends Model {
     //     return $this->hasMany(\App\Models\ComboOption::class, 'hotel_info_id', 'id');
     // }
 
-    // public function contents(){
-    //     return $this->hasMany(\App\Models\ComboContent::class, 'combo_info_id', 'id');
-    // }
-
-    public function questions(){
-        return $this->hasMany(\App\Models\QuestionAnswer::class, 'reference_id', 'id');
+    public function contents(){
+        return $this->hasMany(\App\Models\HotelContent::class, 'hotel_info_id', 'id');
     }
 }
