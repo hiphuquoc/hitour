@@ -79,13 +79,15 @@
             </thead>
             <tbody>
                 @php
-                if(!empty($list)){
-                    $i          = 1;
-                    foreach($list as $item){
-                        echo view('admin.combo.oneRow', ['item' => $item, 'no' => $i]);
-                        ++$i;
+                    if(!empty($list)){
+                        $i          = 1;
+                        foreach($list as $item){
+                            echo view('admin.combo.oneRow', ['item' => $item, 'no' => $i]);
+                            ++$i;
+                        }
+                    }else {
+                        echo '<tr><td colspan="6">Không có dữ liệu phù hợp!</td></tr>';
                     }
-                }
                 @endphp
             </tbody>
         </table>

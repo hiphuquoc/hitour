@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 @section('content')
 
-<div class="titlePage">Danh sách Combo</div>
+<div class="titlePage">Danh sách Hotel</div>
 <!-- ===== START: SEARCH FORM ===== -->
 <form id="formSearch" method="get" action="{{ route('admin.hotel.list') }}">
 <div class="searchBox">
@@ -11,11 +11,11 @@
             <button class="btn btn-primary waves-effect" id="button-addon2" type="submit" aria-label="Tìm">Tìm</button>
         </div>
     </div>
-    @if(!empty($tourLocations))
+    @if(!empty($hotelLocations))
         <div class="searchBox_item">
             <select class="form-select select2" name="search_location" onChange="submitForm('formSearch');">
                 <option value="0">- Tìm theo Khu vực -</option>
-                @foreach($tourLocations as $location)
+                @foreach($hotelLocations as $location)
                     @php
                         $selected   = null;
                         if(!empty($params['search_location'])&&$params['search_location']==$location->id) $selected = 'selected';
@@ -79,13 +79,15 @@
             </thead>
             <tbody>
                 @php
-                if(!empty($list)){
-                    $i          = 1;
-                    foreach($list as $item){
-                        echo view('admin.hotel.oneRow', ['item' => $item, 'no' => $i]);
-                        ++$i;
+                    if(!empty($list)&&$list->isNotEmpty()){
+                        $i          = 1;
+                        foreach($list as $item){
+                            echo view('admin.hotel.oneRow', ['item' => $item, 'no' => $i]);
+                            ++$i;
+                        }
+                    }else {
+                        echo '<tr><td colspan="6">Không có dữ liệu phù hợp!</td></tr>';
                     }
-                }
                 @endphp
             </tbody>
         </table>

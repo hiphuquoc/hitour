@@ -34,9 +34,7 @@ class Hotel extends Model {
                         })
                         /* tìm theo khu vực */
                         ->when(!empty($params['search_location']), function($query) use($params){
-                            $query->whereHas('locations', function($q) use ($params){
-                                $q->where('hotel_location_id', $params['search_location']);
-                            });
+                            $query->where('hotel_location_id', $params['search_location']);
                         })
                         /* tìm theo nhân viên */
                         ->when(!empty($params['search_staff']), function($query) use($params){
