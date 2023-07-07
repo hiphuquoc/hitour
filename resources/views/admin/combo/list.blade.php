@@ -79,7 +79,7 @@
             </thead>
             <tbody>
                 @php
-                    if(!empty($list)){
+                    if(!empty($list)&&$list->isNotEmpty()){
                         $i          = 1;
                         foreach($list as $item){
                             echo view('admin.combo.oneRow', ['item' => $item, 'no' => $i]);
