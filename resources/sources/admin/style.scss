@@ -410,6 +410,15 @@ html .content.app-content {
     font-size: 1rem !important;
 }
 
+.labelWithIcon {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    i {
+        color: $colorSuccess;
+    }
+}
+
 label.error {
     display: none !important;
 }
@@ -538,9 +547,13 @@ html .content {
     &-header {
         padding: 1rem 1.5rem;
         background: $colorLv1;
-        > * {
+        h2, h3, h4, h5 {
             @include titleBox;
             i {
+                font-family: "Font Awesome 6 Free";
+                font-weight: 900;
+            }
+            > * {
                 font-size: 1.6rem;
                 position: absolute;
                 right: 0;
@@ -551,6 +564,11 @@ html .content {
                 cursor: pointer;
                 &:hover {
                     color: $colorSLv1-hover;
+                }
+                > * {
+                    &:not(:last-child){
+                        margin-right: 0.25rem;
+                    }
                 }
             }
         }
@@ -985,6 +1003,103 @@ html .content {
     font-size: 1.2rem;
     color: $colorLv1-hover;
     font-weight: bold;
+}
+
+.uploadImageBox {
+    &_box {
+        display: flex;
+        flex-wrap: wrap;
+        &_item {
+            width: 20%;
+            border: 1px dashed $bg-05;
+            position: relative;
+            background: $bg-03;
+            &:not(:last-child){
+                border-right: 0;
+            }
+            // &:nth-child(4n + 0){
+            //     border-right: 1px dashed $bg-05 !important;
+            // }
+            img {
+                width: 100%;
+            }
+            &_icon {
+                position: absolute;
+                top: 0.25rem;
+                right: 0.5rem;
+                font-size: 1.5rem;
+                color: rgba(255, 0, 0, 0.5);
+                cursor: pointer;
+                &:hover {
+                    color: rgba(255, 0, 0, 0.7);
+                }
+                &:before {
+                    content: "\f057";
+                    @include fontAwesome;
+                }
+            }
+        }
+    }
+}
+
+.hotelRoomBox {
+    width: 100%;
+    &_item {
+        width: 100%;
+        display: flex;
+        &:not(:first-child){
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid $bg-05;
+        }
+        > * {
+            width: 100%;
+            &:not(:first-child){
+                margin-left: 1.5rem;
+            }
+        }
+        &_img {
+            display: flex;
+            flex-wrap: wrap;
+            min-width: 400px;
+            align-items: flex-start;
+            background: $bg-03;
+            img {
+                width: 25%;
+            }
+        }
+        &_action {
+            vertical-align: top;
+            display: flex;
+            font-size: 0.95rem;
+            max-width: 80px;
+        }
+        &_info {
+            > * {
+                &:not(:first-child){
+                    margin-top: 0.5rem;
+                }
+            }
+            &_title {
+                font-size: 1.05rem;
+                font-family: $fontTitle;
+            }
+            &_facility {
+                > span {
+                    background: $bg-03;
+                    padding: 0.15rem 0.5rem;
+                    border-radius: 5px;
+                    margin-top: 0.25rem;
+                    display: inline-block;
+                    > svg {
+                        margin-right: 0.25rem;
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+        
+    }
 }
 
 // @media print {

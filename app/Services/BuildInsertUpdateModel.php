@@ -1350,4 +1350,18 @@ class BuildInsertUpdateModel {
         }
         return $result;
     }
+
+    public static function buildArrayTableHotelRoom($dataForm, $idHotelInfo){
+        $result     = [];
+        if(!empty($dataForm)&&!empty($idHotelInfo)){
+            $result['hotel_info_id']        = $idHotelInfo;
+            $result['name']                 = $dataForm['name'];
+            $result['condition']            = $dataForm['condition'] ?? null;
+            $result['size']                 = $dataForm['size'];
+            $result['number_people']        = $dataForm['number_people'];
+            $result['price']                = $dataForm['price'];
+            $result['note']                 = $dataForm['note'] ?? null;
+        }
+        return $result;
+    }
 }

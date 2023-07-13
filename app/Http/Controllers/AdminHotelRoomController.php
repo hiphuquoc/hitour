@@ -1,0 +1,335 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Services\BuildInsertUpdateModel;
+use App\Models\Hotel;
+use App\Models\HotelRoom;
+use App\Models\HotelImage;
+use App\Models\HotelRoomDetail;
+use App\Models\HotelRoomFacility;
+use App\Models\RelationHotelRoomHotelRoomFacility;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic;
+
+// use Goutte\Client;
+// use Symfony\Component\BrowserKit\CookieJar;
+// use Symfony\Component\BrowserKit\Cookie;
+// use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\DomCrawler\Crawler;
+
+class AdminHotelRoomController extends Controller {
+    private $arrayData;
+    private $count;
+
+    public function __construct(BuildInsertUpdateModel $BuildInsertUpdateModel){
+        $this->BuildInsertUpdateModel   = $BuildInsertUpdateModel;
+    }
+
+    public function loadFormHotelRoom(Request $request){
+        $data                           = [];
+        if(!empty($request->get('hotel_room_id'))){
+            $data                       = HotelRoom::select('*')
+                                            ->where('id', $request->get('hotel_room_id'))
+                                            ->with('facilities', 'details', 'images')
+                                            ->first();
+            $result['head']             = 'Chỉnh sửa Phòng';
+        }else {
+            $result['head']             = 'Thêm mới Phòng';
+        }
+        /* viết lại array images */
+        $result['body']                 = view('admin.hotel.formHotelRoom', compact('data'))->render();
+        return $result;
+    }
+
+    public function downloadHotelRoom(Request $request){
+        $result     = null;
+        if(!empty($request->get('data'))){
+            $data               = $request->get('data');
+            // $data               = view('admin.hotel.room')->render();
+            $crawlerRoom        = new Crawler($data);
+            /* lấy tiện ích chung phòng - dạng icon */
+            $crawlerRoom->filter('#hprt-ws-lightbox-facilities-mapped > div > div > span')->each(function($node){
+                /* ===== lấy facilities */
+                /* lấy text */
+                $this->arrayData['facilities'][$this->count]['text']                      = $node->text();
+                /* lấy icon */
+                $spanNode   = $node->filter('svg')->getNode(0);
+                $spanDom    = $node->getNode(0)->ownerDocument->saveHTML($spanNode);
+                if(!empty($spanDom)) $this->arrayData['facilities'][$this->count]['icon'] = trim($spanDom);
+                $this->count += 1;
+            });
+            /* lấy hình ảnh phòng */
+            $crawlerRoom->filter('.hprt-lightbox-gallery img')->each(function($node){
+                if(!empty($node->attr('src'))) {
+                    $this->arrayData['images'][]   = $node->attr('src');
+                }else if(!empty($node->attr('data-lazy'))){
+                    $this->arrayData['images'][]   = $node->attr('data-lazy');
+                }
+            });
+            /* lấy mô tả tiện ích phòng */
+            $this->count        = 0;
+            $crawlerRoom->filter('.more-facilities-space h2')->each(function($node){
+                if(!empty($node->filter('h2')->text())) $this->arrayData['details'][$this->count]['name'] = $node->filter('h2')->text();
+                $this->count    += 1;
+            });
+            $this->count = 0;
+            $crawlerRoom->filter('.more-facilities-space ul')->each(function($node){
+                if(!empty($node->html())) $this->arrayData['details'][$this->count]['detail'] = '<ul>'.trim($node->html()).'</ul>';
+                $this->count    += 1;
+            });
+            /* lấy số người tối đa của phòng */
+            $numberPeople   = null;
+            $tmp            = $crawlerRoom->filter('.tpi-hprt-lightbox-book-conditions__occupancy')->count()>0 ? $crawlerRoom->filter('.tpi-hprt-lightbox-book-conditions__occupancy')->attr('title') : null;
+            if(!empty($tmp)){
+                $pattern    = '/\d+/';
+                preg_match($pattern, $tmp, $matches);
+                if (!empty($matches)) $numberPeople = $matches[0];
+            }
+            $this->arrayData['number_people'] = $numberPeople;
+            /* lấy giá phòng */
+            $price          = null;
+            $tmp            = $crawlerRoom->filter('.hprt-lightbox-book-price')->count()>0 ? $crawlerRoom->filter('.hprt-lightbox-book-price')->text() : null;
+            if(!empty($tmp)){
+                $pattern    = '/\d+[,.]*\d*/';
+                preg_match($pattern, $tmp, $matches);
+                if (!empty($matches)) $price = $matches[0];
+            }
+            $price          = str_replace([',', '.'], ['', ''], $price);
+            $this->arrayData['price']   = $price;
+            /* lấy tên phòng */
+            $this->arrayData['name']    = $crawlerRoom->filter('h1')->text();
+            /* lấy tiện nghi chung của phòng */
+            $this->count        = 0;
+            $crawlerRoom->filter('.hprt-facilities-facility span')->each(function($node){
+                if(!empty($node->text())) $this->arrayData['tmp'][$this->count]['name'] = $node->text();
+                $this->count    += 1;
+            });
+            $this->count        = 0;
+            $crawlerRoom->filter('.hprt-facilities-facility')->each(function($node){
+                $spanNode       = $node->filter('svg')->getNode(0);
+                $spanDom        = $node->getNode(0)->ownerDocument->saveHTML($spanNode);
+                $this->arrayData['tmp'][$this->count]['icon'] = trim($spanDom);
+                $this->count    += 1;
+            });
+            
+            /* => tiến hành lọc qua xem nào chưa có trong bảng CSDL thì tạo ra */
+            $allRoomFacilities  = HotelRoomFacility::all();
+            $this->count        = 0;
+            foreach($this->arrayData['tmp'] as $r){
+                $flag           = false;
+                $tmp            = new \Illuminate\Database\Eloquent\Collection;
+                foreach($allRoomFacilities as $roomFacility){
+                    if($r['name']==$roomFacility->name){
+                        $flag   =  true;
+                        $tmp    = $roomFacility;
+                        break;
+                    }
+                }
+                /* flag = true => facility này đã có trong cơ sở dữ liệu => lấy thông tin đưa vào mảng */
+                if($flag==true){
+                    $this->arrayData['facilities'][$this->count]['id']     = $tmp->id;
+                    $this->arrayData['facilities'][$this->count]['name']   = $tmp->name;
+                    $this->arrayData['facilities'][$this->count]['icon']   = $tmp->icon;
+                }else { /* flag = false => facility này đã chưa trong cơ sở dữ liệu => insert vào sau đó lấy thông tin đưa vào mảng */
+                    $idRoomFacility = HotelRoomFacility::insertItem([
+                        'name'  => $r['name'],
+                        'icon'  => $r['icon']
+                    ]);
+                    $this->arrayData['facilities'][$this->count]['id']     = $idRoomFacility;
+                    $this->arrayData['facilities'][$this->count]['name']   = $r['name'];
+                    $this->arrayData['facilities'][$this->count]['icon']   = $r['icon'];
+                }
+                $this->count    += 1;
+            }
+            /* truyền vào form */
+            $roomFacilities     = HotelRoomFacility::all();
+            $result = view('admin.hotel.formHotelRoomPart2', [
+                'data'              => $this->arrayData,
+                'roomFacilities'    => $roomFacilities
+            ])->render();
+        }
+        echo $result;
+    }
+
+    public function create(Request $request){
+        $flag                           = false;
+        try {
+            DB::beginTransaction();
+            $idHotelInfo                = $request->get('hotel_info_id');
+            $dataForm                   = $request->get('dataForm');
+            /* insert hotel_room */
+            $hotelRoom                  = $this->BuildInsertUpdateModel->buildArrayTableHotelRoom($dataForm, $idHotelInfo);
+            $idHotelRoom                = HotelRoom::insertItem($hotelRoom);
+            /* lưu ảnh vào cơ sở dữ liệu */
+            if(!empty($dataForm['room_images'])){
+                $imageName              = \App\Helpers\Charactor::convertStrToUrl($dataForm['room_name']);
+                self::saveImagesHotelRoom($imageName, $idHotelRoom, $dataForm['room_images']);
+            }
+            /* insert relation_hotel_room_hotel_room_facility */
+            if(!empty($dataForm['facilities'])){
+                foreach($dataForm['facilities'] as $idRoomFacility){
+                    RelationHotelRoomHotelRoomFacility::insertItem([
+                        'hotel_room_id'             => $idHotelRoom, 
+                        'hotel_room_facility_id'    => $idRoomFacility
+                    ]);
+                }
+            }
+            /* insert hotel_room_details */
+            if(!empty($dataForm['room_details'])){
+                foreach($dataForm['room_details'] as $roomDetail){
+                    HotelRoomDetail::insertItem([
+                        'hotel_room_id' => $idHotelRoom,
+                        'name'          => $roomDetail['name'],
+                        'detail'        => $roomDetail['detail']
+                    ]);
+                }
+            }
+            /* Message */
+            if(!empty($idHotelRoom)) $flag = true;
+            DB::commit();
+            return true;
+        } catch (\Exception $exception){
+            DB::rollBack();
+            return false;
+        }
+        echo $flag;
+    }
+
+    public function update(Request $request){
+        $flag                           = false;
+        try {
+            DB::beginTransaction();
+            $idHotelInfo                = $request->get('hotel_info_id');
+            $idHotelRoom                = $request->get('hotel_room_id');
+            $dataForm                   = $request->get('dataForm');
+            /* update hotel_room */
+            $hotelRoom                  = $this->BuildInsertUpdateModel->buildArrayTableHotelRoom($dataForm, $idHotelInfo);
+            $idHotelRoom                = HotelRoom::updateItem($idHotelRoom, $hotelRoom);
+            /* update relation_hotel_room_hotel_room_facility */
+            RelationHotelRoomHotelRoomFacility::select('*')
+                ->where('hotel_room_id', $idHotelRoom)
+                ->delete();
+            if(!empty($dataForm['facilities'])){
+                foreach($dataForm['facilities'] as $idRoomFacility){
+                    RelationHotelRoomHotelRoomFacility::insertItem([
+                        'hotel_room_id'             => $idHotelRoom, 
+                        'hotel_room_facility_id'    => $idRoomFacility
+                    ]);
+                }
+            }
+            /* update hotel_room_details */
+            HotelRoomDetail::select('*')
+                ->where('hotel_room_id', $idHotelRoom)
+                ->delete();
+            if(!empty($dataForm['room_details'])){
+                foreach($dataForm['room_details'] as $roomDetail){
+                    HotelRoomDetail::insertItem([
+                        'hotel_room_id' => $idHotelRoom,
+                        'name'          => $roomDetail['name'],
+                        'detail'        => $roomDetail['detail']
+                    ]);
+                }
+            }
+            /* Message */
+            if(!empty($idHotelRoom)) $flag = true;
+            DB::commit();
+            return true;
+        } catch (\Exception $exception){
+            DB::rollBack();
+            return false;
+        }
+        echo $flag;
+    }
+
+    public static function delete(Request $request){
+        $flag               = false;
+        try {
+            DB::beginTransaction();
+            $idHotelRoom    = $request->get('id');
+            $infoHotelRoom  = HotelRoom::select('*')
+                                ->where('id', $idHotelRoom)
+                                ->with('facilities', 'details', 'images')
+                                ->first();
+            /* xóa ảnh trong storage */
+            foreach($infoHotelRoom->iamges as $image){
+                /* xóa ảnh normal */
+                $imageDelete    = Storage::path($image->image);
+                if(file_exists($imageDelete)) @unlink($imageDelete);
+                /* xóa ảnh small */
+                $imageDelete    = Storage::path($image->image_small);
+                if(file_exists($imageDelete)) @unlink($imageDelete);
+            }
+            /* xóa các relation */
+            $infoHotelRoom->facilities()->delete();
+            $infoHotelRoom->details()->delete();
+            $infoHotelRoom->images()->delete();
+            /* xóa hotel room */
+            $infoHotelRoom->delete();
+            $flag   = true;
+            DB::commit();
+            return true;
+        } catch (\Exception $exception){
+            DB::rollBack();
+            return false;
+        }
+        echo $flag;
+    }
+
+    public static function saveImagesHotelRoom($imageName, $idHotelRoom, $imageUrls){
+        $i      = 0;
+        foreach ($imageUrls as $imageUrl) {
+            /*  folder upload */
+            $folderUpload   = config('admin.images.folderHotel');
+            /* image upload */
+            $extension      = config('admin.images.extension');
+            /* upload ảnh normal */
+            $name           = $imageName.'-'.$i.'-'.time();
+            $filenameNormal = $folderUpload.$name.'.'.$extension;
+            ImageManagerStatic::make($imageUrl)
+                ->encode($extension, config('admin.images.quality'))
+                ->save(Storage::path($filenameNormal));
+            /* upload ảnh small */
+            /* lấy width và height của ảnh truyền vào để tính percenter resize */
+            $imageTmp           = ImageManagerStatic::make($imageUrl);
+            $percentPixel       = $imageTmp->width()/$imageTmp->height();
+            $widthImageSmall    = config('admin.images.smallResize_width');
+            $heightImageSmall   = $widthImageSmall/$percentPixel;
+            $filenameSmall      = $folderUpload.$name.'-small.'.$extension;
+            ImageManagerStatic::make($imageUrl)
+                ->encode($extension, config('admin.images.quality'))
+                ->resize(config('admin.images.smallResize_width'), $heightImageSmall)
+                ->save(Storage::path($filenameSmall));
+            HotelImage::insertItem([
+                'reference_type'    => 'hotel_room',
+                'reference_id'      => $idHotelRoom,
+                'image'             => Storage::url($filenameNormal),
+                'image_small'       => Storage::url($filenameSmall)
+            ]);
+            ++$i;
+        }
+    }
+
+    // public function loadFormOption(Request $request){
+    //     if(!empty($request->get('combo_info_id'))){
+    //         $option             = [];
+    //         if(!empty($request->get('combo_option_id'))) $option   = ComboOption::select('*')
+    //                                                                     ->where('id', $request->get('combo_option_id'))
+    //                                                                     ->with('prices')
+    //                                                                     ->get();
+    //         $options            = self::margeComboPriceByDate($option);
+    //         /* lấy option đầu tiên vì là duy nhất */
+    //         foreach($options as $o) $option = $o;
+    //         /* lấy dach sách departure */
+    //         $departures         = TourDeparture::all();
+    //         $result['header']   = !empty($option) ? 'Chỉnh sửa Option' : 'Thêm Option';
+    //         $result['body']     = view('admin.combo.formComboOption', compact('option', 'departures'))->render();
+    //     }else {
+    //         $result['header']   = 'Thêm Option';
+    //         $result['body']     = '<div style="margin-top:1rem;font-weight:600;">Vui lòng tạo và lưu Tour trước khi tạo Option & Giá!</div>';
+    //     }
+    //     return json_encode($result);
+    // }
+}

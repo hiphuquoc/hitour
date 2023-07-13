@@ -103,6 +103,10 @@ class Hotel extends Model {
         return $this->hasMany(\App\Models\SystemFile::class, 'attachment_id', 'id');
     }
 
+    public function rooms() {
+        return $this->hasMany(\App\Models\HotelRoom::class, 'hotel_info_id', 'id');
+    }
+
     public function location(){
         return $this->hasOne(\App\Models\HotelLocation::class, 'id', 'hotel_location_id');
     }
@@ -115,11 +119,11 @@ class Hotel extends Model {
         return $this->hasMany(\App\Models\RelationHotelContact::class, 'hotel_info_id', 'id');
     }
 
-    // public function options(){
-    //     return $this->hasMany(\App\Models\ComboOption::class, 'hotel_info_id', 'id');
-    // }
-
     public function contents(){
         return $this->hasMany(\App\Models\HotelContent::class, 'hotel_info_id', 'id');
+    }
+
+    public function facilities(){
+        return $this->hasMany(\App\Models\RelationHotelInfoHotelFacility::class, 'hotel_info_id', 'id');
     }
 }

@@ -9,6 +9,7 @@ return [
     /* Định dạng hình ảnh Upload */
     'images'    => [
         'folderUpload'          => 'public/images/upload/',
+        'folderHotel'           => 'public/images/hotel/',
         'normalResize_width'    => 750,
         'normalResize_height'   => 460,
         'smallResize_width'     => 400,

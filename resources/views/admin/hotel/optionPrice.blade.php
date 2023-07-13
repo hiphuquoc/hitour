@@ -1,4 +1,4 @@
-<div id="optionPrice_{{ $option['hotel_option_id'] }}" class="flexBox">
+{{-- <div id="optionPrice_{{ $option['hotel_option_id'] }}" class="flexBox">
     <div class="flexBox_item">
         <div><b>{{ $option['name'] }}</b></div>
         @foreach($option['date_apply'] as $dateApply)
@@ -35,4 +35,4 @@
             </a>
         </div>
     </div>
-</div>
+</div> --}}

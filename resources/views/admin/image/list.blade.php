@@ -224,10 +224,5 @@
             });
         }
 
-        function addLoading(idBox, heightBox = 300){
-            const htmlLoadding  = '<div style="display:flex;align-items:center;justify-content:center;height:'+heightBox+'px;"><div class="spinner-grow text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div></div>';
-            $('#'+idBox).html(htmlLoadding);
-        }
-
     </script>
 @endpush
