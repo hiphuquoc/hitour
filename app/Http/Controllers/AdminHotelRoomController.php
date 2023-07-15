@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\BuildInsertUpdateModel;
 use App\Models\Hotel;
+use App\Models\HotelFacility;
 use App\Models\HotelRoom;
 use App\Models\HotelImage;
 use App\Models\HotelRoomDetail;
@@ -39,8 +40,10 @@ class AdminHotelRoomController extends Controller {
         }else {
             $result['head']             = 'Thêm mới Phòng';
         }
+        /* lấy tất cả room facilities */
+        $roomFacilities                 = HotelRoomFacility::all();
         /* viết lại array images */
-        $result['body']                 = view('admin.hotel.formHotelRoom', compact('data'))->render();
+        $result['body']                 = view('admin.hotel.formHotelRoom', compact('data', 'roomFacilities'))->render();
         return $result;
     }
 
@@ -117,33 +120,28 @@ class AdminHotelRoomController extends Controller {
             
             /* => tiến hành lọc qua xem nào chưa có trong bảng CSDL thì tạo ra */
             $allRoomFacilities  = HotelRoomFacility::all();
-            $this->count        = 0;
             foreach($this->arrayData['tmp'] as $r){
                 $flag           = false;
-                $tmp            = new \Illuminate\Database\Eloquent\Collection;
                 foreach($allRoomFacilities as $roomFacility){
+                    /* facility này đã có trong cơ sở dữ liệu => lấy id đưa vào mảng */
                     if($r['name']==$roomFacility->name){
                         $flag   =  true;
-                        $tmp    = $roomFacility;
+                        $this->arrayData['facilities'][] = $roomFacility->id;
                         break;
                     }
                 }
-                /* flag = true => facility này đã có trong cơ sở dữ liệu => lấy thông tin đưa vào mảng */
-                if($flag==true){
-                    $this->arrayData['facilities'][$this->count]['id']     = $tmp->id;
-                    $this->arrayData['facilities'][$this->count]['name']   = $tmp->name;
-                    $this->arrayData['facilities'][$this->count]['icon']   = $tmp->icon;
-                }else { /* flag = false => facility này đã chưa trong cơ sở dữ liệu => insert vào sau đó lấy thông tin đưa vào mảng */
+                /* flag = false => facility này chưa có trong cơ sở dữ liệu => insert vào sau đó lấy id đưa vào mảng */
+                if($flag==false){
                     $idRoomFacility = HotelRoomFacility::insertItem([
                         'name'  => $r['name'],
                         'icon'  => $r['icon']
                     ]);
-                    $this->arrayData['facilities'][$this->count]['id']     = $idRoomFacility;
-                    $this->arrayData['facilities'][$this->count]['name']   = $r['name'];
-                    $this->arrayData['facilities'][$this->count]['icon']   = $r['icon'];
+                    $this->arrayData['facilities'][]     = $idRoomFacility;
                 }
-                $this->count    += 1;
             }
+            $this->arrayData['facilities'] = HotelRoomFacility::select('*')
+                                                ->whereIn('id', $this->arrayData['facilities'])
+                                                ->get();
             /* truyền vào form */
             $roomFacilities     = HotelRoomFacility::all();
             $result = view('admin.hotel.formHotelRoomPart2', [
@@ -164,9 +162,9 @@ class AdminHotelRoomController extends Controller {
             $hotelRoom                  = $this->BuildInsertUpdateModel->buildArrayTableHotelRoom($dataForm, $idHotelInfo);
             $idHotelRoom                = HotelRoom::insertItem($hotelRoom);
             /* lưu ảnh vào cơ sở dữ liệu */
-            if(!empty($dataForm['room_images'])){
-                $imageName              = \App\Helpers\Charactor::convertStrToUrl($dataForm['room_name']);
-                self::saveImagesHotelRoom($imageName, $idHotelRoom, $dataForm['room_images']);
+            if(!empty($dataForm['images'])){
+                $imageName              = \App\Helpers\Charactor::convertStrToUrl($dataForm['name']);
+                self::saveImagesHotelRoom($imageName, $idHotelRoom, $dataForm['images']);
             }
             /* insert relation_hotel_room_hotel_room_facility */
             if(!empty($dataForm['facilities'])){
@@ -178,8 +176,8 @@ class AdminHotelRoomController extends Controller {
                 }
             }
             /* insert hotel_room_details */
-            if(!empty($dataForm['room_details'])){
-                foreach($dataForm['room_details'] as $roomDetail){
+            if(!empty($dataForm['details'])){
+                foreach($dataForm['details'] as $roomDetail){
                     HotelRoomDetail::insertItem([
                         'hotel_room_id' => $idHotelRoom,
                         'name'          => $roomDetail['name'],
@@ -195,7 +193,7 @@ class AdminHotelRoomController extends Controller {
             DB::rollBack();
             return false;
         }
-        echo $flag;
+        return $flag;
     }
 
     public function update(Request $request){
@@ -203,11 +201,12 @@ class AdminHotelRoomController extends Controller {
         try {
             DB::beginTransaction();
             $idHotelInfo                = $request->get('hotel_info_id');
-            $idHotelRoom                = $request->get('hotel_room_id');
             $dataForm                   = $request->get('dataForm');
+            $idHotelRoom                = $dataForm['hotel_room_id'];
+
             /* update hotel_room */
             $hotelRoom                  = $this->BuildInsertUpdateModel->buildArrayTableHotelRoom($dataForm, $idHotelInfo);
-            $idHotelRoom                = HotelRoom::updateItem($idHotelRoom, $hotelRoom);
+            HotelRoom::updateItem($idHotelRoom, $hotelRoom);
             /* update relation_hotel_room_hotel_room_facility */
             RelationHotelRoomHotelRoomFacility::select('*')
                 ->where('hotel_room_id', $idHotelRoom)
@@ -224,8 +223,8 @@ class AdminHotelRoomController extends Controller {
             HotelRoomDetail::select('*')
                 ->where('hotel_room_id', $idHotelRoom)
                 ->delete();
-            if(!empty($dataForm['room_details'])){
-                foreach($dataForm['room_details'] as $roomDetail){
+            if(!empty($dataForm['details'])){
+                foreach($dataForm['details'] as $roomDetail){
                     HotelRoomDetail::insertItem([
                         'hotel_room_id' => $idHotelRoom,
                         'name'          => $roomDetail['name'],
@@ -254,7 +253,7 @@ class AdminHotelRoomController extends Controller {
                                 ->with('facilities', 'details', 'images')
                                 ->first();
             /* xóa ảnh trong storage */
-            foreach($infoHotelRoom->iamges as $image){
+            foreach($infoHotelRoom->images as $image){
                 /* xóa ảnh normal */
                 $imageDelete    = Storage::path($image->image);
                 if(file_exists($imageDelete)) @unlink($imageDelete);
@@ -275,7 +274,7 @@ class AdminHotelRoomController extends Controller {
             DB::rollBack();
             return false;
         }
-        echo $flag;
+        return $flag;
     }
 
     public static function saveImagesHotelRoom($imageName, $idHotelRoom, $imageUrls){
@@ -305,31 +304,24 @@ class AdminHotelRoomController extends Controller {
             HotelImage::insertItem([
                 'reference_type'    => 'hotel_room',
                 'reference_id'      => $idHotelRoom,
-                'image'             => Storage::url($filenameNormal),
-                'image_small'       => Storage::url($filenameSmall)
+                'image'             => $filenameNormal,
+                'image_small'       => $filenameSmall
             ]);
             ++$i;
         }
     }
 
-    // public function loadFormOption(Request $request){
-    //     if(!empty($request->get('combo_info_id'))){
-    //         $option             = [];
-    //         if(!empty($request->get('combo_option_id'))) $option   = ComboOption::select('*')
-    //                                                                     ->where('id', $request->get('combo_option_id'))
-    //                                                                     ->with('prices')
-    //                                                                     ->get();
-    //         $options            = self::margeComboPriceByDate($option);
-    //         /* lấy option đầu tiên vì là duy nhất */
-    //         foreach($options as $o) $option = $o;
-    //         /* lấy dach sách departure */
-    //         $departures         = TourDeparture::all();
-    //         $result['header']   = !empty($option) ? 'Chỉnh sửa Option' : 'Thêm Option';
-    //         $result['body']     = view('admin.combo.formComboOption', compact('option', 'departures'))->render();
-    //     }else {
-    //         $result['header']   = 'Thêm Option';
-    //         $result['body']     = '<div style="margin-top:1rem;font-weight:600;">Vui lòng tạo và lưu Tour trước khi tạo Option & Giá!</div>';
-    //     }
-    //     return json_encode($result);
-    // }
+    public function loadHotelRoom(Request $request){
+        $result     = '';
+        if(!empty($request->get('hotel_info_id'))){
+            $data   = HotelRoom::select('*')
+                        ->where('hotel_info_id', $request->get('hotel_info_id'))
+                        ->get();
+            foreach($data as $item){
+                $result .= view('admin.hotel.oneRowHotelRoom', compact('item'))->render();
+            }
+        }
+        if(empty($result)) $result = 'Không có dữ liệu phù hợp!';
+        echo $result;
+    }
 }

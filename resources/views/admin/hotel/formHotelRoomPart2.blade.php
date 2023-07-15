@@ -14,7 +14,7 @@
                     @foreach($data['images'] as $image)
                         <div id="randomIdImage_{{ $loop->index }}" class="uploadImageBox_box_item">
                             <input type="hidden" name="images[]" value="{{ $image->image_small ?? $image }}" />
-                            <img src="{{ $image->image_small ?? $image }}">
+                            <img src="{{ !empty($image->image_small) ? Storage::url($image->image_small) : $image }}">
                             <div class="uploadImageBox_box_item_icon" onclick="removeUpploadImage('randomIdImage_{{ $loop->index }}');"></div>
                         </div>
                     @endforeach
@@ -55,9 +55,17 @@
                         $selected = '';
                         if(!empty($data['facilities'])){
                             foreach($data['facilities'] as $r){
-                                if($r['id']==$roomFacility->id){
-                                    $selected = 'selected';
-                                    break;
+                                /* kiểm tra select nếu gọi từ relation (edit) => kiểm tra này trước */
+                                if(!empty($r->infoHotelRoomFacility->id)){
+                                    if($r->infoHotelRoomFacility->id==$roomFacility->id){
+                                        $selected = 'selected';
+                                        break;
+                                    }
+                                }else { /* kiểm tra select nếu gọi từ việc truyền collection vào (download => create) */
+                                    if($r->id==$roomFacility->id){
+                                        $selected = 'selected';
+                                        break;
+                                    }
                                 }
                             }
                         }
@@ -70,7 +78,7 @@
 </div>
 <div class="formBox_full">
     <!-- One Row -->
-    <div data-repeater-list="repeater">
+    <div data-repeater-list="details">
         
         @if(!empty($data['details']))
             @foreach($data['details'] as $detail)

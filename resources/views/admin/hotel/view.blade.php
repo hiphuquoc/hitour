@@ -98,40 +98,9 @@
                                 <div id="js_showMessageHotelRoom">
                                     <!-- javascript:showMessage -->
                                 </div>
-                                <div id="js_loadTypeRoom" class="hotelRoomBox">
-                                    <!-- javascript:loadTypeRoom -->
-                                    @foreach($item->rooms as $room)
-                                        <div class="hotelRoomBox_item">
-                                            <div class="hotelRoomBox_item_img">
-                                                @foreach($room->images as $image)
-                                                    <img src="{{ $image->image_small }}" />
-                                                @endforeach
-                                            </div>
-                                            <div class="hotelRoomBox_item_info">
-                                                <div class="hotelRoomBox_item_info_title highLight">{{ $room->name }}</div> 
-                                                <div class="hotelRoomBox_item_info_facility">
-                                                    @foreach($room->facilities as $facility)
-                                                        <span>{!! !empty($facility->infoHotelRoomFacility->icon)&&!empty($facility->infoHotelRoomFacility->name) ? $facility->infoHotelRoomFacility->icon.$facility->infoHotelRoomFacility->name : null !!}</span>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                            <div class="hotelRoomBox_item_action">
-                                                <div class="icon-wrapper iconAction">
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#formModalHotelRoom" onclick="loadFormHotelRoom({{ $room->id }})">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-                                                        <div>Sửa</div>
-                                                    </a>
-                                                </div>
-                                                <div class="icon-wrapper iconAction">
-                                                    <div class="actionDelete" onclick="deleteItem('4');">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
-                                                        <div>Xóa</div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    @endforeach
+                                <div id="js_loadHotelRoom" class="hotelRoomBox">
+                                    <!-- javascript:loadHotelRoom -->
+                                    Không có dữ liệu phù hợp!
                                 </div>
                             </div>
                         </div>
@@ -195,8 +164,6 @@
     <!-- form modal liên hệ -->
     <form id="formHotelContact" method="POST" action="#">
     @csrf
-        <!-- Input Hidden -->
-        {{-- <input type="hidden" id="hotel_info_id" name="hotel_info_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : 0 }}" /> --}}
         <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="addNewCardTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -238,14 +205,19 @@
             </div>
         </div>
     </form>
-    
     <!-- ===== END:: Modal ===== -->
+</div>
+<div id="loadingBox" class="loadingBox">
+    <div class="loadingBox_icon">
+        <div class="spinner-grow text-secondary me-1" role="status"></div>
+    </div>
+    <div class="loadingBox_bg"></div>
 </div>
 @endsection
 @push('scripts-custom')
     <script type="text/javascript">
         $(document).ready(function(){
-            // loadTypeRoom('js_loadTypeRoom');
+            loadHotelRoom();
             closeMessage();
             loadContactOfHotel('js_loadHotelContact');
         })
@@ -358,7 +330,7 @@
         }
 
         function loadFormHotelRoom(hotelRoom = 0){
-            const comboId       = $('#hotel_info_id').val();
+            const idHotel       = $('#hotel_info_id').val();
             const type          = '{{ $type }}';
             $.ajax({
                 url         : '{{ route("admin.hotelRoom.loadFormHotelRoom") }}',
@@ -366,7 +338,7 @@
                 dataType    : 'json',
                 data        : {
                     '_token'        : '{{ csrf_token() }}',
-                    hotel_info_id   : comboId,
+                    hotel_info_id   : idHotel,
                     hotel_room_id   : hotelRoom
                 },
                 success     : function(data){
@@ -376,30 +348,46 @@
             });
         }
 
-        // function deleteOptionPrice(id){
-        //     if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
-        //         $.ajax({
-        //             url         : '{{ route("admin.hotelRoom.deleteRoom") }}',
-        //             type        : 'post',
-        //             dataType    : 'html',
-        //             data        : {
-        //                 '_token'    : '{{ csrf_token() }}',
-        //                 id      : id
-        //             },
-        //             success     : function(data){
-        //                 if(data==true){
-        //                     /* thành công */
-        //                     $('#optionPrice_'+id).remove();
-        //                     loadTypeRoom('js_loadTypeRoom');
-        //                     showMessage('js_showMessage', 'Xóa Option & Giá thành công!', 'success');
-        //                 }else {
-        //                     /* thất bại */
-        //                     showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
-        //                 }
-        //             }
-        //         });
-        //     }
-        // }
+        function loadHotelRoom(){
+            const idHotel       = $('#hotel_info_id').val();
+            $.ajax({
+                url         : '{{ route("admin.hotelRoom.loadHotelRoom") }}',
+                type        : 'post',
+                dataType    : 'html',
+                data        : {
+                    '_token'        : '{{ csrf_token() }}',
+                    hotel_info_id   : idHotel
+                },
+                success     : function(data){
+                    $('#js_loadHotelRoom').html(data);
+                }
+            });
+        }
+
+        function deleteRoom(id){
+            if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
+                $.ajax({
+                    url         : '{{ route("admin.hotelRoom.deleteRoom") }}',
+                    type        : 'post',
+                    dataType    : 'html',
+                    data        : {
+                        '_token'    : '{{ csrf_token() }}',
+                        id      : id
+                    },
+                    success     : function(data){
+                        if(data==true){
+                            /* thành công */
+                            $('#hotelRoom_'+id).remove();
+                            loadHotelRoom();
+                            showMessage('js_showMessage', 'Xóa Phòng thành công!', 'success');
+                        }else {
+                            /* thất bại */
+                            showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
+                        }
+                    }
+                });
+            }
+        }
 
         function validateFormModal(idForm){
             let error       = [];
@@ -478,37 +466,43 @@
         }
 
         function addAndUpdateHotelRoom(){
+            /* bật loadding toàn screen */
+            loaddingFullScreen();
             /* kiểm tra trường required bỏ trống */
-            const tmp               = validateFormModal('formHotelRoom');
+            const tmp                   = validateFormModal('formHotelRoom');
             if(tmp==''){
-                const idHotel       = $('#hotel_info_id').val();
+                const idHotel           = $('#hotel_info_id').val();
                 var dataForm            = {};
+                /* lấy id phòng */
+                dataForm['hotel_room_id'] = $('#hotel_room_id').val();
                 /* lấy tên phòng */ 
-                dataForm['room_name']   = $('#room_name').val();
+                dataForm['name']        = $('#formHotelRoom #name').val();
                 /* lấy kích thước */ 
-                dataForm['room_size']   = $('#room_size').val();
+                dataForm['size']        = $('#formHotelRoom #size').val();
                 /* lấy số người tối đa */ 
-                dataForm['room_number_people']    = $('#room_number_people').val();
+                dataForm['number_people']    = $('#formHotelRoom #number_people').val();
                 /* lấy giá */ 
-                dataForm['room_price']  = $('#room_price').val();
+                dataForm['price']       = $('#formHotelRoom #price').val();
+                /* lấy điều khoản */ 
+                dataForm['condition']   = $('#formHotelRoom #condition').val();
                 /* lấy ảnh */
                 var images              = {};
                 var count               = 0;
-                $('#formHotelRoom').find('input[name*=room_images]').each(function(){
+                $('#formHotelRoom').find('input[name*=images]').each(function(){
                     if($(this).val().length>0) {
                         images[count]   = $(this).val();
                         ++count;
                     }
                 });
-                dataForm['room_images']  = images;
+                dataForm['images']      = images;
                 /* lấy chi tiết tiện nghi */
-                var detail = [];
-                $('#formHotelRoom').find('[name^="room_details"]').filter(function() {
+                var detail              = [];
+                $('#formHotelRoom').find('[name^="details"]').filter(function() {
                     return /\[\d+\]\[name\]$/.test(this.name); // Lọc các input có dạng room_detail[0][name]
                 }).each(function() {
                     var key = this.name.match(/\[(\d+)\]/)[1]; // Lấy số từ giá trị name
                     var value = $(this).val(); // Lấy giá trị của input
-                    var contentName = 'room_details[' + key + '][detail]'; // Tạo name tương ứng với content
+                    var contentName = 'details[' + key + '][detail]'; // Tạo name tương ứng với content
                     var contentValue = $('[name="' + contentName + '"]').val(); // Lấy giá trị của input content
                     var item = {
                         'name': value,
@@ -516,18 +510,18 @@
                     };
                     detail[key] = item; // Gán giá trị vào mảng dataForm với key tương ứng
                 });
-                dataForm['room_details']  = detail;
+                dataForm['details']  = detail;
                 /* lấy tiện nghi chungg */
-                dataForm['room_facilities'] = $('#room_facilities option:selected').map(function() {
+                dataForm['facilities'] = $('#formHotelRoom #facilities option:selected').map(function() {
                     return $(this).val();
                 }).get();
                 /* truyền ajax xử lý */
-                if(dataForm['hotel_room_id']==null){
+                if(dataForm['hotel_room_id']==''){
                     /* insert */
                     $.ajax({
                         url         : '{{ route("admin.hotelRoom.createRoom") }}',
                         type        : 'post',
-                        dataType    : 'html',
+                        dataType    : 'json',
                         data        : {
                             '_token'        : '{{ csrf_token() }}',
                             hotel_info_id   : idHotel,
@@ -536,39 +530,41 @@
                         success     : function(data){
                             if(data==true){
                                 /* thành công */
-                                // loadContactOfHotel('js_loadHotelContact');
+                                loadHotelRoom();
                                 showMessage('js_showMessageHotelRoom', 'Thêm mới Phòng thành công!', 'success');
                             }else {
                                 /* thất bại */
                                 showMessage('js_showMessageHotelRoom', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
                             }
+                            loaddingFullScreen();
+                            $('#formModalHotelRoom').modal('hide');
                         }
                     });
                 }else {
-                    // /* update */
-                    // $.ajax({
-                    //     url         : '{{ route("admin.hotel.updateContact") }}',
-                    //     type        : 'post',
-                    //     dataType    : 'html',
-                    //     data        : {
-                    //         '_token'    : '{{ csrf_token() }}',
-                    //         hotel_info_id   : idHotel,
-                    //         dataForm    : dataForm
-                    //     },
-                    //     success     : function(data){
-                            
-                    //         if(data==true){
-                    //             /* thành công */
-                    //             loadContactOfHotel('js_loadHotelContact');
-                    //             showMessage('js_showMessage', 'Cập nhật Liên hệ thành công!', 'success');
-                    //         }else {
-                    //             /* thất bại */
-                    //             showMessage('js_showMessage', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
-                    //         }
-                    //     }
-                    // });
+                    /* update */
+                    $.ajax({
+                        url         : '{{ route("admin.hotelRoom.updateRoom") }}',
+                        type        : 'post',
+                        dataType    : 'json',
+                        data        : {
+                            '_token'    : '{{ csrf_token() }}',
+                            hotel_info_id   : idHotel,
+                            dataForm    : dataForm
+                        },
+                        success     : function(data){
+                            if(data==true){
+                                /* thành công */
+                                loadHotelRoom();
+                                showMessage('js_showMessageHotelRoom', 'Cập nhật thành công!', 'success');
+                            }else {
+                                /* thất bại */
+                                showMessage('js_showMessageHotelRoom', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
+                            }
+                            loaddingFullScreen();
+                            $('#formModalHotelRoom').modal('hide');
+                        }
+                    });
                 }
-                $('#formModalHotelRoom').modal('hide');
             }else {
                 /* có 1 vài trường required bị bỏ trống */
                 let messageError        = 'Không được bỏ trống trường ';
@@ -591,6 +587,18 @@
                     if(index!=parseInt(tmp.length-1)) messageError += ', ';
                 })
                 $('#js_validateFormModalHotelRoom_message').css('display', 'block').html(messageError);
+            }
+        }
+
+        function loaddingFullScreen(){
+            const loadingBox    = $('#loadingBox');
+            const flag          = loadingBox.css('display');
+            if(flag=='none'){
+                loadingBox.css('display', 'flex');
+                $('body').css('overflow', 'hidden');
+            }else {
+                loadingBox.css('display', 'none');
+                $('body').css('overflow', 'auto');
             }
         }
         

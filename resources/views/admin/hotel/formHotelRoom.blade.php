@@ -1,6 +1,5 @@
 <!-- Input hidden -->
 <input type="hidden" id="hotel_room_id" name="hotel_room_id" value="{{ $data->id ?? null }}" />
-
 @if(empty($data->id))
     <div class="formBox" style="margin-bottom:1rem;">
         <div class="formBox_full">
@@ -18,7 +17,7 @@
 
 
 <div id="js_downloadHotelRoom_idWrite" class="formBox">
-    @include('admin.hotel.formHotelRoomPart2')
+    @include('admin.hotel.formHotelRoomPart2', compact('roomFacilities'))
 </div>
 
 <script src="{{ asset('sources/admin/app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
