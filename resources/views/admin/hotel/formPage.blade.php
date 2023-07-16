@@ -1,4 +1,5 @@
 <input type="hidden" id="hotel_info_id" name="hotel_info_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : null }}" />
+<input type="hidden" id="url_crawler" name="url_crawler" value="{{ $item['url_crawler'] ?? null }}" />
 <div class="formBox">
     <div class="formBox_full">
         <!-- One Row -->
@@ -11,10 +12,10 @@
                     <label class="form-label inputRequired" for="title">Tiêu đề Trang</label>
                 </span>
                 <div class="inputWithNumberChacractor_count" data-charactor="title">
-                    {{ !empty($item->seo->title) ? mb_strlen($item->seo->title) : 0 }}
+                    {{ !empty($item->name) ? mb_strlen($item->name) : 0 }}
                 </div>
             </div>
-            <input type="text" class="form-control" id="title" name="title" value="{{ old('title') ?? $item->seo['title'] ?? '' }}" required>
+            <input type="text" class="form-control" id="title" name="title" value="{{ old('name') ?? $item['name'] ?? '' }}" required>
             <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
         </div>
         <!-- One Row -->
@@ -24,13 +25,13 @@
                     Đây là Mô tả của Chuyên mục được hiển thị trên website
                 ">
                     <i class="explainInput" data-feather='alert-circle'></i>
-                    <label class="form-label inputRequired" for="description">Mô tả hành trình</label>
+                    <label class="form-label" for="description">Mô tả</label>
                 </span>
                 <div class="inputWithNumberChacractor_count" data-charactor="description">
-                    {{ !empty($item->seo->description) ? mb_strlen($item->seo->description) : 0 }}
+                    {{ !empty($item->description) ? mb_strlen($item->description) : 0 }}
                 </div>
             </div>
-            <textarea class="form-control" id="description"  name="description" rows="5" required>{{ old('description') ?? $item->seo['description'] ?? '' }}</textarea>
+            <textarea class="form-control" id="description"  name="description" rows="5">{{ old('description') ?? $item['description'] ?? '' }}</textarea>
             <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
         </div>
         <!-- One Row -->
@@ -61,7 +62,7 @@
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
-            <label class="form-label inputRequired" for="staff">Nhân viên tư vấn</label>
+            <label class="form-label" for="staff">Nhân viên tư vấn</label>
             <select class="select2 form-select select2-hidden-accessible" id="staff" name="staff[]" multiple="true">
                 @if(!empty($staffs))
                     @foreach($staffs as $staff)

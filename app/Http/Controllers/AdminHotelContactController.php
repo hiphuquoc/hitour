@@ -72,7 +72,7 @@ class AdminHotelContactController extends Controller {
 
     public function loadFormContact(Request $request){
         $item               = [];
-        if(!empty($request->get('id'))) $item   = HotelContact::find($request->get('id'));
+        if(!empty($request->get('hotel_contact_id'))) $item   = HotelContact::find($request->get('hotel_contact_id'));
         $result['header']   = !empty($item) ? 'Chỉnh sửa liên hệ' : 'Thêm liên hệ';
         $result['body']     = view('admin.hotel.formContact', compact('item'))->render();
         return json_encode($result);

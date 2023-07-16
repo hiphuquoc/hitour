@@ -23,7 +23,12 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\HotelRequest;
 use App\Jobs\CheckSeo;
 
+use Goutte\Client;
+
 class AdminHotelInfoController extends Controller {
+
+    private $arrayData;
+    private $count;
 
     public function __construct(BuildInsertUpdateModel $BuildInsertUpdateModel){
         $this->BuildInsertUpdateModel   = $BuildInsertUpdateModel;
@@ -294,4 +299,96 @@ class AdminHotelInfoController extends Controller {
             }
         }
     }
+
+    public function downloadHotelInfo(Request $request){
+        if(!empty($request->get('url_crawler'))){
+            // Tạo đối tượng Client của Goutte
+            $client         = new Client();
+            // Gửi yêu cầu GET đến URL cần lấy dữ liệu
+            $url            = $request->get('url_crawler');
+            $crawlerContent = $client->request('GET', $url);
+
+            /* lấy url_crawler */
+            $this->arrayData['url_crawler']         = $request->get('url_crawler');
+            /* lấy tên khách sạn */
+            $this->arrayData['name']                = trim($crawlerContent->filter('h1')->text());
+            /* lấy giới thiệu khách sạn */
+            $crawlerContent->filter('#hotel_description > div > div > div')->each(function($node){
+                $this->arrayData['description'][]   = $node->html();
+            });
+            if(!empty($this->arrayData['description'])){
+                $this->arrayData['description']     = implode('', $this->arrayData['description']);
+            }else {
+                $this->arrayData['description']     = null;
+            }
+            /* lấy tên khách sạn (SEO) */
+            $this->arrayData['seo']['seo_title']    = trim($crawlerContent->filter('head title')->text());
+            /* lấy mô tả khách sạn (SEO) */
+            $crawlerContent->filter('head meta[name=description]')->each(function($node){
+                $this->arrayData['seo']['seo_description'] = $node->attr('content');
+            });
+            /* tự động slug theo tên */
+            $this->arrayData['seo']['slug']         = \App\Helpers\Charactor::convertStrToUrl($this->arrayData['name']);
+
+            /* lấy câu hỏi thường gặp */
+            $this->count            = 0;
+            $crawlerContent->filter('[class^="HotelFAQ_content"] > div h3')->each(function($node){
+                $this->arrayData['faqs'][$this->count]['question']  = trim($node->text());
+                $this->count    += 1;
+            });
+            $this->count            = 0;
+            $crawlerContent->filter('[class^="HotelFAQ_content"] > div > div')->each(function($node){
+                $tmp                = trim($node->html());
+                $tmp                = str_replace(['<p></p>', '<span></span>', '<div></div>', '<li></li>'], '', $tmp);
+                $this->arrayData['faqs'][$this->count]['answer']    = $tmp;
+                $this->count    += 1;
+            });
+
+            /* lấy chính sách khách sạn */
+            $this->arrayData['contents'][0]['name']     = trim($crawlerContent->filter('#hotel_policy h2')->text());
+            $this->arrayData['contents'][0]['content']  = '<div>'.trim($crawlerContent->filter('#hotel_policy')->html()).'</div>';
+
+            /* random star * rating */
+            $this->arrayData['seo']['rating_aggregate_star']    = '4.'.rand(5,8);
+            $this->arrayData['seo']['rating_aggregate_count']   = rand(100,300);
+            /* lấy dữ liệu trong db truyển đi kèm */
+            $hotelLocations     = HotelLocation::all();
+            $staffs             = Staff::all();
+            $parents            = HotelLocation::select('*')
+                                    ->with('seo')
+                                    ->get();
+            /* type */
+            $type               = !empty($item) ? 'edit' : 'create';
+            $type               = $request->get('type') ?? $type;
+            // $item               = $this->arrayData;
+            $item               = self::convertToCollectionRecursive($this->arrayData);
+            $item->id           = null;
+            $item->seo          = $item['seo'];
+            $item->seo->id      = null;
+            $item->seo->link_canonical = null;
+            $item->company_name = null;
+            $item->address      = null;
+            $item->company_code = null;
+            $item->website      = null;
+            $item->hotline      = null;
+            $item->email        = null;
+            $item->contents     = $item['contents'];
+            return view('admin.hotel.view', compact('item', 'type', 'hotelLocations', 'staffs', 'parents'));
+        }
+    }
+
+    public static function convertToCollectionRecursive($array){
+        $result = [];
+
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $result[$key] = self::convertToCollectionRecursive($value);
+            } else {
+                $result[$key] = $value;
+            }
+        }
+
+        return collect($result);
+    }
 }
+

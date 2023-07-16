@@ -1338,6 +1338,7 @@ class BuildInsertUpdateModel {
             if(!empty($seoId)) $result['seo_id'] = $seoId;
             $result['hotel_location_id']    = $dataForm['location'];
             $result['name']                 = $dataForm['title'];
+            $result['description']          = $dataForm['description'] ?? null;
             $result['code']                 = $dataForm['code'] ?? null;
             $result['company_name']         = $dataForm['company_name'] ?? null;
             $result['company_code']         = $dataForm['company_code'] ?? null;
@@ -1347,6 +1348,7 @@ class BuildInsertUpdateModel {
             $result['email']                = $dataForm['email'] ?? null;
             $result['status_show']          = !empty($dataForm['status_show']) ? 1 : 0;
             $result['status_sidebar']       = !empty($dataForm['status_sidebar']) ? 1 : 0;
+            $result['url_crawler']          = $dataForm['url_crawler'] ?? null;
         }
         return $result;
     }

@@ -13,6 +13,7 @@ class Hotel extends Model {
         'seo_id',
         'hotel_location_id',
         'name', 
+        'description',
         'code',
         'company_name',
         'company_code',
@@ -22,7 +23,8 @@ class Hotel extends Model {
         'email',
         'logo',
         'status_show',
-        'status_sidebar'
+        'status_sidebar',
+        'url_crawler'
     ];
     public $timestamps      = true;
 

@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 @section('content')
     @php
-        $titlePage      = 'Thêm Hotel mới';
+        $titlePage      = 'Thêm Hotel mới <a href="#" data-bs-toggle="modal" data-bs-target="#formModalDownloadHotelInfo" style="color:#26cf8e;font-size:1.05rem;"><i class="fa-solid fa-download"></i> Tải tự động</a>';
         $submit         = 'admin.hotel.create';
         $checkImage     = 'required';
         if(!empty($type)&&$type=='edit'){
@@ -15,7 +15,7 @@
     @csrf
         <div class="pageAdminWithRightSidebar withRightSidebar">
             <div class="pageAdminWithRightSidebar_header">
-                {{ $titlePage }}
+                {!! $titlePage !!}
             </div>
             <!-- Error -->
             @if ($errors->any())
@@ -73,7 +73,7 @@
                             <div class="card-header border-bottom">
                                 <h4 class="card-title">
                                     Danh sách liên hệ
-                                    <i class="fa-regular fa-circle-plus" data-bs-toggle="modal" data-bs-target="#formModal" onClick="setValueFormInsert();"></i>
+                                    <i class="fa-regular fa-circle-plus" data-bs-toggle="modal" data-bs-target="#formModal" onClick="setValueFormHotelContact();"></i>
                                 </h4>
                             </div>
                             <div class="card-body">
@@ -91,7 +91,7 @@
                             <div class="card-header border-bottom">
                                 <h4 class="card-title">
                                     Loại phòng và giá
-                                    <i class="fa-regular fa-circle-plus" data-bs-toggle="modal" data-bs-target="#formModalHotelRoom" onclick="loadFormHotelRoom();"></i>
+                                    <i class="fa-regular fa-circle-plus" data-bs-toggle="modal" data-bs-target="#formModalHotelRoom" onclick="setValueFormHotelRoom();"></i>
                                 </h4>
                             </div>
                             <div class="card-body">
@@ -108,7 +108,7 @@
                     <div class="pageAdminWithRightSidebar_main_content_item width100 repeater">
                         <div data-repeater-list="contents">
                             @include('admin.hotel.formContent', [
-                                'contents' => $item->contents ?? null
+                                'contents' => $item['contents'] ?? null
                             ])
                         </div>
                         <div class="card">
@@ -162,6 +162,29 @@
     </form>
     <!-- ===== START:: Modal ===== -->
     <!-- form modal liên hệ -->
+    <form id="formDownloadHotelInfo" method="POST" action="{{ route('admin.hotel.downloadHotelInfo') }}">
+        @csrf
+            <div class="modal fade" id="formModalDownloadHotelInfo" tabindex="-1" aria-labelledby="addNewCardTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content" style="min-width:600px;">
+                        <div class="modal-header bg-transparent">
+                            <h4>Tải tự động khách sạn</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <label class="form-label" for="url_crawler">Url khách sạn (Mytour)</label>
+                            <textarea class="form-control" id="url_crawler"  name="url_crawler" rows="2">{{ $item['url_crawler'] ?? null }}</textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <div id="js_validateFormModalHotelContact_message" class="error" style="display:none;"><!-- Load Ajax --></div>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Đóng">Đóng</button>
+                            <button type="submit" class="btn btn-primary" aria-label="Xác nhận">Xác nhận</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    <!-- form modal liên hệ -->
     <form id="formHotelContact" method="POST" action="#">
     @csrf
         <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="addNewCardTitle" aria-hidden="true">
@@ -174,10 +197,10 @@
                     <div id="js_loadFormModal_body" class="modal-body">
                         <!-- load Ajax -->
                     </div>
-                    <div class="modal-footer">
-                        <div id="js_validateFormModalHotelContact_message" class="error" style="display:none;"><!-- Load Ajax --></div>
+                    <div id="js_loadFormModal_footer" class="modal-footer">
+                        {{-- <div id="js_validateFormModalHotelContact_message" class="error" style="display:none;"><!-- Load Ajax --></div>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Đóng">Đóng</button>
-                        <button type="button" class="btn btn-primary" onClick="addAndUpdateHotelContact();" aria-label="Xác nhận">Xác nhận</button>
+                        <button type="button" class="btn btn-primary" onClick="addAndUpdateHotelContact();" aria-label="Xác nhận">Xác nhận</button> --}}
                     </div>
                 </div>
             </div>
@@ -196,10 +219,10 @@
                     <div id="js_loadFormHotelRoom_body" class="modal-body">
                         <!-- load Ajax -->
                     </div>
-                    <div class="modal-footer">
-                        <div id="js_validateFormModalHotelRoom_message" class="error" style="display:none;"><!-- Load Ajax --></div>
+                    <div id="js_loadFormHotelRoom_footer" class="modal-footer">
+                        {{-- <div id="js_validateFormModalHotelRoom_message" class="error" style="display:none;"><!-- Load Ajax --></div>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Đóng">Đóng</button>
-                        <button type="button" class="btn btn-primary" onClick="addAndUpdateHotelRoom();" aria-label="Xác nhận">Xác nhận</button>
+                        <button type="button" class="btn btn-primary" onClick="addAndUpdateHotelRoom();" aria-label="Xác nhận">Xác nhận</button> --}}
                     </div>
                 </div>
             </div>
@@ -329,6 +352,15 @@
             }
         }
 
+        function setValueFormHotelRoom(){
+            const idHotelInfo     = $('#hotel_info_id').val();
+            if(idHotelInfo!=''){
+                loadFormHotelRoom(0);
+            }else {
+                $('#js_loadFormHotelRoom_body').html('Vui lòng tạo và lưu Đối tác trước khi tạo Phòng!');
+            }
+        }
+
         function loadFormHotelRoom(hotelRoom = 0){
             const idHotel       = $('#hotel_info_id').val();
             const type          = '{{ $type }}';
@@ -344,6 +376,7 @@
                 success     : function(data){
                     $('#js_loadFormHotelRoom_header').html(data.header);
                     $('#js_loadFormHotelRoom_body').html(data.body);
+                    $('#js_loadFormHotelRoom_footer').html(data.footer);
                 }
             });
         }
@@ -415,23 +448,25 @@
             });
         }
 
-        function setValueFormInsert(){
-            const partnerId     = $('#hotel_info_id').val();
-            if(partnerId!=''){
+        function setValueFormHotelContact(){
+            const idHotelInfo     = $('#hotel_info_id').val();
+            if(idHotelInfo!=''){
                 loadFormHotelContact(0);
             }else {
-                $('#js_loadFormHotelContact_body').html('<div style="margin-top:1rem;font-weight:600;">Vui lòng tạo và lưu Đối tác trước khi tạo Liên hệ!</div>');
+                $('#js_loadFormModal_body').html('Vui lòng tạo và lưu Đối tác trước khi tạo Liên hệ!');
             }
         }
 
-        function loadFormHotelContact(id){
+        function loadFormHotelContact(idHotelContact){
+            // const idHotelInfo = $('#hotel_info_id').val();
             $.ajax({
                 url         : '{{ route("admin.hotel.loadFormContact") }}',
                 type        : 'post',
                 dataType    : 'json',
                 data        : {
                     '_token'    : '{{ csrf_token() }}',
-                    id          : id
+                    // hotel_info_id       : idHotelInfo,
+                    hotel_contact_id    : idHotelContact
                 },
                 success     : function(data){
                     $('#js_loadFormModal_header').html(data.header);
