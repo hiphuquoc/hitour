@@ -17,6 +17,7 @@ use App\Models\Staff;
 // use App\Models\ComboPrice;
 // use App\Models\ComboOption;
 use App\Models\Seo;
+use Illuminate\Support\Facades\Cache;
 use App\Services\BuildInsertUpdateModel;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
@@ -64,13 +65,18 @@ class AdminHotelInfoController extends Controller {
                                 ->get();
         $message            = $request->get('message') ?? null;
         $id                 = $request->get('id') ?? 0;
-        $item               = Hotel::select('*')
+        /* nhận item nếu được redirect từ auto download */
+        $item               = Cache::get('item_download');
+        Cache::forget('item_download');
+        if(empty($item)){
+            $item           = Hotel::select('*')
                                 ->where('id', $request->get('id'))
                                 ->with(['files' => function($query){
                                     $query->where('relation_table', 'hotel_info');
                                 }])
                                 ->with('seo', 'contents')
                                 ->first();
+        }
         /* type */
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
@@ -373,7 +379,9 @@ class AdminHotelInfoController extends Controller {
             $item->hotline      = null;
             $item->email        = null;
             $item->contents     = $item['contents'];
-            return view('admin.hotel.view', compact('item', 'type', 'hotelLocations', 'staffs', 'parents'));
+            Cache::put('item_download', $item, 60); // Lưu trữ trong 60 phút
+            return redirect()->route('admin.hotel.view');
+            // return view('admin.hotel.view', compact('item', 'type', 'hotelLocations', 'staffs', 'parents'));
         }
     }
 

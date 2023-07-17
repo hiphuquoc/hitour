@@ -138,7 +138,7 @@
                     <!-- Button Save -->
                     <div class="pageAdminWithRightSidebar_main_rightSidebar_item buttonAction" style="padding-bottom:1rem;">
                         <a href="{{ route('admin.hotel.list') }}" type="button" class="btn btn-secondary waves-effect waves-float waves-light">Quay lại</a>
-                        <button type="submit" class="btn btn-success waves-effect waves-float waves-light" onClick="javascript:submitForm('formAction');" style="width:100px;" aria-label="Lưu">Lưu</button>
+                        <button type="button" class="btn btn-success waves-effect waves-float waves-light" onClick="javascript:submitForm('formAction');" style="width:100px;" aria-label="Lưu">Lưu</button>
                     </div>
                     <div class="customScrollBar-y" style="height: calc(100% - 70px);border-top: 1px dashed #adb5bd;">
                         <!-- Form Upload -->
@@ -255,7 +255,9 @@
 
         function submitForm(idForm){
             const elemt = $('#'+idForm);
-            if(elemt.valid()) elemt.submit();
+            if(elemt.valid()){
+                elemt.submit();
+            }
         }
 
         function addAndUpdateHotelContact(){
