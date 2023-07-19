@@ -12,7 +12,7 @@
                     <label class="form-label inputRequired" for="seo_title">Tiêu đề SEO</label>
                 </span>
                 <div class="inputWithNumberChacractor_count" data-charactor="seo_title">
-                    {{ !empty($item->seo->seo_title) ? mb_strlen($item->seo->seo_title) : 0 }}
+                    {{ !empty($item->seo['seo_title']) ? mb_strlen($item->seo['seo_title']) : 0 }}
                 </div>
             </div>
             <input type="text" id="seo_title" class="form-control" name="seo_title" value="{{ old('seo_title') ?? $item->seo['seo_title'] ?? '' }}" required>
@@ -28,7 +28,7 @@
                     <label class="form-label inputRequired" for="seo_description">Mô tả SEO</label>
                 </span>
                 <div class="inputWithNumberChacractor_count" data-charactor="seo_description">
-                    {{ !empty($item->seo->seo_description) ? mb_strlen($item->seo->seo_description) : 0 }}
+                    {{ !empty($item->seo['seo_description']) ? mb_strlen($item->seo['seo_description']) : 0 }}
                 </div>
             </div>
             <textarea class="form-control" id="seo_description"  name="seo_description" rows="5" required>{{ old('seo_description') ?? $item->seo['seo_description'] ?? '' }}</textarea>

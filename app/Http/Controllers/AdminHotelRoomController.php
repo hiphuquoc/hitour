@@ -277,7 +277,40 @@ class AdminHotelRoomController extends Controller {
         return $flag;
     }
 
-    public static function saveImagesHotelRoom($imageName, $idHotelRoom, $imageUrls){
+    public static function deleteById($idHotelRoom){
+        $flag               = false;
+        try {
+            DB::beginTransaction();
+            $infoHotelRoom  = HotelRoom::select('*')
+                                ->where('id', $idHotelRoom)
+                                ->with('facilities', 'details', 'images')
+                                ->first();
+            /* xóa ảnh trong storage */
+            foreach($infoHotelRoom->images as $image){
+                /* xóa ảnh normal */
+                $imageDelete    = Storage::path($image->image);
+                if(file_exists($imageDelete)) @unlink($imageDelete);
+                /* xóa ảnh small */
+                $imageDelete    = Storage::path($image->image_small);
+                if(file_exists($imageDelete)) @unlink($imageDelete);
+            }
+            /* xóa các relation */
+            $infoHotelRoom->facilities()->delete();
+            $infoHotelRoom->details()->delete();
+            $infoHotelRoom->images()->delete();
+            /* xóa hotel room */
+            $infoHotelRoom->delete();
+            $flag   = true;
+            DB::commit();
+            return true;
+        } catch (\Exception $exception){
+            DB::rollBack();
+            return false;
+        }
+        return $flag;
+    }
+
+    public static function saveImagesHotelRoom($imageName, $idHotelRoom, $imageUrls, $table = 'hotel_room'){
         $i      = 0;
         foreach ($imageUrls as $imageUrl) {
             /*  folder upload */
@@ -302,7 +335,7 @@ class AdminHotelRoomController extends Controller {
                 ->resize(config('admin.images.smallResize_width'), $heightImageSmall)
                 ->save(Storage::path($filenameSmall));
             HotelImage::insertItem([
-                'reference_type'    => 'hotel_room',
+                'reference_type'    => $table,
                 'reference_id'      => $idHotelRoom,
                 'image'             => $filenameNormal,
                 'image_small'       => $filenameSmall

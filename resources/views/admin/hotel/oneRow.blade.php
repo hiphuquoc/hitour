@@ -2,7 +2,7 @@
 @php
     $no = $no ?? 0;
 @endphp
-<tr id="combo_{{ $item->id }}">
+<tr id="hotel_{{ $item->id }}">
     <td style="width:60px;text-align:center;">
         {{ $no }}
     </td>
@@ -47,19 +47,11 @@
         </div>
     </td>
     <td style="vertical-align:top;width:210px;">
-        @php
-            if(!empty($item->files)){
-                $gallery        = [];
-                foreach($item->files as $file){
-                    if($file->file_type==='gallery') $gallery[]  = $file;
-                }
-            }
-        @endphp
-        @if(!empty($gallery))
+        @if(!empty($item->images))
             <div style="position:relative;">
-                <img src="{{ $gallery[0]->file_path }}" style="width:210px;" />
-                @if(count($gallery)>1)
-                    <span style="position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);font-size:2rem;color:#fff;font-weight:bold;border-radius:50%;border:3px solid #fff;padding:0.2rem 1rem;background:rgba(0,0,0,0.2);">{{ count($gallery) }}</span>
+                <img src="{{ Storage::url($item->images[0]->image) }}" style="width:210px;" />
+                @if(count($item->images)>1)
+                    <span style="position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);font-size:2rem;color:#fff;font-weight:bold;border-radius:50%;border:3px solid #fff;padding:0.2rem 1rem;background:rgba(0,0,0,0.2);">{{ count($item->images) }}</span>
                 @endif
             </div>
         @endif

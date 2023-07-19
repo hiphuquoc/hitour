@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('reference_type');
             $table->integer('reference_id');
             $table->text('image');
-            $table->text('image_small');
+            $table->text('image_small')->nullable();
         });
     }
 

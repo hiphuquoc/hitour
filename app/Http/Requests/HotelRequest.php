@@ -41,7 +41,6 @@ class HotelRequest extends FormRequest
                     }
                 }
             ],
-            'location'                  => 'integer|min:1',
             'title'                     => 'required|max:255',
             'seo_title'                 => 'required',
             'seo_description'           => 'required',
@@ -53,7 +52,6 @@ class HotelRequest extends FormRequest
     public function messages()
     {
         return [
-            'location.min'                      => 'Điểm đến không được bỏ trống!',
             'title.required'                    => 'Tiêu đề không được bỏ trống!',
             'title.max'                         => 'Tiêu đề không quá 255 ký tự!',
             'seo_title.required'                => 'Tiêu đề SEO không được bỏ trống!',

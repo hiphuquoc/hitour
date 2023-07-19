@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 @section('content')
     @php
-        $titlePage      = 'Thêm Hotel mới <a href="#" data-bs-toggle="modal" data-bs-target="#formModalDownloadHotelInfo" style="color:#26cf8e;font-size:1.05rem;"><i class="fa-solid fa-download"></i> Tải tự động</a>';
+        $titlePage      = 'Thêm Hotel mới <a href="#" data-bs-toggle="modal" data-bs-target="#formModalDownloadHotelInfo" style="color:#26cf8e;font-size:1.05rem;font-weight:normal;"><i class="fa-solid fa-download"></i> Tải tự động</a>';
         $submit         = 'admin.hotel.create';
         $checkImage     = 'required';
         if(!empty($type)&&$type=='edit'){
@@ -108,7 +108,7 @@
                     <div class="pageAdminWithRightSidebar_main_content_item width100 repeater">
                         <div data-repeater-list="contents">
                             @include('admin.hotel.formContent', [
-                                'contents' => $item['contents'] ?? null
+                                'contents' => old('contents') ?? $item['contents'] ?? null
                             ])
                         </div>
                         <div class="card">
@@ -118,7 +118,7 @@
                             </button>
                         </div>
                     </div>
-                    {{-- <div class="pageAdminWithRightSidebar_main_content_item width100">
+                    <div class="pageAdminWithRightSidebar_main_content_item width100">
                         <div class="card">
                             <div class="card-header border-bottom">
                                 <h4 class="card-title">Câu hỏi thường gặp</h4>
@@ -129,7 +129,7 @@
                                 
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                 </div>
                 <!-- END:: Main content -->
 
@@ -149,9 +149,9 @@
                         <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
                             @include('admin.form.formSlider')
                         </div>
-                        <!-- Form Gallery -->
+                        <!-- Form Image -->
                         <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
-                            @include('admin.form.formGallery')
+                            @include('admin.hotel.formImage')
                         </div>
                     </div>
                 </div>
@@ -161,7 +161,31 @@
 
     </form>
     <!-- ===== START:: Modal ===== -->
-    <!-- form modal liên hệ -->
+    <!-- form modal tải ảnh khách sạn -->
+    <form id="formDownloadImageHotelInfo" method="POST" action="#">
+    @csrf
+        <div class="modal fade" id="formModalDownloadImageHotelInfo" tabindex="-1" aria-labelledby="addNewCardTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="min-width:600px;">
+                    <div class="modal-header bg-transparent">
+                        <h4>Tải tự động ảnh khách sạn</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label class="form-label" for="content_image">Thẻ html chứa đường dẫn ảnh (Mytour)</label>
+                        <textarea class="form-control" id="content_image"  name="content_image" rows="2">{{ $item['content_image'] ?? null }}</textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <div id="js_validateFormModalHotelContact_message" class="error" style="display:none;"><!-- Load Ajax --></div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Đóng">Đóng</button>
+                        <button type="button" class="btn btn-primary" aria-label="Xác nhận" onClick="downloadImageHotelInfo();">Xác nhận</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- form modal tải thông tin khách sạn -->
     <form id="formDownloadHotelInfo" method="POST" action="{{ route('admin.hotel.downloadHotelInfo') }}">
         @csrf
             <div class="modal fade" id="formModalDownloadHotelInfo" tabindex="-1" aria-labelledby="addNewCardTitle" aria-hidden="true">

@@ -68,7 +68,7 @@ class HomeController extends Controller {
             $airPartners        = AirPartner::select('*')
                                     ->with('seo')
                                     ->get();
-            $xhtml  = view('main.home.home', compact('item', 'shipLocations', 'airLocations', 'serviceLocations', 'islandLocations', 'specialLocations', 'shipPartners', 'airPartners'))->render();
+            $xhtml              = view('main.home.home', compact('item', 'shipLocations', 'airLocations', 'serviceLocations', 'islandLocations', 'specialLocations', 'shipPartners', 'airPartners'))->render();
             if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
         }
         echo $xhtml;
@@ -165,44 +165,16 @@ class HomeController extends Controller {
     }
 
     function readWebPage($url = null) {
-        // Tạo đối tượng Client của Goutte
-        $client         = new Client();
-        // Gửi yêu cầu GET đến URL cần lấy dữ liệu
-        $url            = 'https://mytour.vn/khach-san/50143-bavi-padme-homestay-and-villas.html';
-        $crawlerContent = $client->request('GET', $url);
-
-        /* lấy tên khách sạn */
-        $this->arrayData['name']                = trim($crawlerContent->filter('h1')->text());
-        /* lấy giới thiệu khách sạn */
-        $crawlerContent->filter('#hotel_description > div > div > div')->each(function($node){
-            $this->arrayData['description'][]   = $node->html();
-        });
-        /* lấy tên khách sạn (SEO) */
-        $this->arrayData['seo_title']           = trim($crawlerContent->filter('head title')->text());
-        /* lấy mô tả khách sạn (SEO) */
-        $crawlerContent->filter('head meta[name=description]')->each(function($node){
-            $this->arrayData['seo_description'] = $node->attr('content');
-        });
-        /* tự động slug theo tên */
-        $this->arrayData['slug']                = \App\Helpers\Charactor::convertStrToUrl($this->arrayData['name']);
-
-        /* lấy câu hỏi thường gặp */
-        $this->count            = 0;
-        $crawlerContent->filter('[class^="HotelFAQ_content"] > div h3')->each(function($node){
-            $this->arrayData['faqs'][$this->count]['question']  = trim($node->text());
-            $this->count    += 1;
-        });
-        $this->count            = 0;
-        $crawlerContent->filter('[class^="HotelFAQ_content"] > div > div')->each(function($node){
-            $tmp                = trim($node->html());
-            $tmp                = str_replace(['<p></p>', '<span></span>', '<div></div>', '<li></li>'], '', $tmp);
-            $this->arrayData['faqs'][$this->count]['answer']    = $tmp;
-            $this->count    += 1;
-        });
+        $data               = view('admin.hotel.room')->render();
+        $crawlerContent     = new Crawler($data);
 
         /* lấy chính sách khách sạn */
-        $this->arrayData['policy'] = '<div>'.trim($crawlerContent->filter('#hotel_policy')->html()).'</div>';
-        
+        $crawlerContent->filter('img')->each(function($node){
+            $filteredUrl = preg_replace('/^http.+(http.*)/', '$1', $node->attr('src'));
+            $filteredUrl = preg_replace('/\?[^\/]+/', '', $filteredUrl);
+            
+            $this->arrayData['images'][] = $filteredUrl;
+        });
 
         dd($this->arrayData);
 

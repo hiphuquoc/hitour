@@ -1336,7 +1336,7 @@ class BuildInsertUpdateModel {
         $result     = [];
         if(!empty($dataForm)){
             if(!empty($seoId)) $result['seo_id'] = $seoId;
-            $result['hotel_location_id']    = $dataForm['location'];
+            $result['hotel_location_id']    = $dataForm['parent'];
             $result['name']                 = $dataForm['title'];
             $result['description']          = $dataForm['description'] ?? null;
             $result['code']                 = $dataForm['code'] ?? null;

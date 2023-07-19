@@ -4,27 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Helpers\Upload;
-use App\Http\Controllers\AdminImageController;
+use Intervention\Image\ImageManagerStatic;
 use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\AdminGalleryController;
 use App\Models\HotelLocation;
 use App\Models\HotelContent;
-// use App\Models\TourDeparture;
+use App\Models\QuestionAnswer;
 use App\Models\Hotel;
-use App\Models\RelationHotelLocation;
 use App\Models\RelationHotelStaff;
 use App\Models\Staff;
-// use App\Models\ComboPrice;
-// use App\Models\ComboOption;
+use App\Models\HotelImage;
 use App\Models\Seo;
 use Illuminate\Support\Facades\Cache;
 use App\Services\BuildInsertUpdateModel;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\HotelRequest;
 use App\Jobs\CheckSeo;
 
 use Goutte\Client;
+use Symfony\Component\DomCrawler\Crawler;
 
 class AdminHotelInfoController extends Controller {
 
@@ -74,7 +74,7 @@ class AdminHotelInfoController extends Controller {
                                 ->with(['files' => function($query){
                                     $query->where('relation_table', 'hotel_info');
                                 }])
-                                ->with('seo', 'contents')
+                                ->with('seo', 'contents', 'questions')
                                 ->first();
         }
         /* type */
@@ -88,9 +88,9 @@ class AdminHotelInfoController extends Controller {
             DB::beginTransaction();
             /* upload image */
             $dataPath           = [];
+            $imageName          = !empty($request->get('slug')) ? $request->get('slug') : time();
             if($request->hasFile('image')) {
-                $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
-                $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
+                $dataPath       = Upload::uploadThumnail($request->file('image'), $imageName);
             }
             /* insert page */
             $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'hotel_info', $dataPath);
@@ -98,6 +98,10 @@ class AdminHotelInfoController extends Controller {
             /* insert hotel_info */
             $insertHotelInfo    = $this->BuildInsertUpdateModel->buildArrayTableHotelInfo($request->all(), $pageId);
             $idHotel            = Hotel::insertItem($insertHotelInfo);
+            /* lưu ảnh vào cơ sở dữ liệu */
+            if(!empty($request->get('images'))){
+                self::saveImagesHotelInfo($imageName, $idHotel, $request->get('images'), 'hotel_info');
+            }
             /* insert hotel_content */
             if(!empty($request->get('contents'))){
                 foreach($request->get('contents') as $content){
@@ -140,6 +144,19 @@ class AdminHotelInfoController extends Controller {
                     RelationHotelStaff::insertItem($params);
                 }
             }
+            /* insert câu hỏi thường gặp */
+            if(!empty($request->get('question_answer'))){
+                foreach($request->get('question_answer') as $itemQues){
+                    if(!empty($itemQues['question'])&&!empty($itemQues['answer'])){
+                        QuestionAnswer::insertItem([
+                            'question'          => $itemQues['question'],
+                            'answer'            => $itemQues['answer'],
+                            'relation_table'    => 'hotel_info',
+                            'reference_id'      => $idHotel
+                        ]);
+                    }
+                }
+            }
             DB::commit();
             /* Message */
             $message        = [
@@ -164,12 +181,12 @@ class AdminHotelInfoController extends Controller {
     public function update(HotelRequest $request){
         try {
             DB::beginTransaction();
-            $idHotel             = $request->get('hotel_info_id') ?? 0;
+            $idHotel            = $request->get('hotel_info_id') ?? 0;
             /* upload image */
             $dataPath           = [];
+            $imageName          = !empty($request->get('slug')) ? $request->get('slug') : time();
             if($request->hasFile('image')) {
-                $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
-                $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
+                $dataPath       = Upload::uploadThumnail($request->file('image'), $imageName);
             };
             /* update page */
             $updatePage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'hotel_info', $dataPath);
@@ -177,6 +194,10 @@ class AdminHotelInfoController extends Controller {
             /* update hotel_info */
             $updateHotelInfo     = $this->BuildInsertUpdateModel->buildArrayTableHotelInfo($request->all(), $request->get('seo_id'));
             Hotel::updateItem($idHotel, $updateHotelInfo);
+            /* lưu ảnh vào cơ sở dữ liệu */
+            if(!empty($request->get('images'))){
+                self::saveImagesHotelInfo($imageName, $idHotel, $request->get('images'), 'hotel_info');
+            }
             /* update hotel_content */
             HotelContent::select('*')
                             ->where('hotel_info_id', $idHotel)
@@ -225,6 +246,23 @@ class AdminHotelInfoController extends Controller {
                     RelationHotelStaff::insertItem($params);
                 }
             }
+            /* update câu hỏi thường gặp */
+            QuestionAnswer::select('*')
+                ->where('relation_table', 'hotel_info')
+                ->where('reference_id', $idHotel)
+                ->delete();
+            if(!empty($request->get('question_answer'))){
+                foreach($request->get('question_answer') as $itemQues){
+                    if(!empty($itemQues['question'])&&!empty($itemQues['answer'])){
+                        QuestionAnswer::insertItem([
+                            'question'          => $itemQues['question'],
+                            'answer'            => $itemQues['answer'],
+                            'relation_table'    => 'hotel_info',
+                            'reference_id'      => $idHotel
+                        ]);
+                    }
+                }
+            }
             DB::commit();
             /* Message */
             $message        = [
@@ -252,51 +290,40 @@ class AdminHotelInfoController extends Controller {
                 DB::beginTransaction();
                 $idHotel     = $request->get('id');
                 /* lấy hotel_option (with hotel_price) */
-                $infoCombo   = Hotel::select('*')
+                $infoHotel   = Hotel::select('*')
                                     ->where('id', $idHotel)
                                     ->with(['files' => function($query){
                                         $query->where('relation_table', 'hotel_info');
                                     }])
-                                    ->with('seo', 'locations', 'staffs', 'partners', 'options.prices')
+                                    ->with('seo', 'images', 'rooms', 'staffs', 'contacts', 'contents', 'questions')
                                     ->first();
                 /* xóa ảnh đại diện trong thư mục upload */
-                if(!empty($infoCombo->seo->image)&&file_exists(public_path($infoCombo->seo->image))) unlink(public_path($infoCombo->seo->image));
-                if(!empty($infoCombo->seo->image_small)&&file_exists(public_path($infoCombo->seo->image_small))) unlink(public_path($infoCombo->seo->image_small));
+                if(!empty($infoHotel->seo->image)&&file_exists(public_path($infoHotel->seo->image))) @unlink(public_path($infoHotel->seo->image));
+                if(!empty($infoHotel->seo->image_small)&&file_exists(public_path($infoHotel->seo->image_small))) @unlink(public_path($infoHotel->seo->image_small));
                 /* xóa hotel_content */
-                HotelContent::select('*')
-                            ->where('hotel_info_id', $idHotel)
-                            ->delete();
-                /* xóa hotel_option và hotel_price */
-                $arrayIdOption  = [];
-                $arrayIdPrice   = [];
-                foreach($infoCombo->options as $option){
-                    $arrayIdOption[]    = $option->id;
-                    foreach($option->prices as $price){
-                        $arrayIdPrice[] = $price->id;
-                    }
+                $infoHotel->contents()->delete();
+                /* xóa ảnh phòng */
+                foreach($infoHotel->images as $image){
+                    if(!empty($image->image)&&file_exists(Storage::path($image->image))) @unlink(Storage::path($image->image));
+                    if(!empty($image->image_small)&&file_exists(Storage::path($image->image_small))) @unlink(Storage::path($image->image_small));
                 }
-                ComboPrice::select('*')->whereIn('id', $arrayIdPrice)->delete();
-                ComboOption::select('*')->whereIn('id', $arrayIdOption)->delete();
-                /* xóa relation hotel_location */
-                $arrayIdhotelLocation    = [];
-                foreach($infoCombo->locations as $location) $arrayIdhotelLocation[] = $location->id;
-                RelationHotelLocation::select('*')->whereIn('id', $arrayIdhotelLocation)->delete();
-                /* xóa hotel_staff */
-                $arrayIdStaff           = [];
-                foreach($infoCombo->staffs as $staff) $arrayIdStaff[] = $staff->id;
-                RelationHotelStaff::select('*')->whereIn('id', $arrayIdStaff)->delete();
-                /* xóa hotel_partner */
-                $arrayIdPartner         = [];
-                foreach($infoCombo->partners as $partner) $arrayIdPartner[] = $partner->id;
-                RelationComboPartner::select('*')->whereIn('id', $arrayIdPartner)->delete();
-                /* delete files - dùng removeSliderById cũng remove luôn cả gallery */
-                if(!empty($infoCombo->files)){
-                    foreach($infoCombo->files as $file) AdminSliderController::removeSliderById($file->id);
+                /* xóa hotel_contact */
+                $infoHotel->contacts()->delete();
+                /* xóa relation staff */
+                $infoHotel->staffs()->delete();
+                /* xóa phòng và tất cả ảnh + thông tin phòng */
+                foreach($infoHotel->rooms as $room) AdminHotelRoomController::deleteById($room->id);
+                /* xóa files */
+                foreach($infoHotel->files as $file){
+                    if(file_exists(Storage::path($file->file_name))) @unlink(Storage::path($file->file_name));
                 }
+                $infoHotel->files()->delete();
+                /* xóa câu hỏi thường gặp */
+                $infoHotel->questions()->delete();
                 /* xóa seo */
-                Seo::find($infoCombo->seo->id)->delete();
+                $infoHotel->seo()->delete();
                 /* xóa hotel_info */
-                $infoCombo->delete();
+                $infoHotel->delete();
                 DB::commit();
                 return true;
             } catch (\Exception $exception){
@@ -306,82 +333,161 @@ class AdminHotelInfoController extends Controller {
         }
     }
 
+    public function removeImageHotelInfo(Request $request){
+        $flag       = false;
+        if(!empty($request->get('hotel_image_id'))){
+            $infoHotelImage = HotelImage::select('*')
+                                ->where('id', $request->get('hotel_image_id'))
+                                ->first();
+            /* xóa trong storage */
+            if(!empty($infoHotelImage->image)&&file_exists(Storage::path($infoHotelImage->image))) @unlink(Storage::path($infoHotelImage->image));
+            if(!empty($infoHotelImage->image_small)&&file_exists(Storage::path($infoHotelImage->image_small))) @unlink(Storage::path($infoHotelImage->image_small));
+            /* xóa trong database */
+            $flag   = $infoHotelImage->delete();
+        }
+        echo $flag;
+    }
+
     public function downloadHotelInfo(Request $request){
-        if(!empty($request->get('url_crawler'))){
-            // Tạo đối tượng Client của Goutte
-            $client         = new Client();
-            // Gửi yêu cầu GET đến URL cần lấy dữ liệu
-            $url            = $request->get('url_crawler');
-            $crawlerContent = $client->request('GET', $url);
+        try {
+            if(!empty($request->get('url_crawler'))){
+                // Tạo đối tượng Client của Goutte
+                $client         = new Client();
+                // Gửi yêu cầu GET đến URL cần lấy dữ liệu
+                $url            = $request->get('url_crawler');
+                $crawlerContent = $client->request('GET', $url);
 
-            /* lấy url_crawler */
-            $this->arrayData['url_crawler']         = $request->get('url_crawler');
-            /* lấy tên khách sạn */
-            $this->arrayData['name']                = trim($crawlerContent->filter('h1')->text());
-            /* lấy giới thiệu khách sạn */
-            $crawlerContent->filter('#hotel_description > div > div > div')->each(function($node){
-                $this->arrayData['description'][]   = $node->html();
-            });
-            if(!empty($this->arrayData['description'])){
-                $this->arrayData['description']     = implode('', $this->arrayData['description']);
-            }else {
-                $this->arrayData['description']     = null;
+                /* lấy url_crawler */
+                $this->arrayData['url_crawler']         = $request->get('url_crawler');
+                /* lấy tên khách sạn */
+                $this->arrayData['name']                = trim($crawlerContent->filter('h1')->text());
+                /* lấy giới thiệu khách sạn */
+                $crawlerContent->filter('#hotel_description > div > div > div')->each(function($node){
+                    $this->arrayData['description'][]   = $node->html();
+                });
+                if(!empty($this->arrayData['description'])){
+                    $this->arrayData['description']     = implode('', $this->arrayData['description']);
+                }else {
+                    $this->arrayData['description']     = null;
+                }
+                /* lấy tên khách sạn (SEO) */
+                $this->arrayData['seo']['seo_title']    = trim($crawlerContent->filter('head title')->text());
+                /* lấy mô tả khách sạn (SEO) */
+                $crawlerContent->filter('head meta[name=description]')->each(function($node){
+                    $this->arrayData['seo']['seo_description'] = $node->attr('content');
+                });
+                /* tự động slug theo tên */
+                $this->arrayData['seo']['slug']         = \App\Helpers\Charactor::convertStrToUrl($this->arrayData['name']);
+
+                /* lấy câu hỏi thường gặp */
+                $this->count            = 0;
+                $crawlerContent->filter('[class^="HotelFAQ_content"] > div h3')->each(function($node){
+                    $this->arrayData['questions'][$this->count]['question']  = trim($node->text());
+                    $this->count    += 1;
+                });
+                $this->count            = 0;
+                $crawlerContent->filter('[class^="HotelFAQ_content"] > div > div')->each(function($node){
+                    $tmp                = trim($node->html());
+                    $tmp                = str_replace(['<p></p>', '<span></span>', '<div></div>', '<li></li>'], '', $tmp);
+                    $this->arrayData['questions'][$this->count]['answer']    = $tmp;
+                    $this->count    += 1;
+                });
+
+                /* lấy chính sách khách sạn */
+                $this->arrayData['contents'][0]['name']     = trim($crawlerContent->filter('#hotel_policy h2')->text());
+                $this->arrayData['contents'][0]['content']  = '<div>'.trim($crawlerContent->filter('#hotel_policy')->html()).'</div>';
+
+                /* random star * rating */
+                $this->arrayData['seo']['rating_aggregate_star']    = '4.'.rand(5,8);
+                $this->arrayData['seo']['rating_aggregate_count']   = rand(100,300);
+                /* lấy dữ liệu trong db truyển đi kèm */
+                $hotelLocations     = HotelLocation::all();
+                $staffs             = Staff::all();
+                $parents            = HotelLocation::select('*')
+                                        ->with('seo')
+                                        ->get();
+                /* type */
+                $type               = !empty($item) ? 'edit' : 'create';
+                $type               = $request->get('type') ?? $type;
+                // $item               = $this->arrayData;
+                $item               = self::convertToCollectionRecursive($this->arrayData);
+                $item->id           = null;
+                $item->seo          = $item['seo'];
+                $item->seo->id      = null;
+                $item->seo->link_canonical = null;
+                $item->company_name = null;
+                $item->address      = null;
+                $item->company_code = null;
+                $item->website      = null;
+                $item->hotline      = null;
+                $item->email        = null;
+                $item->contents     = $item['contents'];
+                $item->questions    = $item['questions'];
+                Cache::put('item_download', $item, 60); // Lưu trữ trong 60 phút
+                return redirect()->route('admin.hotel.view', ['type' => 'create']);
+                // return view('admin.hotel.view', compact('item', 'type', 'hotelLocations', 'staffs', 'parents'));
+            }} catch (\Exception $exception){
+                return redirect()->route('admin.hotel.view');
             }
-            /* lấy tên khách sạn (SEO) */
-            $this->arrayData['seo']['seo_title']    = trim($crawlerContent->filter('head title')->text());
-            /* lấy mô tả khách sạn (SEO) */
-            $crawlerContent->filter('head meta[name=description]')->each(function($node){
-                $this->arrayData['seo']['seo_description'] = $node->attr('content');
-            });
-            /* tự động slug theo tên */
-            $this->arrayData['seo']['slug']         = \App\Helpers\Charactor::convertStrToUrl($this->arrayData['name']);
+    }
 
-            /* lấy câu hỏi thường gặp */
-            $this->count            = 0;
-            $crawlerContent->filter('[class^="HotelFAQ_content"] > div h3')->each(function($node){
-                $this->arrayData['faqs'][$this->count]['question']  = trim($node->text());
-                $this->count    += 1;
-            });
-            $this->count            = 0;
-            $crawlerContent->filter('[class^="HotelFAQ_content"] > div > div')->each(function($node){
-                $tmp                = trim($node->html());
-                $tmp                = str_replace(['<p></p>', '<span></span>', '<div></div>', '<li></li>'], '', $tmp);
-                $this->arrayData['faqs'][$this->count]['answer']    = $tmp;
-                $this->count    += 1;
+    public function downloadImageHotelInfo(Request $request){
+        if(!empty($request->get('content_image'))){
+            $data               = $request->get('content_image');
+            $crawlerContent     = new Crawler($data);
+    
+            /* lấy ảnh khách sạn */
+            $crawlerContent->filter('img')->each(function($node){
+                $filteredUrl = preg_replace('/^http.+(http.*)/', '$1', $node->attr('src'));
+                $filteredUrl = preg_replace('/\?[^\/]+/', '', $filteredUrl);
+                
+                $this->arrayData['images'][] = $filteredUrl;
             });
 
-            /* lấy chính sách khách sạn */
-            $this->arrayData['contents'][0]['name']     = trim($crawlerContent->filter('#hotel_policy h2')->text());
-            $this->arrayData['contents'][0]['content']  = '<div>'.trim($crawlerContent->filter('#hotel_policy')->html()).'</div>';
+            /* duyệt qua để lọc bỏ đường dẫn không phải ảnh */
+            $allowedExtensions  = ['png', 'jpg', 'jpeg'];
+            $imagesReal         = [];
+            foreach($this->arrayData['images'] as $image){
+                $extension = pathinfo($image, PATHINFO_EXTENSION);
+                if (in_array($extension, $allowedExtensions)) {
+                    $imagesReal[] = $image;
+                }
+            }
+        }
+        return json_encode($imagesReal);
+    }
 
-            /* random star * rating */
-            $this->arrayData['seo']['rating_aggregate_star']    = '4.'.rand(5,8);
-            $this->arrayData['seo']['rating_aggregate_count']   = rand(100,300);
-            /* lấy dữ liệu trong db truyển đi kèm */
-            $hotelLocations     = HotelLocation::all();
-            $staffs             = Staff::all();
-            $parents            = HotelLocation::select('*')
-                                    ->with('seo')
-                                    ->get();
-            /* type */
-            $type               = !empty($item) ? 'edit' : 'create';
-            $type               = $request->get('type') ?? $type;
-            // $item               = $this->arrayData;
-            $item               = self::convertToCollectionRecursive($this->arrayData);
-            $item->id           = null;
-            $item->seo          = $item['seo'];
-            $item->seo->id      = null;
-            $item->seo->link_canonical = null;
-            $item->company_name = null;
-            $item->address      = null;
-            $item->company_code = null;
-            $item->website      = null;
-            $item->hotline      = null;
-            $item->email        = null;
-            $item->contents     = $item['contents'];
-            Cache::put('item_download', $item, 60); // Lưu trữ trong 60 phút
-            return redirect()->route('admin.hotel.view');
-            // return view('admin.hotel.view', compact('item', 'type', 'hotelLocations', 'staffs', 'parents'));
+    public static function saveImagesHotelInfo($imageName, $idHotelRoom, $imageUrls, $table = 'hotel_info'){
+        $i      = 0;
+        foreach ($imageUrls as $imageUrl) {
+            /*  folder upload */
+            $folderUpload   = config('admin.images.folderHotel');
+            /* image upload */
+            $extension      = config('admin.images.extension');
+            /* upload ảnh normal */
+            $name           = $imageName.'-'.$i.'-'.time();
+            $filenameNormal = $folderUpload.$name.'.'.$extension;
+            ImageManagerStatic::make($imageUrl)
+                ->encode($extension, config('admin.images.quality'))
+                ->save(Storage::path($filenameNormal));
+            /* upload ảnh small */
+            // /* lấy width và height của ảnh truyền vào để tính percenter resize */
+            // $imageTmp           = ImageManagerStatic::make($imageUrl);
+            // $percentPixel       = $imageTmp->width()/$imageTmp->height();
+            // $widthImageSmall    = config('admin.images.smallResize_width');
+            // $heightImageSmall   = $widthImageSmall/$percentPixel;
+            // $filenameSmall      = $folderUpload.$name.'-small.'.$extension;
+            // ImageManagerStatic::make($imageUrl)
+            //     ->encode($extension, config('admin.images.quality'))
+            //     ->resize(config('admin.images.smallResize_width'), $heightImageSmall)
+            //     ->save(Storage::path($filenameSmall));
+            HotelImage::insertItem([
+                'reference_type'    => $table,
+                'reference_id'      => $idHotelRoom,
+                'image'             => $filenameNormal,
+                'image_small'       => null
+            ]);
+            ++$i;
         }
     }
 

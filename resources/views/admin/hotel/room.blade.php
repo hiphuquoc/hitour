@@ -1,589 +1,1023 @@
-<div class="modal-wrapper hprt-lightbox--wrapper hprt-lightbox--two_column_layout hprt-lightbox--wrapperwider modal-pos-abs" role="dialog" aria-label="dialog" aria-modal="true" style="position: absolute; top: 2586px; left: 278px; overflow: visible; visibility: visible;">
-   <div class="hprt-lightbox js_hp_rt_lightbox_facilities  hprt-lightbox-long-language a11y-lighbox-no-outline" id="blocktoggleRD965953405" data-room-id="965953405" data-first-room="" data-component="hotel/new-rooms-table/lightbox" tabindex="-1" style="display: block;">
-      <span class="invisible_spoken">Bắt đầu nội dung hộp thoại</span>
-      <div class="room-lightbox-container js-async-room-lightbox-container" data-component="room-lightbox-async" data-room-id="965953405" data-prefetch-mode="on_room_hover" data-et-view="INFdBOSTPeVcDHBYAZERMC:1" style="display: block;">
-         <div data-room-id="965953405">
-            <div class="hprt-lightbox-left-container hprt-lightbox-left-container--wider">
-               <div aria-hidden="true" class="hprt-lightbox-gallery-container  hprt-lightbox-gallery-corner-nav slicked" data-photos-count="13">
-                  <div class="hprt-lightbox-gallery">
-                     <div class="hprt-lightbox-gallery-slides hprt-lightbox-gallery-slides--portrait-fix slick-initialized slick-slider" data-gallery="">
-                        <div class="slick-list draggable">
-                           <div class="slick-track" style="opacity: 1; width: 7865px;">
-                              <div data-photoid="434661121" class="slick-slide slick-active" data-slick-index="0" aria-hidden="false" style="width: 605px; position: relative; left: 0px; top: 0px; z-index: 900; opacity: 1;">
-                                 <img alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #1" class="" src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/434661121.jpg?k=7df39a2cb71115483388ec6fd085d9b56a3093b4c1b98e1953ff0f5402f09fe4&amp;o=" style="opacity: 1;">
-                              </div>
-                              <div data-photoid="441569601" class="slick-slide" data-slick-index="1" aria-hidden="true" style="width: 605px; position: relative; left: -605px; top: 0px; z-index: 800; opacity: 0;">
-                                 <img alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #2" class="" src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/441569601.jpg?k=3fcc3b458c8e90e7972269b1be74945c9821cbf8ab0ba43673dd04d06a8e3944&amp;o=" style="opacity: 1;">
-                              </div>
-                              <div data-photoid="441578634" class="slick-slide" data-slick-index="2" aria-hidden="true" style="width: 605px; position: relative; left: -1210px; top: 0px; z-index: 800; opacity: 0;">
-                                 <img alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #3" class="" src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/441578634.jpg?k=cc2f272f6e780e4b6171949aafe7726098103b1b1c6f53d4f9c7b60cbbfaa4ce&amp;o=" style="opacity: 1;">
-                              </div>
-                              <div data-photoid="441569613" class="slick-slide" data-slick-index="3" aria-hidden="true" style="width: 605px; position: relative; left: -1815px; top: 0px; z-index: 800; opacity: 0;">
-                                 <img data-lazy="https://cf.bstatic.com/xdata/images/hotel/max1024x768/441569613.jpg?k=1fa82d9498874466ad61248da11c36b9219f5f3b90ec36849bee2218632b0cb1&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #4" class="slick-loading">
-                              </div>
-                              <div data-photoid="441578635" class="slick-slide" data-slick-index="4" aria-hidden="true" style="width: 605px; position: relative; left: -2420px; top: 0px; z-index: 800; opacity: 0;">
-                                 <img data-lazy="https://cf.bstatic.com/xdata/images/hotel/max1024x768/441578635.jpg?k=6718de1e1ef3c1f931349b2833e83f0a593a9e93aaa00f36ec5ac8a897f5d6ff&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #5" class="slick-loading">
-                              </div>
-                              <div data-photoid="441569700" class="slick-slide" data-slick-index="5" aria-hidden="true" style="width: 605px; position: relative; left: -3025px; top: 0px; z-index: 800; opacity: 0;">
-                                 <img data-lazy="https://cf.bstatic.com/xdata/images/hotel/max1024x768/441569700.jpg?k=59c24d5c53d2975da70329c7313346814a41cf98ed86c0d1205f79fb8e6066fd&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #6" class="slick-loading">
-                              </div>
-                              <div data-photoid="441569755" class="slick-slide" data-slick-index="6" aria-hidden="true" style="width: 605px; position: relative; left: -3630px; top: 0px; z-index: 800; opacity: 0;">
-                                 <img data-lazy="https://cf.bstatic.com/xdata/images/hotel/max1024x768/441569755.jpg?k=45d2f9deb261903fe3485e0a0db92b8c9c9734934f193a3374cb0b696d5f0928&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #7" class="slick-loading">
-                              </div>
-                              <div data-photoid="441569769" class="slick-slide" data-slick-index="7" aria-hidden="true" style="width: 605px; position: relative; left: -4235px; top: 0px; z-index: 800; opacity: 0;">
-                                 <img data-lazy="https://cf.bstatic.com/xdata/images/hotel/max1024x768/441569769.jpg?k=75a4cf94d8642473f307f939545bbed1c3474fd20dd8ed8bfa7704e616c680fd&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #8" class="slick-loading">
-                              </div>
-                              <div data-photoid="441569834" class="slick-slide" data-slick-index="8" aria-hidden="true" style="width: 605px; position: relative; left: -4840px; top: 0px; z-index: 800; opacity: 0;">
-                                 <img data-lazy="https://cf.bstatic.com/xdata/images/hotel/max1024x768/441569834.jpg?k=a137408f75e7d332c2b15fd162e7ab278fc3049bdc6b8334c08ffee4ad59edbf&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #9" class="slick-loading">
-                              </div>
-                              <div data-photoid="441569835" class="slick-slide" data-slick-index="9" aria-hidden="true" style="width: 605px; position: relative; left: -5445px; top: 0px; z-index: 800; opacity: 0;">
-                                 <img data-lazy="https://cf.bstatic.com/xdata/images/hotel/max1024x768/441569835.jpg?k=5fc96ffad33758102c1f5d5b1542b3be1c7990dd38dfcc3d65724d4dca35b955&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #10" class="slick-loading">
-                              </div>
-                              <div data-photoid="441569836" class="slick-slide" data-slick-index="10" aria-hidden="true" style="width: 605px; position: relative; left: -6050px; top: 0px; z-index: 800; opacity: 0;">
-                                 <img data-lazy="https://cf.bstatic.com/xdata/images/hotel/max1024x768/441569836.jpg?k=c4ea8c8167060c63d40ad8de81a5d3a4abf4780e565ae10781c53a760a64f8de&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #11" class="slick-loading">
-                              </div>
-                              <div data-photoid="441583353" class="slick-slide" data-slick-index="11" aria-hidden="true" style="width: 605px; position: relative; left: -6655px; top: 0px; z-index: 800; opacity: 0;">
-                                 <img data-lazy="https://cf.bstatic.com/xdata/images/hotel/max1024x768/441583353.jpg?k=f6d48094fc42afc871893c26b625be001d73877a9de65da5ee38761e215b6b4f&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #12" class="slick-loading">
-                              </div>
-                              <div data-photoid="441583533" class="slick-slide" data-slick-index="12" aria-hidden="true" style="width: 605px; position: relative; left: -7260px; top: 0px; z-index: 800; opacity: 0;">
-                                 <img data-lazy="https://cf.bstatic.com/xdata/images/hotel/max1024x768/441583533.jpg?k=0416d3ef0d29fc47a5b31de2f3ec96321b11d9552eb15d28d5d75a2661c41886&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #13" class="slick-loading">
-                              </div>
-                           </div>
-                        </div>
-                        <style>
-                           .txp-vt-bg-img {
-                           background-image:url('https:&#47;&#47;cf.bstatic.com&#47;xdata&#47;images&#47;hotel&#47;max1024x768&#47;434661121.jpg?k=7df39a2cb71115483388ec6fd085d9b56a3093b4c1b98e1953ff0f5402f09fe4&amp;o=')
-                           }
-                        </style>
-                        <style>
-                           .txp-vt-bg-img {
-                           background-image:url('https:&#47;&#47;cf.bstatic.com&#47;xdata&#47;images&#47;hotel&#47;max1024x768&#47;441569601.jpg?k=3fcc3b458c8e90e7972269b1be74945c9821cbf8ab0ba43673dd04d06a8e3944&amp;o=')
-                           }
-                        </style>
-                        <style>
-                           .txp-vt-bg-img {
-                           background-image:url('https:&#47;&#47;cf.bstatic.com&#47;xdata&#47;images&#47;hotel&#47;max1024x768&#47;441578634.jpg?k=cc2f272f6e780e4b6171949aafe7726098103b1b1c6f53d4f9c7b60cbbfaa4ce&amp;o=')
-                           }
-                        </style>
-                        <style>
-                           .txp-vt-bg-img {
-                           background-image:url('https:&#47;&#47;cf.bstatic.com&#47;xdata&#47;images&#47;hotel&#47;max1024x768&#47;441569613.jpg?k=1fa82d9498874466ad61248da11c36b9219f5f3b90ec36849bee2218632b0cb1&amp;o=')
-                           }
-                        </style>
-                        <style>
-                           .txp-vt-bg-img {
-                           background-image:url('https:&#47;&#47;cf.bstatic.com&#47;xdata&#47;images&#47;hotel&#47;max1024x768&#47;441578635.jpg?k=6718de1e1ef3c1f931349b2833e83f0a593a9e93aaa00f36ec5ac8a897f5d6ff&amp;o=')
-                           }
-                        </style>
-                        <style>
-                           .txp-vt-bg-img {
-                           background-image:url('https:&#47;&#47;cf.bstatic.com&#47;xdata&#47;images&#47;hotel&#47;max1024x768&#47;441569700.jpg?k=59c24d5c53d2975da70329c7313346814a41cf98ed86c0d1205f79fb8e6066fd&amp;o=')
-                           }
-                        </style>
-                        <style>
-                           .txp-vt-bg-img {
-                           background-image:url('https:&#47;&#47;cf.bstatic.com&#47;xdata&#47;images&#47;hotel&#47;max1024x768&#47;441569755.jpg?k=45d2f9deb261903fe3485e0a0db92b8c9c9734934f193a3374cb0b696d5f0928&amp;o=')
-                           }
-                        </style>
-                        <style>
-                           .txp-vt-bg-img {
-                           background-image:url('https:&#47;&#47;cf.bstatic.com&#47;xdata&#47;images&#47;hotel&#47;max1024x768&#47;441569769.jpg?k=75a4cf94d8642473f307f939545bbed1c3474fd20dd8ed8bfa7704e616c680fd&amp;o=')
-                           }
-                        </style>
-                        <style>
-                           .txp-vt-bg-img {
-                           background-image:url('https:&#47;&#47;cf.bstatic.com&#47;xdata&#47;images&#47;hotel&#47;max1024x768&#47;441569834.jpg?k=a137408f75e7d332c2b15fd162e7ab278fc3049bdc6b8334c08ffee4ad59edbf&amp;o=')
-                           }
-                        </style>
-                        <style>
-                           .txp-vt-bg-img {
-                           background-image:url('https:&#47;&#47;cf.bstatic.com&#47;xdata&#47;images&#47;hotel&#47;max1024x768&#47;441569835.jpg?k=5fc96ffad33758102c1f5d5b1542b3be1c7990dd38dfcc3d65724d4dca35b955&amp;o=')
-                           }
-                        </style>
-                        <style>
-                           .txp-vt-bg-img {
-                           background-image:url('https:&#47;&#47;cf.bstatic.com&#47;xdata&#47;images&#47;hotel&#47;max1024x768&#47;441569836.jpg?k=c4ea8c8167060c63d40ad8de81a5d3a4abf4780e565ae10781c53a760a64f8de&amp;o=')
-                           }
-                        </style>
-                        <style>
-                           .txp-vt-bg-img {
-                           background-image:url('https:&#47;&#47;cf.bstatic.com&#47;xdata&#47;images&#47;hotel&#47;max1024x768&#47;441583353.jpg?k=f6d48094fc42afc871893c26b625be001d73877a9de65da5ee38761e215b6b4f&amp;o=')
-                           }
-                        </style>
-                        <style>
-                           .txp-vt-bg-img {
-                           background-image:url('https:&#47;&#47;cf.bstatic.com&#47;xdata&#47;images&#47;hotel&#47;max1024x768&#47;441583533.jpg?k=0416d3ef0d29fc47a5b31de2f3ec96321b11d9552eb15d28d5d75a2661c41886&amp;o=')
-                           }
-                        </style>
-                     </div>
-                     <div class="rt-lightbox-reviews-container" style="display: none;">
-                        <a class="bicon bicon-close rt-lightbox-reviews-container-close js--rt-lightbox-reviews-container-close"></a>
-                        <div class="js-clean-rating-score" data-reviews="159" data-score="9" data-text="Sạch sẽ"></div>
-                        <div class="js-comfort-rating-score" data-reviews="159" data-score="9.1" data-text="Thoải mái"></div>
-                     </div>
-                     <div class="hp-gallery-controls hp-controls--visible">
-                        <button role="presentation" aria-label="Ảnh sau" class="hp-gallery-control hp-gallery-control-prev" data-nav="prev" style="display: block;">
-                        </button>
-                        <button role="presentation" aria-label="Ảnh trước" class="hp-gallery-control hp-gallery-control-next" data-nav="next" style="display: block;">
-                        </button>
-                     </div>
-                  </div>
-                  <div class="b_nha_hotel_small_images">
-                     <div class="hprt-lightbox-gallery-thumbs hprt-lightbox-gallery-thumbs_border">
-                        <a data-photoid="434661121" target="_blank" tabindex="0" class="js-hotel-thumb hotel_thumbs_sprite change_large_image_on_hover selected_thumb" title="Hình của Phòng Có Giường Cỡ King Với Ban Công #1">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/square60/434661121.jpg?k=7df39a2cb71115483388ec6fd085d9b56a3093b4c1b98e1953ff0f5402f09fe4&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #1">
-                        </a>
-                        <a data-photoid="441569601" target="_blank" tabindex="0" class="js-hotel-thumb hotel_thumbs_sprite change_large_image_on_hover" title="Hình của Phòng Có Giường Cỡ King Với Ban Công #2">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/square60/441569601.jpg?k=3fcc3b458c8e90e7972269b1be74945c9821cbf8ab0ba43673dd04d06a8e3944&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #2">
-                        </a>
-                        <a data-photoid="441578634" target="_blank" tabindex="0" class="js-hotel-thumb hotel_thumbs_sprite change_large_image_on_hover" title="Hình của Phòng Có Giường Cỡ King Với Ban Công #3">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/square60/441578634.jpg?k=cc2f272f6e780e4b6171949aafe7726098103b1b1c6f53d4f9c7b60cbbfaa4ce&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #3">
-                        </a>
-                        <a data-photoid="441569613" target="_blank" tabindex="0" class="js-hotel-thumb hotel_thumbs_sprite change_large_image_on_hover" title="Hình của Phòng Có Giường Cỡ King Với Ban Công #4">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/square60/441569613.jpg?k=1fa82d9498874466ad61248da11c36b9219f5f3b90ec36849bee2218632b0cb1&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #4">
-                        </a>
-                        <a data-photoid="441578635" target="_blank" tabindex="0" class="js-hotel-thumb hotel_thumbs_sprite change_large_image_on_hover" title="Hình của Phòng Có Giường Cỡ King Với Ban Công #5">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/square60/441578635.jpg?k=6718de1e1ef3c1f931349b2833e83f0a593a9e93aaa00f36ec5ac8a897f5d6ff&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #5">
-                        </a>
-                        <a data-photoid="441569700" target="_blank" tabindex="0" class="js-hotel-thumb hotel_thumbs_sprite change_large_image_on_hover" title="Hình của Phòng Có Giường Cỡ King Với Ban Công #6">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/square60/441569700.jpg?k=59c24d5c53d2975da70329c7313346814a41cf98ed86c0d1205f79fb8e6066fd&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #6">
-                        </a>
-                        <a data-photoid="441569755" target="_blank" tabindex="0" class="js-hotel-thumb hotel_thumbs_sprite change_large_image_on_hover" title="Hình của Phòng Có Giường Cỡ King Với Ban Công #7">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/square60/441569755.jpg?k=45d2f9deb261903fe3485e0a0db92b8c9c9734934f193a3374cb0b696d5f0928&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #7">
-                        </a>
-                        <a data-photoid="441569769" target="_blank" tabindex="0" class="js-hotel-thumb hotel_thumbs_sprite change_large_image_on_hover" title="Hình của Phòng Có Giường Cỡ King Với Ban Công #8">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/square60/441569769.jpg?k=75a4cf94d8642473f307f939545bbed1c3474fd20dd8ed8bfa7704e616c680fd&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #8">
-                        </a>
-                        <a data-photoid="441569834" target="_blank" tabindex="0" class="js-hotel-thumb hotel_thumbs_sprite change_large_image_on_hover" title="Hình của Phòng Có Giường Cỡ King Với Ban Công #9">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/square60/441569834.jpg?k=a137408f75e7d332c2b15fd162e7ab278fc3049bdc6b8334c08ffee4ad59edbf&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #9">
-                        </a>
-                        <a data-photoid="441569835" target="_blank" tabindex="0" class="js-hotel-thumb hotel_thumbs_sprite change_large_image_on_hover" title="Hình của Phòng Có Giường Cỡ King Với Ban Công #10">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/square60/441569835.jpg?k=5fc96ffad33758102c1f5d5b1542b3be1c7990dd38dfcc3d65724d4dca35b955&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #10">
-                        </a>
-                        <a data-photoid="441569836" target="_blank" tabindex="0" class="js-hotel-thumb hotel_thumbs_sprite change_large_image_on_hover" title="Hình của Phòng Có Giường Cỡ King Với Ban Công #11">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/square60/441569836.jpg?k=c4ea8c8167060c63d40ad8de81a5d3a4abf4780e565ae10781c53a760a64f8de&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #11">
-                        </a>
-                        <a data-photoid="441583353" target="_blank" tabindex="0" class="js-hotel-thumb hotel_thumbs_sprite change_large_image_on_hover" title="Hình của Phòng Có Giường Cỡ King Với Ban Công #12">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/square60/441583353.jpg?k=f6d48094fc42afc871893c26b625be001d73877a9de65da5ee38761e215b6b4f&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #12">
-                        </a>
-                        <a data-photoid="441583533" target="_blank" tabindex="0" class="js-hotel-thumb hotel_thumbs_sprite change_large_image_on_hover" title="Hình của Phòng Có Giường Cỡ King Với Ban Công #13">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/square60/441583533.jpg?k=0416d3ef0d29fc47a5b31de2f3ec96321b11d9552eb15d28d5d75a2661c41886&amp;o=" alt="Hình của Phòng Có Giường Cỡ King Với Ban Công #13">
-                        </a>
-                        <div class="clearfix"></div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="hprt-lightbox-right-container">
-               <h1 class="rt-lightbox-title" id="hp_rt_room_gallery_modal_room_name">Phòng Có Giường Cỡ King Với Ban Công</h1>
-               <div class="hprt-facilities-facility" data-name-en="room size" data-facility-id="0" data-facility-type="0">
-                  <span class=" bui-badge bui-badge--outline room_highlight_badge--without_borders">
-                     <svg class="bk-icon -streamline-room_size" fill="" size="medium" width="16" height="16" viewBox="0 0 24 24">
-                        <path d="M3.75 23.25V7.5a.75.75 0 0 0-1.5 0v15.75a.75.75 0 0 0 1.5 0zM.22 21.53l2.25 2.25a.75.75 0 0 0 1.06 0l2.25-2.25a.75.75 0 1 0-1.06-1.06l-2.25 2.25h1.06l-2.25-2.25a.75.75 0 0 0-1.06 1.06zM5.78 9.22L3.53 6.97a.75.75 0 0 0-1.06 0L.22 9.22a.75.75 0 1 0 1.06 1.06l2.25-2.25H2.47l2.25 2.25a.75.75 0 1 0 1.06-1.06zM7.5 3.75h15.75a.75.75 0 0 0 0-1.5H7.5a.75.75 0 0 0 0 1.5zM9.22.22L6.97 2.47a.75.75 0 0 0 0 1.06l2.25 2.25a.75.75 0 1 0 1.06-1.06L8.03 2.47v1.06l2.25-2.25A.75.75 0 1 0 9.22.22zm12.31 5.56l2.25-2.25a.75.75 0 0 0 0-1.06L21.53.22a.75.75 0 1 0-1.06 1.06l2.25 2.25V2.47l-2.25 2.25a.75.75 0 0 0 1.06 1.06zM10.5 13.05v7.2a2.25 2.25 0 0 0 2.25 2.25h6A2.25 2.25 0 0 0 21 20.25v-7.2a.75.75 0 0 0-1.5 0v7.2a.75.75 0 0 1-.75.75h-6a.75.75 0 0 1-.75-.75v-7.2a.75.75 0 0 0-1.5 0zm13.252 2.143l-6.497-5.85a2.25 2.25 0 0 0-3.01 0l-6.497 5.85a.75.75 0 0 0 1.004 1.114l6.497-5.85a.75.75 0 0 1 1.002 0l6.497 5.85a.75.75 0 0 0 1.004-1.114z"></path>
-                     </svg>
-                     26 m²
-                  </span>
-               </div>
-               <div class="hprt-facilities-facility" data-name-en="undefined" data-facility-id="17" data-facility-type="1">
-                  <span class=" bui-badge bui-badge--outline room_highlight_badge--without_borders">
-                     <svg class="bk-icon -streamline-resort" fill="" size="medium" width="16" height="16" viewBox="0 0 24 24">
-                        <path d="M.768 11.413l1.5 6.75a.75.75 0 0 0 1.464-.326l-1.5-6.75a.75.75 0 0 0-1.464.326zM2.22 23.456l1.5-5.25L3 18.75h3a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 0 1.5 0V19.5A2.25 2.25 0 0 0 6 17.25H3a.75.75 0 0 0-.721.544l-1.5 5.25a.75.75 0 1 0 1.442.412zm19.547-12.369l-1.5 6.75a.75.75 0 1 0 1.464.326l1.5-6.75a.75.75 0 1 0-1.464-.326zm1.453 11.957l-1.5-5.25A.75.75 0 0 0 21 17.25h-3a2.25 2.25 0 0 0-2.25 2.25v3.75a.75.75 0 0 0 1.5 0V19.5a.75.75 0 0 1 .75-.75h3l-.721-.544 1.5 5.25a.75.75 0 1 0 1.442-.412zM11.25 6.75v16.5a.75.75 0 0 0 1.5 0V6.75a.75.75 0 0 0-1.5 0zm-4.5 7.5h10.5a.75.75 0 0 0 0-1.5H6.75a.75.75 0 0 0 0 1.5zM1.5 6l10.064-4.37c.297-.161.575-.161.803-.033l10.178 4.425L22.5 6H1.5zm0 1.5h21a1.5 1.5 0 0 0 .689-2.832L13.034.255c-.616-.35-1.452-.35-2.136.034L.858 4.646c-.544.28-.856.792-.857 1.352A1.5 1.5 0 0 0 1.499 7.5z"></path>
-                     </svg>
-                     Ban công
-                  </span>
-               </div>
-               <div class="hprt-facilities-facility" data-name-en="undefined" data-facility-id="121" data-facility-type="1">
-                  <span class=" bui-badge bui-badge--outline room_highlight_badge--without_borders">
-                     <svg class="bk-icon -streamline-city" fill="" size="medium" width="16" height="16" viewBox="0 0 24 24">
-                        <path d="M2.75 6h9.5a.25.25 0 0 1-.25-.25v17.5l.75-.75H2.25l.75.75V5.75a.25.25 0 0 1-.25.25zm0-1.5c-.69 0-1.25.56-1.25 1.25v17.5c0 .414.336.75.75.75h10.5a.75.75 0 0 0 .75-.75V5.75c0-.69-.56-1.25-1.25-1.25h-9.5zm3-1.5h3.5A.25.25 0 0 1 9 2.75v2.5l.75-.75h-4.5l.75.75v-2.5a.25.25 0 0 1-.25.25zm0-1.5c-.69 0-1.25.56-1.25 1.25v2.5c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-2.5c0-.69-.56-1.25-1.25-1.25h-3.5zM5.25 9h4.5a.75.75 0 0 0 0-1.5h-4.5a.75.75 0 0 0 0 1.5zm0 3h4.5a.75.75 0 0 0 0-1.5h-4.5a.75.75 0 0 0 0 1.5zm0 3h4.5a.75.75 0 0 0 0-1.5h-4.5a.75.75 0 0 0 0 1.5zm0 3h4.5a.75.75 0 0 0 0-1.5h-4.5a.75.75 0 0 0 0 1.5zm0 3h4.5a.75.75 0 0 0 0-1.5h-4.5a.75.75 0 0 0 0 1.5zM7.5.75v1.5a.75.75 0 0 0 1.5 0V.75a.75.75 0 0 0-1.5 0zM15.75 24h6a.75.75 0 0 0 .75-.75V10.5A1.5 1.5 0 0 0 21 9h-4.5a1.5 1.5 0 0 0-1.5 1.5v12.75a.75.75 0 0 0 1.5 0V10.5H21v12.75l.75-.75h-6a.75.75 0 0 0 0 1.5zM19.5 8.25v1.5a.75.75 0 0 0 1.5 0v-1.5a.75.75 0 0 0-1.5 0zM.75 24h22.5a.75.75 0 0 0 0-1.5H.75a.75.75 0 0 0 0 1.5z"></path>
-                     </svg>
-                     Nhìn ra thành phố
-                  </span>
-               </div>
-               <div class="hprt-facilities-facility" data-name-en="undefined" data-facility-id="11" data-facility-type="1">
-                  <span class=" bui-badge bui-badge--outline room_highlight_badge--without_borders">
-                     <svg class="bk-icon -streamline-weather_snowflake" fill="" size="medium" width="16" height="16" viewBox="0 0 24 24">
-                        <path d="M11.25.75v7.5a.75.75 0 0 0 1.5 0V.75a.75.75 0 0 0-1.5 0zm4.031.914l-3.75 3h.938l-3.75-3a.75.75 0 1 0-.938 1.172l3.75 3a.75.75 0 0 0 .938 0l3.75-3a.75.75 0 1 0-.938-1.172zM1.883 7.024l6.495 3.75a.75.75 0 0 0 .75-1.299l-6.495-3.75a.75.75 0 1 0-.75 1.3zM4.69 3.99l.723 4.748.468-.812-4.473 1.748a.75.75 0 0 0 .546 1.398l4.473-1.748a.75.75 0 0 0 .468-.812l-.723-4.748a.75.75 0 1 0-1.482.226zM2.632 18.274l6.495-3.75a.75.75 0 1 0-.75-1.298l-6.495 3.75a.75.75 0 1 0 .75 1.299zm-1.224-3.948l4.473 1.748-.468-.812-.723 4.748a.75.75 0 0 0 1.482.226l.723-4.748a.75.75 0 0 0-.468-.812l-4.473-1.748a.75.75 0 0 0-.546 1.398zM12.75 23.25v-7.5a.75.75 0 0 0-1.5 0v7.5a.75.75 0 0 0 1.5 0zm-4.031-.914l3.75-3h-.938l3.75 3a.75.75 0 0 0 .937-1.172l-3.75-3a.75.75 0 0 0-.937 0l-3.75 3a.75.75 0 0 0 .938 1.172zm13.399-5.36l-6.495-3.75a.75.75 0 0 0-.75 1.298l6.495 3.75a.75.75 0 0 0 .75-1.299zm-2.807 3.034l-.724-4.748-.468.812 4.473-1.748a.75.75 0 0 0-.546-1.398l-4.473 1.748a.75.75 0 0 0-.468.812l.723 4.748a.75.75 0 0 0 1.483-.226zm2.057-14.285l-6.495 3.75a.75.75 0 0 0 .75 1.3l6.495-3.75a.75.75 0 0 0-.75-1.3zm1.224 3.95l-4.473-1.749.468.812.724-4.748a.75.75 0 0 0-1.483-.226l-.723 4.748a.75.75 0 0 0 .468.812l4.473 1.748a.75.75 0 0 0 .546-1.398zM11.625 7.6L8.377 9.475a.75.75 0 0 0-.375.65v3.75a.75.75 0 0 0 .375.65l3.248 1.874a.75.75 0 0 0 .75 0l3.248-1.875a.75.75 0 0 0 .375-.649v-3.75a.75.75 0 0 0-.375-.65L12.375 7.6a.75.75 0 0 0-.75 0zm.75 1.3h-.75l3.248 1.874-.375-.649v3.75l.375-.65-3.248 1.876h.75l-3.248-1.876.375.65v-3.75l-.375.65L12.375 8.9z"></path>
-                     </svg>
-                     Điều hòa không khí
-                  </span>
-               </div>
-               <div class="hprt-facilities-facility" data-name-en="undefined" data-facility-id="38" data-facility-type="1">
-                  <span class=" bui-badge bui-badge--outline room_highlight_badge--without_borders">
-                     <svg class="bk-icon -streamline-shower" fill="" size="medium" width="16" height="16" viewBox="0 0 24 24">
-                        <path d="M15.375 10.875a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0zm1.5 0a3.375 3.375 0 1 0-6.75 0 3.375 3.375 0 0 0 6.75 0zm.375 12.375V18.7l-.667.745C20.748 18.98 24 15.925 24 10.5a2.25 2.25 0 0 0-4.5 0c0 1.945-.609 3.154-1.64 3.848a3.973 3.973 0 0 1-2.132.652H9a3.75 3.75 0 1 0 0 7.5h3a2.25 2.25 0 0 0 0-4.5H9a.75.75 0 0 0 0 1.5h3a.75.75 0 0 1 0 1.5H9a2.25 2.25 0 0 1 0-4.5h6.74a5.426 5.426 0 0 0 2.957-.908C20.154 14.613 21 12.932 21 10.5a.75.75 0 0 1 1.5 0c0 4.6-2.628 7.069-6.083 7.455a.75.75 0 0 0-.667.745v4.55a.75.75 0 0 0 1.5 0zm-7.5-1.5v1.5a.75.75 0 0 0 1.5 0v-1.5a.75.75 0 0 0-1.5 0zM.75 1.5h1.5l-.53-.22 1.402 1.402a.75.75 0 0 0 1.06-1.06L2.78.22A.75.75 0 0 0 2.25 0H.75a.75.75 0 1 0 0 1.5zm2.983 3.754a.01.01 0 0 1 .016.002c-.542-1.072-.1-2.426 1.008-2.988a2.25 2.25 0 0 1 2.037 0c-.041-.022-.043-.029-.04-.034l.002-.002-3.013 3.012zm1.07 1.05l3.002-3A1.489 1.489 0 0 0 7.51.951 3.766 3.766 0 0 0 4.079.929 3.75 3.75 0 0 0 2.43 5.971a1.49 1.49 0 0 0 2.382.323zm3.408-.968l1.116.62a.75.75 0 1 0 .728-1.312l-1.116-.62a.75.75 0 1 0-.728 1.312zm1.964-2.233l1.615.44a.75.75 0 1 0 .394-1.448l-1.615-.44a.75.75 0 1 0-.394 1.448zm4.217 1.15l1.615.44a.75.75 0 0 0 .396-1.447l-1.615-.44a.75.75 0 0 0-.396 1.447zM5.697 7.388l.577 1.038a.75.75 0 1 0 1.312-.728L7.009 6.66a.75.75 0 1 0-1.312.728zM3.284 8.94l.44 1.615a.75.75 0 1 0 1.448-.394l-.44-1.615a.75.75 0 1 0-1.448.394zm1.15 4.219l.246.896a.75.75 0 1 0 1.446-.396l-.245-.896a.75.75 0 1 0-1.446.396z"></path>
-                     </svg>
-                     Phòng tắm riêng
-                  </span>
-               </div>
-               <div class="hprt-facilities-facility" data-name-en="undefined" data-facility-id="75" data-facility-type="1">
-                  <span class=" bui-badge bui-badge--outline room_highlight_badge--without_borders">
-                     <svg class="bk-icon -streamline-tv_flat_screen" fill="" size="medium" width="16" height="16" viewBox="0 0 24 24">
-                        <path d="M22.5 10.375v6.5a.25.25 0 0 1-.25.25H1.75a.25.25 0 0 1-.25-.25v-13a.25.25 0 0 1 .25-.25h20.5a.25.25 0 0 1 .25.25v6.5zm1.5 0v-6.5a1.75 1.75 0 0 0-1.75-1.75H1.75A1.75 1.75 0 0 0 0 3.875v13c0 .966.784 1.75 1.75 1.75h20.5a1.75 1.75 0 0 0 1.75-1.75v-6.5zm-16.5 12h9a.75.75 0 0 0 0-1.5h-9a.75.75 0 0 0 0 1.5zm3.75-4.5v3.75a.75.75 0 0 0 1.5 0v-3.75a.75.75 0 0 0-1.5 0z"></path>
-                     </svg>
-                     TV màn hình phẳng
-                  </span>
-               </div>
-               <div class="hprt-facilities-facility" data-name-en="undefined" data-facility-id="79" data-facility-type="1">
-                  <span class=" bui-badge bui-badge--outline room_highlight_badge--without_borders">
-                     <svg class="bk-icon -streamline-soundproof" fill="" size="medium" width="16" height="16" viewBox="0 0 24 24">
-                        <path d="M10.413 17.368l3.284 2.09c.947.713 2.357.511 3.103-.483.292-.39.45-.863.45-1.35v-5.25a.75.75 0 0 0-1.5 0v5.25a.75.75 0 0 1-1.2.6l-3.331-2.123a.75.75 0 0 0-.806 1.266zM17.25 5.625a2.25 2.25 0 0 0-3.6-1.8L7.097 7.992l.403-.117h-3a2.25 2.25 0 0 0-2.25 2.25v3a2.25 2.25 0 0 0 2.25 2.25h.625a.75.75 0 0 0 0-1.5H4.5a.75.75 0 0 1-.75-.75v-3a.75.75 0 0 1 .75-.75h3a.75.75 0 0 0 .403-.117l6.6-4.2A.816.816 0 0 1 15 4.875a.75.75 0 0 1 .75.75.75.75 0 0 0 1.5 0zM3.48 20.451l18-15a.75.75 0 0 0-.96-1.152l-18 15a.75.75 0 0 0 .96 1.152z"></path>
-                     </svg>
-                     Hệ thống cách âm
-                  </span>
-               </div>
-               <div class="hprt-facilities-facility" data-name-en="undefined" data-facility-id="123" data-facility-type="1">
-                  <span class=" bui-badge bui-badge--outline room_highlight_badge--without_borders">
-                     <svg class="bk-icon -streamline-resort" fill="" size="medium" width="16" height="16" viewBox="0 0 24 24">
-                        <path d="M.768 11.413l1.5 6.75a.75.75 0 0 0 1.464-.326l-1.5-6.75a.75.75 0 0 0-1.464.326zM2.22 23.456l1.5-5.25L3 18.75h3a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 0 1.5 0V19.5A2.25 2.25 0 0 0 6 17.25H3a.75.75 0 0 0-.721.544l-1.5 5.25a.75.75 0 1 0 1.442.412zm19.547-12.369l-1.5 6.75a.75.75 0 1 0 1.464.326l1.5-6.75a.75.75 0 1 0-1.464-.326zm1.453 11.957l-1.5-5.25A.75.75 0 0 0 21 17.25h-3a2.25 2.25 0 0 0-2.25 2.25v3.75a.75.75 0 0 0 1.5 0V19.5a.75.75 0 0 1 .75-.75h3l-.721-.544 1.5 5.25a.75.75 0 1 0 1.442-.412zM11.25 6.75v16.5a.75.75 0 0 0 1.5 0V6.75a.75.75 0 0 0-1.5 0zm-4.5 7.5h10.5a.75.75 0 0 0 0-1.5H6.75a.75.75 0 0 0 0 1.5zM1.5 6l10.064-4.37c.297-.161.575-.161.803-.033l10.178 4.425L22.5 6H1.5zm0 1.5h21a1.5 1.5 0 0 0 .689-2.832L13.034.255c-.616-.35-1.452-.35-2.136.034L.858 4.646c-.544.28-.856.792-.857 1.352A1.5 1.5 0 0 0 1.499 7.5z"></path>
-                     </svg>
-                     Sân hiên
-                  </span>
-               </div>
-               <div class="hprt-facilities-facility" data-name-en="undefined" data-facility-id="3" data-facility-type="1">
-                  <span class=" bui-badge bui-badge--outline room_highlight_badge--without_borders">
-                     <svg class="bk-icon -streamline-food_and_drink" fill="" size="medium" width="16" height="16" viewBox="0 0 128 128">
-                        <path d="M48.25 4v36a20.13 20.13 0 0 1-16 19.59V124a4 4 0 0 1-8 0V59.58A20.09 20.09 0 0 1 8.25 40V4a4 4 0 0 1 8 0v36a12 12 0 0 0 8 11.28V4a4 4 0 0 1 8 0v47.29a12.1 12.1 0 0 0 8-11.3V4a4 4 0 0 1 8 0zm65 120a4 4 0 0 1-4 4H77.28a4 4 0 0 1 0-8h12V95.7c-14.139-2.16-24.023-15.135-22.35-29.34l6-59.17a8 8 0 0 1 8-7.19h24.67a8 8 0 0 1 8 7.19l6 59.23c1.633 14.181-8.24 27.115-22.35 29.28V120h12a4 4 0 0 1 3.96 4zM80.89 8l-2.43 24H108l-2.4-24zM83 84.88A18.49 18.49 0 0 0 93.17 88h.15a18.48 18.48 0 0 0 10.17-3.12 18.48 18.48 0 0 0 8.12-17.59L108.85 40H77.64l-2.76 27.23A18.49 18.49 0 0 0 83 84.88z"></path>
-                     </svg>
-                     Minibar
-                  </span>
-               </div>
-               <p data-name-en="roomsize">
-               </p>
-               <h2>
-                  Kích thước phòng
-               </h2>
-               26 m²
-               <p></p>
-               <div class="roomtype-no-margins">
-                  <div class="hprt-roomtype-bed lightbox-bed-icons-for-all--container ">
-                     <div class="bed-types-wrapper
-                        ">
-                        <ul class="rt-bed-types">
-                           <li class="rt-bed-type">
-                              <span>
-                              1 giường đôi lớn
-                              <i class="bicon bicon-double"></i>
-                              </span>
-                           </li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
-               <div class="bui-spacer--medium bui-text--variant-body_2">
-                  Giường thoải mái, 9 – 
-                  Dựa trên  29 đánh giá
-               </div>
-               <p>Phòng Giường Đôi này có ban công, áo choàng tắm và minibar.</p>
-               <div class="more-facilities-space">
-                  <p class="hprt-lightbox-title">
-                  </p>
-                  <h2>
-                     Trong phòng tắm riêng của bạn:
-                  </h2>
-                  <p></p>
-                  <ul class="hprt-lightbox-list js-lightbox-facilities" data-nr-of-facilities="7">
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Free Toiletries" data-id="27">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Đồ vệ sinh cá nhân miễn phí
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Bath-robe" data-id="19">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Áo choàng tắm
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Toilet" data-id="31">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Nhà vệ sinh
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Bath or Shower" data-id="69">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Bồn tắm hoặc Vòi sen
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Slippers" data-id="43">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Dép
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Hair Dryer" data-id="12">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Máy sấy tóc
-                        </span>
-                     </li>
-                  </ul>
-                  <p class="hprt-lightbox-title">
-                  </p>
-                  <h2>
-                     Hướng tầm nhìn:
-                  </h2>
-                  <p></p>
-                  <ul class="hprt-lightbox-list js-lightbox-facilities" data-nr-of-facilities="3">
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Balcony" data-id="17">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Ban công
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Terrace" data-id="123">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Sân hiên
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="City View" data-id="121">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Nhìn ra thành phố
-                        </span>
-                     </li>
-                  </ul>
-                  <p class="hprt-lightbox-title">
-                  </p>
-                  <h2>
-                     Tiện nghi phòng: ​
-                  </h2>
-                  <p></p>
-                  <ul class="hprt-lightbox-list js-lightbox-facilities" data-nr-of-facilities="25">
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Desk" data-id="23">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Bàn làm việc
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Safe Deposit Box" data-id="6">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Két an toàn
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Wooden / Parquet floor" data-id="82">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Sàn lát gỗ
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Flat-screen TV" data-id="75">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           TV màn hình phẳng
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Wake Up Service" data-id="83">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Dịch vụ báo thức
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Wake Up Service/Alarm-clock" data-id="13">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Dịch vụ báo thức
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Alarm Clock" data-id="84">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Đồng hồ báo thức
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Towels" data-id="124">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Khăn tắm
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Entire unit wheelchair accessible" data-id="134">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Xe lăn có thể đi đến mọi nơi trong toàn bộ khuôn viên
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Ironing facilities" data-id="25">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Tiện nghi ủi
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Seating area" data-id="26">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Khu vực tiếp khách
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Towels/Linens at surcharge" data-id="91">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Khăn tắm/Bộ khăn trải giường (có thu phí)
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="TV" data-id="8">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           TV
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Refrigerator" data-id="22">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Tủ lạnh
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Linen" data-id="125">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Ra trải giường
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Mini-bar" data-id="3">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Minibar
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Electric Kettle" data-id="86">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Ấm đun nước điện
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Telephone" data-id="9">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Điện thoại
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Cleaning products" data-id="116">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Sản phẩm lau rửa
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Soundproofing" data-id="79">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Hệ thống cách âm
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Airconditioning" data-id="11">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Điều hòa không khí
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Dining Area" data-id="85">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Khu vực phòng ăn
-                        </span>
-                     </li>
-                     <li class="hprt-lightbox-list__item js-lightbox-facility" data-name-en="Clothes Rack" data-id="138">
-                        <span class="">
-                           <svg class="bk-icon -streamline-checkmark" fill="" size="small" width="14" height="14" viewBox="0 0 128 128">
-                              <path d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z"></path>
-                           </svg>
-                           Giá treo quần áo
-                        </span>
-                     </li>
-                  </ul>
-               </div>
-               <div class="policy-section">
-                  <h2>
-                     Hút thuốc: ​
-                  </h2>
-                  <span>
-                  Không hút thuốc
-                  </span>
-               </div>
-            </div>
-            <div class="clearfix"></div>
-         </div>
-         <style>
-            .txp-vt-container-rt { display:none; }
-            .rt-lightbox-title.virtual-tour-room-name {
-            display: inline-block;
-            margin-bottom: 0;
-            vertical-align: middle;
-            }
-         </style>
+<div class="jss1663">
+   <div class="MuiBox-root jss1678" style="position: relative;">
+      <div class="MuiBox-root jss1679 jss1667">
+         <video width="740px" height="390px" type="video/mp4" loop="" autoplay="">
+            <source src="https://teaser.hn.ss.bfcplatform.vn/33364_MYTOUR.mp4">
+            Your browser does not support the video tag.
+         </video>
       </div>
-      <div class="js-async-room-lightbox-reserve">
-         <div class="hprt-lightbox-reserve" data-reserve-room-id="965953405">
-            <div data-et-view="INFdBOSTPeVcDHBYAZERMC:2 "></div>
-         </div>
+      <div class="MuiBox-root jss1680 jss1668">
+         <svg width="16" height="16" fill="none">
+            <path d="M15.498 7.188L3.314 1.095A.91.91 0 002 1.908v12.184a.91.91 0 001.314.813l12.184-6.093a.908.908 0 000-1.624z" fill="#fff"></path>
+         </svg>
       </div>
-      <span class="invisible_spoken">Kết thúc nội dung hộp thoại</span>
    </div>
-   <button class="modal-mask-closeBtn" title="Đóng"><span class="invisible_spoken">Đóng</span></button>
-   <div tabindex="0"></div>
+   <div class="MuiBox-root jss1681" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://www.googleapis.com/download/storage/v1/b/tourcdn/o/photos%2FZ05YDO0UXK_%2Ftmp%2Fplaytemp7458377284404767097%2FmultipartBody2973956485641321854asTemporaryFile?generation=1612513692749396&amp;alt=media" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1687" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/http://pix6.agoda.net/hotelImages/4848611/-1/690a09900282e88da35b0238791b997b.jpg?s=1024x768" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1688" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/http://pix6.agoda.net/hotelImages/4848611/0/bd1759c2b71ffb6e742e2caa8cee5701.jpg?s=1024x768" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1689" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/http://pix6.agoda.net/hotelImages/4848611/0/b6d8e2f4032396262ec46e3f24f26aa2.jpg?s=1024x768" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1690" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/q7c1527062305_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1691" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/mbm1526554893_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1692" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/glk1526554893_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1693" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/JwwOPHbXSUeHgaFd_QbtDg-52-SDM_3528-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1694" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/XR27uGrqRneJ4kTEhxIjZA-102-IMG_1030-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1698" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/tJfo0oQnTt6fgIAvArOA1w-105-71_done100-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1699" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/XR27uGrqRneJ4kTEhxIjZA-103-YL5_4528-Edit-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1700" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/JwwOPHbXSUeHgaFd_QbtDg-53-YL1D2847-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1701" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/tJfo0oQnTt6fgIAvArOA1w-106-YL1D3619-Edit-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1702" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/eo31FGvTQfaBJ3GJ5D9MGA-68-1_done_cleanlake-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1703" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/atp09ZAYQI2PmVCXagIn-A-0-IMG_0637-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1704" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/atp09ZAYQI2PmVCXagIn-A-1-YL1D3684-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1705" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/JwwOPHbXSUeHgaFd_QbtDg-54-YL1D4250-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1706" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/JwwOPHbXSUeHgaFd_QbtDg-56-YL1D2829-Edit-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1707" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/JwwOPHbXSUeHgaFd_QbtDg-57-IMG_1030-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1711" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/kBGyWjzyQKKovMtt6VGj8g-0-71_done100-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1712" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/kBGyWjzyQKKovMtt6VGj8g-1-YL5_4528-Edit-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1713" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/JwwOPHbXSUeHgaFd_QbtDg-59-YL1D2847-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1714" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/JwwOPHbXSUeHgaFd_QbtDg-60-YL1D3619-Edit-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1715" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/JwwOPHbXSUeHgaFd_QbtDg-61-1_done_cleanlake-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1716" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/kBGyWjzyQKKovMtt6VGj8g-2-IMG_0637-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1717" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/JwwOPHbXSUeHgaFd_QbtDg-62-YL1D3684-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1718" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/JwwOPHbXSUeHgaFd_QbtDg-63-YL1D4250-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1719" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/qMGAMiw4T4Op9sf42ORO6Q-0-YL1D2829-Edit-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1720" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/uDarkehDT5SCTcTuEQ0Wgg-58-1541479064_136295366jpg.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1749" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/dm9h1YfJRAm8oalyxbW6Dw-63-1541479069_136295440jpg.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1750" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/3X-0msb8TTqBDZ6DMEP1hw-69-1541479074_136294950jpg.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1751" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/3X-0msb8TTqBDZ6DMEP1hw-70-1541479079_136294911jpg.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1752" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/v-GHkeGDTA6KWhXmAmhXhg-98-dsc7319-15520332450872103404160.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1753" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/http://pix6.agoda.net/hotelImages/4848611/-1/33ea6f4a48fda60259bced4bfdfe6db3.jpg?s=1024x768" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1754" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/http://pix6.agoda.net/hotelImages/4848611/0/67d02101b93c3311bd3c27e5a6ac4eb1.jpg?s=1024x768" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1755" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/7jf1527062305_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1756" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/crw1527062357_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1757" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/36y1526554979_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1758" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/uz11526554939_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1762" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/krp5mGxnTGqRFemkDVKoTg-39-174514010.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1763" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/vB1AkaPmS2qESpS79Jge6g-99-junior%2520suite.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1764" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://storage.googleapis.com/hms_prod/photo/img/454880XcsbZZ/vct9w7l6qfwdaps9lsossa-2.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1765" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://storage.googleapis.com/hms_prod/photo/img/2685GA/e82ddddad0b84757b01a37b1dcc7fad5.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1766" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/http://pix6.agoda.net/hotelImages/4848611/0/6ef179a53da8d6b00ff7f5e20b73d119.jpg?s=1024x768" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1767" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://storage.googleapis.com/hms_prod/photo/img/2684NQ/136294485.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1768" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/vCT9W7l6QFWdAPS9LSOssA-2.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1769" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/pp91527062376_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1770" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/fny1527062337_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1771" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/ti71527062306_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1775" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/kvj1527062336_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1776" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/http://pix6.agoda.net/hotelImages/4848611/-1/babe3bfd8bcd51305f8157a2553e2c5e.jpg?s=1024x768" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1777" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/2ki1527062304_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1778" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/http://pix6.agoda.net/hotelImages/4848611/-1/7cdbd423c13b65ca89a3acb5ec69f56c.jpg?s=1024x768" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1779" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/iwj1527062336_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1780" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/http://pix6.agoda.net/hotelImages/4848611/-1/df75da2b69c509f0a282cd88861ef660.jpg?s=1024x768" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1781" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/pla1527062306_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1782" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/http://pix6.agoda.net/hotelImages/4848611/-1/fa04aefadbdb0adf971286ab87287862.jpg?s=1024x768" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1783" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/uy91527062336_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1784" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/f5s1527062303_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1788" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/pki1527062272_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1789" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/http://pix6.agoda.net/hotelImages/4848611/-1/f54708602fee80298d81c8305f6c500d.jpg?s=1024x768" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1790" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/ci21527062337_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1791" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/http://pix6.agoda.net/hotelImages/4848611/-1/c7ba8ccd2d4bb2d7849fe1c9c86b42f0.jpg?s=1024x768" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1792" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/ebq1527062354_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1793" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/http://pix6.agoda.net/hotelImages/4848611/-1/1194cead7ff1763169a0c418588afa08.jpg?s=1024x768" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1794" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/h3p1527062376_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1795" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/http://pix6.agoda.net/hotelImages/4848611/-1/2143fd19f193196bfaef56c5053805cc.jpg?s=1024x768" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1796" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/tcq1527062376_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1797" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/wzr1527062375_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1801" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/http://pix6.agoda.net/hotelImages/4848611/-1/fb614d28b02d3df95dbf5f0505edcf8f.jpg?s=1024x768" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1802" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/p4p1527062375_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1803" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/http://pix6.agoda.net/hotelImages/4848611/-1/53a0a1f505c82cc7508394f884bd6500.jpg?s=1024x768" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1804" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/5ms1527062357_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1805" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/yrs1527062356_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1806" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/http://pix6.agoda.net/hotelImages/4848611/-1/7e94e46c31482e0f1d9a546abef42791.jpg?s=1024x768" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1807" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/c4f1527062356_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1808" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/http://pix6.agoda.net/hotelImages/4848611/-1/fb4541c16947283cb5f7283dc2888df5.jpg?s=1024x768" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1809" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/wy91527062355_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1810" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/q0e1527062355_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1814" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/http://pix6.agoda.net/hotelImages/4848611/-1/11daba017872941b8f1640a510ba9955.jpg?s=1024x768" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1815" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/inq1527062272_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1816" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/r3y1527062253_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1817" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/http://pix6.agoda.net/hotelImages/4848611/-1/07d74897bfb19d4bcd6a8ddf61a09927.jpg?s=1024x768" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1818" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/kdj1527062253_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1819" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/http://pix6.agoda.net/hotelImages/4848611/-1/adc20b004946337ac93f02aa4635d8ae.jpg?s=1024x768" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1820" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/amk1526554892_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1821" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/7ye1526554892_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1822" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/z2r1526554878_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1823" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/xyc1526554877_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1827" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/prl1526554877_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1828" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/udb1526554876_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1829" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/rrj1526554876_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1830" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/4mx1526554875_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1831" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/oao1527062304_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1832" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/buq1526554938_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1833" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/nzj1526554980_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1834" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/vvm1526554980_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1835" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/5us1527062252_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1836" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/mu31526554940_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1840" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/9oi1526554940_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1841" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/5kv1526554940_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1842" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/6fp1526554939_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1843" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/lv11526554981_khach_san_melia_bavi_mountain_retreat.jpg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1844" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/tJfo0oQnTt6fgIAvArOA1w-104-Song%2520Da%2520set%2520up%25201-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1845" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/eo31FGvTQfaBJ3GJ5D9MGA-66-IMG_1012-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1846" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/eo31FGvTQfaBJ3GJ5D9MGA-67-YL1D3089-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1847" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/tJfo0oQnTt6fgIAvArOA1w-107-Song%2520Da%2520set%2520up%25201-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1848" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/JwwOPHbXSUeHgaFd_QbtDg-55-IMG_1012-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1849" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/JwwOPHbXSUeHgaFd_QbtDg-58-YL1D4173-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1853" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/33y34DJITGeq61ZCFibn2Q-0-YL1D3089-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1854" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/kBGyWjzyQKKovMtt6VGj8g-3-YL1D4173-min.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1855" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/KLvvoKKZTh_dhmTrzI-i5w-277-173233605.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1856" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/KLvvoKKZTh_dhmTrzI-i5w-278-174508420.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1857" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/gRXW7NYnQJqsmbcL-fZVBQ-65-174508432.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1858" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/gRXW7NYnQJqsmbcL-fZVBQ-66-174508442.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1859" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/kNLENwaFR8ikBHexkZLYIw-34-174513983.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1860" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/krp5mGxnTGqRFemkDVKoTg-38-174514004.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1861" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/kNLENwaFR8ikBHexkZLYIw-35-174514028.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1862" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/KLvvoKKZTh_dhmTrzI-i5w-279-174513998.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1866" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/KLvvoKKZTh_dhmTrzI-i5w-280-174517586.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1867" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/dm9h1YfJRAm8oalyxbW6Dw-62-1541479037_34585795_509272712822638_4269836308479737856_njpg.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1868" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/3X-0msb8TTqBDZ6DMEP1hw-71-15423836979230.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1869" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/v-GHkeGDTA6KWhXmAmhXhg-96-15423836946462.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1870" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/dm9h1YfJRAm8oalyxbW6Dw-65-2.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1871" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/dm9h1YfJRAm8oalyxbW6Dw-64-dsc7483-15520332450791260056109.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1872" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/v-GHkeGDTA6KWhXmAmhXhg-97-ava.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1873" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/3X-0msb8TTqBDZ6DMEP1hw-72-dsc7521-15520332450781099121499.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1874" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/yUV0Q7XNS2qLXjcyWCnuBA-58-dlx3.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1875" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/FaUuGDnkT4yVfZCXF5S3kw-78-dlx6.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1879" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/FaUuGDnkT4yVfZCXF5S3kw-77-dlx.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1880" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/FaUuGDnkT4yVfZCXF5S3kw-79-fam2.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1881" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/yUV0Q7XNS2qLXjcyWCnuBA-59-fam5.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1882" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/FNv1supJTR2M8qqykpVshA-124-fam.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1883" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/FaUuGDnkT4yVfZCXF5S3kw-80-fam76.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1884" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/yUV0Q7XNS2qLXjcyWCnuBA-60-fam7686.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1885" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/FaUuGDnkT4yVfZCXF5S3kw-81-fam58768.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1886" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/FNv1supJTR2M8qqykpVshA-125-fam6.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1887" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/vB1AkaPmS2qESpS79Jge6g-96-fam1.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1888" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/FNv1supJTR2M8qqykpVshA-126-fam5467.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1892" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/vB1AkaPmS2qESpS79Jge6g-97-fam765.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1893" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/vB1AkaPmS2qESpS79Jge6g-98-fam64574.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1894" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/yUV0Q7XNS2qLXjcyWCnuBA-61-junior%2520suite4.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1895" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/FNv1supJTR2M8qqykpVshA-127-junior%2520suite5.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1896" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/yUV0Q7XNS2qLXjcyWCnuBA-62-premium3.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1897" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/vB1AkaPmS2qESpS79Jge6g-100-premium.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1898" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/FNv1supJTR2M8qqykpVshA-128-premium35.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1899" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/FaUuGDnkT4yVfZCXF5S3kw-82-premium1.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1900" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/FaUuGDnkT4yVfZCXF5S3kw-83-premium345.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1901" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/nITF7kH9TI_O94ckDAzKvA-1-Deluxe%25202.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1905" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/O8vtVaZHQqyluVkUokpm9Q-10-Deluxe%25206.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1906" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/umxo0zCATHq2SO_VaPIh_Q-8-Deluxe%25201.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1907" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/TOXbukEfQfenhbNN40ZaSw-19-Deluxe%25205.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1908" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/aU4E-tkzR6W3pgQtVMvPDw-2-Deluxe%25204.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1909" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/H2wKCwBVTV6ikqTLTLsMjA-0-Deluxe%25203.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1910" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/agRjjn84QlilNFkJcv8ZQA-1-Premium%25203.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1911" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/umxo0zCATHq2SO_VaPIh_Q-9-Premium%25202.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1912" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/O8vtVaZHQqyluVkUokpm9Q-11-Premium%25201.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1913" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/H2wKCwBVTV6ikqTLTLsMjA-1-Premium%25205.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1914" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/7QoPB_gzSqqfgBZSvqPklA-151-Premium%25204.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1918" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/O8vtVaZHQqyluVkUokpm9Q-19-Junior%2520Suite%25201.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1919" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/7QoPB_gzSqqfgBZSvqPklA-158-Junior%2520Suite%25202.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1920" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/7QoPB_gzSqqfgBZSvqPklA-159-Junior%2520Suite%25204.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1921" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/O8vtVaZHQqyluVkUokpm9Q-20-Junior%2520Suite%25205.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1922" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/ONNDe9y3QAGK2FImUGWl4A-0-Junior%2520Suite%25203.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1923" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/ONNDe9y3QAGK2FImUGWl4A-1-Junior%2520Suite%25207.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1924" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/7QoPB_gzSqqfgBZSvqPklA-160-Junior%2520Suite%25208.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1925" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=740,height=480/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/ONNDe9y3QAGK2FImUGWl4A-2-Junior%2520Suite%25209.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
+   <div class="MuiBox-root jss1926" style="position: relative;">
+      <div class="jss1682 jss1664" style="border-radius: 0px; overflow: hidden;">
+         <div class="jss1683 jss1686"></div>
+         <img src="https://img.tripi.vn/cdn-cgi/image/width=1480,height=780/https://s3.ap-southeast-1.amazonaws.com/mytourcdn.com/resources/pictures/hotels/10/umxo0zCATHq2SO_VaPIh_Q-19-Junior%2520Suite%25206.jpeg" class="jss1685 jss1664" alt="image" style="display: block;">
+      </div>
+   </div>
 </div>

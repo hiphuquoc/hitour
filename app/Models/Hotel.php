@@ -118,14 +118,22 @@ class Hotel extends Model {
     }
 
     public function contacts(){
-        return $this->hasMany(\App\Models\RelationHotelContact::class, 'hotel_info_id', 'id');
+        return $this->hasMany(\App\Models\HotelContact::class, 'hotel_info_id', 'id');
     }
 
     public function contents(){
         return $this->hasMany(\App\Models\HotelContent::class, 'hotel_info_id', 'id');
     }
 
-    public function facilities(){
-        return $this->hasMany(\App\Models\RelationHotelInfoHotelFacility::class, 'hotel_info_id', 'id');
+    public function questions(){
+        return $this->hasMany(\App\Models\QuestionAnswer::class, 'reference_id', 'id')->where('relation_table', 'hotel_info');
     }
+
+    public function images(){
+        return $this->hasMany(\App\Models\HotelImage::class, 'reference_id', 'id')->where('reference_type', 'hotel_info');
+    }
+
+    // public function facilities(){
+    //     return $this->hasMany(\App\Models\RelationHotelInfoHotelFacility::class, 'hotel_info_id', 'id');
+    // }
 }

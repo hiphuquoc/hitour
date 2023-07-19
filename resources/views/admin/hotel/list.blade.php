@@ -111,7 +111,7 @@
                     dataType    : "html",
                     data        : { id : id }
                 }).done(function(data){
-                    if(data==true) $('#combo_'+id).remove();
+                    if(data==true) $('#hotel_'+id).remove();
                 });
             }
         }

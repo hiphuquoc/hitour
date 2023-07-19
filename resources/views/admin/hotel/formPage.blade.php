@@ -12,7 +12,7 @@
                     <label class="form-label inputRequired" for="title">Tiêu đề Trang</label>
                 </span>
                 <div class="inputWithNumberChacractor_count" data-charactor="title">
-                    {{ !empty($item->name) ? mb_strlen($item->name) : 0 }}
+                    {{ !empty($item['name']) ? mb_strlen($item['name']) : 0 }}
                 </div>
             </div>
             <input type="text" class="form-control" id="title" name="title" value="{{ old('name') ?? $item['name'] ?? '' }}" required>
@@ -28,7 +28,7 @@
                     <label class="form-label" for="description">Mô tả</label>
                 </span>
                 <div class="inputWithNumberChacractor_count" data-charactor="description">
-                    {{ !empty($item->description) ? mb_strlen($item->description) : 0 }}
+                    {{ !empty($item['description']) ? mb_strlen($item['description']) : 0 }}
                 </div>
             </div>
             <textarea class="form-control" id="description"  name="description" rows="5">{{ old('description') ?? $item['description'] ?? '' }}</textarea>
@@ -43,22 +43,6 @@
                 <label class="form-label" for="ordering">Thứ tự</label>
             </span>
             <input type="number" min="0" id="ordering" class="form-control" name="ordering" value="{{ old('ordering') ?? $item->seo['ordering'] ?? '' }}">
-        </div>
-        <!-- One Row -->
-        <div class="formBox_full_item">
-            <label class="form-label inputRequired" for="location">Điểm đến Hotel</label>
-            <select class="select2 form-select select2-hidden-accessible" id="location" name="location">
-                <option value="0">- Lựa chọn -</option>
-                @if(!empty($hotelLocations))
-                    @foreach($hotelLocations as $location)
-                        @php
-                            $selected   = null;
-                            if(!empty($item->location)&&$item->location->id==$location->id) $selected = ' selected';
-                        @endphp
-                        <option value="{{ $location['id'] }}"{{ $selected }}>{{ $location['name'] }}</option>
-                    @endforeach
-                @endif
-            </select>
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">

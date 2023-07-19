@@ -459,6 +459,8 @@ Route::prefix('he-thong')->group(function(){
             Route::post('/update', [AdminHotelInfoController::class, 'update'])->name('admin.hotel.update');
             Route::get('/delete', [AdminHotelInfoController::class, 'delete'])->name('admin.hotel.delete');
             Route::post('/downloadHotelInfo', [AdminHotelInfoController::class, 'downloadHotelInfo'])->name('admin.hotel.downloadHotelInfo');
+            Route::post('/downloadImageHotelInfo', [AdminHotelInfoController::class, 'downloadImageHotelInfo'])->name('admin.hotel.downloadImageHotelInfo');
+            Route::post('/removeImageHotelInfo', [AdminHotelInfoController::class, 'removeImageHotelInfo'])->name('admin.hotel.removeImageHotelInfo');
             /* hotel room */
             Route::post('/loadHotelRoom', [AdminHotelRoomController::class, 'loadHotelRoom'])->name('admin.hotelRoom.loadHotelRoom');
             Route::post('/loadFormHotelRoom', [AdminHotelRoomController::class, 'loadFormHotelRoom'])->name('admin.hotelRoom.loadFormHotelRoom');
