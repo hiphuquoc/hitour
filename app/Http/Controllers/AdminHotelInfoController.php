@@ -93,12 +93,12 @@ class AdminHotelInfoController extends Controller {
             if($request->hasFile('image')) {
                 $dataPath       = Upload::uploadThumnail($request->file('image'), $imageName);
             }
-            /* insert page */
-            $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'hotel_info', $dataPath);
-            $pageId             = Seo::insertItem($insertPage);
             /* insert hotel_info */
             $insertHotelInfo    = $this->BuildInsertUpdateModel->buildArrayTableHotelInfo($request->all(), $pageId);
             $idHotel            = Hotel::insertItem($insertHotelInfo);
+            /* insert page */
+            $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'hotel_info', $dataPath);
+            $pageId             = Seo::insertItem($insertPage);
             /* lưu ảnh vào cơ sở dữ liệu */
             if(!empty($request->get('images'))){
                 self::saveImage($imageName, $idHotel, $request->get('images'), 'hotel_info');
@@ -189,12 +189,12 @@ class AdminHotelInfoController extends Controller {
             if($request->hasFile('image')) {
                 $dataPath       = Upload::uploadThumnail($request->file('image'), $imageName);
             };
-            /* update page */
-            $updatePage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'hotel_info', $dataPath);
-            Seo::updateItem($request->get('seo_id'), $updatePage);
             /* update hotel_info */
             $updateHotelInfo     = $this->BuildInsertUpdateModel->buildArrayTableHotelInfo($request->all(), $request->get('seo_id'));
             Hotel::updateItem($idHotel, $updateHotelInfo);
+            /* update page */
+            $updatePage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'hotel_info', $dataPath);
+            Seo::updateItem($request->get('seo_id'), $updatePage);
             /* lưu ảnh vào cơ sở dữ liệu */
             if(!empty($request->get('images'))){
                 self::saveImage($imageName, $idHotel, $request->get('images'), 'hotel_info');

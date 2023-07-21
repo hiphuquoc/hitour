@@ -1333,10 +1333,14 @@ class BuildInsertUpdateModel {
     }
 
     public static function buildArrayTableHotelInfo($dataForm, $seoId = null){
-        $result     = [];
+        $result         = [];
         if(!empty($dataForm)){
             if(!empty($seoId)) $result['seo_id'] = $seoId;
-            $result['hotel_location_id']    = $dataForm['parent'];
+            $infoHotelLocation  = \App\Models\HotelLocation::select('hotel_location.*')
+                                    ->join('seo', 'seo.id', '=', 'hotel_location.seo_id')
+                                    ->where('seo.id', '=', $dataForm['parent'])
+                                    ->first();
+            $result['hotel_location_id']    = $infoHotelLocation->id;
             $result['name']                 = $dataForm['title'];
             $result['description']          = $dataForm['description'] ?? null;
             $result['code']                 = $dataForm['code'] ?? null;
