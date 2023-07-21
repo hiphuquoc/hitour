@@ -1361,7 +1361,7 @@ class BuildInsertUpdateModel {
             $result['condition']            = $dataForm['condition'] ?? null;
             $result['size']                 = $dataForm['size'];
             $result['number_people']        = $dataForm['number_people'];
-            $result['price']                = $dataForm['price'];
+            $result['price']                = $dataForm['price'] ?? null;
             $result['note']                 = $dataForm['note'] ?? null;
         }
         return $result;

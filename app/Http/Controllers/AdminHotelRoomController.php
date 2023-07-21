@@ -13,7 +13,6 @@ use App\Models\HotelRoomFacility;
 use App\Models\RelationHotelRoomHotelRoomFacility;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\ImageManagerStatic;
 
 // use Goutte\Client;
 // use Symfony\Component\BrowserKit\CookieJar;
@@ -164,7 +163,7 @@ class AdminHotelRoomController extends Controller {
             /* lưu ảnh vào cơ sở dữ liệu */
             if(!empty($dataForm['images'])){
                 $imageName              = \App\Helpers\Charactor::convertStrToUrl($dataForm['name']);
-                self::saveImagesHotelRoom($imageName, $idHotelRoom, $dataForm['images']);
+                AdminHotelInfoController::saveImage($imageName, $idHotelRoom, $dataForm['images'], 'hotel_room');
             }
             /* insert relation_hotel_room_hotel_room_facility */
             if(!empty($dataForm['facilities'])){
@@ -253,18 +252,10 @@ class AdminHotelRoomController extends Controller {
                                 ->with('facilities', 'details', 'images')
                                 ->first();
             /* xóa ảnh trong storage */
-            foreach($infoHotelRoom->images as $image){
-                /* xóa ảnh normal */
-                $imageDelete    = Storage::path($image->image);
-                if(file_exists($imageDelete)) @unlink($imageDelete);
-                /* xóa ảnh small */
-                $imageDelete    = Storage::path($image->image_small);
-                if(file_exists($imageDelete)) @unlink($imageDelete);
-            }
+            foreach($infoHotelRoom->images as $image) self::deleteHotelImage($image->id);
             /* xóa các relation */
             $infoHotelRoom->facilities()->delete();
             $infoHotelRoom->details()->delete();
-            $infoHotelRoom->images()->delete();
             /* xóa hotel room */
             $infoHotelRoom->delete();
             $flag   = true;
@@ -285,19 +276,11 @@ class AdminHotelRoomController extends Controller {
                                 ->where('id', $idHotelRoom)
                                 ->with('facilities', 'details', 'images')
                                 ->first();
-            /* xóa ảnh trong storage */
-            foreach($infoHotelRoom->images as $image){
-                /* xóa ảnh normal */
-                $imageDelete    = Storage::path($image->image);
-                if(file_exists($imageDelete)) @unlink($imageDelete);
-                /* xóa ảnh small */
-                $imageDelete    = Storage::path($image->image_small);
-                if(file_exists($imageDelete)) @unlink($imageDelete);
-            }
+            /* xóa ảnh trong storage và dữ liệu trên database */
+            foreach($infoHotelRoom->images as $image) self::deleteHotelImage($image->id);
             /* xóa các relation */
             $infoHotelRoom->facilities()->delete();
             $infoHotelRoom->details()->delete();
-            $infoHotelRoom->images()->delete();
             /* xóa hotel room */
             $infoHotelRoom->delete();
             $flag   = true;
@@ -310,38 +293,17 @@ class AdminHotelRoomController extends Controller {
         return $flag;
     }
 
-    public static function saveImagesHotelRoom($imageName, $idHotelRoom, $imageUrls, $table = 'hotel_room'){
-        $i      = 0;
-        foreach ($imageUrls as $imageUrl) {
-            /*  folder upload */
-            $folderUpload   = config('admin.images.folderHotel');
-            /* image upload */
-            $extension      = config('admin.images.extension');
-            /* upload ảnh normal */
-            $name           = $imageName.'-'.$i.'-'.time();
-            $filenameNormal = $folderUpload.$name.'.'.$extension;
-            ImageManagerStatic::make($imageUrl)
-                ->encode($extension, config('admin.images.quality'))
-                ->save(Storage::path($filenameNormal));
-            /* upload ảnh small */
-            /* lấy width và height của ảnh truyền vào để tính percenter resize */
-            $imageTmp           = ImageManagerStatic::make($imageUrl);
-            $percentPixel       = $imageTmp->width()/$imageTmp->height();
-            $widthImageSmall    = config('admin.images.smallResize_width');
-            $heightImageSmall   = $widthImageSmall/$percentPixel;
-            $filenameSmall      = $folderUpload.$name.'-small.'.$extension;
-            ImageManagerStatic::make($imageUrl)
-                ->encode($extension, config('admin.images.quality'))
-                ->resize(config('admin.images.smallResize_width'), $heightImageSmall)
-                ->save(Storage::path($filenameSmall));
-            HotelImage::insertItem([
-                'reference_type'    => $table,
-                'reference_id'      => $idHotelRoom,
-                'image'             => $filenameNormal,
-                'image_small'       => $filenameSmall
-            ]);
-            ++$i;
+    public static function deleteHotelImage($idHotelImage = null){
+        $flag               = false;
+        if(!empty($idHotelImage)){
+            $infoHotelImage = HotelImage::select('*')
+                                ->where('id', $idHotelImage)
+                                ->first();
+            /* xóa ảnh trên cloud */
+            $flag           = Storage::disk('gcs')->delete($infoHotelImage->image);
+            if($flag) $infoHotelImage->delete();
         }
+        return $flag;
     }
 
     public function loadHotelRoom(Request $request){

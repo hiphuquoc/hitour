@@ -12,10 +12,20 @@
             <div class="uploadImageBox_box js_readURLsCustom_idWrite" style="position:relative;">
                 @if(!empty($data['images']))
                     @foreach($data['images'] as $image)
+                        @php
+                            $base64Image       = config('admin.images.default_750x460');
+                            $contentImage      = Storage::disk('gcs')->get($image['image']);
+                            if(!empty($contentImage)){
+                                $thumbnail     = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(200, null, function ($constraint) {
+                                    $constraint->aspectRatio();
+                                })->encode();
+                                $base64Image   = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
+                            }
+                        @endphp     
                         <div id="randomIdImage_{{ $loop->index }}" class="uploadImageBox_box_item">
-                            <input type="hidden" name="images[]" value="{{ $image->image_small ?? $image }}" />
-                            <img src="{{ !empty($image->image_small) ? Storage::url($image->image_small) : $image }}">
-                            <div class="uploadImageBox_box_item_icon" onclick="removeUpploadImage('randomIdImage_{{ $loop->index }}');"></div>
+                            <input type="hidden" name="images[]" value="{{ $image->id }}" />
+                            <img src="{{ $base64Image }}">
+                            <div class="uploadImageBox_box_item_icon" onclick="removeUploadImage('randomIdImage_{{ $loop->index }}');"></div>
                         </div>
                     @endforeach
                 @endif
@@ -42,8 +52,8 @@
     </div>
     <!-- One Row -->
     <div class="formBox_full_item">
-        <label class="form-label inputRequired" for="price">Giá phòng /đêm</label>
-        <input type="number" min="0" id="price" class="form-control" name="price" placeholder="0" value="{{ $data['price'] ?? '' }}" required />
+        <label class="form-label" for="price">Giá phòng /đêm</label>
+        <input type="number" min="0" id="price" class="form-control" name="price" placeholder="0" value="{{ $data['price'] ?? '' }}" />
     </div>
     <!-- One Row -->
     <div class="formBox_full_item">
@@ -150,7 +160,21 @@
 <script type="text/javascript">
     $('.select2').select2();
     
-    function removeUpploadImage(idNode){
+    function removeUploadImage(idNode){
+        const node          = $('#'+idNode);
+        let idHotelImage    = node.find('input').val();
+        if(idHotelImage!=''){
+            $.ajax({
+                url         : `/he-thong/hotel/deleteHotelImage/${idHotelImage}`,
+                type        : 'DELETE',
+                data        : {
+                    '_token'        : '{{ csrf_token() }}'
+                },
+                success     : function(data){
+                    /* don't nothing */
+                }
+            });
+        }
         $('#'+idNode).remove();
     }
 </script>

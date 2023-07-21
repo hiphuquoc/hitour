@@ -18,15 +18,19 @@ use App\Models\TourContent;
 use App\Models\TourContentForeign;
 use App\Models\HotelRoomFacility;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic;
 
 use App\Jobs\CheckSeo;
 use App\Models\Redirect;
 
 use Goutte\Client;
+use Illuminate\Support\Facades\File;
 use Symfony\Component\BrowserKit\CookieJar;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\DomCrawler\Crawler;
+
+use Illuminate\Support\Facades\Response;
 
 class HomeController extends Controller {
 
@@ -165,18 +169,15 @@ class HomeController extends Controller {
     }
 
     function readWebPage($url = null) {
-        $data               = view('admin.hotel.room')->render();
-        $crawlerContent     = new Crawler($data);
-
-        /* lấy chính sách khách sạn */
-        $crawlerContent->filter('img')->each(function($node){
-            $filteredUrl = preg_replace('/^http.+(http.*)/', '$1', $node->attr('src'));
-            $filteredUrl = preg_replace('/\?[^\/]+/', '', $filteredUrl);
-            
-            $this->arrayData['images'][] = $filteredUrl;
-        });
-
-        dd($this->arrayData);
+        $disk       = Storage::disk('gcs');
+        $content    = $disk->get('a.jpg');
+        
+        if(!empty($content)){
+            $thumbnail  = ImageManagerStatic::make($content)->resize(500, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->encode();
+            echo '<img src="data:image/jpeg;base64,' . base64_encode($thumbnail) . '">';
+        }
 
     }
     

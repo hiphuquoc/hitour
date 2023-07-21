@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\HotelRequest;
 use App\Jobs\CheckSeo;
+use App\Jobs\DownloadImageToCloudStorage;
 
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
@@ -100,7 +101,7 @@ class AdminHotelInfoController extends Controller {
             $idHotel            = Hotel::insertItem($insertHotelInfo);
             /* lưu ảnh vào cơ sở dữ liệu */
             if(!empty($request->get('images'))){
-                self::saveImagesHotelInfo($imageName, $idHotel, $request->get('images'), 'hotel_info');
+                self::saveImage($imageName, $idHotel, $request->get('images'), 'hotel_info');
             }
             /* insert hotel_content */
             if(!empty($request->get('contents'))){
@@ -196,7 +197,7 @@ class AdminHotelInfoController extends Controller {
             Hotel::updateItem($idHotel, $updateHotelInfo);
             /* lưu ảnh vào cơ sở dữ liệu */
             if(!empty($request->get('images'))){
-                self::saveImagesHotelInfo($imageName, $idHotel, $request->get('images'), 'hotel_info');
+                self::saveImage($imageName, $idHotel, $request->get('images'), 'hotel_info');
             }
             /* update hotel_content */
             HotelContent::select('*')
@@ -303,10 +304,7 @@ class AdminHotelInfoController extends Controller {
                 /* xóa hotel_content */
                 $infoHotel->contents()->delete();
                 /* xóa ảnh phòng */
-                foreach($infoHotel->images as $image){
-                    if(!empty($image->image)&&file_exists(Storage::path($image->image))) @unlink(Storage::path($image->image));
-                    if(!empty($image->image_small)&&file_exists(Storage::path($image->image_small))) @unlink(Storage::path($image->image_small));
-                }
+                foreach($infoHotel->images as $image) Storage::disk('gcs')->delete($image->image);
                 /* xóa hotel_contact */
                 $infoHotel->contacts()->delete();
                 /* xóa relation staff */
@@ -333,19 +331,21 @@ class AdminHotelInfoController extends Controller {
         }
     }
 
-    public function removeImageHotelInfo(Request $request){
-        $flag       = false;
-        if(!empty($request->get('hotel_image_id'))){
-            $infoHotelImage = HotelImage::select('*')
-                                ->where('id', $request->get('hotel_image_id'))
+    public function removeAllImageHotelInfo(Request $request){
+        $flag               = false;
+        if(!empty($request->get('hotel_info_id'))){
+            $hotelInfo    = Hotel::select('*')
+                                ->where('id', $request->get('hotel_info_id'))
+                                ->with('images')
                                 ->first();
             /* xóa trong storage */
-            if(!empty($infoHotelImage->image)&&file_exists(Storage::path($infoHotelImage->image))) @unlink(Storage::path($infoHotelImage->image));
-            if(!empty($infoHotelImage->image_small)&&file_exists(Storage::path($infoHotelImage->image_small))) @unlink(Storage::path($infoHotelImage->image_small));
+            foreach($hotelInfo->images as $image){
+                Storage::disk('gcs')->delete($image->image);
+            }
             /* xóa trong database */
-            $flag   = $infoHotelImage->delete();
+            $flag           = $hotelInfo->images()->delete();
         }
-        echo $flag;
+        echo true;
     }
 
     public function downloadHotelInfo(Request $request){
@@ -457,37 +457,27 @@ class AdminHotelInfoController extends Controller {
         return json_encode($imagesReal);
     }
 
-    public static function saveImagesHotelInfo($imageName, $idHotelRoom, $imageUrls, $table = 'hotel_info'){
-        $i      = 0;
-        foreach ($imageUrls as $imageUrl) {
+    public static function saveImage($imageName, $referenceId, $urlImages, $referenceType = 'hotel_info'){
+        $i                  = 0;
+        foreach ($urlImages as $urlImage) {
             /*  folder upload */
             $folderUpload   = config('admin.images.folderHotel');
-            /* image upload */
-            $extension      = config('admin.images.extension');
             /* upload ảnh normal */
+            $extension      = config('admin.images.extension');
             $name           = $imageName.'-'.$i.'-'.time();
-            $filenameNormal = $folderUpload.$name.'.'.$extension;
-            ImageManagerStatic::make($imageUrl)
-                ->encode($extension, config('admin.images.quality'))
-                ->save(Storage::path($filenameNormal));
-            /* upload ảnh small */
-            // /* lấy width và height của ảnh truyền vào để tính percenter resize */
-            // $imageTmp           = ImageManagerStatic::make($imageUrl);
-            // $percentPixel       = $imageTmp->width()/$imageTmp->height();
-            // $widthImageSmall    = config('admin.images.smallResize_width');
-            // $heightImageSmall   = $widthImageSmall/$percentPixel;
-            // $filenameSmall      = $folderUpload.$name.'-small.'.$extension;
-            // ImageManagerStatic::make($imageUrl)
-            //     ->encode($extension, config('admin.images.quality'))
-            //     ->resize(config('admin.images.smallResize_width'), $heightImageSmall)
-            //     ->save(Storage::path($filenameSmall));
-            HotelImage::insertItem([
-                'reference_type'    => $table,
-                'reference_id'      => $idHotelRoom,
-                'image'             => $filenameNormal,
-                'image_small'       => null
-            ]);
-            ++$i;
+            $fileName       = $folderUpload.$name.'.'.$extension;
+            /* đua vào job */
+            $flag           = DownloadImageToCloudStorage::dispatch($urlImage, $fileName, $extension);
+            /* lưu cơ sở dữ liệu */
+            if($flag){
+                HotelImage::insertItem([
+                    'reference_type'    => $referenceType,
+                    'reference_id'      => $referenceId,
+                    'image'             => $fileName,
+                    'image_small'       => null
+                ]);
+                ++$i;
+            }
         }
     }
 

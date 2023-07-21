@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('condition')->nullable(); /* giường trong phòng - bao gồm ăn sang hay chưa - các điều khoản thanh toán */
             $table->integer('size');
             $table->integer('number_people');
-            $table->integer('price');
+            $table->integer('price')->nullable();
             $table->text('note')->nullable();
         });
     }

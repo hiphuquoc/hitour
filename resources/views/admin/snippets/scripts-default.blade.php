@@ -72,4 +72,16 @@
         const htmlLoadding  = '<div style="display:flex;align-items:center;justify-content:center;height:'+heightBox+'px;width:100%;"><div class="spinner-grow text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div></div>';
         $('#'+idBox).html(htmlLoadding);
     }
+
+    function loaddingFullScreen(){
+        const loadingBox    = $('#loadingBox');
+        const flag          = loadingBox.css('display');
+        if(flag=='none'){
+            loadingBox.css('display', 'flex');
+            $('body').css('overflow', 'hidden');
+        }else {
+            loadingBox.css('display', 'none');
+            $('body').css('overflow', 'auto');
+        }
+    }
 </script>

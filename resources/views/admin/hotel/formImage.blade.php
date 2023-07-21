@@ -9,26 +9,25 @@
     <input class="form-control" type="file" id="gallery" name="gallery[]" onChange="readURLs(this, 'galleryUpload');" multiple />
     <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
     <div id="galleryUpload" class="imageUpload">
-        {{-- @if(!empty($item['images'])&&$type==='edit') --}}
-            @foreach($item['images'] as $image)
-                @if(Storage::path($image['image']))
-                    <div id="imageHotelInfo_{{ $image->id }}">
-                        <img src="{{ Storage::url($image['image_small']) }}" />
-                        <i class="fa-solid fa-circle-xmark" onClick="removeImageHotelInfo('{{ $image['id'] ?? null }}');"></i>
-                        @php
-                            $infoPixel  = getimagesize(Storage::path($image['image']));
-                            $extension  = pathinfo(Storage::path($image['image']))['extension'];
-                            $infoSize   = round(filesize(Storage::path($image['image']))/1024, 2);
-                        @endphp
-                        <div style="margin-top:0.25rem;color:#789;display:flex;justify-content:space-between;">
-                            <span>.{{ $extension }}</span>
-                            <span>{{ $infoPixel[0] }}*{{ $infoPixel[1] }} px</span>
-                            <span>{{ $infoSize }} MB</span>
-                        </div>
-                    </div>
+        @if(!empty($item['images']))
+            <div id="js_removeAllImageHotelInfo_box" style="position:relative;">
+                @php
+                    $imageFirst     = config('admin.images.default_750x460');
+                    $contentImage   = Storage::disk('gcs')->get($item->images[0]->image);
+                    if(!empty($contentImage)){
+                        $thumbnail  = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(200, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        })->encode();
+                        $imageFirst = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
+                    }
+                @endphp
+                <img src="{{ $imageFirst }}" />
+                @if(count($item->images)>1)
+                    <span style="position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);font-size:2rem;color:#fff;font-weight:bold;border-radius:50%;border:3px solid #fff;padding:0.2rem 1rem;background:rgba(0,0,0,0.2);">{{ count($item->images) }}</span>
                 @endif
-            @endforeach
-        {{-- @endif --}}
+                <i class="fa-solid fa-circle-xmark" onclick="removeAllImageHotelInfo();"></i>
+            </div>
+        @endif
     </div>
 </div>
 
@@ -75,17 +74,22 @@
             }
         }
 
-        function removeImageHotelInfo(id){
+        function removeAllImageHotelInfo(){
+            const idHotelInfo = $('#hotel_info_id').val();
+            loaddingFullScreen();
             $.ajax({
-                url         : "{{ route('admin.hotel.removeImageHotelInfo') }}",
+                url         : "{{ route('admin.hotel.removeAllImageHotelInfo') }}",
                 type        : "POST",
                 dataType    : "html",
                 data        : { 
                     '_token'        : '{{ csrf_token() }}',
-                    hotel_image_id  : id
+                    hotel_info_id   : idHotelInfo
                 }
             }).done(function(data){
-                if(data==true) $('#imageHotelInfo_'+id).remove();
+                if(data==true) {
+                    $('#js_removeAllImageHotelInfo_box').remove();
+                    loaddingFullScreen();
+                }
             });
         }
 

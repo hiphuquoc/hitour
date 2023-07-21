@@ -39,7 +39,6 @@
     function downloadHotelRoom(){
         const dataHtml = $('#js_downloadHotelRoom_input').val();
         addLoading('js_downloadHotelRoom_idWrite', 60);
-        // console.log(dataHtml);
         $.ajax({
             url         : '{{ route("admin.hotelRoom.downloadHotelRoom") }}',
             type        : 'post',

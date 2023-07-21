@@ -460,7 +460,7 @@ Route::prefix('he-thong')->group(function(){
             Route::get('/delete', [AdminHotelInfoController::class, 'delete'])->name('admin.hotel.delete');
             Route::post('/downloadHotelInfo', [AdminHotelInfoController::class, 'downloadHotelInfo'])->name('admin.hotel.downloadHotelInfo');
             Route::post('/downloadImageHotelInfo', [AdminHotelInfoController::class, 'downloadImageHotelInfo'])->name('admin.hotel.downloadImageHotelInfo');
-            Route::post('/removeImageHotelInfo', [AdminHotelInfoController::class, 'removeImageHotelInfo'])->name('admin.hotel.removeImageHotelInfo');
+            Route::post('/removeImageHotelInfo', [AdminHotelInfoController::class, 'removeAllImageHotelInfo'])->name('admin.hotel.removeAllImageHotelInfo');
             /* hotel room */
             Route::post('/loadHotelRoom', [AdminHotelRoomController::class, 'loadHotelRoom'])->name('admin.hotelRoom.loadHotelRoom');
             Route::post('/loadFormHotelRoom', [AdminHotelRoomController::class, 'loadFormHotelRoom'])->name('admin.hotelRoom.loadFormHotelRoom');
@@ -468,6 +468,7 @@ Route::prefix('he-thong')->group(function(){
             Route::post('/createRoom', [AdminHotelRoomController::class, 'create'])->name('admin.hotelRoom.createRoom');
             Route::post('/updateRoom', [AdminHotelRoomController::class, 'update'])->name('admin.hotelRoom.updateRoom');
             Route::post('/deleteRoom', [AdminHotelRoomController::class, 'delete'])->name('admin.hotelRoom.deleteRoom');
+            Route::delete('/deleteHotelImage/{idHotelImage}', [AdminHotelRoomController::class, 'deleteHotelImage'])->name('admin.hotelImage.deleteHotelImage');
             /* thông tin liên hệ */
             Route::post('/createContact', [AdminHotelContactController::class, 'create'])->name('admin.hotel.createContact');
             Route::post('/updateContact', [AdminHotelContactController::class, 'update'])->name('admin.hotel.updateContact');

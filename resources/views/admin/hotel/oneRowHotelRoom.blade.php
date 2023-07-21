@@ -1,15 +1,34 @@
 <div id="hotelRoom_{{ $item->id }}" class="hotelRoomBox_item">
     <div class="hotelRoomBox_item_img">
         @foreach($item->images as $image)
-            <img src="{{ Storage::url($image->image_small) }}" />
+            @php
+                $base64Image       = config('admin.images.default_750x460');
+                $contentImage      = Storage::disk('gcs')->get($image['image']);
+                if(!empty($contentImage)){
+                    $thumbnail     = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(200, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })->encode();
+                    $base64Image   = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
+                }
+            @endphp
+            <img src="{{ $base64Image }}" />
         @endforeach
     </div>
     <div class="hotelRoomBox_item_info">
         <div class="hotelRoomBox_item_info_title highLight">{{ $item->name }}</div> 
+        @if(!empty($item->condition))
+            <div class="hotelRoomBox_item_info_desc">{!! $item->condition !!}</div> 
+        @endif
         <div class="hotelRoomBox_item_info_facility">
             @foreach($item->facilities as $facility)
                 <span>{!! !empty($facility->infoHotelRoomFacility->icon)&&!empty($facility->infoHotelRoomFacility->name) ? $facility->infoHotelRoomFacility->icon.$facility->infoHotelRoomFacility->name : null !!}</span>
             @endforeach
+        </div>
+        <div>
+            Số người tối đa: <span class="highLight">{{ $item->number_people }}</span>
+        </div>
+        <div style="font-size:1.2rem;font-weight:bold;color:red;letter-spacing:1px;">
+            {{ !empty($item->price) ? number_format($item->price).' /đêm' : '-' }}
         </div>
     </div>
     <div class="hotelRoomBox_item_action">

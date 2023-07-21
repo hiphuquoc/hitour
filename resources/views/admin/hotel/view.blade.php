@@ -222,9 +222,9 @@
                         <!-- load Ajax -->
                     </div>
                     <div id="js_loadFormModal_footer" class="modal-footer">
-                        {{-- <div id="js_validateFormModalHotelContact_message" class="error" style="display:none;"><!-- Load Ajax --></div>
+                        <div id="js_validateFormModalHotelContact_message" class="error" style="display:none;"><!-- Load Ajax --></div>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Đóng">Đóng</button>
-                        <button type="button" class="btn btn-primary" onClick="addAndUpdateHotelContact();" aria-label="Xác nhận">Xác nhận</button> --}}
+                        <button type="button" class="btn btn-primary" onClick="addAndUpdateHotelContact();" aria-label="Xác nhận">Xác nhận</button>
                     </div>
                 </div>
             </div>
@@ -244,9 +244,9 @@
                         <!-- load Ajax -->
                     </div>
                     <div id="js_loadFormHotelRoom_footer" class="modal-footer">
-                        {{-- <div id="js_validateFormModalHotelRoom_message" class="error" style="display:none;"><!-- Load Ajax --></div>
+                        <div id="js_validateFormModalHotelRoom_message" class="error" style="display:none;"><!-- Load Ajax --></div>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Đóng">Đóng</button>
-                        <button type="button" class="btn btn-primary" onClick="addAndUpdateHotelRoom();" aria-label="Xác nhận">Xác nhận</button> --}}
+                        <button type="button" class="btn btn-primary" onClick="addAndUpdateHotelRoom();" aria-label="Xác nhận">Xác nhận</button>
                     </div>
                 </div>
             </div>
@@ -384,10 +384,12 @@
                 loadFormHotelRoom(0);
             }else {
                 $('#js_loadFormHotelRoom_body').html('Vui lòng tạo và lưu Đối tác trước khi tạo Phòng!');
+                $('#js_loadFormHotelRoom_footer').css('display', 'none');
             }
         }
 
         function loadFormHotelRoom(hotelRoom = 0){
+            addLoading('js_loadFormHotelRoom_body', 100);
             const idHotel       = $('#hotel_info_id').val();
             const type          = '{{ $type }}';
             $.ajax({
@@ -402,12 +404,13 @@
                 success     : function(data){
                     $('#js_loadFormHotelRoom_header').html(data.header);
                     $('#js_loadFormHotelRoom_body').html(data.body);
-                    $('#js_loadFormHotelRoom_footer').html(data.footer);
+                    $('#js_loadFormHotelRoom_footer').css('display', 'flex');
                 }
             });
         }
 
         function loadHotelRoom(){
+            addLoading('js_loadHotelRoom', 60);
             const idHotel       = $('#hotel_info_id').val();
             $.ajax({
                 url         : '{{ route("admin.hotelRoom.loadHotelRoom") }}',
@@ -459,6 +462,7 @@
         }
 
         function loadContactOfHotel(idWrite){
+            addLoading(idWrite, 60);
             $.ajax({
                 url         : '{{ route("admin.hotel.loadContact") }}',
                 type        : 'post',
@@ -480,6 +484,7 @@
                 loadFormHotelContact(0);
             }else {
                 $('#js_loadFormModal_body').html('Vui lòng tạo và lưu Đối tác trước khi tạo Liên hệ!');
+                $('#js_loadFormModal_footer').css('display', 'none');
             }
         }
 
@@ -497,6 +502,7 @@
                 success     : function(data){
                     $('#js_loadFormModal_header').html(data.header);
                     $('#js_loadFormModal_body').html(data.body);
+                    $('#js_loadFormModal_footer').css('display', 'flex');
                 }
             });
         }
@@ -649,19 +655,6 @@
                 })
                 $('#js_validateFormModalHotelRoom_message').css('display', 'block').html(messageError);
             }
-        }
-
-        function loaddingFullScreen(){
-            const loadingBox    = $('#loadingBox');
-            const flag          = loadingBox.css('display');
-            if(flag=='none'){
-                loadingBox.css('display', 'flex');
-                $('body').css('overflow', 'hidden');
-            }else {
-                loadingBox.css('display', 'none');
-                $('body').css('overflow', 'auto');
-            }
-        }
-        
+        }        
     </script>
 @endpush
