@@ -26,6 +26,8 @@ use App\Helpers\Url;
 use App\Models\TourInfoForeign;
 use App\Models\ComboLocation;
 use App\Models\Combo;
+use App\Models\HotelLocation;
+use App\Models\Hotel;
 
 class RoutingController extends Controller {
 
@@ -542,6 +544,25 @@ class RoutingController extends Controller {
                     // $content                = Blade::render(Storage::get(config('admin.storage.contentTour').$item->seo->slug.'.blade.php'));
                     $breadcrumb             = Url::buildBreadcrumb($checkExists->slug_full);
                     $xhtml                  = view('main.combo.index', compact('item', 'breadcrumb', 'related'))->render();
+                }
+                /* ===== HOTEL LOCATION */
+                if($checkExists->type=='hotel_location'){
+                    $flagMatch          = true;
+                    $item               = HotelLocation::select('*')
+                                            ->whereHas('seo', function($query) use($checkExists){
+                                                $query->where('slug', $checkExists->slug);
+                                            })
+                                            ->with(['files' => function($query){
+                                                $query->where('relation_table', 'hotel_location');
+                                            }])
+                                            ->with(['questions' => function($q){
+                                                $q->where('relation_table', 'hotel_location');
+                                            }])
+                                            ->with('seo', 'hotels')
+                                            ->first();
+                    $content            = Blade::render(Storage::get(config('admin.storage.contentHotelLocation').$item->seo->slug.'.blade.php'));
+                    $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full);
+                    $xhtml              = view('main.hotelLocation.index', compact('item', 'content', 'breadcrumb'))->render();
                 }
                 /* Ghi dữ liệu - Xuất kết quả */
                 if($flagMatch==true){

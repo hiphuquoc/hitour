@@ -47,7 +47,7 @@
         </div>
     </td>
     <td style="vertical-align:top;width:210px;">
-        @if(!empty($item->images))
+        @if(!empty($item->images)&&$item->images->isNotEmpty())
             <div style="position:relative;">
                 @php
                     $imageFirst     = config('admin.images.default_750x460');

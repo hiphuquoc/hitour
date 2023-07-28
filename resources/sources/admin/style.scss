@@ -1122,6 +1122,19 @@ html .content {
     }
 }
 
+.commentFormBox {
+    display: flex;
+    flex-direction: column;
+    &_item {
+        width: 100%;
+        background: $bg-02;
+        padding: 1.5rem;
+        &:not(:first-child){
+            margin-top: 1.5rem;
+        }
+    }
+}
+
 // @media print {
 //     *,
 //     *:before,

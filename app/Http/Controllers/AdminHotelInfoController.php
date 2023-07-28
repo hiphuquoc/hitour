@@ -15,6 +15,7 @@ use App\Models\RelationHotelStaff;
 use App\Models\Staff;
 use App\Models\HotelImage;
 use App\Models\Seo;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Cache;
 use App\Services\BuildInsertUpdateModel;
 use Illuminate\Support\Facades\Cookie;
@@ -23,7 +24,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\HotelRequest;
 use App\Jobs\CheckSeo;
 use App\Jobs\DownloadImageToCloudStorage;
-
+use App\Models\HotelFacility;
+use App\Models\RelationHotelInfoHotelFacility;
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -75,13 +77,18 @@ class AdminHotelInfoController extends Controller {
                                 ->with(['files' => function($query){
                                     $query->where('relation_table', 'hotel_info');
                                 }])
-                                ->with('seo', 'contents', 'questions')
+                                ->with('seo', 'facilities', 'contents', 'questions')
                                 ->first();
+        }
+        $facilities         = HotelFacility::all();
+        $content            = null;
+        if(!empty($item->seo->slug)){
+            $content        = Storage::get(config('admin.storage.contentHotelInfo').$item->seo->slug.'.blade.php');
         }
         /* type */
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.hotel.view', compact('item', 'type', 'hotelLocations', 'staffs', 'parents', 'message'));
+        return view('admin.hotel.view', compact('item', 'type', 'hotelLocations', 'staffs', 'parents', 'facilities', 'content', 'message'));
     }
 
     public function create(HotelRequest $request){
@@ -93,12 +100,12 @@ class AdminHotelInfoController extends Controller {
             if($request->hasFile('image')) {
                 $dataPath       = Upload::uploadThumnail($request->file('image'), $imageName);
             }
-            /* insert hotel_info */
-            $insertHotelInfo    = $this->BuildInsertUpdateModel->buildArrayTableHotelInfo($request->all(), $pageId);
-            $idHotel            = Hotel::insertItem($insertHotelInfo);
             /* insert page */
             $insertPage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'hotel_info', $dataPath);
             $pageId             = Seo::insertItem($insertPage);
+            /* insert hotel_info */
+            $insertHotelInfo    = $this->BuildInsertUpdateModel->buildArrayTableHotelInfo($request->all(), $pageId);
+            $idHotel            = Hotel::insertItem($insertHotelInfo);
             /* lưu ảnh vào cơ sở dữ liệu */
             if(!empty($request->get('images'))){
                 self::saveImage($imageName, $idHotel, $request->get('images'), 'hotel_info');
@@ -158,6 +165,25 @@ class AdminHotelInfoController extends Controller {
                     }
                 }
             }
+            /* insert comments */
+            if(!empty($request->get('comments'))){
+                foreach($request->get('comments') as $comment){
+                    $insertComment = $this->BuildInsertUpdateModel->buildArrayTableCommentInfo($comment, $idHotel, 'hotel_info');
+                    Comment::insertItem($insertComment);
+                }
+            }
+            /* lưu content vào file */
+            $content    = $request->get('content') ?? '';
+            Storage::put(config('admin.storage.contentHotelInfo').$request->get('slug').'.blade.php', $request->get('content'));
+            /* insert relation_hotel_info_hotel_facility */
+            if(!empty($request->get('facilities'))){
+                foreach($request->get('facilities') as $idFacility){
+                    RelationHotelInfoHotelFacility::insertItem([
+                        'hotel_info_id'     => $idHotel,
+                        'hotel_facility_id' => $idFacility
+                    ]);
+                }
+            }
             DB::commit();
             /* Message */
             $message        = [
@@ -189,12 +215,12 @@ class AdminHotelInfoController extends Controller {
             if($request->hasFile('image')) {
                 $dataPath       = Upload::uploadThumnail($request->file('image'), $imageName);
             };
-            /* update hotel_info */
-            $updateHotelInfo     = $this->BuildInsertUpdateModel->buildArrayTableHotelInfo($request->all(), $request->get('seo_id'));
-            Hotel::updateItem($idHotel, $updateHotelInfo);
             /* update page */
             $updatePage         = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'hotel_info', $dataPath);
             Seo::updateItem($request->get('seo_id'), $updatePage);
+            /* update hotel_info */
+            $updateHotelInfo     = $this->BuildInsertUpdateModel->buildArrayTableHotelInfo($request->all(), $request->get('seo_id'));
+            Hotel::updateItem($idHotel, $updateHotelInfo);
             /* lưu ảnh vào cơ sở dữ liệu */
             if(!empty($request->get('images'))){
                 self::saveImage($imageName, $idHotel, $request->get('images'), 'hotel_info');
@@ -264,6 +290,32 @@ class AdminHotelInfoController extends Controller {
                     }
                 }
             }
+            /* xóa và insert comments */
+            Comment::select('*')
+                ->where('reference_type', 'hotel_info')
+                ->where('reference_id', $idHotel)
+                ->delete();
+            if(!empty($request->get('comments'))){
+                foreach($request->get('comments') as $comment){
+                    $insertComment = $this->BuildInsertUpdateModel->buildArrayTableCommentInfo($comment, $idHotel, 'hotel_info');
+                    Comment::insertItem($insertComment);
+                }
+            }
+            /* lưu content vào file */
+            $content    = $request->get('content') ?? '';
+            Storage::put(config('admin.storage.contentHotelInfo').$request->get('slug').'.blade.php', $content);
+            /* insert relation_hotel_info_hotel_facility */
+            RelationHotelInfoHotelFacility::select('*')
+                ->where('hotel_info_id', $idHotel)
+                ->delete();
+            if(!empty($request->get('facilities'))){
+                foreach($request->get('facilities') as $idFacility){
+                    RelationHotelInfoHotelFacility::insertItem([
+                        'hotel_info_id'     => $idHotel,
+                        'hotel_facility_id' => $idFacility
+                    ]);
+                }
+            }
             DB::commit();
             /* Message */
             $message        = [
@@ -289,14 +341,14 @@ class AdminHotelInfoController extends Controller {
         if(!empty($request->get('id'))){
             try {
                 DB::beginTransaction();
-                $idHotel     = $request->get('id');
+                $idHotel        = $request->get('id');
                 /* lấy hotel_option (with hotel_price) */
-                $infoHotel   = Hotel::select('*')
+                $infoHotel      = Hotel::select('*')
                                     ->where('id', $idHotel)
                                     ->with(['files' => function($query){
                                         $query->where('relation_table', 'hotel_info');
                                     }])
-                                    ->with('seo', 'images', 'rooms', 'staffs', 'contacts', 'contents', 'questions')
+                                    ->with('seo', 'images', 'rooms', 'staffs', 'contacts', 'contents', 'comments', 'questions')
                                     ->first();
                 /* xóa ảnh đại diện trong thư mục upload */
                 if(!empty($infoHotel->seo->image)&&file_exists(public_path($infoHotel->seo->image))) @unlink(public_path($infoHotel->seo->image));
@@ -318,6 +370,12 @@ class AdminHotelInfoController extends Controller {
                 $infoHotel->files()->delete();
                 /* xóa câu hỏi thường gặp */
                 $infoHotel->questions()->delete();
+                /* xóa content */
+                Storage::delete(config('admin.storage.contentHotelInfo').$infoHotel->seo->slug.'.blade.php');
+                /* xóa comment */
+                $infoHotel->comments()->delete();
+                /* xóa relation_hotel_info_hotel_facility */
+                $infoHotel->facilities()->delete();
                 /* xóa seo */
                 $infoHotel->seo()->delete();
                 /* xóa hotel_info */
@@ -350,85 +408,272 @@ class AdminHotelInfoController extends Controller {
 
     public function downloadHotelInfo(Request $request){
         try {
-            if(!empty($request->get('url_crawler'))){
-                // Tạo đối tượng Client của Goutte
-                $client         = new Client();
-                // Gửi yêu cầu GET đến URL cần lấy dữ liệu
-                $url            = $request->get('url_crawler');
-                $crawlerContent = $client->request('GET', $url);
+            /* ============= Lấy dữ liệu của Mytour */
+            if(!empty($request->get('url_crawler_mytour'))) $this->downloadHotelInfo_mytour($request->get('url_crawler_mytour'));
+            /* ============= Lấy dữ liệu của Tripadvisor */
+            if(!empty($request->get('url_crawler_tripadvisor'))) $this->downloadHotelInfo_tripadvisor($request->get('url_crawler_tripadvisor'));
+            // dd($this->arrayData);
+            // /* truyền biến qua view */
+            // $hotelLocations     = HotelLocation::all();
+            // $staffs             = Staff::all();
+            // $parents            = HotelLocation::select('*')
+            //                         ->with('seo')
+            //                         ->get();
+            $type               = !empty($item) ? 'edit' : 'create';
+            $type               = $request->get('type') ?? $type;
+            $item               = self::convertToCollectionRecursive($this->arrayData);
+            $item->id           = null;
+            $item->seo          = $item['seo'];
+            $item->seo->id      = null;
+            $item->seo->link_canonical = null;
+            $item->company_name = null;
+            $item->address      = null;
+            $item->company_code = null;
+            $item->website      = null;
+            $item->hotline      = null;
+            $item->email        = null;
+            $item->contents     = $item['contents'];
+            $item->questions    = $item['questions'];
 
-                /* lấy url_crawler */
-                $this->arrayData['url_crawler']         = $request->get('url_crawler');
-                /* lấy tên khách sạn */
-                $this->arrayData['name']                = trim($crawlerContent->filter('h1')->text());
-                /* lấy giới thiệu khách sạn */
-                $crawlerContent->filter('#hotel_description > div > div > div')->each(function($node){
-                    $this->arrayData['description'][]   = $node->html();
-                });
-                if(!empty($this->arrayData['description'])){
-                    $this->arrayData['description']     = implode('', $this->arrayData['description']);
-                }else {
-                    $this->arrayData['description']     = null;
+            /* => tiến hành lọc facility nào chưa có trong bảng CSDL thì tạo ra */
+            $tmp                = [];
+            $allFacilities      = HotelFacility::all();
+            foreach($item['tmpFacilities'] as $f){
+                $flag           = false;
+                foreach($allFacilities as $facility){
+                    /* facility này đã có trong cơ sở dữ liệu => lấy id đưa vào mảng */
+                    if($f['name']==$facility->name&&$f['type']==$facility->type){
+                        $flag       =  true;
+                        $tmp[]      = $facility->id;
+                        break;
+                    }
                 }
-                /* lấy tên khách sạn (SEO) */
-                $this->arrayData['seo']['seo_title']    = trim($crawlerContent->filter('head title')->text());
-                /* lấy mô tả khách sạn (SEO) */
-                $crawlerContent->filter('head meta[name=description]')->each(function($node){
-                    $this->arrayData['seo']['seo_description'] = $node->attr('content');
-                });
-                /* tự động slug theo tên */
-                $this->arrayData['seo']['slug']         = \App\Helpers\Charactor::convertStrToUrl($this->arrayData['name']);
+                /* flag = false => facility này chưa có trong cơ sở dữ liệu => insert vào sau đó lấy id đưa vào mảng */
+                if($flag==false){
+                    $idFacility = HotelFacility::insertItem([
+                        'name'          => $f['name'],
+                        'category_name' => $f['category_name'] ?? null,
+                        'icon'          => $f['icon'] ?? null,
+                        'type'          => $f['type'] ?? null,
+                        'highlight'     => $f['highlight'] ?? 0
 
-                /* lấy câu hỏi thường gặp */
-                $this->count            = 0;
-                $crawlerContent->filter('[class^="HotelFAQ_content"] > div h3')->each(function($node){
-                    $this->arrayData['questions'][$this->count]['question']  = trim($node->text());
-                    $this->count    += 1;
-                });
-                $this->count            = 0;
-                $crawlerContent->filter('[class^="HotelFAQ_content"] > div > div')->each(function($node){
-                    $tmp                = trim($node->html());
-                    $tmp                = str_replace(['<p></p>', '<span></span>', '<div></div>', '<li></li>'], '', $tmp);
-                    $this->arrayData['questions'][$this->count]['answer']    = $tmp;
-                    $this->count    += 1;
-                });
-
-                /* lấy chính sách khách sạn */
-                $this->arrayData['contents'][0]['name']     = trim($crawlerContent->filter('#hotel_policy h2')->text());
-                $this->arrayData['contents'][0]['content']  = '<div>'.trim($crawlerContent->filter('#hotel_policy')->html()).'</div>';
-
-                /* random star * rating */
-                $this->arrayData['seo']['rating_aggregate_star']    = '4.'.rand(5,8);
-                $this->arrayData['seo']['rating_aggregate_count']   = rand(100,300);
-                /* lấy dữ liệu trong db truyển đi kèm */
-                $hotelLocations     = HotelLocation::all();
-                $staffs             = Staff::all();
-                $parents            = HotelLocation::select('*')
-                                        ->with('seo')
-                                        ->get();
-                /* type */
-                $type               = !empty($item) ? 'edit' : 'create';
-                $type               = $request->get('type') ?? $type;
-                // $item               = $this->arrayData;
-                $item               = self::convertToCollectionRecursive($this->arrayData);
-                $item->id           = null;
-                $item->seo          = $item['seo'];
-                $item->seo->id      = null;
-                $item->seo->link_canonical = null;
-                $item->company_name = null;
-                $item->address      = null;
-                $item->company_code = null;
-                $item->website      = null;
-                $item->hotline      = null;
-                $item->email        = null;
-                $item->contents     = $item['contents'];
-                $item->questions    = $item['questions'];
-                Cache::put('item_download', $item, 60); // Lưu trữ trong 60 phút
-                return redirect()->route('admin.hotel.view', ['type' => 'create']);
-                // return view('admin.hotel.view', compact('item', 'type', 'hotelLocations', 'staffs', 'parents'));
-            }} catch (\Exception $exception){
-                return redirect()->route('admin.hotel.view');
+                    ]);
+                    $tmp[]     = $idFacility;
+                }
             }
+            $item->facilities   = HotelFacility::select('*')
+                                    ->whereIn('id', $tmp)
+                                    ->get();
+            // Lưu trữ trong 60 phút
+            Cache::put('item_download', $item, 3600); 
+            return redirect()->route('admin.hotel.view', ['type' => 'create']);
+        } catch (\Exception $exception){
+            return redirect()->route('admin.hotel.view', ['type' => 'create']);
+        }
+    }
+
+    public function downloadHotelInfo_mytour($url){
+        $flag               = false;
+        if(!empty($url)){
+            // Tạo đối tượng Client của Goutte
+            $client         = new Client();
+            // Gửi yêu cầu GET đến URL cần lấy dữ liệu
+            $crawlerContent = $client->request('GET', $url);
+            /* lấy url_crawler */
+            $this->arrayData['url_crawler_mytour']  = $url;
+            /* lấy tên khách sạn */
+            $this->arrayData['name']                = trim($crawlerContent->filter('h1')->text());
+            /* lấy giới thiệu khách sạn */
+            $crawlerContent->filter('#hotel_description > div > div > div')->each(function($node){
+                $this->arrayData['content'][]   = $node->html();
+            });
+            if(!empty($this->arrayData['content'])){
+                $this->arrayData['content']     = implode('', $this->arrayData['content']);
+            }else {
+                $this->arrayData['content']     = null;
+            }
+            /* lấy tên khách sạn (SEO) */
+            $this->arrayData['seo']['seo_title']    = trim($crawlerContent->filter('head title')->text());
+            /* lấy mô tả khách sạn (SEO) */
+            $crawlerContent->filter('head meta[name=description]')->each(function($node){
+                $this->arrayData['seo']['seo_description'] = $node->attr('content');
+            });
+            /* tự động slug theo tên */
+            $this->arrayData['seo']['slug']         = \App\Helpers\Charactor::convertStrToUrl($this->arrayData['name']);
+
+            /* lấy câu hỏi thường gặp */
+            $this->count            = 0;
+            $crawlerContent->filter('[class^="HotelFAQ_content"] > div h3')->each(function($node){
+                $this->arrayData['questions'][$this->count]['question']  = trim($node->text());
+                $this->count    += 1;
+            });
+            $this->count            = 0;
+            $crawlerContent->filter('[class^="HotelFAQ_content"] > div > div')->each(function($node){
+                $tmp                = trim($node->html());
+                $tmp                = str_replace(['<p></p>', '<span></span>', '<div></div>', '<li></li>'], '', $tmp);
+                $this->arrayData['questions'][$this->count]['answer']    = $tmp;
+                $this->count    += 1;
+            });
+
+            /* lấy chính sách khách sạn */
+            $this->arrayData['contents'][0]['name']     = trim($crawlerContent->filter('#hotel_policy h2')->text());
+            $this->arrayData['contents'][0]['content']  = '<div>'.trim($crawlerContent->filter('#hotel_policy')->html()).'</div>';
+
+            $flag = true;
+        }
+        return $flag;
+    }
+
+    public function downloadHotelInfo_tripadvisor($url){
+        $flag               = false;
+        if(!empty($url)){
+            // Tạo đối tượng Client của Goutte
+            $client         = new Client();
+            // Gửi yêu cầu GET đến URL cần lấy dữ liệu
+            $crawlerContent = $client->request('GET', $url);
+            $this->arrayData['url_crawler_tripadvisor'] = $url;
+            /* ===== tiện nghi khách sạn */
+            $crawlerContent->filter('.MXlSZ .ssr-init-26f')->each(function($node){
+                $this->arrayData['tmp'][]   = $node->attr('data-ssrev-handlers');
+            });
+            /* lấy tất cả thông tin */
+            $dataFacility                   = [];
+            $this->arrayData['description'] = null;
+            foreach($this->arrayData['tmp'] as $tmp){
+                $tmp                        = json_decode($tmp, true);
+                foreach($tmp['load'] as $t){
+                    if(!empty($t['amenities'])) $dataFacility = $t['amenities'];
+                    if(!empty($t['locationDescription'])) $this->arrayData['description'] = $t['locationDescription'];
+                }
+            }
+            /* build lại mảng */
+            $this->arrayData['tmpFacilities']  = [];
+            if(!empty($dataFacility['highlightedAmenities']['roomFeatures'])) {
+                /* duyệt qua mảng lấy tiện nghi nổi bật -> loại tiện nghi trong phòng */
+                $i      = 0;
+                foreach($dataFacility['highlightedAmenities']['roomFeatures'] as $facility){
+                    if(!empty($facility['amenityNameLocalized'])) $this->arrayData['tmpFacilities'][$i]['name']    = $facility['amenityNameLocalized'];
+                    if(!empty($facility['amenityCategoryName'])) $this->arrayData['tmpFacilities'][$i]['category_name']     = $facility['amenityCategoryName'];
+                    if(!empty($facility['amenityIcon'])) $this->arrayData['tmpFacilities'][$i]['icon']    = $facility['amenityIcon'];
+                    $this->arrayData['tmpFacilities'][$i]['type']      = 'hotel_room_feature';
+                    $this->arrayData['tmpFacilities'][$i]['highligh']  = 1;
+                    ++$i;
+                }
+                /* duyệt qua mảng lấy tiện nghi thường -> loại tiện nghi trong phòng */
+                foreach($dataFacility['nonHighlightedAmenities']['roomFeatures'] as $facility){
+                    if(!empty($facility['amenityNameLocalized'])) $this->arrayData['tmpFacilities'][$i]['name']    = $facility['amenityNameLocalized'];
+                    if(!empty($facility['amenityCategoryName'])) $this->arrayData['tmpFacilities'][$i]['category_name']     = $facility['amenityCategoryName'];
+                    if(!empty($facility['amenityIcon'])) $this->arrayData['tmpFacilities'][$i]['icon']    = $facility['amenityIcon'];
+                    $this->arrayData['tmpFacilities'][$i]['type']      = 'hotel_room_feature';
+                    $this->arrayData['tmpFacilities'][$i]['highligh']  = 0;
+                    ++$i;
+                }
+                /* duyệt qua mảng lấy tiện nghi nổi bật -> loại loại phòng */
+                foreach($dataFacility['highlightedAmenities']['roomTypes'] as $facility){
+                    if(!empty($facility['amenityNameLocalized'])) $this->arrayData['tmpFacilities'][$i]['name']    = $facility['amenityNameLocalized'];
+                    if(!empty($facility['amenityCategoryName'])) $this->arrayData['tmpFacilities'][$i]['category_name']     = $facility['amenityCategoryName'];
+                    if(!empty($facility['amenityIcon'])) $this->arrayData['tmpFacilities'][$i]['icon']    = $facility['amenityIcon'];
+                    $this->arrayData['tmpFacilities'][$i]['type']      = 'hotel_room_type';
+                    $this->arrayData['tmpFacilities'][$i]['highligh']  = 1;
+                    ++$i;
+                }
+                /* duyệt qua mảng lấy tiện nghi thường -> loại loại phòng */
+                foreach($dataFacility['nonHighlightedAmenities']['roomTypes'] as $facility){
+                    if(!empty($facility['amenityNameLocalized'])) $this->arrayData['tmpFacilities'][$i]['name']    = $facility['amenityNameLocalized'];
+                    if(!empty($facility['amenityCategoryName'])) $this->arrayData['tmpFacilities'][$i]['category_name']     = $facility['amenityCategoryName'];
+                    if(!empty($facility['amenityIcon'])) $this->arrayData['tmpFacilities'][$i]['icon']    = $facility['amenityIcon'];
+                    $this->arrayData['tmpFacilities'][$i]['type']      = 'hotel_room_type';
+                    $this->arrayData['tmpFacilities'][$i]['highligh']  = 0;
+                    ++$i;
+                }
+                /* duyệt qua mảng lấy tinh năng nổi bật -> loại tiện nghi chung khách sạn */
+                foreach($dataFacility['highlightedAmenities']['propertyAmenities'] as $facility){
+                    if(!empty($facility['amenityNameLocalized'])) $this->arrayData['tmpFacilities'][$i]['name']    = $facility['amenityNameLocalized'];
+                    if(!empty($facility['amenityCategoryName'])) $this->arrayData['tmpFacilities'][$i]['category_name']     = $facility['amenityCategoryName'];
+                    if(!empty($facility['amenityIcon'])) $this->arrayData['tmpFacilities'][$i]['icon']    = $facility['amenityIcon'];
+                    $this->arrayData['tmpFacilities'][$i]['type']      = 'hotel_info_feature';
+                    $this->arrayData['tmpFacilities'][$i]['highligh']  = 1;
+                    ++$i;
+                }
+                /* duyệt qua mảng lấy tinh năng nổi bật -> loại tiện nghi chung khách sạn */
+                foreach($dataFacility['nonHighlightedAmenities']['propertyAmenities'] as $facility){
+                    if(!empty($facility['amenityNameLocalized'])) $this->arrayData['tmpFacilities'][$i]['name']    = $facility['amenityNameLocalized'];
+                    if(!empty($facility['amenityCategoryName'])) $this->arrayData['tmpFacilities'][$i]['category_name']     = $facility['amenityCategoryName'];
+                    if(!empty($facility['amenityIcon'])) $this->arrayData['tmpFacilities'][$i]['icon']    = $facility['amenityIcon'];
+                    $this->arrayData['tmpFacilities'][$i]['type']      = 'hotel_info_feature';
+                    $this->arrayData['tmpFacilities'][$i]['highligh']  = 0;
+                    ++$i;
+                }
+            }
+            /* đánh giá tổng quan */
+            $crawlerContent->filter('.grdwI')->each(function($node){
+                $this->arrayData['seo']['rating_aggregate_star']     = str_replace(',', '.', $node->filter('.uwJeR')->text());
+                $this->arrayData['seo']['rating_aggregate_text']     = $node->filter('.kkzVG')->text();
+                $this->arrayData['seo']['rating_aggregate_count']    = preg_replace("/[^0-9]/", "", $node->filter('.hkxYU')->text());
+            });
+            /* đánh giá chi tiết */
+            $crawlerContent->filter('.MXlSZ .HXCfp')->each(function($node){
+                $numberClass                                         = preg_replace("/[^0-9]/", '', $node->filter('span')->attr('class')); /* 40 /45 /50 */
+                $this->arrayData['rating_detail'][]                  = $numberClass/10;
+                /*  mảng gồm 4 phần tử:
+                    0 là địa điểm
+                    1 là sự sạch sẽ
+                    2 là dịch vụ
+                    3 là giá trị
+                */
+            });
+            /* comment */
+            $this->getComment_tripadvisor($url, 0, $this->count);
+            $flag = true;
+        }
+        return $flag;
+    }
+
+    private function getComment_tripadvisor($url, $number, $count){
+        try {
+            /* Tạo đối tượng Client của Goutte */
+            $client         = new Client();
+            $everyTime      = 5; /* đây là số comment mặc định trên mỗi trang của tripadvisor */
+            /* Gửi yêu cầu GET đến URL cần lấy dữ liệu */
+            $url            = explode('Reviews', $url);
+            $url            = implode('Reviews-or'.$number, $url);
+            $crawlerContent = $client->request('GET', $url);
+            /* lấy comment */
+            $this->count    = $count;
+            if($crawlerContent->filter('[data-test-target=reviews-tab] .YibKl')->count()>0){
+                $crawlerContent->filter('[data-test-target=reviews-tab] .YibKl')->each(function($node){
+                    /* số sao */
+                    $number         = preg_replace("/[^0-9]/", '', $node->filter('[data-test-target=review-rating] > span')->attr('class'));
+                    $this->arrayData['comments'][$this->count]['rating']        = $number/10;
+                    /* người đánh giá + lúc đánh giá */
+                    $tmp            = $node->filter('.cRVSd')->text();
+                    $tmp            = explode('đã viết đánh giá vào', $tmp);
+                    $authorName     = $tmp[0];
+                    /* xử lý ngày tháng comment */
+                    $chuoiNgayThang = $tmp[1];
+                    $mangChuoi      = explode(" ", $chuoiNgayThang);
+                    $thang          = 0;
+                    $tungay         = array("thg", " ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
+                    $denngay        = array("", "", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
+                    $mangChuoi[1]   = str_replace($tungay, $denngay, strtolower($mangChuoi[1]));
+                    $thang          = (int)$mangChuoi[1];
+                    $this->arrayData['comments'][$this->count]['created_at']    = sprintf("%d-%02d-%02d", (int)$mangChuoi[2], $thang, 01);
+
+                    $this->arrayData['comments'][$this->count]['author_name']   = $authorName;
+                    /* tiêu đề đánh giá */
+                    $this->arrayData['comments'][$this->count]['title']         = $node->filter('.Qwuub')->text();
+                    /* nội dung đánh giá */
+                    $this->arrayData['comments'][$this->count]['comment']       = $node->filter('.fIrGe')->text();
+    
+                    $this->count    += 1;
+                });
+                $this->getComment_tripadvisor($url, ($number + $everyTime), $this->count);
+            }else {
+                return true;
+            }
+        }catch (\Exception $e) {
+            return false;
+        }
     }
 
     public function downloadImageHotelInfo(Request $request){
@@ -481,14 +726,16 @@ class AdminHotelInfoController extends Controller {
         }
     }
 
-    public static function convertToCollectionRecursive($array){
+    public static function convertToCollectionRecursive($array = []){
         $result = [];
 
-        foreach ($array as $key => $value) {
-            if (is_array($value)) {
-                $result[$key] = self::convertToCollectionRecursive($value);
-            } else {
-                $result[$key] = $value;
+        if(!empty($array)){
+            foreach ($array as $key => $value) {
+                if (is_array($value)) {
+                    $result[$key] = self::convertToCollectionRecursive($value);
+                } else {
+                    $result[$key] = $value;
+                }
             }
         }
 

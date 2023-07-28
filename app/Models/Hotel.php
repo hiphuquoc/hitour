@@ -24,7 +24,8 @@ class Hotel extends Model {
         'logo',
         'status_show',
         'status_sidebar',
-        'url_crawler'
+        'url_crawler_mytour',
+        'url_crawler_tripadvisor'
     ];
     public $timestamps      = true;
 
@@ -133,7 +134,11 @@ class Hotel extends Model {
         return $this->hasMany(\App\Models\HotelImage::class, 'reference_id', 'id')->where('reference_type', 'hotel_info');
     }
 
-    // public function facilities(){
-    //     return $this->hasMany(\App\Models\RelationHotelInfoHotelFacility::class, 'hotel_info_id', 'id');
-    // }
+    public function facilities(){
+        return $this->hasMany(\App\Models\RelationHotelInfoHotelFacility::class, 'hotel_info_id', 'id');
+    }
+
+    public function comments(){
+        return $this->hasMany(\App\Models\Comment::class, 'reference_id', 'id')->where('reference_type', 'hotel_info');
+    }
 }

@@ -78,7 +78,7 @@ class HomeController extends Controller {
         echo $xhtml;
     }
 
-    /* ===== Tính năng thay tất cả các ảnh hỗ trợ Loading ===== */
+    /* ===== tiện nghi thay tất cả các ảnh hỗ trợ Loading ===== */
     public static function changeImageInContentWithLoading(){
         $data           = glob(Storage::path('/public/contents').'/*');
         $fileSuccess    = [];
@@ -169,16 +169,50 @@ class HomeController extends Controller {
     }
 
     function readWebPage($url = null) {
-        $disk       = Storage::disk('gcs');
-        $content    = $disk->get('a.jpg');
-        
-        if(!empty($content)){
-            $thumbnail  = ImageManagerStatic::make($content)->resize(500, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })->encode();
-            echo '<img src="data:image/jpeg;base64,' . base64_encode($thumbnail) . '">';
-        }
+        $chuoiNgayThang = "thg 7 2018";
+        // Tách các phần tử trong chuỗi bằng khoảng trắng
+        $mangChuoi      = explode(" ", $chuoiNgayThang);
+        // Xác định tháng dựa trên từ viết tắt
+        $thang          = 0;
+        $tungay         = array("thg", " ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
+        $denngay        = array("", "", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
+        $mangChuoi[1]   = str_replace($tungay, $denngay, strtolower($mangChuoi[1]));
+        $thang          = (int)$mangChuoi[1];
+        // Tạo định dạng ngày tháng
+        $ngayThangPHP = sprintf("%d-%02d-%02d", (int)$mangChuoi[2], $thang, 01);
+    }
 
+    private function getComment($url, $number, $count){
+        if(!empty($url)){
+            // Tạo đối tượng Client của Goutte
+            $client         = new Client();
+            $everyTime      = 5;
+            // Gửi yêu cầu GET đến URL cần lấy dữ liệu
+            $url            = explode('Reviews', $url);
+            $url            = implode('Reviews-or'.$number, $url);
+            $crawlerContent = $client->request('GET', $url);
+            /* lấy comment */
+            $this->count    = $count;
+            if($crawlerContent->filter('[data-test-target=reviews-tab] .YibKl')->count()>0){
+                $crawlerContent->filter('[data-test-target=reviews-tab] .YibKl')->each(function($node){
+                    /* số sao */
+                    $number         = preg_replace("/[^0-9]/", '', $node->filter('[data-test-target=review-rating] > span')->attr('class'));
+                    $this->arrayData['comments'][$this->count]['stars']     = $number/10;
+                    /* người đánh giá + lúc đánh giá */
+                    $this->arrayData['comments'][$this->count]['person']    = $node->filter('.cRVSd')->text();
+                    /* tiêu đề đánh giá */
+                    $this->arrayData['comments'][$this->count]['title']     = $node->filter('.Qwuub')->text();
+                    /* nội dung đánh giá */
+                    $this->arrayData['comments'][$this->count]['content']   = $node->filter('.fIrGe')->text();
+    
+                    $this->count    += 1;
+                });
+                $this->getComment($url, ($number + $everyTime), $this->count);
+            }else {
+                return true;
+            }
+        }
+        return true;
     }
     
 }

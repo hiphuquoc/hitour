@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('relation_hotel_info_hotel_facality', function (Blueprint $table) {
+        Schema::create('relation_hotel_info_hotel_facility', function (Blueprint $table) {
             $table->id();
             $table->integer('hotel_info_id');
-            $table->integer('hotel_facality_id');
+            $table->integer('hotel_facility_id');
         });
     }
 

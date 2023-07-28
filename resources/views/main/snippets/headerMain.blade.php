@@ -40,14 +40,42 @@
         /* biển đảo */
         if($item->island==true) $dataBD[] = $item;
     }
-    /* Tour nước ngoài */
-    $dataTourContinent  = \App\Models\TourContinent::select('*')
-                            ->with('tourCountries', function($query){
-                                $query->whereHas('tours', function($q){
+    // /* Tour nước ngoài */
+    // $dataTourContinent  = \App\Models\TourContinent::select('*')
+    //                         ->with('tourCountries', function($query){
+    //                             $query->whereHas('tours', function($q){
 
-                                });
+    //                             });
+    //                         })
+    //                         ->get();
+    /* khách sạn */
+    $dataHotelLocation  = \App\Models\HotelLocation::select('*')
+                            ->with('hotels', function($query){
+
                             })
                             ->get();
+    $hotelMB            = [];
+    $hotelMT            = [];
+    $hotelMN            = [];
+    $hotelBD            = [];
+    foreach($dataHotelLocation as $item){
+        /* vùng miền */
+        switch($item->region->id){
+            case 1:
+                $hotelMB[]  = $item;
+                break;
+            case 2:
+                $hotelMT[]  = $item;
+                break;
+            case 3:
+                $hotelMN[]  = $item;
+                break;
+            default:
+                break;
+        }
+        /* biển đảo */
+        if($item->island==true) $hotelBD[] = $item;
+    }
     /* Combo du lịch */
     $dataComboLocation  = \App\Models\ComboLocation::select('*')
                             ->whereHas('combos', function($query){
@@ -95,17 +123,18 @@
                     </div>
                     @include('main.snippets.megaMenuTour', compact('dataMB', 'dataMT', 'dataMN', 'dataBD'))
                 </li>
-                <li>
+                {{-- <li>
                     <div>
                         <div>Tour nước ngoài</div>
                     </div>
                     @include('main.snippets.megaMenuTourContinent', compact('dataTourContinent'))
-                </li>
-                {{-- <li>
-                    <div>
-                        <a href="https://www.booking.com" title="Đặt phòng khách sạn" rel="nofollow" style="padding-right:0;">Khách sạn</a>
-                    <div>
                 </li> --}}
+                <li>
+                    <div>
+                        <div>Khách sạn</div>
+                    </div>
+                    @include('main.snippets.megaMenuHotel', compact('hotelMB', 'hotelMT', 'hotelMN', 'hotelBD'))
+                </li>
                 @if(!empty($dataComboLocation)&&$dataComboLocation->isNotEmpty())
                     <li>
                         <div>
@@ -281,7 +310,7 @@
                         <div class="right-icon"></div>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <div>
                         <i class="fas fa-umbrella-beach"></i>
                         Tour nước ngoài
@@ -296,7 +325,7 @@
                         </li>
                     @endforeach
                     </ul>
-                </li>
+                </li> --}}
                 @if(!empty($dataBD))
                     <li>
                         <div>

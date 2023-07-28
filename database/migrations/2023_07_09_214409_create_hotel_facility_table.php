@@ -16,7 +16,10 @@ return new class extends Migration
         Schema::create('hotel_facility', function (Blueprint $table) {
             $table->id();
             $table->text('name');
+            $table->text('category_name')->nullable();
             $table->text('icon')->nullable();
+            $table->text('type')->nullable();
+            $table->boolean('highlight')->default(0);
         });
     }
 

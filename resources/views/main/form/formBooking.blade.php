@@ -15,18 +15,16 @@
 				<div class="show-767"><i class="fa-solid fa-ship"></i>Tàu</div>
 			</div>
 			<div {{ !empty($active)&&$active=='tour' ? 'class=active' : null }} data-tab="tourBookingForm" onClick="changeTab(this);">
-				<div class="hide-767"><i class="fa-solid fa-suitcase-rolling"></i>Tour du lịch</div>
-				<div class="show-767"><i class="fa-solid fa-suitcase-rolling"></i>Tour</div>
+				<div><i class="fa-solid fa-suitcase-rolling"></i>Tour</div>
 			</div>
-			{{-- <div {{ !empty($active)&&$active=='combo' ? 'class=active' : null }} data-tab="comboBookingForm" onClick="changeTab(this);">
+			<div {{ !empty($active)&&$active=='combo' ? 'class=active' : null }} data-tab="comboBookingForm" onClick="changeTab(this);">
 				<div><i class="fa-solid fa-ship"></i>Combo</div>
-			</div> --}}
-			{{-- <div data-tab="hotelBookingForm" onClick="changeTab(this);">
+			</div>
+			<div {{ !empty($active)&&$active=='hotel' ? 'class=active' : null }} data-tab="hotelBookingForm" onClick="changeTab(this);">
 				<i class="fa-solid fa-hotel"></i>Khách sạn
-			</div> --}}
+			</div>
 			<div {{ !empty($active)&&$active=='service' ? 'class=active' : null }} data-tab="ticketBookingForm" onClick="changeTab(this);">
-				<div class="hide-767"><i class="fa-solid fa-ticket"></i>Vé vui chơi</div>
-				<div class="show-767"><i class="fa-solid fa-ticket"></i>Vé vui chơi</div>
+				<div><i class="fa-solid fa-ticket"></i>Vé vui chơi</div>
 			</div>
 		</div>
 		<div class="bookFormSort_body">
@@ -42,12 +40,18 @@
 					@include('main.form.sortBooking.tour', compact('item'))
 				</form>
 			</div>
-			{{-- <!-- Combo booking form -->
+			<!-- Combo booking form -->
 			<div id="comboBookingForm" {{ !empty($active)&&$active!='combo' ? 'style=display:none;' : null }}>
 				<form id="comboBookingSort" method="get" action="{{ route('main.comboBooking.form') }}">
 					@include('main.form.sortBooking.combo', compact('item'))
 				</form>
-			</div> --}}
+			</div>
+			<!-- Combo booking form -->
+			<div id="hotelBookingForm" {{ !empty($active)&&$active!='hotel' ? 'style=display:none;' : null }}>
+				<form id="hotelBookingSort" method="get" action="#">
+					@include('main.form.sortBooking.hotel', compact('item'))
+				</form>
+			</div>
 			<!-- Tour booking form -->
 			<div id="ticketBookingForm" {{ !empty($active)&&$active!='service' ? 'style=display:none;' : null }}>
 				<form id="serviceBookingSort" method="get" action="{{ route('main.serviceBooking.form') }}">

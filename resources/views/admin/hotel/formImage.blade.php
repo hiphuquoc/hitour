@@ -9,7 +9,7 @@
     <input class="form-control" type="file" id="gallery" name="gallery[]" onChange="readURLs(this, 'galleryUpload');" multiple />
     <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
     <div id="galleryUpload" class="imageUpload">
-        @if(!empty($item['images']))
+        @if(!empty($item->images)&&$item->images->isNotEmpty())
             <div id="js_removeAllImageHotelInfo_box" style="position:relative;">
                 @php
                     $imageFirst     = config('admin.images.default_750x460');

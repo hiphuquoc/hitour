@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('hotel_info', function (Blueprint $table) {
-            $table->text('url_crawler')->nullable();
+            $table->text('url_crawler_mytour')->nullable();
+            $table->text('url_crawler_tripadvisor')->nullable();
         });
     }
 

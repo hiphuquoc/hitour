@@ -1352,7 +1352,8 @@ class BuildInsertUpdateModel {
             $result['email']                = $dataForm['email'] ?? null;
             $result['status_show']          = !empty($dataForm['status_show']) ? 1 : 0;
             $result['status_sidebar']       = !empty($dataForm['status_sidebar']) ? 1 : 0;
-            $result['url_crawler']          = $dataForm['url_crawler'] ?? null;
+            $result['url_crawler_mytour']   = $dataForm['url_crawler_mytour'] ?? null;
+            $result['url_crawler_tripadvisor']   = $dataForm['url_crawler_tripadvisor'] ?? null;
         }
         return $result;
     }
@@ -1367,6 +1368,29 @@ class BuildInsertUpdateModel {
             $result['number_people']        = $dataForm['number_people'];
             $result['price']                = $dataForm['price'] ?? null;
             $result['note']                 = $dataForm['note'] ?? null;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableCommentInfo($dataForm, $referenceId, $referenceType){
+        $result     = [];
+        dd();
+        if(!empty($dataForm)&&!empty($referenceId)&&!empty($referenceType)&&!empty($dataForm['title'])){
+            $result['reference_type']       = $referenceType;
+            $result['reference_id']         = $referenceId;
+            $result['title']                = $dataForm['title'];
+            $result['comment']              = $dataForm['comment'] ?? null;
+            $result['author_name']          = $dataForm['author_name'];
+            $result['author_phone']         = $dataForm['author_phone'] ?? null;
+            $result['author_email']         = $dataForm['author_email'] ?? null;
+            $result['rating']               = $dataForm['rating'] ?? 0;
+            $result['rating_for_local']     = $dataForm['rating_for_local'] ?? null;
+            $result['rating_for_clean']     = $dataForm['rating_for_clean'] ?? null;
+            $result['rating_for_service']   = $dataForm['rating_for_service'] ?? null;
+            $result['rating_for_value']     = $dataForm['rating_for_value'] ?? null;
+            if($dataForm['created_at']){
+                $result['created_at']       = date('Y-m-d H:i:s', strtotime($dataForm['created_at']));
+            }
         }
         return $result;
     }
