@@ -1374,8 +1374,7 @@ class BuildInsertUpdateModel {
 
     public static function buildArrayTableCommentInfo($dataForm, $referenceId, $referenceType){
         $result     = [];
-        dd();
-        if(!empty($dataForm)&&!empty($referenceId)&&!empty($referenceType)&&!empty($dataForm['title'])){
+        if(!empty($dataForm)&&!empty($referenceId)&&!empty($referenceType)&&!empty($dataForm['title'])&&!empty($dataForm['author_name'])){
             $result['reference_type']       = $referenceType;
             $result['reference_id']         = $referenceId;
             $result['title']                = $dataForm['title'];
@@ -1388,7 +1387,7 @@ class BuildInsertUpdateModel {
             $result['rating_for_clean']     = $dataForm['rating_for_clean'] ?? null;
             $result['rating_for_service']   = $dataForm['rating_for_service'] ?? null;
             $result['rating_for_value']     = $dataForm['rating_for_value'] ?? null;
-            if($dataForm['created_at']){
+            if($dataForm['created_at']&&$dataForm['created_at']!='1970-01-01'){
                 $result['created_at']       = date('Y-m-d H:i:s', strtotime($dataForm['created_at']));
             }
         }

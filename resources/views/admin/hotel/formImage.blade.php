@@ -4,7 +4,12 @@
         Đây là ảnh dùng làm slider hiển thị ở phần giới thiệu và phần ảnh đẹp của Tour
     ">
         <i class="explainInput" data-feather='alert-circle'></i>
-        <label class="form-label">Ảnh Hotel <span data-bs-toggle="modal" data-bs-target="#formModalDownloadImageHotelInfo" style="color:#26cf8e;font-size:1rem;"><i class="fa-solid fa-download"></i> Tải tự động</span></label>
+        <label class="form-label">
+            Ảnh Hotel 
+            <span data-bs-toggle="modal" data-bs-target="#formModalDownloadImageHotelInfo" onClick="loadFormDownloadImageHotelInfo();" style="color:#26cf8e;font-size:1rem;">
+                <i class="fa-solid fa-download"></i> Tải tự động
+            </span>
+        </label>
     </span>
     <input class="form-control" type="file" id="gallery" name="gallery[]" onChange="readURLs(this, 'galleryUpload');" multiple />
     <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
@@ -34,26 +39,46 @@
 @push('scripts-custom')
     <script type="text/javascript">
 
-        function downloadImageHotelInfo(){
-            const contentImage = $('#content_image').val();
+        function loadFormDownloadImageHotelInfo(){
+            const idHotel       = $('#hotel_info_id').val();
             $.ajax({
-                url         : "{{ route('admin.hotel.downloadImageHotelInfo') }}",
-                type        : "post",
-                dataType    : "json",
-                data        : { 
-                    '_token'        : '{{ csrf_token() }}',
-                    content_image : contentImage
-                }
-            }).done(function(data){
-                console.log(data);
-                for(let i = 0; i<data.length; i++){
-                    var div         = document.createElement("div");
-                    div.innerHTML   = '<img src="'+data[i]+'" />';
-                    div.innerHTML   += '<input type="hidden" name="images[]" value="'+data[i]+'" />';
-                    $('#galleryUpload').append(div);
-                }
-                $('#formModalDownloadImageHotelInfo').modal('hide');
-            });
+                    url         : "{{ route('admin.hotel.loadFormDownloadImageHotelInfo') }}",
+                    type        : "post",
+                    dataType    : "html",
+                    data        : { 
+                        '_token'        : '{{ csrf_token() }}',
+                        hotel_info_id   : idHotel
+                    }
+                }).done(function(data){
+                    $('#js_loadFormDownloadImageHotelInfo_idWrite').html(data);
+                });
+        }
+
+        function downloadImageHotelInfo(){
+            const contentImage  = $('#content_image').val();
+            const idHotel       = $('#hotel_info_id').val();
+            const slug          = $('#slug').val();
+            if(idHotel!=''){
+                $.ajax({
+                    url         : "{{ route('admin.hotel.downloadImageHotelInfo') }}",
+                    type        : "post",
+                    dataType    : "json",
+                    data        : { 
+                        '_token'        : '{{ csrf_token() }}',
+                        content_image   : contentImage,
+                        hotel_info_id   : idHotel,
+                        slug
+                    }
+                }).done(function(data){
+                    for(let i = 0; i<data.length; i++){
+                        var div         = document.createElement("div");
+                        div.innerHTML   = '<img src="'+data[i]+'" />';
+                        div.innerHTML   += '<input type="hidden" name="images[]" value="'+data[i]+'" />';
+                        $('#galleryUpload').append(div);
+                    }
+                    $('#formModalDownloadImageHotelInfo').modal('hide');
+                });
+            }
         }
 
         function readURLs(input, idShow) {

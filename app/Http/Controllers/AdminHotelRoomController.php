@@ -52,19 +52,8 @@ class AdminHotelRoomController extends Controller {
             $data               = $request->get('data');
             // $data               = view('admin.hotel.room')->render();
             $crawlerRoom        = new Crawler($data);
-            /* lấy tiện ích chung phòng - dạng icon */
-            $crawlerRoom->filter('#hprt-ws-lightbox-facilities-mapped > div > div > span')->each(function($node){
-                /* ===== lấy facilities */
-                /* lấy text */
-                $this->arrayData['facilities'][$this->count]['text']                      = $node->text();
-                /* lấy icon */
-                $spanNode   = $node->filter('svg')->getNode(0);
-                $spanDom    = $node->getNode(0)->ownerDocument->saveHTML($spanNode);
-                if(!empty($spanDom)) $this->arrayData['facilities'][$this->count]['icon'] = trim($spanDom);
-                $this->count += 1;
-            });
             /* lấy hình ảnh phòng */
-            $crawlerRoom->filter('.hprt-lightbox-gallery img')->each(function($node){
+            $crawlerRoom->filter('.slick-track img')->each(function($node){
                 if(!empty($node->attr('src'))) {
                     $this->arrayData['images'][]   = $node->attr('src');
                 }else if(!empty($node->attr('data-lazy'))){
@@ -116,7 +105,6 @@ class AdminHotelRoomController extends Controller {
                 $this->arrayData['tmp'][$this->count]['icon'] = trim($spanDom);
                 $this->count    += 1;
             });
-            
             /* => tiến hành lọc qua xem nào chưa có trong bảng CSDL thì tạo ra */
             $allRoomFacilities  = HotelRoomFacility::all();
             foreach($this->arrayData['tmp'] as $r){
@@ -138,6 +126,7 @@ class AdminHotelRoomController extends Controller {
                     $this->arrayData['facilities'][]     = $idRoomFacility;
                 }
             }
+            
             $this->arrayData['facilities'] = HotelRoomFacility::select('*')
                                                 ->whereIn('id', $this->arrayData['facilities'])
                                                 ->get();

@@ -33,7 +33,7 @@
             </span>
             {{ $item->seo->seo_title }}
         </div>
-        <div class="oneLine">
+        <div class="oneLine maxLine_2">
             <span class="tableHighLight">
                 Mô tả SEO: (<span class="highLight_500">{{ mb_strlen($item->seo->seo_description) }}</span>)
             </span>
@@ -66,31 +66,6 @@
             </div>
         @endif
     </td>
-    {{-- <td style="vertical-align:top;width:210px;">
-        @php
-            if(!empty($item->files)){
-                $slider        = [];
-                foreach($item->files as $file){
-                    if($file->file_type==='slider') $slider[]  = $file;
-                }
-            }
-        @endphp
-        @if(!empty($slider))
-            <div style="position:relative;">
-                @foreach($slider as $s)
-                    @if($loop->index<3)
-                        <div class="oneLine">
-                            <img src="{{ $s->file_path }}" style="width:210px;border-radius:0;" />
-                        </div>
-                    @endif
-                @endforeach
-                @if(count($slider)>3)
-                    <span style="position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);font-size:2rem;color:#fff;font-weight:bold;border-radius:50%;border:3px solid #fff;padding:0.2rem 1rem;background:rgba(0,0,0,0.2);">{{ count($slider) }}</span>
-                @endif
-            </div>
-        @endif
-
-    </td> --}}
     <td style="vertical-align:top;">
         <div class="oneLine">
             Đánh giá:
@@ -112,9 +87,14 @@
                 @endforeach
             </div>
         @endif
+        @if(!empty($item->rooms))
+            <div class="oneLine">
+                Loại phòng: <div class="badge bg-primary" style="margin-left:0.25rem">{{ $item->rooms->count() }}</div>
+            </div>
+        @endif
         @if(!empty($item->staffs))
             <div class="oneLine">
-                Nhân viên:<br/>
+                Hỗ trợ: 
                 @foreach($item->staffs as $staff)
                     <div class="badge bg-primary" {{ $loop->index>0 ? 'style=margin-left:0.25rem' : null }}>{{ $staff->infoStaff['prefix_name'] }}. {{ $staff->infoStaff['lastname'] }}</div>
                 @endforeach

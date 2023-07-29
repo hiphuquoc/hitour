@@ -22,7 +22,7 @@
             </span>
             {{ $item->seo->seo_title }}
         </div>
-        <div class="oneLine">
+        <div class="oneLine maxLine_2">
             <span class="tableHighLight">
                 Mô tả SEO: (<span class="highLight_500">{{ mb_strlen($item->seo->seo_description) }}</span>)
             </span>

@@ -12,21 +12,31 @@
             <div class="uploadImageBox_box js_readURLsCustom_idWrite" style="position:relative;">
                 @if(!empty($data['images']))
                     @foreach($data['images'] as $image)
-                        @php
-                            $base64Image       = config('admin.images.default_750x460');
-                            $contentImage      = Storage::disk('gcs')->get($image['image']);
-                            if(!empty($contentImage)){
-                                $thumbnail     = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(200, null, function ($constraint) {
-                                    $constraint->aspectRatio();
-                                })->encode();
-                                $base64Image   = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
-                            }
-                        @endphp     
-                        <div id="randomIdImage_{{ $loop->index }}" class="uploadImageBox_box_item">
-                            <input type="hidden" name="images[]" value="{{ $image->id }}" />
-                            <img src="{{ $base64Image }}">
-                            <div class="uploadImageBox_box_item_icon" onclick="removeUploadImage('randomIdImage_{{ $loop->index }}');"></div>
-                        </div>
+                        @if(!empty($image->id))
+                            @php
+                                $base64Image       = config('admin.images.default_750x460');
+                                $contentImage      = Storage::disk('gcs')->get($image['image']);
+                                if(!empty($contentImage)){
+                                    $thumbnail     = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(200, null, function ($constraint) {
+                                        $constraint->aspectRatio();
+                                    })->encode();
+                                    $base64Image   = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
+                                }
+                            @endphp     
+                            <div id="randomIdImage_{{ $loop->index }}" class="uploadImageBox_box_item">
+                                <input type="hidden" name="images[]" value="{{ $image->id }}" />
+                                <img src="{{ $base64Image }}">
+                                <div class="uploadImageBox_box_item_icon" onclick="removeUploadImage('randomIdImage_{{ $loop->index }}');"></div>
+                            </div>
+                        @else 
+                            <div id="randomIdImage_{{ $loop->index }}" class="uploadImageBox_box_item">
+                                <input type="hidden" name="images[]" value="{{ $image }}" />
+                                <img src="{{ $image }}">
+                                <div class="uploadImageBox_box_item_icon" onclick="removeUploadImage('randomIdImage_{{ $loop->index }}');"></div>
+                            </div>
+                        @endif 
+
+                        
                     @endforeach
                 @endif
             </div>

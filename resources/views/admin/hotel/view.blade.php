@@ -115,7 +115,7 @@
                             </div>
                             <div class="card-body">
                                 @include('admin.form.formContent', [
-                                    'content'   => old('content') ?? $item['content'] ?? null
+                                    'content'   => old('content') ?? $item['content'] ?? $content ?? null
                                 ])
                             </div>
                         </div>
@@ -197,20 +197,8 @@
     @csrf
         <div class="modal fade" id="formModalDownloadImageHotelInfo" tabindex="-1" aria-labelledby="addNewCardTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content" style="min-width:600px;">
-                    <div class="modal-header bg-transparent">
-                        <h4>Tải tự động ảnh khách sạn</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <label class="form-label" for="content_image">Thẻ html chứa đường dẫn ảnh (Mytour)</label>
-                        <textarea class="form-control" id="content_image"  name="content_image" rows="2">{{ $item['content_image'] ?? null }}</textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <div id="js_validateFormModalHotelContact_message" class="error" style="display:none;"><!-- Load Ajax --></div>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Đóng">Đóng</button>
-                        <button type="button" class="btn btn-primary" aria-label="Xác nhận" onClick="downloadImageHotelInfo();">Xác nhận</button>
-                    </div>
+                <div id="js_loadFormDownloadImageHotelInfo_idWrite" class="modal-content" style="min-width:600px;">
+                    <!-- Ajax -->
                 </div>
             </div>
         </div>
@@ -644,7 +632,6 @@
                                 /* thất bại */
                                 showMessage('js_showMessageHotelRoom', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
                             }
-                            loaddingFullScreen();
                             $('#formModalHotelRoom').modal('hide');
                         }
                     });
@@ -668,7 +655,6 @@
                                 /* thất bại */
                                 showMessage('js_showMessageHotelRoom', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
                             }
-                            loaddingFullScreen();
                             $('#formModalHotelRoom').modal('hide');
                         }
                     });
@@ -696,6 +682,7 @@
                 })
                 $('#js_validateFormModalHotelRoom_message').css('display', 'block').html(messageError);
             }
+            loaddingFullScreen();
         }        
     </script>
 @endpush

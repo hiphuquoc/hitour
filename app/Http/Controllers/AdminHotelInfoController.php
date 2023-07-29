@@ -173,8 +173,7 @@ class AdminHotelInfoController extends Controller {
                 }
             }
             /* lưu content vào file */
-            $content    = $request->get('content') ?? '';
-            Storage::put(config('admin.storage.contentHotelInfo').$request->get('slug').'.blade.php', $request->get('content'));
+            if(!empty($request->get('content'))) Storage::put(config('admin.storage.contentHotelInfo').$request->get('slug').'.blade.php', $request->get('content'));
             /* insert relation_hotel_info_hotel_facility */
             if(!empty($request->get('facilities'))){
                 foreach($request->get('facilities') as $idFacility){
@@ -302,8 +301,11 @@ class AdminHotelInfoController extends Controller {
                 }
             }
             /* lưu content vào file */
-            $content    = $request->get('content') ?? '';
-            Storage::put(config('admin.storage.contentHotelInfo').$request->get('slug').'.blade.php', $content);
+            if(!empty($request->get('content'))){
+                Storage::put(config('admin.storage.contentHotelInfo').$request->get('slug').'.blade.php', $request->get('content'));
+            }else {
+                Storage::delete(config('admin.storage.contentHotelInfo').$request->get('slug').'.blade.php');
+            }
             /* insert relation_hotel_info_hotel_facility */
             RelationHotelInfoHotelFacility::select('*')
                 ->where('hotel_info_id', $idHotel)
@@ -676,8 +678,15 @@ class AdminHotelInfoController extends Controller {
         }
     }
 
+    public function loadFormDownloadImageHotelInfo(Request $request){
+        $idHotel    = $request->get('hotel_info_id') ?? null;
+        $result     = view('admin.hotel.formDownloadImage', compact('idHotel'))->render();
+        echo $result;
+    }
+
     public function downloadImageHotelInfo(Request $request){
-        if(!empty($request->get('content_image'))){
+        $imagesReal             = [];
+        if(!empty($request->get('content_image'))&&!empty($request->get('hotel_info_id'))){
             $data               = $request->get('content_image');
             $crawlerContent     = new Crawler($data);
     
@@ -688,13 +697,13 @@ class AdminHotelInfoController extends Controller {
                 
                 $this->arrayData['images'][] = $filteredUrl;
             });
-
             /* duyệt qua để lọc bỏ đường dẫn không phải ảnh */
             $allowedExtensions  = ['png', 'jpg', 'jpeg'];
-            $imagesReal         = [];
+            $fileName       = $request->get('slug') ?? \App\Helpers\Charactor::randomString(20);
             foreach($this->arrayData['images'] as $image){
-                $extension = pathinfo($image, PATHINFO_EXTENSION);
+                $extension  = pathinfo($image, PATHINFO_EXTENSION);
                 if (in_array($extension, $allowedExtensions)) {
+                    self::saveImage($fileName, $request->get('hotel_info_id'), [$image], 'hotel_info');
                     $imagesReal[] = $image;
                 }
             }

@@ -1062,10 +1062,10 @@ html .content {
             display: flex;
             flex-wrap: wrap;
             min-width: 400px;
-            align-items: flex-start;
-            // background: $bg-03;
+            align-items: stretch;
             img {
                 width: 25%;
+                object-fit: cover;
             }
         }
         &_action {
@@ -1133,6 +1133,28 @@ html .content {
             margin-top: 1.5rem;
         }
     }
+}
+
+.maxLine_1, .maxLine_2, .maxLine_3, .maxLine_4, .maxLine_5 {
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
+}
+.maxLine_1 {
+	-webkit-line-clamp: 1;
+}
+.maxLine_2 {
+	-webkit-line-clamp: 2;
+}
+.maxLine_3 {
+	-webkit-line-clamp: 3;
+}
+.maxLine_4 {
+	-webkit-line-clamp: 4;
+}
+.maxLine_5 {
+	-webkit-line-clamp: 5;
 }
 
 // @media print {
