@@ -169,17 +169,7 @@ class HomeController extends Controller {
     }
 
     function readWebPage($url = null) {
-        $chuoiNgayThang = "thg 7 2018";
-        // Tách các phần tử trong chuỗi bằng khoảng trắng
-        $mangChuoi      = explode(" ", $chuoiNgayThang);
-        // Xác định tháng dựa trên từ viết tắt
-        $thang          = 0;
-        $tungay         = array("thg", " ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
-        $denngay        = array("", "", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
-        $mangChuoi[1]   = str_replace($tungay, $denngay, strtolower($mangChuoi[1]));
-        $thang          = (int)$mangChuoi[1];
-        // Tạo định dạng ngày tháng
-        $ngayThangPHP = sprintf("%d-%02d-%02d", (int)$mangChuoi[2], $thang, 01);
+        \App\Jobs\DownloadCommentHotelInfo::dispatch(35, 0);
     }
 
     private function getComment($url, $number, $count){

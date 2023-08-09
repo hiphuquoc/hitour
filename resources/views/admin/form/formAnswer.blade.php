@@ -30,31 +30,32 @@
                     </div>
                 </div>
                 @endforeach
-            @else 
-                <div class="flexBox" style="flex-wrap:unset;align-items:flex-start;" data-repeater-item>
-                    <div class="flexBox_item">
-                        <!-- One Row -->
-                        <div class="formBox_full_item">
-                            <div class="flexBox" style="justify-content:space-between;">
-                                <label class="form-label">Câu hỏi</label>
-                            </div>
-                            <textarea class="form-control" name="question" rows="3">{{ null }}</textarea>
+            @endif
+
+            <div class="flexBox" style="flex-wrap:unset;align-items:flex-start;" data-repeater-item>
+                <div class="flexBox_item">
+                    <!-- One Row -->
+                    <div class="formBox_full_item">
+                        <div class="flexBox" style="justify-content:space-between;">
+                            <label class="form-label">Câu hỏi</label>
                         </div>
-                    </div>
-                    <div class="flexBox_item">
-                        <!-- One Row -->
-                        <div class="formBox_full_item">
-                            <div class="flexBox" style="justify-content:space-between;">
-                                <label class="form-label">Trả lời</label>
-                            </div>
-                            <textarea class="form-control" name="answer" rows="3">{{ null }}</textarea>
-                        </div>
-                    </div>
-                    <div class="flexBox_item btnRemoveRepeater" style="align-self:center;" data-repeater-delete>
-                        <i class="fa-solid fa-xmark"></i>
+                        <textarea class="form-control" name="question" rows="3">{{ null }}</textarea>
                     </div>
                 </div>
-            @endif
+                <div class="flexBox_item">
+                    <!-- One Row -->
+                    <div class="formBox_full_item">
+                        <div class="flexBox" style="justify-content:space-between;">
+                            <label class="form-label">Trả lời</label>
+                        </div>
+                        <textarea class="form-control" name="answer" rows="3">{{ null }}</textarea>
+                    </div>
+                </div>
+                <div class="flexBox_item btnRemoveRepeater" style="align-self:center;" data-repeater-delete>
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+            
         </div>
         <div style="margin-top:1.2rem;text-align:right;"> 
             <button class="btn btn-icon btn-primary waves-effect waves-float waves-light" type="button" aria-label="Thêm" data-repeater-create>

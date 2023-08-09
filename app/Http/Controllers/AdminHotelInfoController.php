@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\HotelRequest;
 use App\Jobs\CheckSeo;
+use App\Jobs\DownloadCommentHotelInfo;
 use App\Jobs\DownloadImageToCloudStorage;
 use App\Models\HotelFacility;
 use App\Models\RelationHotelInfoHotelFacility;
@@ -165,7 +166,9 @@ class AdminHotelInfoController extends Controller {
                     }
                 }
             }
-            /* insert comments */
+            /* insert comments => tải từ tripadvisor */
+            DownloadCommentHotelInfo::dispatch($idHotel, 0);
+            /* insert comments => tử nhập */
             if(!empty($request->get('comments'))){
                 foreach($request->get('comments') as $comment){
                     $insertComment = $this->BuildInsertUpdateModel->buildArrayTableCommentInfo($comment, $idHotel, 'hotel_info');
@@ -289,17 +292,7 @@ class AdminHotelInfoController extends Controller {
                     }
                 }
             }
-            /* xóa và insert comments */
-            Comment::select('*')
-                ->where('reference_type', 'hotel_info')
-                ->where('reference_id', $idHotel)
-                ->delete();
-            if(!empty($request->get('comments'))){
-                foreach($request->get('comments') as $comment){
-                    $insertComment = $this->BuildInsertUpdateModel->buildArrayTableCommentInfo($comment, $idHotel, 'hotel_info');
-                    Comment::insertItem($insertComment);
-                }
-            }
+            /* xóa và insert comments => xử lý riêng ở một controller khác (giảm tải) */
             /* lưu content vào file */
             if(!empty($request->get('content'))){
                 Storage::put(config('admin.storage.contentHotelInfo').$request->get('slug').'.blade.php', $request->get('content'));
@@ -624,59 +617,59 @@ class AdminHotelInfoController extends Controller {
                     3 là giá trị
                 */
             });
-            /* comment */
-            $this->getComment_tripadvisor($url, 0, $this->count);
+            /* comment => tải bằng job khi tạo khách sạn mới */
+            // $this->getComment_tripadvisor($url, 0, $this->count);
             $flag = true;
         }
         return $flag;
     }
 
-    private function getComment_tripadvisor($url, $number, $count){
-        try {
-            /* Tạo đối tượng Client của Goutte */
-            $client         = new Client();
-            $everyTime      = 5; /* đây là số comment mặc định trên mỗi trang của tripadvisor */
-            /* Gửi yêu cầu GET đến URL cần lấy dữ liệu */
-            $url            = explode('Reviews', $url);
-            $url            = implode('Reviews-or'.$number, $url);
-            $crawlerContent = $client->request('GET', $url);
-            /* lấy comment */
-            $this->count    = $count;
-            if($crawlerContent->filter('[data-test-target=reviews-tab] .YibKl')->count()>0){
-                $crawlerContent->filter('[data-test-target=reviews-tab] .YibKl')->each(function($node){
-                    /* số sao */
-                    $number         = preg_replace("/[^0-9]/", '', $node->filter('[data-test-target=review-rating] > span')->attr('class'));
-                    $this->arrayData['comments'][$this->count]['rating']        = $number/10;
-                    /* người đánh giá + lúc đánh giá */
-                    $tmp            = $node->filter('.cRVSd')->text();
-                    $tmp            = explode('đã viết đánh giá vào', $tmp);
-                    $authorName     = $tmp[0];
-                    /* xử lý ngày tháng comment */
-                    $chuoiNgayThang = $tmp[1];
-                    $mangChuoi      = explode(" ", $chuoiNgayThang);
-                    $thang          = 0;
-                    $tungay         = array("thg", " ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
-                    $denngay        = array("", "", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
-                    $mangChuoi[1]   = str_replace($tungay, $denngay, strtolower($mangChuoi[1]));
-                    $thang          = (int)$mangChuoi[1];
-                    $this->arrayData['comments'][$this->count]['created_at']    = sprintf("%d-%02d-%02d", (int)$mangChuoi[2], $thang, 01);
+    // private function getComment_tripadvisor($url, $number, $count){
+    //     try {
+    //         /* Tạo đối tượng Client của Goutte */
+    //         $client         = new Client();
+    //         $everyTime      = 5; /* đây là số comment mặc định trên mỗi trang của tripadvisor */
+    //         /* Gửi yêu cầu GET đến URL cần lấy dữ liệu */
+    //         $url            = explode('Reviews', $url);
+    //         $url            = implode('Reviews-or'.$number, $url);
+    //         $crawlerContent = $client->request('GET', $url);
+    //         /* lấy comment */
+    //         $this->count    = $count;
+    //         if($crawlerContent->filter('[data-test-target=reviews-tab] .YibKl')->count()>0){
+    //             $crawlerContent->filter('[data-test-target=reviews-tab] .YibKl')->each(function($node){
+    //                 /* số sao */
+    //                 $number         = preg_replace("/[^0-9]/", '', $node->filter('[data-test-target=review-rating] > span')->attr('class'));
+    //                 $this->arrayData['comments'][$this->count]['rating']        = $number/10;
+    //                 /* người đánh giá + lúc đánh giá */
+    //                 $tmp            = $node->filter('.cRVSd')->text();
+    //                 $tmp            = explode('đã viết đánh giá vào', $tmp);
+    //                 $authorName     = $tmp[0];
+    //                 /* xử lý ngày tháng comment */
+    //                 $chuoiNgayThang = $tmp[1];
+    //                 $mangChuoi      = explode(" ", $chuoiNgayThang);
+    //                 $thang          = 0;
+    //                 $tungay         = array("thg", " ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
+    //                 $denngay        = array("", "", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
+    //                 $mangChuoi[1]   = str_replace($tungay, $denngay, strtolower($mangChuoi[1]));
+    //                 $thang          = (int)$mangChuoi[1];
+    //                 $this->arrayData['comments'][$this->count]['created_at']    = sprintf("%d-%02d-%02d", (int)$mangChuoi[2], $thang, 01);
 
-                    $this->arrayData['comments'][$this->count]['author_name']   = $authorName;
-                    /* tiêu đề đánh giá */
-                    $this->arrayData['comments'][$this->count]['title']         = $node->filter('.Qwuub')->text();
-                    /* nội dung đánh giá */
-                    $this->arrayData['comments'][$this->count]['comment']       = $node->filter('.fIrGe')->text();
+    //                 $this->arrayData['comments'][$this->count]['author_name']   = $authorName;
+    //                 /* tiêu đề đánh giá */
+    //                 $this->arrayData['comments'][$this->count]['title']         = $node->filter('.Qwuub')->text();
+    //                 /* nội dung đánh giá */
+    //                 $this->arrayData['comments'][$this->count]['comment']       = $node->filter('.fIrGe')->text();
     
-                    $this->count    += 1;
-                });
-                $this->getComment_tripadvisor($url, ($number + $everyTime), $this->count);
-            }else {
-                return true;
-            }
-        }catch (\Exception $e) {
-            return false;
-        }
-    }
+    //                 $this->count    += 1;
+    //             });
+    //             $this->getComment_tripadvisor($url, ($number + $everyTime), $this->count);
+    //         }else {
+    //             return true;
+    //         }
+    //     }catch (\Exception $e) {
+    //         return false;
+    //     }
+    // }
 
     public function loadFormDownloadImageHotelInfo(Request $request){
         $idHotel    = $request->get('hotel_info_id') ?? null;
@@ -697,16 +690,9 @@ class AdminHotelInfoController extends Controller {
                 
                 $this->arrayData['images'][] = $filteredUrl;
             });
-            /* duyệt qua để lọc bỏ đường dẫn không phải ảnh */
-            $allowedExtensions  = ['png', 'jpg', 'jpeg'];
+            /* upload ảnh */
             $fileName       = $request->get('slug') ?? \App\Helpers\Charactor::randomString(20);
-            foreach($this->arrayData['images'] as $image){
-                $extension  = pathinfo($image, PATHINFO_EXTENSION);
-                if (in_array($extension, $allowedExtensions)) {
-                    self::saveImage($fileName, $request->get('hotel_info_id'), [$image], 'hotel_info');
-                    $imagesReal[] = $image;
-                }
-            }
+            self::saveImage($fileName, $request->get('hotel_info_id'), $this->arrayData['images'], 'hotel_info');
         }
         return json_encode($imagesReal);
     }
@@ -720,7 +706,7 @@ class AdminHotelInfoController extends Controller {
             $extension      = config('admin.images.extension');
             $name           = $imageName.'-'.$i.'-'.time();
             $fileName       = $folderUpload.$name.'.'.$extension;
-            /* đua vào job */
+            /* đưa vào job */
             $flag           = DownloadImageToCloudStorage::dispatch($urlImage, $fileName, $extension);
             /* lưu cơ sở dữ liệu */
             if($flag){

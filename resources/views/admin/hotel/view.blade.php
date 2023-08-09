@@ -134,6 +134,46 @@
                             </button>
                         </div>
                     </div>
+
+                    <div class="pageAdminWithRightSidebar_main_content_item width100">
+                        <div class="card">
+                            <div class="card-header border-bottom">
+                                <h4 class="card-title">
+                                    Comment
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                
+                                <div class="formBox">
+                                    <div class="formBox_full">
+                                        <!-- One Row -->
+                                        <div class="formBox_full_item" style="display:flex;justify-content:space-between;">
+                                            <div> 
+                                                @if(!empty($item->comments)&&$item->comments->isNotEmpty())
+                                                    Khách sạn này có <span class="highLight">{{ $item->comments->count() }}</span> comment!
+                                                @else 
+                                                    Khách sạn này chưa có comment!
+                                                @endif
+                                            </div>
+                                            @if(!empty($item->id))
+                                                <div>
+                                                    <div class="hotelRoomBox_item_action">
+                                                        <div class="icon-wrapper iconAction" style="width:70px;">
+                                                            <a href="{{ route('admin.hotelComment.view', ['id' => $item->id ?? 0]) }}">
+                                                                <i class="fa-solid fa-gear"></i>
+                                                                <div>Quản lí</div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
                     
                     <div class="pageAdminWithRightSidebar_main_content_item width100">
                         <div class="card">
@@ -145,19 +185,6 @@
                                 @include('admin.form.formAnswer', compact('item'))
                                 
                             </div>
-                        </div>
-                    </div>
-                    <div class="pageAdminWithRightSidebar_main_content_item width100 repeater">
-                        <div data-repeater-list="comments">
-                            @include('admin.form.formComment', [
-                                'comments' => old('comments') ?? $item['comments'] ?? null
-                            ])
-                        </div>
-                        <div class="card">
-                            <button class="btn btn-icon btn-primary waves-effect waves-float waves-light" type="button" aria-label="Thêm" data-repeater-create>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus me-25"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                                <span>Thêm comment</span>
-                            </button>
                         </div>
                     </div>
 

@@ -38,17 +38,17 @@ return [
             'driver' => 'database',
             'table' => 'jobs',
             'queue' => 'default',
-            'retry_after' => 90,
-            'after_commit' => false,
+            'retry_after' => 300,
+            'after_commit' => false
         ],
 
         'beanstalkd' => [
             'driver' => 'beanstalkd',
             'host' => 'localhost',
             'queue' => 'default',
-            'retry_after' => 90,
+            'retry_after' => 300,
             'block_for' => 0,
-            'after_commit' => false,
+            'after_commit' => false
         ],
 
         'sqs' => [
@@ -59,16 +59,16 @@ return [
             'queue' => env('SQS_QUEUE', 'default'),
             'suffix' => env('SQS_SUFFIX'),
             'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
-            'after_commit' => false,
+            'after_commit' => false
         ],
 
         'redis' => [
             'driver' => 'redis',
             'connection' => 'default',
             'queue' => env('REDIS_QUEUE', 'default'),
-            'retry_after' => 90,
+            'retry_after' => 300,
             'block_for' => null,
-            'after_commit' => false,
+            'after_commit' => false
         ],
 
     ],

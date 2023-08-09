@@ -564,6 +564,25 @@ class RoutingController extends Controller {
                     $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full);
                     $xhtml              = view('main.hotelLocation.index', compact('item', 'content', 'breadcrumb'))->render();
                 }
+                /* ===== HOTEL INFO */
+                if($checkExists->type=='hotel_info'){
+                    $flagMatch          = true;
+                    $item               = Hotel::select('*')
+                                            ->whereHas('seo', function($query) use($checkExists){
+                                                $query->where('slug', $checkExists->slug);
+                                            })
+                                            ->with(['files' => function($query){
+                                                $query->where('relation_table', 'hotel_info');
+                                            }])
+                                            ->with(['questions' => function($q){
+                                                $q->where('relation_table', 'hotel_info');
+                                            }])
+                                            ->with('seo', 'comments', 'rooms')
+                                            ->first();
+                    $content            = Blade::render(Storage::get(config('admin.storage.contentHotelInfo').$item->seo->slug.'.blade.php'));
+                    $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full);
+                    $xhtml              = view('main.hotel.index', compact('item', 'content', 'breadcrumb'))->render();
+                }
                 /* Ghi dữ liệu - Xuất kết quả */
                 if($flagMatch==true){
                     echo $xhtml;

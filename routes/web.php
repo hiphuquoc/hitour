@@ -41,6 +41,7 @@ use App\Http\Controllers\AdminHotelLocationController;
 use App\Http\Controllers\AdminHotelInfoController;
 use App\Http\Controllers\AdminHotelRoomController;
 use App\Http\Controllers\AdminHotelContactController;
+use App\Http\Controllers\AdminHotelCommentController;
 
 use App\Http\Controllers\AdminToolSeoController;
 use App\Http\Controllers\AdminSettingController;
@@ -72,6 +73,7 @@ use App\Http\Controllers\ShipBookingController;
 use App\Http\Controllers\ServiceBookingController;
 use App\Http\Controllers\TourBookingController;
 use App\Http\Controllers\ComboBookingController;
+use App\Http\Controllers\HotelController;
 
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\Auth\ProviderController;
@@ -477,6 +479,11 @@ Route::prefix('he-thong')->group(function(){
             Route::post('/loadFormContact', [AdminHotelContactController::class, 'loadFormContact'])->name('admin.hotel.loadFormContact');
             Route::post('/deleteContact', [AdminHotelContactController::class, 'delete'])->name('admin.hotel.deleteContact');
         });
+        /* ===== Hotel Comment ===== */
+        Route::prefix('hotelComment')->group(function(){
+            Route::get('/view', [AdminHotelCommentController::class, 'view'])->name('admin.hotelComment.view');
+            Route::post('/update', [AdminHotelCommentController::class, 'update'])->name('admin.hotelComment.update');
+        });
         /* ===== TOOL SEO ===== */
         Route::prefix('toolSeo')->group(function(){
             Route::get('/listBlogger', [AdminToolSeoController::class, 'listBlogger'])->name('admin.toolSeo.listBlogger');
@@ -601,6 +608,8 @@ Route::prefix('serviceBooking')->group(function(){
     Route::get('/loadBookingSummary', [ServiceBookingController::class, 'loadBookingSummary'])->name('main.serviceBooking.loadBookingSummary');
     Route::get('/confirm', [ServiceBookingController::class, 'confirm'])->name('main.serviceBooking.confirm');
 });
+/* ===== HOTEL ===== */
+Route::get('/loadHotelRoom', [HotelController::class, 'loadHotelRoom'])->name('main.hotel.loadHotelRoom');
 /* login với google */
 // Route::get('/setCsrfFirstTime', [CookieController::class, 'setCsrfFirstTime'])->name('main.setCsrfFirstTime');
 Route::post('/auth/google/callback', [ProviderController::class, 'googleCallback'])->name('main.google.callback');
