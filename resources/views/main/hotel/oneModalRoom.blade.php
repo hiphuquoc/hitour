@@ -102,8 +102,23 @@
         </div>
     </div>
     <!-- button -->
-    <div class="modalHotelRoom_box_button">
-        <span>Đặt phòng này!</span>
+    <div class="modalHotelRoom_box_footer">
+        @if(!empty($room->price))
+            <div class="modalHotelRoom_box_footer_price">
+                <div class="modalHotelRoom_box_footer_price_old">
+                    <div class="modalHotelRoom_box_footer_price_old_number">
+                        {{ number_format($room->price) }} <sup>đ</sup>
+                    </div>
+                    <div class="modalHotelRoom_box_footer_price_old_saleoff">
+                        -25%
+                    </div>
+                </div>
+                <div class="modalHotelRoom_box_footer_price_now">
+                    2,228,000 <sup>đ</sup>
+                </div>
+            </div>
+        @endif
+        <div class="modalHotelRoom_box_footer_button">Đặt phòng này!</div>
     </div>
 </div> 
 <div class="modalHotelRoom_bg" onClick="openCloseModal('js_loadHotelRoom_modal_{{ $room->id }}');"></div>

@@ -2972,6 +2972,7 @@ blockquote{
     }
 }
 .faqBox {
+    margin-top: 0.75rem;
     &_title {
         h2, h3 {
             @include titleSection;
@@ -5972,7 +5973,7 @@ $width-single-menu  : 260px;
                 color: $colorRed;
                 text-align: right;
                 font-weight: bold;
-                margin-top: -0.1rem;
+                margin-top: -0.2rem;
                 letter-spacing: 0.75px;
             }
         }
@@ -6216,18 +6217,14 @@ $width-single-menu  : 260px;
             margin-left: 1.25rem;
         }
         &_numberpeople {
-            flex: 0 0 45px;
-            margin-left: 0.75rem;
+            flex: 0 0 50px;
+            margin-left: 2.5rem;
             display: flex;
             justify-content: flex-end;
         }
-        &_price {
-            flex: 0 0 125px;
-            margin-left: 0.75rem;
-        }
         &_action {
-            flex: 0 0 150px;
-            margin-left: 0.75rem;
+            flex: 0 0 210px;
+            margin-left: 1.25rem;
             padding-right: 1.25rem;
         }
     }
@@ -6317,11 +6314,11 @@ $width-single-menu  : 260px;
                 margin-top: -0.25rem;
                 &_name {
                     font-family: $fontTitle;
-                    font-size: 1.05rem;
-                    letter-spacing: 0.25px;
-                    line-height: 1.5rem;
-                    color: $colorLv1;
+                    font-size: 1.1rem;
+                    letter-spacing: .25px;
+                    line-height: 1.6rem;
                     cursor: pointer;
+                    color: $colorTitle;
                 }
                 &_desc {
                     font-size: 1rem;
@@ -6351,30 +6348,56 @@ $width-single-menu  : 260px;
                 }
                 > * {
                     &:not(:last-child){
-                        margin-bottom: 0.65rem;
+                        margin-bottom: 0.75rem;
                     }
                 }
             }
             &_numberpeople {
                 font-size: 1.2rem;
             }
-            &_price {
-                text-align: right;
-                font-size: 1.2rem;
-                color: $colorRed;
-                font-weight: bold;
-                letter-spacing: 1px;
-
-            }
             &_action {
-                justify-content: flex-end;
                 display: flex;
-                span {
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: flex-end;
+                &_price {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    width: 140px;
+                    margin-bottom: 0.75rem;
+                    &_old {
+                        display: flex;
+                        align-items: flex-end;
+                        font-size: 0.95rem;
+                        text-align: right;
+                        &_number {
+                            text-decoration: line-through;
+                            margin-right: 0.5rem;
+                        }
+                        &_saleoff {
+                            background: $colorRed;
+                            color: #fff;
+                            padding: 0.1rem 0.25rem;
+                            border-radius: 6px;
+                            font-size: 0.9rem;
+                        }
+                    }
+                    &_now {
+                        font-size: 1.3rem;
+                        color: $colorRed;
+                        text-align: right;
+                        font-weight: bold;
+                        margin-top: -0.2rem;
+                        letter-spacing: 0.75px;
+                    }
+                }
+                &_button {
                     background: $colorSLv1;
                     width: 100%;
-                    max-width: 120px;
                     display: flex;
                     justify-content: center;
+                    align-self: flex-end;
                     font-family: $fontTitle;
                     padding: 0.5rem 0;
                     border-radius: 6px;
@@ -6382,6 +6405,7 @@ $width-single-menu  : 260px;
                     font-size: 1rem;
                     letter-spacing: 0.5px;
                     color: $colorTitle;
+                    max-width: 150px;
                     &:hover {
                         background: $colorSLv1-hover;
                     }
@@ -6417,8 +6441,8 @@ $width-single-menu  : 260px;
                 position: absolute;
                 top: 0;
                 right: 0;
-                width: 40px;
-                height: 40px;
+                width: 45px;
+                height: 45px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -6474,6 +6498,7 @@ $width-single-menu  : 260px;
                     font-family: $fontTitle;
                     letter-spacing: 0.5px;
                     margin-bottom: 0.75rem;
+                    padding-right: 30px;
                 }
                 &_facilities {
                     &_label {
@@ -6551,14 +6576,47 @@ $width-single-menu  : 260px;
                 }
             }
         }
-        &_button {
+        &_footer {
             width: 100%;
             display: flex;
             justify-content: flex-end;
+            align-items: flex-end;
             padding: 0 1.5rem 1.25rem 1.5rem;
-            > span {
+            &_price {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                width: 140px;   
+                margin-right: 1.5rem;
+                &_old {
+                    display: flex;
+                    align-items: flex-end;
+                    font-size: 0.95rem;
+                    text-align: right;
+                    &_number {
+                        text-decoration: line-through;
+                        margin-right: 0.5rem;
+                    }
+                    &_saleoff {
+                        background: $colorRed;
+                        color: #fff;
+                        padding: 0.1rem 0.25rem;
+                        border-radius: 6px;
+                        font-size: 0.9rem;
+                    }
+                }
+                &_now {
+                    font-size: 1.3rem;
+                    color: $colorRed;
+                    text-align: right;
+                    font-weight: bold;
+                    margin-top: -0.2rem;
+                    letter-spacing: 0.75px;
+                }
+            }
+            &_button {
                 background: $colorSLv1;
-                padding: 0.5rem 1.5rem;
+                padding: 0.65rem 1.5rem;
                 color: $colorTitle;
                 font-family: $fontTitle;
                 border-radius: 7px;
@@ -6599,25 +6657,27 @@ $width-single-menu  : 260px;
         border-radius: 10px;
         overflow: hidden;
         &_head {
-            padding: 1rem 1.5rem 0.5rem 1.5rem;
+            padding: 0.5rem 1.5rem 0.25rem 1.5rem;
+            margin-bottom:1rem;
             position: relative;
+            background: $bg-02;
             &_close {
                 position: absolute;
                 top: 0;
                 right: 0;
-                width: 40px;
-                height: 40px;
+                height: 100%;
+                aspect-ratio: 1/1;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
                 border-radius: 0 7px 0 7px;
                 &:hover {
-                    background: $bg-02;
+                    background: $bg-04;
                 }
             }
             h2 {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
                 font-family: $fontTitle;
             }
         }
@@ -6675,5 +6735,64 @@ $width-single-menu  : 260px;
                 }
             }
         }
+    }
+}
+.modalHotelDescription {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    &_box {
+        position: relative;
+        top: 2rem;
+        left: 50%;
+        width: 100%;
+        max-width: 800px;
+        max-height: calc(100vh - 4rem);
+        background: #fff;
+        transform: translate3d(-50%, 0, 0);
+        border-radius: 10px;
+        overflow: hidden;
+        &_head {
+            padding: 0.5rem 1.5rem 0.25rem 1.5rem;
+            background: $bg-02;
+            position: relative;
+            &_close {
+                position: absolute;
+                top: 0;
+                right: 0;
+                height: 100%;
+                aspect-ratio: 1/1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                border-radius: 0 7px 0 7px;
+                &:hover {
+                    background: $bg-04;
+                }
+            }
+            h2 {
+                font-size: 1.2rem;
+                font-family: $fontTitle;
+            }
+        }
+        &_body {
+            padding: 1rem 1.5rem;
+            max-height: calc(100vh - 8rem);
+        }
+        
+    }
+    &_bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: -1;
     }
 }

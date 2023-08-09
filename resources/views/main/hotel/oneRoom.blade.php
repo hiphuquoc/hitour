@@ -63,9 +63,21 @@
     @endfor
     
 </div>
-<div class="hotelRoom_body_item_price">
-    {{ !empty($room->price) ? number_format($room->price) : 'liên hệ' }}
-</div>
 <div class="hotelRoom_body_item_action">
-    <span>đặt phòng</span>
+    @if(!empty($room->price))
+    <div class="hotelRoom_body_item_action_price">
+        <div class="hotelRoom_body_item_action_price_old">
+            <div class="hotelRoom_body_item_action_price_old_number">
+                {{ number_format($room->price) }} <sup>đ</sup>
+            </div>
+            <div class="hotelRoom_body_item_action_price_old_saleoff">
+                -25%
+            </div>
+        </div>
+        <div class="hotelRoom_body_item_action_price_now">
+            2,228,000 <sup>đ</sup>
+        </div>
+    </div>
+    @endif
+    <div class="hotelRoom_body_item_action_button">đặt phòng</div>
 </div>

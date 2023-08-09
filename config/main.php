@@ -21,5 +21,35 @@ return [
     'cache'     => [
         'folderSave'    => 'public/caches/',
         'extension'     => 'html',
+    ],
+    'rating_rule'       => [
+        [
+            'text'  => 'Rất tuyệt',
+            'score' => '9'
+        ],
+        [
+            'text'  => 'Tuyệt vời',
+            'score' => '8'
+        ],
+        [
+            'text'  => 'Rất tốt',
+            'score' => '7'
+        ],
+        [
+            'text'  => 'Tốt',
+            'score' => '6'
+        ],
+        [
+            'text'  => 'Tạm được',
+            'score' => '5'
+        ],
+        [
+            'text'  => 'Hơi tệ',
+            'score' => '3'
+        ],
+        [
+            'text'  => 'Rất tệ',
+            'score' => '0'
+        ]
     ]
 ];
