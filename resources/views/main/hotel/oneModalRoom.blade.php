@@ -105,16 +105,18 @@
     <div class="modalHotelRoom_box_footer">
         @if(!empty($room->price))
             <div class="modalHotelRoom_box_footer_price">
-                <div class="modalHotelRoom_box_footer_price_old">
-                    <div class="modalHotelRoom_box_footer_price_old_number">
-                        {{ number_format($room->price) }} <sup>đ</sup>
+                @if(!empty($room->sale_off)&&!empty($room->price_old))
+                    <div class="modalHotelRoom_box_footer_price_old">
+                        <div class="modalHotelRoom_box_footer_price_old_number">
+                            {{ number_format($room->price_old) }} <sup>đ</sup>
+                        </div>
+                        <div class="modalHotelRoom_box_footer_price_old_saleoff">
+                            -{{ $room->sale_off }}%
+                        </div>
                     </div>
-                    <div class="modalHotelRoom_box_footer_price_old_saleoff">
-                        -25%
-                    </div>
-                </div>
+                @endif
                 <div class="modalHotelRoom_box_footer_price_now">
-                    2,228,000 <sup>đ</sup>
+                    {{ number_format($room->price) }} <sup>đ</sup>
                 </div>
             </div>
         @endif

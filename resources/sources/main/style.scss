@@ -5944,7 +5944,7 @@ $width-single-menu  : 260px;
     &_right {
         display: flex;
         justify-content: flex-end;
-        align-items: flex-end;
+        align-items: center;
         &_price {
             display: flex;
             flex-direction: column;
@@ -6091,6 +6091,9 @@ $width-single-menu  : 260px;
                     align-items: center;
                     svg {
                         margin-right: 0.5rem;
+                        vertical-align: middle;
+                        filter: invert(60%) sepia(20%) saturate(10000%) hue-rotate(200deg) brightness(100%) contrast(100%);
+                        transform: scale(1.1);
                     }
                 }
             }
@@ -6343,6 +6346,9 @@ $width-single-menu  : 260px;
                         }
                         svg {
                             vertical-align: middle;
+                            margin-right: 0.35rem;
+                            filter: invert(60%) sepia(20%) saturate(10000%) hue-rotate(200deg) brightness(100%) contrast(100%);
+                            transform: scale(1.1);
                         }
                     }
                 }
@@ -6519,7 +6525,7 @@ $width-single-menu  : 260px;
                             svg {
                                 vertical-align: middle;
                                 margin-right: 0.35rem;
-                                filter: invert(60%) sepia(20%) saturate(10000%) hue-rotate(110deg) brightness(100%) contrast(100%);
+                                filter: invert(60%) sepia(20%) saturate(10000%) hue-rotate(200deg) brightness(100%) contrast(100%);
                                 transform: scale(1.1);
                             }
                         }
@@ -6682,7 +6688,7 @@ $width-single-menu  : 260px;
             }
         }
         &_body {
-            padding: 0 1.5rem 1rem 1.5rem;
+            padding: 0;
         }
         
     }
@@ -6700,6 +6706,7 @@ $width-single-menu  : 260px;
     &_head {
         display: flex;
         cursor: pointer;
+        padding: 0 1.5rem;
         &_item {
             padding: 0.5rem 1.5rem;
             border: 1px solid $bg-04;
@@ -6716,7 +6723,7 @@ $width-single-menu  : 260px;
     }
     &_body {
         margin-top: 0.75rem;
-        padding: 0 1rem 1rem;
+        padding: 0 2rem 1.5rem 2rem;
         max-height: calc(100vh - 11rem);
         &_tab {
             display: none;
@@ -6732,6 +6739,9 @@ $width-single-menu  : 260px;
                 align-items: center;
                 svg {
                     margin-right: 0.5rem;
+                    vertical-align: middle;
+                    filter: invert(60%) sepia(20%) saturate(10000%) hue-rotate(200deg) brightness(100%) contrast(100%);
+                    transform: scale(1.1);
                 }
             }
         }

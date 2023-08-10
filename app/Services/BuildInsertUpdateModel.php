@@ -1367,6 +1367,18 @@ class BuildInsertUpdateModel {
             $result['size']                 = $dataForm['size'];
             $result['number_people']        = $dataForm['number_people'];
             $result['price']                = $dataForm['price'] ?? null;
+            /* giá cũ */
+            $priceOld                       = $dataForm['price_old'] ?? null;
+            if(empty($priceOld)&&!empty($dataForm['price'])){
+                $priceOld                   = $dataForm['price'];
+            }
+            $result['price_old']            = $priceOld;
+            /* sale_off */
+            $saleOff                        = 0;
+            if($result['price_old']>$result['price']){
+                $saleOff                    = (($dataForm['price_old'] - $dataForm['price'])/$dataForm['price_old'])*100;
+            }
+            $result['sale_off']             = $saleOff;
             $result['note']                 = $dataForm['note'] ?? null;
         }
         return $result;

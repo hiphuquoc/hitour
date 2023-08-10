@@ -191,7 +191,6 @@ class AdminHotelRoomController extends Controller {
             $idHotelInfo                = $request->get('hotel_info_id');
             $dataForm                   = $request->get('dataForm');
             $idHotelRoom                = $dataForm['hotel_room_id'];
-
             /* update hotel_room */
             $hotelRoom                  = $this->BuildInsertUpdateModel->buildArrayTableHotelRoom($dataForm, $idHotelInfo);
             HotelRoom::updateItem($idHotelRoom, $hotelRoom);

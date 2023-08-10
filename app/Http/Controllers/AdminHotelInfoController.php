@@ -527,6 +527,8 @@ class AdminHotelInfoController extends Controller {
             // Gửi yêu cầu GET đến URL cần lấy dữ liệu
             $crawlerContent = $client->request('GET', $url);
             $this->arrayData['url_crawler_tripadvisor'] = $url;
+            /* địa chỉ khách sạn */
+            $this->arrayData['address']     = $crawlerContent->filter('.gZwVG')->text();
             /* ===== tiện nghi khách sạn */
             $crawlerContent->filter('.MXlSZ .ssr-init-26f')->each(function($node){
                 $this->arrayData['tmp'][]   = $node->attr('data-ssrev-handlers');
@@ -541,7 +543,7 @@ class AdminHotelInfoController extends Controller {
                     if(!empty($t['locationDescription'])) $this->arrayData['description'] = $t['locationDescription'];
                 }
             }
-            /* build lại mảng */
+            /* build lại mảng facilities */
             $this->arrayData['tmpFacilities']  = [];
             if(!empty($dataFacility['highlightedAmenities']['roomFeatures'])) {
                 /* duyệt qua mảng lấy tiện nghi nổi bật -> loại tiện nghi trong phòng */
@@ -549,7 +551,6 @@ class AdminHotelInfoController extends Controller {
                 foreach($dataFacility['highlightedAmenities']['roomFeatures'] as $facility){
                     if(!empty($facility['amenityNameLocalized'])) $this->arrayData['tmpFacilities'][$i]['name']    = $facility['amenityNameLocalized'];
                     if(!empty($facility['amenityCategoryName'])) $this->arrayData['tmpFacilities'][$i]['category_name']     = $facility['amenityCategoryName'];
-                    if(!empty($facility['amenityIcon'])) $this->arrayData['tmpFacilities'][$i]['icon']    = $facility['amenityIcon'];
                     $this->arrayData['tmpFacilities'][$i]['type']      = 'hotel_room_feature';
                     $this->arrayData['tmpFacilities'][$i]['highligh']  = 1;
                     ++$i;
@@ -558,7 +559,6 @@ class AdminHotelInfoController extends Controller {
                 foreach($dataFacility['nonHighlightedAmenities']['roomFeatures'] as $facility){
                     if(!empty($facility['amenityNameLocalized'])) $this->arrayData['tmpFacilities'][$i]['name']    = $facility['amenityNameLocalized'];
                     if(!empty($facility['amenityCategoryName'])) $this->arrayData['tmpFacilities'][$i]['category_name']     = $facility['amenityCategoryName'];
-                    if(!empty($facility['amenityIcon'])) $this->arrayData['tmpFacilities'][$i]['icon']    = $facility['amenityIcon'];
                     $this->arrayData['tmpFacilities'][$i]['type']      = 'hotel_room_feature';
                     $this->arrayData['tmpFacilities'][$i]['highligh']  = 0;
                     ++$i;
@@ -567,7 +567,6 @@ class AdminHotelInfoController extends Controller {
                 foreach($dataFacility['highlightedAmenities']['roomTypes'] as $facility){
                     if(!empty($facility['amenityNameLocalized'])) $this->arrayData['tmpFacilities'][$i]['name']    = $facility['amenityNameLocalized'];
                     if(!empty($facility['amenityCategoryName'])) $this->arrayData['tmpFacilities'][$i]['category_name']     = $facility['amenityCategoryName'];
-                    if(!empty($facility['amenityIcon'])) $this->arrayData['tmpFacilities'][$i]['icon']    = $facility['amenityIcon'];
                     $this->arrayData['tmpFacilities'][$i]['type']      = 'hotel_room_type';
                     $this->arrayData['tmpFacilities'][$i]['highligh']  = 1;
                     ++$i;
@@ -576,7 +575,6 @@ class AdminHotelInfoController extends Controller {
                 foreach($dataFacility['nonHighlightedAmenities']['roomTypes'] as $facility){
                     if(!empty($facility['amenityNameLocalized'])) $this->arrayData['tmpFacilities'][$i]['name']    = $facility['amenityNameLocalized'];
                     if(!empty($facility['amenityCategoryName'])) $this->arrayData['tmpFacilities'][$i]['category_name']     = $facility['amenityCategoryName'];
-                    if(!empty($facility['amenityIcon'])) $this->arrayData['tmpFacilities'][$i]['icon']    = $facility['amenityIcon'];
                     $this->arrayData['tmpFacilities'][$i]['type']      = 'hotel_room_type';
                     $this->arrayData['tmpFacilities'][$i]['highligh']  = 0;
                     ++$i;
@@ -585,7 +583,6 @@ class AdminHotelInfoController extends Controller {
                 foreach($dataFacility['highlightedAmenities']['propertyAmenities'] as $facility){
                     if(!empty($facility['amenityNameLocalized'])) $this->arrayData['tmpFacilities'][$i]['name']    = $facility['amenityNameLocalized'];
                     if(!empty($facility['amenityCategoryName'])) $this->arrayData['tmpFacilities'][$i]['category_name']     = $facility['amenityCategoryName'];
-                    if(!empty($facility['amenityIcon'])) $this->arrayData['tmpFacilities'][$i]['icon']    = $facility['amenityIcon'];
                     $this->arrayData['tmpFacilities'][$i]['type']      = 'hotel_info_feature';
                     $this->arrayData['tmpFacilities'][$i]['highligh']  = 1;
                     ++$i;
@@ -594,10 +591,29 @@ class AdminHotelInfoController extends Controller {
                 foreach($dataFacility['nonHighlightedAmenities']['propertyAmenities'] as $facility){
                     if(!empty($facility['amenityNameLocalized'])) $this->arrayData['tmpFacilities'][$i]['name']    = $facility['amenityNameLocalized'];
                     if(!empty($facility['amenityCategoryName'])) $this->arrayData['tmpFacilities'][$i]['category_name']     = $facility['amenityCategoryName'];
-                    if(!empty($facility['amenityIcon'])) $this->arrayData['tmpFacilities'][$i]['icon']    = $facility['amenityIcon'];
                     $this->arrayData['tmpFacilities'][$i]['type']      = 'hotel_info_feature';
                     $this->arrayData['tmpFacilities'][$i]['highligh']  = 0;
                     ++$i;
+                }
+            }
+            /* lấy facilities có icon => để gộp vào mảng facilities chính */
+            $this->count    = 0;
+            $crawlerContent->filter('[data-test-target*=amenity_text]')->each(function($node){
+                /* icon */
+                $spanNode       = $node->filter('svg')->getNode(0);
+                $spanDom        = $node->getNode(0)->ownerDocument->saveHTML($spanNode);
+                $this->arrayData['tmpFacilitiesWithIcon'][$this->count]['icon']   = trim($spanDom);
+                /* name */
+                $this->arrayData['tmpFacilitiesWithIcon'][$this->count]['name']   = $node->text();
+                $this->count += 1;
+            });
+            /* gộp 2 mảng facilities lại */
+            for($i=0;$i<count($this->arrayData['tmpFacilities']);++$i){
+                foreach($this->arrayData['tmpFacilitiesWithIcon'] as $icon){
+                    if($icon['name']==$this->arrayData['tmpFacilities'][$i]['name']){
+                        $this->arrayData['tmpFacilities'][$i]['icon'] = $icon['icon'];
+                        break;
+                    }
                 }
             }
             /* đánh giá tổng quan */

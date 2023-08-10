@@ -66,16 +66,18 @@
 <div class="hotelRoom_body_item_action">
     @if(!empty($room->price))
     <div class="hotelRoom_body_item_action_price">
-        <div class="hotelRoom_body_item_action_price_old">
-            <div class="hotelRoom_body_item_action_price_old_number">
-                {{ number_format($room->price) }} <sup>đ</sup>
+        @if(!empty($room->sale_off)&&!empty($room->price_old))
+            <div class="hotelRoom_body_item_action_price_old">
+                <div class="hotelRoom_body_item_action_price_old_number">
+                    {{ number_format($room->price_old) }} <sup>đ</sup>
+                </div>
+                <div class="hotelRoom_body_item_action_price_old_saleoff">
+                    -{{ $room->sale_off }}%
+                </div>
             </div>
-            <div class="hotelRoom_body_item_action_price_old_saleoff">
-                -25%
-            </div>
-        </div>
+        @endif
         <div class="hotelRoom_body_item_action_price_now">
-            2,228,000 <sup>đ</sup>
+            {{ number_format($room->price) }} <sup>đ</sup>
         </div>
     </div>
     @endif

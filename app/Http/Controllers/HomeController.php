@@ -168,8 +168,8 @@ class HomeController extends Controller {
         return \Illuminate\Support\Facades\Redirect::to(route('main.home'), 301);
     }
 
-    function readWebPage($url = null) {
-        \App\Jobs\DownloadCommentHotelInfo::dispatch(35, 0);
+    public function readWebPage($url = null) {
+       
     }
 
     private function getComment($url, $number, $count){

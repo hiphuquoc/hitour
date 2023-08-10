@@ -606,6 +606,8 @@
                 dataForm['number_people']    = $('#formHotelRoom #number_people').val();
                 /* lấy giá */ 
                 dataForm['price']       = $('#formHotelRoom #price').val();
+                /* lấy giá cũ */ 
+                dataForm['price_old']   = $('#formHotelRoom #price_old').val();
                 /* lấy điều khoản */ 
                 dataForm['condition']   = $('#formHotelRoom #condition').val();
                 /* lấy ảnh */

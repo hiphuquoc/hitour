@@ -62,8 +62,16 @@
     </div>
     <!-- One Row -->
     <div class="formBox_full_item">
-        <label class="form-label" for="price">Giá phòng /đêm</label>
-        <input type="number" min="0" id="price" class="form-control" name="price" placeholder="0" value="{{ $data['price'] ?? '' }}" />
+        <div class="flexBox">
+            <div class="flexBox_item">
+                <label class="form-label" for="price">Giá phòng /đêm</label>
+                <input type="number" min="0" id="price" class="form-control" name="price" placeholder="0" value="{{ $data['price'] ?? '' }}" />
+            </div>
+            <div class="flexBox_item">
+                <label class="form-label" for="price_old">Giá cũ</label>
+                <input type="number" min="0" id="price_old" class="form-control" name="price_old" placeholder="0" value="{{ $data['price_old'] ?? '' }}" />
+            </div>
+        </div>
     </div>
     <!-- One Row -->
     <div class="formBox_full_item">
