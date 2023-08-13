@@ -71,7 +71,7 @@
 
                         @include('main.tour.price', compact('item'))
     
-                        <div class="js_scrollFixed" style="margin-top:0;">
+                        <div class="js_scrollFixed" style="margin-top:0;border-radius:10px;">
                             @php
                                 $linkTourBooking = route('main.tourBooking.form', [
                                     'tour_location_id'  => $item->locations[0]->infoLocation->id ?? 0,

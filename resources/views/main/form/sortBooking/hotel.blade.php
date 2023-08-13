@@ -1,3 +1,1 @@
-<div class="bookFormSort_body_item">
-    Form đặt Khách sạn đang cập nhật
-</div>
+<div>Hệ thống đặt Khách sạn đang bảo trì! Để được hỗ trợ nhanh chóng Quý khách vui lòng liên hệ <span style="font-size:1.2rem;color:rgb(0,123,255);font-weight:700;">08 6868 6868</span>.</div>

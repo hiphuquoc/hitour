@@ -55,9 +55,9 @@
 
     @include('main.snippets.breadcrumb')
 
-    <div class="pageContent">
+        <input type="hidden" id="hotel_info_id" name="hotel_info_id" value="{{ $item->id }}" />
         <!-- Giới thiệu Hotel du lịch -->
-        <div class="sectionBox">
+        <div class="sectionBox noBackground">
             <div class="container">
                 <!-- title -->
                 <h1 class="titlePage">
@@ -140,9 +140,8 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- giới thiệu & gallery -->
-                <div class="hotelGallery">
+                <div id="anh-khach-san" class="hotelGallery" onClick="openCloseModalImage('modalImage')">
                     <div class="hotelGallery_left">
                         @php
                             $imageContent       = config('admin.images.default_750x460');
@@ -154,7 +153,11 @@
                                 $imageContent   = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
                             }
                         @endphp
-                        <img src="{{ $imageContent }}" alt="{{ $item->name }}" title="{{ $item->name }}" />
+                        <img src="{{ config('main.svg.loading_main') }}" data-src="{{ $imageContent }}" alt="{{ $item->name }}" title="{{ $item->name }}" />
+                        <span class="hotelGallery_left_count">
+                            +{{ $item->images->count()-6 }}
+                            <i class="fa-solid fa-image"></i>
+                        </span>
                     </div>
                     <div class="hotelGallery_right">
                         @foreach($item->images as $image)
@@ -164,17 +167,17 @@
                                 $imageContent       = config('admin.images.default_750x460');
                                 $contentImage       = Storage::disk('gcs')->get($image->image);
                                 if(!empty($contentImage)){
-                                    $thumbnail      = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(200, null, function ($constraint) {
+                                    $thumbnail      = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(300, null, function ($constraint) {
                                         $constraint->aspectRatio();
                                     })->encode();
                                     $imageContent   = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
                                 }
                             @endphp
                             <div class="hotelGallery_right_item">
-                                <img src="{{ $imageContent }}" alt="{{ $item->name }}" title="{{ $item->name }}" />
+                                <img src="{{ config('main.svg.loading_main') }}" data-src="{{ $imageContent }}" alt="{{ $item->name }}" title="{{ $item->name }}" />
                                 @if($loop->index==6)
                                     <span class="hotelGallery_right_item_count">
-                                        +{{ $item->images->count() }}
+                                        +{{ $item->images->count()-6 }}
                                         <i class="fa-solid fa-image"></i>
                                     </span>
                                 @endif
@@ -182,6 +185,7 @@
                         @endforeach
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -209,7 +213,7 @@
                                         @else
                                             <svg viewBox="0 0 25 24" width="1em" height="1em" class="d Vb UmNoP"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.422 8.499l-5.427 1.875c-.776-2.73.113-5.116.792-6.2 1.11.324 3.46 1.607 4.635 4.325zm1.421-.491c-1.027-2.46-2.862-3.955-4.33-4.73 2.283-.461 4.023-.013 5.304.749a7.133 7.133 0 012.6 2.745l-3.574 1.236zm.495 1.416l4.345-1.502.723-.25-.264-.718c-.482-1.305-1.633-3.07-3.558-4.216-1.957-1.165-4.643-1.647-8.073-.461C6.08 3.462 4.196 5.522 3.274 7.66c-.909 2.108-.86 4.241-.523 5.595l.198.795.775-.268 8.002-2.765 2.962 8.597.186.54c-.104.08-.208.156-.315.23-.473.326-.902.523-1.379.523-.48 0-.896-.19-1.36-.51-.189-.13-.367-.27-.562-.42v-.001l-.003-.002-.15-.117a7.473 7.473 0 00-.948-.642l-.003-.001c-.386-.224-.7-.407-1.07-.5-.376-.095-.8-.095-1.402-.094h-.1c-.551 0-1.043.223-1.44.472-.402.25-.778.574-1.1.862l-.21.187c-.247.223-.456.41-.654.56a1.409 1.409 0 01-.33.203l-.006.003h.008v1.5c.502 0 .94-.29 1.231-.508.256-.193.529-.439.782-.666l.177-.16c.319-.284.613-.532.897-.71.288-.18.496-.243.645-.243.744 0 .965.006 1.136.049.157.04.28.11.822.422.2.116.407.268.648.454l.135.104c.197.154.418.325.645.482.572.395 1.292.776 2.212.776.923 0 1.657-.392 2.232-.79.232-.16.456-.334.655-.489l.087-.067.04-.031c.24-.186.439-.331.624-.437.555-.317.715-.395.877-.433.173-.04.363-.04.976-.04h.107c.111 0 .3.054.594.24.284.18.584.432.913.719l.144.126.004.004c.271.238.564.495.839.696.297.218.74.502 1.238.502v-1.5c.008 0 .008 0-.001-.003a1.49 1.49 0 01-.351-.21c-.216-.158-.449-.361-.72-.6h-.001a78.03 78.03 0 00-.166-.145c-.327-.286-.704-.606-1.095-.855-.382-.242-.864-.474-1.398-.474h-.197c-.493-.002-.875-.003-1.227.079-.397.093-.743.285-1.206.549l-.042-.123-2.962-8.598 2.496-.863.702-.23-.004-.011zM7.87 4.675c-.611 1.541-1.012 3.755-.294 6.19l-3.51 1.213a7.778 7.778 0 01.585-3.824c.55-1.275 1.533-2.566 3.219-3.579z"></path></svg>
                                         @endif
-                                        {{ $facility['name'] }}
+                                        <span class="maxLine_1">{{ $facility['name'] }}</span>
                                     </div>
                                 @endforeach
                             </div>
@@ -228,7 +232,7 @@
                                         @else
                                             <svg viewBox="0 0 25 24" width="1em" height="1em" class="d Vb UmNoP"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.422 8.499l-5.427 1.875c-.776-2.73.113-5.116.792-6.2 1.11.324 3.46 1.607 4.635 4.325zm1.421-.491c-1.027-2.46-2.862-3.955-4.33-4.73 2.283-.461 4.023-.013 5.304.749a7.133 7.133 0 012.6 2.745l-3.574 1.236zm.495 1.416l4.345-1.502.723-.25-.264-.718c-.482-1.305-1.633-3.07-3.558-4.216-1.957-1.165-4.643-1.647-8.073-.461C6.08 3.462 4.196 5.522 3.274 7.66c-.909 2.108-.86 4.241-.523 5.595l.198.795.775-.268 8.002-2.765 2.962 8.597.186.54c-.104.08-.208.156-.315.23-.473.326-.902.523-1.379.523-.48 0-.896-.19-1.36-.51-.189-.13-.367-.27-.562-.42v-.001l-.003-.002-.15-.117a7.473 7.473 0 00-.948-.642l-.003-.001c-.386-.224-.7-.407-1.07-.5-.376-.095-.8-.095-1.402-.094h-.1c-.551 0-1.043.223-1.44.472-.402.25-.778.574-1.1.862l-.21.187c-.247.223-.456.41-.654.56a1.409 1.409 0 01-.33.203l-.006.003h.008v1.5c.502 0 .94-.29 1.231-.508.256-.193.529-.439.782-.666l.177-.16c.319-.284.613-.532.897-.71.288-.18.496-.243.645-.243.744 0 .965.006 1.136.049.157.04.28.11.822.422.2.116.407.268.648.454l.135.104c.197.154.418.325.645.482.572.395 1.292.776 2.212.776.923 0 1.657-.392 2.232-.79.232-.16.456-.334.655-.489l.087-.067.04-.031c.24-.186.439-.331.624-.437.555-.317.715-.395.877-.433.173-.04.363-.04.976-.04h.107c.111 0 .3.054.594.24.284.18.584.432.913.719l.144.126.004.004c.271.238.564.495.839.696.297.218.74.502 1.238.502v-1.5c.008 0 .008 0-.001-.003a1.49 1.49 0 01-.351-.21c-.216-.158-.449-.361-.72-.6h-.001a78.03 78.03 0 00-.166-.145c-.327-.286-.704-.606-1.095-.855-.382-.242-.864-.474-1.398-.474h-.197c-.493-.002-.875-.003-1.227.079-.397.093-.743.285-1.206.549l-.042-.123-2.962-8.598 2.496-.863.702-.23-.004-.011zM7.87 4.675c-.611 1.541-1.012 3.755-.294 6.19l-3.51 1.213a7.778 7.778 0 01.585-3.824c.55-1.275 1.533-2.566 3.219-3.579z"></path></svg>
                                         @endif
-                                        {{ $facility['name'] }}
+                                        <span class="maxLine_1">{{ $facility['name'] }}</span>
                                     </div>
                                 @endforeach
                             </div>
@@ -247,7 +251,7 @@
                                         @else
                                             <svg viewBox="0 0 25 24" width="1em" height="1em" class="d Vb UmNoP"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.422 8.499l-5.427 1.875c-.776-2.73.113-5.116.792-6.2 1.11.324 3.46 1.607 4.635 4.325zm1.421-.491c-1.027-2.46-2.862-3.955-4.33-4.73 2.283-.461 4.023-.013 5.304.749a7.133 7.133 0 012.6 2.745l-3.574 1.236zm.495 1.416l4.345-1.502.723-.25-.264-.718c-.482-1.305-1.633-3.07-3.558-4.216-1.957-1.165-4.643-1.647-8.073-.461C6.08 3.462 4.196 5.522 3.274 7.66c-.909 2.108-.86 4.241-.523 5.595l.198.795.775-.268 8.002-2.765 2.962 8.597.186.54c-.104.08-.208.156-.315.23-.473.326-.902.523-1.379.523-.48 0-.896-.19-1.36-.51-.189-.13-.367-.27-.562-.42v-.001l-.003-.002-.15-.117a7.473 7.473 0 00-.948-.642l-.003-.001c-.386-.224-.7-.407-1.07-.5-.376-.095-.8-.095-1.402-.094h-.1c-.551 0-1.043.223-1.44.472-.402.25-.778.574-1.1.862l-.21.187c-.247.223-.456.41-.654.56a1.409 1.409 0 01-.33.203l-.006.003h.008v1.5c.502 0 .94-.29 1.231-.508.256-.193.529-.439.782-.666l.177-.16c.319-.284.613-.532.897-.71.288-.18.496-.243.645-.243.744 0 .965.006 1.136.049.157.04.28.11.822.422.2.116.407.268.648.454l.135.104c.197.154.418.325.645.482.572.395 1.292.776 2.212.776.923 0 1.657-.392 2.232-.79.232-.16.456-.334.655-.489l.087-.067.04-.031c.24-.186.439-.331.624-.437.555-.317.715-.395.877-.433.173-.04.363-.04.976-.04h.107c.111 0 .3.054.594.24.284.18.584.432.913.719l.144.126.004.004c.271.238.564.495.839.696.297.218.74.502 1.238.502v-1.5c.008 0 .008 0-.001-.003a1.49 1.49 0 01-.351-.21c-.216-.158-.449-.361-.72-.6h-.001a78.03 78.03 0 00-.166-.145c-.327-.286-.704-.606-1.095-.855-.382-.242-.864-.474-1.398-.474h-.197c-.493-.002-.875-.003-1.227.079-.397.093-.743.285-1.206.549l-.042-.123-2.962-8.598 2.496-.863.702-.23-.004-.011zM7.87 4.675c-.611 1.541-1.012 3.755-.294 6.19l-3.51 1.213a7.778 7.778 0 01.585-3.824c.55-1.275 1.533-2.566 3.219-3.579z"></path></svg>
                                         @endif
-                                        {{ $facility['name'] }}
+                                        <span class="maxLine_1">{{ $facility['name'] }}</span>
                                     </div>
                                 @endforeach
                             </div>
@@ -267,8 +271,8 @@
         </div>
 
         <div id="chon-phong-khach-san" class="sectionBox noBackground">
-            <div class="container">
-                <div class="hotelRoom">
+            <div class="hotelRoom">
+                <div class="container">
                     <div class="hotelRoom_head">
                         <div class="hotelRoom_head_image">
                             Ảnh phòng
@@ -276,12 +280,6 @@
                         <div class="hotelRoom_head_info">
                             Thông tin
                         </div>
-                        <div class="hotelRoom_head_numberpeople">
-                            Tôi đa
-                        </div>
-                        {{-- <div class="hotelRoom_head_price">
-                            Giá (đ)
-                        </div> --}}
                         <div class="hotelRoom_head_action">
                             Giá (đ)
                         </div>
@@ -289,13 +287,15 @@
                     <div class="hotelRoom_body">
                         @foreach($item->rooms as $room)
                             <div id="js_loadHotelRoom_{{ $room->id }}" class="hotelRoom_body_item">
-                                <!-- load Ajax -->
+                                <!-- load Ajax chép đè -->
+                                <img src="{{ config('main.svg.loading_main_nobg')}}" alt="tải thông tin phòng {{ $item->name }}" title="tải thông tin phòng {{ $item->name }}" style="margin:0 auto;width:250px;" />
                             </div>
                         @endforeach
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- Contents -->
         <div class="sectionBox" style="background:#EDF2F7;">
             <div class="container">
@@ -320,9 +320,10 @@
             </div>
         </div>
 
-    </div>
 @endsection
 @push('modal')
+    <!-- modal của ảnh -->
+    @include('main.hotel.modalImage', ['images' => $item->images])
     <!-- modal của tiện nghi -->
     @include('main.hotel.modalFacilities', compact('arrayFacilities'))
     <!-- modal của tiện nghi -->
@@ -350,8 +351,6 @@
 @endpush
 @push('scripts-custom')
     <script type="text/javascript">
-        // buildTocContentMain('js_buildTocContentSidebar_element');
-
         $('window').ready(function(){
             @foreach ($item->rooms as $room)
                 loadHotelRoom('{{ $room->id }}');
@@ -389,6 +388,22 @@
                     $('#js_loadHotelRoom_modal_'+idHotelRoom).hidden();
                 }
             });
+        }
+
+        function openCloseModalImage(idModal){
+            const elementModal  = $('#'+idModal);
+            const flag          = elementModal.css('display');
+            $('a[href="#anh-khach-san"]').trigger('click');
+            /* tooggle */
+            if(flag=='none'){
+                elementModal.css('display', 'flex');
+                $('#js_openCloseModal_blur').addClass('blurBackground');
+                // $('body').css('overflow', 'hidden');
+            }else {
+                elementModal.css('display', 'none');
+                $('#js_openCloseModal_blur').removeClass('blurBackground');
+                // $('body').css('overflow', 'unset');
+            }
         }
 
     </script>

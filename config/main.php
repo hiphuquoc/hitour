@@ -13,7 +13,8 @@ return [
     'icon-arrow-email'  => 'https://hitour.vn/images/main/icon-arrow-email.png',
     'avatar_home'       => 'https://hitour.vn/storage/images/upload/banner-hitour-1-type-manager-upload.webp',
     'svg'               => [
-        'loading_main'  => '/images/main/svg/loading_plane_bge9ecef.svg'
+        'loading_main'      => '/storage/images/svg/loading_plane_bge9ecef.svg',
+        'loading_main_nobg' => '/storage/images/svg/loading_plane_transparent.svg'
     ],
     'title_list_service_sidebar'        => 'Có thể bạn cần?',
     /* Background hỗ trợ loading */

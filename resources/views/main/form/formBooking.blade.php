@@ -11,8 +11,7 @@
 	<div class="bookFormSort" onClick="hideShowAround();">
 		<div class="bookFormSort_head">
 			<div {{ !empty($active)&&$active=='ship' ? 'class=active' : null }} data-tab="shipBookingForm" onClick="changeTab(this);">
-				<div class="hide-767"><i class="fa-solid fa-ship"></i>Tàu cao tốc</div>
-				<div class="show-767"><i class="fa-solid fa-ship"></i>Tàu</div>
+				<div><i class="fa-solid fa-ship"></i>Tàu cao tốc</div>
 			</div>
 			<div {{ !empty($active)&&$active=='tour' ? 'class=active' : null }} data-tab="tourBookingForm" onClick="changeTab(this);">
 				<div><i class="fa-solid fa-suitcase-rolling"></i>Tour</div>

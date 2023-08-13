@@ -330,9 +330,9 @@
         width: 100%;
         max-width: 120px;
         border: 1px solid $bg-04;
-        padding: 0.25rem 1rem;
+        padding: 0.35rem 1rem;
         text-align: center;
-        border-radius: 5px;
+        border-radius: 7px;
         font-size: 0.95rem;
         font-weight: bold;
         cursor: pointer;
@@ -464,6 +464,8 @@
         }
     }
     &_body {
+        border-radius: 10px;
+        overflow: hidden;
         &_row {
             display: flex;
             border-bottom: 1px dashed $bg-05;
@@ -481,7 +483,7 @@
                     padding: 0.35rem 0.5rem;
                     border: 1px solid $bg-03;
                     background: #fff;
-                    border-radius: 5px;
+                    border-radius: 3px;
                     cursor: pointer;
                     &.active, &:hover {
                         color: $colorHighlight;
@@ -532,6 +534,8 @@
 }
 .chooseOptionTourBox {
     background: $bg-02;
+    border-radius: 10px;
+    overflow: hidden;
     &_body {
         display: flex;
         flex-direction: column;

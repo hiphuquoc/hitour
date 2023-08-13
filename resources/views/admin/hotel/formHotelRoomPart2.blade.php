@@ -45,7 +45,7 @@
     <!-- One Row -->
     <div class="formBox_full_item"> 
         <label class="form-label" for="condition">Điều khoản (html)</label>
-        <textarea class="form-control" id="condition"  name="condition" rows="5">{{ old('condition') ?? '' }}</textarea>
+        <textarea class="form-control" id="condition"  name="condition" rows="5">{{ $data['condition'] ?? '' }}</textarea>
     </div>
     <!-- One Row -->
     <div class="formBox_full_item">

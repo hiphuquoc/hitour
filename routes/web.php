@@ -610,6 +610,7 @@ Route::prefix('serviceBooking')->group(function(){
 });
 /* ===== HOTEL ===== */
 Route::get('/loadHotelRoom', [HotelController::class, 'loadHotelRoom'])->name('main.hotel.loadHotelRoom');
+Route::get('/loadHotelImage', [HotelController::class, 'loadHotelImage'])->name('main.hotel.loadHotelImage');
 /* login với google */
 // Route::get('/setCsrfFirstTime', [CookieController::class, 'setCsrfFirstTime'])->name('main.setCsrfFirstTime');
 Route::post('/auth/google/callback', [ProviderController::class, 'googleCallback'])->name('main.google.callback');

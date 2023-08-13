@@ -4,7 +4,7 @@
             $imageContent       = config('admin.images.default_750x460');
             $contentImage       = Storage::disk('gcs')->get($room->images[0]->image);
             if(!empty($contentImage)){
-                $thumbnail      = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(200, null, function ($constraint) {
+                $thumbnail      = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(300, null, function ($constraint) {
                     $constraint->aspectRatio();
                 })->encode();
                 $imageContent   = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
@@ -20,7 +20,7 @@
                 $imageContent       = config('admin.images.default_750x460');
                 $contentImage       = Storage::disk('gcs')->get($image->image);
                 if(!empty($contentImage)){
-                    $thumbnail      = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(200, null, function ($constraint) {
+                    $thumbnail      = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(100, null, function ($constraint) {
                         $constraint->aspectRatio();
                     })->encode();
                     $imageContent   = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
@@ -42,9 +42,22 @@
     <div class="hotelRoom_body_item_info_name maxLine_2" onClick="openCloseModal('js_loadHotelRoom_modal_{{ $room->id }}');">
         {{ $room->name }}
     </div>
+    <div class="hotelRoom_body_item_info_sub">
+        <div>
+            Kích thước phòng: 
+            <span class="highLight">{{ $room->size }} m<sup>2</sup></span>
+        </div>
+        <div>
+            Tối đa: 
+            <span class="highLight">
+                @for($i=0;$i<$room->number_people;++$i)
+                    <i class="fa-solid fa-person"></i>
+                @endfor
+            </span>
+        </div>
+    </div>
     <div class="hotelRoom_body_item_info_desc">
         {!! $room->condition ?? null !!}
-        <div>Kích thước phòng: {{ $room->size }} m<sup>2</sup></div>
     </div>
     <div class="hotelRoom_body_item_info_facilities">
         @foreach($room->facilities as $facility)
@@ -56,12 +69,6 @@
             @endif
         @endforeach
     </div>
-</div>
-<div class="hotelRoom_body_item_numberpeople">
-    @for($i=0;$i<$room->number_people;++$i)
-        <i class="fa-solid fa-person"></i>
-    @endfor
-    
 </div>
 <div class="hotelRoom_body_item_action">
     @if(!empty($room->price))

@@ -10,7 +10,7 @@
                     $imageContent       = config('admin.images.default_750x460');
                     $contentImage       = Storage::disk('gcs')->get($room->images[0]->image);
                     if(!empty($contentImage)){
-                        $thumbnail      = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(600, null, function ($constraint) {
+                        $thumbnail      = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(750, null, function ($constraint) {
                             $constraint->aspectRatio();
                         })->encode();
                         $imageContent   = 'data:image/jpeg;base64,'.base64_encode($thumbnail);

@@ -146,10 +146,10 @@
                         </div>
                     </div>
                     <div class="shipGrid_item_btn">
-                        <a href="{{ route('main.shipBooking.form', ['ship_port_departure_id' => $ship->portDeparture->id, 'ship_port_location_id' => $ship->portLocation->id]) }}" title="Đặt vé tàu {{ $ship->name ?? $ship->seo->title ?? null }}" style="border-radius:0 0 0 5px;">
+                        <a href="{{ route('main.shipBooking.form', ['ship_port_departure_id' => $ship->portDeparture->id, 'ship_port_location_id' => $ship->portLocation->id]) }}" title="Đặt vé tàu {{ $ship->name ?? $ship->seo->title ?? null }}" style="border-radius:0 0 0 10px;">
                             <i class="far fa-edit"></i>Đặt vé
                         </a>
-                        <a href="/{{ $ship->seo->slug_full ?? null }}" title="Xem chi tiết tàu cao tốc {{ $ship->name ?? $ship->seo->title ?? null }}" style="border-radius:0 0 5px 0;">
+                        <a href="/{{ $ship->seo->slug_full ?? null }}" title="Xem chi tiết tàu cao tốc {{ $ship->name ?? $ship->seo->title ?? null }}" style="border-radius:0 0 10px 0;">
                             <i class="fas fa-external-link-alt"></i>Xem chi tiết
                         </a>
                     </div>
