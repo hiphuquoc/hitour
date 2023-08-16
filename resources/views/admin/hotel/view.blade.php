@@ -252,6 +252,10 @@
                                         <label class="form-label" for="url_crawler_tripadvisor">Url khách sạn (Tripadvisor)</label>
                                         <textarea class="form-control" id="url_crawler_tripadvisor"  name="url_crawler_tripadvisor" rows="2">{{ $item['url_crawler_tripadvisor'] ?? null }}</textarea>
                                     </div>
+                                    <div class="formBox_full_item">
+                                        <label class="form-label" for="url_crawler_traveloka">Url khách sạn (Traveloka)</label>
+                                        <textarea class="form-control" id="url_crawler_traveloka"  name="url_crawler_traveloka" rows="2">{{ $item['url_crawler_traveloka'] ?? null }}</textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -85,13 +85,13 @@
         <!-- Hotel box -->
         <div class="sectionBox backgroundPrimaryGradiend">
             <div class="container">
-                <h2 class="sectionBox_title">Hotel {{ $item->display_name ?? null }} - Danh sách Hotel du lịch {{ $item->display_name ?? null }}</h2>
-                <p class="sectionBox_desc">Tổng hợp các chương trình <strong>Hotel {{ $item->display_name ?? null }} trọn gói</strong> và <strong>Hotel {{ $item->display_name ?? null }} trong ngày</strong> đa dạng, chất lượng hàng đầu được cung cấp và đảm bảo bởi {{ config('company.sortname') }} cùng hệ thống đối tác du lịch trên toàn quốc.</p>
-                {{-- @include('main.tourLocation.filterBox') --}}
+                <h2 class="sectionBox_title">Hotel {{ $item->display_name ?? null }} - Danh sách khách sạn {{ $item->display_name ?? null }}</h2>
+                <p class="sectionBox_desc">Tổng hợp các <strong>Khách sạn {{ $item->display_name ?? null }}</strong> thịnh hành, chất lượng hàng đầu, được đánh giá cao và là lựa chọn hàng đầu của khách du lịch.</p>
+                @include('main.hotelLocation.filterBox')
                 @if(!empty($item->hotels)&&$item->hotels->isNotEmpty())
-                    @include('main.hotelLocation.hotelList', ['list' => $item->hotels])
+                    @include('main.hotelLocation.hotelGrid', ['list' => $item->hotels])
                 @else 
-                    <div style="color:#069a8e;">Các chương trình <strong>Hotel {{ $item->display_name ?? null }}</strong> đang được {{ config('company.sortname') }} cập nhật và sẽ sớm giới thiệu đến Quý khách trong thời gian tới!</div>
+                    <div style="color:#069a8e;">Các <strong>Hotel {{ $item->display_name ?? null }}</strong> đang được {{ config('company.sortname') }} cập nhật và sẽ sớm giới thiệu đến Quý khách trong thời gian tới!</div>
                 @endif
             </div>
         </div>

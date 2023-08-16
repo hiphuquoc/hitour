@@ -1,9 +1,9 @@
 <div class="modalHotelRoom_box customScrollBar-y">
+    <!-- icon close -->
+    <div class="modalHotelRoom_box_close" onClick="openCloseModal('js_loadHotelRoom_modal_{{ $room->id }}');">
+        <i class="fa-solid fa-xmark"></i>
+    </div>
     <div class="modalHotelRoom_box_body">
-        <!-- icon close -->
-        <div class="modalHotelRoom_box_body_close" onClick="openCloseModal('js_loadHotelRoom_modal_{{ $room->id }}');">
-            <i class="fa-solid fa-xmark"></i>
-        </div>
         <div class="modalHotelRoom_box_body_gallery">
             <div class="modalHotelRoom_box_body_gallery_top">
                 @php

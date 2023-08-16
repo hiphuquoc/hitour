@@ -14,6 +14,7 @@
 <script type="text/javascript">
     $(window).ready(function(){
         loadImage()
+        loadImageFromGoogleCloud()
         addTableResponsive()
         checkLoginAndSetShow()
         /* fixed sidebar khi scroll */
@@ -83,6 +84,26 @@
     function loadImage(){
         $(document).find('img[data-src]').each(function(){
             $(this).attr('src', $(this).attr('data-src'));
+        });
+    }
+    /* load image from goole cloud */
+    function loadImageFromGoogleCloud(){
+        $(document).find('img[data-google-cloud]').each(function(){
+            var elementImg          = $(this);
+            const urlGoogleCloud    = elementImg.attr('data-google-cloud');
+            const size              = elementImg.attr('data-size');
+            $.ajax({
+                url         : '{{ route("ajax.loadImageFromGoogleCloud") }}',
+                type        : 'get',
+                dataType    : 'html',
+                data        : {
+                    url_google_cloud    : urlGoogleCloud,
+                    size
+                },
+                success     : function(response){
+                    elementImg.attr('src', response);
+                }
+            });
         });
     }
     /* toc content */

@@ -1350,10 +1350,13 @@ class BuildInsertUpdateModel {
             $result['website']              = $dataForm['website'] ?? null;
             $result['hotline']              = $dataForm['hotline'] ?? null;
             $result['email']                = $dataForm['email'] ?? null;
+            $result['type_name']            = $dataForm['type_name'];
+            $result['type_rating']          = $dataForm['type_rating'] ?? null;
             $result['status_show']          = !empty($dataForm['status_show']) ? 1 : 0;
             $result['status_sidebar']       = !empty($dataForm['status_sidebar']) ? 1 : 0;
             $result['url_crawler_mytour']   = $dataForm['url_crawler_mytour'] ?? null;
-            $result['url_crawler_tripadvisor']   = $dataForm['url_crawler_tripadvisor'] ?? null;
+            $result['url_crawler_tripadvisor']  = $dataForm['url_crawler_tripadvisor'] ?? null;
+            $result['url_crawler_traveloka']    = $dataForm['url_crawler_traveloka'] ?? null;
         }
         return $result;
     }

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\RegistryEmail;
 
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic;
+
 class AjaxController extends Controller {
 
     public function buildTocContentSidebar(Request $request){
@@ -80,6 +83,27 @@ class AjaxController extends Controller {
             'title'     => $request->get('title') ?? null,
             'content'   => $request->get('content') ?? null
         ])->render();
+        echo $response;
+    }
+
+    public static function loadImageFromGoogleCloud(Request $request){
+        $response               = '';
+        if(!empty($request->get('url_google_cloud'))){
+            $url                = $request->get('url_google_cloud');
+            $size               = $request->get('size') ?? null;
+            $response           = config('admin.images.default_750x460');
+            $contentImage       = Storage::disk('gcs')->get($url);
+            if(!empty($contentImage)){
+                if(!empty($size)){
+                    $thumbnail      = ImageManagerStatic::make($contentImage)->resize($size, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })->encode();
+                }else {
+                    $thumbnail      = ImageManagerStatic::make($contentImage)->encode();
+                }
+                $response   = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
+            }
+        }
         echo $response;
     }
 }

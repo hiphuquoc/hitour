@@ -407,6 +407,8 @@ class AdminHotelInfoController extends Controller {
             if(!empty($request->get('url_crawler_mytour'))) $this->downloadHotelInfo_mytour($request->get('url_crawler_mytour'));
             /* ============= Lấy dữ liệu của Tripadvisor */
             if(!empty($request->get('url_crawler_tripadvisor'))) $this->downloadHotelInfo_tripadvisor($request->get('url_crawler_tripadvisor'));
+            /* ============= Lấy dữ liệu của Traveloka */
+            if(!empty($request->get('url_crawler_traveloka'))) $this->downloadHotelInfo_traveloka($request->get('url_crawler_traveloka'));
             // dd($this->arrayData);
             // /* truyền biến qua view */
             // $hotelLocations     = HotelLocation::all();
@@ -636,6 +638,35 @@ class AdminHotelInfoController extends Controller {
             /* comment => tải bằng job khi tạo khách sạn mới */
             // $this->getComment_tripadvisor($url, 0, $this->count);
             $flag = true;
+        }
+        return $flag;
+    }
+
+    public function downloadHotelInfo_traveloka($url){
+        $flag       = false;
+        if(!empty($url)){
+            // Tạo đối tượng Client của Goutte
+            $client         = new Client();
+            // Gửi yêu cầu GET đến URL cần lấy dữ liệu
+            $crawlerContent = $client->request('GET', $url);
+            $this->arrayData['url_crawler_traveloka'] = $url;
+            /* ===== loại khách sạn */
+            $crawlerContent->filter('.r-ml3lyg .r-1ssbvtb .r-1h0z5md')->each(function($node){
+                $this->arrayData['type_name'][]     = $node->text();
+            });
+            $this->arrayData['type_name']           = trim($this->arrayData['type_name'][0]) ?? '';
+            /* ===== sao khách sạn */
+            $crawlerContent->filter('.r-ml3lyg .r-1ssbvtb img')->each(function($node){
+                $this->arrayData['type_rating'][]   = $node->text();
+            });
+            $rating                                 = !empty($this->arrayData['type_rating']) ? count($this->arrayData['type_rating']) : 0;
+            if($rating>0&&$rating<=5){
+                $this->arrayData['type_rating']     = count($this->arrayData['type_rating']);
+            }else {
+                $this->arrayData['type_rating']     = 0;
+            }
+
+            $flag   = true;
         }
         return $flag;
     }

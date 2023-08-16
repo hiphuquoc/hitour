@@ -20,6 +20,34 @@
         <div class="formBox_full_item">
             <div class="flexBox">
                 <!-- One Row -->
+                @php
+                    $typeNames = [
+                        'Khách sạn', 'Khu nghỉ dưỡng', 'Nhà nghỉ Homestay', 'Nhà nghỉ', 'Căn hộ', 'Nhà khách gia đình', 'Biệt thự', 'Nhà riêng','Khác'
+                    ];
+                @endphp
+                <div class="flexBox_item">
+                    <label class="form-label inputRequired" for="type_name">Loại</label>
+                    <select class="select2 form-select select2-hidden-accessible" id="type_name" name="type_name">
+                        @foreach($typeNames as $typeName)
+                            @php
+                                $selected   = null;
+                                if(!empty($item['type_name'])&&strtolower($item['type_name'])==strtolower($typeName)) $selected = ' selected';
+                            @endphp
+                            <option value="{{ strtolower($typeName) }}"{{ $selected }}>{{ strtolower($typeName) }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="flexBox_item">
+                    <label class="form-label" for="type_rating">Loại sao</label>
+                    <input type="number" min="1" max="5" class="form-control" id="type_rating" name="type_rating" value="{{ old('type_rating') ?? $item['type_rating'] ?? '' }}" />
+                </div>
+            </div>
+            
+        </div>
+        <!-- One Row -->
+        <div class="formBox_full_item">
+            <div class="flexBox">
+                <!-- One Row -->
                 <div class="flexBox_item">
                     <label class="form-label" for="company_code">Mã số thuế</label>
                     <input type="text" class="form-control" id="company_code" name="company_code" value="{{ old('company_code') ?? $item['company_code'] ?? '' }}" />

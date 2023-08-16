@@ -1,6 +1,7 @@
 <input type="hidden" id="hotel_info_id" name="hotel_info_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : null }}" />
 <input type="hidden" id="url_crawler_mytour" name="url_crawler_mytour" value="{{ $item['url_crawler_mytour'] ?? null }}" />
 <input type="hidden" id="url_crawler_tripadvisor" name="url_crawler_tripadvisor" value="{{ $item['url_crawler_tripadvisor'] ?? null }}" />
+<input type="hidden" id="url_crawler_traveloka" name="url_crawler_traveloka" value="{{ $item['url_crawler_traveloka'] ?? null }}" />
 <div class="formBox">
     <div class="formBox_full">
         <!-- One Row -->
@@ -100,7 +101,6 @@
                                     }
                                 }
                             }
-                            
                         @endphp
                         <option value="{{ $facility->id }}"{{ $selected }}>{{ $facility->name }}</option>
                     @endforeach
