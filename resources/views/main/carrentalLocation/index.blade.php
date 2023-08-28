@@ -65,7 +65,11 @@
                                     <h2>Câu hỏi thường gặp về {{ $item->name ?? null }}</h2>
                                 </div>
                                 <div class="contentTour_item_text">
-                                    @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
+                                    @include('main.snippets.faq', [
+                                        'list' => $item->questions, 
+                                        'title' => $item->name,
+                                        'hiddenTitle'   => true
+                                    ])
                                 </div>
                             </div>
                         @endif

@@ -168,14 +168,8 @@ class HomeController extends Controller {
         return \Illuminate\Support\Facades\Redirect::to(route('main.home'), 301);
     }
 
-    public function readWebPage($url = null) {
-        // $client         = new Client();
-        // // Gửi yêu cầu GET đến URL cần lấy dữ liệu
-        // $url            = 'https://www.traveloka.com/vi-vn/hotel/detail?spec=16-08-2023.17-08-2023.1.1.HOTEL.9000000890249.Vinholidays%20Fiesta%20Phu%20Quoc.2&contexts=%7B%22inventoryRateKey%22%3A%22povEwB3ZzsU2C6pd%2B6MdU13LUNuufACdbU0usK5vg0dM0tKsNUio4Rxug1zOzHJilcvZa8YdqqIySdppe7dolTIewZlxfjiOGz6oXLTucMvN0%2BgQ3yZPvZcoHwUFNN%2BZpcr%2F%2FNa8o9ElfN8zOYhzzZeg0X586laFpeUViPi9rxANfxrpY14hXPTM%2BJsQ4WZhmhLDdV0WLeT%2FFKfQ0QL8LH02Dvlx%2F8PjYogEE5yzx6g6yOKyKeIDf7jO3GM45O1o1hmSkmz3HiZNSbS8gXb3CDW9nmlhkqLKa4lLkAkZpAH0gcTfW1b8h02Mkay%2BiC4IKB0BsYuboIucRvBmdyyyZ%2Fvnzag3zLIuKsio2qc%2FE%2BLJ0GtLHBjIyioFHRQHjGdXeOjRTl6ytxGba%2F42pjcyydEESW7Hq%2F%2BXk7KJE212dw50t%2FO%2FKXHu8psmmFaPxdrazHaEIke4gLKBu993M9y78xj%2F1r5oS%2BOwbxdgGx0rugiNmO0SRV1ogUSH81Kgs05BsmVHb%2FDz2eMMIR3KhBjDXyMn1qdaM1viWqCGwU1siX1ZIegdsZIo1sjlWnbsTcjefS6Pj3RtIU6lROCEB6QAgiS1WJabPNVEO7waQAXksTDyQHUY2wqyAfRzb44KOjG0poBVHSJ1fq5iJGt%2Fs2ROyG2r1yuKaZ4GSAmh5BaCjz8%3D%22%7D&loginPromo=1&prevSearchId=1774388644401935939';
-        // $crawlerContent = $client->request('GET', $url);
-        // $this->arrayData['url_crawler_traveloka'] = $url;
+    public function readWebPage(Request $request) {
         
-        // dd($this->arrayData);
     }
 
     private function getComment($url, $number, $count){

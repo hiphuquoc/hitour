@@ -1,46 +1,30 @@
-<div class="hotelList">
+<div id="js_filter_parent" class="hotelList">
     @foreach($list as $hotel)
         @php
             $urlHotel = $hotel->seo->slug_full;
         @endphp
-        <div class="hotelList_item">
+        <div class="hotelList_item" data-filter-type="{{ \App\Helpers\Charactor::convertStrToUrl($hotel->type_name) }}">
             <a href="/{{ $urlHotel }}" class="hotelList_item_gallery">
-                <div class="hotelList_item_gallery_top">
-                    @php
-                        $imageContent       = config('admin.images.default_750x460');
-                        $contentImage       = Storage::disk('gcs')->get($hotel->images[0]->image);
-                        if(!empty($contentImage)){
-                            $thumbnail      = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(550, null, function ($constraint) {
-                                $constraint->aspectRatio();
-                            })->encode();
-                            $imageContent   = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
-                        }
-                    @endphp
-                    <img src="{{ $imageContent }}" alt="{{ $hotel->name }}" title="{{ $hotel->name }}" />
-                </div>
-                <div class="hotelList_item_gallery_bottom">
-                    @php
-                        $j = 0;
-                    @endphp
-                    @foreach($hotel->images as $image)
+                @if(!empty($hotel->images)&&$hotel->images->isNotEmpty())
+                    <div class="hotelList_item_gallery_top">
+                        <img src="{{ config('main.svg.loading_main') }}" data-google-cloud="{{ $hotel->images[0]->image }}" data-size="550" alt="{{ $hotel->name }}" title="{{ $hotel->name }}" />
+                    </div>
+                    <div class="hotelList_item_gallery_bottom">
                         @php
-                            ++$j;
-                            if($j==1) continue;
-                            if($j==5) break;
-                            $imageContent       = config('admin.images.default_750x460');
-                            $contentImage       = Storage::disk('gcs')->get($image->image);
-                            if(!empty($contentImage)){
-                                $thumbnail      = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(550, null, function ($constraint) {
-                                    $constraint->aspectRatio();
-                                })->encode();
-                                $imageContent   = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
-                            }
+                            $j = 0;
                         @endphp
-                        <div class="hotelList_item_gallery_bottom_item">
-                            <img src="{{ $imageContent }}" alt="{{ $hotel->name }}" title="{{ $hotel->name }}" />
-                        </div>
-                    @endforeach
-                </div>
+                        @foreach($hotel->images as $image)
+                            @php
+                                ++$j;
+                                if($j==1) continue;
+                                if($j==5) break;
+                            @endphp
+                            <div class="hotelList_item_gallery_bottom_item">
+                                <img src="{{ config('main.svg.loading_main') }}" data-google-cloud="{{ $image->image }}" data-size="200" alt="{{ $hotel->name }}" title="{{ $hotel->name }}" />
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             </a>
             <div class="hotelList_item_info">
                 <div class="hotelList_item_info_title">
@@ -48,8 +32,8 @@
                 </div>
                 <div class="hotelList_item_info_rating">
                     @php
-                        $rating         = $hotel->seo->rating_aggregate_star*2;
-                        $ratingCount    = $hotel->seo->rating_aggregate_count;
+                        $rating         = 0;
+                        $ratingCount    = 0;
                         if(!empty($hotel->comments)&&$hotel->comments->isNotEmpty()){
                             $tmpTotal   = 0;
                             $tmpCount   = 0;
@@ -60,16 +44,17 @@
                             $rating     = number_format($tmpTotal/$tmpCount, 1);
                             $ratingCount = $tmpCount;
                         }
-                        $rating         = $rating*2;
                         $ratingText     = \App\Helpers\Rating::getTextRatingByRule($rating);
                     @endphp
-                    <div class="hotelList_item_info_rating_number">
-                        <img src="{{ Storage::url('images/svg/icon-comment.svg') }}" alt="Đánh giá khách sạn" title="Đánh giá khách sạn" />
-                        <span>{{ $rating }}</span> ({{ $ratingCount }})
-                    </div>
-                    <div class="hotelList_item_info_rating_text">
-                        {{ $ratingText }}
-                    </div>
+                    @if(!empty($ratingCount))
+                        <div class="hotelList_item_info_rating_number">
+                            <img src="{{ Storage::url('images/svg/icon-comment.svg') }}" alt="Đánh giá khách sạn" title="Đánh giá khách sạn" />
+                            <span>{{ $rating }}</span> ({{ $ratingCount }})
+                        </div>
+                        <div class="hotelList_item_info_rating_text">
+                            {{ $ratingText }}
+                        </div>
+                    @endif
                 </div>
                 <div class="hotelList_item_info_type">
                     <div class="hotelList_item_info_type_text">

@@ -24,7 +24,7 @@
             'img'       => '/storage/images/upload/huong-dan-dat-tour-3-type-manager-upload.webp',
             'title'     => 'Thanh toán và hoàn tất',
             'content'   => '<ul>
-                                <li>Nhân viên '.config('company.sortname').' sẽ liên hệ lại và gửi xác nhận chi tiết</li>
+                                <li>Nhân viên '.config('main.name').' sẽ liên hệ lại và gửi xác nhận chi tiết</li>
                                 <li>Quý khách thanh toán (hoặc cọc) theo hướng dẫn trong xác nhận</li>
                                 <li>Và cung cấp thông tin từng hành khách (nếu có yêu cầu)</li>
                                 <li>Hoàn tất các bước trên Quý khách sẽ nhận được một <strong>Phiếu xác nhận</strong></li>
@@ -35,7 +35,7 @@
             'title'     => 'Sử dụng dịch vụ Tour',
             'content'   => '<ul>
                                 <li>Trước ngày khởi hành Nhân viên sẽ liên hệ Quý khách để dặn dò chi tiết</li>
-                                <li><strong>Phiếu xác nhận</strong> có giá trị sử dụng dịch vụ Tour của '.config('company.sortname').'</li>
+                                <li><strong>Phiếu xác nhận</strong> có giá trị sử dụng dịch vụ Tour của '.config('main.name').'</li>
                                 <li>Tùy thuộc vào mỗi chương trình Tour mà Quý khách nhận thêm các <strong>Vé dịch vụ</strong> đi kèm khác nhau (Ví dụ: vé tàu cao tốc, vé máy bay,...)</li>
                             </ul>
                             <p>

@@ -11,19 +11,20 @@
 	<div class="bookFormSort" onClick="hideShowAround();">
 		<div class="bookFormSort_head">
 			<div {{ !empty($active)&&$active=='ship' ? 'class=active' : null }} data-tab="shipBookingForm" onClick="changeTab(this);">
-				<div><i class="fa-solid fa-ship"></i>Tàu cao tốc</div>
+				<div class="show-767 maxLine_1"><i class="fa-solid fa-ship"></i>Tàu</div>
+				<div class="hide-767 maxLine_1"><i class="fa-solid fa-ship"></i>Tàu cao tốc</div>
 			</div>
 			<div {{ !empty($active)&&$active=='tour' ? 'class=active' : null }} data-tab="tourBookingForm" onClick="changeTab(this);">
-				<div><i class="fa-solid fa-suitcase-rolling"></i>Tour</div>
+				<div class="maxLine_1"><i class="fa-solid fa-suitcase-rolling"></i>Tour</div>
 			</div>
 			<div {{ !empty($active)&&$active=='combo' ? 'class=active' : null }} data-tab="comboBookingForm" onClick="changeTab(this);">
-				<div><i class="fa-solid fa-ship"></i>Combo</div>
+				<div class="maxLine_1"><i class="fa-solid fa-ship"></i>Combo</div>
 			</div>
 			<div {{ !empty($active)&&$active=='hotel' ? 'class=active' : null }} data-tab="hotelBookingForm" onClick="changeTab(this);">
-				<i class="fa-solid fa-hotel"></i>Khách sạn
+				<div class="maxLine_1"><i class="fa-solid fa-hotel"></i>Khách sạn</div>
 			</div>
 			<div {{ !empty($active)&&$active=='service' ? 'class=active' : null }} data-tab="ticketBookingForm" onClick="changeTab(this);">
-				<div><i class="fa-solid fa-ticket"></i>Vé vui chơi</div>
+				<div class="maxLine_1"><i class="fa-solid fa-ticket"></i>Vé vui chơi</div>
 			</div>
 		</div>
 		<div class="bookFormSort_body">

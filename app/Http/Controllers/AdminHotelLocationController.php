@@ -51,6 +51,7 @@ class AdminHotelLocationController extends Controller {
                                 }])
                                 ->with('seo')
                                 ->first();
+                                // dd($item->questions);
         $provinces          = Province::getItemByIdRegion($item->region_id ?? 0);
         $districts          = District::getItemByIdProvince($item->province_id ?? 0);
         $content        = null;
@@ -145,7 +146,7 @@ class AdminHotelLocationController extends Controller {
                         ->where('relation_table', 'hotel_location')
                         ->where('reference_id', $idHotelLocation)
                         ->delete();
-            if(!empty($request->get('question_answer'))){
+             if(!empty($request->get('question_answer'))){
                 foreach($request->get('question_answer') as $itemQues){
                     if(!empty($itemQues['question'])&&!empty($itemQues['answer'])){
                         QuestionAnswer::insertItem([

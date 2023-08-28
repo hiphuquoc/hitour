@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Services\BuildInsertUpdateModel;
+// use App\Services\BuildInsertUpdateModel;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,10 +13,10 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function register(){
-        // Binds BuildInsertUpdateModel to the container
-        $this->app->bind(BuildInsertUpdateModel::class, function ($app) {
-            return new BuildInsertUpdateModel(/* Add any required dependencies here */);
-        });
+        // // Binds BuildInsertUpdateModel to the container
+        // $this->app->bind(BuildInsertUpdateModel::class, function ($app) {
+        //     return new BuildInsertUpdateModel(/* Add any required dependencies here */);
+        // });
     }
 
     /**

@@ -116,7 +116,7 @@ return [
         'contentSchedule'           => 'public/contents/shipSchedule/',
         'contentComboLocation'      => 'public/contents/comboLocations/',
         'contentHotelLocation'      => 'public/contents/hotelLocations/',
-        'contentHotelInfo'          => 'public/contents/hotelInfos/',
+        'contentHotel'              => 'public/contents/hotelInfos/',
     ],
 
     'alert'     => [

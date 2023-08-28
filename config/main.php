@@ -52,5 +52,8 @@ return [
             'text'  => 'Rất tệ',
             'score' => '0'
         ]
-    ]
+        ],
+        'hotel_type'    => [
+            'Khách sạn', 'Khu nghỉ dưỡng', 'Homestay', 'Nhà nghỉ', 'Căn hộ', 'Nhà khách gia đình', 'Biệt thự', 'Nhà riêng','Khác'
+        ]
 ];

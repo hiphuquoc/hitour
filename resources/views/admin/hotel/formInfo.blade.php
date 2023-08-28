@@ -20,15 +20,10 @@
         <div class="formBox_full_item">
             <div class="flexBox">
                 <!-- One Row -->
-                @php
-                    $typeNames = [
-                        'Khách sạn', 'Khu nghỉ dưỡng', 'Nhà nghỉ Homestay', 'Nhà nghỉ', 'Căn hộ', 'Nhà khách gia đình', 'Biệt thự', 'Nhà riêng','Khác'
-                    ];
-                @endphp
                 <div class="flexBox_item">
                     <label class="form-label inputRequired" for="type_name">Loại</label>
                     <select class="select2 form-select select2-hidden-accessible" id="type_name" name="type_name">
-                        @foreach($typeNames as $typeName)
+                        @foreach(config('main.hotel_type') as $typeName)
                             @php
                                 $selected   = null;
                                 if(!empty($item['type_name'])&&strtolower($item['type_name'])==strtolower($typeName)) $selected = ' selected';

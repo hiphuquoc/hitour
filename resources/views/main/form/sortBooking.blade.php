@@ -10,7 +10,7 @@
 <div id="js_setHeightBox_box" class="bookOnline" style="background: {{ $imageSlider }}"></div>
 <!-- Booking form -->
 @include('main.form.formBooking', compact('active'))
-@push('scripts-custom')
+{{-- @push('scripts-custom')
 	<script type="text/javascript">
 		setHeightBox('js_setHeightBox_box', 0.15625);
         $(window).resize(function(){
@@ -22,4 +22,4 @@
             $('#'+idBox).css('height', valueHeight+'px');
         }
 	</script>
-@endpush
+@endpush --}}

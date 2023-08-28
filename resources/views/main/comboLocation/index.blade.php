@@ -85,19 +85,28 @@
         <!-- Combo box -->
         <div class="sectionBox backgroundPrimaryGradiend">
             <div class="container">
-                <h2 class="sectionBox_title">Combo {{ $item->display_name ?? null }} - Danh sách Combo du lịch {{ $item->display_name ?? null }}</h2>
-                <p class="sectionBox_desc">Tổng hợp các chương trình <strong>Combo {{ $item->display_name ?? null }} trọn gói</strong> và <strong>Combo {{ $item->display_name ?? null }} trong ngày</strong> đa dạng, chất lượng hàng đầu được cung cấp và đảm bảo bởi {{ config('company.sortname') }} cùng hệ thống đối tác du lịch trên toàn quốc.</p>
+                <h2 class="sectionBox_title">Combo {{ $item->display_name ?? null }} - Danh sách Combo du lịch {{ $item->display_name ?? null }} chất lượng</h2>
+                <p class="sectionBox_desc">Tổng hợp các chương trình <strong>Combo {{ $item->display_name ?? null }} trọn gói</strong> và <strong>Combo {{ $item->display_name ?? null }} trong ngày</strong> đa dạng, chất lượng hàng đầu được cung cấp và đảm bảo bởi {{ config('main.name') }} cùng hệ thống đối tác du lịch trên toàn quốc.</p>
                 {{-- @include('main.tourLocation.filterBox') --}}
-                @if(!empty($item->combos)&&$item->combos->isNotEmpty())
-                    @include('main.comboLocation.comboGrid', ['list' => $item->combos])
+                @php
+                    $dataCombos             = new \Illuminate\Support\Collection();
+                    $i                      = 0;
+                    foreach($item->combos as $combo){
+                        $dataCombos[$i]               = $combo->infoCombo;
+                        $dataCombos[$i]->seo          = $combo->infoCombo->seo;
+                        ++$i;
+                    }
+                @endphp
+                @if(!empty($dataCombos)&&$dataCombos->isNotEmpty())
+                    @include('main.comboLocation.comboItem', ['list' => $dataCombos])
                 @else 
-                    <div style="color:#069a8e;">Các chương trình <strong>Combo {{ $item->display_name ?? null }}</strong> đang được {{ config('company.sortname') }} cập nhật và sẽ sớm giới thiệu đến Quý khách trong thời gian tới!</div>
+                    <div style="color:#069a8e;">Các chương trình <strong>Combo {{ $item->display_name ?? null }}</strong> đang được {{ config('main.name') }} cập nhật và sẽ sớm giới thiệu đến Quý khách trong thời gian tới!</div>
                 @endif
             </div>
         </div>
 
-        <!-- Hướng dẫn đặt Vé -->
-        @include('main.comboLocation.guideBook', ['title' => 'Hướng dẫn đặt Combo '.$item->display_name])
+        {{-- <!-- Hướng dẫn đặt Vé -->
+        @include('main.comboLocation.guideBook', ['title' => 'Hướng dẫn đặt Combo '.$item->display_name]) --}}
 
         <!-- START:: Video -->
         @include('main.tourLocation.videoBox', [
@@ -105,6 +114,15 @@
             'title' => 'Video Combo '.$item->display_name
         ])
         <!-- END:: Video -->
+
+        <!-- Câu hỏi thường gặp -->
+        @if(!empty($item->questions)&&$item->questions->isNotEmpty())
+            <div class="sectionBox withBorder">
+                <div class="container" style="border-bottom:none !important;">
+                    @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
+                </div>
+            </div>
+        @endif
 
     </div>
 @endsection

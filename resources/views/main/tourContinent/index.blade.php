@@ -179,7 +179,6 @@
             @if(!empty($item->questions)&&$item->questions->isNotEmpty())
                 <div class="sectionBox withBorder">
                     <div class="container">
-                        <h2 class="sectionBox_title">Câu hỏi thường gặp về Tour {{ $item->display_name ?? null }}</h2>
                         @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
                     </div>
                 </div>

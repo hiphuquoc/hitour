@@ -18,6 +18,7 @@
     padding: 0;
     background: #fff;
     cursor: pointer;
+    border-radius: 5px;
     label {
         cursor: pointer;
         margin-bottom: 0;
@@ -265,7 +266,7 @@
         }
     }
     input, textarea, .select2-container--default .select2-selection--single .select2-selection__rendered {
-        color: $colorLv1-hover !important;
+        color: $colorLv2 !important;
     }
     label {
         margin-bottom: 0.25rem;
@@ -340,10 +341,10 @@
             border-left: 1px solid $bg-04;
         }
         &:hover {
-            background: $colorLv1-03;
+            @include colorOpacity('background', $colorLv1, 0.3)
         }
         &.active {
-            background: linear-gradient(90deg, $colorLv1 0, $colorLv1-hover 100%);
+            background: linear-gradient(90deg, $colorLv1 0, $colorLv2 100%);
             color: #fff;
         }
     }
@@ -393,10 +394,6 @@
     color: $colorRed;
     font-style: italic;
 }
-// .inputWithIcon {
-//     position: relative;
-    
-// }
 .inputNumberCustom {
     display: flex;
     width: 220px;
@@ -445,7 +442,7 @@
                 border-left: 1px solid $bg-05;
             }
             &.active {
-                background: linear-gradient(90deg, $colorLv1 0, $colorLv1-hover 100%);
+                background: linear-gradient(90deg, $colorLv1 0, $colorLv2 100%);
                 color: #fff;
                 .chooseDepartureShipBox_head_item_price {
                     color: $colorSLv1;
@@ -456,7 +453,7 @@
                 font-weight: 500;
             }
             &_price {
-                color: $colorLv1-hover;
+                color: $colorLv2;
                 font-weight: 500;
                 font-size: 1.2rem;
                 letter-spacing: 0.5px;
@@ -492,11 +489,11 @@
                         background: $colorSLv1 !important;
                     }
                     &:hover {
-                        background: $colorLv1-02;
+                        @include colorOpacity('background', $colorLv1, 0.2)
                     }
                     .price {
                         font-family: $fontTitle;
-                        color: $colorLv1-hover;
+                        color: $colorLv2;
                         font-size: 1.2rem;
                         letter-spacing: 0.5px;
                     }
@@ -504,7 +501,7 @@
                 .highLight {
                     font-size: 1.2rem;
                     font-family: $fontTitle;
-                    color: $colorLv1-hover;
+                    color: $colorLv2;
                 }
             }
         }
@@ -560,7 +557,7 @@
                 }
             }
             &:hover {
-                background: $colorLv1-01;
+                @include colorOpacity('background', $colorLv1, 0.1)
             }
             > * {
                 width: 100%;
@@ -578,7 +575,7 @@
             .highLight {
                 font-weight: bold;
                 font-size: 1.1rem;
-                color: $colorLv1-hover;
+                color: $colorLv2;
             }
         }
     }

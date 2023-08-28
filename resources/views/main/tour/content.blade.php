@@ -6,38 +6,38 @@
 			<h2>Điểm nổi bật của Tour</h2>
 		</div>
 		<div class="contentTour_item_text">
-			<table class="tableList noResponsive">
+			<table class="tableList noResponsive" style="margin-bottom:0;">
 				<tbody>
 					<tr>
 						<td style="width:100px;">Hành trình</td>
-						<td><h3 style="font-size:1.05rem;">{{ $item->seo->description }}</h3></td>
+						<td><h3 style="font-size:1rem;">{{ $item->seo->description }}</h3></td>
 					</tr>
 					@if(!empty($item->days))
                         @if($item->days>1)
                             <tr>
                                 <td>Thời gian</td>
-                                <td><h3>{{ $item->days }} ngày {{ $item->nights }} đêm</h3></td>
+                                <td><h3 style="font-size:1rem;">{{ $item->days }} ngày {{ $item->nights }} đêm</h3></td>
                             </tr>
                         @else 
                             <tr>
                                 <td>Thời gian</td>
-                                <td><h3>{{ $item->time_start }} - {{ $item->time_end }}</h3></td>
+                                <td><h3 style="font-size:1rem;">{{ $item->time_start }} - {{ $item->time_end }}</h3></td>
                             </tr>
                         @endif
                     @endif
                     @if(!empty($item->departure_schedule))
                         <tr>
                             <td>Lịch tour</td>
-                            <td><h3>{{ $item->departure_schedule }}</h3></td>
+                            <td><h3 style="font-size:1rem;">{{ $item->departure_schedule }}</h3></td>
                         </tr>
                     @endif
                     <tr>
                         <td>Vận chuyển</td>
-                        <td><h3>{{ $item->transport }}</h3></td>
+                        <td><h3 style="font-size:1rem;">{{ $item->transport }}</h3></td>
                     </tr>
                     <tr>
                         <td>Xuất phát</td>
-                        <td><h3>{{ $item->pick_up }}</h3></td>
+                        <td><h3 style="font-size:1rem;">{{ $item->pick_up }}</h3></td>
                     </tr>
 				</tbody>
 			</table>
@@ -56,7 +56,7 @@
                     $options    = \App\Http\Controllers\AdminTourOptionController::margeTourPriceByDate($item->options);
                     // dd($options);
                 @endphp
-                <table class="tableContentBorder">
+                <table class="tableContentBorder" style="margin-bottom:0;">
                     <thead>
                         <tr>
                             <th>Tùy chọn</th>
@@ -67,7 +67,7 @@
                         @foreach($options as $option)
                             <tr>
                                 <td>
-                                    <h3 style="font-weight:700;font-size:1.05rem;">{{ $option['name'] }}</h3>
+                                    <h3 style="font-weight:700;font-size:1rem;">{{ $option['name'] }}</h3>
                                     @foreach($option['date_apply'] as $price)
                                         @foreach($price as $applyAge)
                                             <div style="font-size:0.95rem;">từ <b>{{ !empty($applyAge['date_start']) ? date('d/m/Y', strtotime($applyAge['date_start'])) : '...' }}</b> đến <b>{{ !empty($applyAge['date_end']) ? date('d/m/Y', strtotime($applyAge['date_end'])) : '...' }}</b></div>
@@ -231,7 +231,11 @@
                 <h2>Câu hỏi thường gặp về {{ $item->name ?? null }}</h2>
             </div>
             <div class="contentTour_item_text">
-                @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
+                @include('main.snippets.faq', [
+                    'list' => $item->questions, 
+                    'title' => $item->name,
+                    'hiddenTitle'   => true
+                ])
             </div>
         </div>
     @endif

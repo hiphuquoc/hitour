@@ -5,7 +5,7 @@
    @endphp
    @if(!empty($parent->tourLocations)&&$parent->tourLocations->isNotEmpty())
    @php
-       $flagMargin = 'margin-top:1.5rem;';
+       $flagMargin = 'margin-top:1.25rem;';
    @endphp
    <div class="serviceRelatedSidebarBox">
       <div class="serviceRelatedSidebarBox_title">
@@ -89,7 +89,7 @@
    @endphp
    @if(!empty($categoryRelates)&&$categoryRelates->isNotEmpty())
    @php
-      $flagMargin2 = 'margin-top:1.5rem;';
+      $flagMargin2 = 'margin-top:1.25rem;';
    @endphp
    <div class="serviceRelatedSidebarBox" style="{{ $flagMargin }}">
       <div class="serviceRelatedSidebarBox_title">

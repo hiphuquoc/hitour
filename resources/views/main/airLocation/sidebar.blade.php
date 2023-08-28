@@ -9,9 +9,9 @@
    @endphp
    @if(!empty($item->tourLocations)&&$item->tourLocations->isNotEmpty())
       @php
-         $flagMargin = 'margin-top:1.5rem;';
+         $flagMargin = 'margin-top:1.25rem;';
       @endphp
-      <div class="serviceRelatedSidebarBox" style="margin-top:1.5rem;">
+      <div class="serviceRelatedSidebarBox" style="margin-top:1.25rem;">
          <div class="serviceRelatedSidebarBox_title">
             <h2>{{ config('main.title_list_service_sidebar') }}</h2>
          </div>
@@ -22,6 +22,17 @@
                <a href="/{{ $tourLocation->infoTourLocation->seo->slug_full ?? null }}" title="{{ $tourLocation->infoTourLocation->name ?? $tourLocation->infoTourLocation->seo->title ?? null }}" class="serviceRelatedSidebarBox_box_item">
                   <i class="fa-solid fa-person-hiking"></i><h3>{{ $tourLocation->infoTourLocation->name ?? $tourLocation->infoTourLocation->seo->title ?? null }}</h3>
                </a>
+            @endforeach
+
+            <!-- combo du lịch -->
+            @foreach($item->tourLocations as $tourLocation)
+               @if($tourLocation->infoTourLocation->comboLocations->isNotEmpty())
+                  @foreach($tourLocation->infoTourLocation->comboLocations as $comboLocation)
+                     <a href="/{{ $comboLocation->infoComboLocation->seo->slug_full ?? null }}" title="{{ $comboLocation->infoComboLocation->name ?? $comboLocation->infoComboLocation->seo->title ?? null }}" class="serviceRelatedSidebarBox_box_item">
+                        <i class="fa-solid fa-award"></i><h3>{{ $comboLocation->infoComboLocation->name ?? $comboLocation->infoComboLocation->seo->title ?? null }}</h3>
+                     </a>
+                  @endforeach
+               @endif
             @endforeach
 
             <!-- tàu cao tốc -->

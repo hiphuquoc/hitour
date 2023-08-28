@@ -48,19 +48,10 @@
                     const valueDay  = $(this).data('filter-day'); /* dùng document để lấy cả trong hidden */
                     data.push($(this));
                 })
-            }else if(type=="tour-nhieu-ngay"){
+            }else {
                 $(document).find("[data-filter-day]").each(function(){
-                    const valueDay  = $(this).data('filter-day');
-                    if(parseInt(valueDay)>1) {
-                        data.push($(this));
-                    }else {
-                        dataHidden.push($(this));
-                    }
-                })
-            }else if(type=="tour-trong-ngay"){
-                $(document).find("[data-filter-day]").each(function(){
-                    const valueDay  = $(this).data('filter-day');
-                    if(parseInt(valueDay)==1) {
+                    const valueFilter  = $(this).data('filter-day');
+                    if(valueFilter==type){
                         data.push($(this));
                     }else {
                         dataHidden.push($(this));
@@ -96,10 +87,10 @@
             $(elementButton).addClass('active');
             /* đổi giao diện */
             if(type=='list'){
-                $('.tourGrid').addClass('tourList');
+                $('.tourList').removeClass('tourGrid');
                 $('.loadingGridBox').addClass('loadingListBox');
             }else if(type=='grid'){
-                $('.tourGrid').removeClass('tourList');
+                $('.tourList').addClass('tourGrid');
                 $('.loadingGridBox').removeClass('loadingListBox');
             }
         }

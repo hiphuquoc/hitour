@@ -92,7 +92,7 @@
                         }
                     }
                 @endphp
-                @include('main.home.servicesSlick', ['list' => $services])
+                @include('main.serviceLocation.serviceItem', ['list' => $services])
                 {{-- @include('main.home.serviceLocationList', compact('serviceLocations')) --}}
             </div>
         </div>

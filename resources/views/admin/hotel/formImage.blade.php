@@ -11,8 +11,8 @@
             </span>
         </label>
     </span>
-    <input class="form-control" type="file" id="gallery" name="gallery[]" onChange="readURLs(this, 'galleryUpload');" multiple />
-    <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
+    {{-- <input class="form-control" type="file" id="gallery" name="gallery[]" onChange="readURLs(this, 'galleryUpload');" multiple />
+    <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div> --}}
     <div id="galleryUpload" class="imageUpload">
         @if(!empty($item->images)&&$item->images->isNotEmpty())
             <div id="js_removeAllImageHotelInfo_box" style="position:relative;">
@@ -70,13 +70,14 @@
                         slug
                     }
                 }).done(function(data){
-                    for(let i = 0; i<data.length; i++){
-                        var div         = document.createElement("div");
-                        div.innerHTML   = '<img src="'+data[i]+'" />';
-                        div.innerHTML   += '<input type="hidden" name="images[]" value="'+data[i]+'" />';
-                        $('#galleryUpload').append(div);
-                    }
-                    $('#formModalDownloadImageHotelInfo').modal('hide');
+                    location.reload();
+                    // for(let i = 0; i<data.length; i++){
+                    //     var div         = document.createElement("div");
+                    //     div.innerHTML   = '<img src="'+data[i]+'" />';
+                    //     div.innerHTML   += '<input type="hidden" name="images[]" value="'+data[i]+'" />';
+                    //     $('#galleryUpload').append(div);
+                    // }
+                    // $('#formModalDownloadImageHotelInfo').modal('hide');
                 });
             }
         }

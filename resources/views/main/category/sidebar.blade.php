@@ -5,7 +5,7 @@
    @endphp
    @if(!empty($item->tourLocations)&&$item->tourLocations->isNotEmpty())
    @php
-       $flagMargin  = 'margin-top:1.5rem;';
+       $flagMargin  = 'margin-top:1.25rem;';
    @endphp
    <div class="serviceRelatedSidebarBox">
       <div class="serviceRelatedSidebarBox_title">

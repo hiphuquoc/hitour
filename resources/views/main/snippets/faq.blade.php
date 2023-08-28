@@ -1,5 +1,12 @@
 @if($list->isNotEmpty())
     <div class="faqBox">
+        @if(!empty($hiddenTitle)&&$hiddenTitle==true)
+            
+        @else 
+            <div class="faqBox_title">
+                <h2 class="sectionBox_title">Câu hỏi thường gặp về {{ $item->name ?? null }}</h2>
+            </div>
+        @endif
         <div class="faqBox_content">
             @foreach($list as $faq)
                 <div class="faqBox_content_item">

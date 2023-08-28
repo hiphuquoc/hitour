@@ -1,15 +1,20 @@
 <div class="loadingGridBox">
     @for($i=0;$i<3;++$i)
         <div class="loadingGridBox_item">
-            <span class="loadingGridBox_item_top"></span>
-            <div class="loadingGridBox_item_middle">
-                <span class="loadingGridBox_item_middle_item"></span>
-                <span class="loadingGridBox_item_middle_item"></span>
-                <span class="loadingGridBox_item_middle_item"></span>
-                <span class="loadingGridBox_item_middle_item"></span>
+            <div class="loadingGridBox_item_image">
+                <div class="loadingGridBox_item_image_item"></div>
+                <div class="loadingGridBox_item_image_item"></div>
+                <div class="loadingGridBox_item_image_item"></div>
+                <div class="loadingGridBox_item_image_item"></div>
             </div>
-            <div class="loadingGridBox_item_bottom">
-                <span class="loadingGridBox_item_bottom_item"></span>
+            <div class="loadingGridBox_item_info">
+                <span class="loadingGridBox_item_info_item"></span>
+                <span class="loadingGridBox_item_info_item"></span>
+                <span class="loadingGridBox_item_info_item"></span>
+                <span class="loadingGridBox_item_info_item"></span>
+            </div>
+            <div class="loadingGridBox_item_price">
+                <span class="loadingGridBox_item_price_item"></span>
             </div>
         </div>
     @endfor

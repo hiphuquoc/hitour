@@ -36,12 +36,12 @@
 @pushonce('scripts-custom')
     <script type="text/javascript">
         $(document).ready(function(){
-            setSlick();
+            setSlickBlog();
         })
         $(window).resize(function(){
-            setSlick();
+            setSlickBlog();
         })
-        function setSlick(){
+        function setSlickBlog(){
             $('.blogGridSlick_box').slick({
                 infinite: false,
                 slidesToShow: 3.6,

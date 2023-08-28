@@ -55,17 +55,18 @@
 
     @include('main.form.sortBooking', [
         'item'      => $item,
-        'active'    => 'Hotel'
+        'active'    => 'hotel'
     ])
 
     @include('main.snippets.breadcrumb')
 
     <div class="pageContent">
+
         <!-- Giới thiệu Hotel du lịch -->
         <div class="sectionBox">
             <div class="container">
                 <!-- title -->
-                <h1 class="titlePage">Hotel {{ $item->display_name ?? null }} - Giới thiệu Hotel {{ $item->display_name ?? null }}</h1>
+                <h1 class="titlePage">Khách sạn {{ $item->display_name ?? null }} - Giới thiệu chung về khách sạn {{ $item->display_name ?? null }}</h1>
                 <!-- rating -->
                 @include('main.template.rating', compact('item'))
                 <!-- content -->
@@ -85,8 +86,8 @@
         <!-- Hotel box -->
         <div class="sectionBox backgroundPrimaryGradiend">
             <div class="container">
-                <h2 class="sectionBox_title">Hotel {{ $item->display_name ?? null }} - Danh sách khách sạn {{ $item->display_name ?? null }}</h2>
-                <p class="sectionBox_desc">Tổng hợp các <strong>Khách sạn {{ $item->display_name ?? null }}</strong> thịnh hành, chất lượng hàng đầu, được đánh giá cao và là lựa chọn hàng đầu của khách du lịch.</p>
+                <h2 class="sectionBox_title">Khách sạn {{ $item->display_name ?? null }} - Danh sách khách sạn {{ $item->display_name ?? null }}</h2>
+                <p class="sectionBox_desc">Tổng hợp các <strong>Khách sạn {{ $item->display_name ?? null }}</strong> thịnh hành, chất lượng, được đánh giá cao và là lựa chọn hàng đầu của khách du lịch.</p>
                 @include('main.hotelLocation.filterBox')
                 @if(!empty($item->hotels)&&$item->hotels->isNotEmpty())
                     @include('main.hotelLocation.hotelGrid', ['list' => $item->hotels])
@@ -96,8 +97,8 @@
             </div>
         </div>
 
-        <!-- Hướng dẫn đặt Vé -->
-        @include('main.hotelLocation.guideBook', ['title' => 'Hướng dẫn đặt Hotel '.$item->display_name])
+        {{-- <!-- Hướng dẫn đặt Vé -->
+        @include('main.hotelLocation.guideBook', ['title' => 'Hướng dẫn đặt Khách sạn '.$item->display_name]) --}}
 
         <!-- START:: Video -->
         @include('main.tourLocation.videoBox', [
@@ -106,6 +107,14 @@
         ])
         <!-- END:: Video -->
 
+        <!-- faq -->
+        @if(!empty($item->questions)&&$item->questions->isNotEmpty())
+            <div class="sectionBox withBorder">
+                <div class="container" style="border-bottom:none !important;">
+                    @include('main.snippets.faq', ['list' => $item->questions, 'title' => $item->name])
+                </div>
+            </div>
+        @endif
     </div>
 @endsection
 @push('bottom')

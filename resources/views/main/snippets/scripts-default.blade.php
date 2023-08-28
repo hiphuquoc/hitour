@@ -173,70 +173,75 @@
                 dataSend    : dataTocContent
             },
             success     : function(data){
-                $('#tocContentMain').html(data);
-                fixedTocContentIcon();
-                setHeightTocFixed();
-
-                $(window).resize(function() {
+                if(data!=''){
+                    $('#tocContentMain').html(data);
                     fixedTocContentIcon();
                     setHeightTocFixed();
-                });
 
-                $('.tocFixedIcon, .tocContentMain.tocFixed .tocContentMain_close').click(function(){
-                    let elementMenu = $('.tocContentMain.tocFixed');
-                    let displayMenu = elementMenu.css('display');
-                    if(displayMenu=='none'){
-                        elementMenu.css('display', 'block');
-                    }else {
-                        elementMenu.css('display', 'none');
-                    }
-                    // fixedTocContentIcon();
-                });
+                    $(window).resize(function() {
+                        fixedTocContentIcon();
+                        setHeightTocFixed();
+                    });
 
-                $('.tocContentMain_title, .tocContentMain_close').click(function(){
-                    let elemtMenu   = $('.tocContentMain .tocContentMain_list');
-                    let displayMenu = elemtMenu.css('display');
-                    if(displayMenu=='none'){
-                        elemtMenu.css('display', 'block');
-                        $('.tocContentMain_close').removeClass('hidden');
-                    }else {
-                        elemtMenu.css('display', 'none');
-                        $('.tocContentMain_close').addClass('hidden');
-                    }
-                });
+                    $('.tocFixedIcon, .tocContentMain.tocFixed .tocContentMain_close').click(function(){
+                        let elementMenu = $('.tocContentMain.tocFixed');
+                        let displayMenu = elementMenu.css('display');
+                        if(displayMenu=='none'){
+                            elementMenu.css('display', 'block');
+                        }else {
+                            elementMenu.css('display', 'none');
+                        }
+                        // fixedTocContentIcon();
+                    });
 
-                function fixedTocContentIcon(){
-                    let widthS      = $(window).width();
-                    let widthC      = $('.container').outerWidth();
-                    let leftE       = parseInt((widthS - widthC - 70) / 2);
-                    if($(window).width() < 1200){
-                        leftE       = parseInt((widthS - widthC + 20) / 2);
+                    $('.tocContentMain_title, .tocContentMain_close').click(function(){
+                        let elemtMenu   = $('.tocContentMain .tocContentMain_list');
+                        let displayMenu = elemtMenu.css('display');
+                        if(displayMenu=='none'){
+                            elemtMenu.css('display', 'block');
+                            $('.tocContentMain_close').removeClass('hidden');
+                        }else {
+                            elemtMenu.css('display', 'none');
+                            $('.tocContentMain_close').addClass('hidden');
+                        }
+                    });
+
+                    function fixedTocContentIcon(){
+                        let widthS      = $(window).width();
+                        let widthC      = $('.container').outerWidth();
+                        let leftE       = parseInt((widthS - widthC - 70) / 2);
+                        if($(window).width() < 1200){
+                            leftE       = parseInt((widthS - widthC + 20) / 2);
+                        }
+                        $('.tocFixedIcon').css('left', leftE);
                     }
-                    $('.tocFixedIcon').css('left', leftE);
+
+                    function setHeightTocFixed(){
+                        let heightToc   = parseInt($(window).height() - 210);
+                        $('.tocContentMain.tocFixed .tocContentMain_list').css('height', heightToc+'px');
+                    }
+
+                    let element         = $('#tocContentMain');
+                    let positionE       = element.offset().top;
+                    let heightE         = element.outerHeight();
+                    let boxContent      = $('#'+idElement);
+                    let positionB       = boxContent.offset().top;
+                    let heightB         = boxContent.outerHeight();
+                    let heightFooter    = $('.footer').outerHeight();
+                    $(document).scroll(function(){
+                        let scrollNow   = $(document).scrollTop();
+                        let minScroll   = parseInt(heightE + positionE);
+                        let maxScroll   = parseInt(heightB + positionB - heightFooter);
+                        if(scrollNow > minScroll && scrollNow < maxScroll){ 
+                            $('.tocFixedIcon').css('display', 'block');
+                        }else {
+                            $('.tocFixedIcon').css('display', 'none');
+                        }
+                    });
+                }else {
+                    $('#tocContentMain').remove();
                 }
-
-                function setHeightTocFixed(){
-                    let heightToc   = parseInt($(window).height() - 210);
-                    $('.tocContentMain.tocFixed .tocContentMain_list').css('height', heightToc+'px');
-                }
-
-                let element         = $('#tocContentMain');
-                let positionE       = element.offset().top;
-                let heightE         = element.outerHeight();
-                let boxContent      = $('#'+idElement);
-                let positionB       = boxContent.offset().top;
-                let heightB         = boxContent.outerHeight();
-                let heightFooter    = $('.footer').outerHeight();
-                $(document).scroll(function(){
-                    let scrollNow   = $(document).scrollTop();
-                    let minScroll   = parseInt(heightE + positionE);
-                    let maxScroll   = parseInt(heightB + positionB - heightFooter);
-                    if(scrollNow > minScroll && scrollNow < maxScroll){ 
-                        $('.tocFixedIcon').css('display', 'block');
-                    }else {
-                        $('.tocFixedIcon').css('display', 'none');
-                    }
-                });
+                
             }
         });
     }

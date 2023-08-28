@@ -3,28 +3,28 @@
     <ul>
         @if(!empty($hotelMB))
             <li id="menuHotel_1" onmouseover="openMegaMenu(this.id);" class="selected">
-                <div>Tour Miền Bắc<i class="fas fa-angle-right"></i></div>
+                <div>Khách sạn Miền Bắc<i class="fas fa-angle-right"></i></div>
             </li>
         @endif
         @if(!empty($hotelMT))
             <li id="menuHotel_2" onmouseover="openMegaMenu(this.id);">
-                <div>Tour Miền Trung<i class="fas fa-angle-right"></i></div>
+                <div>Khách sạn Miền Trung<i class="fas fa-angle-right"></i></div>
             </li>
         @endif
         @if(!empty($hotelMN))
             <li id="menuHotel_3" onmouseover="openMegaMenu(this.id);">
-                <div>Tour Miền Nam<i class="fas fa-angle-right"></i></div>
+                <div>Khách sạn Miền Nam<i class="fas fa-angle-right"></i></div>
             </li>
         @endif
         @if(!empty($hotelBD))
             <li id="menuHotel_4" onmouseover="openMegaMenu(this.id);">
-                <div>Tour Biển Đảo<i class="fas fa-angle-right"></i></div>
+                <div>Khách sạn Biển Đảo<i class="fas fa-angle-right"></i></div>
             </li>
         @endif
     </ul>
     </div>
     <div class="megaMenu_content">
-        <!-- Danh sách Tour Miền Bắc -->
+        <!-- Danh sách Khách sạn Miền Bắc -->
         @if(!empty($hotelMB))
             <ul data-menu="menuHotel_1">
                 @foreach($hotelMB as $item)
@@ -40,7 +40,7 @@
                 @endforeach
             </ul>
         @endif
-        <!-- Danh sách Tour Miền Trung -->
+        <!-- Danh sách Khách sạn Miền Trung -->
         @if(!empty($hotelMT))
             <ul data-menu="menuHotel_2">
                 @foreach($hotelMT as $item)
@@ -56,7 +56,7 @@
                 @endforeach
             </ul>
         @endif
-        <!-- Danh sách Tour Miền Nam -->
+        <!-- Danh sách Khách sạn Miền Nam -->
         @if(!empty($hotelMN))
             <ul data-menu="menuHotel_3">
                 @foreach($hotelMN as $item)
@@ -72,7 +72,7 @@
                 @endforeach
             </ul>
         @endif
-        <!-- Danh sách Tour Biển Đảo -->
+        <!-- Danh sách Khách sạn Biển Đảo -->
         @if(!empty($hotelBD))
             <ul data-menu="menuHotel_4">
                 @foreach($hotelBD as $item)

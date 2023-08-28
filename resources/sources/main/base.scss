@@ -12,11 +12,11 @@ body {
     color: $colorText;
     @media (max-width: 1023px) {
         background: #fff;
-        font-size: 1rem;
+        font-size: 0.975rem;
     }
     @media (max-width: 767px) {
         background: #fff;
-        font-size: 0.975rem;
+        font-size: 0.95rem;
     }
 }
 
@@ -29,7 +29,7 @@ a {
     text-decoration: none;
     color: $colorLv1;
     &:hover {
-        color: $colorLv1-hover;
+        color: $colorLv2;
     }
 }
 
@@ -192,7 +192,7 @@ button {
     box-shadow: 0 1px 3px $bg-07;
     cursor: pointer;
     &:hover {
-        background: $colorSLv1-hover;
+        background: $colorSLv2;
     }
     i {
         margin-right: 5px;

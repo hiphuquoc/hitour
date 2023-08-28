@@ -3,16 +3,24 @@
         <div class="filterBox_label">
             Lọc theo:
         </div>
+        {{-- config('main.hotel_type') --}}
+        @php
+            $arrayFilter    = [];
+            foreach($item->hotels as $hotel){
+                if(!in_array($hotel->type_name, $arrayFilter)){
+                    $arrayFilter[] = $hotel->type_name;
+                }
+            }
+        @endphp
         <div class="filterBox_filter">
-            <div class="filterBox_filter_item active" onClick="filterTour(this, 'tat-ca-tour');">
+            <div class="filterBox_filter_item active" onClick="filter(this, 'tat-ca');">
                 <div>Tất cả</div>
             </div>
-            <div class="filterBox_filter_item" onClick="filterTour(this, 'tour-trong-ngay');">
-                <h3>Tour trong ngày</h3>
-            </div>
-            <div class="filterBox_filter_item" onClick="filterTour(this, 'tour-nhieu-ngay');">
-                <h3>Tour nhiều ngày</h3>
-            </div>
+            @foreach($arrayFilter as $filter)
+                <div class="filterBox_filter_item" onClick="filter(this, '{{ \App\Helpers\Charactor::convertStrToUrl($filter) }}');">
+                    <h3>{{ $filter }}</h3>
+                </div>
+            @endforeach
         </div>
         <div class="filterBox_view">
             <div class="filterBox_view_item active" onClick="filterView(this, 'list');">
@@ -26,7 +34,7 @@
 </div>
 @push('scripts-custom')
     <script type="text/javascript">
-        function filterTour(elementButton, type){
+        function filter(elementButton, type){
             /* active button vừa click */
             $(elementButton).parent().children().each(function(){
                 $(this).removeClass('active');
@@ -35,32 +43,22 @@
             /* hiện loading - ẩn child box chính */
             $('.loadingGridBox').css('display', 'flex');
             $('.loadingGridBox_note').css('display', 'none');
-            const parent    = $('#js_filterTour_parent');
-            const hidden    = $('#js_filterTour_hidden');
+            const parent    = $('#js_filter_parent');
+            const hidden    = $('#js_filter_hidden');
             parent.children().each(function(){
                 $(this).css('display', 'none');
             })
             /* lọc phần tử */
             let data                = [];
             let dataHidden          = [];
-            if(type=="tat-ca-tour"){
-                $(document).find("[data-filter-day]").each(function(){
-                    const valueDay  = $(this).data('filter-day'); /* dùng document để lấy cả trong hidden */
+            if(type=="tat-ca"){
+                $(document).find("[data-filter-type]").each(function(){ /* dùng document để lấy cả trong hidden */
                     data.push($(this));
                 })
-            }else if(type=="tour-nhieu-ngay"){
-                $(document).find("[data-filter-day]").each(function(){
-                    const valueDay  = $(this).data('filter-day');
-                    if(parseInt(valueDay)>1) {
-                        data.push($(this));
-                    }else {
-                        dataHidden.push($(this));
-                    }
-                })
-            }else if(type=="tour-trong-ngay"){
-                $(document).find("[data-filter-day]").each(function(){
-                    const valueDay  = $(this).data('filter-day');
-                    if(parseInt(valueDay)==1) {
+            }else {
+                $(document).find("[data-filter-type]").each(function(){
+                    const valueFilter  = $(this).data('filter-type');
+                    if(valueFilter==type) {
                         data.push($(this));
                     }else {
                         dataHidden.push($(this));
@@ -85,7 +83,6 @@
                         hidden.append(dataHidden[i].clone());
                     }
                 }
-                
             }, 1000);
         }
         function filterView(elementButton, type){

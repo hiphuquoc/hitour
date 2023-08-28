@@ -579,7 +579,7 @@ class RoutingController extends Controller {
                                             }])
                                             ->with('seo', 'comments', 'rooms')
                                             ->first();
-                    $content            = Blade::render(Storage::get(config('admin.storage.contentHotelInfo').$item->seo->slug.'.blade.php'));
+                    $content            = Blade::render(Storage::get(config('admin.storage.contentHotel').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full);
                     $xhtml              = view('main.hotel.index', compact('item', 'content', 'breadcrumb'))->render();
                 }

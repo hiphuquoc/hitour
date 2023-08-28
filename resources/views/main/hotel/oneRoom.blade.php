@@ -206,5 +206,5 @@
             {{ number_format($room->price) }} <sup>đ</sup>
         </div>
     </div>
-    <a href="/#" class="hotelList_item_action_button">chọn phòng</a>
+    <a href="/#" class="hotelList_item_action_button">Đặt phòng</a>
 </div>

@@ -9,9 +9,9 @@
    @endphp
    @if(!empty($item->tourLocations)&&$item->tourLocations->isNotEmpty())
       @php
-         $flagMargin   = 'margin-top:1.5rem;';
+         $flagMargin   = 'margin-top:1.25rem;';
       @endphp
-      <div class="serviceRelatedSidebarBox" style="margin-top:1.5rem;">
+      <div class="serviceRelatedSidebarBox" style="margin-top:1.25rem;">
          <div class="serviceRelatedSidebarBox_title">
             <h2>{{ config('main.title_list_service_sidebar') }}</h2>
          </div>

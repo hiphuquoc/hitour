@@ -1,4 +1,4 @@
-<div id="js_buildTocContentSidebar_idWrite" class="tocContentTour customScrollBar-y" style="margin-top:1.5rem;">
+<div id="js_buildTocContentSidebar_idWrite" class="tocContentTour customScrollBar-y" style="margin-top:1.25rem;">
     <a href="#diem-noi-bat-chuong-trinh-tour" title="Điểm nổi bật Chương trình Tour" class="tocContentTour_item">
         <i class="fa-solid fa-award"></i>Điểm nổi bật CT Tour
     </a>
