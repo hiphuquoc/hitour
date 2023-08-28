@@ -28,7 +28,9 @@
             </a>
             <div class="hotelList_item_info">
                 <div class="hotelList_item_info_title">
-                    <a href="/{{ $urlHotel }}"><h2>{{ $hotel->name }}</h2></a>
+                    <a href="/{{ $urlHotel }}">
+                        <h3>{{ $hotel->name }}</h3>
+                    </a>
                 </div>
                 <div class="hotelList_item_info_rating">
                     @php

@@ -33,7 +33,7 @@
         <div class="tourList_item_info" style="paddig-bottom:0.75rem;">
             <div class="tourList_item_info_title">
                 <a href="/{{ $tour->seo->slug_full ?? null }}">
-                    <h2>{{ $tour->name ?? $tour->seo->title ?? null}}</h2>
+                    <h3>{{ $tour->name ?? $tour->seo->title ?? null}}</h3>
                 </a>
             </div>
             @if(!empty($tour->comments)&&$tour->comments->isNotEmpty())
@@ -63,9 +63,9 @@
                 @endif
             @endif
             {{-- <div class="tourList_item_info_highlightTitle">
-                <h3 class="maxLine_4">
+                <h4 class="maxLine_4">
                     <i class="fa-solid fa-check"></i>{{ $tour->seo->description ?? null }}
-                </h3>
+                </h4>
             </div> --}}
 
             @if(!empty($tour->location->display_name)&&!empty($tour->departure->display_name))
