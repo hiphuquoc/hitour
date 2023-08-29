@@ -12,6 +12,7 @@ use App\Models\CarrentalLocation;
 use App\Models\ServiceLocation;
 use App\Models\AirLocation;
 use App\Models\ComboLocation;
+use App\Models\HotelLocation;
 use App\Models\Seo;
 use App\Services\BuildInsertUpdateModel;
 use App\Models\District;
@@ -31,6 +32,7 @@ use App\Models\RelationTourLocationAirLocation;
 use App\Models\RelationTourLocationDestinationList;
 use App\Models\RelationTourLocationSpecialList;
 use App\Models\RelationTourLocationComboLocation;
+use App\Models\RelationTourLocationHotelLocation;
 use App\Jobs\CheckSeo;
 
 class AdminTourLocationController extends Controller {
@@ -74,6 +76,7 @@ class AdminTourLocationController extends Controller {
         $airLocations       = AirLocation::all();
         $categories         = Category::all();
         $comboLocations     = ComboLocation::all();
+        $hotelLocations     = HotelLocation::all();
         $content        = null;
         if(!empty($item->seo->slug)){
             $content    = Storage::get(config('admin.storage.contentTourLocation').$item->seo->slug.'.blade.php');
@@ -81,7 +84,7 @@ class AdminTourLocationController extends Controller {
         $message            = $request->get('message') ?? null; 
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.tourLocation.view', compact('item', 'type', 'provinces', 'districts', 'guides', 'shipLocations', 'carrentalLocations', 'serviceLocations', 'airLocations', 'categories', 'comboLocations', 'content', 'message'));
+        return view('admin.tourLocation.view', compact('item', 'type', 'provinces', 'districts', 'guides', 'shipLocations', 'carrentalLocations', 'serviceLocations', 'airLocations', 'categories', 'comboLocations', 'hotelLocations', 'content', 'message'));
     }
 
     public function create(TourLocationRequest $request){
@@ -187,9 +190,19 @@ class AdminTourLocationController extends Controller {
                 foreach($request->get('combo_location_id') as $idCombo){
                     $insertRelationTourLocationComboLocation    = [
                         'tour_location_id'      => $idTourLocation,
-                        'combo_location_id'      => $idCombo
+                        'combo_location_id'     => $idCombo
                     ];
                     RelationTourLocationComboLocation::insertItem($insertRelationTourLocationComboLocation);
+                }
+            }
+            /* relation tour_location và hotel_location */
+            if(!empty($request->get('hotel_location_id'))){
+                foreach($request->get('hotel_location_id') as $idHotelLocation){
+                    $insertRelationTourLocationHotelLocation    = [
+                        'tour_location_id'      => $idTourLocation,
+                        'hotel_location_id'     => $idHotelLocation
+                    ];
+                    RelationTourLocationHotelLocation::insertItem($insertRelationTourLocationHotelLocation);
                 }
             }
             /* lưu content vào file */
@@ -360,6 +373,19 @@ class AdminTourLocationController extends Controller {
                         'combo_location_id'      => $idCombo
                     ];
                     RelationTourLocationComboLocation::insertItem($insertRelationTourLocationComboLocation);
+                }
+            }
+            /* relation tour_location và hotel_location */
+            RelationTourLocationHotelLocation::select('*')
+                ->where('tour_location_id', $idTourLocation)
+                ->delete();
+            if(!empty($request->get('hotel_location_id'))){
+                foreach($request->get('hotel_location_id') as $idHotelLocation){
+                    $insertRelationTourLocationHotelLocation    = [
+                        'tour_location_id'      => $idTourLocation,
+                        'hotel_location_id'     => $idHotelLocation
+                    ];
+                    RelationTourLocationHotelLocation::insertItem($insertRelationTourLocationHotelLocation);
                 }
             }
             /* lưu content vào file */

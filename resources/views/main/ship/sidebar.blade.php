@@ -27,6 +27,28 @@
                </a>
             @endforeach
 
+            <!-- combo -->
+            @foreach($item->location->tourLocations as $tourLocation)
+               @if($tourLocation->infoTourLocation->comboLocations->isNotEmpty())
+                  @foreach($tourLocation->infoTourLocation->comboLocations as $comboLocation)
+                     <a href="/{{ $comboLocation->infoComboLocation->seo->slug_full ?? null }}" title="{{ $comboLocation->infoComboLocation->name ?? $comboLocation->infoComboLocation->seo->title ?? null }}" class="serviceRelatedSidebarBox_box_item">
+                        <i class="fa-solid fa-gift"></i><h3>{{ $comboLocation->infoComboLocation->name ?? $comboLocation->infoComboLocation->seo->title ?? null }}</h3>
+                     </a>
+                  @endforeach
+               @endif
+            @endforeach
+
+            <!-- khách sạn -->
+            @foreach($item->location->tourLocations as $tourLocation)
+               @if($tourLocation->infoTourLocation->hotelLocations->isNotEmpty())
+                  @foreach($tourLocation->infoTourLocation->hotelLocations as $hotelLocation)
+                     <a href="/{{ $hotelLocation->infoHotelLocation->seo->slug_full ?? null }}" title="{{ $hotelLocation->infoHotelLocation->name ?? $hotelLocation->infoHotelLocation->seo->title ?? null }}" class="serviceRelatedSidebarBox_box_item">
+                        <i class="fa-solid fa-bed"></i><h3>{{ $hotelLocation->infoHotelLocation->name ?? $hotelLocation->infoHotelLocation->seo->title ?? null }}</h3>
+                     </a>
+                  @endforeach
+               @endif
+            @endforeach
+
             <!-- vé máy bay -->
             @foreach($item->location->tourLocations as $tourLocation)
                @if($tourLocation->infoTourLocation->airLocations->isNotEmpty())

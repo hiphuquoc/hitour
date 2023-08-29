@@ -120,4 +120,8 @@ class TourLocation extends Model {
         return $this->hasMany(\App\Models\RelationTourLocationComboLocation::class, 'tour_location_id', 'id');
     }
 
+    public function hotelLocations(){
+        return $this->hasMany(\App\Models\RelationTourLocationHotelLocation::class, 'tour_location_id', 'id');
+    }
+
 }
