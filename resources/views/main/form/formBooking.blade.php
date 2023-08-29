@@ -18,10 +18,10 @@
 				<div class="maxLine_1"><i class="fa-solid fa-suitcase-rolling"></i>Tour</div>
 			</div>
 			<div {{ !empty($active)&&$active=='combo' ? 'class=active' : null }} data-tab="comboBookingForm" onClick="changeTab(this);">
-				<div class="maxLine_1"><i class="fa-solid fa-ship"></i>Combo</div>
+				<div class="maxLine_1"><i class="fa-solid fa-gift"></i>Combo</div>
 			</div>
 			<div {{ !empty($active)&&$active=='hotel' ? 'class=active' : null }} data-tab="hotelBookingForm" onClick="changeTab(this);">
-				<div class="maxLine_1"><i class="fa-solid fa-hotel"></i>Khách sạn</div>
+				<div class="maxLine_1"><i class="fa-solid fa-bed"></i>Khách sạn</div>
 			</div>
 			<div {{ !empty($active)&&$active=='service' ? 'class=active' : null }} data-tab="ticketBookingForm" onClick="changeTab(this);">
 				<div class="maxLine_1"><i class="fa-solid fa-ticket"></i>Vé vui chơi</div>
