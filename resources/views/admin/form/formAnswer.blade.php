@@ -1,4 +1,4 @@
-<div class="repeater formBox">
+<div class="repeaterQuestion formBox">
     <div class="formBox_full">
         <div data-repeater-list="question_answer">
             @php
@@ -67,6 +67,6 @@
 </div>
 @push('scripts-custom')
     <script type="text/javascript">
-        $('.jd_repeater').repeater();
+        $('.repeaterQuestion').repeater();
     </script>
 @endpush
