@@ -154,6 +154,7 @@
                         </div>
                     </div>
                     <!-- giới thiệu & gallery -->
+                    @if(!empty($item->images)&&$item->images->isNotEmpty())
                     <div id="anh-khach-san" class="hotelGallery" onClick="openCloseModalImage('modalImage')">
                         <div class="hotelGallery_left">
                             <img src="{{ config('main.svg.loading_main') }}" data-google-cloud="{{ $item->images[0]->image }}" data-size="750" alt="{{ $item->name }}" title="{{ $item->name }}" />
@@ -180,7 +181,7 @@
                             @endforeach
                         </div>
                     </div>
-
+                    @endif
                 </div>
             </div>
 
