@@ -296,15 +296,12 @@ class AdminHotelRoomController extends Controller {
 
     public function loadHotelRoom(Request $request){
         $result     = '';
-        if(!empty($request->get('hotel_info_id'))){
-            $data   = HotelRoom::select('*')
-                        ->where('hotel_info_id', $request->get('hotel_info_id'))
-                        ->get();
-            foreach($data as $item){
-                $result .= view('admin.hotel.oneRowHotelRoom', compact('item'))->render();
-            }
+        if(!empty($request->get('hotel_room_id'))){
+            $item   = HotelRoom::select('*')
+                        ->where('id', $request->get('hotel_room_id'))
+                        ->first();
+            $result .= view('admin.hotel.oneRowHotelRoom', compact('item'))->render();
         }
-        if(empty($result)) $result = 'Không có dữ liệu phù hợp!';
         echo $result;
     }
 }
