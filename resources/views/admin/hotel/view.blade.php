@@ -98,15 +98,15 @@
                                 <div id="js_showMessageHotelRoom">
                                     <!-- javascript:showMessage -->
                                 </div>
-                                {{-- <div id="js_loadHotelRoom" class="hotelRoomBox"> --}}
                                 <div class="hotelRoomBox">
-                                    {{-- <!-- javascript:loadHotelRoom -->
-                                    Không có dữ liệu phù hợp! --}}
-                                    @foreach($item->rooms as $room)
-                                        <div id="js_loadHotelRoom_{{ $room->id }}" class="hotelRoomBox_item">
-                                            123
-                                        </div>
-                                    @endforeach
+                                    <!-- javascript:loadHotelRoom -->
+                                    @if(!empty($item->rooms)&&$item->rooms->isNotEmpty())
+                                        @foreach($item->rooms as $room)
+                                            <div id="js_loadHotelRoom_{{ $room->id }}" class="hotelRoomBox_item"></div>
+                                        @endforeach
+                                    @else 
+                                        Không có dữ liệu phù hợp
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -333,9 +333,11 @@
             closeMessage();
             loadContactOfHotel('js_loadHotelContact');
 
-            @foreach($item->rooms as $room)
-                loadHotelRoom({{ $room->id }});
-            @endforeach
+            @if(!empty($item->rooms)&&$item->rooms->isNotEmpty())
+                @foreach($item->rooms as $room)
+                    loadHotelRoom({{ $room->id }});
+                @endforeach
+            @endif
         })
 
         $('.repeater').repeater();
