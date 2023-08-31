@@ -49,17 +49,7 @@
     <td style="vertical-align:top;width:210px;">
         @if(!empty($item->images)&&$item->images->isNotEmpty())
             <div style="position:relative;">
-                @php
-                    $imageFirst     = config('admin.images.default_750x460');
-                    $contentImage   = Storage::disk('gcs')->get($item->images[0]->image);
-                    if(!empty($contentImage)){
-                        $thumbnail  = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(200, null, function ($constraint) {
-                            $constraint->aspectRatio();
-                        })->encode();
-                        $imageFirst = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
-                    }
-                @endphp
-                <img src="{{ $imageFirst }}" style="width:210px;" />
+                <img src="{{ config('main.svg.loading_main') }}" data-google-cloud="{{ $item->images[0]->image }}" data-size="210"  style="width:210px;" />
                 @if(count($item->images)>1)
                     <span style="position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);font-size:2rem;color:#fff;font-weight:bold;border-radius:50%;border:3px solid #fff;padding:0.2rem 1rem;background:rgba(0,0,0,0.2);">{{ count($item->images) }}</span>
                 @endif
