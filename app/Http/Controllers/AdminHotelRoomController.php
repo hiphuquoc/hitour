@@ -173,15 +173,14 @@ class AdminHotelRoomController extends Controller {
                     ]);
                 }
             }
-            /* Message */
-            if(!empty($idHotelRoom)) $flag = true;
             DB::commit();
-            return true;
+            if(!empty($idHotelRoom)) $flag = true;
         } catch (\Exception $exception){
             DB::rollBack();
-            return false;
         }
-        return $flag;
+        $response['status']     = $flag;
+        $response['content']    = self::getHtmlHotelRoom($idHotelRoom);
+        return json_encode($response);
     }
 
     public function update(Request $request){
@@ -295,13 +294,16 @@ class AdminHotelRoomController extends Controller {
     }
 
     public function loadHotelRoom(Request $request){
-        $result     = '';
-        if(!empty($request->get('hotel_room_id'))){
-            $item   = HotelRoom::select('*')
-                        ->where('id', $request->get('hotel_room_id'))
-                        ->first();
-            $result .= view('admin.hotel.oneRowHotelRoom', compact('item'))->render();
-        }
+        $result     = self::getHtmlHotelRoom($request->get('hotel_room_id'));
         echo $result;
+    }
+
+    private static function getHtmlHotelRoom($idHotelRoom = 0){
+        $result = null;
+        $item   = HotelRoom::select('*')
+                        ->where('id', $idHotelRoom)
+                        ->first();
+        if(!empty($item)) $result = view('admin.hotel.oneRowHotelRoom', compact('item'))->render();
+        return $result;
     }
 }

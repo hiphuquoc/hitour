@@ -552,6 +552,12 @@ class RoutingController extends Controller {
                                             ->whereHas('seo', function($query) use($checkExists){
                                                 $query->where('slug', $checkExists->slug);
                                             })
+                                            ->whereHas('hotels.images', function($query){
+
+                                            })
+                                            ->whereHas('hotels.rooms', function($query){
+
+                                            })
                                             ->with(['files' => function($query){
                                                 $query->where('relation_table', 'hotel_location');
                                             }])

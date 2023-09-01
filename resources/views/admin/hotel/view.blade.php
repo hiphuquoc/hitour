@@ -97,15 +97,16 @@
                             <div class="card-body">
                                 <div id="js_showMessageHotelRoom">
                                     <!-- javascript:showMessage -->
+                                    @if(empty($item->rooms)||!$item->rooms->isNotEmpty())
+                                        Không có dữ liệu phù hợp
+                                    @endif
                                 </div>
-                                <div class="hotelRoomBox">
+                                <div id="hotelRoomBox" class="hotelRoomBox">
                                     <!-- javascript:loadHotelRoom -->
                                     @if(!empty($item->rooms)&&$item->rooms->isNotEmpty())
                                         @foreach($item->rooms as $room)
-                                            <div id="js_loadHotelRoom_{{ $room->id }}" class="hotelRoomBox_item"></div>
+                                            <div id="js_loadHotelRoom_{{ $room->id }}" class="hotelRoomBox_item" style="min-height:100px;"></div>
                                         @endforeach
-                                    @else 
-                                        Không có dữ liệu phù hợp
                                     @endif
                                 </div>
                             </div>
@@ -481,7 +482,10 @@
         }
 
         function loadHotelRoom(idHotelRoom){
-            addLoading('js_loadHotelRoom_'+idHotelRoom, 100);
+            const nodeWrite = $('#js_loadHotelRoom_'+idHotelRoom);
+            let heightBox   = 100;
+            if(nodeWrite!='') heightBox = nodeWrite.outerHeight();
+            addLoading('js_loadHotelRoom_'+idHotelRoom, heightBox);
             $.ajax({
                 url         : '{{ route("admin.hotelRoom.loadHotelRoom") }}',
                 type        : 'post',
@@ -509,8 +513,7 @@
                     success     : function(data){
                         if(data==true){
                             /* thành công */
-                            $('#hotelRoom_'+id).remove();
-                            loadHotelRoom(id);
+                            $('#js_loadHotelRoom_'+id).remove();
                             showMessage('js_showMessage', 'Xóa Phòng thành công!', 'success');
                         }else {
                             /* thất bại */
@@ -667,16 +670,16 @@
                             hotel_info_id   : idHotel,
                             dataForm        : dataForm
                         },
-                        success     : function(data){
-                            if(data==true){
-                                /* thành công */
-                                loadHotelRoom(idHotelRoom);
+                        success     : function(response){
+                            if(response.status==true){
+                                const contentBox = response.content + $('#hotelRoomBox').html();
+                                $('#hotelRoomBox').html(contentBox);
                                 showMessage('js_showMessageHotelRoom', 'Thêm mới Phòng thành công!', 'success');
                             }else {
                                 /* thất bại */
                                 showMessage('js_showMessageHotelRoom', 'Có lỗi xảy ra, vui lòng thử lại!', 'danger');
                             }
-                            $('#formModalHotelRoom').modal('hide');
+                            $('#formModalHotelRoom').modal('hide');                            
                         }
                     });
                 }else {
