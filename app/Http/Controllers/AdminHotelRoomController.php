@@ -50,7 +50,6 @@ class AdminHotelRoomController extends Controller {
         $result     = null;
         if(!empty($request->get('data'))){
             $data               = $request->get('data');
-            // $data               = view('admin.hotel.room')->render();
             $crawlerRoom        = new Crawler($data);
             /* lấy hình ảnh phòng */
             $crawlerRoom->filter('.slick-track img')->each(function($node){
@@ -100,13 +99,16 @@ class AdminHotelRoomController extends Controller {
             });
             $this->count        = 0;
             $crawlerRoom->filter('.hprt-facilities-facility')->each(function($node){
-                $spanNode       = $node->filter('svg')->getNode(0);
-                $spanDom        = $node->getNode(0)->ownerDocument->saveHTML($spanNode);
-                $this->arrayData['tmp'][$this->count]['icon'] = trim($spanDom);
-                $this->count    += 1;
+                if($node->html()!=null){ /* sửa lỗi có class trống */
+                    $spanNode       = $node->filter('svg')->getNode(0);
+                    $spanDom        = $node->getNode(0)->ownerDocument->saveHTML($spanNode);
+                    $this->arrayData['tmp'][$this->count]['icon'] = trim($spanDom);
+                    $this->count    += 1;
+                }
             });
             /* => tiến hành lọc qua xem nào chưa có trong bảng CSDL thì tạo ra */
             $allRoomFacilities  = HotelRoomFacility::all();
+            
             foreach($this->arrayData['tmp'] as $r){
                 $flag           = false;
                 foreach($allRoomFacilities as $roomFacility){
