@@ -9,6 +9,7 @@ use App\Models\Combo;
 use App\Models\ComboOption;
 use App\Models\ComboPrice;
 use App\Models\TourDeparture;
+use App\Models\Hotel;
 use Illuminate\Support\Facades\DB;
 
 class AdminComboOptionController extends Controller {
@@ -122,8 +123,22 @@ class AdminComboOptionController extends Controller {
             foreach($options as $o) $option = $o;
             /* lấy dach sách departure */
             $departures         = TourDeparture::all();
+            /* lấy thông tin combo */
+            $combo              = Combo::select('*')
+                                    ->where('id', $request->get('combo_info_id'))
+                                    ->with('locations')
+                                    ->first();
+            /* lấy quận /huyện của combo */
+            $arrayDistrict      = [];
+            foreach($combo->locations as $location) $arrayDistrict[] = $location->infoLocation->district_id;
+            /* tìm hotel trong quận /huyện đó */
+            $hotels             = Hotel::select('*')
+                                    ->whereHas('location', function($query) use($arrayDistrict){
+                                        $query->whereIn('district_id', $arrayDistrict);
+                                    })
+                                    ->get();
             $result['header']   = !empty($option) ? 'Chỉnh sửa Option' : 'Thêm Option';
-            $result['body']     = view('admin.combo.formComboOption', compact('option', 'departures'))->render();
+            $result['body']     = view('admin.combo.formComboOption', compact('option', 'departures', 'hotels'))->render();
         }else {
             $result['header']   = 'Thêm Option';
             $result['body']     = '<div style="margin-top:1rem;font-weight:600;">Vui lòng tạo và lưu Tour trước khi tạo Option & Giá!</div>';
@@ -137,6 +152,8 @@ class AdminComboOptionController extends Controller {
             foreach($options as $option){
                 $result[$option->name]['combo_info_id']     = $option->combo_info_id;
                 $result[$option->name]['combo_option_id']   = $option->id;
+                $result[$option->name]['hotel_info_id']     = $option->hotel_info_id;
+                $result[$option->name]['hotel_room_id']     = $option->hotel_room_id;
                 $result[$option->name]['name']              = $option->name;
                 $result[$option->name]['days']              = $option->days;
                 $result[$option->name]['nights']            = $option->nights;

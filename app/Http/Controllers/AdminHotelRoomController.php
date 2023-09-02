@@ -308,4 +308,20 @@ class AdminHotelRoomController extends Controller {
         if(!empty($item)) $result = view('admin.hotel.oneRowHotelRoom', compact('item'))->render();
         return $result;
     }
+
+    public function loadOptionHotelRoomByIdHotel(Request $request){
+        $response           = '<option value="0">- Vui lòng chọn -</option>';
+        if(!empty($request->get('hotel_info_id'))){
+            $hotelRooms     = HotelRoom::select('*')
+                                ->where('hotel_info_id', $request->get('hotel_info_id'))
+                                ->get();
+            $idHotelRoom    = $request->get('hotel_room_id') ?? 0;
+            foreach($hotelRooms as $hotelRoom){
+                $selected   = '';
+                if($idHotelRoom==$hotelRoom->id) $selected = 'selected';
+                $response   .= '<option value="'.$hotelRoom->id.'" '.$selected.'>'.$hotelRoom->name.'</option>';
+            }
+        }
+        return $response;
+    }
 }

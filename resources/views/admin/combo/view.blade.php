@@ -218,6 +218,8 @@
                     nights            : $('#nights').val(),
                     combo_info_id    : $('#combo_info_id').val(),
                     combo_option_id  : $('#combo_option_id').val(),
+                    hotel_info_id    : $('#hotel_info_id').val(),
+                    hotel_room_id  : $('#hotel_room_id').val(),
                     name            : $('#combo_option').val(),
                     date_range,
                     apply_age,

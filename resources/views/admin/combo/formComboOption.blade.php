@@ -45,6 +45,33 @@
             </div>
         </div>
         <!-- One Row -->
+        <div class="formBox_full_item">
+            @php
+                $idHotelInfo                = '';
+            @endphp 
+            <label class="form-label" for="hotel_info_id">Khách sạn</label>
+            <select class="select2 form-select select2-hidden-accessible" id="hotel_info_id" name="hotel_info_id" onChange="loadOptionHotelRoomByIdHotel('hotel_room_id');">
+                <option value="0">- Vui lòng chọn -</option>
+                @foreach($hotels as $hotel)
+                    @php
+                        $selected           = 0;
+                        if($option['hotel_info_id']==$hotel->id) {
+                            $selected       = 'selected';
+                            $idHotelInfo    = $hotel->id;
+                        }
+                    @endphp
+                    <option value="{{ $hotel->id }}" {{ $selected }}>{{ $hotel->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <!-- One Row -->
+        <div class="formBox_full_item">
+            <label class="form-label" for="hotel_room_id">Loại phòng</label>
+            <select class="select2 form-select select2-hidden-accessible" id="hotel_room_id" name="hotel_room_id">
+                <!-- load Ajax -->
+            </select>
+        </div>
+        <!-- One Row -->
         <div class="formBox_full_item" data-repeater-list="repeater_date_range">
             @if(!empty($option['date_apply']))
                 @foreach($option['date_apply'] as $dateApply)
@@ -141,7 +168,10 @@
 <script src="{{ asset('sources/admin/app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
 <script src="{{ asset('sources/admin/app-assets/js/scripts/forms/form-select2.min.js') }}"></script>
 <script type="text/javascript">
+    loadOptionHotelRoomByIdHotel('hotel_room_id', {{ $idHotelInfo }}, {{ $option['hotel_room_id'] ?? 0 }});
+
     $('.formBox_full').repeater();
+
     setInterval(() => {
         $(document).find('.date_range').each(function(){
             if($(this).hasClass('added')){
@@ -153,4 +183,23 @@
             }
         })
     }, 100);
+
+    function loadOptionHotelRoomByIdHotel(idWrite, idHotelInfo = 0, idHotelRoom = 0){
+        if(idHotelInfo=='0') {
+            const idHotelInfo = $('#hotel_info_id').val();
+        }
+        $.ajax({
+            url         : '{{ route("admin.hotel.loadOptionHotelRoomByIdHotel") }}',
+            type        : 'post',
+            dataType    : 'html',
+            data        : {
+                '_token'        : '{{ csrf_token() }}',
+                hotel_info_id   : idHotelInfo,
+                hotel_room_id   : idHotelRoom
+            },
+            success     : function(response){
+                $('#'+idWrite).html(response);
+            }
+        });
+    }
 </script>

@@ -12,54 +12,6 @@
             <input type="text" class="form-control" id="departure_schedule" name="departure_schedule" value="{{ old('departure_schedule') ?? $item->departure_schedule ?? '' }}" required>
             <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
         </div>
-        {{-- <!-- One Row -->
-        <div class="formBox_full_item">
-            <div class="flexBox">
-                <div class="flexBox_item">
-                    <span data-toggle="tooltip" data-placement="top" title="
-                        Nhập số ngày của Combo. Nhập 0 nếu là Combo trong ngày
-                    ">
-                        <i class="explainInput" data-feather='alert-circle'></i>
-                        <label class="form-label inputRequired" for="days">Số ngày</label>
-                    </span>
-                    <input type="number" min="0" id="days" class="form-control" name="days" value="{{ old('days') ?? $item->days ?? 0 }}" required>
-                    <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
-                </div>
-                <div class="flexBox_item" style="margin-left:1rem;">
-                    <span data-toggle="tooltip" data-placement="top" title="
-                        Nhập số đêm của Combo. Nhập 0 nếu là Combo trong ngày
-                    ">
-                        <i class="explainInput" data-feather='alert-circle'></i>
-                        <label class="form-label inputRequired" for="nights">Số đêm</label>
-                    </span>
-                    <input type="number" min="0" id="nights" class="form-control" name="nights" value="{{ old('nights') ?? $item->nights ?? 0 }}" required>
-                    <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
-                </div>
-            </div>
-        </div>
-        <!-- One Row -->
-        <div class="formBox_full_item">
-            <div class="flexBox">
-                <div class="flexBox_item">
-                    <span data-toggle="tooltip" data-placement="top" title="
-                        Dùng cho Combo trong ngày
-                    ">
-                        <i class="explainInput" data-feather='alert-circle'></i>
-                        <label class="form-label" for="time_start">Thời gian bắt đầu</label>
-                    </span>
-                    <input type="text" id="time_start" name="time_start" class="form-control flatpickr-time text-start flatpickr-input active" placeholder="HH:MM" value="{{ old('time_start') ?? $item->time_start ?? null }}" readonly="readonly">
-                </div>
-                <div class="flexBox_item" style="margin-left:1rem;">
-                    <span data-toggle="tooltip" data-placement="top" title="
-                        Dùng cho Combo trong ngày
-                    ">
-                        <i class="explainInput" data-feather='alert-circle'></i>
-                        <label class="form-label" for="time_end">Thời gian kết thúc</label>
-                    </span>
-                    <input type="text" id="time_end" name="time_end" class="form-control flatpickr-time text-start flatpickr-input active" placeholder="HH:MM" value="{{ old('time_end') ?? $item->time_end ?? null }}" readonly="readonly">
-                </div>
-            </div>
-        </div> --}}
         <!-- One Row -->
         <div class="formBox_full_item">
             <div class="flexBox">

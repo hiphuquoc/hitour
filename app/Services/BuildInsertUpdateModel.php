@@ -1284,6 +1284,8 @@ class BuildInsertUpdateModel {
             $result['name']             = $dataForm['name'] ?? null;
             $result['days']             = $dataForm['days'] ?? null;
             $result['nights']           = $dataForm['nights'] ?? null;
+            $result['hotel_info_id']    = $dataForm['hotel_info_id'] ?? null;
+            $result['hotel_room_id']    = $dataForm['hotel_room_id'] ?? null;
         }
         return $result;
     }

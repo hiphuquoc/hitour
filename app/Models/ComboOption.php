@@ -12,7 +12,9 @@ class ComboOption extends Model {
         'combo_info_id',
         'name',
         'days',
-        'nights'
+        'nights',
+        'hotel_info_id',
+        'hotel_room_id'
     ];
     public $timestamps      = false;
 
@@ -39,5 +41,13 @@ class ComboOption extends Model {
 
     public function prices(){
         return $this->hasMany(\App\Models\ComboPrice::class, 'combo_option_id', 'id');
+    }
+
+    public function hotel(){
+        return $this->hasOne(\App\Models\Hotel::class, 'id', 'hotel_info_id');
+    }
+
+    public function hotelRoom(){
+        return $this->hasOne(\App\Models\HotelRoom::class, 'id', 'hotel_room_id');
     }
 }

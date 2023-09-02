@@ -548,24 +548,20 @@ class RoutingController extends Controller {
                 /* ===== HOTEL LOCATION */
                 if($checkExists->type=='hotel_location'){
                     $flagMatch          = true;
-                    $item               = HotelLocation::select('*')
-                                            ->whereHas('seo', function($query) use($checkExists){
+                    $item = HotelLocation::with([
+                                                'seo',
+                                                'hotels' => function ($query) {
+                                                    $query->whereHas('images')->whereHas('rooms');
+                                                },
+                                                'files' => function ($query) {
+                                                    $query->where('relation_table', 'hotel_location');
+                                                },
+                                                'questions' => function ($query) {
+                                                    $query->where('relation_table', 'hotel_location');
+                                                }
+                                            ])->whereHas('seo', function ($query) use ($checkExists) {
                                                 $query->where('slug', $checkExists->slug);
-                                            })
-                                            ->whereHas('hotels.images', function($query){
-
-                                            })
-                                            ->whereHas('hotels.rooms', function($query){
-
-                                            })
-                                            ->with(['files' => function($query){
-                                                $query->where('relation_table', 'hotel_location');
-                                            }])
-                                            ->with(['questions' => function($q){
-                                                $q->where('relation_table', 'hotel_location');
-                                            }])
-                                            ->with('seo', 'hotels')
-                                            ->first();
+                                            })->first();
                     $content            = Blade::render(Storage::get(config('admin.storage.contentHotelLocation').$item->seo->slug.'.blade.php'));
                     $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full);
                     $xhtml              = view('main.hotelLocation.index', compact('item', 'content', 'breadcrumb'))->render();

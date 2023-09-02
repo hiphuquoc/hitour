@@ -472,6 +472,7 @@ Route::prefix('he-thong')->group(function(){
             Route::post('/updateRoom', [AdminHotelRoomController::class, 'update'])->name('admin.hotelRoom.updateRoom');
             Route::post('/deleteRoom', [AdminHotelRoomController::class, 'delete'])->name('admin.hotelRoom.deleteRoom');
             Route::delete('/deleteHotelImage/{idHotelImage}', [AdminHotelRoomController::class, 'deleteHotelImage'])->name('admin.hotelImage.deleteHotelImage');
+            Route::post('/loadOptionHotelRoomByIdHotel', [AdminHotelRoomController::class, 'loadOptionHotelRoomByIdHotel'])->name('admin.hotel.loadOptionHotelRoomByIdHotel');
             /* thông tin liên hệ */
             Route::post('/createContact', [AdminHotelContactController::class, 'create'])->name('admin.hotel.createContact');
             Route::post('/updateContact', [AdminHotelContactController::class, 'update'])->name('admin.hotel.updateContact');
