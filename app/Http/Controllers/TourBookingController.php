@@ -118,14 +118,16 @@ class TourBookingController extends Controller {
         echo $result;
     }
 
-    public static function getTourOptionByDate($date, $options){
-        $result                 = [];
-        if(!empty($date)&&!empty($options)){
-            $mkDate             = strtotime($date);
-            foreach($options as $option){
-                $mkStart        = strtotime($option['prices'][0]['date_start']);
-                $mkEnd          = strtotime($option['prices'][0]['date_end']);
-                if($mkDate>$mkStart&&$mkDate<$mkEnd) $result[] = $option;
+    public static function getTourOptionByDate($date, $options) {
+        $result = new \Illuminate\Database\Eloquent\Collection;
+        if (!empty($date) && !empty($options)) {
+            $mkDate = strtotime($date);
+            foreach ($options as $option) {
+                if(!empty($option['prices'][0]['date_start'])&&!empty($option['prices'][0]['date_end'])){
+                    $mkStart = strtotime($option['prices'][0]['date_start']);
+                    $mkEnd = strtotime($option['prices'][0]['date_end']);
+                    if ($mkDate > $mkStart && $mkDate < $mkEnd) $result->push($option);
+                }
             }
         }
         return $result;

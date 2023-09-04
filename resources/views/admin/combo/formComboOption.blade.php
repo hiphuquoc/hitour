@@ -3,6 +3,47 @@
 <div class="formBox">
     <div class="formBox_full">
         <!-- One Row -->
+        <div class="formBox_full_item" data-repeater-list="repeater_date_range">
+            @if(!empty($option['date_apply']))
+                @foreach($option['date_apply'] as $dateApply)
+                    @php
+                        /* sẵn vòng lặp build giá -> do key bằng ngày nên ko lấy được */
+                        if($loop->index==0){
+                            $dataPrice              = [];
+                            foreach($dateApply as $price) $dataPrice[] = $price;
+                        }
+                    @endphp
+                    <div class="flexBox" data-repeater-item>
+                        <div class="flexBox_item">
+                            <label class="form-label inputRequired" for="date_range">Ngày áp dụng</label>
+                            <input type="text" class="date_range form-control flatpickr-range flatpickr-input active" name="repeater_date_range[{{ $loop->index }}][date_range]" placeholder="YYYY-MM-DD đến YYYY-MM-DD" value="{{ date('Y-m-d', strtotime($dateApply[0]['date_start'])) }} to {{ date('Y-m-d', strtotime($dateApply[0]['date_end'])) }}" readonly="readonly">
+                        </div>
+                        <div class="flexBox_item btnRemoveRepeater" data-repeater-delete>
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                <div class="flexBox" data-repeater-item>
+                    <div class="flexBox_item">
+                        <label class="form-label inputRequired" for="date_range">Ngày áp dụng</label>
+                        <input type="text" class="date_range form-control flatpickr-range flatpickr-input active" name="repeater_date_range[date_range]" placeholder="YYYY-MM-DD đến YYYY-MM-DD" readonly="readonly">
+                    </div>
+                    <div class="flexBox_item btnRemoveRepeater" data-repeater-delete>
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                </div>
+            @endif
+            
+        </div>
+        <!-- One Row -->
+        <div class="formBox_full_item" style="text-align:right;">
+            <button class="btn btn-icon btn-primary waves-effect waves-float waves-light" type="button" aria-label="Thêm" data-repeater-create>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus me-25"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <span>Thêm</span>
+            </button>
+        </div>
+        <!-- One Row -->
         <div class="formBox_full_item">
             <label class="form-label inputRequired" for="departure">Điểm khởi hành</label>
             <select class="select2 form-select select2-hidden-accessible" id="departure_id" name="departure_id">
@@ -45,9 +86,16 @@
             </div>
         </div>
         <!-- One Row -->
+        <div class="formBox_full">
+            <div class="formBox_full_item">
+                <label class="form-label inputRequired" for="include">Bao gồm (html)</label>
+                <textarea class="form-control" id="include" name="include" rows="2" required>{{ $dataPrice[0]['include'] ?? null }}</textarea>
+            </div>
+        </div>
+        <!-- One Row -->
         <div class="formBox_full_item">
             @php
-                $idHotelInfo                = '';
+                $idHotelInfo                = 0;
             @endphp 
             <label class="form-label" for="hotel_info_id">Khách sạn</label>
             <select class="select2 form-select select2-hidden-accessible" id="hotel_info_id" name="hotel_info_id" onChange="loadOptionHotelRoomByIdHotel('hotel_room_id');">
@@ -55,7 +103,7 @@
                 @foreach($hotels as $hotel)
                     @php
                         $selected           = 0;
-                        if($option['hotel_info_id']==$hotel->id) {
+                        if(!empty($option['hotel_info_id'])&&$option['hotel_info_id']==$hotel->id) {
                             $selected       = 'selected';
                             $idHotelInfo    = $hotel->id;
                         }
@@ -70,47 +118,6 @@
             <select class="select2 form-select select2-hidden-accessible" id="hotel_room_id" name="hotel_room_id">
                 <!-- load Ajax -->
             </select>
-        </div>
-        <!-- One Row -->
-        <div class="formBox_full_item" data-repeater-list="repeater_date_range">
-            @if(!empty($option['date_apply']))
-                @foreach($option['date_apply'] as $dateApply)
-                    @php
-                        /* sẵn vòng lặp build giá -> do key bằng ngày nên ko lấy được */
-                        if($loop->index==0){
-                            $dataPrice              = [];
-                            foreach($dateApply as $price) $dataPrice[] = $price;
-                        }
-                    @endphp
-                    <div class="flexBox" data-repeater-item>
-                        <div class="flexBox_item">
-                            <label class="form-label inputRequired" for="date_range">Ngày áp dụng</label>
-                            <input type="text" class="date_range form-control flatpickr-range flatpickr-input active" name="repeater_date_range[{{ $loop->index }}][date_range]" placeholder="YYYY-MM-DD đến YYYY-MM-DD" value="{{ date('Y-m-d', strtotime($dateApply[0]['date_start'])) }} to {{ date('Y-m-d', strtotime($dateApply[0]['date_end'])) }}" readonly="readonly">
-                        </div>
-                        <div class="flexBox_item btnRemoveRepeater" data-repeater-delete>
-                            <i class="fa-solid fa-xmark"></i>
-                        </div>
-                    </div>
-                @endforeach
-            @else
-                <div class="flexBox" data-repeater-item>
-                    <div class="flexBox_item">
-                        <label class="form-label inputRequired" for="date_range">Ngày áp dụng</label>
-                        <input type="text" class="date_range form-control flatpickr-range flatpickr-input active" name="repeater_date_range[date_range]" placeholder="YYYY-MM-DD đến YYYY-MM-DD" readonly="readonly">
-                    </div>
-                    <div class="flexBox_item btnRemoveRepeater" data-repeater-delete>
-                        <i class="fa-solid fa-xmark"></i>
-                    </div>
-                </div>
-            @endif
-            
-        </div>
-        <!-- One Row -->
-        <div class="formBox_full_item" style="text-align:right;">
-            <button class="btn btn-icon btn-primary waves-effect waves-float waves-light" type="button" aria-label="Thêm" data-repeater-create>
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus me-25"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                <span>Thêm</span>
-            </button>
         </div>
     </div>
     <div class="formBox_full">
@@ -128,6 +135,10 @@
                             <input type="number" class="form-control" name="repeater[{{ $loop->index }}][price]" value="{{ $price['price'] ?? 0 }}" required>
                         </div>
                         <div class="flexBox_item" style="margin-left:1rem;">
+                            <label class="form-label inputRequired">Giá cũ</label>
+                            <input type="number" class="form-control" name="repeater[{{ $loop->index }}][x_old]" value="{{ $price['price_old'] ?? 0 }}" required>
+                        </div>
+                        <div class="flexBox_item" style="margin-left:1rem;">
                             <label class="form-label">Hoa hồng</label>
                             <input type="number" class="form-control" name="repeater[{{ $loop->index }}][profit]" value="{{ $price['profit'] ?? 0 }}">
                         </div>
@@ -136,7 +147,7 @@
                         </div>
                     </div>
                 @endforeach
-            @else
+            @else 
                 <div class="flexBox" data-repeater-item>
                     <div class="flexBox_item">
                         <label class="form-label inputRequired">Tuổi áp dụng</label>
@@ -145,6 +156,10 @@
                     <div class="flexBox_item" style="margin-left:1rem;">
                         <label class="form-label inputRequired">Giá</label>
                         <input type="text" class="form-control" name="price" value="" required>
+                    </div>
+                    <div class="flexBox_item" style="margin-left:1rem;">
+                        <label class="form-label inputRequired">Giá cũ</label>
+                        <input type="number" class="form-control" name="x_old" value="" required>
                     </div>
                     <div class="flexBox_item" style="margin-left:1rem;">
                         <label class="form-label">Hoa hồng</label>
@@ -168,7 +183,7 @@
 <script src="{{ asset('sources/admin/app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
 <script src="{{ asset('sources/admin/app-assets/js/scripts/forms/form-select2.min.js') }}"></script>
 <script type="text/javascript">
-    loadOptionHotelRoomByIdHotel('hotel_room_id', {{ $idHotelInfo }}, {{ $option['hotel_room_id'] ?? 0 }});
+    loadOptionHotelRoomByIdHotel('hotel_room_id', {{ $idHotelInfo ?? 0 }}, {{ $option['hotel_room_id'] ?? 0 }});
 
     $('.formBox_full').repeater();
 
@@ -185,8 +200,8 @@
     }, 100);
 
     function loadOptionHotelRoomByIdHotel(idWrite, idHotelInfo = 0, idHotelRoom = 0){
-        if(idHotelInfo=='0') {
-            const idHotelInfo = $('#hotel_info_id').val();
+        if(idHotelInfo==0) {
+            idHotelInfo = $('#hotel_info_id').val();
         }
         $.ajax({
             url         : '{{ route("admin.hotel.loadOptionHotelRoomByIdHotel") }}',

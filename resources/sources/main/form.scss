@@ -562,7 +562,7 @@
             > * {
                 width: 100%;
                 &:not(:first-child){
-                    padding-left: 1rem;
+                    padding-left: 0.5rem;
                 }
             }
             &_icon {
@@ -570,6 +570,22 @@
                 &:before {
                     @include fontAwesome;
                     content: '\f1ce';
+                }
+            }
+            &_details {
+                &_title {
+                    font-weight: bold;
+                }
+                &_list {
+                    > * {
+                        &::before {
+                            @include fontAwesome;
+                            content: '\f00c';
+                            font-size: 0.85rem;
+                            margin-right: 0.5rem;
+                            color: $colorDesc;
+                        }
+                    }
                 }
             }
             .highLight {

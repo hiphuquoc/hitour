@@ -1,4 +1,9 @@
 <div class="contentTour">
+    <!-- gallery -->
+    <div class="contentTour_item">
+        @include('main.combo.gallery', compact('item'))
+    </div>
+
     <!-- Bảng giá Tour -->
 	@if($item->options->isNotEmpty())
         <div id="bang-gia-combo" class="contentTour_item">
@@ -7,35 +12,70 @@
                 <h2>Bảng giá {{ $item->name ?? null }}</h2>
             </div>
             <div class="contentTour_item_text">
-                <table class="tableContentBorder" style="margin-bottom:0;">
-                    <thead>
-                        <tr>
-                            <th>Tùy chọn</th>
-                            <th>Khởi hành</th>
-                            <th>Giá áp dụng</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($item->options as $option)
-                            <tr>
-                                <td>
-                                    <h3 style="font-weight:700;font-size:1.05rem;">{{ $option['name'] }}</h3>
-                                    <div style="font-size:0.95rem;">từ <b>{{ !empty($option->prices[0]->date_start) ? date('d/m/Y', strtotime($option->prices[0]->date_start)) : '...' }}</b> đến <b>{{ !empty($option->prices[0]->date_end) ? date('d/m/Y', strtotime($option->prices[0]->date_end)) : '...' }}</b></div>
-                                </td>
-                                <td>
-                                    {{ $option->prices[0]->departure->display_name }}
-                                </td>
-                                <td style="vertical-align:top;">
-                                    @foreach($option->prices as $price)
-                                        <div><span style="font-weight:700;color:rgb(0, 90, 180);font-size:1.1rem;">{!! !empty($price->price) ? number_format($price->price).config('main.unit_currency') : '-' !!}</span> /{{ $price->apply_age ?? '-' }}</div>
+                <div class="comboTableBox">
+                    @foreach($item->options as $option)
+                        @php
+                            $xhtmlLocation = [];
+                            foreach($item->locations as $location){
+                                $xhtmlLocation[] = $location->infoLocation->display_name;
+                            }
+                            $xhtmlLocation = implode(', ', $xhtmlLocation);
+                        @endphp
+                        <div class="comboTableBox_item">
+                            <div class="comboTableBox_item">
+                                <div class="comboTableBox_item_info">
+                                    <div class="comboTableBox_item_info_title">Combo {{ $xhtmlLocation }} {{ $option->name ?? null }} đã gồm</div>
+                                    <div class="comboTableBox_item_info_include">
+                                        @if(!empty($option->prices[0]->include))
+                                            {!! $option->prices[0]->include !!}
+                                        @endif
+                                        @if(!empty($option->hotelRoom))
+                                            <div>{{ $option->hotelRoom->name }} - {{ $option->hotel->name }}<br/>
+                                                <a href="/{{ $option->hotel->seo->slug_full }}">Xem chi tiết khách sạn</a>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="comboTableBox_item_info_note">
+                                        Giá áp dụng từ <b>{{ !empty($option->prices[0]->date_start) ? date('d/m/Y', strtotime($option->prices[0]->date_start)) : '...' }}</b> - <b>{{ !empty($option->prices[0]->date_end) ? date('d/m/Y', strtotime($option->prices[0]->date_end)) : '...' }}</b>
+                                    </div>
+                                </div>
+                                <div class="comboTableBox_item_action">
+                                    @php
+                                        /* lấy giá người lớn (giá cao nhất) */
+                                        $priceShow  = 0;
+                                        $priceOld   = 0;
+                                        $saleOff    = 0;
+                                        foreach($option->prices as $price){
+                                            if($price->price>$priceShow) {
+                                                $priceShow  = $price->price;
+                                                $priceOld   = $price->price_old;
+                                                $saleOff    = $price->sale_off;
+                                            }
+                                        }
+                                    @endphp
+                                    <div class="comboTableBox_item_action_price">
+                                        @if(!empty($priceOld)&&$priceOld>$priceShow)
+                                            <div class="comboTableBox_item_action_price_old">
+                                                <div class="comboTableBox_item_action_price_old_number">
+                                                    {{ number_format($priceOld) }} <sup>đ</sup>
+                                                </div>
+                                                <div class="comboTableBox_item_action_price_old_saleoff">
+                                                    {{ $saleOff }}%
+                                                </div>
+                                            </div>
+                                        @endif
+                                        <div class="comboTableBox_item_action_price_now">
+                                            {{ number_format($priceShow) }} <sup>đ</sup>
+                                        </div>
+                                    </div>
+                                    <a href="{{ $linkBooking ?? '#' }}" class="comboTableBox_item_action_button">Đặt combo này</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
 
-                                    @endforeach
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                
+                </div>
+
             </div>
         </div>
     @endif

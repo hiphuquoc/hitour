@@ -48,9 +48,12 @@ class AdminComboOptionController extends Controller {
                             ComboPrice::insertItem([
                                 'departure_id'      => $dataForm['departure_id'],
                                 'combo_option_id'   => $idComboOption,
-                                'apply_age'         => $request->get('dataForm')['apply_age'][$i],
-                                'price'             => $request->get('dataForm')['price'][$i],
-                                'profit'            => $request->get('dataForm')['profit'][$i],
+                                'apply_age'         => $dataForm['apply_age'][$i],
+                                'include'           => $dataForm['include'],
+                                'price'             => $dataForm['price'][$i],
+                                'price_old'         => $dataForm['price_old'][$i],
+                                'sale_off'          => \App\Helpers\Number::calculatorSaleoff($dataForm['price'][$i], $dataForm['price_old'][$i]),
+                                'profit'            => $dataForm['profit'][$i],
                                 'date_start'        => $dateStart,
                                 'date_end'          => $dateEnd
                             ]);
@@ -83,9 +86,12 @@ class AdminComboOptionController extends Controller {
                             ComboPrice::insertItem([
                                 'departure_id'      => $dataForm['departure_id'],
                                 'combo_option_id'   => $dataForm['combo_option_id'],
-                                'apply_age'         => $request->get('dataForm')['apply_age'][$i],
-                                'price'             => $request->get('dataForm')['price'][$i],
-                                'profit'            => $request->get('dataForm')['profit'][$i],
+                                'apply_age'         => $dataForm['apply_age'][$i],
+                                'include'           => $dataForm['include'],
+                                'price'             => $dataForm['price'][$i],
+                                'price_old'         => $dataForm['price_old'][$i],
+                                'sale_off'          => \App\Helpers\Number::calculatorSaleoff($dataForm['price'][$i], $dataForm['price_old'][$i]),
+                                'profit'            => $dataForm['profit'][$i],
                                 'date_start'        => $dateStart,
                                 'date_end'          => $dateEnd
                             ]);
@@ -114,9 +120,9 @@ class AdminComboOptionController extends Controller {
     public function loadFormOption(Request $request){
         if(!empty($request->get('combo_info_id'))){
             $option             = [];
-            if(!empty($request->get('combo_option_id'))) $option   = ComboOption::select('*')
+            if(!empty($request->get('combo_option_id'))) $option    = ComboOption::select('*')
                                                                         ->where('id', $request->get('combo_option_id'))
-                                                                        ->with('prices')
+                                                                        ->with('prices', 'hotel', 'hotelRoom')
                                                                         ->get();
             $options            = self::margeComboPriceByDate($option);
             /* lấy option đầu tiên vì là duy nhất */
@@ -157,6 +163,8 @@ class AdminComboOptionController extends Controller {
                 $result[$option->name]['name']              = $option->name;
                 $result[$option->name]['days']              = $option->days;
                 $result[$option->name]['nights']            = $option->nights;
+                $result[$option->name]['hotel']             = $option->hotel;
+                $result[$option->name]['hotelRoom']         = $option->hotelRoom;
                 foreach($option->prices as $price){
                     $result[$option->name]['date_apply'][$price->date_start.'-'.$price->date_end][]    = $price->toArray();
                 }

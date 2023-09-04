@@ -1177,7 +1177,6 @@ $tourGrid_radius : 10px;
 }
 .galleryBox {
     position: relative;
-    margin-bottom: 1.5rem;
     &_image {
         img {
             width: 100%;
@@ -1619,6 +1618,7 @@ $tourGrid_radius : 10px;
             &_title {
                 h2, h3 {
                     font-size: 1.1rem;
+                    margin-bottom: 0.25rem !important;
                 }
                 i {
                     margin-top: 0.55rem;
@@ -7593,6 +7593,134 @@ $width-single-menu  : 260px;
                 // &_action {
                 //     padding: 0.5rem 0.75rem 0.75rem 0.75rem;
                 // }
+            }
+        }
+    }
+}
+.comboTableBox {
+    width: 100%;
+    margin-top: 0.5rem;
+    &_item {
+        display: flex;
+        width: inherit;
+        background: $bg-02;
+        box-shadow: 0 0 2px $bg-03;
+        border-radius: 10px;
+        &:not(:first-child){
+            margin-top: 1rem;
+        }
+        &_info {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            &_title {
+                font-size: 1.05rem;
+                font-family: $fontTitle;
+                color: $colorTitle;
+                margin-bottom: 0.25rem;
+            }
+            &_include {
+                display: flex;
+                flex-direction: column;
+                > * {
+                    &::before {
+                        @include fontAwesome;
+                        content: '\f00c';
+                        font-size: 0.85rem;
+                        margin-right: 0.5rem;
+                        color: $colorSuccess;
+                    }
+                }
+            }
+            &_note {
+                color: $colorPrice;
+                font-size: 0.95rem;
+            }
+        }
+        &_action {
+            flex: 0 0 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: flex-end;
+            padding: 1rem;
+            border-left: 3px solid #fff;
+            &_price {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                width: 140px;
+                margin-bottom: 0.75rem;
+                &_old {
+                    display: flex;
+                    align-items: flex-end;
+                    font-size: 0.9rem;
+                    text-align: right;
+                    &_number {
+                        text-decoration: line-through;
+                        margin-right: 0.5rem;
+                    }
+                    &_saleoff {
+                        background: $colorPrice;
+                        color: #fff;
+                        padding: 0 0.25rem;
+                        border-radius: 6px;
+                        font-size: 0.9rem;
+                    }
+                }
+                &_now {
+                    font-size: 1.2rem;
+                    color: $colorPrice;
+                    text-align: right;
+                    font-weight: bold;
+                    margin-top: -0.2rem;
+                    letter-spacing: 0.75px;
+                }
+            }
+            &_button {
+                width: 100%;
+                background: $colorSLv1;
+                padding: 0.5rem 1rem;
+                color: $colorTitle;
+                font-family: $fontTitle;
+                border-radius: 7px;
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                &:hover {
+                    background: $colorSLv2;
+                    color: $colorTitle;
+                }
+            }
+        }
+    }
+    @media(max-width: 767px){
+        margin-top: 0.25rem;
+    }
+    @media(max-width: 577px){
+        &_item {
+            flex-wrap: wrap;
+            &:not(:first-child){
+                margin-top: 0.75rem;
+            }
+            &_info {
+                padding: 0.5rem 0.75rem 0.25rem 0.75rem;
+                &_title {
+                    font-size: 1rem;
+                }
+            }
+            &_action {
+                padding: 0 0.75rem 0.75rem 0.75rem;
+                flex: unset;
+                width: 100%;
+                flex-direction: row;
+                border: none;
+                &_price {
+                    margin-bottom :0;
+                    margin-right: 0.75rem;
+                }
+                &_button {
+                    width: auto;
+                }
             }
         }
     }

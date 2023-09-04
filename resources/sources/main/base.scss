@@ -23,6 +23,9 @@ body {
 p {
     margin-bottom: 0.5rem;
     color: $colorText;
+    @media(max-width: 577px){
+        margin-bottom: 0.25rem;
+    }
 }
 
 a {
@@ -76,6 +79,9 @@ h1, h2, h3, h4, h5, h6 {
 
 ul, ol {
     margin: 0.5rem 0 0.5rem 1rem;
+    @media(max-width: 577px){
+        margin: 0.25rem 0 0.25rem 0.75rem;
+    }
 }
 
 img {

@@ -9,16 +9,21 @@
                 @endphp
                 <div class="chooseOptionTourBox_body_item {{ $active }}" onClick="highLightChoose(this, '{{ $price->id ?? null }}');">
                     <div class="chooseOptionTourBox_body_item_icon"></div>
-                    <div>
-                        <div style="font-weight:bold;">{{ $price['name'] ?? null }}</div>
-                        @if(!empty($price->prices[0]->departure->display_name))
-                            <div style="font-size:0.9rem;">Khởi hành từ {{ $price->prices[0]->departure->display_name }}</div>
-                        @endif
-                        {{-- @if(!empty($price['prices'][0]['promotion']))
-                            <div style="font-size:0.95rem;">
-                                Ghi chú: {{ $price['prices'][0]['promotion'] }}
-                            </div>
-                        @endif --}}
+                    <div class="chooseOptionTourBox_body_item_details">
+                        <div class="chooseOptionTourBox_body_item_details_title">
+                            Combo {{ $location }} {{ $price['name'] ?? null }} khởi hành từ {{ $price->prices[0]->departure->display_name }} gồm
+                        </div>
+                        <div class="chooseOptionTourBox_body_item_details_list">
+                            @if(!empty($price->prices[0]->include))
+                                {!! $price->prices[0]->include !!}
+                            @endif
+                            @if(!empty($price->hotelRoom))
+                                <div>
+                                    {{ $price->hotelRoom->name }} - {{ $price->hotel->name }}
+                                    {{-- <a href="/{{ $price->hotel->seo->slug_full }}">Xem chi tiết khách sạn</a> --}}
+                                </div>
+                            @endif
+                        </div>
                     </div>
                     <div>
                         @foreach($price['prices'] as $price)

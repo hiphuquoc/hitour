@@ -14,6 +14,9 @@ class ComboPrice extends Model {
         'apply_age', 
         'price',
         'profit',
+        'price_old',
+        'sale_off',
+        'include',
         'date_start',
         'date_end'
     ];

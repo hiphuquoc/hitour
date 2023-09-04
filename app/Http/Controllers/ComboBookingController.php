@@ -71,10 +71,16 @@ class ComboBookingController extends Controller {
             $idCombo            = $request->get('combo_info_id');
             $infoCombo          = Combo::select('*')
                                     ->where('id', $idCombo)
-                                    ->with('options.prices')
+                                    ->with('options.prices', 'options.hotel', 'options.hotelRoom')
                                     ->first();
             $data               = \App\Http\Controllers\TourBookingController::getTourOptionByDate($request->get('date'), $infoCombo->options);
-            $result             = view('main.comboBooking.formChooseOption', compact('data'));
+            /* lấy location */
+            $location           = [];
+            foreach($infoCombo->locations as $l){
+                $location[]     = $l->infoLocation->display_name;
+            }
+            $location           = implode(', ', $location);
+            $result             = view('main.comboBooking.formChooseOption', compact('data', 'location'));
             /* dùng cho edit trong admin */
             if(!empty($request->get('type'))&&$request->get('type')=='admin') {
                 $result                             = [];

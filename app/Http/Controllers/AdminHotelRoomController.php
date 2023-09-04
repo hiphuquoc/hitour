@@ -312,6 +312,7 @@ class AdminHotelRoomController extends Controller {
     public function loadOptionHotelRoomByIdHotel(Request $request){
         $response           = '<option value="0">- Vui lòng chọn -</option>';
         if(!empty($request->get('hotel_info_id'))){
+            
             $hotelRooms     = HotelRoom::select('*')
                                 ->where('hotel_info_id', $request->get('hotel_info_id'))
                                 ->get();

@@ -147,7 +147,7 @@
         <!-- Input Hidden -->
         {{-- <input type="hidden" id="Combo_info_id" name="Combo_info_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : 0 }}" /> --}}
         <div class="modal fade" id="modalContact" tabindex="-1" aria-labelledby="addNewCardTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered" style="min-width:700px;">
                 <div class="modal-content">
                     <div class="modal-header bg-transparent">
                         <h4 id="js_loadFormOption_header">Thêm Option & Giá</h4>
@@ -202,9 +202,14 @@
                     apply_age.push($(this).val());
                 });
                 /* data price */
-                let price               = [];
-                $('#formComboOption').find('input[name*=price]').each(function(){
+                let price = [];
+                $('#formComboOption').find('input[name*=price]').each(function() {
                     price.push($(this).val());
+                });
+                /* data price_old */
+                let price_old = [];
+                $('#formComboOption').find('input[name*=x_old]').each(function() {
+                    price_old.push($(this).val());
                 });
                 /* data profit */
                 let profit              = [];
@@ -221,9 +226,11 @@
                     hotel_info_id    : $('#hotel_info_id').val(),
                     hotel_room_id  : $('#hotel_room_id').val(),
                     name            : $('#combo_option').val(),
+                    include         : $('#include').val(),
                     date_range,
                     apply_age,
                     price,
+                    price_old,
                     profit
                 };
                 /* không có trường required bỏ trống */

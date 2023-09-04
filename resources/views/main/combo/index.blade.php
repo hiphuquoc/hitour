@@ -55,14 +55,18 @@
                     @include('main.template.rating', compact('item'))
                 </div>
     
+                @php
+                    $linkBooking = route('main.comboBooking.form', [
+                        'combo_location_id'  => $item->locations[0]->infoLocation->id ?? 0,
+                        'combo_info_id'      => $item->id ?? 0
+                    ]);
+                @endphp 
+
                 <div class="pageContent_body">
                     <div class="pageContent_body_content">
     
-                        <!-- gallery -->
-                        @include('main.combo.gallery', compact('item'))
-    
                         <!-- content box -->
-                        @include('main.combo.content', compact('item'))
+                        @include('main.combo.content', compact('item', 'linkBooking'))
                         
                     </div>
                     <div class="pageContent_body_sidebar notPrint">
@@ -72,16 +76,10 @@
                         @include('main.combo.price', compact('item'))
     
                         <div class="js_scrollFixed" style="margin-top:0;">
-                            @php
-                                $linkTourBooking = route('main.comboBooking.form', [
-                                    'combo_location_id'  => $item->locations[0]->infoLocation->id ?? 0,
-                                    'combo_info_id'      => $item->id ?? 0
-                                ]);
-                            @endphp 
                             @include('main.template.callbook', [
                                 'flagButton'    => true,
                                 'button'        => 'Đặt Combo',
-                                'linkFull'      => $linkTourBooking
+                                'linkFull'      => $linkBooking
                             ])
                             @include('main.combo.tocContent', compact('item'))
                             <!-- đoạn này để xử lý trường hợp đang mở xem thêm điểm nổi bật tour thì không scroll -->
@@ -103,7 +101,7 @@
                 <div class="callBookTourMobile_price">
                     {{ number_format($item->price_show).config('main.unit_currency') }}
                 </div>
-                <a href="{{ $linkTourBooking }}" class="callBookTourMobile_button"><h2>Đặt Tour này</h2></a>
+                <a href="{{ $linkBooking }}" class="callBookTourMobile_button"><h2>Đặt Combo này</h2></a>
             </div>
         </div>
     @endif
