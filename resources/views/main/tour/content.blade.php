@@ -1,4 +1,10 @@
 <div class="contentTour">
+
+    <!-- gallery -->
+    <div class="contentTour_item">
+        @include('main.tour.gallery', compact('item'))
+    </div>
+
     <!-- Điểm nổi bật của Tour -->
 	<div id="diem-noi-bat-chuong-trinh-tour" class="contentTour_item notPrint">
 		<div class="contentTour_item_title">
