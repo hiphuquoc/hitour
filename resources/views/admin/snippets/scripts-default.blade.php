@@ -108,4 +108,28 @@
             $('body').css('overflow', 'auto');
         }
     }
+
+    function clearCacheHtml(){
+        Swal.fire({
+            title: 'Xác nhận xóa CacheHTML',
+            html: '<div>CacheHTML của tất cả các trang sẽ được xóa và làm mới lại.</div>',
+            preConfirm: () => {
+                Swal.showLoading()
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        $.ajax({
+                            url         : '{{ route("admin.cache.clearCache") }}',
+                            type        : 'get',
+                            dataType    : 'html',
+                            success     : function(response){
+                                resolve(response)
+                            }
+                        });
+                    }, 500)
+                })
+            },
+            confirmButtonText: 'Xác nhận'
+        })
+    }
+
 </script>

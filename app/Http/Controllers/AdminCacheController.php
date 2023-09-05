@@ -10,7 +10,7 @@ class AdminCacheController extends Controller {
         foreach($caches as $cache){
             if(file_exists($cache)) @unlink($cache);
         }
-        return redirect()->route('admin.tourLocation.list');
+        return true;
     }
 
 }

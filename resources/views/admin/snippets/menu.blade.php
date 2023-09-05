@@ -94,6 +94,12 @@
                      </li>';
                }
             @endphp
+            <li class="nav-item">
+               <a href="#" class="d-flex align-items-center" onClick="clearCacheHtml();">
+                  <i class="fa-sharp fa-solid fa-xmark"></i>
+                  <span class="menu-title text-truncate">Xóa Cache</span>
+               </a>
+            </li>
       </ul>
    </div>
 </div>
