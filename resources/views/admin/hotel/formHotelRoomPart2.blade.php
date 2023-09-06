@@ -80,7 +80,7 @@
     </div>
 </div>
 <!-- tùy chọn giá -->
-<div class="repeater formBox_full">
+<div class="repeater2 formBox_full">
     <div class="formBox_full_item" data-repeater-list="prices">
         @if(!empty($data['prices'])&&$data['prices']->isNotEmpty())
             @foreach($data['prices'] as $price)
@@ -88,6 +88,7 @@
                     <div class="card-header">
                         <h4 class="card-title">
                             Tùy chọn giá
+                            <i class="fa-solid fa-circle-xmark" data-repeater-delete></i>
                         </h4>
                     </div>
                     <div class="card-body">
@@ -159,7 +160,7 @@
     </div>
 </div>
 <!-- mô tả tiện ích -->
-<div class="repeater formBox_full">
+<div class="repeater2 formBox_full">
     <!-- One Row -->
     <div data-repeater-list="details">
         
@@ -234,7 +235,7 @@
 <script type="text/javascript">
     $('.select2').select2();
 
-    $('.repeater').repeater();
+    $('.repeater2').repeater();
     
     function removeUploadImage(idNode){
         const node          = $('#'+idNode);

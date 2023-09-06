@@ -644,7 +644,7 @@
                         'number_people' : contentNumberPeople,
                         'price'         : value,
                         'price_old'     : contentPriceOld,
-                        'discription'   : contentDescription
+                        'description'   : contentDescription
                     };
                     price[key]      = item; // Gán giá trị vào mảng dataForm với key tương ứng
                 });
