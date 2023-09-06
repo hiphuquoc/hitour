@@ -254,13 +254,14 @@ class AdminHotelRoomController extends Controller {
             $idHotelRoom    = $request->get('id');
             $infoHotelRoom  = HotelRoom::select('*')
                                 ->where('id', $idHotelRoom)
-                                ->with('facilities', 'details', 'images')
+                                ->with('facilities', 'details', 'images', 'prices')
                                 ->first();
             /* xóa ảnh trong storage */
             foreach($infoHotelRoom->images as $image) self::deleteHotelImage($image->id);
             /* xóa các relation */
             $infoHotelRoom->facilities()->delete();
             $infoHotelRoom->details()->delete();
+            $infoHotelRoom->prices()->delete();
             /* xóa hotel room */
             $infoHotelRoom->delete();
             $flag   = true;
