@@ -1,40 +1,42 @@
 <div class="modalHotelRoom_box customScrollBar-y">
     <!-- icon close -->
-    <div class="modalHotelRoom_box_close" onClick="openCloseModal('js_loadHotelRoom_modal_{{ $price->id }}');">
+    <div class="modalHotelRoom_box_close" onClick="openCloseModal('js_loadHotelPrice_modal_{{ $price->id }}');">
         <i class="fa-solid fa-xmark"></i>
     </div>
     <div class="modalHotelRoom_box_body">
         <div class="modalHotelRoom_box_body_gallery">
-            <div class="modalHotelRoom_box_body_gallery_top">
-                @php
-                    $imageContent       = config('admin.images.default_750x460');
-                    $contentImage       = Storage::disk('gcs')->get($price->room->images[0]->image);
-                    if(!empty($contentImage)){
-                        $thumbnail      = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(750, null, function ($constraint) {
-                            $constraint->aspectRatio();
-                        })->encode();
-                        $imageContent   = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
-                    }
-                @endphp
-                <img src="{{ $imageContent }}" alt="Ảnh phòng {{ $price->room->name }}" title="Ảnh phòng {{ $price->room->name }}" />
-            </div>
-            <div class="modalHotelRoom_box_body_gallery_bottom">
-                @foreach($price->room->images as $image)
+            @if(!empty($price->room->images)&&$price->room->images->isNotEmpty())
+                <div class="modalHotelRoom_box_body_gallery_top">
                     @php
                         $imageContent       = config('admin.images.default_750x460');
-                        $contentImage       = Storage::disk('gcs')->get($image->image);
+                        $contentImage       = Storage::disk('gcs')->get($price->room->images[0]->image);
                         if(!empty($contentImage)){
-                            $thumbnail      = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(100, null, function ($constraint) {
+                            $thumbnail      = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(750, null, function ($constraint) {
                                 $constraint->aspectRatio();
                             })->encode();
                             $imageContent   = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
                         }
                     @endphp
-                    <div class="modalHotelRoom_box_body_gallery_bottom_item">
-                        <img src="{{ $imageContent }}" alt="Ảnh phòng {{ $price->room->name }}" title="Ảnh phòng {{ $price->room->name }}" />
-                    </div>
-                @endforeach
-            </div>
+                    <img src="{{ $imageContent }}" alt="Ảnh phòng {{ $price->room->name }}" title="Ảnh phòng {{ $price->room->name }}" />
+                </div>
+                <div class="modalHotelRoom_box_body_gallery_bottom">
+                    @foreach($price->room->images as $image)
+                        @php
+                            $imageContent       = config('admin.images.default_750x460');
+                            $contentImage       = Storage::disk('gcs')->get($image->image);
+                            if(!empty($contentImage)){
+                                $thumbnail      = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(100, null, function ($constraint) {
+                                    $constraint->aspectRatio();
+                                })->encode();
+                                $imageContent   = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
+                            }
+                        @endphp
+                        <div class="modalHotelRoom_box_body_gallery_bottom_item">
+                            <img src="{{ $imageContent }}" alt="Ảnh phòng {{ $price->room->name }}" title="Ảnh phòng {{ $price->room->name }}" />
+                        </div>
+                    @endforeach
+                </div>
+            @endif
         </div>
         <div class="modalHotelRoom_box_body_info">
             <!-- title -->
@@ -72,6 +74,12 @@
                     <span class="highLight">
                         @for($i=0;$i<$price->number_people;++$i)
                             <i class="fa-solid fa-person"></i>
+                            @php
+                                if($price->number_people>4){
+                                    echo 'x'.$price->number_people;
+                                    break;
+                                }
+                            @endphp
                         @endfor
                     </span>
                 </div>
@@ -123,4 +131,4 @@
         <div class="modalHotelRoom_box_footer_button">Đặt phòng này!</div>
     </div>
 </div> 
-<div class="modalHotelRoom_bg" onClick="openCloseModal('js_loadHotelRoom_modal_{{ $price->id }}');"></div>
+<div class="modalHotelRoom_bg" onClick="openCloseModal('js_loadHotelPrice_modal_{{ $price->id }}');"></div>

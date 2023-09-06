@@ -94,10 +94,12 @@
                         $priceOld   = 0;
                         if(!empty($hotel->rooms)){
                             foreach($hotel->rooms as $room){
-                                if(!empty($room->price)&&$priceMin>$room->price){
-                                    $priceMin   = $room->price;
-                                    $priceOld   = $room->price_old;
-                                    $saleOff    = $room->sale_off;
+                                foreach($room->prices as $price){
+                                    if(!empty($price->price)&&$priceMin>$price->price){
+                                        $priceMin   = $price->price;
+                                        $priceOld   = $price->price_old;
+                                        $saleOff    = $price->sale_off;
+                                    }
                                 }
                             }
                         }
