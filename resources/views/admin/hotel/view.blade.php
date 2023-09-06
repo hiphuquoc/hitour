@@ -620,14 +620,6 @@
                 dataForm['name']        = $('#formHotelRoom #name').val();
                 /* lấy kích thước */ 
                 dataForm['size']        = $('#formHotelRoom #size').val();
-                /* lấy số người tối đa */ 
-                dataForm['number_people']    = $('#formHotelRoom #number_people').val();
-                /* lấy giá */ 
-                dataForm['price']       = $('#formHotelRoom #price').val();
-                /* lấy giá cũ */ 
-                dataForm['price_old']   = $('#formHotelRoom #price_old').val();
-                /* lấy điều khoản */ 
-                dataForm['condition']   = $('#formHotelRoom #condition').val();
                 /* lấy ảnh */
                 var images              = {};
                 var count               = 0;
@@ -638,6 +630,25 @@
                     }
                 });
                 dataForm['images']      = images;
+                /* lấy tùy chọn giá */
+                var price               = [];
+                $('#formHotelRoom').find('[name^="prices"]').filter(function() {
+                    return /\[\d+\]\[price\]$/.test(this.name); // Lọc các input có dạng prices[0][name]
+                }).each(function() {
+                    var key = this.name.match(/\[(\d+)\]/)[1]; // Lấy số từ giá trị name
+                    var value = $(this).val(); // Lấy giá trị của input
+                    var contentNumberPeople = $('[name="prices[' + key + '][number_people]"]').val();
+                    var contentPriceOld     = $('[name="prices[' + key + '][price_old]"]').val();
+                    var contentDescription  = $('[name="prices[' + key + '][description]"]').val();
+                    var item = {
+                        'number_people' : contentNumberPeople,
+                        'price'         : value,
+                        'price_old'     : contentPriceOld,
+                        'discription'   : contentDescription
+                    };
+                    price[key]      = item; // Gán giá trị vào mảng dataForm với key tương ứng
+                });
+                dataForm['prices']  = price;
                 /* lấy chi tiết tiện nghi */
                 var detail              = [];
                 $('#formHotelRoom').find('[name^="details"]').filter(function() {

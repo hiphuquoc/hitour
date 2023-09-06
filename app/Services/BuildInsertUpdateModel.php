@@ -1368,10 +1368,19 @@ class BuildInsertUpdateModel {
         if(!empty($dataForm)&&!empty($idHotelInfo)){
             $result['hotel_info_id']        = $idHotelInfo;
             $result['name']                 = $dataForm['name'];
-            $result['condition']            = $dataForm['condition'] ?? null;
             $result['size']                 = $dataForm['size'];
+            $result['note']                 = $dataForm['note'] ?? null;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableHotelPrice($dataForm, $idHotelRoom){
+        $result     = [];
+        if(!empty($dataForm)&&!empty($idHotelRoom)){
+            $result['hotel_room_id']        = $idHotelRoom;
+            $result['description']          = $dataForm['description'] ?? null;
+            $result['price']                = $dataForm['price'];
             $result['number_people']        = $dataForm['number_people'];
-            $result['price']                = $dataForm['price'] ?? null;
             /* giá cũ */
             $priceOld                       = $dataForm['price_old'] ?? null;
             if(empty($priceOld)&&!empty($dataForm['price'])){
@@ -1384,7 +1393,6 @@ class BuildInsertUpdateModel {
                 $saleOff                    = (($dataForm['price_old'] - $dataForm['price'])/$dataForm['price_old'])*100;
             }
             $result['sale_off']             = $saleOff;
-            $result['note']                 = $dataForm['note'] ?? null;
         }
         return $result;
     }

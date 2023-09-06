@@ -610,7 +610,7 @@ Route::prefix('serviceBooking')->group(function(){
     Route::get('/confirm', [ServiceBookingController::class, 'confirm'])->name('main.serviceBooking.confirm');
 });
 /* ===== HOTEL ===== */
-Route::get('/loadHotelRoom', [HotelController::class, 'loadHotelRoom'])->name('main.hotel.loadHotelRoom');
+Route::get('/loadHotelPrice', [HotelController::class, 'loadHotelPrice'])->name('main.hotel.loadHotelPrice');
 Route::get('/loadHotelImage', [HotelController::class, 'loadHotelImage'])->name('main.hotel.loadHotelImage');
 /* login với google */
 // Route::get('/setCsrfFirstTime', [CookieController::class, 'setCsrfFirstTime'])->name('main.setCsrfFirstTime');

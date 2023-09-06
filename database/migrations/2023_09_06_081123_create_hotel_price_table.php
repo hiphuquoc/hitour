@@ -13,7 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('hotel_room', function (Blueprint $table) {
+        Schema::create('hotel_price', function (Blueprint $table) {
+            $table->id();
+            $table->integer('hotel_room_id');
+            $table->longText('description')->nullable();
+            $table->integer('number_people');
+            $table->integer('price');
             $table->integer('price_old')->nullable();
             $table->integer('sale_off')->nullable();
         });
@@ -26,8 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::table('hotel_room', function (Blueprint $table) {
-        //     //
-        // });
+        // Schema::dropIfExists('hotel_price');
     }
 };

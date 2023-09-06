@@ -1,3 +1,4 @@
+<!-- thông tin phòng chung -->
 <div class="formBox_full">
     <!-- One Row -->
     <div class="formBox_full_item">
@@ -44,34 +45,8 @@
     </div>
     <!-- One Row -->
     <div class="formBox_full_item"> 
-        <label class="form-label" for="condition">Điều khoản (html)</label>
-        <textarea class="form-control" id="condition"  name="condition" rows="5">{{ $data['condition'] ?? '' }}</textarea>
-    </div>
-    <!-- One Row -->
-    <div class="formBox_full_item">
-        <div class="flexBox">
-            <div class="flexBox_item">
-                <label class="form-label inputRequired" for="size">Kích thước</label>
-                <input type="number" min="0" id="size" class="form-control" name="size" placeholder="0" value="{{ $data['size'] ?? '' }}" required />
-            </div>
-            <div class="flexBox_item" style="margin-left:1rem;">
-                <label class="form-label inputRequired" for="number_people">Người tối đa</label>
-                <input type="number" min="0" id="number_people" class="form-control" name="number_people" placeholder="0" value="{{ $data['number_people'] ?? '' }}" required />
-            </div>
-        </div>
-    </div>
-    <!-- One Row -->
-    <div class="formBox_full_item">
-        <div class="flexBox">
-            <div class="flexBox_item">
-                <label class="form-label" for="price">Giá phòng /đêm</label>
-                <input type="number" min="0" id="price" class="form-control" name="price" placeholder="0" value="{{ $data['price'] ?? '' }}" />
-            </div>
-            <div class="flexBox_item">
-                <label class="form-label" for="price_old">Giá cũ</label>
-                <input type="number" min="0" id="price_old" class="form-control" name="price_old" placeholder="0" value="{{ $data['price_old'] ?? '' }}" />
-            </div>
-        </div>
+        <label class="form-label inputRequired" for="size">Kích thước</label>
+        <input type="number" min="0" id="size" class="form-control" name="size" placeholder="0" value="{{ $data['size'] ?? '' }}" required />
     </div>
     <!-- One Row -->
     <div class="formBox_full_item">
@@ -104,7 +79,87 @@
         </select>
     </div>
 </div>
-<div class="formBox_full">
+<!-- tùy chọn giá -->
+<div class="repeater formBox_full">
+    <div class="formBox_full_item" data-repeater-list="prices">
+        @if(!empty($data['prices'])&&$data['prices']->isNotEmpty())
+            @foreach($data['prices'] as $price)
+                <div class="card" data-repeater-item>
+                    <div class="card-header">
+                        <h4 class="card-title">
+                            Tùy chọn giá
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- One Row -->
+                        <div class="formBox_full_item">
+                            <div class="flexBox">
+                                <div class="flexBox_item">
+                                    <label class="form-label inputRequired">Người tối đa</label>
+                                    <input type="number" min="0" id="number_people" class="form-control" name="number_people" placeholder="0" value="{{ $price['number_people'] ?? '' }}" required />
+                                </div>
+                                <div class="flexBox_item">
+                                    <label class="form-label inputRequired">Giá phòng /đêm</label>
+                                    <input type="number" min="0" id="price" class="form-control" name="price" placeholder="0" value="{{ $price['price'] ?? '' }}" required />
+                                </div>
+                                <div class="flexBox_item">
+                                    <label class="form-label">Giá cũ</label>
+                                    <input type="number" min="0" id="price_old" class="form-control" name="price_old" placeholder="0" value="{{ $price['price_old'] ?? '' }}" />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- One Row -->
+                        <div class="formBox_full_item"> 
+                            <label class="form-label">Mô tả giá (html)</label>
+                            <textarea class="form-control" id="description"  name="description" rows="3">{{ $price['description'] ?? '' }}</textarea>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        @else 
+            <div class="card" data-repeater-item>
+                <div class="card-header">
+                    <h4 class="card-title">
+                        Tùy chọn giá
+                        <i class="fa-solid fa-circle-xmark" data-repeater-delete></i>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <!-- One Row -->
+                    <div class="formBox_full_item">
+                        <div class="flexBox">
+                            <div class="flexBox_item">
+                                <label class="form-label inputRequired">Người tối đa</label>
+                                <input type="number" min="0" id="number_people" class="form-control" name="number_people" placeholder="0" value="" required />
+                            </div>
+                            <div class="flexBox_item">
+                                <label class="form-label inputRequired">Giá phòng /đêm</label>
+                                <input type="number" min="0" id="price" class="form-control" name="price" placeholder="0" value="" required />
+                            </div>
+                            <div class="flexBox_item">
+                                <label class="form-label">Giá cũ</label>
+                                <input type="number" min="0" id="price_old" class="form-control" name="price_old" placeholder="0" value="" />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- One Row -->
+                    <div class="formBox_full_item"> 
+                        <label class="form-label">Mô tả giá (html)</label>
+                        <textarea class="form-control" id="description"  name="description" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+        @endif
+    </div>
+    <div class="formBox_full_item" style="text-align:right;">
+        <button class="btn btn-icon btn-primary waves-effect waves-float waves-light" type="button" aria-label="Thêm" data-repeater-create>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus me-25"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span>Thêm</span>
+        </button>
+    </div>
+</div>
+<!-- mô tả tiện ích -->
+<div class="repeater formBox_full">
     <!-- One Row -->
     <div data-repeater-list="details">
         
@@ -175,8 +230,11 @@
         </button>
     </div>
 </div>
+
 <script type="text/javascript">
     $('.select2').select2();
+
+    $('.repeater').repeater();
     
     function removeUploadImage(idNode){
         const node          = $('#'+idNode);

@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->integer('hotel_info_id');
             $table->text('name');
-            $table->text('condition')->nullable(); /* giường trong phòng - bao gồm ăn sang hay chưa - các điều khoản thanh toán */
             $table->integer('size');
-            $table->integer('number_people');
-            $table->integer('price')->nullable();
+            // $table->text('condition')->nullable(); /* giường trong phòng - bao gồm ăn sang hay chưa - các điều khoản thanh toán */
+            // $table->integer('number_people');
+            // $table->integer('price')->nullable();
             $table->text('note')->nullable();
         });
     }

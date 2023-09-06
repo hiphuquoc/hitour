@@ -16,6 +16,7 @@
     </div>
     <div class="hotelRoomBox_item_info">
         <div class="hotelRoomBox_item_info_title highLight">{{ $item->name }}</div> 
+        <div>Kích thước: {{ $item->size }}m<sup>2</sup></div>
         @if(!empty($item->condition))
             <div class="hotelRoomBox_item_info_desc">{!! $item->condition !!}</div> 
         @endif
@@ -24,12 +25,19 @@
                 <span>{!! !empty($facility->infoHotelRoomFacility->icon)&&!empty($facility->infoHotelRoomFacility->name) ? $facility->infoHotelRoomFacility->icon.$facility->infoHotelRoomFacility->name : null !!}</span>
             @endforeach
         </div>
-        <div>
-            Số người tối đa: <span class="highLight">{{ $item->number_people }}</span>
-        </div>
-        <div style="font-size:1.2rem;font-weight:bold;color:red;letter-spacing:1px;">
-            {{ !empty($item->price) ? number_format($item->price).' /đêm' : '-' }}
-        </div>
+        @if(!empty($item->prices)&&$item->prices->isNotEmpty())
+            <div class="hotelRoomBox_item_info_price">
+                @foreach($item->prices as $price)
+                    <div class="hotelRoomBox_item_info_price_item">
+                        Số người: <span class="highLight">{{ $price->number_people }}</span> - Giá: <span class="highLight">{{ number_format($price->price) }} <sup>đ</sup></span> 
+                        @if(!empty($price->price_old)&&!empty($price->sale_off))
+                            (<span style="text-decoration:line-through;">{{ number_format($price->price_old) }}</span>) 
+                            <span style="background:red;color:#fff;border-radius:5px;padding:0.15rem 0.5rem;font-size:0.9rem;">-{{ $price->sale_off }}%</span>
+                        @endif
+                    </div>
+                @endforeach
+            </div>
+        @endif
     </div>
     <div class="hotelRoomBox_item_action">
         <div class="icon-wrapper iconAction">

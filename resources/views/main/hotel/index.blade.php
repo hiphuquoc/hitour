@@ -125,10 +125,12 @@
                                 $priceOld   = 0;
                                 if(!empty($item->rooms)){
                                     foreach($item->rooms as $room){
-                                        if(!empty($room->price)&&$priceMin>$room->price){
-                                            $priceMin   = $room->price;
-                                            $priceOld   = $room->price_old;
-                                            $saleOff    = $room->sale_off;
+                                        foreach($room->prices as $price){
+                                            if(!empty($price->price)&&$priceMin>$price->price){
+                                                $priceMin   = $price->price;
+                                                $priceOld   = $price->price_old;
+                                                $saleOff    = $price->sale_off;
+                                            }
                                         }
                                     }
                                 }
@@ -284,12 +286,14 @@
                 <div class="container">
                     <div class="hotelList">
                         @foreach($item->rooms as $room)
-                            <div id="js_loadHotelRoom_{{ $room->id }}" class="hotelList_item">
-                                <!-- load Ajax chép đè -->
-                                <div style="width:100%;height:230px;display:flex;justify-content:center;align-items:center;">
-                                    <img src="{{ config('main.svg.loading_main_nobg')}}" alt="tải thông tin phòng {{ $item->name }}" title="tải thông tin phòng {{ $item->name }}" style="width:230px;" />
+                            @foreach($room->prices as $price)
+                                <div id="js_loadHotelPrice_{{ $price->id }}" class="hotelList_item">
+                                    <!-- load Ajax chép đè -->
+                                    <div style="width:100%;height:230px;display:flex;justify-content:center;align-items:center;">
+                                        <img src="{{ config('main.svg.loading_main_nobg')}}" alt="tải thông tin phòng {{ $room->name }}" title="tải thông tin phòng {{ $room->name }}" style="width:230px;" />
+                                    </div>
                                 </div>
-                            </div>
+                            @endforeach
                         @endforeach
                     </div>
                 </div>
@@ -329,9 +333,11 @@
     @include('main.hotel.modalDescription', compact('content'))
     <!-- modal của phòng -->
     @foreach($item->rooms as $room)
-        <div id="js_loadHotelRoom_modal_{{ $room->id }}" class="modalHotelRoom">
-            <!-- load Ajax -->
-        </div>
+        @foreach($room->prices as $price)
+            <div id="js_loadHotelPrice_modal_{{ $price->id }}" class="modalHotelRoom">
+                <!-- load Ajax -->
+            </div>
+        @endforeach
     @endforeach
 @endpush
 @push('bottom')
@@ -352,7 +358,9 @@
     <script type="text/javascript">
         $('window').ready(function(){
             @foreach ($item->rooms as $room)
-                loadHotelRoom('{{ $room->id }}');
+                @foreach ($room->prices as $price)
+                    loadHotelPrice('{{ $price->id }}');
+                @endforeach
             @endforeach
         })
 
@@ -367,24 +375,24 @@
             }
         }
 
-        function loadHotelRoom(idHotelRoom){
+        function loadHotelPrice(idHotelPrice){
             $.ajax({
-                url         : "{{ route('main.hotel.loadHotelRoom') }}",
+                url         : "{{ route('main.hotel.loadHotelPrice') }}",
                 type        : "GET",
                 dataType    : "json",
-                data        : { hotel_room_id : idHotelRoom }
+                data        : { hotel_price_id : idHotelPrice }
             }).done(function(data){
                 /* ghi nội dung room vào bảng */
                 if(data.row!='') {
-                    $('#js_loadHotelRoom_'+idHotelRoom).html(data.row);
+                    $('#js_loadHotelPrice_'+idHotelPrice).html(data.row);
                 }else {
-                    $('#js_loadHotelRoom_'+idHotelRoom).hidden();
+                    $('#js_loadHotelPrice_'+idHotelPrice).hidden();
                 }
                 /* ghi nội dung modal room */
                 if(data.row!='') {
-                    $('#js_loadHotelRoom_modal_'+idHotelRoom).html(data.modal);
+                    $('#js_loadHotelPrice_modal_'+idHotelPrice).html(data.modal);
                 }else {
-                    $('#js_loadHotelRoom_modal_'+idHotelRoom).hidden();
+                    $('#js_loadHotelPrice_modal_'+idHotelPrice).hidden();
                 }
             });
         }

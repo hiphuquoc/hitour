@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\HotelRoom;
+use App\Models\HotelPrice;
 use App\Models\HotelImage;
 
 use Illuminate\Http\Request;
@@ -13,15 +13,15 @@ use PDO;
 
 class HotelController extends Controller {
 
-    public function loadHotelRoom(Request $request){
-        $result         = [];
-        if(!empty($request->get('hotel_room_id'))){
-            $room       = HotelRoom::select('*')
-                            ->where('id', $request->get('hotel_room_id'))
-                            ->with('images', 'facilities')
-                            ->first();
-            $result['row']      = view('main.hotel.oneRoom', compact('room'))->render();
-            $result['modal']    = view('main.hotel.oneModalRoom', compact('room'))->render();
+    public function loadHotelPrice(Request $request){
+        $result                 = [];
+        if(!empty($request->get('hotel_price_id'))){
+            $price              = HotelPrice::select('*')
+                                    ->where('id', $request->get('hotel_price_id'))
+                                    ->with('room.images', 'room.facilities')
+                                    ->first();
+            $result['row']      = view('main.hotel.oneRoom', compact('price'))->render();
+            $result['modal']    = view('main.hotel.oneModalRoom', compact('price'))->render();
         }
         return json_encode($result);
     }
