@@ -81,7 +81,7 @@ class HotelLocation extends Model {
     }
 
     public function hotels(){
-        return $this->hasMany(\App\Models\Hotel::class, 'hotel_location_id', 'id');
+        return $this->hasMany(\App\Models\Hotel::class, 'hotel_location_id', 'id')->orderBy('id', 'DESC');
     }
 
     public function questions(){

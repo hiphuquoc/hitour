@@ -8,9 +8,6 @@ use App\Models\HotelImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-use Illuminate\Support\Facades\Response;
-use PDO;
-
 class HotelController extends Controller {
 
     public function loadHotelPrice(Request $request){
