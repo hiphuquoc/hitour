@@ -225,7 +225,7 @@ class BuildInsertUpdateModel {
         return $result;
     }
 
-    public static function buildArrayTableStaffInfo($dataForm, $avatarPath = null){
+    public static function buildArrayTableStaffInfo($userId, $dataForm, $avatarPath = null){
         /*
             fullname
             prefix_name
@@ -236,6 +236,7 @@ class BuildInsertUpdateModel {
         */
         $result                     = [];
         if(!empty($dataForm)){
+            $result['user_id']      = $userId;
             $result['firstname']    = $dataForm['firstname'] ?? null;
             $result['lastname']     = $dataForm['lastname'] ?? null;
             $result['prefix_name']  = $dataForm['prefix_name'] ?? null;
