@@ -69,7 +69,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <!-- One Row -->
+                                </div>
+                                <div class="bookingForm_item_footer">
+                                    *Đây là thông tin của Người Đặt để nhân viên Hitour có thể liên hệ và hỗ trợ bạn hoàn tất booking này!
+                                </div>
+                            </div>
+                            <div class="bookingForm_item">
+                                <div class="bookingForm_item_head">
+                                    Hành trình
+                                </div>
+                                <div class="bookingForm_item_body" style="border-radius:inherit;">
                                     <div class="bookingForm_item_body_item">
                                         <input type="hidden" id="type_booking" name="type_booking" value="2">
                                         <div class="chooseTripBox">
@@ -80,10 +89,7 @@
                                                 Một chiều
                                             </div>
                                         </div>
-                                    </div> --}}
-                                </div>
-                                <div class="bookingForm_item_footer">
-                                    *Đây là thông tin của Người Đặt để nhân viên Hitour có thể liên hệ và hỗ trợ bạn hoàn tất booking này!
+                                    </div>
                                 </div>
                             </div>
                             <!-- Departture 1 & 2 -->

@@ -347,11 +347,11 @@
     display: flex;
     &_item {
         width: 100%;
-        max-width: 120px;
+        // max-width: 120px;
         border: 1px solid $bg-04;
-        padding: 0.35rem 1rem;
+        padding: 0.5rem 1rem;
         text-align: center;
-        border-radius: 7px;
+        // border-radius: 7px;
         font-size: 0.95rem;
         font-weight: bold;
         cursor: pointer;
