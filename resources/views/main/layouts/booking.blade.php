@@ -37,7 +37,7 @@
         <!-- === END:: Breadcrumb === -->
 
         <!-- === START:: Content === -->
-        <div class="app-content content" style="background:#e9ecef;">
+        <div class="app-content content pageBooking">
             <div class="content-overlay"></div>
             @yield('content')
         </div>

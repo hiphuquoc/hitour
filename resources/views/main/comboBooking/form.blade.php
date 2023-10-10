@@ -23,7 +23,7 @@
             <div class="container">
                 <!-- title -->
                 <h1 class="titlePage" style="margin-bottom:0.5rem;">Đặt combo du lịch</h1>
-                <div style="margin-bottom:1rem;">Quý khách vui lòng điền thông tin liên hệ và xem lại đặt chỗ.</div>
+                {{-- <div style="margin-bottom:1rem;">Quý khách vui lòng điền thông tin liên hệ và xem lại đặt chỗ.</div> --}}
                 <!-- service box -->
                 <div class="pageContent_body">
                     <div class="pageContent_body_content">

@@ -1,6 +1,66 @@
+.pageBooking {
+    background: $bg-03;
+    @media(max-width: 577px){
+        background: #fff;
+    }
+}
+.certifiedBox {
+    display: flex;
+    align-items: flex-start;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 1px 3px $bg-05;
+    border: 1px solid $bg-04;
+    background: #fff;
+    border-radius: 10px;
+    &_image {
+        flex: 0 0 100px;
+        img {
+            margin: 0 !important;
+        }
+    }
+    &_content {
+        width: 100%;
+        margin-left: 1.5rem;
+        &_title {
+            font-weight: bold;
+            color: $colorTitle;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #25a244;
+        }
+        &_list {
+            font-size: 1rem;
+            > * {
+                color: $colorHighlight;
+                &:before {
+                    @include fontAwesome;
+                    content: '\f00c';
+                    margin-right: 0.5rem;
+                    color: #25a244;
+                }
+            }
+        }
+    }
+    @media(max-width: 577px){
+        padding: 0;
+        box-shadow: none;
+        border: none;
+        flex-wrap: wrap;
+        &_image {
+            margin: 0 auto;
+        }
+        &_content {
+            margin-top: 0.75rem;
+            margin-left: 0;
+        }
+    }
+}
 /* form */
 .titlePageBooking {
     margin-bottom: 0.75rem !important;
+    @media(max-width: 990px){
+        text-align: center;
+    }
 }
 .inputRequired {
     &:after {
@@ -228,7 +288,7 @@
         border-radius: 10px;
         // overflow: hidden;
         &:not(:first-child){
-            margin-top: 2rem;
+            margin-top: 1.5rem;
         }
         &_head {
             font-size: 1.3rem;
@@ -313,21 +373,45 @@
     }
     @media(max-width: 577px){
         &_item {
-            // &:not(:first-child){
-            //     margin-top: 1.5rem;
-            //     padding-top: 1rem;
-            //     border-top: 1px solid $bg-04;
-            // }
+            border-radius: 0 !important;
+            position: relative;
+            &:not(:first-child){
+                padding-top: 0.75rem;
+                border-top: 7px solid $bg-03;
+                &:after, &:before {
+                    content: '';
+                    width: 30px;
+                    height: 5px;
+                    position: absolute;
+                    top: -7px;
+                    border-top: 7px solid $bg-03;
+                }
+                &:after {
+                    right: -0.75rem;
+                }
+                &:before {
+                    left: -0.75rem;
+                }
+            }
+            &:not(:first-child){
+                margin-top: 1.25rem;
+            }
             &_head {
                 font-size: 1.2rem;
+                margin-bottom: 0.75rem;
             }
             &_body {
-                // padding: 0.75rem 1rem 1rem;
+                padding: 0;
+                background: none;
+                box-shadow: none;
                 &_item {
                     &:not(:first-child){
                         margin-top: 1rem;
                     }
                 }
+            }
+            &_footer {
+                display: none;
             }
         }
         .formColumnCustom {
@@ -336,7 +420,7 @@
                 width: 100%;
                 margin-left: 0 !important;
                 &:not(:first-child){
-                    margin-top: 1rem;
+                    margin-top: 0.75rem;
                 }
             }
         }
@@ -530,9 +614,13 @@
         &_body {
             &_row {
                 flex-wrap: wrap;
+                padding: 0.75rem 0.75rem 1rem 0.75rem;
                 &_item {
                     &:not(:last-child){
                         margin-left: 0;
+                    }
+                    &:nth-child(2n + 1){
+                        margin-left: 0.75rem;
                     }
                     &:nth-child(n + 2){
                         margin-top: 0.5rem;
@@ -550,7 +638,6 @@
     }
 }
 .chooseOptionTourBox {
-    // background: $bg-02;
     border-radius: 10px;
     overflow: hidden;
     &_body {

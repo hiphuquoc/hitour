@@ -279,14 +279,14 @@
         });
     });
     function showHideListMenuMobile(thisD){
-        let elemtC      = $(thisD).parent().find('ul');
+        let elemtC      = $(thisD).parent().find('> ul');
         let displayC    = elemtC.css('display');
         if(displayC=='none'){
             elemtC.css('display', 'block');
-            $(thisD).html('<i class="fas fa-chevron-down"></i>');
+            $(thisD).find('.nav-mobile_main__arrow').html('<i class="fas fa-chevron-down"></i>');
         }else {
             elemtC.css('display', 'none');
-            $(thisD).html('<i class="fas fa-chevron-right"></i>');
+            $(thisD).find('.nav-mobile_main__arrow').html('<i class="fas fa-chevron-right"></i>');
         }
     }
     function openCloseElemt(idElemt){

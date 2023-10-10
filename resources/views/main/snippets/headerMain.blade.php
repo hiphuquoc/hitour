@@ -105,6 +105,29 @@
         /* biển đảo */
         if($item->island==true) $combosBD[] = $item;
     }
+     /* Tour trong nước */
+     $guideMenuByRegion = \App\Models\Guide::select('*')
+                            ->with('seo', 'region')
+                            ->get();
+    $guideMB            = [];
+    $guideMT            = [];
+    $guideMN            = [];
+    foreach($guideMenuByRegion as $item){
+        /* vùng miền */
+        switch($item->region->id){
+            case 1:
+                $guideMB[]   = $item;
+                break;
+            case 2:
+                $guideMT[]   = $item;
+                break;
+            case 3:
+                $guideMN[]   = $item;
+                break;
+            default:
+                break;
+        }
+    }
 @endphp
 
 <!-- START:: Menu Desktop -->
@@ -274,7 +297,7 @@
             </div>
         @else 
             <div class="header_arrow">
-                <a href="javascript:history.back()" title="Quay lại trang trước">
+                <a href="history.back()" title="Quay lại trang trước">
                     <i class="fa-solid fa-arrow-left-long"></i>
                 </a>
             </div>
@@ -284,7 +307,7 @@
         @endif
         <!-- Menu Mobile -->
         <div class="header_menuMobile">
-            <div class="header_menuMobile_item" onclick="javascript:openCloseElemt('nav-mobile');">
+            <div class="header_menuMobile_item" onclick="openCloseElemt('nav-mobile');">
                 <i class="fa-solid fa-bars" style="font-size:1.5rem;margin-top:0.25rem;color:#fff;"></i>
             </div>
         </div>
@@ -295,9 +318,9 @@
 <!-- START:: Menu Mobile -->
 <div id="nav-mobile" style="display:none;">
     <div class="nav-mobile">
-        <div class="nav-mobile_bg" onclick="javascript:openCloseElemt('nav-mobile');"></div>
+        <div class="nav-mobile_bg" onclick="openCloseElemt('nav-mobile');"></div>
         <div class="nav-mobile_main customScrollBar-y">
-            <div class="nav-mobile_main__exit" onclick="javascript:openCloseElemt('nav-mobile');">
+            <div class="nav-mobile_main__exit" onclick="openCloseElemt('nav-mobile');">
                 <i class="fas fa-times"></i>
             </div>
             <a href="/" title="Trang chủ {{ config('company.sortname') }}" style="display:flex;justify-content:center;margin-top:5px;margin-bottom:-10px;">
@@ -315,7 +338,7 @@
                         <i class="fas fa-umbrella-beach"></i>
                         Tour nước ngoài
                     </div>
-                    <span class="right-icon" onclick="javascript:showHideListMenuMobile(this);"><i class="fas fa-chevron-right"></i></span>
+                    <span class="right-icon" onclick="showHideListMenuMobile(this);"><i class="fas fa-chevron-right"></i></span>
                     <ul style="display:none;">
                     @foreach($dataTourContinent as $tourContinent)
                         <li>
@@ -326,85 +349,92 @@
                     @endforeach
                     </ul>
                 </li> --}}
-                @if(!empty($dataBD))
-                    <li>
-                        <div>
-                            <i class="fas fa-umbrella-beach"></i>
-                            Tour biển đảo
-                        </div>
-                        <span class="right-icon" onclick="javascript:showHideListMenuMobile(this);"><i class="fas fa-chevron-right"></i></span>
-                        <ul style="display:none;">
-                        @foreach($dataBD as $tourBD)
+                <li>
+                    <div onclick="showHideListMenuMobile(this);">
+                        <i class="fas fa-umbrella-beach"></i>
+                        <span class="nav-mobile_main__title">Tour Du Lịch</span>
+                        <span class="nav-mobile_main__arrow"><i class="fas fa-chevron-right"></i></span>
+                    </div>
+                    <ul style="display:none;">
+                        @if(!empty($dataBD))
                             <li>
-                                <a href="/{{ $tourBD->seo->slug_full ?? null }}" title="{{ $tourBD->name ?? $tourBD->seo->title ?? null }}">
-                                    <div>{{ $tourBD->name ?? $tourBD->seo->title ?? null }}</div>
-                                </a>
+                                <div onclick="showHideListMenuMobile(this);">
+                                    <span class="nav-mobile_main__title">Tour Biển Đảo</span>
+                                    <span class="nav-mobile_main__arrow"><i class="fas fa-chevron-right"></i></span>
+                                </div>
+                                <ul style="display:none;">
+                                @foreach($dataBD as $tourBD)
+                                    <li>
+                                        <a href="/{{ $tourBD->seo->slug_full ?? null }}" title="{{ $tourBD->name ?? $tourBD->seo->title ?? null }}">
+                                            <div>{{ $tourBD->name ?? $tourBD->seo->title ?? null }}</div>
+                                        </a>
+                                    </li>
+                                @endforeach
+                                </ul>
                             </li>
-                        @endforeach
-                        </ul>
-                    </li>
-                @endif
-                @if(!empty($dataMB))
-                    <li>
-                        <div>
-                            <i class="fas fa-umbrella-beach"></i>
-                            Tour miền bắc
-                        </div>
-                        <span class="right-icon" onclick="javascript:showHideListMenuMobile(this);"><i class="fas fa-chevron-right"></i></span>
-                        <ul style="display:none;">
-                        @foreach($dataMB as $tourMB)
+                        @endif
+                        @if(!empty($dataMB))
                             <li>
-                                <a href="/{{ $tourMB->seo->slug_full ?? null }}" title="{{ $tourMB->name ?? $tourMB->seo->title ?? null }}">
-                                    <div>{{ $tourMB->name ?? $tourMB->seo->title ?? null }}</div>
-                                </a>
+                                <div onclick="showHideListMenuMobile(this);">
+                                    <span class="nav-mobile_main__title">Tour Miền Bắc</span>
+                                    <span class="nav-mobile_main__arrow"><i class="fas fa-chevron-right"></i></span>
+                                </div>
+                                <ul style="display:none;">
+                                @foreach($dataMB as $tourMB)
+                                    <li>
+                                        <a href="/{{ $tourMB->seo->slug_full ?? null }}" title="{{ $tourMB->name ?? $tourMB->seo->title ?? null }}">
+                                            <div>{{ $tourMB->name ?? $tourMB->seo->title ?? null }}</div>
+                                        </a>
+                                    </li>
+                                @endforeach
+                                </ul>
                             </li>
-                        @endforeach
-                        </ul>
-                    </li>
-                @endif
-                @if(!empty($dataMT))
-                    <li>
-                        <div>
-                            <i class="fas fa-umbrella-beach"></i>
-                            Tour miền trung
-                        </div>
-                        <span class="right-icon" onclick="javascript:showHideListMenuMobile(this);"><i class="fas fa-chevron-right"></i></span>
-                        <ul style="display:none;">
-                        @foreach($dataMT as $tourMT)
+                        @endif
+                        @if(!empty($dataMT))
                             <li>
-                                <a href="/{{ $tourMT->seo->slug_full ?? null }}" title="{{ $tourMT->name ?? $tourMT->seo->title ?? null }}">
-                                    <div>{{ $tourMT->name ?? $tourMT->seo->title ?? null }}</div>
-                                </a>
+                                <div onclick="showHideListMenuMobile(this);">
+                                    <span class="nav-mobile_main__title">Tour Miền Trung</span>
+                                    <span class="nav-mobile_main__arrow"><i class="fas fa-chevron-right"></i></span>
+                                </div>
+                                <ul style="display:none;">
+                                @foreach($dataMT as $tourMT)
+                                    <li>
+                                        <a href="/{{ $tourMT->seo->slug_full ?? null }}" title="{{ $tourMT->name ?? $tourMT->seo->title ?? null }}">
+                                            <div>{{ $tourMT->name ?? $tourMT->seo->title ?? null }}</div>
+                                        </a>
+                                    </li>
+                                @endforeach
+                                </ul>
                             </li>
-                        @endforeach
-                        </ul>
-                    </li>
-                @endif
-                @if(!empty($dataMN))
-                    <li>
-                        <div>
-                            <i class="fas fa-umbrella-beach"></i>
-                            Tour miền nam
-                        </div>
-                        <span class="right-icon" onclick="javascript:showHideListMenuMobile(this);"><i class="fas fa-chevron-right"></i></span>
-                        <ul style="display:none;">
-                        @foreach($dataMN as $tourMN)
+                        @endif
+                        @if(!empty($dataMN))
                             <li>
-                                <a href="/{{ $tourMN->seo->slug_full ?? null }}" title="{{ $tourMN->name ?? $tourMN->seo->title ?? null }}">
-                                    <div>{{ $tourMN->name ?? $tourMN->seo->title ?? null }}</div>
-                                </a>
+                                <div onclick="showHideListMenuMobile(this);">
+                                    <span class="nav-mobile_main__title">Tour Miền Nam</span>
+                                    <span class="nav-mobile_main__arrow"><i class="fas fa-chevron-right"></i></span>
+                                </div>
+                                <ul style="display:none;">
+                                @foreach($dataMN as $tourMN)
+                                    <li>
+                                        <a href="/{{ $tourMN->seo->slug_full ?? null }}" title="{{ $tourMN->name ?? $tourMN->seo->title ?? null }}">
+                                            <div>{{ $tourMN->name ?? $tourMN->seo->title ?? null }}</div>
+                                        </a>
+                                    </li>
+                                @endforeach
+                                </ul>
                             </li>
-                        @endforeach
-                        </ul>
-                    </li>
-                @endif
+                        @endif
+                    </ul>
+                </li>
+                
+                
                 @if(!empty($dataShip)&&$dataShip->isNotEmpty())
                     <li>
-                        <div>
+                        <div onclick="showHideListMenuMobile(this);">
                             <i class="fas fa-ship"></i>
-                            Vé tàu cao tốc
+                            <span class="nav-mobile_main__title">Vé Tàu Cao Tốc</span>
+                            <span class="nav-mobile_main__arrow"><i class="fas fa-chevron-right"></i></span>
                         </div>
-                        <span class="right-icon" onclick="javascript:showHideListMenuMobile(this);"><i class="fas fa-chevron-right"></i></span>
                         <ul style="display:none;">
                         @foreach($dataShip as $shipLocation)
                             <li>
@@ -416,38 +446,92 @@
                         </ul>
                     </li>
                 @endif
+
                 <li>
-                    <div>
-                        <i class="fa-solid fa-plane-departure"></i>
-                        <div>Vé máy bay</div>
+                    <div onclick="showHideListMenuMobile(this);">
+                        <i class="fa-solid fa-bed"></i>
+                        <span class="nav-mobile_main__title">Khách Sạn</span>
+                        <span class="nav-mobile_main__arrow"><i class="fas fa-chevron-right"></i></span>
                     </div>
-                    @if(!empty($dataAir)&&$dataAir->isNotEmpty())
-                        <span class="right-icon" onclick="javascript:showHideListMenuMobile(this);"><i class="fas fa-chevron-right"></i></span>
-                        <ul style="display:none;">
-                        @foreach($dataAir as $airLocation)
+                    <ul style="display:none;">
+                        @if(!empty($hotelBD))
                             <li>
-                                <a href="/{{ $airLocation->seo->slug_full ?? null }}" title="{{ $airLocation->name ?? $airLocation->seo->title ?? null }}">
-                                    <div>{{ $airLocation->name ?? $airLocation->seo->title ?? null }}</div>
-                                </a>
+                                <div onclick="showHideListMenuMobile(this);">
+                                    <span class="nav-mobile_main__title">Khách Sạn Biển Đảo</span>
+                                    <span class="nav-mobile_main__arrow"><i class="fas fa-chevron-right"></i></span>
+                                </div>
+                                <ul style="display:none;">
+                                @foreach($hotelBD as $h)
+                                    <li>
+                                        <a href="/{{ $h->seo->slug_full ?? null }}" title="{{ $h->name ?? $h->seo->title ?? null }}">
+                                            <div>{{ $h->name ?? $h->seo->title ?? null }}</div>
+                                        </a>
+                                    </li>
+                                @endforeach
+                                </ul>
                             </li>
-                        @endforeach
-                        </ul>
-                    @endif
+                        @endif
+                        @if(!empty($hotelMB))
+                            <li>
+                                <div onclick="showHideListMenuMobile(this);">
+                                    <span class="nav-mobile_main__title">Khách Sạn Miền Bắc</span>
+                                    <span class="nav-mobile_main__arrow"><i class="fas fa-chevron-right"></i></span>
+                                </div>
+                                <ul style="display:none;">
+                                @foreach($hotelMB as $h)
+                                    <li>
+                                        <a href="/{{ $h->seo->slug_full ?? null }}" title="{{ $h->name ?? $h->seo->title ?? null }}">
+                                            <div>{{ $h->name ?? $h->seo->title ?? null }}</div>
+                                        </a>
+                                    </li>
+                                @endforeach
+                                </ul>
+                            </li>
+                        @endif
+                        @if(!empty($hotelMT))
+                            <li>
+                                <div onclick="showHideListMenuMobile(this);">
+                                    <span class="nav-mobile_main__title">Khách Sạn Miền Trung</span>
+                                    <span class="nav-mobile_main__arrow"><i class="fas fa-chevron-right"></i></span>
+                                </div>
+                                <ul style="display:none;">
+                                @foreach($hotelMT as $h)
+                                    <li>
+                                        <a href="/{{ $h->seo->slug_full ?? null }}" title="{{ $h->name ?? $h->seo->title ?? null }}">
+                                            <div>{{ $h->name ?? $h->seo->title ?? null }}</div>
+                                        </a>
+                                    </li>
+                                @endforeach
+                                </ul>
+                            </li>
+                        @endif
+                        @if(!empty($hotelMN))
+                            <li>
+                                <div onclick="showHideListMenuMobile(this);">
+                                    <span class="nav-mobile_main__title">Khách Sạn Miền Nam</span>
+                                    <span class="nav-mobile_main__arrow"><i class="fas fa-chevron-right"></i></span>
+                                </div>
+                                <ul style="display:none;">
+                                @foreach($hotelMN as $h)
+                                    <li>
+                                        <a href="/{{ $h->seo->slug_full ?? null }}" title="{{ $h->name ?? $h->seo->title ?? null }}">
+                                            <div>{{ $h->name ?? $h->seo->title ?? null }}</div>
+                                        </a>
+                                    </li>
+                                @endforeach
+                                </ul>
+                            </li>
+                        @endif
+                    </ul>
                 </li>
+
                 <li>
-                    <a href="https://www.booking.com" title="Đặt phòng khách sạn">
-                        <i class="fa-solid fa-hotel"></i>
-                        <div>Khách sạn</div>
-                    </a>
-                </li>
-                <li>
-                    <div>
+                    <div onclick="showHideListMenuMobile(this);">
                         <i class="fa-solid fa-star"></i>
-                        <div>Vé vui chơi</div>
+                        <span class="nav-mobile_main__title">Vé Vui Chơi</span>
+                        <span class="nav-mobile_main__arrow"><i class="fas fa-chevron-right"></i></span>
                     </div>
-                    @if(!empty($dataService)&&$dataService->isNotEmpty())
-                        <span class="right-icon" onclick="javascript:showHideListMenuMobile(this);"><i class="fas fa-chevron-right"></i></span>
-                        <ul style="display:none;">
+                    <ul style="display:none;">
                         @foreach($dataService as $serviceLocation)
                             <li>
                                 <a href="/{{ $serviceLocation->seo->slug_full ?? null }}" title="{{ $serviceLocation->display_name ?? null }}">
@@ -455,19 +539,91 @@
                                 </a>
                             </li>
                         @endforeach
-                        </ul>
-                    @endif
+                    </ul>
                 </li>
-                {{-- <li>
-                    <div>
-                        <i class="fa-solid fa-book"></i>
-                        <div>Cẩm nang du lịch</div>
+                
+                <li>
+                    <div onclick="showHideListMenuMobile(this);">
+                        <i class="fa-solid fa-plane-departure"></i>
+                        <span class="nav-mobile_main__title">Vé Máy Bay</span>
+                        <span class="nav-mobile_main__arrow"><i class="fas fa-chevron-right"></i></span>
                     </div>
-                </li> --}}
+                    <ul style="display:none;">
+                    @foreach($dataAir as $airLocation)
+                        <li>
+                            <a href="/{{ $airLocation->seo->slug_full ?? null }}" title="{{ $airLocation->name ?? $airLocation->seo->title ?? null }}">
+                                <div>{{ $airLocation->name ?? $airLocation->seo->title ?? null }}</div>
+                            </a>
+                        </li>
+                    @endforeach
+                    </ul>
+                </li>
+                
+                <li>
+                    <div onclick="showHideListMenuMobile(this);">
+                        <i class="fa-solid fa-book"></i>
+                        <span class="nav-mobile_main__title">Cẩm Nang Du Lịch</span>
+                        <span class="nav-mobile_main__arrow"><i class="fas fa-chevron-right"></i></span>
+                    </div>
+                    <ul style="display:none;">
+                        @if(!empty($guideMB))
+                            <li>
+                                <div onclick="showHideListMenuMobile(this);">
+                                    <span class="nav-mobile_main__title">Cảm Nang Miền Bắc</span>
+                                    <span class="nav-mobile_main__arrow"><i class="fas fa-chevron-right"></i></span>
+                                </div>
+                                <ul style="display:none;">
+                                @foreach($guideMB as $h)
+                                    <li>
+                                        <a href="/{{ $h->seo->slug_full ?? null }}" title="{{ $h->name ?? $h->seo->title ?? null }}">
+                                            <div>Cẩm Nang {{ $h->display_name ?? null }}</div>
+                                        </a>
+                                    </li>
+                                @endforeach
+                                </ul>
+                            </li>
+                        @endif
+                        @if(!empty($guideMT))
+                            <li>
+                                <div onclick="showHideListMenuMobile(this);">
+                                    <span class="nav-mobile_main__title">Cẩm Nang Miền Trung</span>
+                                    <span class="nav-mobile_main__arrow"><i class="fas fa-chevron-right"></i></span>
+                                </div>
+                                <ul style="display:none;">
+                                @foreach($guideMT as $h)
+                                    <li>
+                                        <a href="/{{ $h->seo->slug_full ?? null }}" title="{{ $h->name ?? $h->seo->title ?? null }}">
+                                            <div>Cẩm Nang {{ $h->display_name ?? null }}</div>
+                                        </a>
+                                    </li>
+                                @endforeach
+                                </ul>
+                            </li>
+                        @endif
+                        @if(!empty($guideMN))
+                            <li>
+                                <div onclick="showHideListMenuMobile(this);">
+                                    <span class="nav-mobile_main__title">Cẩm Nang Miền Nam</span>
+                                    <span class="nav-mobile_main__arrow"><i class="fas fa-chevron-right"></i></span>
+                                </div>
+                                <ul style="display:none;">
+                                @foreach($guideMN as $h)
+                                    <li>
+                                        <a href="/{{ $h->seo->slug_full ?? null }}" title="{{ $h->name ?? $h->seo->title ?? null }}">
+                                            <div>Cẩm Nang {{ $h->display_name ?? null }}</div>
+                                        </a>
+                                    </li>
+                                @endforeach
+                                </ul>
+                            </li>
+                        @endif
+                    </ul>
+                </li>
+
                 <li>
                     <a href="/lien-he-hitour" title="Liên hệ {{ config('company.sortname') }}">
                         <i class="fa-solid fa-phone"></i>
-                        <div>Liên hệ</div>
+                        <span class="nav-mobile_main__title">Liên Hệ</span>
                     </a>
                 </li>
             </ul>
@@ -475,53 +631,3 @@
     </div>
 </div>
 <!-- END:: Menu Mobile -->
-
-{{-- @push('scripts-custom') ===== dùng cache nên đoạn script này đặt ở script_default
-    <script type="text/javascript">
-        $(window).on('load', function () {
-            /* fixed headerMobile khi scroll */
-            const elemt                 = $('.header');
-            const positionTopElemt      = elemt.offset().top;
-            $(window).scroll(function(){
-                const positionScrollbar = $(window).scrollTop();
-                // const scrollHeight      = $('body').prop('scrollHeight');
-                // const heightLimit       = parseInt(scrollHeight - heightFooter - elemt.outerHeight());
-                if(positionScrollbar>parseInt(positionTopElemt+50)){
-                    elemt.css({
-                        'top'       : '0',
-                        'position'  : 'fixed',
-                        'left'      : 0
-                    });
-                }else {
-                    elemt.css({
-                        'top'       : '0',
-                        'position'  : 'relative',
-                        'left'      : 0
-                    });
-                }
-            });
-        });
-
-        function showHideListMenuMobile(thisD){
-            let elemtC      = $(thisD).parent().find('ul');
-            let displayC    = elemtC.css('display');
-            if(displayC=='none'){
-                elemtC.css('display', 'block');
-                $(thisD).html('<i class="fas fa-chevron-down"></i>');
-            }else {
-                elemtC.css('display', 'none');
-                $(thisD).html('<i class="fas fa-chevron-right"></i>');
-            }
-        }
-        function openCloseElemt(idElemt){
-            let displayE    = $('#' + idElemt).css('display');
-            if(displayE=='none'){
-                $('#' + idElemt).css('display', 'block');
-                $('body').css('overflow', 'hidden');
-            }else {
-                $('#' + idElemt).css('display', 'none');
-                $('body').css('overflow', 'unset');
-            }
-        }
-    </script>
-@endpush --}}
