@@ -1,4 +1,7 @@
 /* form */
+.titlePageBooking {
+    margin-bottom: 0.75rem !important;
+}
 .inputRequired {
     &:after {
         content: '\f621';
@@ -11,30 +14,30 @@
     }
 }
 .inputWithLabelInside, .textareaWithLabelInside {
-    height: 55px;
-    border: 1px solid $bg-05;
+    height: 58px;
+    border: 1px solid $bg-04;
     width: 100%;
     position: relative;
     padding: 0;
     background: #fff;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 10px;
     label {
         cursor: pointer;
         margin-bottom: 0;
         font-weight: normal;
         font-size: 0.85rem;
         padding: 0 0.75rem;
+        margin-top: 0.1rem;
     }
     > input {
         display: flex;
-        margin-top: -2px;
         font-size: 1.05rem;
         padding: 0;
         border: none;
         outline: none;
         position: absolute;
-        top: 2px;
+        top: 1px;
         height: 100%;
         padding: 35px 0.75rem 13px 0.75rem !important;
         background: transparent !important;
@@ -146,7 +149,7 @@
     .select2-container {
         left: 0 !important;
         .select2-selection--single .select2-selection__rendered {
-            margin-top: -45px;
+            margin-top: -44px;
             padding: 22px 0.75rem 10px 0.75rem !important;
             z-index: 2;
             position: relative;
@@ -222,6 +225,8 @@
     flex-direction: column;
     &_item {
         width: 100%;
+        border-radius: 10px;
+        // overflow: hidden;
         &:not(:first-child){
             margin-top: 2rem;
         }
@@ -229,14 +234,16 @@
             font-size: 1.3rem;
             font-family: $fontTitle;
             font-weight: 700;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
+            color: $colorTitle;
         }
         &_body {
-            // box-shadow: 0 0 5px $bg-03;
+            background: #fff;
+            padding: 1.5rem 1rem;
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+            box-shadow: 0 1px 3px $bg-05;
             // border: 1px solid $bg-03;
-            // background: #fff;
-            // border-radius: 3px;
-            // padding: 1rem 1.5rem 1.5rem;
             ul:not(.select2-results__options) {
                 li {
                     &:not(:first-child){
@@ -252,6 +259,17 @@
                 }
             }
         }
+        &_footer {
+            background: $bg-02;
+            padding: 0.75rem 1rem;
+            line-height: 1.4;
+            font-family: $fontTitle;
+            font-size: 0.95rem;
+            box-shadow: 0 1px 3px $bg-05;
+            border: 1px solid $bg-04;
+            border-bottom-left-radius: inherit;
+            border-bottom-right-radius: inherit;
+        }
     }
     .formColumnCustom {
         display: flex;
@@ -259,9 +277,9 @@
             margin-top: 1.2rem;
         }
         &_item {
-            width: calc(50% - 0.75rem);
+            width: calc(50% - 0.5rem);
             &:not(:first-child){
-                margin-left: 1.5rem;
+                margin-left: 1rem;
             }
         }
     }
@@ -465,10 +483,15 @@
         overflow: hidden;
         &_row {
             display: flex;
-            border-bottom: 1px dashed $bg-05;
             align-items: center;
-            background: $bg-02;
+            // background: $bg-02;
             padding: 1rem;
+            &:not(:last-child){
+                border-bottom: 1px dashed $bg-06;
+            }
+            &:last-child {
+                padding-bottom: 0;
+            }
             &_item {
                 width: 100%;
                 text-align: center;
@@ -478,9 +501,9 @@
                 .option {
                     line-height: 1.4;
                     padding: 0.35rem 0.5rem;
-                    border: 1px solid $bg-03;
-                    background: #fff;
-                    border-radius: 3px;
+                    // border: 1px solid $bg-03;
+                    background: $bg-02;
+                    border-radius: 10px;
                     cursor: pointer;
                     &.active, &:hover {
                         color: $colorHighlight;
@@ -530,7 +553,7 @@
     }
 }
 .chooseOptionTourBox {
-    background: $bg-02;
+    // background: $bg-02;
     border-radius: 10px;
     overflow: hidden;
     &_body {

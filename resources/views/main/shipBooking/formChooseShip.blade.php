@@ -18,7 +18,7 @@
     <input type="hidden" name="ship_info_id_{{ $code }}" value="{{ $data[0]['ship_info_id'] ?? null }}" />
     <input type="hidden" name="name_dp{{ $code }}" value="{{ $nameDeparture }}" />
     <div class="formBox_full_item">
-        <label class="form-label" for="quantity_adult">
+        <label class="form-label" for="quantity_adult" style="margin-bottom:0;">
             Giờ tàu và loại vé&nbsp;&nbsp;
             {{-- <span class="messageValidate_error" data-validate="dp{{ $code }}" style="font-weight:normal;margin-top:0;">Vui lòng chọn giờ khởi hành và loại vé!</span> --}}
         </label>

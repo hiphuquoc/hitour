@@ -1,4 +1,4 @@
-@extends('main.layouts.main')
+@extends('main.layouts.booking')
 @push('head-custom')
     <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/vendors/css/vendors.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/vendors/css/pickers/pickadate/pickadate.css') }}">

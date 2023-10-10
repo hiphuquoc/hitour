@@ -1,4 +1,4 @@
-@extends('main.layouts.main')
+@extends('main.layouts.booking')
 @push('head-custom')
     <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/vendors/css/vendors.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/vendors/css/pickers/pickadate/pickadate.css') }}">
@@ -18,15 +18,15 @@
         <div class="sectionBox">
             <div class="container">
                 <!-- title -->
-                <h1 class="titlePage" style="margin-bottom:0.5rem;">Đặt vé tàu cao tốc</h1>
-                <div style="margin-bottom:1rem;">Quý khách vui lòng điền thông tin liên hệ, chọn giờ khởi hành và xem lại đặt chỗ.</div>
+                <h1 class="titlePage titlePageBooking">Đặt vé tàu cao tốc</h1>
+                {{-- <div style="margin-bottom:1rem;">Quý khách vui lòng điền thông tin liên hệ, chọn giờ khởi hành và xem lại đặt chỗ.</div> --}}
                 <!-- ship box -->
                 <div class="pageContent_body">
                     <div class="pageContent_body_content">
                         
                         <div class="bookingForm">
-                             <!-- chứng nhận -->
-                             <div class="bookingForm_item">
+                            <!-- chứng nhận -->
+                            <div class="bookingForm_item">
                                 @include('main.serviceBooking.certifiedService')
                             </div>
                             <!-- thông tin liên hệ -->
@@ -39,21 +39,12 @@
                                     <div class="bookingForm_item_body_item">
                                         <div class="formColumnCustom">
                                             <div class="formColumnCustom_item">
-                                                {{-- <div>
-                                                    <label class="form-label inputRequired" for="name">Họ và Tên</label>
-                                                    <input type="text" class="form-control" name="name" value="" required>
-                                                </div>
-                                                <div class="messageValidate_error" data-validate="name">{{ config('main.message_validate.not_empty') }}</div> --}}
                                                 <div class="inputWithLabelInside">
                                                     <label class="inputRequired" for="name">Họ tên</label>
                                                     <input type="text" id="name" name="name" value="" onkeyup="validateWhenType(this)" required />
                                                 </div>
                                             </div>
                                             <div class="formColumnCustom_item">
-                                                {{-- <div>
-                                                    <label class="form-label" for="email">Email (nếu có)</label>
-                                                    <input type="text" class="form-control" name="email" value="">
-                                                </div> --}}
                                                 <div class="inputWithLabelInside email">
                                                     <label for="email">Email (nếu có)</label>
                                                     <input type="text" id="email" name="email" value="" onkeyup="validateWhenType(this, 'email')" />
@@ -65,21 +56,12 @@
                                     <div class="bookingForm_item_body_item">
                                         <div class="formColumnCustom">
                                             <div class="formColumnCustom_item">
-                                                {{-- <div>
-                                                    <label class="form-label inputRequired" for="phone">Điện thoại</label>
-                                                    <input type="text" class="form-control" name="phone" value="" required>
-                                                </div>
-                                                <div class="messageValidate_error" data-validate="phone">{{ config('main.message_validate.not_empty') }}</div> --}}
                                                 <div class="inputWithLabelInside phone">
                                                     <label class="inputRequired" for="phone">Điện thoại</label>
                                                     <input type="text" id="phone" name="phone" value="" onkeyup="validateWhenType(this, 'phone')" required />
                                                 </div>
                                             </div>
                                             <div class="formColumnCustom_item">
-                                                {{-- <div>
-                                                    <label class="form-label" for="zalo">Zalo (nếu có)</label>
-                                                    <input type="text" class="form-control" name="zalo" value="">
-                                                </div> --}}
                                                 <div class="inputWithLabelInside message">
                                                     <label for="zalo">Zalo (nếu có)</label>
                                                     <input type="text" id="zalo" name="zalo" value="" />
@@ -87,7 +69,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- One Row -->
+                                    {{-- <!-- One Row -->
                                     <div class="bookingForm_item_body_item">
                                         <input type="hidden" id="type_booking" name="type_booking" value="2">
                                         <div class="chooseTripBox">
@@ -98,7 +80,10 @@
                                                 Một chiều
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
+                                </div>
+                                <div class="bookingForm_item_footer">
+                                    *Đây là thông tin của Người Đặt để nhân viên Hitour có thể liên hệ và hỗ trợ bạn hoàn tất booking này!
                                 </div>
                             </div>
                             <!-- Departture 1 & 2 -->
@@ -127,7 +112,7 @@
                                 <div class="bookingForm_item_head">
                                     {{ $i==1 ? 'Chuyến đi' : 'Chuyến về' }}
                                 </div>
-                                <div class="bookingForm_item_body">
+                                <div class="bookingForm_item_body" style="border-radius:inherit;">
                                     <!-- One Row -->
                                     <div class="bookingForm_item_body_item">
                                         <div class="formColumnCustom">
