@@ -10,6 +10,8 @@
 @vite(['resources/sources/main/style.scss'])
 <!-- END: Custom CSS-->
 
+<link rel="icon" href="{{ Storage::url('images/svg/favicon-hitour.ico') }}" type="image/x-icon">
+
 <!-- BEGIN: FONT AWESOME -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 <!-- END: FONT AWESOME -->
