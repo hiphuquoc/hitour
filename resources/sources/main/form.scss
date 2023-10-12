@@ -436,6 +436,12 @@
         font-size: 0.95rem;
         font-weight: bold;
         cursor: pointer;
+        &:nth-child(2n + 1){
+            border-radius: 10px 0 0 10px;
+        }
+        &:not(:nth-child(2n + 1)){
+            border-radius: 0 10px 10px 0;
+        }
         &:not(:first-child){
             border-left: 1px solid $bg-04;
         }

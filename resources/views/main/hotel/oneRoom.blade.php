@@ -42,7 +42,19 @@
 
 <div class="hotelList_item_info">
     <div class="hotelList_item_info_title" onClick="openCloseModal('js_loadHotelPrice_modal_{{ $price->id }}');">
-        <h2>{{ $price->room->name }}</h2>
+        <h2>
+            {{ $price->room->name }}
+            @if($price->breakfast==1||$price->given==1)
+                @php
+                    $tmp            = [];
+                    if($price->breakfast==1) $tmp[] = 'Bữa sáng';
+                    if($price->given==1) $tmp[] = 'Đưa đón';
+                    $xhtmlInclude   = implode(' + ', $tmp);
+                @endphp
+                 ({{ $xhtmlInclude }})
+            @endif
+        </h2>
+        
     </div>
     {{-- <div class="hotelList_item_info_rating">
         @php
@@ -70,13 +82,13 @@
         </div>
     </div> --}}
     <div class="hotelList_item_info_sub">
-        <div>
-            Kích thước phòng: 
-            <span class="highLight">{{ $price->room->size }} m<sup>2</sup></span>
+        <div> 
+            <svg class="bk-icon -streamline-room_size" fill="#678" size="medium" width="16" height="16" viewBox="0 0 24 24"><path d="M3.75 23.25V7.5a.75.75 0 0 0-1.5 0v15.75a.75.75 0 0 0 1.5 0zM.22 21.53l2.25 2.25a.75.75 0 0 0 1.06 0l2.25-2.25a.75.75 0 1 0-1.06-1.06l-2.25 2.25h1.06l-2.25-2.25a.75.75 0 0 0-1.06 1.06zM5.78 9.22L3.53 6.97a.75.75 0 0 0-1.06 0L.22 9.22a.75.75 0 1 0 1.06 1.06l2.25-2.25H2.47l2.25 2.25a.75.75 0 1 0 1.06-1.06zM7.5 3.75h15.75a.75.75 0 0 0 0-1.5H7.5a.75.75 0 0 0 0 1.5zM9.22.22L6.97 2.47a.75.75 0 0 0 0 1.06l2.25 2.25a.75.75 0 1 0 1.06-1.06L8.03 2.47v1.06l2.25-2.25A.75.75 0 1 0 9.22.22zm12.31 5.56l2.25-2.25a.75.75 0 0 0 0-1.06L21.53.22a.75.75 0 1 0-1.06 1.06l2.25 2.25V2.47l-2.25 2.25a.75.75 0 0 0 1.06 1.06zM10.5 13.05v7.2a2.25 2.25 0 0 0 2.25 2.25h6A2.25 2.25 0 0 0 21 20.25v-7.2a.75.75 0 0 0-1.5 0v7.2a.75.75 0 0 1-.75.75h-6a.75.75 0 0 1-.75-.75v-7.2a.75.75 0 0 0-1.5 0zm13.252 2.143l-6.497-5.85a2.25 2.25 0 0 0-3.01 0l-6.497 5.85a.75.75 0 0 0 1.004 1.114l6.497-5.85a.75.75 0 0 1 1.002 0l6.497 5.85a.75.75 0 0 0 1.004-1.114z"></path></svg> 
+            <span>{{ $price->room->size }} m2</span>
         </div>
         <div>
-            Tối đa: 
-            <span class="highLight">
+            Đủ chỗ ngủ cho
+            <span>
                 @for($i=0;$i<$price->number_people;++$i)
                     <i class="fa-solid fa-person"></i>
                     @php
@@ -89,6 +101,16 @@
             </span>
         </div>
     </div>
+    @if(!empty($price->beds)&&$price->beds->isNotEmpty())
+        <div class="hotelList_item_info_bed">
+        @foreach($price->beds as $bed)
+            <span>{{ $bed->quantity }}</span> {{ $bed->infoHotelBed->name }}
+            @if($loop->index!=($price->beds->count()-1))
+                +
+            @endif
+        @endforeach
+        </div>
+    @endif
     <div class="hotelList_item_info_condition">
         {!! $price->description !!}
     </div>

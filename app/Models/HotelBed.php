@@ -5,21 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class HotelRoom extends Model {
+class HotelBed extends Model {
     use HasFactory;
-    protected $table        = 'hotel_room';
+    protected $table        = 'hotel_bed';
     protected $fillable     = [
-        'hotel_info_id',
         'name',
-        'size',
-        'note'
+        'size'
     ];
     public $timestamps      = false;
 
     public static function insertItem($params){
         $id                 = 0;
         if(!empty($params)){
-            $model          = new HotelRoom();
+            $model          = new HotelBed();
             foreach($params as $key => $value) $model->{$key}  = $value;
             $model->save();
             $id             = $model->id;
@@ -37,19 +35,7 @@ class HotelRoom extends Model {
         return $flag;
     }
 
-    public function facilities() {
-        return $this->hasMany(\App\Models\RelationHotelRoomHotelRoomFacility::class, 'hotel_room_id', 'id');
-    }
-
-    public function details() {
-        return $this->hasMany(\App\Models\HotelRoomDetail::class, 'hotel_room_id', 'id');
-    }
-
-    public function images(){
-        return $this->hasMany(\App\Models\HotelImage::class, 'reference_id', 'id')->where('reference_type', 'hotel_room');
-    }
-
-    public function prices(){
-        return $this->hasMany(\App\Models\HotelPrice::class, 'hotel_room_id', 'id')->orderBy('id', 'ASC');
-    }
+    // public function facilities() {
+    //     return $this->hasMany(\App\Models\RelationHotelRoomHotelRoomFacility::class, 'hotel_room_id', 'id');
+    // }
 }

@@ -35,9 +35,7 @@
                                 <img src="{{ $image }}">
                                 <div class="uploadImageBox_box_item_icon" onclick="removeUploadImage('randomIdImage_{{ $loop->index }}');"></div>
                             </div>
-                        @endif 
-
-                        
+                        @endif
                     @endforeach
                 @endif
             </div>
@@ -82,42 +80,97 @@
 <!-- tùy chọn giá -->
 <div class="repeater2 formBox_full">
     <div class="formBox_full_item" data-repeater-list="prices">
-        @if(!empty($data['prices'])&&$data['prices']->isNotEmpty())
-            @foreach($data['prices'] as $price)
-                <div class="card" data-repeater-item>
-                    <div class="card-header">
-                        <h4 class="card-title">
-                            Tùy chọn giá
-                            <i class="fa-solid fa-circle-xmark" data-repeater-delete></i>
-                        </h4>
-                    </div>
-                    <div class="card-body">
-                        <!-- One Row -->
-                        <div class="formBox_full_item">
-                            <div class="flexBox">
-                                <div class="flexBox_item">
-                                    <label class="form-label inputRequired">Người tối đa</label>
-                                    <input type="number" min="0" id="number_people" class="form-control" name="number_people" placeholder="0" value="{{ $price['number_people'] ?? '' }}" required />
-                                </div>
-                                <div class="flexBox_item">
-                                    <label class="form-label inputRequired">Giá phòng /đêm</label>
-                                    <input type="number" min="0" id="price" class="form-control" name="price" placeholder="0" value="{{ $price['price'] ?? '' }}" required />
-                                </div>
-                                <div class="flexBox_item">
-                                    <label class="form-label">Giá cũ</label>
-                                    <input type="number" min="0" id="price_old" class="form-control" name="price_old" placeholder="0" value="{{ $price['price_old'] ?? '' }}" />
-                                </div>
+        @if(!empty($data->prices)&&$data->prices->isNotEmpty())
+            @foreach($data->prices as $price)
+            <div class="card" data-repeater-item>
+                <div class="card-header">
+                    <h4 class="card-title">
+                        Tùy chọn giá
+                        <i class="fa-solid fa-circle-xmark" data-repeater-delete></i>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <!-- One Row -->
+                    <div class="formBox_full_item">
+                        <div class="flexBox">
+                            <div class="flexBox_item">
+                                <label class="form-label inputRequired">Người tối đa</label>
+                                <input type="number" min="0" id="number_people" class="form-control" name="number_people" placeholder="0" value="{{ $price->number_people ?? null }}" required />
+                            </div>
+                            <div class="flexBox_item">
+                                <label class="form-label inputRequired">Giá phòng /đêm</label>
+                                <input type="number" min="0" id="price" class="form-control" name="price" placeholder="0" value="{{ $price->price ?? null }}" required />
+                            </div>
+                            <div class="flexBox_item">
+                                <label class="form-label">Giá cũ</label>
+                                <input type="number" min="0" id="price_old" class="form-control" name="price_old" placeholder="0" value="{{ $price->price_old ?? null }}" />
                             </div>
                         </div>
-                        <!-- One Row -->
-                        <div class="formBox_full_item"> 
-                            <label class="form-label">Mô tả giá (html)</label>
-                            <textarea class="form-control" id="description"  name="description" rows="3">{{ $price['description'] ?? '' }}</textarea>
+                    </div>
+                    <!-- One Row -->
+                    <div class="formBox_full_item">
+                        @php
+                            $keyId      = \App\Helpers\Charactor::randomString(10);
+                            $checked    = '';
+                            if($price->breakfast==1) $checked = 'checked';
+                        @endphp
+                        <input type="checkbox" name="breakfast" class="form-check-input" {{ $checked }} />
+                        <label class="form-check-label" style="margin-left:0.5rem;">Bao gồm bữa sáng</label>
+                    </div>
+                    <!-- One Row -->
+                    <div class="formBox_full_item">
+                        @php
+                            $keyId      = \App\Helpers\Charactor::randomString(10);
+                            $checked    = '';
+                            if($price->given==1) $checked = 'checked';
+                        @endphp
+                        <input type="checkbox" name="given" class="form-check-input" {{ $checked }} />
+                        <label class="form-check-label" style="margin-left:0.5rem;">Bao gồm đưa - đón</label>
+                    </div>
+                    <!-- One Row -->
+                    <div class="formBox_full_item">
+                        <label class="form-label">
+                            Loại giường
+                        </label>
+                        <div class="cssAddHotelBed">
+
+                            @if(!empty($roomBeds))
+                                @foreach($roomBeds as $bed)
+                                    @php
+                                        $value = '';
+                                        if(!empty($price->beds)){
+                                            foreach($price->beds as $b){
+                                                if($bed->id==$b->hotel_bed_id) $value = $b->quantity;
+                                            }
+                                        }
+                                    @endphp
+                                    <div class="cssAddHotelBed_item">
+                                        <div class="cssAddHotelBed_item_name">
+                                            {{ $bed->name ?? null }}
+                                        </div>
+                                        <div class="cssAddHotelBed_item_size">
+                                            {{ $bed->size ?? null }}
+                                        </div>
+                                        <div class="cssAddHotelBed_item_icon">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </div>
+                                        <div class="cssAddHotelBed_item_number">
+                                            <input class="form-control" type="number" name="quantity_{{ $bed->id }}" placeholder="0" value="{{ $value }}" />
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+
                         </div>
                     </div>
+                    <div class="formBox_full_item"> 
+                        <label class="form-label">Mô tả giường (nếu có)</label>
+                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                    </div>
                 </div>
+            </div>
             @endforeach
-        @else 
+        @else
             <div class="card" data-repeater-item>
                 <div class="card-header">
                     <h4 class="card-title">
@@ -144,9 +197,52 @@
                         </div>
                     </div>
                     <!-- One Row -->
+                    <div class="formBox_full_item">
+                        @php
+                            $keyId = \App\Helpers\Charactor::randomString(10);
+                        @endphp
+                        <input id="breakfast_{{ $keyId }}" name="breakfast" class="form-check-input" type="checkbox" />
+                        <label class="form-check-label" for="breakfast_{{ $keyId }}" style="margin-left:0.5rem;">Bao gồm bữa sáng</label>
+                    </div>
+                    <!-- One Row -->
+                    <div class="formBox_full_item">
+                        @php
+                            $keyId = \App\Helpers\Charactor::randomString(10);
+                        @endphp
+                        <input id="given_{{ $keyId }}" name="given" class="form-check-input" type="checkbox" />
+                        <label class="form-check-label" for="given_{{ $keyId }}" style="margin-left:0.5rem;">Bao gồm đưa - đón</label>
+                    </div>
+                    <!-- One Row -->
+                    <div class="formBox_full_item">
+                        <label class="form-label">
+                            Loại giường
+                        </label>
+                        <div class="cssAddHotelBed">
+
+                            @if(!empty($roomBeds))
+                                @foreach($roomBeds as $bed)
+                                    <div class="cssAddHotelBed_item">
+                                        <div class="cssAddHotelBed_item_name">
+                                            {{ $bed->name ?? null }}
+                                        </div>
+                                        <div class="cssAddHotelBed_item_size">
+                                            {{ $bed->size ?? null }}
+                                        </div>
+                                        <div class="cssAddHotelBed_item_icon">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </div>
+                                        <div class="cssAddHotelBed_item_number">
+                                            <input class="form-control" type="number" name="quantity_{{ $bed->id }}" placeholder="0" />
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+
+                        </div>
+                    </div>
                     <div class="formBox_full_item"> 
-                        <label class="form-label">Mô tả giá (html)</label>
-                        <textarea class="form-control" id="description"  name="description" rows="3"></textarea>
+                        <label class="form-label">Mô tả giường (nếu có)</label>
+                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
                     </div>
                 </div>
             </div>
@@ -159,6 +255,8 @@
         </button>
     </div>
 </div>
+
+
 <!-- mô tả tiện ích -->
 <div class="repeater2 formBox_full">
     <!-- One Row -->
@@ -236,6 +334,8 @@
     $('.select2').select2();
 
     $('.repeater2').repeater();
+
+    $('.repeater3').repeater();
     
     function removeUploadImage(idNode){
         const node          = $('#'+idNode);

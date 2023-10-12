@@ -1394,6 +1394,10 @@ class BuildInsertUpdateModel {
                 $saleOff                    = (($dataForm['price_old'] - $dataForm['price'])/$dataForm['price_old'])*100;
             }
             $result['sale_off']             = $saleOff;
+            /* ăn sáng */
+            $result['breakfast']            = !empty($dataForm['breakfast'])&&$dataForm['breakfast']=='true' ? 1 : 0;
+            /* đưa đón */
+            $result['given']                = !empty($dataForm['given'])&&$dataForm['given']=='true' ? 1 : 0;
         }
         return $result;
     }

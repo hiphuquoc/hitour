@@ -14,7 +14,9 @@ class HotelPrice extends Model {
         'number_people',
         'price',
         'price_old',
-        'sale_off'
+        'sale_off',
+        'breakfast',
+        'given'
     ];
     public $timestamps      = false;
 
@@ -41,5 +43,9 @@ class HotelPrice extends Model {
 
     public function room() {
         return $this->hasOne(\App\Models\HotelRoom::class, 'id', 'hotel_room_id');
+    }
+
+    public function beds() {
+        return $this->hasMany(\App\Models\RelationHotelPriceHotelBed::class, 'hotel_price_id', 'id');
     }
 }

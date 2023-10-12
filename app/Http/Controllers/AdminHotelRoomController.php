@@ -9,6 +9,8 @@ use App\Models\HotelPrice;
 use App\Models\HotelImage;
 use App\Models\HotelRoomDetail;
 use App\Models\HotelRoomFacility;
+use App\Models\HotelBed;
+use App\Models\RelationHotelPriceHotelBed;
 use App\Models\RelationHotelRoomHotelRoomFacility;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -40,8 +42,9 @@ class AdminHotelRoomController extends Controller {
         }
         /* lấy tất cả room facilities */
         $roomFacilities                 = HotelRoomFacility::all();
+        $roomBeds                       = HotelBed::all();
         /* viết lại array images */
-        $result['body']                 = view('admin.hotel.formHotelRoom', compact('data', 'roomFacilities'))->render();
+        $result['body']                 = view('admin.hotel.formHotelRoom', compact('data', 'roomFacilities', 'roomBeds'))->render();
         return $result;
     }
 
@@ -167,8 +170,18 @@ class AdminHotelRoomController extends Controller {
             /* insert hotel_price */
             if(!empty($dataForm['prices'])){
                 foreach($dataForm['prices'] as $price){
-                    $insertHotelPrice = $this->BuildInsertUpdateModel->buildArrayTableHotelPrice($price, $idHotelRoom);
-                    HotelPrice::insertItem($insertHotelPrice);
+                    $insertHotelPrice   = $this->BuildInsertUpdateModel->buildArrayTableHotelPrice($price, $idHotelRoom);
+                    $idHotelPrice       = HotelPrice::insertItem($insertHotelPrice);
+                    /* tạo relation của Hotel Price và Hotel Bed */
+                    foreach($price['quantity'] as $idHotelBed => $quantity){
+                        if(!empty($quantity)){
+                            RelationHotelPriceHotelBed::insertItem([
+                                'hotel_price_id'    => $idHotelPrice,
+                                'hotel_bed_id'      => $idHotelBed,
+                                'quantity'          => $quantity
+                            ]);
+                        }
+                    }
                 }
             }
             /* insert hotel_room_details */
@@ -214,13 +227,25 @@ class AdminHotelRoomController extends Controller {
                 }
             }
             /* update hotel_price */
-            HotelPrice::select('*')
-                ->where('hotel_room_id', $idHotelRoom)
-                ->delete();
+            $hotelPrices = HotelPrice::where('hotel_room_id', $idHotelRoom)->get();
+            foreach ($hotelPrices as $hotelPrice) {
+                $hotelPrice->beds()->delete();
+                $hotelPrice->delete();
+            }
             if(!empty($dataForm['prices'])){
                 foreach($dataForm['prices'] as $price){
-                    $insertHotelPrice = $this->BuildInsertUpdateModel->buildArrayTableHotelPrice($price, $idHotelRoom);
-                    HotelPrice::insertItem($insertHotelPrice);
+                    $insertHotelPrice   = $this->BuildInsertUpdateModel->buildArrayTableHotelPrice($price, $idHotelRoom);
+                    $idHotelPrice       = HotelPrice::insertItem($insertHotelPrice);
+                    /* tạo relation của Hotel Price và Hotel Bed */
+                    foreach($price['quantity'] as $idHotelBed => $quantity){
+                        if(!empty($quantity)){
+                            RelationHotelPriceHotelBed::insertItem([
+                                'hotel_price_id'    => $idHotelPrice,
+                                'hotel_bed_id'      => $idHotelBed,
+                                'quantity'          => $quantity
+                            ]);
+                        }
+                    }
                 }
             }
             /* update hotel_room_details */

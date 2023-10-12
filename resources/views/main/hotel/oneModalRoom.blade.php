@@ -43,6 +43,39 @@
             <div class="modalHotelRoom_box_body_info_title">
                 {{ $price->room->name }}
             </div>
+            <!-- bao gồm -->
+            @if($price->breakfast==1||$price->given==1)
+                <div class="modalHotelRoom_box_body_info_include">
+                    @if($price->breakfast==1)
+                        <span>
+                            <i class="fa-solid fa-check"></i>Bao gồm bữa sáng ngon
+                        </span>
+                    @endif
+                    @if($price->given==1)
+                        <span>
+                            <i class="fa-solid fa-check"></i>Bao gồm đưa đón
+                        </span>
+                    @endif
+                </div>
+            @endif
+            <!-- số người tối đa & kích thước phòng -->
+            @if(!empty($price->number_people))
+                <div class="modalHotelRoom_box_body_info_size">
+                    <div> 
+                        <svg class="bk-icon -streamline-room_size" fill="#678" size="medium" width="16" height="16" viewBox="0 0 24 24"><path d="M3.75 23.25V7.5a.75.75 0 0 0-1.5 0v15.75a.75.75 0 0 0 1.5 0zM.22 21.53l2.25 2.25a.75.75 0 0 0 1.06 0l2.25-2.25a.75.75 0 1 0-1.06-1.06l-2.25 2.25h1.06l-2.25-2.25a.75.75 0 0 0-1.06 1.06zM5.78 9.22L3.53 6.97a.75.75 0 0 0-1.06 0L.22 9.22a.75.75 0 1 0 1.06 1.06l2.25-2.25H2.47l2.25 2.25a.75.75 0 1 0 1.06-1.06zM7.5 3.75h15.75a.75.75 0 0 0 0-1.5H7.5a.75.75 0 0 0 0 1.5zM9.22.22L6.97 2.47a.75.75 0 0 0 0 1.06l2.25 2.25a.75.75 0 1 0 1.06-1.06L8.03 2.47v1.06l2.25-2.25A.75.75 0 1 0 9.22.22zm12.31 5.56l2.25-2.25a.75.75 0 0 0 0-1.06L21.53.22a.75.75 0 1 0-1.06 1.06l2.25 2.25V2.47l-2.25 2.25a.75.75 0 0 0 1.06 1.06zM10.5 13.05v7.2a2.25 2.25 0 0 0 2.25 2.25h6A2.25 2.25 0 0 0 21 20.25v-7.2a.75.75 0 0 0-1.5 0v7.2a.75.75 0 0 1-.75.75h-6a.75.75 0 0 1-.75-.75v-7.2a.75.75 0 0 0-1.5 0zm13.252 2.143l-6.497-5.85a2.25 2.25 0 0 0-3.01 0l-6.497 5.85a.75.75 0 0 0 1.004 1.114l6.497-5.85a.75.75 0 0 1 1.002 0l6.497 5.85a.75.75 0 0 0 1.004-1.114z"></path></svg> 
+                        <span>309 m2</span>
+                    </div>
+                    <div>
+                        Đủ chỗ ngủ cho
+                        <span>
+                            <i class="fa-solid fa-person"></i>
+                            <i class="fa-solid fa-person"></i>
+                            <i class="fa-solid fa-person"></i>
+                            <i class="fa-solid fa-person"></i>
+                        </span>
+                    </div>
+                </div>
+            @endif
             <!-- facilities -->
             @if(!empty($price->room->facilities)&&$price->room->facilities->isNotEmpty())
                 <div class="modalHotelRoom_box_body_info_facilities">
@@ -59,29 +92,6 @@
                         @endforeach
 
                     </div>
-                </div>
-            @endif
-            <!-- size -->
-            @if(!empty($price->size))
-                <div class="modalHotelRoom_box_body_info_size">
-                    Kích thước phòng: <span class="highLight">{{ $room->size }} m<sup>2</sup></span>
-                </div>
-            @endif
-            <!-- số người tối đa -->
-            @if(!empty($price->number_people))
-                <div class="modalHotelRoom_box_body_info_size">
-                    Số người tối đa: 
-                    <span class="highLight">
-                        @for($i=0;$i<$price->number_people;++$i)
-                            <i class="fa-solid fa-person"></i>
-                            @php
-                                if($price->number_people>4){
-                                    echo 'x'.$price->number_people;
-                                    break;
-                                }
-                            @endphp
-                        @endfor
-                    </span>
                 </div>
             @endif
             <!-- condition -->

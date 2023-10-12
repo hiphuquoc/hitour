@@ -640,11 +640,29 @@
                     var contentNumberPeople = $('[name="prices[' + key + '][number_people]"]').val();
                     var contentPriceOld     = $('[name="prices[' + key + '][price_old]"]').val();
                     var contentDescription  = $('[name="prices[' + key + '][description]"]').val();
+                    var breakfast           = $('[name*="prices[' + key + '][breakfast]"]:checked').length > 0;
+                    var given               = $('[name*="prices[' + key + '][given]"]:checked').length > 0;
+                    var quantity = {};
+                    // Tạo biến chứa pattern cho tên input
+                    var pattern = new RegExp('prices\\[' + key + '\\]\\[quantity_(\\d+)\\]');
+                    // Duyệt qua tất cả các input trong form
+                    $('#formHotelRoom input[name*="prices[' + key + '][quantity_"]').each(function() {
+                        // Kiểm tra xem tên input có khớp với pattern không
+                        var match = pattern.exec(this.name);
+                        if (match) {
+                            var randomKey       = match[1];
+                            var quantityValue   = $(this).val();
+                            quantity[randomKey] = quantityValue;
+                        }
+                    });
                     var item = {
                         'number_people' : contentNumberPeople,
                         'price'         : value,
                         'price_old'     : contentPriceOld,
-                        'description'   : contentDescription
+                        'description'   : contentDescription,
+                        'breakfast'     : breakfast,
+                        'given'         : given,
+                        'quantity'      : quantity
                     };
                     price[key]      = item; // Gán giá trị vào mảng dataForm với key tương ứng
                 });

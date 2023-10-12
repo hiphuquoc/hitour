@@ -28,7 +28,7 @@ $colorSLv1-hover  : rgb(241, 196, 15);
 $colorPrice: rgb(255, 90, 50);
 $colorRed: #E74C3C;
 $colorRed-hover: #D04637;
-$colorSuccess: rgb(38, 207, 142);
+$colorSuccess: rgb(38,207,142);
 
 $bg-1: 			#212529;
 $bg-09: 		#343a40;
@@ -1159,6 +1159,70 @@ html .content {
 }
 .maxLine_5 {
 	-webkit-line-clamp: 5;
+}
+
+.cssAddHotelBed {
+    &_item {
+        display: flex;
+        align-items: center;
+        position: relative;
+        &:not(:first-child){
+            margin-top: 0.5rem;
+        }
+        > * {
+            display: flex;
+            justify-content: center;
+            &:not(:first-child){
+                margin-left: 0.5rem;
+            }
+        }
+        &_name {
+            width: 100%;
+            justify-content: flex-start;
+            > * {
+                width: 100%;
+            }
+        }
+        &_size {
+            flex: 0 0 140px;
+            justify-content: flex-start;
+        }
+        &_icon {
+            flex: 0 0 45px;
+            font-size: 0.9rem;
+        }
+        &_number {
+            flex: 0 0 60px;
+            input {
+                padding: 0.25rem 0.5rem;
+            }
+        }
+        &_delete {
+            font-size: 1.1rem;
+            position: absolute;
+            top: 7px;
+            right: -15px;
+            width: 28px;
+            aspect-ratio: 1/1;
+            background: $colorRed;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+.addRepeaterIcon {
+    margin-left: 0.5rem;
+    font-size: 1.1rem;
+    background: $colorSuccess;
+    color: #fff;
+    width: 28px;
+    aspect-ratio: 1/1;
+    display: inline-block;
+    text-align: center;
+    border-radius: 50%;
 }
 
 // @media print {
