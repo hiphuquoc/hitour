@@ -10,7 +10,7 @@
     </div>
 @endif
 <div class="shipBookingTotalBox_row">
-    <div>Loại dịch vụ <span style="font-weight:700;"> {{ $data['options']['name'] }}</span></div>
+    <div class="shipBookingTotalBox_row_title"><i class="fa-solid fa-ticket"></i>{{ $data['options']['name'] }}</div>
     <div>Ngày sử dụng {{ date('d/m/Y', strtotime($data['date'])) }}</div>
     <table class="noResponsive">
         <tbody>

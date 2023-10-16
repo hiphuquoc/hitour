@@ -7,7 +7,7 @@
 .certifiedBox {
     display: flex;
     align-items: flex-start;
-    padding: 1rem 1.25rem;
+    padding: 1rem;
     box-shadow: 0 1px 3px $bg-05;
     border: 1px solid $bg-04;
     background: #fff;
@@ -22,7 +22,7 @@
         width: 100%;
         margin-left: 1.5rem;
         &_title {
-            font-weight: bold;
+            font-family: $fontTitle;
             color: $colorTitle;
             font-size: 1.1rem;
             margin-bottom: 0.5rem;
@@ -50,8 +50,12 @@
             margin: 0 auto;
         }
         &_content {
-            margin-top: 0.75rem;
+            margin-top: 0.5rem;
             margin-left: 0;
+            &_title {
+                font-size: 1.05rem;
+                margin-bottom: 0.25rem;
+            }
         }
     }
 }
@@ -286,9 +290,8 @@
     &_item {
         width: 100%;
         border-radius: 10px;
-        // overflow: hidden;
         &:not(:first-child){
-            margin-top: 1.5rem;
+            margin-top: 1.25rem;
         }
         &_head {
             font-size: 1.3rem;
@@ -303,7 +306,6 @@
             border-top-left-radius: inherit;
             border-top-right-radius: inherit;
             box-shadow: 0 1px 3px $bg-05;
-            // border: 1px solid $bg-03;
             ul:not(.select2-results__options) {
                 li {
                     &:not(:first-child){
@@ -366,8 +368,16 @@
             &_head {
                 font-size: 1.25rem;
             }
+        }
+    }
+    @media(max-width: 767px){
+        &_item {
+            &_head {
+                font-size: 1.2rem;
+                margin-bottom: 0.75rem;
+            }
             &:not(:first-child){
-                margin-top: 1.5rem;
+                margin-top: 1rem;
             }
         }
     }
@@ -397,8 +407,7 @@
                 margin-top: 1.25rem;
             }
             &_head {
-                font-size: 1.2rem;
-                margin-bottom: 0.75rem;
+                font-size: 1.15rem;
             }
             &_body {
                 padding: 0;
@@ -406,7 +415,7 @@
                 box-shadow: none;
                 &_item {
                     &:not(:first-child){
-                        margin-top: 1rem;
+                        margin-top: 0.75rem;
                     }
                 }
             }
@@ -652,7 +661,7 @@
         min-width: 550px;
         &_item {
             display: flex;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 0.75rem;
             cursor: pointer;
             &:not(:first-child){
                 border-top: 1px dashed $bg-06;
@@ -705,6 +714,13 @@
                 font-weight: bold;
                 font-size: 1.1rem;
                 color: $colorLv2;
+            }
+        }
+    }
+    @media(max-width: 577px){
+        &_body {
+            &_item {
+                padding: 0.5rem;
             }
         }
     }

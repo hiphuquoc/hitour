@@ -145,5 +145,5 @@
             {{ number_format($price->price) }} <sup>đ</sup>
         </div>
     </div>
-    <a href="#" class="hotelList_item_action_button">Đặt phòng</a>
+    <a href="{{ route('main.hotelBooking.form', ['hotel_price_id' => $price->id]) }}" class="hotelList_item_action_button">Đặt phòng</a>
 </div>

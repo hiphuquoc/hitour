@@ -132,7 +132,6 @@ class ComboBookingController extends Controller {
                                 ->with('prices')
                                 ->first();
             $dataForm['options'] = $infoOption->toArray();
-            // dd($dataForm);
             $result         = view('main.comboBooking.summary', ['data' => $dataForm]);
         }
         echo $result;

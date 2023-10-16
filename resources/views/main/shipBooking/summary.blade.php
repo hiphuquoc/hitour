@@ -11,7 +11,7 @@
 @endif
 @if(!empty($data['name_dp1']))
     <div class="shipBookingTotalBox_row">
-        <div style="font-weight:700;"><i class="fa-solid fa-ship"></i>{{ $data['name_dp1'] }}  ({{ date('d/m/Y', strtotime($data['date_1'])) }})</div>
+        <div class="shipBookingTotalBox_row_title"><i class="fa-solid fa-ship"></i>{{ $data['name_dp1'] }}  ({{ date('d/m/Y', strtotime($data['date_1'])) }})</div>
         @if(!empty($data['dp1']))
             @php
                 $tmp = [];
@@ -70,7 +70,7 @@
 @endif
 @if(!empty($data['name_dp2']))
     <div class="shipBookingTotalBox_row">
-        <div style="font-weight:700;"><i class="fa-solid fa-ship"></i>{{ $data['name_dp2'] }} ({{ date('d/m/Y', strtotime($data['date_2'])) }})</div>
+        <div class="shipBookingTotalBox_row_title"><i class="fa-solid fa-ship"></i>{{ $data['name_dp2'] }} ({{ date('d/m/Y', strtotime($data['date_2'])) }})</div>
         @if(!empty($data['dp2']))
             @php
                 $tmp = [];

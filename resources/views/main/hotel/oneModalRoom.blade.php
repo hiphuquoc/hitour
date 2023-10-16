@@ -138,7 +138,7 @@
                 </div>
             </div>
         @endif
-        <div class="modalHotelRoom_box_footer_button">Đặt phòng này!</div>
+        <a href="{{ route('main.hotelBooking.form', ['hotel_price_id' => $price->id]) }}" class="modalHotelRoom_box_footer_button">Đặt phòng này!</a>
     </div>
 </div> 
 <div class="modalHotelRoom_bg" onClick="openCloseModal('js_loadHotelPrice_modal_{{ $price->id }}');"></div>

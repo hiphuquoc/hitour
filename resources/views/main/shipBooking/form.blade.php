@@ -18,7 +18,7 @@
         <div class="sectionBox">
             <div class="container">
                 <!-- title -->
-                <h1 class="titlePage titlePageBooking">Đặt vé tàu cao tốc</h1>
+                {{-- <h1 class="titlePage titlePageBooking">Đặt vé tàu cao tốc</h1> --}}
                 {{-- <div style="margin-bottom:1rem;">Quý khách vui lòng điền thông tin liên hệ, chọn giờ khởi hành và xem lại đặt chỗ.</div> --}}
                 <!-- ship box -->
                 <div class="pageContent_body">

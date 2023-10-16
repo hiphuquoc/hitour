@@ -52,8 +52,11 @@ return [
             'text'  => 'Rất tệ',
             'score' => '0'
         ]
-        ],
-        'hotel_type'    => [
-            'Khách sạn', 'Khu nghỉ dưỡng', 'Homestay', 'Nhà nghỉ', 'Căn hộ', 'Nhà khách gia đình', 'Biệt thự', 'Nhà riêng','Khác'
-        ]
+    ],
+    'hotel_type'    => [
+        'Khách sạn', 'Khu nghỉ dưỡng', 'Homestay', 'Nhà nghỉ', 'Căn hộ', 'Nhà khách gia đình', 'Biệt thự', 'Nhà riêng','Khác'
+    ],
+    'hotel_time_receive' => [
+        'Tôi chưa biết', '14h00 - 15h00', '15h00 - 16h00', '16h00 - 17h00', '17h00 - 18h00', '18h00 - 19h00', '20h00 - 21h00', '21h00 - 22h00', '22h00 - 23h00', '23h00 - 00h00', '00h00 - 01h00 (hôm sau)', '01h00 - 02h00 (hôm sau)'
+    ]
 ];
