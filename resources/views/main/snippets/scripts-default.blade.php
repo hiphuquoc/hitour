@@ -14,7 +14,6 @@
 <script type="text/javascript">
     $(window).ready(function(){
         loadImage()
-        loadImageFromGoogleCloud()
         addTableResponsive()
         checkLoginAndSetShow()
         /* fixed sidebar khi scroll */
@@ -44,7 +43,27 @@
                 }
             });
         }
+        /* lazyload image google cloud */
+        const imagesWithGoogleCloud = $('img[data-google-cloud]');
+        function lazyLoadImagesGoogleCloud() {
+            const windowTop = $(window).scrollTop();
+            const windowHeight = $(window).height();
+            imagesWithGoogleCloud.each(function() {
+                const image = $(this);
+                if (!image.hasClass('loaded')) {
+                    const imageTop = image.offset().top;
+                    if (imageTop < windowTop + windowHeight + 2000) {
+                        loadImageFromGoogleCloud(image);
+                    }
+                }
+            });
+        }
+        lazyLoadImagesGoogleCloud();
+        $(window).scroll(function() {
+            lazyLoadImagesGoogleCloud();
+        });
     });
+
     /* check đăng nhập */
     function checkLoginAndSetShow(){
         const language = $('#language').val();
@@ -87,23 +106,20 @@
         });
     }
     /* load image from goole cloud */
-    function loadImageFromGoogleCloud(){
-        $(document).find('img[data-google-cloud]').each(function(){
-            var elementImg          = $(this);
-            const urlGoogleCloud    = elementImg.attr('data-google-cloud');
-            const size              = elementImg.attr('data-size');
-            $.ajax({
-                url         : '{{ route("ajax.loadImageFromGoogleCloud") }}',
-                type        : 'get',
-                dataType    : 'html',
-                data        : {
-                    url_google_cloud    : urlGoogleCloud,
-                    size
-                },
-                success     : function(response){
-                    elementImg.attr('src', response);
-                }
-            });
+    function loadImageFromGoogleCloud(imageElement){
+        const urlGoogleCloud    = $(imageElement).attr('data-google-cloud');
+        const size              = $(imageElement).attr('data-size');
+        $.ajax({
+            url         : '{{ route("ajax.loadImageFromGoogleCloud") }}',
+            type        : 'get',
+            dataType    : 'html',
+            data        : {
+                url_google_cloud    : urlGoogleCloud,
+                size
+            },
+            success     : function(response){
+                $(imageElement).attr('src', response);
+            }
         });
     }
     /* toc content */
