@@ -551,11 +551,11 @@ class RoutingController extends Controller {
                     $item = HotelLocation::with([
                                                 'seo',
                                                 'hotels' => function ($query) {
-                                                    $query->whereHas('images')->whereHas('rooms');
+                                                    $query->whereHas('rooms');
                                                 },
-                                                'files' => function ($query) {
-                                                    $query->where('relation_table', 'hotel_location');
-                                                },
+                                                // 'files' => function ($query) {
+                                                //     $query->where('relation_table', 'hotel_location');
+                                                // },
                                                 'questions' => function ($query) {
                                                     $query->where('relation_table', 'hotel_location');
                                                 }
