@@ -15,6 +15,7 @@ class HotelBookingController extends Controller {
 
     public static function form(Request $request){
         $dataForm           = $request->all();
+        // dd($dataForm);
         $idHotelPrice       = $dataForm['hotel_price_id'] ?? 0;
         /* lấy prices được chọn */
         $room               = HotelRoom::select('*')

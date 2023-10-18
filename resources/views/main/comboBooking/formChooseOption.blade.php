@@ -1,5 +1,5 @@
 <!-- One Row -->
-@if(!empty($data))
+@if(!empty($data)&&$data->isNotEmpty())
     <input type="hidden" id="combo_option_id" name="combo_option_id" value="{{ $data[0]->id ?? 0 }}" /> <!-- active option đầu tiên -->
     <div class="chooseOptionTourBox customScrollBar-x">
         <div class="chooseOptionTourBox_body">

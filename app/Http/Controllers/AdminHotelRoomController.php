@@ -136,9 +136,11 @@ class AdminHotelRoomController extends Controller {
                                                 ->get();
             /* truyền vào form */
             $roomFacilities     = HotelRoomFacility::all();
+            $roomBeds           = HotelBed::all();
             $result = view('admin.hotel.formHotelRoomPart2', [
                 'data'              => $this->arrayData,
-                'roomFacilities'    => $roomFacilities
+                'roomFacilities'    => $roomFacilities,
+                'roomBes'           => $roomBeds
             ])->render();
         }
         echo $result;

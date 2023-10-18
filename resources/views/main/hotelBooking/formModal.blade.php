@@ -8,7 +8,7 @@
         <div class="bookingModal_box_body_item_body_item">
             <div class="inputWithLabelInside date">
                 <label for="modal_range_time">Ngày Check-In Check-Out</label>
-                <input type="text" class="form-control flatpickr-disabled-range flatpickr-input active" id="modal_range_time" name="modal_range_time" value="{{ date('Y-m-d', $checkIn) .' to '. date('Y-m-d', $checkOut)}}" placeholder="Ngày Check-In Check-Out" />
+                <input type="text" class="form-control flatpickr-disabled-range flatpickr-input" id="modal_range_time" name="modal_range_time" value="{{ $dataForm['range_time'] ?? null }}" />
             </div>
         </div>
 

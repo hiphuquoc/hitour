@@ -12,8 +12,8 @@
     @include('main.snippets.breadcrumb')
 
     @php
-        if(!empty($dataForm['range_itme'])){
-            $tmp        = explode(' - ', $rangeTime);
+        if(!empty($dataForm['range_time'])){
+            $tmp        = explode(' to ', $dataForm['range_time']);
             $checkIn    = !empty($tmp[0]) ? strtotime($tmp[0]) : null;
             $checkOut   = !empty($tmp[1]) ? strtotime($tmp[1]) : null;
             /* xử lý trường hợp không range_time cùng một ngày (không có trường hợp này nên phải là ngày hôm sau) */
@@ -193,13 +193,13 @@
                                                 <div class="formColumnCustom_item">
                                                     <div class="inputWithLabelInside">
                                                         <label class="inputRequired" for="name">Họ tên</label>
-                                                        <input type="text" id="name" name="name" value="{{ $dataForm['name'] ?? null }}" onkeyup="validateWhenType(this)" required />
+                                                        <input type="text" name="name" value="{{ $dataForm['name'] ?? null }}" onkeyup="validateWhenType(this)" required />
                                                     </div>
                                                 </div>
                                                 <div class="formColumnCustom_item">
                                                     <div class="inputWithLabelInside email">
                                                         <label for="email">Email (nếu có)</label>
-                                                        <input type="text" id="email" name="email" value="{{ $dataForm['email'] ?? null }}" onkeyup="validateWhenType(this, 'email')" />
+                                                        <input type="text" name="email" value="{{ $dataForm['email'] ?? null }}" onkeyup="validateWhenType(this, 'email')" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -209,13 +209,13 @@
                                                 <div class="formColumnCustom_item">
                                                     <div class="inputWithLabelInside phone">
                                                         <label class="inputRequired" for="phone">Điện thoại</label>
-                                                        <input type="text" id="phone" name="phone" value="{{ $dataForm['phone'] ?? null }}" onkeyup="validateWhenType(this, 'phone')" required />
+                                                        <input type="text" name="phone" value="{{ $dataForm['phone'] ?? null }}" onkeyup="validateWhenType(this, 'phone')" required />
                                                     </div>
                                                 </div>
                                                 <div class="formColumnCustom_item">
                                                     <div class="inputWithLabelInside message">
                                                         <label for="zalo">Zalo (nếu có)</label>
-                                                        <input type="text" id="zalo" name="zalo" value="{{ $dataForm['zalo'] ?? null }}" />
+                                                        <input type="text" name="zalo" value="{{ $dataForm['zalo'] ?? null }}" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -270,7 +270,8 @@
 
         </div>
     </div>
-    
+
+    <input type="text" class="form-control flatpickr-range flatpickr-input active" id="modal_range_time" name="modal_range_time" value="2023-05-29 to 2023-06-01" />
 @endsection
 @push('modal')
     <!-- ===== BOOKING MODAL -->
@@ -317,39 +318,39 @@
 
             loadBookingSummary();
 
-            @foreach ($hotel->rooms as $room)
-                @foreach ($room->prices as $price)
-                    loadHotelPrice('{{ $price->id }}');
-                @endforeach
-            @endforeach
+            // $('.flatpickr-input').flatpickr({
+            //     mode: 'range'
+            // });
 
         })
 
-        function loadHotelPrice(idHotelPrice){
-            $.ajax({
-                url         : "{{ route('main.hotel.loadHotelPrice') }}",
-                type        : "GET",
-                dataType    : "json",
-                data        : { hotel_price_id : idHotelPrice }
-            }).done(function(data){
-                /* ghi nội dung room vào bảng */
-                if(data.row!='') {
-                    $('#js_loadHotelPrice_'+idHotelPrice).html(data.row);
-                }else {
-                    $('#js_loadHotelPrice_'+idHotelPrice).hidden();
-                }
-                /* ghi nội dung modal room */
-                if(data.row!='') {
-                    $('#js_loadHotelPrice_modal_'+idHotelPrice).html(data.modal);
-                }else {
-                    $('#js_loadHotelPrice_modal_'+idHotelPrice).hidden();
-                }
-            });
-        }
+        // @foreach ($hotel->rooms as $room)
+        //         @foreach ($room->prices as $price)
+        //             loadHotelPrice('{{ $price->id }}');
+        //         @endforeach
+        //     @endforeach
 
-        $('.flatpickr-input').flatpickr({
-            mode: 'range'
-        });
+        // function loadHotelPrice(idHotelPrice){
+        //     $.ajax({
+        //         url         : "{{ route('main.hotel.loadHotelPrice') }}",
+        //         type        : "GET",
+        //         dataType    : "json",
+        //         data        : { hotel_price_id : idHotelPrice }
+        //     }).done(function(data){
+        //         /* ghi nội dung room vào bảng */
+        //         if(data.row!='') {
+        //             $('#js_loadHotelPrice_'+idHotelPrice).html(data.row);
+        //         }else {
+        //             $('#js_loadHotelPrice_'+idHotelPrice).hidden();
+        //         }
+        //         /* ghi nội dung modal room */
+        //         if(data.row!='') {
+        //             $('#js_loadHotelPrice_modal_'+idHotelPrice).html(data.modal);
+        //         }else {
+        //             $('#js_loadHotelPrice_modal_'+idHotelPrice).hidden();
+        //         }
+        //     });
+        // }
 
         $('#formBooking').find('input, select, textarea').each(function(){
             $(this).on('input', () => {

@@ -99,7 +99,7 @@
                                 <div class="bookingForm_item_head">
                                     Thông tin dịch vụ
                                 </div>
-                                <div class="bookingForm_item_body">
+                                <div class="bookingForm_item_body" style="border-radius:inherit;">
                                     <!-- One Row -->
                                     <div class="bookingForm_item_body_item">
                                         <div class="formColumnCustom">

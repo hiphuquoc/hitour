@@ -7709,11 +7709,11 @@ $width-single-menu  : 260px;
         }
     }
 }
-
 .hotelBookingInfoBox {
     padding: 1.25rem 1rem;
     background: #fff;
     border-radius: 10px;
+    box-shadow: 0 0 5px $bg-04;
     &_hotel {
         display: flex;
         &_image {
@@ -7972,7 +7972,7 @@ $width-single-menu  : 260px;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 999999;
+    z-index: 999;
     justify-content: center;
     &_box {
         max-width: 660px;
