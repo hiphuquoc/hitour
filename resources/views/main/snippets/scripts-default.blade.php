@@ -50,7 +50,7 @@
             const windowHeight = $(window).height();
             imagesWithGoogleCloud.each(function() {
                 const image = $(this);
-                if (!image.hasClass('loaded')) {
+                if (!image.hasClass('loaded')&&image.is(":visible")) {
                     const imageTop = image.offset().top;
                     if (imageTop < windowTop + windowHeight + 2000) {
                         loadImageFromGoogleCloud(image);

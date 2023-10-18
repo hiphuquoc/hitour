@@ -91,6 +91,13 @@
                 @include('main.hotelLocation.filterBox')
                 @if(!empty($item->hotels)&&$item->hotels->isNotEmpty())
                     @include('main.hotelLocation.hotelGrid', ['list' => $item->hotels])
+                    @if($item->hotels->count()>10)
+                        <div class="viewMore">
+                            <div id="js_loadMoreHotels_button" style="margin-top:0.5rem;" onClick="loadMoreHotels(10);">
+                                <i class="fa-solid fa-arrow-down-long"></i>Xem thêm <span>{{ $item->hotels->count() - 10 }}</span> chỗ nghỉ
+                            </div>
+                        </div>
+                    @endif
                 @else 
                     <div style="color:#069a8e;">Các <strong>Hotel {{ $item->display_name ?? null }}</strong> đang được {{ config('company.sortname') }} cập nhật và sẽ sớm giới thiệu đến Quý khách trong thời gian tới!</div>
                 @endif
@@ -145,5 +152,35 @@
                 $(elementButton).html('<i class="fa-solid fa-arrow-down-long"></i>Đọc thêm');
             }
         }
+
+        function loadMoreHotels(showEveryTime){
+            var count = 1;
+            /* hiển thị thêm */
+            $('#js_filter_parent').children().each(function(){
+                const display = $(this).css('display');
+                if(display=='none'){
+                    $(this).css('display', 'flex');
+                    if(count==showEveryTime) return false;
+                    ++count;
+                }
+            });
+            /* đếm lại phần tử còn lại chưa hiển thị */
+            var hidden = 0;
+            $('#js_filter_parent').children().each(function(){
+                const display = $(this).css('display');
+                if(display=='none'){
+                    ++hidden;
+                }
+            });
+            /* hiển thị số lượng vào button */
+            if(hidden==0){
+                $('#js_loadMoreHotels_button').parent().hide();
+            }else {
+                $('#js_loadMoreHotels_button span').html(hidden);
+            }
+            /* load ảnh */
+            lazyLoadImagesGoogleCloud();
+        }
+
     </script>
 @endpush

@@ -2,9 +2,11 @@
     @foreach($list as $hotel)
         @if(!empty($hotel->images)&&$hotel->images->isNotEmpty()&&!empty($hotel->rooms)&&$hotel->rooms->isNotEmpty())
             @php
-                $urlHotel = $hotel->seo->slug_full;
+                $urlHotel       = $hotel->seo->slug_full;
+                $displayShow    = 'display:flex;';
+                if($loop->index>9) $displayShow = 'display:none;';
             @endphp
-            <div class="hotelList_item" data-filter-type="{{ \App\Helpers\Charactor::convertStrToUrl($hotel->type_name) }}">
+            <div class="hotelList_item" data-filter-type="{{ \App\Helpers\Charactor::convertStrToUrl($hotel->type_name) }}" style="{{ $displayShow }}">
                 <a href="/{{ $urlHotel }}" class="hotelList_item_gallery">
                     @if(!empty($hotel->images)&&$hotel->images->isNotEmpty())
                         <div class="hotelList_item_gallery_top">
