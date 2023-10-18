@@ -140,7 +140,7 @@ class AdminHotelRoomController extends Controller {
             $result = view('admin.hotel.formHotelRoomPart2', [
                 'data'              => $this->arrayData,
                 'roomFacilities'    => $roomFacilities,
-                'roomBes'           => $roomBeds
+                'roomBeds'          => $roomBeds
             ])->render();
         }
         echo $result;

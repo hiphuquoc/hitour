@@ -218,7 +218,6 @@
                             Loại giường
                         </label>
                         <div class="cssAddHotelBed">
-
                             @if(!empty($roomBeds))
                                 @foreach($roomBeds as $bed)
                                     <div class="cssAddHotelBed_item">
