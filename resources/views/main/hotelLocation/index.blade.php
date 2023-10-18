@@ -178,8 +178,6 @@
             }else {
                 $('#js_loadMoreHotels_button span').html(hidden);
             }
-            /* load ảnh */
-            lazyLoadImagesGoogleCloud();
         }
 
     </script>

@@ -54,6 +54,7 @@
                     const imageTop = image.offset().top;
                     if (imageTop < windowTop + windowHeight + 2000) {
                         loadImageFromGoogleCloud(image);
+                        image.addClass('loaded');
                     }
                 }
             });
