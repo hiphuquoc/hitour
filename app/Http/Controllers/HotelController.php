@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hotel;
 use App\Models\HotelPrice;
 use App\Models\HotelImage;
 
@@ -9,6 +10,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class HotelController extends Controller {
+
+    public function loadHotelInfo(Request $request){
+        $result                 = [];
+        if(!empty($request->get('hotel_info_id'))){
+            $hotel              = Hotel::select('*')
+                                    ->where('id', $request->get('hotel_info_id'))
+                                    ->with('rooms', 'facilities')
+                                    ->first();
+            $result             = view('main.hotelLocation.oneHotel', compact('hotel'))->render();
+        }
+        return json_encode($result);
+    }
 
     public function loadHotelPrice(Request $request){
         $result                 = [];

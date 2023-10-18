@@ -7068,10 +7068,10 @@ $width-single-menu  : 260px;
         &_gallery {
             flex: 0 0 320px;
             cursor: pointer;
+            position: relative;
             &_top {
                 position: relative;
                 display: flex;
-                height: 100%;
                 &_time {
                     position: absolute;
                     top: 0;
@@ -7089,18 +7089,19 @@ $width-single-menu  : 260px;
                     }
                 }
             }
-            // &_bottom {
-            //     display: flex;
-            //     margin-top: 0.25rem;
-            //     &_item {
-            //         width: calc(100% - 0.1666rem);
-            //         &:not(:first-child){
-            //             margin-left: 0.25rem;
-            //         }
-            //     }
-            // }
+            &_bottom {
+                display: flex;
+                margin-top: 0.25rem;
+                &_item {
+                    width: calc(100% - 0.1666rem);
+                    &:not(:first-child){
+                        margin-left: 0.25rem;
+                    }
+                }
+            }
             img {
                 width: 100%;
+                height: 100%;
                 display: flex;
                 margin: 0;
                 aspect-ratio: 750/400;

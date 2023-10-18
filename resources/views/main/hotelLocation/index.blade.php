@@ -140,6 +140,12 @@
 @endpush
 @push('scripts-custom')
     <script type="text/javascript">
+        $('window').ready(function(){
+            @foreach ($item->hotels as $hotel)
+                loadHotelInfo('{{ $hotel->id }}');
+            @endforeach
+        })
+
         buildTocContentMain('js_buildTocContentSidebar_element');
 
         function showHideFullContent(elementButton, classCheck){
@@ -178,6 +184,22 @@
             }else {
                 $('#js_loadMoreHotels_button span').html(hidden);
             }
+        }
+
+        function loadHotelInfo(idHotelInfo){
+            $.ajax({
+                url         : "{{ route('main.hotel.loadHotelInfo') }}",
+                type        : "GET",
+                dataType    : "json",
+                data        : { hotel_info_id : idHotelInfo }
+            }).done(function(data){
+                /* ghi nội dung room vào bảng */
+                if(data!='') {
+                    $('#js_loadHotelInfo_'+idHotelInfo).html(data);
+                }else {
+                    $('#js_loadHotelInfo_'+idHotelInfo).hidden();
+                }
+            });
         }
 
     </script>
