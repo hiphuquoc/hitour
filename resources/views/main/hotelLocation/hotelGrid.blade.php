@@ -10,9 +10,10 @@
                 <a href="/{{ $urlHotel }}" class="hotelList_item_gallery">
                     @if(!empty($hotel->images)&&$hotel->images->isNotEmpty())
                         <div class="hotelList_item_gallery_top">
-                            <img src="{{ config('main.svg.loading_main') }}" data-google-cloud="{{ $hotel->images[0]->image }}" data-size="550" alt="{{ $hotel->name }}" title="{{ $hotel->name }}" />
+                            {{-- <img src="{{ config('main.svg.loading_main') }}" data-google-cloud="{{ $hotel->images[0]->image }}" data-size="550" alt="{{ $hotel->name }}" title="{{ $hotel->name }}" /> --}}
+                            <img src="{{ config('main.svg.loading_main') }}" data-src="{{ $hotel->seo->image ?? $hotel->seo->image_small ?? null }}" alt="{{ $hotel->name }}" title="{{ $hotel->name }}" />
                         </div>
-                        <div class="hotelList_item_gallery_bottom">
+                        {{-- <div class="hotelList_item_gallery_bottom">
                             @php
                                 $j = 0;
                             @endphp
@@ -26,7 +27,7 @@
                                     <img src="{{ config('main.svg.loading_main') }}" data-google-cloud="{{ $image->image }}" data-size="200" alt="{{ $hotel->name }}" title="{{ $hotel->name }}" />
                                 </div>
                             @endforeach
-                        </div>
+                        </div> --}}
                     @endif
                 </a>
                 <div class="hotelList_item_info">

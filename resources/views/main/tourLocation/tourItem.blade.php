@@ -20,7 +20,7 @@
                         @endif
                     @endif
                 </div>
-                @php
+                {{-- @php
                     $imagesFile = [];
                     if(!empty($tour->files)&&$tour->files->isNotEmpty()){
                         foreach($tour->files as $file){
@@ -39,7 +39,7 @@
                         </div>
                     @endforeach
                 </div>
-                @endif
+                @endif --}}
             </a>
             <div class="tourList_item_info">
                 <div class="tourList_item_info_title">

@@ -7071,6 +7071,7 @@ $width-single-menu  : 260px;
             &_top {
                 position: relative;
                 display: flex;
+                height: 100%;
                 &_time {
                     position: absolute;
                     top: 0;
@@ -7088,16 +7089,16 @@ $width-single-menu  : 260px;
                     }
                 }
             }
-            &_bottom {
-                display: flex;
-                margin-top: 0.25rem;
-                &_item {
-                    width: calc(100% - 0.1666rem);
-                    &:not(:first-child){
-                        margin-left: 0.25rem;
-                    }
-                }
-            }
+            // &_bottom {
+            //     display: flex;
+            //     margin-top: 0.25rem;
+            //     &_item {
+            //         width: calc(100% - 0.1666rem);
+            //         &:not(:first-child){
+            //             margin-left: 0.25rem;
+            //         }
+            //     }
+            // }
             img {
                 width: 100%;
                 display: flex;

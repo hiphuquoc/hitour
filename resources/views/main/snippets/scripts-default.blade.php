@@ -13,7 +13,6 @@
 
 <script type="text/javascript">
     $(window).ready(function(){
-        loadImage()
         addTableResponsive()
         checkLoginAndSetShow()
         /* fixed sidebar khi scroll */
@@ -59,9 +58,27 @@
                 }
             });
         }
+        /* lazyload image */ 
+        const imagesWithDataSrc = $('img[data-src]');
+        function lazyLoadImages() {
+            const windowTop = $(window).scrollTop();
+            const windowHeight = $(window).height();
+            imagesWithDataSrc.each(function() {
+                const image = $(this);
+                if (!image.hasClass('loaded')&&image.is(":visible")) {
+                    const imageTop = image.offset().top;
+                    if (imageTop < windowTop + windowHeight + 2000) {
+                        loadImageFromHosting(image);
+                        image.addClass('loaded');
+                    }
+                }
+            });
+        }
         lazyLoadImagesGoogleCloud();
+        lazyLoadImages();
         $(window).scroll(function() {
             lazyLoadImagesGoogleCloud();
+            lazyLoadImages();
         });
     });
 
@@ -101,10 +118,8 @@
         document.documentElement.scrollTop          = 0;
     }
     /* load image */
-    function loadImage(){
-        $(document).find('img[data-src]').each(function(){
-            $(this).attr('src', $(this).attr('data-src'));
-        });
+    function loadImageFromHosting(imageElement){
+        $(imageElement).attr('src', $(imageElement).attr('data-src'));
     }
     /* load image from goole cloud */
     function loadImageFromGoogleCloud(imageElement){
