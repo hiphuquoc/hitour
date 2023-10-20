@@ -7120,6 +7120,14 @@ $width-single-menu  : 260px;
                     }
                 }
             }   
+            &_include {
+                i {
+                    font-size: 0.9rem;
+                    margin-right: 0.25rem;
+                    margin-left: 0.4rem;
+                    color: $colorSuccess;
+                }
+            }
             &_rating {
                 position: absolute;
                 top: 0.75rem;
