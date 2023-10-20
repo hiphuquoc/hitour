@@ -25,10 +25,10 @@
                     <div class="pageContent_body_content">
                         
                         <div class="bookingForm">
-                            <!-- chứng nhận -->
+                            {{-- <!-- chứng nhận -->
                             <div class="bookingForm_item">
                                 @include('main.serviceBooking.certifiedService')
-                            </div>
+                            </div> --}}
                             <!-- thông tin liên hệ -->
                             <div class="bookingForm_item">
                                 <div class="bookingForm_item_head">
@@ -174,13 +174,13 @@
                                                 </div>
                                             </div>
                                             <div class="formColumnCustom_item">
-                                                <div class="inputWithLabelInside child">
+                                                <div class="inputWithLabelInside children">
                                                     <label class="form-label" for="quantity_child_{{ $i }}">Trẻ em (6 - 11 tuổi)</label>
                                                     <input type="number" class="form-control" name="quantity_child_{{ $i }}" placeholder="0" value="{{ !empty(request('child_ship')) ?  request('child_ship') : null }}" onInput="loadBookingSummary();">
                                                 </div>
                                             </div>
                                             <div class="formColumnCustom_item">
-                                                <div class="inputWithLabelInside child">
+                                                <div class="inputWithLabelInside adult">
                                                     <label class="form-label" for="quantity_old_{{ $i }}">Cao tuổi (trên 60 tuổi)</label>
                                                     <input type="number" class="form-control" name="quantity_old_{{ $i }}" placeholder="0" value="{{ !empty(request('old_ship')) ? request('old_ship') : null }}" onInput="loadBookingSummary();">
                                                 </div>

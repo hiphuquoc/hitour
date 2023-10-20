@@ -42,38 +42,7 @@
                 }
             });
         }
-        /* lazyload image google cloud */
-        const imagesWithGoogleCloud = $('img[data-google-cloud]');
-        function lazyLoadImagesGoogleCloud() {
-            const windowTop = $(window).scrollTop();
-            const windowHeight = $(window).height();
-            imagesWithGoogleCloud.each(function() {
-                const image = $(this);
-                if (!image.hasClass('loaded')&&image.is(":visible")) {
-                    const imageTop = image.offset().top;
-                    if (imageTop < windowTop + windowHeight + 2000) {
-                        loadImageFromGoogleCloud(image);
-                        image.addClass('loaded');
-                    }
-                }
-            });
-        }
-        /* lazyload image */ 
-        const imagesWithDataSrc = $('img[data-src]');
-        function lazyLoadImages() {
-            const windowTop = $(window).scrollTop();
-            const windowHeight = $(window).height();
-            imagesWithDataSrc.each(function() {
-                const image = $(this);
-                if (!image.hasClass('loaded')&&image.is(":visible")) {
-                    const imageTop = image.offset().top;
-                    if (imageTop < windowTop + windowHeight + 2000) {
-                        loadImageFromHosting(image);
-                        image.addClass('loaded');
-                    }
-                }
-            });
-        }
+        
         lazyLoadImagesGoogleCloud();
         lazyLoadImages();
         $(window).scroll(function() {
@@ -81,6 +50,39 @@
             lazyLoadImages();
         });
     });
+
+    /* lazyload image google cloud */
+    const imagesWithGoogleCloud = $('img[data-google-cloud]');
+    function lazyLoadImagesGoogleCloud() {
+        const windowTop = $(window).scrollTop();
+        const windowHeight = $(window).height();
+        imagesWithGoogleCloud.each(function() {
+            const image = $(this);
+            if (!image.hasClass('loaded')&&image.is(":visible")) {
+                const imageTop = image.offset().top;
+                if (imageTop < windowTop + windowHeight + 2000) {
+                    loadImageFromGoogleCloud(image);
+                    image.addClass('loaded');
+                }
+            }
+        });
+    }
+    /* lazyload image */ 
+    const imagesWithDataSrc = $('img[data-src]');
+    function lazyLoadImages() {
+        const windowTop = $(window).scrollTop();
+        const windowHeight = $(window).height();
+        imagesWithDataSrc.each(function() {
+            const image = $(this);
+            if (!image.hasClass('loaded')&&image.is(":visible")) {
+                const imageTop = image.offset().top;
+                if (imageTop < windowTop + windowHeight + 2000) {
+                    loadImageFromHosting(image);
+                    image.addClass('loaded');
+                }
+            }
+        });
+    }
 
     /* check đăng nhập */
     function checkLoginAndSetShow(){

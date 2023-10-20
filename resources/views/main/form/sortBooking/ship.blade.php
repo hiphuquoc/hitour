@@ -6,7 +6,7 @@
         <!-- One column -->
         <div class="bookFormSortShip_column_item">
             <div class="inputWithIconBetween">
-                <div class="inputWithIconBetween_item inputWithLabelInside">
+                <div class="inputWithIconBetween_item inputWithLabelInside location">
                     <label for="js_loadShipLocationByShipDeparture_element">Điểm đi</label>
                     <select id="js_loadShipLocationByShipDeparture_element" class="select2 form-select select2-hidden-accessible" name="ship_port_departure_id" onchange="loadShipLocationByShipDeparture(this, 'js_loadShipLocationByShipDeparture_idWrite');" tabindex="-1" aria-hidden="true">
                         {{-- <option value="">- Lựa chọn -</option> --}}
@@ -26,7 +26,7 @@
                 <div class="inputWithIconBetween_icon">
                     <img src="/images/main/svg/icon-round.svg" alt="đặt vé tàu cao tốc" title="đặt vé tàu cao tốc" />
                 </div>
-                <div class="inputWithIconBetween_item inputWithLabelInside">
+                <div class="inputWithIconBetween_item inputWithLabelInside location">
                     <label for="js_loadShipLocationByShipDeparture_idWrite">Điểm đến</label>
                     <select id="js_loadShipLocationByShipDeparture_idWrite" class="select2 form-select select2-hidden-accessible" name="ship_port_location_id" tabindex="-1" aria-hidden="true">
                         {{-- <option value="">- Lựa chọn -</option> --}}
@@ -48,7 +48,7 @@
     <div class="bookFormSortShip_column">
         <!-- One column -->
         <div class="bookFormSortShip_column_item">
-            <div class="inputWithLabelInside adult inputWithForm">
+            <div class="inputWithLabelInside peopleGroup inputWithForm">
                 <label for="bookFormSort_date">Số hành khách</label>
                 {{-- <div class="inputWithForm"> --}}
                     <input type="text" id="js_setValueQuantityShip_idWrite" class="form-control inputWithForm_input" name="quantity" value="1 Người lớn, 0 Trẻ em, 0 Cao tuổi" readonly="readonly" aria-label="Số khách đặt vé tàu cao tốc" required>
@@ -56,9 +56,11 @@
                         <div class="formBox">
                             <div class="formBox_labelOneRow">
                                 <div class="formBox_labelOneRow_item">
-                                    <div>
-                                        <label>Người lớn</label>
-                                        <div style="font-size: 0.95rem;">Năm sinh từ {{ date('Y', time()) - 12 }} - {{ date('Y', time()) - 59 }}</div>
+                                    <div class="labelWithIcon">
+                                        <div class="labelWithIcon_icon adult"></div>
+                                        <div class="labelWithIcon_label">
+                                            Người lớn (Năm sinh từ {{ date('Y', time()) - 12 }} - {{ date('Y', time()) - 59 }})
+                                        </div>
                                     </div>
                                     <div class="inputNumberCustom"> 
                                         <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_nguoilon', 'minus');">
@@ -71,9 +73,11 @@
                                     </div>
                                 </div>
                                 <div class="formBox_labelOneRow_item">
-                                    <div>
-                                        <label>Trẻ em</label>
-                                        <div style="font-size: 0.95rem;">Năm sinh từ {{ date('Y', time()) - 6 }} - {{ date('Y', time()) - 11 }}</div>
+                                    <div class="labelWithIcon">
+                                        <div class="labelWithIcon_icon children"></div>
+                                        <div class="labelWithIcon_label">
+                                            Trẻ em (Năm sinh từ {{ date('Y', time()) - 6 }} - {{ date('Y', time()) - 11 }})
+                                        </div>
                                     </div>
                                     <div class="inputNumberCustom"> 
                                         <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_treem', 'minus');">
@@ -86,9 +90,11 @@
                                     </div>
                                 </div>
                                 <div class="formBox_labelOneRow_item">
-                                    <div>
-                                        <label>Cao tuổi</label>
-                                        <div style="font-size: 0.95rem;">Năm sinh từ {{ date('Y', time()) - 60 }}</div>
+                                    <div class="labelWithIcon">
+                                        <div class="labelWithIcon_icon adult"></div>
+                                        <div class="labelWithIcon_label">
+                                            Cao tuổi (Năm sinh từ {{ date('Y', time()) - 60 }})
+                                        </div>
                                     </div>
                                     <div class="inputNumberCustom"> 
                                         <div class="inputNumberCustom_button" onClick="changeValueInputShip('js_changeValueInputShip_input_caotuoi', 'minus');">
@@ -135,7 +141,6 @@
         }
 
         function setValueQuantityShip(){
-            console.log(123);
 			const valueAdult 	= parseInt($('#js_changeValueInputShip_input_nguoilon').val());
 			const valueChild 	= parseInt($('#js_changeValueInputShip_input_treem').val());
 			const valueOld 		= parseInt($('#js_changeValueInputShip_input_caotuoi').val());

@@ -12,17 +12,8 @@
     @include('main.snippets.breadcrumb')
 
     @php
-        if(!empty($dataForm['range_time'])){
-            $tmp        = explode(' to ', $dataForm['range_time']);
-            $checkIn    = !empty($tmp[0]) ? strtotime($tmp[0]) : null;
-            $checkOut   = !empty($tmp[1]) ? strtotime($tmp[1]) : null;
-            /* xử lý trường hợp không range_time cùng một ngày (không có trường hợp này nên phải là ngày hôm sau) */
-            if(empty($checkOut)) $checkOut   = $checkIn + 86400;
-        }else {
-            /* xử lý trường hợp chưa có time */
-            $checkIn    = time() + 86400;
-            $checkOut   = $checkIn + 86400;
-        }
+        $checkIn            = strtotime($dataForm['check_in']);
+        $checkOut           = $checkIn + ($dataForm['number_night']*86400);
         $price              = $room->prices[0];
         $numberNight        = ($checkOut - $checkIn)/86400;
         $dayOfWeekCheckIn   = \App\Helpers\DateAndTime::convertMktimeToDayOfWeek($checkIn);
@@ -45,16 +36,13 @@
                             <input type="hidden" name="hotel_name" value="{{ $hotel->name }}" /> 
                             <input type="hidden" name="hotel_info_id" value="{{ $hotel->id }}" />
                             <input type="hidden" name="hotel_price_id" value="{{ $price->id }}" />
-                            <input type="hidden" name="range_time" value="{{ $dataForm['range_time'] ?? null }}" />
-                            <input type="hidden" name="quantity" value="{{ $quantity }}" />
-                            <input type="hidden" name="number_night" value="{{ $numberNight }}" /> 
                             <div class="bookingForm">
                                 <div class="bookingForm_item">
-                                    
+
                                     <div class="hotelBookingInfoBox">
                                         <div class="hotelBookingInfoBox_hotel">
                                             <div class="hotelBookingInfoBox_hotel_image">
-                                                <img class="" src="{{ config('main.svg.loading_main') }}"  data-google-cloud="{{ $hotel->images[0]->image }}" data-size="200" />
+                                                <img src="{{ config('main.svg.loading_main') }}"  data-google-cloud="{{ $hotel->images[0]->image }}" data-size="200" />
                                             </div>
                                             <div class="hotelBookingInfoBox_hotel_info">
                                                 <div class="hotelBookingInfoBox_hotel_info_title">{{ $hotel->name }}</div>
@@ -136,51 +124,59 @@
                                                         @endphp
                                                     @endforeach
                                                 </div>
-                                                <div class="iconAction" onclick="openCloseModal('bookingModal');">
+                                                <div class="iconAction" onclick="openCloseModalEditHotelPrice('bookingModal');">
                                                     <i class="fa-solid fa-pen-to-square"></i>
-                                                </div>
-                                            </div>
-                                            <div class="hotelBookingInfoBox_booking_time">
-                                                <div class="hotelBookingInfoBox_booking_time_item">
-                                                    <div class="hotelBookingInfoBox_booking_time_item_label">
-                                                        Nhận phòng
-                                                    </div>
-                                                    <div class="hotelBookingInfoBox_booking_time_item_info highLight">
-                                                        {{ $xhtmlCheckIn }}
-                                                    </div>
-                                                </div>
-                                                <div class="hotelBookingInfoBox_booking_time_item">
-                                                    <div class="hotelBookingInfoBox_booking_time_item_label">
-                                                        Trả phòng
-                                                    </div>
-                                                    <div class="hotelBookingInfoBox_booking_time_item_info highLight">
-                                                        {{ $xhtmlCheckOut }}
-                                                    </div>
-                                                </div>
-                                                <div class="hotelBookingInfoBox_booking_time_item">
-                                                    <div class="hotelBookingInfoBox_booking_time_item_label">
-                                                        Số đêm
-                                                    </div>
-                                                    <div class="hotelBookingInfoBox_booking_time_item_info highLight">
-                                                        {{ $numberNight }}
-                                                    </div>
-                                                </div>
-                                                <div class="iconAction" onclick="openCloseModal('bookingModal');">
-                                                    <i class="fa-solid fa-pen-to-square"></i>
-                                                </div>
-                                            </div>
-                                            <div class="hotelBookingInfoBox_booking_quantity">
-                                                <div class="hotelBookingInfoBox_booking_quantity_label">
-                                                    Số phòng
-                                                </div>
-                                                <div class="hotelBookingInfoBox_booking_quantity_info">
-                                                    <span class="highLight">{{ $quantity }} x</span> 1-Bedroom Wellness Pool Villa
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
                                 </div>
+
+                                <!-- thông tin nhận phòng -->
+                                <div class="bookingForm_item">
+                                    <div class="bookingForm_item_head">
+                                        Thông tin nhận phòng
+                                    </div>
+                                    <div class="bookingForm_item_body" style="border-radius:inherit;">
+                                        <!-- One Row -->
+                                        <div class="bookingForm_item_body_item">
+                                            <div class="formColumnCustom">
+                                                <div class="formColumnCustom_item">
+                                                    <div class="inputWithLabelInside date">
+                                                        <label for="check_in">Ngày Check-In</label>
+                                                        <input type="text" class="form-control flatpickr-basic flatpickr-input active" id="check_in" name="check_in" placeholder="YYYY-MM-DD" value="{{ $dataForm['check_in'] ?? null }}" readonly="readonly" onchange="updateCheckOutDate();" />
+                                                    </div>
+                                                </div>
+                                                <div class="formColumnCustom_item">
+                                                    <div class="inputWithLabelInside night">
+                                                        <label for="number_night">Số đêm</label>
+                                                        <select class="select2 form-select select2-hidden-accessible" id="number_night" name="number_night" onchange="updateCheckOutDate();">
+                                                            @for($i=1;$i<31;++$i)
+                                                                @php
+                                                                    $selected = null;
+                                                                    if(!empty($dataForm['number_night'])&&$dataForm['number_night']==$i) $selected = 'selected';
+                                                                @endphp
+                                                                <option value="{{ $i }}" {{ $selected }}>{{ $i }} đêm</option>
+                                                            @endfor
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="formColumnCustom_item">
+                                                    <div class="inputWithLabelInside date disabled">
+                                                        <label for="check_out">Ngày Check-Out</label>
+                                                        <input type="text" class="form-control flatpickr-basic flatpickr-input active" id="check_out" placeholder="YYYY-MM-DD" value="" readonly="readonly" disabled />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="bookingForm_item_body_item">
+                                            @include('main.hotelBooking.inputQuantityAndRoom')
+                                        </div>
+                                    </div>
+                                </div>
+
+
                                 <!-- thông tin liên hệ -->
                                 <div class="bookingForm_item">
                                     <div class="bookingForm_item_head">
@@ -255,7 +251,7 @@
                                         </div>
                                     </div>
                                     <div class="bookingForm_item_footer">
-                                        *Yêu câu này sẽ được Chỗ Nghỉ tiếp nhận để hỗ trợ Quý khách tốt nhất trong quá trình nhận phòng!
+                                        *Yêu cầu này sẽ được Chỗ Nghỉ tiếp nhận để hỗ trợ Quý khách tốt nhất trong quá trình nhận phòng!
                                     </div>
                                 </div>
                             </div>
@@ -270,8 +266,6 @@
 
         </div>
     </div>
-
-    <input type="text" class="form-control flatpickr-range flatpickr-input active" id="modal_range_time" name="modal_range_time" value="2023-05-29 to 2023-06-01" />
 @endsection
 @push('modal')
     <!-- ===== BOOKING MODAL -->
@@ -281,7 +275,7 @@
                 @include('main.hotelBooking.formModal')
             </div>
             <div class="bookingModal_box_footer">
-                <div class="button buttonCancel" onclick="openCloseModal('bookingModal');">Hủy thay đổi</div>
+                <div class="button buttonCancel" onclick="openCloseModalEditHotelPrice('bookingModal');">Hủy thay đổi</div>
                 <div class="button buttonPrimary" onclick="submitModalChangeHotelRoom();">Lưu thay đổi</div>
             </div>
         </div>
@@ -302,55 +296,65 @@
     </div>
 @endpush
 @push('scripts-custom')
-    <!-- BEGIN: Page Vendor JS-->
     <script src="{{ asset('sources/admin/app-assets/vendors/js/pickers/pickadate/picker.js') }}"></script>
     <script src="{{ asset('sources/admin/app-assets/vendors/js/pickers/pickadate/picker.date.js') }}"></script>
     <script src="{{ asset('sources/admin/app-assets/vendors/js/pickers/pickadate/picker.time.js') }}"></script>
     <script src="{{ asset('sources/admin/app-assets/vendors/js/pickers/pickadate/legacy.js') }}"></script>
     <script src="{{ asset('sources/admin/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js') }}"></script>
-	<!-- ===== -->
-    <script src="{{ asset('sources/admin/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js') }}"></script>
     <script src="{{ asset('sources/admin/app-assets/js/scripts/forms/pickers/form-pickers.js') }}"></script>
     <script src="{{ asset('sources/admin/app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
     <script src="{{ asset('sources/admin/app-assets/js/scripts/forms/form-select2.min.js') }}"></script>
+    <script src="{{ asset('sources/admin/app-assets/vendors/js/forms/repeater/jquery.repeater.min.js') }}"></script>
+    <script src="{{ asset('sources/admin/app-assets/js/scripts/forms/form-repeater.min.js') }}"></script>
     <script type="text/javascript">
         $(window).ready(function(){
 
             loadBookingSummary();
 
-            // $('.flatpickr-input').flatpickr({
-            //     mode: 'range'
-            // });
+            updateCheckOutDate();
 
         })
 
-        // @foreach ($hotel->rooms as $room)
-        //         @foreach ($room->prices as $price)
-        //             loadHotelPrice('{{ $price->id }}');
-        //         @endforeach
-        //     @endforeach
+        // Function để tính và cập nhật ngày Check-Out
+        function updateCheckOutDate() {
+            // Lấy giá trị của ngày Check-In và số đêm từ các input
+            const checkInDate = new Date($("#check_in").val());
+            const numberOfNights = parseInt($("#number_night").val());
+            if (!isNaN(numberOfNights) && checkInDate instanceof Date && !isNaN(checkInDate)) {
+                // Tính ngày Check-Out bằng cách thêm số đêm vào ngày Check-In
+                const checkOutDate = new Date(checkInDate);
+                checkOutDate.setDate(checkOutDate.getDate() + numberOfNights);
 
-        // function loadHotelPrice(idHotelPrice){
-        //     $.ajax({
-        //         url         : "{{ route('main.hotel.loadHotelPrice') }}",
-        //         type        : "GET",
-        //         dataType    : "json",
-        //         data        : { hotel_price_id : idHotelPrice }
-        //     }).done(function(data){
-        //         /* ghi nội dung room vào bảng */
-        //         if(data.row!='') {
-        //             $('#js_loadHotelPrice_'+idHotelPrice).html(data.row);
-        //         }else {
-        //             $('#js_loadHotelPrice_'+idHotelPrice).hidden();
-        //         }
-        //         /* ghi nội dung modal room */
-        //         if(data.row!='') {
-        //             $('#js_loadHotelPrice_modal_'+idHotelPrice).html(data.modal);
-        //         }else {
-        //             $('#js_loadHotelPrice_modal_'+idHotelPrice).hidden();
-        //         }
-        //     });
-        // }
+                // Định dạng ngày Check-Out thành "YYYY-MM-DD"
+                const checkOutDateString = checkOutDate.toISOString().split('T')[0];
+
+                // Cập nhật giá trị của input Ngày Check-Out
+                $('#check_out').val(checkOutDateString);
+            }
+        }
+
+        function openCloseModalEditHotelPrice(idModal){
+            const elementModal  = $('#'+idModal);
+            const flag          = elementModal.css('display');
+            /* tooggle */
+            if(flag=='none'){
+                elementModal.css('display', 'flex');
+                $('#js_openCloseModal_blur').addClass('blurBackground');
+                $('body').css('overflow', 'hidden');
+            }else {
+                elementModal.css('display', 'none');
+                $('#js_openCloseModal_blur').removeClass('blurBackground');
+                $('body').css('overflow', 'unset');
+            }
+            lazyLoadImagesGoogleCloud();
+            // $(window).scroll(function() {
+            //     lazyLoadImagesGoogleCloud();
+            // });
+        }
+
+        // $('.flatpickr-input').flatpickr({
+        //     mode: 'range'
+        // });
 
         $('#formBooking').find('input, select, textarea').each(function(){
             $(this).on('input', () => {
@@ -378,12 +382,8 @@
         function submitModalChangeHotelRoom(){
             var form = $('#formBooking');
             /* lấy giá trị từ input của modal */
-            const quantity  = $('#modal_quantity').val();
-            const timeRange = $('#modal_range_time').val();
-            const idHotelPrice = $('#modal_hotel_price_id').val();
+            const idHotelPrice  = $(document).find('[name=modal_hotel_price_id]').val();
             /* điền giá trị qua form chính */
-            form.find('[name="quantity"]').val(quantity);
-            form.find('[name="range_time"]').val(timeRange);
             form.find('[name="hotel_price_id"]').val(idHotelPrice);
             /* submit */
             form.attr('action', '{{ route("main.hotelBooking.form") }}');

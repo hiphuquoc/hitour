@@ -77,6 +77,28 @@
         opacity: 0.6;
     }
 }
+.inputWithForm {
+    position: relative;
+    z-index: 100;
+    border-radius: 10px;
+    &:hover {
+        .inputWithForm_form {
+            display: block;
+        }
+    }
+    &_form {
+        display: none;
+        position: absolute;
+        top: 54px;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        padding: 1rem;
+        border: 1px solid $bg-04;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0 0 5px $bg-04;
+    }
+}
 .inputWithLabelInside, .textareaWithLabelInside {
     height: 58px;
     border: 1px solid $bg-04;
@@ -86,6 +108,10 @@
     background: #fff;
     cursor: pointer;
     border-radius: 10px;
+    &.disabled {
+        background: $bg-02;
+        border: none;
+    }
     label {
         cursor: pointer;
         margin-bottom: 0;
@@ -101,7 +127,7 @@
         border: none;
         outline: none;
         position: absolute;
-        top: 1px;
+        top: 0;
         height: 100%;
         padding: 35px 0.75rem 13px 0.75rem !important;
         background: transparent !important;
@@ -120,60 +146,50 @@
     &:not(:first-child){
         margin-top: 1rem;
     }
-    &:after {
-        @include fontAwesome;
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: $bg-06;
-        font-size: 0.95rem;
-        z-index: 1;
-    }
-    &.email {
-        &:after {
-            content: "\f0e0";
-        }
-    }
-    &.phone {
-        &:after {
-            content: "\f095";
-        }
-    }
-    &.location {
-        &:after {
-            content: "\f3c5";
-        }
-    }
-    &.date {
-        &:after {
-            content: "\f073";
-        }
-    }  
-    &.adult {
-        &:after {
-            content: "\f183";
-            font-size: 1.1rem;
-        }
-    }  
-    &.child {
-        &:after {
-            content: "\f1ae";
-            font-size: 1.1rem;
-        }
-    } 
-    &.old {
-        &:after {
-            content: "\e53c";
-            font-size: 1.1rem;
-        }
-    } 
-    &.message {
-        &:after {
-            content: "\f4ad";
-            font-size: 1.1rem;
-        }
-    }
+    // &.email {
+    //     &:after {
+    //         content: "\f0e0";
+    //     }
+    // }
+    // &.phone {
+    //     &:after {
+    //         content: "\f095";
+    //     }
+    // }
+    // &.location {
+    //     &:after {
+    //         content: "\f3c5";
+    //     }
+    // }
+    // &.date {
+    //     &:after {
+    //         content: "\f073";
+    //     }
+    // }  
+    // &.adult {
+    //     &:after {
+    //         content: "\f183";
+    //         font-size: 1.1rem;
+    //     }
+    // }  
+    // &.child {
+    //     &:after {
+    //         content: "\f1ae";
+    //         font-size: 1.1rem;
+    //     }
+    // } 
+    // &.old {
+    //     &:after {
+    //         content: "\e53c";
+    //         font-size: 1.1rem;
+    //     }
+    // } 
+    // &.message {
+    //     &:after {
+    //         content: "\f4ad";
+    //         font-size: 1.1rem;
+    //     }
+    // }
     select {
         -webkit-appearance: none !important;
         -moz-appearance: none !important;
@@ -346,7 +362,7 @@
         }
     }
     input, textarea, .select2-container--default .select2-selection--single .select2-selection__rendered {
-        color: $colorLv2 !important;
+        color: $colorLv1 !important;
     }
     label {
         margin-bottom: 0.25rem;
@@ -464,8 +480,9 @@
     }
 }
 .formBox {
-    width: 100%;
     display: flex;
+    flex-direction: column;
+    width: 100%;
     justify-content: space-between;
     flex-wrap: wrap;
     &_full {
@@ -491,6 +508,24 @@
                 width: 100%;
             }
         }
+        label {
+            padding: 0;
+        }
+    }
+    &_item {
+        &:not(:first-child){
+            margin-top: 1rem;
+        }
+        label {
+            display: flex;
+        }
+    }
+    @media(max-width: 577px){
+        &_item {
+            &:not(:first-child){
+                margin-top: 0.75rem;
+            }
+        }
     }
 }
 .inputRequired {
@@ -510,26 +545,27 @@
 }
 .inputNumberCustom {
     display: flex;
-    width: 220px;
+    width: fit-content;
+    margin-left: 0.75rem;
     &_button {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 100%;
+        width: 42px;
+        height: 42px;
         background: $bg-02;
-        border: 1px solid $bg-04;
         font-size: 0.9rem;
-        border-radius: 5px;
         color: $colorLv1;
+        border-radius: 10px;
     }
     &_input {
-        flex: 0 0 50px;
+        width: 42px;
+        height: 42px;
         display: flex;
         align-items: center;
         justify-content: center;
         font-weight: 500;
         border: 1px solid $bg-04;
-        border-radius: 5px;
         padding-left: 0.65rem;
         padding-right: 0.65rem;
         text-align: center;
@@ -723,5 +759,80 @@
                 padding: 0.5rem;
             }
         }
+    }
+}
+.peopleGroup, .date, .night, .location, .hotelRoom, .adult, .children {
+    position: relative;
+    > input, .select2-container .select2-selection--single .select2-selection__rendered {
+        padding-left: 42px !important;
+    }
+    &:after {
+        position: absolute;
+        content: '';
+        width: 26px;
+        aspect-ratio: 1/1;
+        z-index: 1;
+        left: 0.5rem;
+        bottom: 5px;
+    }
+}
+.peopleGroup { 
+    &:after {
+        background: url('/storage/images/svg/icon-people-group.svg') no-repeat;
+        background-size: 100% 100%;
+    }
+}
+.date {
+    &:after {
+        background: url('/storage/images/svg/icon-date.svg') no-repeat;
+        background-size: 100% 100%;
+    }
+}
+.night {
+    &:after {
+        background: url('/storage/images/svg/icon-moon.svg') no-repeat;
+        background-size: 100% 100%;
+    }
+}
+.location {
+    &:after {
+        background: url('/storage/images/svg/icon-local.svg') no-repeat;
+        background-size: 100% 100%;
+    }
+}
+.hotelRoom {
+    &:after {
+        background: url('/storage/images/svg/icon-room.svg') no-repeat;
+        background-size: 100% 100%;
+    }
+}
+.adult {
+    &:after {
+        background: url('/storage/images/svg/icon-adult.svg') no-repeat;
+        background-size: 100% 100%;
+    }
+}
+.children {
+    &:after {
+        background: url('/storage/images/svg/icon-children.svg') no-repeat;
+        background-size: 100% 100%;
+    }
+}
+.labelWithIcon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    &_icon {
+        margin-right: 35px;
+        &:after {
+            bottom: unset;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+        }
+    }
+    &_label {
+        font-size: 1rem;
+        font-family: $fontTitle;
     }
 }

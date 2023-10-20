@@ -1,4 +1,4 @@
-<div class="bookingModal_box_body_item">
+{{-- <div class="bookingModal_box_body_item">
     <div class="bookingModal_box_body_item_head">
         Thông tin chung
     </div>
@@ -6,22 +6,44 @@
 
         <!-- One Row -->
         <div class="bookingModal_box_body_item_body_item">
-            <div class="inputWithLabelInside date">
-                <label for="modal_range_time">Ngày Check-In Check-Out</label>
-                <input type="text" class="form-control flatpickr-disabled-range flatpickr-input" id="modal_range_time" name="modal_range_time" value="{{ $dataForm['range_time'] ?? null }}" />
+            <div class="flexBox">
+                <div class="flexBox_item">
+                    <div class="inputWithLabelInside date">
+                        <label for="modal_range_time">Ngày Check-In</label>
+                        <input type="text" class="form-control flatpickr-basic flatpickr-input active" id="modal_check_in" name="modal_check_in" placeholder="YYYY-MM-DD" value="{{ $dataForm['check_in'] ?? null }}" readonly="readonly" onchange="updateCheckOutDate();" />
+                    </div>
+                </div>
+                <div class="flexBox_item">
+                    <div class="inputWithLabelInside night">
+                        <label for="modal_range_time">Số đêm</label>
+                        <select class="select2 form-select select2-hidden-accessible" id="modal_number_night" name="modal_number_night" onchange="updateCheckOutDate();">
+                            @for($i=1;$i<31;++$i)
+                                @php
+                                    $selected = null;
+                                    if(!empty($dataForm['number_night'])&&$dataForm['number_night']==$i) $selected = 'selected';
+                                @endphp
+                                <option value="{{ $i }}" {{ $selected }}>{{ $i }} đêm</option>
+                            @endfor
+                        </select>
+                    </div>
+                </div>
+                <div class="flexBox_item">
+                    <div class="inputWithLabelInside date disabled">
+                        <label for="modal_range_time">Ngày Check-Out</label>
+                        <input type="text" class="form-control flatpickr-basic flatpickr-input active" id="modal_check_out" placeholder="YYYY-MM-DD" value="" readonly="readonly" disabled />
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- One Row -->
         <div class="bookingModal_box_body_item_body_item">
-            <div class="inputWithLabelInside">
-                <label for="modal_quantity">Số phòng</label>
-                <input type="number" id="modal_quantity" name="modal_quantity" value="{{ $quantity }}" />
-            </div>
+            <input type="hidden" name="modal_quantity" value="{{ $dataForm['quantity'] }}" /> 
+            @include('main.hotelBooking.inputQuantityAndRoom')
         </div>
         
     </div>
-</div>
+</div> --}}
 
 <div class="bookingModal_box_body_item">
     <div class="bookingModal_box_body_item_head">
@@ -41,7 +63,9 @@
                 <div id="js_chooseHotelPrice_{{ $p->id }}" class="formChooseHotelRoom_item {{ $selected }}" onclick="chooseHotelPrice({{ $p->id }});">
 
                     <div class="formChooseHotelRoom_item_image">
+                        @if(!empty($room->images[0]->image))
                         <img src="{{ config('main.svg.loading_main') }}" data-google-cloud="{{ $room->images[0]->image }}" data-size="300" />
+                        @endif
                     </div>
 
                     <div class="formChooseHotelRoom_item_info">
@@ -95,6 +119,22 @@
                                 {!! $p->description !!}
                             </div>
                         @endif
+                    </div>
+                    
+                    <div class="formChooseHotelRoom_item_price">
+                        @if(!empty($p->sale_off))
+                            <div class="formChooseHotelRoom_item_price_old">
+                                <div class="formChooseHotelRoom_item_price_old_number">
+                                    {{ number_format($p->price_old) }} <sup>đ</sup>
+                                </div>
+                                <div class="formChooseHotelRoom_item_price_old_saleoff">
+                                    -{{ $p->sale_off }}%
+                                </div>
+                            </div>
+                        @endif
+                        <div class="formChooseHotelRoom_item_price_now">
+                            {{ number_format($p->price) }} <sup>đ</sup>
+                        </div>
                     </div>
                     
                 </div>

@@ -25,10 +25,10 @@
                     <div class="pageContent_body_content">
                         
                         <div class="bookingForm">
-                            <!-- chứng nhận -->
+                            {{-- <!-- chứng nhận -->
                             <div class="bookingForm_item">
                                 @include('main.tourBooking.certifiedTour')
-                            </div>
+                            </div> --}}
                             <!-- thông tin liên hệ -->
                             <div class="bookingForm_item">
                                 <div class="bookingForm_item_head">

@@ -4,7 +4,7 @@
         @if(!empty($prices)&&$prices->isNotEmpty())
             @foreach($prices as $price)
                 @php
-                    $classIcon = $loop->index==0 ? 'adult' : 'child';
+                    $classIcon = $loop->index==0 ? 'adult' : 'children';
                 @endphp
                 <div class="formColumnCustom_item">
                     <div class="inputWithLabelInside {{ $classIcon }}">
