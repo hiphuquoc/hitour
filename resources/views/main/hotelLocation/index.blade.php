@@ -126,7 +126,7 @@
 @endsection
 @push('bottom')
     <!-- button book tour mobile -->
-    @php
+    {{-- @php
         $linkBooking = route('main.serviceBooking.form', [
             'service_location_id'   => $item->id ?? 0
         ]);
@@ -136,7 +136,7 @@
             <a href="tel:{{ \App\Helpers\Charactor::removeSpecialCharacters(config('main.company.hotline')) }}" class="callBookTourMobile_phone maxLine_1">{{ config('main.company.hotline') }}</a>
             <a href="{{ $linkBooking ?? '/' }}" class="callBookTourMobile_button"><h2 style="margin:0;">Đặt Hotel</h2></a>
         </div>
-    </div>
+    </div> --}}
 @endpush
 @push('scripts-custom')
     <script type="text/javascript">
