@@ -14,7 +14,7 @@ class HotelBookingController extends Controller {
     }
 
     public static function form(Request $request){
-        $dataForm           = $request->all();
+        $dataForm           = $request->all();  
         if(empty($request->get('check_in'))) $dataForm['check_in'] = date('Y-m-d', time() + 86400);
         if(empty($request->get('number_night'))) $dataForm['number_night'] = 1;
         $idHotelPrice       = $dataForm['hotel_price_id'] ?? 0;

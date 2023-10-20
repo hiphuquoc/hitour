@@ -83,7 +83,27 @@
             }
         });
     }
-
+    /* load image */
+    function loadImageFromHosting(imageElement){
+        $(imageElement).attr('src', $(imageElement).attr('data-src'));
+    }
+    /* load image from goole cloud */
+    function loadImageFromGoogleCloud(imageElement){
+        const urlGoogleCloud    = $(imageElement).attr('data-google-cloud');
+        const size              = $(imageElement).attr('data-size');
+        $.ajax({
+            url         : '{{ route("ajax.loadImageFromGoogleCloud") }}',
+            type        : 'get',
+            dataType    : 'html',
+            data        : {
+                url_google_cloud    : urlGoogleCloud,
+                size
+            },
+            success     : function(response){
+                $(imageElement).attr('src', response);
+            }
+        });
+    }
     /* check đăng nhập */
     function checkLoginAndSetShow(){
         const language = $('#language').val();
@@ -118,27 +138,6 @@
     }
     function gotoTop() {
         document.documentElement.scrollTop          = 0;
-    }
-    /* load image */
-    function loadImageFromHosting(imageElement){
-        $(imageElement).attr('src', $(imageElement).attr('data-src'));
-    }
-    /* load image from goole cloud */
-    function loadImageFromGoogleCloud(imageElement){
-        const urlGoogleCloud    = $(imageElement).attr('data-google-cloud');
-        const size              = $(imageElement).attr('data-size');
-        $.ajax({
-            url         : '{{ route("ajax.loadImageFromGoogleCloud") }}',
-            type        : 'get',
-            dataType    : 'html',
-            data        : {
-                url_google_cloud    : urlGoogleCloud,
-                size
-            },
-            success     : function(response){
-                $(imageElement).attr('src', response);
-            }
-        });
     }
     /* toc content */
     function buildTocContentSidebar(idElement){

@@ -1003,7 +1003,7 @@ $width_normalMenu : 250px;
     @include colorOpacity('background', $colorLv1, 0.2);
     color: #789;
     cursor: pointer;
-    border-radius: 7px;
+    border-radius: 10px;
     width: 40px;
     height: 40px;
     margin-right: 0.75rem;
@@ -1355,7 +1355,7 @@ $tourGrid_radius : 10px;
             background: $colorSLv1;
             color: #333;
             padding: 0.5rem 1rem;
-            border-radius: 7px;
+            border-radius: 10px;
             font-size: 1.1rem;
             text-align: center;
             margin: 0;
@@ -1655,7 +1655,7 @@ $tourGrid_radius : 10px;
             position: relative;
             background-color: $colorSLv1;
             padding: 0.35rem 1rem;
-            border-radius: 7px;
+            border-radius: 10px;
             cursor: pointer;
             margin-bottom: 0.5rem;
             &:before {
@@ -2270,7 +2270,6 @@ blockquote{
     margin: 1rem 0;
     &_item {
         width: calc(33.33% - 1rem);
-        box-shadow: 0 0 4px $bg-04;
         border-radius: 5px;
         text-align: left;
         &:not(:first-child){
@@ -2285,7 +2284,7 @@ blockquote{
             }
         }
         &_content {
-            padding: 0.5rem 0.75rem;
+            padding: 0 0.75rem;
             a {
                 display: flex;
                 h3 {
@@ -4779,13 +4778,13 @@ $width-single-menu  : 260px;
                     width: calc(33.33% - 0.25rem);
                 }
                 &:nth-child(2){
-                    border-radius: 0 7px 7px 0;
+                    border-radius: 0 10px 10px 0;
                 }
                 &:nth-child(3){
-                    border-radius: 7px;
+                    border-radius: 10px;
                 }
                 &:nth-child(4){
-                    border-radius: 7px 0 0 7px;
+                    border-radius: 10px 0 0 10px;
                 }
                 &:after {
                     position: absolute;
@@ -4811,7 +4810,7 @@ $width-single-menu  : 260px;
                 background: linear-gradient(90deg, #EDF2F7 0%, #F7FAFC 100%);
                 position: relative;
                 overflow: hidden;
-                border-radius: 7px;
+                border-radius: 10px;
                 &:first-child {
                     width: 100%;
                     height: 35px;
@@ -4845,7 +4844,7 @@ $width-single-menu  : 260px;
                 width: 50%;
                 height: 60px;
                 background: linear-gradient(90deg, #EDF2F7 0%, #F7FAFC 100%);
-                border-radius: 7px 0 10px 0;
+                border-radius: 10px 0 10px 0;
                 position: relative;
                 overflow: hidden;
                 &::after {
@@ -5130,7 +5129,7 @@ $width-single-menu  : 260px;
     width: 40px;
     height: 40px;
     background: $bg-03;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     border: 2px solid #fff;
     z-index: 100;
@@ -5771,7 +5770,7 @@ $width-single-menu  : 260px;
                 background: $colorLv1;
                 color: #fff;
                 padding: 0 0.5rem;
-                border-radius: 7px;
+                border-radius: 10px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -5801,7 +5800,7 @@ $width-single-menu  : 260px;
                 display: flex;
                 align-items: center;
                 margin-right: 0.5rem;
-                border-radius: 7px;
+                border-radius: 10px;
                 color: $colorLv1;
                 font-weight: bold;
                 img {
@@ -5878,7 +5877,7 @@ $width-single-menu  : 260px;
                 justify-content: center;
                 font-size: 1.1rem;
                 font-family: $fontTitle;
-                border-radius: 7px;
+                border-radius: 10px;
                 &:hover {
                     color: $colorTitle;
                     background: $colorSLv2;
@@ -5950,7 +5949,7 @@ $width-single-menu  : 260px;
                 margin-left: 0.5rem;
             }
             &_count {
-                border-radius: 7px;
+                border-radius: 10px;
                 position: absolute;
                 bottom: 0;
                 right: 0;
@@ -6017,7 +6016,7 @@ $width-single-menu  : 260px;
                     margin-left: 0.5rem !important;
                 }
                 img {
-                    border-radius: 7px;
+                    border-radius: 10px;
                 }
             }
         }
@@ -6368,6 +6367,39 @@ $width-single-menu  : 260px;
         }
     }
 }
+@mixin modalButtonClose {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 42px;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1;
+    border-radius: 0 10px 0 10px;
+    background: rgba(0,0,0,0.2);
+    color: #fff;
+    &:hover {
+        background: rgba(0,0,0,0.3);
+    }
+    @media(max-width: 767px){
+        width: 40px;
+    }
+    @media(max-width: 577px){
+        width: 38px;
+    }
+}
+@mixin modalHeadTitle {
+    font-size: 1.15rem;
+    @media(max-width: 767px){
+        font-size: 1.1rem;
+    }
+    @media(max-width: 577px){
+        font-size: 1.05rem;
+    }
+}
 .modalHotelRoom {
     display: none;
     position: fixed;
@@ -6378,35 +6410,24 @@ $width-single-menu  : 260px;
     flex-direction: column;
     &_box {
         position: relative;
-        top: 50%;
+        top: 0;
         left: 50%;
         width: calc(100% - 3rem);
         max-width: 1200px;
-        max-height: calc(100vh - 4rem);
+        max-height: 100vh;
         background: #fff;
-        transform: translate3d(-50%, -50%, 0);
+        transform: translate3d(-50%, 0, 0);
         border-radius: 12px;
         &_close {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            border-radius: 0 7px 0 7px;
-            &:hover {
-                background: $bg-02;
-            }
+            @include modalButtonClose;
         }
         &_body {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            padding: 1.5rem;
+            padding: 1.25rem;
             position: unset;
+            max-height: calc(100vh - 4.75rem);
             &_gallery {
                 display: flex;
                 flex-direction: column;
@@ -6560,13 +6581,13 @@ $width-single-menu  : 260px;
             display: flex;
             justify-content: flex-end;
             align-items: flex-end;
-            padding: 0 1.5rem 1.25rem 1.5rem;
+            padding: 1rem 1.25rem;
+            border-top: 1px solid $bg-04;
             &_price {
                 display: flex;
-                flex-direction: column;
-                align-items: flex-end;
-                width: 140px;   
-                margin-right: 1.5rem;
+                align-items: flex-end; 
+                justify-content: flex-end;
+                margin-right: 1.25rem;
                 &_old {
                     display: flex;
                     align-items: flex-end;
@@ -6589,8 +6610,8 @@ $width-single-menu  : 260px;
                     color: $colorPrice;
                     text-align: right;
                     font-weight: bold;
-                    margin-top: -0.2rem;
                     letter-spacing: 0.75px;
+                    margin-left: 0.75rem;
                 }
             }
             &_button {
@@ -6598,7 +6619,7 @@ $width-single-menu  : 260px;
                 padding: 0.65rem 1rem;
                 color: $colorTitle;
                 font-family: $fontTitle;
-                border-radius: 7px;
+                border-radius: 10px;
                 cursor: pointer;
                 &:hover {
                     background: $colorSLv2;
@@ -6627,16 +6648,20 @@ $width-single-menu  : 260px;
             &_body {
                 padding: 1rem;
                 flex-wrap: wrap;
+                max-height: calc(100vh - 4.35rem);
                 &_gallery {
                     width: 100%;
                 }
                 &_info {
                     width: 100%;
                     margin-top: 1rem;
+                    &_title {
+                        padding-right: 0;
+                    }
                 }
             }
             &_footer {
-                padding: 0 1rem 0.75rem 1rem;
+                padding: 0.75rem 1rem;
             }
         }
     }
@@ -6644,6 +6669,7 @@ $width-single-menu  : 260px;
         &_box {
             &_body {
                 padding: 0.75rem;
+                max-height: calc(100vh - 3.95rem);
                 &_info {
                     margin-top: 0.75rem;
                     &_details {
@@ -6663,7 +6689,14 @@ $width-single-menu  : 260px;
                 }
             }
             &_footer {
-                padding: 0 0.75rem 0.5rem 0.75rem;
+                padding: 0.5rem 0.75rem;
+                &_price {
+                    &_old {
+                        &_number {
+                            display: none;
+                        }
+                    }
+                }
             }
         }
     }
@@ -6693,22 +6726,10 @@ $width-single-menu  : 260px;
             position: relative;
             background: $bg-02;
             &_close {
-                position: absolute;
-                top: 0;
-                right: 0;
-                height: 100%;
-                aspect-ratio: 1/1;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                border-radius: 0 7px 0 7px;
-                &:hover {
-                    background: $bg-04;
-                }
+                @include modalButtonClose;
             }
             h2 {
-                font-size: 1.2rem;
+                @include modalHeadTitle;
                 font-family: $fontTitle;
             }
         }
@@ -6750,6 +6771,116 @@ $width-single-menu  : 260px;
         }
     }
 }
+.modalHotelDescription {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    &_box {
+        position: relative;
+        top: 2rem;
+        left: 50%;
+        width: calc(100% - 3rem);
+        max-width: 800px;
+        max-height: calc(100vh - 4rem);
+        background: #fff;
+        transform: translate3d(-50%, 0, 0);
+        border-radius: 10px;
+        overflow: hidden;
+        &_head {
+            padding: 0.5rem 1.5rem 0.25rem 1.5rem;
+            background: $bg-02;
+            position: relative;
+            &_close {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 42px;
+                aspect-ratio: 1/1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                border-radius: 0 10px 0 10px;
+                background: rgba(0,0,0,0.2);
+                color: #fff;
+                &:hover {
+                    background: rgba(0,0,0,0.3);
+                }
+            }
+            h2 {
+                @include modalHeadTitle;
+                font-family: $fontTitle;
+                padding-right: 35px;
+            }
+        }
+        &_body {
+            padding: 1rem 1.5rem;
+            max-height: calc(100vh - 8rem);
+        }
+        
+    }
+    &_bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: -1;
+    }
+    @media(max-width: 767px){
+        &_box {
+            top: 0;
+            width: 100%;
+            max-height: unset;
+            border-radius: 0;
+            &_head {
+                padding: 0.5rem 1rem 0.25rem 1rem;
+            }
+            &_body {
+                max-height: calc(100vh - 45px);
+                padding: 0.75rem 1rem;
+            }
+        }
+    }
+    @media(max-width: 577px){
+        &_box {
+            &_head {
+                padding: 0.5rem 0.75rem 0.25rem 0.75rem;
+                margin-bottom: 0.75rem;
+            }
+            &_body {
+                padding: 0.5rem 0.75rem;
+            }
+        }
+    }
+}
+.modalImage {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    z-index: 9999;
+    &_close {
+        @include modalButtonClose;
+    }
+    &_box {
+        position: relative;
+        top: 0;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        background: rgba(255,255,255,0.95);
+        transform: translate3d(-50%, 0, 0);
+        overflow: hidden;
+    }
+}
 .hotelFacilitiesTab {
     &_head {
         display: flex;
@@ -6759,8 +6890,7 @@ $width-single-menu  : 260px;
         &_item {
             padding: 0.5rem 1rem;
             border: 1px solid $bg-04;
-            border-radius: 6px;
-            font-size: 0.975rem;
+            font-size: 0.95rem;
             font-family: $fontTitle;
             &:not(:first-child){
                 margin-left: -1px;
@@ -6820,126 +6950,6 @@ $width-single-menu  : 260px;
                 }
             }
         }
-    }
-}
-.modalHotelDescription {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    flex-direction: column;
-    &_box {
-        position: relative;
-        top: 2rem;
-        left: 50%;
-        width: calc(100% - 3rem);
-        max-width: 800px;
-        max-height: calc(100vh - 4rem);
-        background: #fff;
-        transform: translate3d(-50%, 0, 0);
-        border-radius: 10px;
-        overflow: hidden;
-        &_head {
-            padding: 0.5rem 1.5rem 0.25rem 1.5rem;
-            background: $bg-02;
-            position: relative;
-            &_close {
-                position: absolute;
-                top: 0;
-                right: 0;
-                height: 100%;
-                aspect-ratio: 1/1;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                border-radius: 0 7px 0 7px;
-                &:hover {
-                    background: $bg-04;
-                }
-            }
-            h2 {
-                font-size: 1.2rem;
-                font-family: $fontTitle;
-            }
-        }
-        &_body {
-            padding: 1rem 1.5rem;
-            max-height: calc(100vh - 8rem);
-        }
-        
-    }
-    &_bg {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background: rgba(0,0,0,0.5);
-        z-index: -1;
-    }
-    @media(max-width: 767px){
-        &_box {
-            top: 0;
-            width: 100%;
-            max-height: unset;
-            border-radius: 0;
-            &_head {
-                padding: 0.5rem 1rem 0.25rem 1rem;
-            }
-            &_body {
-                max-height: calc(100vh - 45px);
-                padding: 0.75rem 1rem;
-            }
-        }
-    }
-    @media(max-width: 577px){
-        &_box {
-            &_head {
-                padding: 0.5rem 0.75rem 0.25rem 0.75rem;
-                margin-bottom: 0.75rem;
-            }
-            &_body {
-                padding: 0.5rem 0.75rem;
-            }
-        }
-    }
-}
-.modalImage {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    flex-direction: column;
-    z-index: 9999;
-    &_close {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 45px;
-        aspect-ratio: 1/1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 1;
-        background: $bg-04;
-        &:hover {
-            background: $bg-04;
-        }
-    }
-    &_box {
-        position: relative;
-        top: 0;
-        left: 50%;
-        width: 100%;
-        height: 100%;
-        background: rgba(255,255,255,0.95);
-        transform: translate3d(-50%, 0, 0);
-        overflow: hidden;
     }
 }
 .hotelImageTab {
@@ -7062,7 +7072,7 @@ $width-single-menu  : 260px;
                 height: 100%;
                 display: flex;
                 margin: 0;
-                aspect-ratio: 750/400;
+                aspect-ratio: 750/460;
                 object-fit: cover;
             }
         }
@@ -7081,14 +7091,15 @@ $width-single-menu  : 260px;
             }
             &_title {
                 margin-bottom: 0.25rem;
-                padding-right: 100px;
+                &.hotelList_item_info_title {
+                    padding-right: 100px;
+                }
                 h2, h3 {
                     font-size: 1rem;
                     letter-spacing: .25px;
                     cursor: pointer;
                     color: $colorLv1;
                     margin: 0 !important;
-                    width: calc(100% - 100px - 1rem);
                 }
             }
             &_highlightTitle {
@@ -7222,6 +7233,7 @@ $width-single-menu  : 260px;
             align-items: flex-end;
             justify-content: flex-end;
             padding: 1rem;
+            padding-top: 0 !important;
             border-left: 3px solid $bg-03;
             &_price {
                 display: flex;
@@ -7232,18 +7244,19 @@ $width-single-menu  : 260px;
                 &_old {
                     display: flex;
                     align-items: flex-end;
-                    font-size: 0.9rem;
+                    font-size: 0.85rem;
                     text-align: right;
                     &_number {
                         text-decoration: line-through;
                         margin-right: 0.5rem;
+                        display: flex;
                     }
                     &_saleoff {
                         background: $colorPrice;
                         color: #fff;
                         padding: 0 0.25rem;
                         border-radius: 6px;
-                        font-size: 0.9rem;
+                        font-size: 0.75rem;
                     }
                 }
                 &_now {
@@ -7262,7 +7275,7 @@ $width-single-menu  : 260px;
                 padding: 0.5rem 1rem;
                 color: $colorTitle;
                 font-family: $fontTitle;
-                border-radius: 7px;
+                border-radius: 10px;
                 cursor: pointer;
                 display: flex;
                 justify-content: center;
@@ -7626,7 +7639,7 @@ $width-single-menu  : 260px;
                 padding: 0.5rem 1rem;
                 color: $colorTitle;
                 font-family: $fontTitle;
-                border-radius: 7px;
+                border-radius: 10px;
                 cursor: pointer;
                 display: flex;
                 justify-content: center;
@@ -7714,7 +7727,7 @@ $width-single-menu  : 260px;
                     background: $colorLv1;
                     color: #fff;
                     padding: 0 0.5rem;
-                    border-radius: 7px;
+                    border-radius: 10px;
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -7857,7 +7870,7 @@ $width-single-menu  : 260px;
                         margin: 0;
                         padding: 0;
                         width: 100%;
-                        aspect-ratio: 750/400;
+                        aspect-ratio: 750/460;
                         object-fit: cover;
                         border-radius: 10px;
                     }
