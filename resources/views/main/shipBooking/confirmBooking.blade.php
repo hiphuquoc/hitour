@@ -31,7 +31,7 @@
                             <table class="tableDetailShipBooking noResponsive">
                                 <tbody>
                                     <tr>
-                                        <td style="width:200px;">Tên khách hàng</td>
+                                        <td style="width:150px;">Tên khách hàng</td>
                                         <td>{{ $item->customer_contact->name ?? null }}</td>
                                     </tr>
                                     <tr>
