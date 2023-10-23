@@ -592,8 +592,6 @@ Route::prefix('hotelBooking')->group(function(){
     // Route::get('/loadCombo', [HotelBookingController::class, 'loadCombo'])->name('main.hotelBooking.loadCombo');
     // Route::get('/loadOption', [HotelBookingController::class, 'loadOption'])->name('main.hotelBooking.loadOption');
     // Route::get('/loadFormQuantityByOption', [HotelBookingController::class, 'loadFormQuantityByOption'])->name('main.hotelBooking.loadFormQuantityByOption');
-    
-    
 });
 /* ===== SHIP BOOKING ===== */
 Route::prefix('shipBooking')->group(function(){
