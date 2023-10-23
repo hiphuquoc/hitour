@@ -166,16 +166,15 @@ class HotelBookingController extends Controller {
     // }
 
     public static function confirm(Request $request){
-        dd($request->all());
-        // $noBooking          = $request->get('no') ?? null;
-        // $item               = Booking::select('*')
-        //                         ->where('no', $noBooking)
-        //                         ->with('quantityAndPrice', 'service')
-        //                         ->first();
-        // if(!empty($item)){
-        //     return view('main.hotelBooking.confirmBooking', compact('item'));
-        // }else {
-        //     return redirect()->route('main.home');
-        // }
+        $noBooking          = $request->get('no') ?? null;
+        $item               = HotelBooking::select('*')
+                                ->where('no', $noBooking)
+                                ->with('customer_contact', 'request', 'quantityAndPrice.hotel', 'quantityAndPrice.room', 'quantityAndPrice.price')
+                                ->first();
+        if(!empty($item)){
+            return view('main.hotelBooking.confirmBooking', compact('item'));
+        }else {
+            return redirect()->route('main.home');
+        }
     }
 }

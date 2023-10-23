@@ -7988,6 +7988,44 @@ $width-single-menu  : 260px;
             color: $colorLv2;
         }
     }
+    &_time {
+        display: flex;
+        align-items: stretch;
+        flex-wrap: wrap;
+        margin-top: 0.5rem;
+        &_item {
+            width: calc(33.33% - 0.3333rem);
+            &:not(:nth-child(3n + 1)){
+                margin-left: 0.5rem;
+            }
+            &:nth-child(n + 4){
+                margin-top: 0.5rem;
+            }
+            &_label {
+                font-size: 0.95rem;
+                color: $colorDesc;
+            }
+            &_text {
+                font-size: 1rem;
+                font-family: $fontTitle;
+                color: $colorTitle;
+            }
+        }
+    }
+    @media(max-width: 767px){
+        &_time {
+            &_item {
+                width: calc(50% - 0.25rem);
+                margin-left: 0 !important;
+                &:not(:nth-child(2n + 1)){
+                    margin-left: 0.5rem !important;
+                }
+                &:nth-child(n + 3){
+                    margin-top: 0.5rem !important;
+                }
+            }
+        }
+    }
     @media(max-width: 577px){
         padding: 0;
         box-shadow: none;

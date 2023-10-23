@@ -78,24 +78,12 @@ class HotelBooking extends Model {
         return $this->hasOne(\App\Models\HotelBookingStatus::class, 'id', 'status_id');
     }
 
-    public function request(){
-        return $this->hasMany(\App\Models\HotelBookingRequest::class, 'hotel_booking_id', 'id');
-    }
-
-    public function hotel(){
-        return $this->hasOne(\App\Models\Hotel::class, 'id', 'hotel_info_id');
-    }
-
-    public function room(){
-        return $this->hasOne(\App\Models\HotelRoom::class, 'id', 'hotel_room_id');
-    }
-
-    public function price(){
-        return $this->hasOne(\App\Models\HotelPrice::class, 'id', 'hotel_price_id');
-    }
-
     public function quantityAndPrice(){
         return $this->hasMany(\App\Models\HotelBookingQuantityAndPrice::class, 'hotel_booking_id', 'id');
+    }
+
+    public function request(){
+        return $this->hasMany(\App\Models\HotelBookingRequest::class, 'hotel_booking_id', 'id');
     }
 
     public function costMoreLess(){
