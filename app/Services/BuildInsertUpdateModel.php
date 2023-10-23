@@ -1423,4 +1423,65 @@ class BuildInsertUpdateModel {
         }
         return $result;
     }
+
+    public static function buildArrayTableHotelBooking($idCustomer, $dataForm){
+        $result = [];
+        if(!empty($dataForm)){
+            if(!empty($idCustomer)) {
+                /* insert booking */
+                $result['customer_info_id']     = $idCustomer;
+                $result['no']                   = \App\Helpers\Charactor::randomString(10);
+                $result['created_by']           = Auth::id() ?? 0;
+            }else {
+                /* update booking */
+            }
+            $result['status_id']                = $dataForm['status_id'] ?? 1;
+            // $result['paid']                     = $dataForm['paid'] ?? null;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableHotelBookingQuantityAndPrice($idBooking, $dataForm){
+        $result = [];
+        if(!empty($idBooking)&&!empty($dataForm)){
+            $idHotelPrice       = $dataForm['hotel_price_id'] ?? 0;
+            /* lấy prices được chọn */
+            $room               = \App\Models\HotelRoom::select('*')
+                                    ->whereHas('prices', function ($query) use ($idHotelPrice) {
+                                        $query->where('id', $idHotelPrice);
+                                    })
+                                    ->with(['prices' => function ($query) use ($idHotelPrice) {
+                                        $query->where('id', $idHotelPrice);
+                                    }])
+                                    ->first();
+            $price              = $room->prices[0];
+            if(!empty($room)){
+                $result['hotel_booking_id']             = $idBooking;
+                $result['hotel_info_id']                = $dataForm['hotel_info_id'];
+                $result['hotel_room_id']                = $room->id;
+                $result['hotel_price_id']               = $idHotelPrice;
+                $result['quantity']                     = $dataForm['quantity'] ?? 1;
+                $result['check_in']                     = $dataForm['check_in'];
+                $checkOut                               = $dataForm['check_out'] ?? null;
+                if(empty($checkOut)){
+                    $checkOut                           = date('Y-m-d', strtotime($dataForm['check_in']) + 86400*$dataForm['number_night']);
+                }
+                $result['check_out']                    = $checkOut;
+                $result['number_night']                 = $dataForm['number_night'] ?? 1;
+                $result['hotel_room_name']              = $room->name;
+                $result['hotel_room_size']              = $room->size;
+                $result['hotel_price_description']      = $price->description;
+                $result['hotel_price_number_people']    = $price->number_people;
+                $result['hotel_price_price']            = $price->price;
+                $result['hotel_price_price_old']        = $price->price_old ?? null;
+                $result['hotel_price_sale_off']         = $price->sale_off ?? null;
+                $textBed                                = implode(' + ', $price->beds->toArray());
+                if(empty($textBed)) $textBed            = 'Xác nhận sau';
+                $result['hotel_price_bed']              = $textBed;
+                $result['hotel_price_breakfast']        = $price->breakfast ?? 0;
+                $result['hotel_price_given']            = $price->fiven ?? 0;
+            }
+        }
+        return $result;
+    }
 }

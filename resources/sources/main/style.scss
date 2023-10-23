@@ -645,6 +645,20 @@ $width_normalMenu : 250px;
         padding-bottom: 3rem;
     }
 }
+.pageConfirm {
+    background: $bg-03;
+    padding-top: 3.25rem;
+    .container {
+        max-width: 800px;
+    }
+    @media(max-width: 767px){
+        padding-top: 3rem;
+    }
+    @media(max-width: 577px){
+        background: #fff;
+        padding-top: 1.25rem;
+    }
+}
 .pageBooking {
     padding-top: 0.5rem;
 }
@@ -2394,23 +2408,33 @@ blockquote{
 }
 .tableDetailShipBooking {
     border: 1px solid $bg-04;
-    box-shadow: 0 0 5px $bg-03;
+    box-shadow: 0 0 5px $bg-04;
     background: #fff;
     font-size: 1rem;
-    .head {
-        td {
-            @include colorOpacity('background', $colorLv1, 0.2);
-            font-weight: bold;
+    border-radius: 10px;
+    overflow: hidden;
+    thead {
+        th {
+            background: $bg-02;
+            font-family: $fontTitle;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border-left: 1px solid $bg-04;
             i {
                 margin-right: 0.5rem;
                 color: $bg-08;
             }
         }
     }
-    tr {
+    tr, th {
+        font-size: 0.95rem;
         td {
-            padding: 0.6rem 1rem;
+            padding: 0.5rem 1rem;
             border-left: 1px solid $bg-04;
+            &:last-child {
+                font-family: $fontTitle;
+                font-size: 1rem;
+            }
         }
         &:not(:first-child){
             td {
@@ -2419,15 +2443,51 @@ blockquote{
             }
         }
     }
+    i {
+        color: $bg-07;
+        margin-right: 0.5rem;
+        font-size: 1.1rem;
+    }
+    @media(max-width: 577px){
+        border-left: none;
+        border-right: none;
+        box-shadow: none;
+        thead {
+            display: none;
+        }
+        tr, th {
+            &:first-child {
+                td {
+                    padding-top: 0;
+                }
+            }
+            &:last-child {
+                td {
+                    padding-bottom: 0;
+                }
+            }
+            td {
+                border-left: none;
+                padding-right: 0;
+                &:first-child {
+                    padding-left: 0;
+                }
+            }
+        }
+    }
 }
 .shipDepartureConfirmBox {
     display: flex;
+    flex-direction: column;
     line-height: 1.7;
     background: #fff;
     box-shadow: 0 0 5px $bg-03;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    border-radius: 12px;
+    box-shadow: 0 0 5px $bg-04;
+    overflow: hidden;
     &_item {
-        width: 50%;
+        width: 100%;
         border: 1px solid $bg-04;
         &_title {
             padding: 0.75rem 1rem;
@@ -2435,36 +2495,60 @@ blockquote{
         }
         &_body {
             padding: 0.75rem 1rem;
-            &_item {
-                &:not(:first-child){
-                    margin-top: 1rem;
-                    padding-top: 0.5rem;
-                    border-top: 1px dashed $bg-04;
+        }
+        tr, th {
+            font-size: 0.95rem;
+            td {
+                padding: 0.1rem 1rem;
+                border-left: 1px solid $bg-04;
+            }
+            &:last-child {
+                td {
+                    padding-bottom: 0.5rem;
                 }
             }
         }
         .highLight {
             color: $colorLv2;
-            font-weight: bold;
-            font-size: 1.2rem;
+            font-family: $fontTitle;
+            font-size: 1.1rem;
+            letter-spacing: 0.25px;
         }
     }
-    @media(max-width: 990px){
-        flex-wrap: wrap;
-        font-size: 0.95rem;
-        &_item {
+    .infoShipDeparture {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem 1rem;
+        background: $colorLv2;
+        color: #fff;
+        line-height: 1.5;
+        &_info {
             width: 100%;
-            .highLight {
-                color: $colorLv2;
-                font-weight: bold;
-                font-size: 1.1rem;
-            }
+        }
+        &_icon {
+            flex: 0 0 50px;
+            margin: 0 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+            color: #f7ff93;
+        }
+        .highLight {
+            color: #f7ff93;
         }
     }
     @media(max-width: 577px){
         &_item {
             .highLight {
-                font-size: 1rem;
+                font-size: 1.05rem;
+            }
+        }
+        .infoShipDeparture {
+            &_icon {
+                margin: 0 0.25rem;
+                font-size: 1.1rem;
             }
         }
     }
@@ -2487,7 +2571,7 @@ blockquote{
 }
 .buttonSecondary, .buttonPrimary, .buttonCancel {
     color: #fff;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1rem;
     display: inline-block;
     border-radius: 10px;
     font-size: 0.95rem;
@@ -8146,6 +8230,75 @@ $width-single-menu  : 260px;
                 margin-left: 0;
                 padding: 0.5rem 0.75rem 0.75rem 0.75rem;
             }
+        }
+    }
+}
+.successMessageBox {
+    position: relative;
+    border-radius: 10px;
+    &_head {
+        color: #fff;
+        position: absolute;
+        left: 50%;
+        top: -25px;
+        transform: translateX(-50%);
+        background: $colorSuccess;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+        font-family: $fontTitle;
+        padding: 0.35rem 1.5rem;
+        box-shadow: 0 0 5px $colorSuccess;
+        border-radius: 100px;
+        letter-spacing: 0.5px;
+        text-transform: capitalize;
+        i {
+            font-size: 1.8rem;
+            margin-right: 0.5rem;
+        }
+    }
+    &_body {
+        margin-top: 0.25rem;
+    }
+    .highLight {
+        font-size: 1.2rem;
+        font-family: $fontTitle;
+        color: $colorSuccess;
+    }
+    .badgeWait {
+        font-size: 0.9rem;
+        font-family: $fontTitle;
+        background: $colorSLv1;
+        padding: 0.25rem 0.5rem;
+        border-radius: 10px;
+        margin: 0.5rem;
+        color: $colorDesc;
+        i {
+            margin-right: 0.25rem;
+        }
+    }
+    .noteWait {
+        font-size: 0.95rem;
+        @include colorOpacity('background', $colorSLv1, 0.2);
+        margin: 0.5rem 0;
+        padding: 0.5rem 0.75rem;
+        border-radius: 10px;
+        line-height: 1.5;
+        color: $colorDesc;
+    }
+    @media(max-width: 577px){
+        &_head {
+            position: relative;
+            display: inline-block;
+            top: 0;
+            margin-bottom: 0.5rem;
+            i {
+                font-size: 1.3rem;
+            }
+        }
+        &_body {
+            margin-top: 0;
         }
     }
 }

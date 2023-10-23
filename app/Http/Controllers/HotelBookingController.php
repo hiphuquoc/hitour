@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 use App\Models\Hotel;
 use App\Models\HotelRoom;
+use App\Models\Customer;
+use App\Models\HotelBooking;
+use App\Models\HotelBookingQuantityAndPrice;
+use App\Models\HotelBookingRequest;
 use Illuminate\Http\Request;
 
 use App\Services\BuildInsertUpdateModel;
@@ -65,27 +69,40 @@ class HotelBookingController extends Controller {
         echo $result;
     }
 
-    // public function create(Request $request){
-    //     /* insert customer_inf0 */
-    //     $insertCustomer             = $this->BuildInsertUpdateModel->buildArrayTableCustomerInfo($request->all());
-    //     $idCustomer                 = Customer::insertItem($insertCustomer);
-    //     /* insert ship_booking */
-    //     $insertBooking              = $this->BuildInsertUpdateModel->buildArrayTableBookingInfo($idCustomer, 'combo_info', $request->all());
-    //     $noBooking                  = $insertBooking['no'];
-    //     $idBooking                  = Booking::insertItem($insertBooking);
-    //     /* insert service_booking_quantity_and_price */
-    //     $arrayInsertServiceQuantity = $this->BuildInsertUpdateModel->buildArrayTableComboQuantityAndPrice($idBooking, $request->all());
-    //     foreach($arrayInsertServiceQuantity as $insertServiceQuantity){
-    //         BookingQuantityAndPrice::insertItem($insertServiceQuantity);
-    //     }
-    //     /* thông báo email cho nhân viên */
-    //     $infoBooking                = Booking::select('*')
-    //                                     ->where('id', $idBooking)
-    //                                     ->with('customer_contact', 'customer_list', 'status', 'service', 'tour', 'combo', 'quantityAndPrice', 'costMoreLess', 'vat')
-    //                                     ->first();
-    //     \App\Jobs\ConfirmBooking::dispatch($infoBooking, null, 'notice');
-    //     return redirect()->route('main.hotelBooking.confirm', ['no' => $noBooking]);
-    // }
+    public function create(Request $request){
+        /* insert customer_inf0 */
+        $insertCustomer             = $this->BuildInsertUpdateModel->buildArrayTableCustomerInfo($request->all());
+        $idCustomer                 = Customer::insertItem($insertCustomer);
+        /* insert ship_booking */
+        $insertBooking              = $this->BuildInsertUpdateModel->buildArrayTableHotelBooking($idCustomer, $request->all());
+        $noBooking                  = $insertBooking['no'];
+        $idBooking                  = HotelBooking::insertItem($insertBooking);
+        /* insert service_booking_quantity_and_price (hiện đang 1) */
+        $insertServiceQuantity      = $this->BuildInsertUpdateModel->buildArrayTableHotelBookingQuantityAndPrice($idBooking, $request->all());
+        HotelBookingQuantityAndPrice::insertItem($insertServiceQuantity);
+        /* insert yêu cầu đặc biệt */
+        if(!empty($request->get('receive_time'))){
+            HotelBookingRequest::insertItem([
+                'hotel_booking_id'  => $idBooking,
+                'name'              => 'Thời gian nhận phòng dự kiến',
+                'detail'            => $request->get('receive_time')
+            ]);
+        }
+        if(!empty($request->get('note_customer'))){
+            HotelBookingRequest::insertItem([
+                'hotel_booking_id'  => $idBooking,
+                'name'              => 'Yêu cầu khác',
+                'detail'            => $request->get('note_customer')
+            ]);
+        }
+        // /* thông báo email cho nhân viên */
+        // $infoBooking                = Booking::select('*')
+        //                                 ->where('id', $idBooking)
+        //                                 ->with('customer_contact', 'customer_list', 'status', 'service', 'tour', 'combo', 'quantityAndPrice', 'costMoreLess', 'vat')
+        //                                 ->first();
+        // \App\Jobs\ConfirmBooking::dispatch($infoBooking, null, 'notice');
+        return redirect()->route('main.hotelBooking.confirm', ['no' => $noBooking]);
+    }
 
     // public static function loadCombo(Request $request){
     //     $result                     = null;
@@ -148,16 +165,17 @@ class HotelBookingController extends Controller {
     //     echo $result;
     // }
 
-    // public static function confirm(Request $request){
-    //     $noBooking          = $request->get('no') ?? null;
-    //     $item               = Booking::select('*')
-    //                             ->where('no', $noBooking)
-    //                             ->with('quantityAndPrice', 'service')
-    //                             ->first();
-    //     if(!empty($item)){
-    //         return view('main.hotelBooking.confirmBooking', compact('item'));
-    //     }else {
-    //         return redirect()->route('main.home');
-    //     }
-    // }
+    public static function confirm(Request $request){
+        dd($request->all());
+        // $noBooking          = $request->get('no') ?? null;
+        // $item               = Booking::select('*')
+        //                         ->where('no', $noBooking)
+        //                         ->with('quantityAndPrice', 'service')
+        //                         ->first();
+        // if(!empty($item)){
+        //     return view('main.hotelBooking.confirmBooking', compact('item'));
+        // }else {
+        //     return redirect()->route('main.home');
+        // }
+    }
 }

@@ -6,20 +6,19 @@
 
     @include('main.snippets.breadcrumb')
 
-    <div class="pageContent background">
+    <div class="pageConfirm background">
         <div class="sectionBox">
             <div class="container">
-            <!-- title -->
-            <h1 class="titlePage" style="margin-bottom:0.75rem;text-align:center;">Đặt vé thành công</h1>
-            <!-- ship box -->
-            <div class="pageContent_body">
                 <div class="bookingForm">
                     <!-- Tình trạng booking -->
-                    <div class="bookingForm_item">
-                        <div class="bookingForm_item_body">
-                        <div>Quý khách vừa thực hiện đăng ký cho booking có MÃ: <span style="font-size:1.2rem;font-weight:700;color:rgb(0, 90, 180);">{{ $item->no ?? null }}</span></div>
-                        <div>Tình trạng: <span style="font-size:1.2rem;font-weight:700;color:#00C000;">Chờ nhân viên xác nhận</span></div>
-                        <div>Thông tin booking của Quý khách đã được thông báo đến nhân viên {{ config('company.sortname') }}. Sau khi kiểm tra xong nhân viên sẽ gửi xác nhận vào Email hoặc Zalo và liên hệ cho Quý khách.</div>
+                    <div class="bookingForm_item_body successMessageBox">
+                        <div class="successMessageBox_head">
+                            <i class="fa-solid fa-check"></i>Đặt Dịch vụ thành công!
+                        </div>
+                        <div class="successMessageBox_body">
+                            <div>Quý khách vừa thực hiện đăng ký cho booking có MÃ: <span class="highLight">{{ $item->no ?? null }}</span></div>
+                            <div>Tình trạng: <span class="badgeWait"><i class="fa-regular fa-clock"></i>Chờ nhân viên xác nhận</span></div>
+                            <div class="noteWait">Booking của Quý khách đã được thông báo đến nhân viên {{ config('company.sortname') }}.<br/>Sau khi kiểm tra dịch vụ nhân viên sẽ gửi xác nhận vào Email hoặc Zalo của Quý khách.</div>
                         </div>
                     </div>
                     
@@ -31,7 +30,7 @@
                             <table class="tableDetailShipBooking noResponsive">
                                 <tbody>
                                     <tr>
-                                        <td style="width:200px;">Tên khách hàng</td>
+                                        <td style="width:150px;">Tên khách hàng</td>
                                         <td>{{ $item->customer_contact->name ?? null }}</td>
                                     </tr>
                                     <tr>
@@ -85,13 +84,15 @@
                         </div>
                         <div class="bookingForm_item_body" style="padding:0;background:none;border:none;box-shadow:none;">
                             <table class="tableDetailShipBooking noResponsive">
-                                <tbody>
+                                <thead>
                                     <!-- Bảng tính tiền -->
-                                    <tr class="head">
-                                        <td style="text-align:center;"><div>Dịch vụ</div></td>
-                                        <td style="text-align:center;"><div>Đơn giá</div></td>
-                                        <td style="text-align:center;"><div>Thành tiền</div></td>
+                                    <tr>
+                                        <th style="text-align:center;"><div>Dịch vụ</div></th>
+                                        <th style="text-align:center;"><div>Đơn giá</div></th>
+                                        <th style="text-align:center;"><div>Thành tiền</div></th>
                                     </tr>
+                                </thead>
+                                <tbody>
                                     @php
                                         $xhtmlTable = null;
                                         $total      = 0;
@@ -133,13 +134,12 @@
                     <!-- Button Quay lại -->
                     <div class="buttonBox">
                         <a href="/">
-                        <button class="buttonSecondary" type="button" aria-label="Quay lại trang chủ">
+                        <button class="buttonCancel" type="button" aria-label="Quay lại trang chủ">
                         <i class="fa-solid fa-angles-left"></i>Quay lại trang chủ
                         </button>
                         </a>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
     </div>

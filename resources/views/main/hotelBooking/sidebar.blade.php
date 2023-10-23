@@ -10,8 +10,7 @@
       </div>
    </div>
    <div class="summaryBox_button">
-      {{-- <div class="summaryBox_button_item bookonline" onclick="submitForm('formBooking');"> --}}
-      <div class="summaryBox_button_item bookonline">
+      <div class="summaryBox_button_item bookonline" onclick="submitForm('formBooking');">
          Xác nhận
       </div>
    </div>

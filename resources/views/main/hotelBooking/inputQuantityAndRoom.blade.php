@@ -1,10 +1,7 @@
-<input type="hidden" id="hotel_booking_adults" name="adults" value="{{ $dataForm['adults'] ?? 1 }}" /> 
-<input type="hidden" id="hotel_booking_childs" name="childs" value="{{ $dataForm['childs'] ?? 0 }}" /> 
-<input type="hidden" id="hotel_booking_quantity" name="quantity" value="{{ $dataForm['quantity'] ?? 0 }}" />
 <div class="inputWithLabelInside peopleGroup inputWithForm">
     <label for="bookFormSort_date">Số hành khách & phòng</label>
     
-        <input type="text" id="js_setValueQuantityHotel_idWrite" class="form-control inputWithForm_input" value="{{ $dataForm['adults'] ?? 1 }} Người lớn, {{ $dataForm['childs'] ?? 0 }} Trẻ em, {{ $dataForm['quantity'] ?? 0 }} Phòng" readonly="readonly" aria-label="Số khách đặt phòng khách sạn" required="">
+        <input type="text" id="js_setValueQuantityHotel_idWrite" class="form-control inputWithForm_input" value="{{ $dataForm['adults'] ?? 2 }} Người lớn, {{ $dataForm['childs'] ?? 0 }} Trẻ em, {{ $dataForm['quantity'] ?? 1 }} Phòng" readonly="readonly" aria-label="Số khách đặt phòng khách sạn" required="">
         <div class="inputWithForm_form">
             <div class="formBox">
                 <div class="formBox_labelOneRow">
@@ -19,7 +16,7 @@
                             <div class="inputNumberCustom_button" onclick="changeValueInputHotel('js_changeValueInputHotel_input_nguoilon', 'minus');">
                                 <i class="fa-solid fa-minus"></i>
                             </div>
-                            <input id="js_changeValueInputHotel_input_nguoilon" class="inputNumberCustom_input" type="number" value="{{ $dataForm['adults'] ?? 1 }}" aria-label="Số người lớn đặt phòng khách sạn" onkeyup="setValueQuantityHotel()">
+                            <input id="js_changeValueInputHotel_input_nguoilon" class="inputNumberCustom_input" type="number" name="adults" value="{{ $dataForm['adults'] ?? 2 }}" aria-label="Số người lớn đặt phòng khách sạn" onkeyup="setValueQuantityHotel()">
                             <div class="inputNumberCustom_button" onclick="changeValueInputHotel('js_changeValueInputHotel_input_nguoilon', 'plus');">
                                 <i class="fa-solid fa-plus"></i>
                             </div>
@@ -36,7 +33,7 @@
                             <div class="inputNumberCustom_button" onclick="changeValueInputHotel('js_changeValueInputHotel_input_treem', 'minus');">
                                 <i class="fa-solid fa-minus"></i>
                             </div>
-                            <input id="js_changeValueInputHotel_input_treem" class="inputNumberCustom_input" type="number" value="{{ $dataForm['childs'] ?? 0 }}" aria-label="Số trẻ em đặt phòng khách sạn" onkeyup="setValueQuantityHotel()">
+                            <input id="js_changeValueInputHotel_input_treem" class="inputNumberCustom_input" type="number" name="childs" value="{{ $dataForm['childs'] ?? 0 }}" aria-label="Số trẻ em đặt phòng khách sạn" onkeyup="setValueQuantityHotel()">
                             <div class="inputNumberCustom_button" onclick="changeValueInputHotel('js_changeValueInputHotel_input_treem', 'plus');">
                                 <i class="fa-solid fa-plus"></i>
                             </div>
@@ -53,7 +50,7 @@
                             <div class="inputNumberCustom_button" onclick="changeValueInputHotel('js_changeValueInputHotel_input_phong', 'minus');">
                                 <i class="fa-solid fa-minus"></i>
                             </div>
-                            <input id="js_changeValueInputHotel_input_phong" class="inputNumberCustom_input" type="number" value="{{ $dataForm['quantity'] ?? 0 }}" aria-label="Số người cao tuổi đặt phòng khách sạn" onkeyup="setValueQuantityHotel()">
+                            <input id="js_changeValueInputHotel_input_phong" class="inputNumberCustom_input" type="number" name="quantity" value="{{ $dataForm['quantity'] ?? 1 }}" aria-label="Số người cao tuổi đặt phòng khách sạn" onkeyup="setValueQuantityHotel()">
                             <div class="inputNumberCustom_button" onclick="changeValueInputHotel('js_changeValueInputHotel_input_phong', 'plus');">
                                 <i class="fa-solid fa-plus"></i>
                             </div>

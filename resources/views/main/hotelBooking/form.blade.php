@@ -31,11 +31,12 @@
                 <div class="pageContent_body">
                     <div class="pageContent_body_content">
                         <!-- ===== BOOKING HIỆN SẴN -->
-                        <form id="formBooking" action="{{ route('main.hotelBooking.create') }}" method="GET">
+                        <form id="formBooking" action="{{ route('main.hotelBooking.create') }}" method="POST">
                             @csrf
                             <input type="hidden" name="hotel_name" value="{{ $hotel->name }}" /> 
                             <input type="hidden" name="hotel_info_id" value="{{ $hotel->id }}" />
                             <input type="hidden" name="hotel_price_id" value="{{ $price->id }}" />
+                            <input type="hidden" name="quantity" value="{{ $quantity }}" />
                             <div class="bookingForm">
                                 <div class="bookingForm_item">
 
@@ -165,7 +166,7 @@
                                                 <div class="formColumnCustom_item">
                                                     <div class="inputWithLabelInside date disabled">
                                                         <label for="check_out">Ngày Check-Out</label>
-                                                        <input type="text" class="form-control flatpickr-basic flatpickr-input active" id="check_out" placeholder="YYYY-MM-DD" value="" readonly="readonly" disabled />
+                                                        <input type="text" class="form-control flatpickr-basic flatpickr-input active" id="check_out" name="check_out" placeholder="YYYY-MM-DD" value="" readonly="readonly" disabled />
                                                     </div>
                                                 </div>
                                             </div>
@@ -387,6 +388,7 @@
             form.find('[name="hotel_price_id"]').val(idHotelPrice);
             /* submit */
             form.attr('action', '{{ route("main.hotelBooking.form") }}');
+            form.attr('method', 'GET');
             form.submit();
         }
 
@@ -401,7 +403,7 @@
                     /* thông báo lỗi riêng => cho số lượng */
                     showHideMessageValidate(nameInput, 'show');
                     /* thông báo lỗi chung empty */
-                    if(nameInput!='quantity') $('input[name*='+nameInput+']').parent().addClass('validateErrorEmpty');
+                    $('input[name='+nameInput+']').parent().addClass('validateErrorEmpty');
                 });
                 /* scroll đến thông báo đầu tiên */
                 $('[class*=validateErrorEmpty]').each(function(){
@@ -433,19 +435,12 @@
         function validateForm(){
             let error       = [];
             /* input required không được bỏ trống */
-            $('#formBooking').find('input[required], select[name="*_1"]').each(function(){
+            $('#formBooking').find('input[required]').each(function(){
                 /* đưa vào mảng */
                 if($(this).val()==''){
                     error.push($(this).attr('name'));
                 }
             })
-            /* validate riêng cho số lượng */
-            var quantity        = 0;
-            $('#formBooking').find('[name^="quantity"]').each(function(){
-                let valInput    = parseInt($(this).val()) || 0;
-                quantity        += parseInt(valInput) + parseInt(quantity);
-            })
-            if(quantity<=0) error.push('quantity');
             return error;
         }
 
