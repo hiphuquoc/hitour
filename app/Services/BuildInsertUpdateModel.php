@@ -1475,7 +1475,13 @@ class BuildInsertUpdateModel {
                 $result['hotel_price_price']            = $price->price;
                 $result['hotel_price_price_old']        = $price->price_old ?? null;
                 $result['hotel_price_sale_off']         = $price->sale_off ?? null;
-                $textBed                                = implode(' + ', $price->beds->toArray());
+                $textBed                                = [];
+                if(!empty($price->beds)&&$price->beds->isNotEmpty()){
+                    foreach($price->beds as $bed){
+                        $textBed[]                      = $bed->quantity.' '.$bed->infoHotelBed->name;
+                    }
+                }
+                $textBed                                = implode(' + ', $textBed);
                 if(empty($textBed)) $textBed            = 'Xác nhận sau';
                 $result['hotel_price_bed']              = $textBed;
                 $result['hotel_price_breakfast']        = $price->breakfast ?? 0;

@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer('number_night')->default(1);
             $table->text('hotel_room_name');
             $table->integer('hotel_room_size')->nullable();
-            $table->text('hotel_price_description');
+            $table->text('hotel_price_description')->nullable();
             $table->integer('hotel_price_number_people');
             $table->integer('hotel_price_price');
             $table->integer('hotel_price_price_old')->nullable();
