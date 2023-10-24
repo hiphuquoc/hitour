@@ -276,9 +276,6 @@
                 loadBookingSummary();
                 const nameInput   = $(this).attr('name');
                 showHideMessageValidate(nameInput, 'hide');
-                // if(nameInput=='quantity_adult'||nameInput=='quantity_child'||nameInput=='quantity_old'){
-                //     showHideMessageValidate('quantity', 'hide');
-                // }
             })
         })
 

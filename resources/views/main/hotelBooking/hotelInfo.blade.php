@@ -90,7 +90,7 @@
             @endif
         </div>
     </div>
-    @if(!empty($pageConfirm)&&$pageConfirm==true&&!empty($booking))
+    @if(!empty($pageConfirm)&&$pageConfirm==true&&!empty($booking->quantityAndPrice[0]))
         <div class="hotelBookingInfoBox_time">
             <div class="hotelBookingInfoBox_time_item">
                 <div class="hotelBookingInfoBox_time_item_label">
@@ -98,8 +98,8 @@
                 </div>
                 <div class="hotelBookingInfoBox_time_item_text">
                     @php
-                        $dayOfWeekCheckIn   = \App\Helpers\DateAndTime::convertMktimeToDayOfWeek(strtotime($booking->check_in));
-                        $xhtmlCheckIn       = $dayOfWeekCheckIn.', '.date('d-m-Y', strtotime($booking->check_in));
+                        $dayOfWeekCheckIn   = \App\Helpers\DateAndTime::convertMktimeToDayOfWeek(strtotime($booking->quantityAndPrice[0]->check_in));
+                        $xhtmlCheckIn       = $dayOfWeekCheckIn.', '.date('d-m-Y', strtotime($booking->quantityAndPrice[0]->check_in));
                     @endphp
                     {{ $xhtmlCheckIn }}
                 </div>
@@ -110,8 +110,8 @@
                 </div>
                 <div class="hotelBookingInfoBox_time_item_text">
                     @php
-                        $dayOfWeekCheckIn   = \App\Helpers\DateAndTime::convertMktimeToDayOfWeek(strtotime($booking->check_out));
-                        $xhtmlCheckIn       = $dayOfWeekCheckIn.', '.date('d-m-Y', strtotime($booking->check_out));
+                        $dayOfWeekCheckIn   = \App\Helpers\DateAndTime::convertMktimeToDayOfWeek(strtotime($booking->quantityAndPrice[0]->check_out));
+                        $xhtmlCheckIn       = $dayOfWeekCheckIn.', '.date('d-m-Y', strtotime($booking->quantityAndPrice[0]->check_out));
                     @endphp
                     {{ $xhtmlCheckIn }}
                 </div>
@@ -121,7 +121,7 @@
                     Số đêm:
                 </div>
                 <div class="hotelBookingInfoBox_time_item_text">
-                    {{ $booking->number_night }}
+                    {{ $booking->quantityAndPrice[0]->number_night }}
                 </div>
             </div>
             <div class="hotelBookingInfoBox_time_item">
@@ -129,9 +129,29 @@
                     Số phòng
                 </div>
                 <div class="hotelBookingInfoBox_time_item_text">
-                    {{ $booking->quantity }}
+                    {{ $booking->quantityAndPrice[0]->quantity }}
                 </div>
             </div>
+            @if(!empty($booking->adult))
+                <div class="hotelBookingInfoBox_time_item">
+                    <div class="hotelBookingInfoBox_time_item_label">
+                        Người lớn
+                    </div>
+                    <div class="hotelBookingInfoBox_time_item_text">
+                        {{ $booking->adult }}
+                    </div>
+                </div>
+            @endif
+            @if(!empty($booking->child))
+                <div class="hotelBookingInfoBox_time_item">
+                    <div class="hotelBookingInfoBox_time_item_label">
+                        Bé 6-11 tuổi
+                    </div>
+                    <div class="hotelBookingInfoBox_time_item_text">
+                        {{ $booking->child }}
+                    </div>
+                </div>
+            @endif
         </div>
     @endif
 </div>

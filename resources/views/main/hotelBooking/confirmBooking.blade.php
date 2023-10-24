@@ -51,6 +51,12 @@
                                             <td>{{ $item->customer_contact->email }}</td>
                                         </tr>
                                     @endif
+                                    @foreach($item->request as $request)
+                                        <tr>
+                                            <td>{{ $request->name }}</td>
+                                            <td>{{ $request->detail }}</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>                        
@@ -66,11 +72,52 @@
                                 'hotel'     => $item->quantityAndPrice[0]->hotel,
                                 'room'      => $item->quantityAndPrice[0]->room,
                                 'price'     => $item->quantityAndPrice[0]->price,
-                                'booking'   => $item->quantityAndPrice[0],
+                                'booking'   => $item,
                                 'pageConfirm'   => true
                             ])
 
                         </div>                        
+                    </div>
+                    <!-- Thông tin liên hệ -->
+                    <div class="bookingForm_item">
+                        <div class="bookingForm_item_head">
+                            Chi phí
+                        </div>
+                        <div class="bookingForm_item_body" style="padding:0;background:none;border:none;box-shadow:none;">
+                            <table class="tableDetailShipBooking noResponsive">
+                                <thead>
+                                    <!-- Bảng tính tiền -->
+                                    <tr>
+                                        <th style="text-align:center;"><div>Dịch vụ</div></th>
+                                        <th style="text-align:center;"><div>Đơn giá</div></th>
+                                        <th style="text-align:center;"><div>Thành tiền</div></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $xhtmlTable = null;
+                                        $total      = 0;
+                                        foreach($item->quantityAndPrice as $quantityPrice){
+                                            $xhtmlTable .= '<tr>
+                                                                <td>'.$quantityPrice->hotel_room_name.'</td>
+                                                                <td style="text-align:right;">'.$quantityPrice->quantity.' phòng * '.$quantityPrice->number_night.' đêm * '.number_format($quantityPrice->hotel_price_price).'</td>
+                                                                <td style="text-align:right;">'.number_format($quantityPrice->quantity*$quantityPrice->number_night*$quantityPrice->hotel_price_price).'</td>
+                                                            </tr>';
+                                            $total  += $quantityPrice->quantity*$quantityPrice->number_night*$quantityPrice->hotel_price_price;
+                                        }
+                                    @endphp
+                                    {!! $xhtmlTable !!}
+                                    <tr>
+                                        <td colspan="2">
+                                        <div style="font-weight:500;">Tổng tiền:</div>
+                                        </td>
+                                        <td style="text-align:right;">
+                                        <div style="font-weight:700;font-size:1.2rem;color:#E74C3C;letter-spacing:0.5px;">{!! number_format($total).config('main.unit_currency') !!}</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <!-- Quy trình đặt vé -->
                     <div class="bookingForm_item">

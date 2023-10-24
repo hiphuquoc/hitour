@@ -1435,6 +1435,8 @@ class BuildInsertUpdateModel {
             }else {
                 /* update booking */
             }
+            $result['adult']                    = $dataForm['adult'] ?? 0;
+            $result['child']                    = $dataForm['child'] ?? 0;
             $result['status_id']                = $dataForm['status_id'] ?? 1;
             // $result['paid']                     = $dataForm['paid'] ?? null;
         }

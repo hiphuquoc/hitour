@@ -11,6 +11,8 @@ class HotelBooking extends Model {
     protected $table        = 'hotel_booking';
     protected $fillable     = [
         'customer_info_id', 
+        'adult',
+        'child',
         'booking_status_id',
         'paid',
         'expiration_at',

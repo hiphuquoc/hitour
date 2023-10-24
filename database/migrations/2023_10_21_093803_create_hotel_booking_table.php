@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('no', 20);
             $table->integer('customer_info_id');
+            $table->integer('adult')->nullable();
+            $table->integer('child')->nullable();
             $table->integer('status_id');
             $table->integer('paid')->nullable();
             $table->integer('created_by')->nullable();

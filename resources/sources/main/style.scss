@@ -8012,6 +8012,11 @@ $width-single-menu  : 260px;
             }
         }
     }
+    ul {
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
     @media(max-width: 767px){
         &_time {
             &_item {

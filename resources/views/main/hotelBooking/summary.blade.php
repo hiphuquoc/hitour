@@ -9,7 +9,7 @@
 <div class="shipBookingTotalBox_row">
     <div class="shipBookingTotalBox_row_title"><i class="fa-solid fa-hotel"></i>{{ $data['hotel_name'] ?? null }}</div>
     <div>
-        {{ $room->name ?? null }}
+        {{ $data['quantity'] }} {{ $room->name ?? null }}
         @if($room->prices[0]->breakfast==1||$room->prices[0]->given==1)
         @php
             $tmp            = [];
@@ -23,8 +23,8 @@
     <table class="noResponsive">
         <tbody>
         <tr>
-            <td><span class="highLight">{{ $data['number_night'] }}</span> đêm * <span class="highLight">{{ $data['quantity'] }}</span> phòng * {{ number_format($room->prices[0]->price) }}</td>
-            <td style="text-align:right;">{{ number_format($data['number_night']*$data['quantity']*$room->prices[0]->price) }}</td>
+            <td><span class="highLight">{{ $data['quantity'] }}</span> phòng * <span class="highLight">{{ $data['number_night'] }}</span> đêm * {{ number_format($room->prices[0]->price) }}</td>
+            <td style="text-align:right;">{{ number_format($data['quantity']*$data['number_night']*$room->prices[0]->price) }}</td>
         </tr>
         </tbody>
     </table>
