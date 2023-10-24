@@ -8013,9 +8013,11 @@ $width-single-menu  : 260px;
         }
     }
     ul {
-        margin: 0;
-        padding: 0;
-        border: none;
+        li {
+            margin: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+        }
     }
     @media(max-width: 767px){
         &_time {
