@@ -84,7 +84,7 @@
         </div>
 
         <!-- Hotel box -->
-        <div class="sectionBox backgroundPrimaryGradiend">
+        <div id="hotelLocationBox" class="sectionBox backgroundPrimaryGradiend">
             <div class="container">
                 <h2 class="sectionBox_title">Khách sạn {{ $item->display_name ?? null }} - Hiện đang có <span class="highLight">{{ $item->hotels->count() }}</span> chỗ nghỉ tại {{ $item->display_name ?? null }}</h2>
                 <p class="sectionBox_desc">Tổng hợp các <strong>Khách sạn {{ $item->display_name ?? null }}</strong>, <strong>Resort {{ $item->display_name ?? null }}</strong>, <strong>Homestay {{ $item->display_name ?? null }}</strong> và <strong>Nhà nghỉ {{ $item->display_name ?? null }}</strong> đang được ưa chuộng và là lựa chọn hàng đầu của khách du lịch.</p>

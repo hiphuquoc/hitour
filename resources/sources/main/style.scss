@@ -8347,3 +8347,47 @@ $width-single-menu  : 260px;
         }
     }
 }
+.bookFormSortHotel {
+    &_top {
+        display: flex;
+        > * {
+            &:not(:first-child){
+                margin-left: 1rem;
+            }
+        }
+        &_item {
+            width: 100%;
+            // display: flex;
+            // > * {
+            //     margin-top: 0 !important;
+            //     &:not(:first-child){
+            //         margin-left: 0.5rem;
+            //     }
+            // }
+            // .night {
+            //     flex: 0 0 120px;
+            // }
+        }
+    }
+    &_bottom {
+        display: flex;
+        margin-top: 1rem;
+        > * {
+            &:not(:first-child){
+                margin-left: 1rem;
+            }
+        }
+        &_item {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            > * {
+                margin-top: 0 !important;
+                &:not(:first-child){
+                    margin-left: 0.5rem;
+                }
+            }
+        }
+    }
+}

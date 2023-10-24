@@ -20,7 +20,6 @@
         $xhtmlCheckIn       = '14:00, '.$dayOfWeekCheckIn.', '.date('d \t\hm', $checkIn);
         $dayOfWeekCheckOut  = \App\Helpers\DateAndTime::convertMktimeToDayOfWeek($checkOut);
         $xhtmlCheckOut      = '12:00, '.$dayOfWeekCheckOut.', '.date('d \t\hm', $checkOut);
-
         $quantity           = $dataForm['quantity'] ?? 1;
     @endphp
     <div class="pageContent">
@@ -298,7 +297,7 @@
             /* điền giá trị qua form chính */
             form.find('[name="hotel_price_id"]').val(idHotelPrice);
             /* submit */
-            form.attr('action', '{{ route("main.hotelBooking.form") }}');
+            form.attr('action', '{{ route("main.hotelBooking.changeHotelRoom") }}');
             form.attr('method', 'GET');
             form.submit();
         }

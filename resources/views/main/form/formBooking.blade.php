@@ -30,31 +30,31 @@
 		<div class="bookFormSort_body">
 			<!-- Ship booking form -->
 			<div id="shipBookingForm" {{ !empty($active)&&$active!='ship' ? 'style=display:none;' : null }}>
-				<form id="shipBookingSort" method="get" action="{{ route('main.shipBooking.form') }}">
+				<form id="shipBookingSort" method="GET" action="{{ route('main.shipBooking.form') }}">
 					@include('main.form.sortBooking.ship', compact('item'))
 				</form>
 			</div>
 			<!-- Tour booking form -->
 			<div id="tourBookingForm" {{ !empty($active)&&$active!='tour' ? 'style=display:none;' : null }}>
-				<form id="tourBookingSort" method="get" action="{{ route('main.tourBooking.form') }}">
+				<form id="tourBookingSort" method="GET" action="{{ route('main.tourBooking.form') }}">
 					@include('main.form.sortBooking.tour', compact('item'))
 				</form>
 			</div>
 			<!-- Combo booking form -->
 			<div id="comboBookingForm" {{ !empty($active)&&$active!='combo' ? 'style=display:none;' : null }}>
-				<form id="comboBookingSort" method="get" action="{{ route('main.comboBooking.form') }}">
+				<form id="comboBookingSort" method="GET" action="{{ route('main.comboBooking.form') }}">
 					@include('main.form.sortBooking.combo', compact('item'))
 				</form>
 			</div>
-			<!-- Combo booking form -->
+			<!-- Khách sạn -->
 			<div id="hotelBookingForm" {{ !empty($active)&&$active!='hotel' ? 'style=display:none;' : null }}>
-				<form id="hotelBookingSort" method="get" action="#">
+				<form id="hotelBookingSort" method="GET" action="{{ route('main.hotelBooking.search') }}">
 					@include('main.form.sortBooking.hotel', compact('item'))
 				</form>
 			</div>
-			<!-- Tour booking form -->
+			<!-- Vé dịch vụ -->
 			<div id="ticketBookingForm" {{ !empty($active)&&$active!='service' ? 'style=display:none;' : null }}>
-				<form id="serviceBookingSort" method="get" action="{{ route('main.serviceBooking.form') }}">
+				<form id="ticketBookingSort" method="GET" action="{{ route('main.serviceBooking.form') }}">
 					@include('main.form.sortBooking.ticket')
 				</form>
 			</div>
