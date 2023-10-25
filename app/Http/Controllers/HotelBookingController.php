@@ -36,6 +36,9 @@ class HotelBookingController extends Controller {
         if(!empty($request->get('hotel_price_id'))){
             $idHotelPrice       = $request->get('hotel_price_id');
             $dataForm           = \App\Http\Controllers\CookieController::getCookie('hotel_booking');
+            if(empty($dataForm['check_in'])) $dataForm['check_in'] = date('Y-m-d', time() + 86400);
+            if(empty($dataForm['number_night'])) $dataForm['number_night'] = 1;
+            // dd($dataForm);
             $dataForm['hotel_price_id'] = $idHotelPrice;
             /* lấy prices được chọn */
             $room               = HotelRoom::select('*')
