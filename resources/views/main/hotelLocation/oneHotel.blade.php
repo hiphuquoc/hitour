@@ -41,7 +41,7 @@
                     $tmpTotal += $comment->rating;
                     $tmpCount += 1;
                 }
-                $rating     = number_format($tmpTotal/$tmpCount, 1);
+                $rating     = number_format($tmpTotal/$tmpCount, 1)*2;
                 $ratingCount = $tmpCount;
             }
             $ratingText     = \App\Helpers\Rating::getTextRatingByRule($rating);

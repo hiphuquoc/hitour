@@ -91,13 +91,13 @@
                 @include('main.hotelLocation.filterBox')
                 @if(!empty($item->hotels)&&$item->hotels->isNotEmpty())
                     @include('main.hotelLocation.hotelGrid', ['list' => $item->hotels])
-                    @if($item->hotels->count()>10)
+                    {{-- @if($item->hotels->count()>10)
                         <div class="viewMore">
                             <div id="js_loadMoreHotels_button" style="margin-top:0.5rem;" onClick="loadMoreHotels(10);">
                                 <i class="fa-solid fa-arrow-down-long"></i>Xem thêm <span>{{ $item->hotels->count() - 10 }}</span> chỗ nghỉ
                             </div>
                         </div>
-                    @endif
+                    @endif --}}
                 @else 
                     <div style="color:#069a8e;">Các <strong>Hotel {{ $item->display_name ?? null }}</strong> đang được {{ config('company.sortname') }} cập nhật và sẽ sớm giới thiệu đến Quý khách trong thời gian tới!</div>
                 @endif
@@ -140,11 +140,47 @@
 @endpush
 @push('scripts-custom')
     <script type="text/javascript">
-        $('window').ready(function(){
-            @foreach ($item->hotels as $hotel)
-                loadHotelInfo('{{ $hotel->id }}');
-            @endforeach
-        })
+        $('window').ready(function () {
+            var hotelsToLoad = @json($item->hotels);
+            var hotelIndex = 0;
+
+            function checkAndLoadHotel() {
+                if (hotelIndex < hotelsToLoad.length) {
+                    var windowTop = $(window).scrollTop();
+                    var hotel = hotelsToLoad[hotelIndex];
+                    var hotelTop = $('#js_loadHotelInfo_' + hotel.id).offset().top;
+
+                    // Kiểm tra nếu cách top ít nhất 1500px
+                    if (hotelTop - windowTop <= 1500) {
+                        loadHotelInfo(hotel.id);
+                        hotelIndex++;
+                    }
+                }
+            }
+
+            // Gọi hàm khi tải trang và khi cuộn trang
+            checkAndLoadHotel();
+
+            $(window).scroll(function () {
+                checkAndLoadHotel();
+            });
+        });
+
+        function loadHotelInfo(idHotelInfo){
+            $.ajax({
+                url         : "{{ route('main.hotel.loadHotelInfo') }}",
+                type        : "GET",
+                dataType    : "json",
+                data        : { hotel_info_id : idHotelInfo }
+            }).done(function(data){
+                /* ghi nội dung room vào bảng */
+                if(data!='') {
+                    $('#js_loadHotelInfo_'+idHotelInfo).html(data);
+                }else {
+                    $('#js_loadHotelInfo_'+idHotelInfo).hidden();
+                }
+            });
+        }
 
         buildTocContentMain('js_buildTocContentSidebar_element');
 
@@ -184,22 +220,6 @@
             }else {
                 $('#js_loadMoreHotels_button span').html(hidden);
             }
-        }
-
-        function loadHotelInfo(idHotelInfo){
-            $.ajax({
-                url         : "{{ route('main.hotel.loadHotelInfo') }}",
-                type        : "GET",
-                dataType    : "json",
-                data        : { hotel_info_id : idHotelInfo }
-            }).done(function(data){
-                /* ghi nội dung room vào bảng */
-                if(data!='') {
-                    $('#js_loadHotelInfo_'+idHotelInfo).html(data);
-                }else {
-                    $('#js_loadHotelInfo_'+idHotelInfo).hidden();
-                }
-            });
         }
 
     </script>

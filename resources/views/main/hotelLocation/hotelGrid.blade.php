@@ -3,7 +3,7 @@
         @if(!empty($hotel->images)&&$hotel->images->isNotEmpty()&&!empty($hotel->rooms)&&$hotel->rooms->isNotEmpty())
             @php
                 $displayShow    = 'display:flex;';
-                if($loop->index>9) $displayShow = 'display:none;';
+                // if($loop->index>9) $displayShow = 'display:none;';
             @endphp
             <div id="js_loadHotelInfo_{{ $hotel->id }}" class="hotelList_item" data-filter-type="{{ \App\Helpers\Charactor::convertStrToUrl($hotel->type_name) }}" style="{{ $displayShow }}">
                 {{-- @include('main.hotelLocation.oneHotel', compact('hotel')) --}}
@@ -14,5 +14,8 @@
             </div>
         @endif
     @endforeach
+</div>
+<div id="js_filter_hidden" style="display:none;">
+    <!-- chứa phần tử tạm của filter => để hiệu chỉnh nth-child cho chính xác -->
 </div>
 @include('main.hotelLocation.loadingGridBox')
