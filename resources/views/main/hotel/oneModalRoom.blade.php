@@ -74,7 +74,7 @@
                             if(empty($xhtmlBed)) $xhtmlBed = 'Chưa xác định';
                         @endphp
                         <div class="modalHotelRoom_box_body_info_item_text_item" style="width:100%;">
-                            <img src="{{ Storage::url('images/svg/icon-bed.svg') }}" alt="loại giường trong phòng" title="loại giường trong phòng" style="width:25px;" />
+                            <img src="{{ Storage::url('images/svg/icon-bed.svg') }}" alt="loại giường trong phòng" title="loại giường trong phòng" style="width:22px;" />
                             <span>{{ $xhtmlBed }}</span>
                         </div>
                     </div>

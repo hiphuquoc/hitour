@@ -6067,7 +6067,7 @@ $width-single-menu  : 260px;
                     svg {
                         margin-right: 0.5rem;
                         vertical-align: middle;
-                        filter: invert(60%) sepia(20%) saturate(10000%) hue-rotate(135deg) brightness(100%) contrast(100%);
+                        filter: invert(60%) sepia(40%) saturate(10000%) hue-rotate(200deg) brightness(100%) contrast(100%);
                         transform: scale(1.1);
                     }
                 }
@@ -6125,7 +6125,7 @@ $width-single-menu  : 260px;
                     svg {
                         margin-right: 0.5rem;
                         vertical-align: middle;
-                        filter: invert(60%) sepia(20%) saturate(10000%) hue-rotate(135deg) brightness(100%) contrast(100%);
+                        filter: invert(60%) sepia(40%) saturate(10000%) hue-rotate(200deg) brightness(100%) contrast(100%);
                         transform: scale(1.1);
                     }
                 }
@@ -6327,10 +6327,9 @@ $width-single-menu  : 260px;
                     > span { /* title */
                         font-size: 1.2rem;
                         color: $colorTitle;
-                        font-weight: bold;
                         margin-bottom: 0.75rem;
                         display: flex;
-                        font-family: $fontTitle;
+                        font-family: $fontSegoeBold;
                     }
                     > div { /* list */
                         gap: 15px 30px;
@@ -6923,7 +6922,7 @@ $width-single-menu  : 260px;
                 svg {
                     margin-right: 0.5rem;
                     vertical-align: middle;
-                    filter: invert(60%) sepia(20%) saturate(10000%) hue-rotate(135deg) brightness(100%) contrast(100%);
+                    filter: invert(60%) sepia(40%) saturate(10000%) hue-rotate(200deg) brightness(100%) contrast(100%);
                     transform: scale(1.1);
                 }
             }
