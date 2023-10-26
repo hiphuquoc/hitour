@@ -68,7 +68,7 @@
                         @php
                             $tmp        = [];
                             foreach($price->beds as $bed){
-                                $tmp[]  = $bed->quantity.' - '.$bed->infoHotelBed->name;
+                                $tmp[]  = $bed->quantity.'-'.$bed->infoHotelBed->name;
                             }
                             $xhtmlBed   = implode(' và ', $tmp);
                             if(empty($xhtmlBed)) $xhtmlBed = 'Chưa xác định';

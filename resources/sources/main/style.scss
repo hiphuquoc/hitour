@@ -336,17 +336,18 @@ $height_headerMain : 80px;
     font-size: 1.4rem;
     font-weight: 800;
     font-family: $fontSegoeBold;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.5rem !important;
+    margin-top: 0 !important;
     color: $colorTitle;
     @media (max-width: 990px){
         font-size: 1.35rem;
     }
     @media (max-width: 767px){
         font-size: 1.3rem;
-        margin-bottom: 0;
     }
-    @media (max-width: 767px){
+    @media (max-width: 577px){
         font-size: 1.25rem;
+        margin-bottom: 0.25rem !important;
     }
 }
 .ratingBox {
@@ -2816,7 +2817,7 @@ blockquote{
                 cursor: pointer;
                 h3 {
                     width: 100%;
-                    margin-bottom: 0.6rem;
+                    margin-bottom: 0.75rem;
                     letter-spacing: 0.3px;
                     font-size: 1rem;
                     border-radius: 5px;
@@ -3192,7 +3193,7 @@ $width-single-menu  : 260px;
         @include titleSection;
     }
     &_desc {
-        margin-bottom: 0.75rem;
+        margin-bottom: 0.5rem;
     }
     a {
         .sectionBox_title {
@@ -3240,11 +3241,6 @@ $width-single-menu  : 260px;
         }
         i {
             margin-right: 0.5rem;
-        }
-    }
-    @media(max-width: 990px){
-        &_desc {
-            margin-bottom: 0.5rem;
         }
     }
     @media (max-width: 767px){
@@ -5880,12 +5876,12 @@ $width-single-menu  : 260px;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: $bg-02;
+            background: #fff;
             z-index: 1001;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.25rem 1.5rem;
+            padding: 0.25rem 1.25rem;
             &_price {
                 justify-content: center;
                 &_old {
@@ -6334,8 +6330,9 @@ $width-single-menu  : 260px;
                     > div { /* list */
                         gap: 15px 30px;
                         display: grid;
-                        margin-top: 16px;
+                        margin-top: 15px;
                         grid-template-columns: repeat(3, 1fr);
+                        line-height: 1.5;
                         > div {
                             > span {
                                 color: $colorLv1;
@@ -7090,12 +7087,12 @@ $width-single-menu  : 260px;
             display: flex;
             flex-direction: column;
             > * {
-                &:last-child {
-                    margin-top: auto;
+                &:not(:first-child){
+                    margin-top: 0.25rem;
                 }
             }
             &_title {
-                margin-bottom: 0.5rem;
+                margin-bottom: 0.25rem;
                 &.hotelList_item_info_title {
                     padding-right: 100px;
                 }
@@ -7109,7 +7106,6 @@ $width-single-menu  : 260px;
             }
             &_highlightTitle {
                 display: flex;
-                margin-bottom: 0.5rem;
                 h3, h4 {
                     font-size: 1.1rem;
                     font-family: $fontTitle;
@@ -7125,12 +7121,20 @@ $width-single-menu  : 260px;
                     }
                 }
             }   
-            &_include {
-                i {
-                    font-size: 0.9rem;
-                    margin-right: 0.25rem;
-                    margin-left: 0.4rem;
-                    color: $colorSuccess;
+            &_sub {
+                display: flex;
+                flex-wrap: wrap;
+                > div {
+                    &:not(:first-child){
+                        margin-left: 1.25rem;
+                    }
+                }
+                img {
+                    width: 20px;
+                    display: inline-block;
+                    padding: 0;
+                    margin: 0 0.25rem 0 0;
+                    vertical-align: middle;
                 }
             }
             &_rating {
@@ -7161,36 +7165,14 @@ $width-single-menu  : 260px;
                     font-family: $fontTitle;
                 }
             }
-            &_sub {
-                display: flex;
-                align-items: flex-end;
-                color: $colorDesc;
-                > * {
-                    &:not(:first-child){
-                        margin-left: 0.75rem;
-                        padding-left: 0.75rem;
-                        border-left: 2px solid $bg-03;
-                    }
-                }
-            }
             &_bed {
                 color: $colorDesc;
             }
             &_desc {
                 font-size: 0.95rem;
             }
-            &_condition {
-                margin-bottom: 0.25rem;
-                margin-top: 0;
-                ul {
-                    margin-top: 0;
-                    margin-bottom: 0;
-                }
-            }
             &_type {
                 display: flex;
-                margin-bottom: 0.5rem;
-                margin-top: 0.25rem;
                 &_text {
                     background: $colorLv1;
                     color: #fff;
@@ -7213,7 +7195,6 @@ $width-single-menu  : 260px;
             }
             &_address {
                 font-size: 0.975rem;
-                margin-bottom: 0.25rem;
                 &:before {
                     @include fontAwesome;
                     content: "\f276";
@@ -7229,10 +7210,11 @@ $width-single-menu  : 260px;
                     display: flex;
                     align-items: center;
                     background: $bg-03;
-                    padding: 0 0.35rem;
+                    padding: 0.1rem 0.5rem;
                     border-radius: 20px;
                     margin-top: 0.35rem;
                     margin-right: 0.25rem;
+                    color: $colorDesc;
                     svg {
                         margin-right: 0.2rem;
                     }
@@ -7358,10 +7340,8 @@ $width-single-menu  : 260px;
                     margin-left: 2px;
                 }
                 @media(max-width: 577px){
-                    // margin-left: 1rem !important;
                     &:not(:first-child){
                         margin-left: 0.75rem !important;
-                        // margin-top: 1rem !important;
                     }
                 }
             }
@@ -7371,24 +7351,18 @@ $width-single-menu  : 260px;
         }
     }
     &.slickBox {
-        // box-shadow: 0 0 10px $bg-04;
         .tourList_item, .serviceList_item {
             margin-top: 0 !important;
             margin-bottom: 3px;
             &:not(:first-child){
                 margin-left: 1.25rem !important;
             }
-            // &:nth-child(3n + 1){
-            //     margin-left: 0 !important;
-            // }
             &:first-child {
                 margin-left: 2px !important;
             }
             @media(max-width: 577px){
-                // margin-left: 1rem !important;
                 &:not(:first-child){
                     margin-left: 0.75rem !important;
-                    // margin-top: 1rem !important;
                 }
             }
         }
@@ -7534,8 +7508,8 @@ $width-single-menu  : 260px;
                 }
                 &_info {
                     padding: 0.5rem 0.75rem;
-                    &_sub {
-                        
+                    &_title {
+                        margin-bottom: 0;
                     }
                     &_type {
                         margin-top: 0.15rem;

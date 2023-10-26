@@ -51,8 +51,8 @@
                     <div id="js_buildTocContentSidebar_element" class="pageContent_body_content">
                         <!-- title -->
                         <h1 class="titlePage">{{ $item->name ?? null }}</h1>
-                        <!-- rating -->
-                        @include('main.template.rating', compact('item'))
+                        {{-- <!-- rating -->
+                        @include('main.template.rating', compact('item')) --}}
                         <!-- tocContent main -->
                         <div id="tocContentMain" style="margin-top:1rem;"></div>
                         <!-- content -->

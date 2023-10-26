@@ -47,8 +47,8 @@
                     <div class="pageContent_body_content">
                         <!-- title -->
                         <h1 class="titlePage">{{ $item->name }}{{ !empty($item->district->district_name) ? ' - Vé tàu '.$item->district->district_name : null}}</h1>
-                        <!-- rating -->
-                        @include('main.template.rating', compact('item'))
+                        {{-- <!-- rating -->
+                        @include('main.template.rating', compact('item')) --}}
                         <!-- content -->
                         <div id="js_buildTocContentSidebar_element" class="contentShip">
                             <!-- tocContent main -->

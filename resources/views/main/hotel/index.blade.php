@@ -118,7 +118,7 @@
                                 {{ $address }}
                             </div>
                         </div>
-                        <div class="hotelInfoHead_right">
+                        <div id="js_hideElement" class="hotelInfoHead_right">
                             @php
                                 $priceMin   = 100000000;
                                 $saleOff    = 0;

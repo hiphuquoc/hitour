@@ -63,30 +63,10 @@
     <div class="pageContent">
 
         <!-- Giới thiệu Hotel du lịch -->
-        <div class="sectionBox">
-            <div class="container">
-                <!-- title -->
-                <h1 class="titlePage">Khách sạn {{ $item->display_name ?? null }} - Giới thiệu chung về khách sạn {{ $item->display_name ?? null }}</h1>
-                <!-- rating -->
-                @include('main.template.rating', compact('item'))
-                <!-- content -->
-                @if(!empty($content))
-                    <div id="js_showHideFullContent_content" class="contentBox maxLine_4">
-                        {!! $content !!}
-                    </div>
-                    <div class="viewMore">
-                        <div onClick="showHideFullContent(this, 'maxLine_4');">
-                            <i class="fa-solid fa-arrow-down-long"></i>Đọc thêm
-                        </div>
-                    </div>
-                @endif
-            </div>
-        </div>
-
-        <!-- Hotel box -->
         <div id="hotelLocationBox" class="sectionBox backgroundPrimaryGradiend">
             <div class="container">
-                <h2 class="sectionBox_title">Khách sạn {{ $item->display_name ?? null }} - Hiện đang có <span class="highLight">{{ $item->hotels->count() }}</span> chỗ nghỉ tại {{ $item->display_name ?? null }}</h2>
+                <!-- title -->
+                <h1 class="titlePage">Khách sạn {{ $item->display_name ?? null }} - Hiện đang có <span class="highLight">{{ $item->hotels->count() }}</span> chỗ nghỉ tại {{ $item->display_name ?? null }}</h1>
                 <p class="sectionBox_desc">Tổng hợp các <strong>Khách sạn {{ $item->display_name ?? null }}</strong>, <strong>Resort {{ $item->display_name ?? null }}</strong>, <strong>Homestay {{ $item->display_name ?? null }}</strong> và <strong>Nhà nghỉ {{ $item->display_name ?? null }}</strong> đang được ưa chuộng và là lựa chọn hàng đầu của khách du lịch.</p>
                 @include('main.hotelLocation.filterBox')
                 @if(!empty($item->hotels)&&$item->hotels->isNotEmpty())
@@ -99,7 +79,25 @@
                         </div>
                     @endif --}}
                 @else 
-                    <div style="color:#069a8e;">Các <strong>Hotel {{ $item->display_name ?? null }}</strong> đang được {{ config('company.sortname') }} cập nhật và sẽ sớm giới thiệu đến Quý khách trong thời gian tới!</div>
+                    <div style="color:#007bff;">Các <strong>Hotel {{ $item->display_name ?? null }}</strong> đang được {{ config('company.sortname') }} cập nhật và sẽ sớm giới thiệu đến Quý khách trong thời gian tới!</div>
+                @endif
+            </div>
+        </div>
+
+        <!-- Hotel box -->
+        <div class="sectionBox" style="padding-top:0;">
+            <div class="container">
+                <h2 class="sectionBox_title">Khách sạn {{ $item->display_name ?? null }} - Giới thiệu thêm về khách sạn {{ $item->display_name ?? null }}</h2>
+                <!-- content -->
+                @if(!empty($content))
+                    <div id="js_showHideFullContent_content" class="contentBox maxLine_4">
+                        {!! $content !!}
+                    </div>
+                    <div class="viewMore">
+                        <div onClick="showHideFullContent(this, 'maxLine_4');">
+                            <i class="fa-solid fa-arrow-down-long"></i>Đọc thêm
+                        </div>
+                    </div>
                 @endif
             </div>
         </div>

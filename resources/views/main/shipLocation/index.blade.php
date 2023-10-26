@@ -75,8 +75,6 @@
             <div class="container">
                 <!-- title -->
                 <h1 class="titlePage">{{ $item->name }}{{ !empty($item->district->district_name) ? ' - Vé tàu '.$item->district->district_name : null}}</h1>
-                <!-- rating -->
-                @include('main.template.rating', compact('item'))
                 <!-- content -->
                 @if(!empty($item->description))
                     <div class="contentBox">

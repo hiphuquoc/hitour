@@ -61,31 +61,11 @@
     @include('main.snippets.breadcrumb')
 
     <div class="pageContent">
-        <!-- Giới thiệu Combo du lịch -->
-        <div class="sectionBox">
-            <div class="container">
-                <!-- title -->
-                <h1 class="titlePage">Combo {{ $item->display_name ?? null }} - Giới thiệu Combo {{ $item->display_name ?? null }}</h1>
-                <!-- rating -->
-                @include('main.template.rating', compact('item'))
-                <!-- content -->
-                @if(!empty($content))
-                    <div id="js_showHideFullContent_content" class="contentBox maxLine_4">
-                        {!! $content !!}
-                    </div>
-                    <div class="viewMore">
-                        <div onClick="showHideFullContent(this, 'maxLine_4');">
-                            <i class="fa-solid fa-arrow-down-long"></i>Đọc thêm
-                        </div>
-                    </div>
-                @endif
-            </div>
-        </div>
 
         <!-- Combo box -->
         <div class="sectionBox backgroundPrimaryGradiend">
             <div class="container">
-                <h2 class="sectionBox_title">Combo {{ $item->display_name ?? null }} - Danh sách Combo du lịch {{ $item->display_name ?? null }} chất lượng</h2>
+                <h1 class="titlePage">Combo {{ $item->display_name ?? null }} - Danh sách Combo du lịch {{ $item->display_name ?? null }} chất lượng</h1>
                 <p class="sectionBox_desc">Tổng hợp các chương trình <strong>Combo {{ $item->display_name ?? null }} trọn gói</strong> và <strong>Combo {{ $item->display_name ?? null }} trong ngày</strong> đa dạng, chất lượng hàng đầu được cung cấp và đảm bảo bởi {{ config('main.name') }} cùng hệ thống đối tác du lịch trên toàn quốc.</p>
                 {{-- @include('main.tourLocation.filterBox') --}}
                 @php
@@ -100,10 +80,31 @@
                 @if(!empty($dataCombos)&&$dataCombos->isNotEmpty())
                     @include('main.comboLocation.comboItem', ['list' => $dataCombos])
                 @else 
-                    <div style="color:#069a8e;">Các chương trình <strong>Combo {{ $item->display_name ?? null }}</strong> đang được {{ config('main.name') }} cập nhật và sẽ sớm giới thiệu đến Quý khách trong thời gian tới!</div>
+                    <div style="color:#007bff;">Các chương trình <strong>Combo {{ $item->display_name ?? null }}</strong> đang được {{ config('main.name') }} cập nhật và sẽ sớm giới thiệu đến Quý khách trong thời gian tới!</div>
                 @endif
             </div>
         </div>
+
+        <!-- Giới thiệu Combo du lịch -->
+        <div class="sectionBox" style="padding-top:0;">
+            <div class="container">
+                <!-- title -->
+                <h2 class="sectionBox_title">Combo {{ $item->display_name ?? null }} - Giới thiệu thêm về Combo {{ $item->display_name ?? null }}</h2>
+                <!-- content -->
+                @if(!empty($content))
+                    <div id="js_showHideFullContent_content" class="contentBox maxLine_4">
+                        {!! $content !!}
+                    </div>
+                    <div class="viewMore">
+                        <div onClick="showHideFullContent(this, 'maxLine_4');">
+                            <i class="fa-solid fa-arrow-down-long"></i>Đọc thêm
+                        </div>
+                    </div>
+                @endif
+            </div>
+        </div>
+
+        
 
         {{-- <!-- Hướng dẫn đặt Vé -->
         @include('main.comboLocation.guideBook', ['title' => 'Hướng dẫn đặt Combo '.$item->display_name]) --}}

@@ -47,8 +47,8 @@
                     <div id="js_buildTocContentSidebar_element" class="pageContent_body_content">
                         <!-- title -->
                         <h1 class="titlePage">Tàu cao tốc {{ $item->name ?? null }}</h1>
-                        <!-- rating -->
-                        @include('main.template.rating', compact('item'))
+                        {{-- <!-- rating -->
+                        @include('main.template.rating', compact('item')) --}}
                         <!-- video -->
                         @if(!empty($item->seo->video))
                             <div class="videoYoutubeBox">

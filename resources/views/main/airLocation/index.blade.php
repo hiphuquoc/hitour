@@ -53,8 +53,8 @@
                 <div class="container">
                     <!-- title -->
                     <h1 class="titlePage">{{ $item->name }}{{ !empty($item->display_name) ? ' - Đặt vé máy bay '.$item->display_name : null}}</h1>
-                    <!-- rating -->
-                    @include('main.template.rating', compact('item'))
+                    {{-- <!-- rating -->
+                    @include('main.template.rating', compact('item')) --}}
                     <!-- description -->
                     @if(!empty($item->description))
                         <div class="contentBox">

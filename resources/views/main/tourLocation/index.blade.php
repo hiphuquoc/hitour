@@ -62,32 +62,11 @@
     @include('main.snippets.breadcrumb')
 
     <div class="pageContent">
-    
-        <!-- Giới thiệu Tour du lịch -->
-        <div class="sectionBox">
-            <div class="container">
-                <!-- title -->
-                <h1 class="titlePage">Tour {{ $item->display_name ?? null }} - Giới thiệu Tour du lịch {{ $item->display_name ?? null }}</h1>
-                <!-- rating -->
-                @include('main.template.rating', compact('item'))
-                <!-- content -->
-                @if(!empty($content))
-                    <div id="js_showHideFullContent_content" class="contentBox maxLine_4">
-                        {!! $content !!}
-                    </div>
-                    <div class="viewMore">
-                        <div onClick="showHideFullContent(this, 'maxLine_4');">
-                            <i class="fa-solid fa-arrow-down-long"></i>Đọc thêm
-                        </div>
-                    </div>
-                @endif
-            </div>
-        </div>
 
         <!-- Tour box -->
         <div class="sectionBox backgroundPrimaryGradiend">
             <div class="container">
-                <h2 class="sectionBox_title">Tour {{ $item->display_name ?? null }} - Danh sách Tour du lịch {{ $item->display_name ?? null }} chất lượng</h2>
+                <h2 class="titlePage">Tour {{ $item->display_name ?? null }} - Danh sách Tour du lịch {{ $item->display_name ?? null }} chất lượng</h2>
                 <p class="sectionBox_desc">Tổng hợp các chương trình <strong>Tour {{ $item->display_name ?? null }} trọn gói</strong> và <strong>Tour {{ $item->display_name ?? null }} trong ngày</strong> đa dạng, chất lượng hàng đầu được cung cấp và đảm bảo bởi {{ config('main.name') }} cùng hệ thống đối tác du lịch trên toàn quốc.</p>
                 @include('main.tourLocation.filterBox')
                 @php
@@ -98,6 +77,25 @@
                     @include('main.tourLocation.tourItem', ['list' => $dataTours])
                 @else 
                     <div style="color:rgb(0,123,255);">Các chương trình <strong>Tour {{ $item->display_name ?? null }}</strong> đang được {{ config('main.name') }} cập nhật và sẽ sớm giới thiệu đến Quý khách trong thời gian tới!</div>
+                @endif
+            </div>
+        </div>
+
+        <!-- Giới thiệu Tour du lịch -->
+        <div class="sectionBox" style="padding-top:0;">
+            <div class="container">
+                <!-- title -->
+                <h2 class="sectionBox_title">Tour {{ $item->display_name ?? null }} - Giới hiệu thêm về Tour du lịch {{ $item->display_name ?? null }}</h2>
+                <!-- content -->
+                @if(!empty($content))
+                    <div id="js_showHideFullContent_content" class="contentBox maxLine_4">
+                        {!! $content !!}
+                    </div>
+                    <div class="viewMore">
+                        <div onClick="showHideFullContent(this, 'maxLine_4');">
+                            <i class="fa-solid fa-arrow-down-long"></i>Đọc thêm
+                        </div>
+                    </div>
                 @endif
             </div>
         </div>

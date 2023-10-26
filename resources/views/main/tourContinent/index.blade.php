@@ -73,8 +73,8 @@
                 <div class="container">
                     <!-- title -->
                     <h1 class="titlePage">Tour {{ $item->display_name }} - Giới thiệu Tour du lịch {{ $item->display_name }}</h1>
-                    <!-- rating -->
-                    @include('main.template.rating', compact('item'))
+                    {{-- <!-- rating -->
+                    @include('main.template.rating', compact('item')) --}}
                     <!-- content -->
                     @if(!empty($content))
                         <div id="js_showHideFullContent_content" class="contentBox maxLine_4">

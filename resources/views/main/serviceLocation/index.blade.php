@@ -61,12 +61,11 @@
     @include('main.snippets.breadcrumb')
 
     <div class="pageContent">
+        
         <div class="sectionBox backgroundPrimaryGradiend">
             <div class="container">
                 <!-- title -->
                 <h1 class="titlePage">{{ $item->name }}{{ !empty($item->district->district_name) ? ' - Đặt vé vui chơi '.$item->district->district_name : null}}</h1>
-                <!-- rating -->
-                @include('main.template.rating', compact('item'))
                 <!-- content -->
                 @if(!empty($item->description))
                     <div class="contentBox">

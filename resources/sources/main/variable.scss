@@ -121,7 +121,7 @@ $backgroundImage: '/images/main/hitour-background.png';
 @mixin titleSection {
     font-family: $fontSegoeBold;
     font-size: 1.4rem !important;
-    margin: 0 0 0.25rem 0 !important;
+    margin: 0 0 0.5rem 0 !important;
     color: $colorTitle;
     display: inline-block;
     @media (max-width:990px){
@@ -132,6 +132,7 @@ $backgroundImage: '/images/main/hitour-background.png';
     }
     @media (max-width: 577px){
         font-size: 1.25rem !important;
+        margin: 0 0 0.25rem 0 !important;
     }
 }
 
