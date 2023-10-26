@@ -1,8 +1,8 @@
 
-<div class="hotelList_item_gallery" onClick="openCloseModal('js_loadHotelPrice_modal_{{ $price->id }}');">
+<div class="hotelList_item_gallery" onClick="openCloseModalRoom({{ $price->id }});">
     @if(!empty($price->room->images)&&$price->room->images->isNotEmpty())
         <div class="hotelList_item_gallery_top">
-            @php
+            {{-- @php
                 $imageContent       = config('admin.images.default_750x460');
                 $contentImage       = Storage::disk('gcs')->get($price->room->images[0]->image);
                 if(!empty($contentImage)){
@@ -11,8 +11,8 @@
                     })->encode();
                     $imageContent   = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
                 }
-            @endphp
-            <img src="{{ $imageContent }}" alt="{{ $price->room->name }}" title="{{ $price->room->name }}" style="aspect-ratio:750/400;" />
+            @endphp --}}
+            <img src="{{ config('main.svg.loading_main') }}" data-google-cloud="{{ $price->room->images[0]->image }}" data-size="500" alt="{{ $price->room->name }}" title="{{ $price->room->name }}" style="aspect-ratio:750/400;" />
         </div>
         <div class="hotelList_item_gallery_bottom">
             @php
@@ -23,17 +23,17 @@
                     ++$j;
                     if($j==1) continue;
                     if($j==5) break;
-                    $imageContent       = config('admin.images.default_750x460');
-                    $contentImage       = Storage::disk('gcs')->get($image->image);
-                    if(!empty($contentImage)){
-                        $thumbnail      = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(550, null, function ($constraint) {
-                            $constraint->aspectRatio();
-                        })->encode();
-                        $imageContent   = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
-                    }
+                    // $imageContent       = config('admin.images.default_750x460');
+                    // $contentImage       = Storage::disk('gcs')->get($image->image);
+                    // if(!empty($contentImage)){
+                    //     $thumbnail      = \Intervention\Image\ImageManagerStatic::make($contentImage)->resize(550, null, function ($constraint) {
+                    //         $constraint->aspectRatio();
+                    //     })->encode();
+                    //     $imageContent   = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
+                    // }
                 @endphp
                 <div class="hotelList_item_gallery_bottom_item">
-                    <img src="{{ $imageContent }}" alt="{{ $price->room->name }}" title="{{ $price->room->name }}" style="aspect-ratio:750/400;" />
+                    <img src="{{ config('main.svg.loading_main') }}" data-google-cloud="{{ $image->image }}" data-size="100" alt="{{ $price->room->name }}" title="{{ $price->room->name }}" style="aspect-ratio:750/400;" />
                 </div>
             @endforeach
         </div>
@@ -41,7 +41,7 @@
 </div>
 
 <div class="hotelList_item_info">
-    <div class="hotelList_item_info_title" onClick="openCloseModal('js_loadHotelPrice_modal_{{ $price->id }}');">
+    <div class="hotelList_item_info_title" onClick="openCloseModalRoom({{ $price->id }});">
         <h2>
             {{ $price->room->name }}
             @if($price->breakfast==1||$price->given==1)

@@ -51,13 +51,16 @@ $opacity-to-hex: (
     #{$property}: unquote($color + map-get($opacity-to-hex, $opacity)) $important;
 }
 
-$fontTitle: "SVN-Gilroy Bold", serif;
+$fontTitle: "SVN-Gilroy Bold", sans-serif;
 $fontText: "SVN-Gilroy", sans-serif;
+$fontSegoeBold: "Segoe-UI Bold", serif;
+$fontSegoe: "Segoe-UI", serif;
+$fontSegoeSemi: "Segoe-UI Semi", serif;
 
 $backgroundImage: '/images/main/hitour-background.png';
 
 // font Gilroy
-$folderFont : '/fonts/';
+// $folderFont : '/fonts/';
 // @font-face{
 // 	font-family:'mt';
 // 	font-style:normal;
@@ -65,47 +68,47 @@ $folderFont : '/fonts/';
 // 	src:url($folderFont+"mt-regular.otf")
 // }
 
-@font-face{
-	font-family:'SVN-Gilroy Thin';
-	font-style:normal;
-	font-weight:400;
-	src:url($folderFont+"svn-gilroy_regular.ttf")
-}
+// @font-face{
+// 	font-family:'SVN-Gilroy Thin';
+// 	font-style:normal;
+// 	font-weight:400;
+// 	src:url($folderFont+"svn-gilroy_regular.ttf")
+// }
 
-@font-face{
-	font-family:'SVN-Gilroy Light';
-	font-style:normal;
-	font-weight:400;
-	src:url($folderFont+"svn-gilroy_regular.ttf")
-}
+// @font-face{
+// 	font-family:'SVN-Gilroy Light';
+// 	font-style:normal;
+// 	font-weight:400;
+// 	src:url($folderFont+"svn-gilroy_regular.ttf")
+// }
 
-@font-face{
-	font-family:'SVN-Gilroy';
-	font-style:normal;
-	font-weight:500;
-	src:url($folderFont+"svn-gilroy_medium.ttf")
-}
+// @font-face{
+// 	font-family:'SVN-Gilroy';
+// 	font-style:normal;
+// 	font-weight:500;
+// 	src:url($folderFont+"svn-gilroy_medium.ttf")
+// }
 
-@font-face{
-	font-family:'SVN-Gilroy Med';
-	font-style:normal;
-	font-weight:700;
-	src:url($folderFont+"svn-gilroy_med.ttf")
-}
+// @font-face{
+// 	font-family:'SVN-Gilroy Med';
+// 	font-style:normal;
+// 	font-weight:700;
+// 	src:url($folderFont+"svn-gilroy_med.ttf")
+// }
 
-@font-face{
-	font-family:'SVN-Gilroy Semi';
-	font-style:normal;
-	font-weight:700;
-	src:url($folderFont+"svn-gilroy_semibold.ttf")
-}
+// @font-face{
+// 	font-family:'SVN-Gilroy Semi';
+// 	font-style:normal;
+// 	font-weight:700;
+// 	src:url($folderFont+"svn-gilroy_semibold.ttf")
+// }
 
-@font-face{
-	font-family:'SVN-Gilroy Bold';
-	font-style:normal;
-	font-weight:700;
-	src:url($folderFont+"svn-gilroy_semibold.ttf")
-}
+// @font-face{
+// 	font-family:'SVN-Gilroy Bold';
+// 	font-style:normal;
+// 	font-weight:700;
+// 	src:url($folderFont+"svn-gilroy_semibold.ttf")
+// }
 
 @mixin titleOfBox {
     font-family: $fontTitle;
@@ -116,6 +119,7 @@ $folderFont : '/fonts/';
 }
 
 @mixin titleSection {
+    font-family: $fontSegoeBold;
     font-size: 1.4rem !important;
     margin: 0 0 0.25rem 0 !important;
     color: $colorTitle;

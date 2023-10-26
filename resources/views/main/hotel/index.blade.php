@@ -365,20 +365,22 @@
             
             /* ẩn button call book */
             var element = $('#js_hideElement');
-            var isVisible = true; // Biến kiểm tra trạng thái hiển thị
-            $(window).scroll(function() {
-                var elementTop = element.offset().top;
-                // Kiểm tra nếu phần tử nằm dưới vị trí cuộn trang 1000px và vẫn hiển thị
-                if (elementTop > 1000 && isVisible) {
-                    element.stop().fadeOut(400);
-                    isVisible = false; // Đánh dấu phần tử đã ẩn
-                }
-                // Kiểm tra nếu phần tử nằm trên vị trí cuộn trang 1000px và đã bị ẩn
-                if (elementTop <= 1000 && !isVisible) {
-                    element.stop().fadeIn(400);
-                    isVisible = true; // Đánh dấu phần tử đã hiển thị
-                }
-            });
+            if (element.length>0){
+                var isVisible = true; // Biến kiểm tra trạng thái hiển thị
+                $(window).scroll(function() {
+                    var elementTop = element.offset().top;
+                    // Kiểm tra nếu phần tử nằm dưới vị trí cuộn trang 1000px và vẫn hiển thị
+                    if (elementTop > 1000 && isVisible) {
+                        element.stop().fadeOut(400);
+                        isVisible = false; // Đánh dấu phần tử đã ẩn
+                    }
+                    // Kiểm tra nếu phần tử nằm trên vị trí cuộn trang 1000px và đã bị ẩn
+                    if (elementTop <= 1000 && !isVisible) {
+                        element.stop().fadeIn(400);
+                        isVisible = true; // Đánh dấu phần tử đã hiển thị
+                    }
+                });
+            }
         })
 
         function showHideFullContent(elementButton, classCheck){
@@ -402,6 +404,8 @@
                 /* ghi nội dung room vào bảng */
                 if(data.row!='') {
                     $('#js_loadHotelPrice_'+idHotelPrice).html(data.row);
+                    /* load ảnh sau */
+                    loadImageFromGoogleCloudInBox('js_loadHotelPrice_'+idHotelPrice);
                 }else {
                     $('#js_loadHotelPrice_'+idHotelPrice).hidden();
                 }
@@ -412,6 +416,16 @@
                     $('#js_loadHotelPrice_modal_'+idHotelPrice).hidden();
                 }
             });
+        }
+
+        function loadImageFromGoogleCloudInBox(idBox){
+            $('#'+idBox).find('img[data-google-cloud]').each(function(){
+                const image = $(this);
+                if (!image.hasClass('loaded')&&image.is(":visible")) {
+                    loadImageFromGoogleCloud(image);
+                    image.addClass('loaded');
+                }
+            })
         }
 
         function openCloseModalImage(idModal){
@@ -428,6 +442,30 @@
                 $('#js_openCloseModal_blur').removeClass('blurBackground');
                 // $('body').css('overflow', 'unset');
             }
+        }
+
+        function openCloseModalRoom(idPrice){
+            const element    = $('#js_loadHotelPrice_modal_'+idPrice);
+            let displayE    = element.css('display');
+            if(displayE=='none'){
+                element.css('display', 'block');
+                $('body').css('overflow', 'hidden');
+                $('#js_openCloseModal_blur').addClass('blurBackground');
+                /* set height modal height */
+                // setHeightBoxByBox(idPrice);
+                /* tải hình ảnh từ google cloud */ 
+                loadImageFromGoogleCloudInBox('js_loadHotelPrice_modal_'+idPrice);
+            }else {
+                element.css('display', 'none');
+                $('body').css('overflow', 'unset');
+                $('#js_openCloseModal_blur').removeClass('blurBackground');
+            }
+        }
+
+        function setHeightBoxByBox(id){
+            const valHeight = $('#js_setHeightBoxByBox_rule_'+id).outerHeight();
+            $('#js_setHeightBoxByBox_element_'+id).css('height', valHeight+'px');
+            console.log(valHeight);
         }
 
     </script>

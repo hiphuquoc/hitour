@@ -4,7 +4,7 @@
                 <div class="footerBox_item">
                     <ul style="margin:0;">
                         <li>
-                            <b style="font-size:1.05rem;font-family:'SVN-Gilroy Bold', serif;display:flex;margin-top:-5px;">{{ config('company.name') }}</b>
+                            <b style="font-size:1.05rem;font-family:'Segoe-UI Bold', serif;display:flex;margin-top:-5px;">{{ config('company.name') }}</b>
                         </li>
                         <li>
                             <i class="fa-solid fa-location-dot"></i>trụ sở: {{ config('company.address') }}

@@ -311,8 +311,7 @@
         }
         &_head {
             font-size: 1.3rem;
-            font-family: $fontTitle;
-            font-weight: 700;
+            font-family: $fontSegoeBold;
             margin-bottom: 1rem;
             color: $colorTitle;
         }
@@ -603,7 +602,7 @@
                 font-weight: 500;
             }
             &_price {
-                color: $colorLv2;
+                color: $colorRed;
                 font-weight: 500;
                 font-size: 1.2rem;
                 letter-spacing: 0.5px;
@@ -647,16 +646,16 @@
                         @include colorOpacity('background', $colorLv1, 0.2)
                     }
                     .price {
-                        font-family: $fontTitle;
-                        color: $colorLv2;
+                        font-family: $fontSegoeBold;
+                        color: $colorRed;
                         font-size: 1.2rem;
                         letter-spacing: 0.5px;
                     }
                 }
                 .highLight {
                     font-size: 1.2rem;
-                    font-family: $fontTitle;
-                    color: $colorLv2;
+                    font-family: $fontSegoeBold;
+                    color: $colorLv1 !important;
                 }
             }
         }
@@ -705,9 +704,6 @@
             &.active {
                 background: $colorSLv1 !important;
                 color: $colorHighlight;
-                .highLight {
-                    color: $colorHighlight !important;
-                }
                 .chooseOptionTourBox_body_item_icon {
                     &:before {
                         content: '\f058' !important;
@@ -721,6 +717,7 @@
                 width: 100%;
                 &:not(:first-child){
                     padding-left: 0.5rem;
+                    color: $colorTitle;
                 }
             }
             &_icon {
@@ -747,9 +744,9 @@
                 }
             }
             .highLight {
-                font-weight: bold;
+                font-family: $fontSegoeBold;
                 font-size: 1.1rem;
-                color: $colorLv2;
+                color: $colorRed !important;
             }
         }
     }
