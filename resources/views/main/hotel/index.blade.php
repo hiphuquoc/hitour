@@ -290,7 +290,7 @@
                                 <div id="js_loadHotelPrice_{{ $price->id }}" class="hotelList_item">
                                     <!-- load Ajax chép đè -->
                                     <div style="width:100%;height:230px;display:flex;justify-content:center;align-items:center;">
-                                        <img src="{{ config('main.svg.loading_main_nobg')}}" alt="tải thông tin phòng {{ $room->name }}" title="tải thông tin phòng {{ $room->name }}" style="width:230px;" />
+                                        <img src="{{ config('main.svg.loading_main_nobg') }}" alt="tải thông tin phòng {{ $room->name }}" title="tải thông tin phòng {{ $room->name }}" style="width:230px;" />
                                     </div>
                                 </div>
                             @endforeach
@@ -431,16 +431,21 @@
         function openCloseModalImage(idModal){
             const elementModal  = $('#'+idModal);
             const flag          = elementModal.css('display');
-            $('a[href="#anh-khach-san"]').trigger('click');
+
+            if(!elementModal.hasClass('loadImage')){
+                elementModal.addClass('loadImage');
+                loadHotelImage();
+            }
+            
             /* tooggle */
             if(flag=='none'){
                 elementModal.css('display', 'flex');
                 $('#js_openCloseModal_blur').addClass('blurBackground');
-                // $('body').css('overflow', 'hidden');
+                $('body').css('overflow', 'hidden');
             }else {
                 elementModal.css('display', 'none');
                 $('#js_openCloseModal_blur').removeClass('blurBackground');
-                // $('body').css('overflow', 'unset');
+                $('body').css('overflow', 'unset');
             }
         }
 

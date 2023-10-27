@@ -88,18 +88,19 @@
         $(imageElement).attr('src', $(imageElement).attr('data-src'));
     }
     /* load image from goole cloud */
-    function loadImageFromGoogleCloud(imageElement){
-        const urlGoogleCloud    = $(imageElement).attr('data-google-cloud');
-        const size              = $(imageElement).attr('data-size');
+    function loadImageFromGoogleCloud(imageElement) {
+        const urlGoogleCloud = $(imageElement).attr('data-google-cloud');
+        const size = $(imageElement).attr('data-size');
+        
         $.ajax({
-            url         : '{{ route("ajax.loadImageFromGoogleCloud") }}',
-            type        : 'get',
-            dataType    : 'html',
-            data        : {
-                url_google_cloud    : urlGoogleCloud,
+            url: '{{ route("ajax.loadImageFromGoogleCloud") }}',
+            type: 'get',
+            dataType: 'html',
+            data: {
+                url_google_cloud: urlGoogleCloud,
                 size
             },
-            success     : function(response){
+            success: function(response) {
                 $(imageElement).attr('src', response);
             }
         });

@@ -42,7 +42,7 @@
         <div class="bookFormSortHotel_bottom_item">
             
             <div class="inputWithLabelInside date">
-                <label for="hotel_form_sort_check_in">Ngày nhận phòng</label>
+                <label class="maxLine_1" for="hotel_form_sort_check_in">Ngày nhận phòng</label>
                 <input type="text" class="form-control flatpickr-basic flatpickr-input active" id="hotel_form_sort_check_in" name="check_in" value="{{ $cookieHotelBooking['check_in'] ?? date('Y-m-d', time() + 86400) }}" aria-label="Ngày nhận phòng khách sạn" readonly="readonly" required />
             </div>
             <div class="inputWithLabelInside night">
