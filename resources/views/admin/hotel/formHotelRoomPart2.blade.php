@@ -165,7 +165,7 @@
                     </div>
                     <div class="formBox_full_item"> 
                         <label class="form-label">Mô tả giường (nếu có)</label>
-                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                        <textarea class="form-control" id="description" name="description" rows="3">{{ $price->description ?? null }}</textarea>
                     </div>
                 </div>
             </div>
