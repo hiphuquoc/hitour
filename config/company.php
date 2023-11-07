@@ -5,7 +5,7 @@ return [
     'webname'       => 'Hitour.vn',
     'gpdkkd'        => 'Giấy chứng nhận đăng ký kinh doanh số GP/no: 1702204052 cấp bởi Sở Kế hoạch và Đầu tư Tỉnh Kiên Giang ngày 20/08/2020',
     'name'          => 'Cty TNHH du lich biển đảo Hitour',
-    'address'       => '55 Cô Giang, Vĩnh Bảo, Rạch Giá, Kiên Giang',
+    'address'       => '43 Nguyễn Tuân, Vĩnh Quang, Rạch Giá, Kiên Giang',
     'hotline'       => '08 6868 4868',
     'website'       => 'https://hitour.vn',
     'email'         => 'hiphuquoc@gmail.com',

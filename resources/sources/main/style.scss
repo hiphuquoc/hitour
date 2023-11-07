@@ -830,18 +830,24 @@ $width_normalMenu : 250px;
             margin: 0;
             li {
                 list-style-type: none;
+                &:not(:first-child){
+                    margin-top: 0.25rem;
+                }
             }
         }
         a {
             color: $colorText;
             &:hover {
                 color: $colorLv1;
+                i {
+                    color: $colorLv1;
+                }
             }
         }
         i {
-            font-size: 0.8rem;
-            width: 20px;
-            color: #789;
+            font-size: 1.3rem;
+            width: 30px;
+            color: $bg-07;
             margin-left: 0.25rem;
         }
     }
@@ -903,6 +909,7 @@ $width_normalMenu : 250px;
 }
 .socialBox {
     display: flex;
+    opacity: 0.4;
     &_item {
         width: 40px;
         height: 40px;
@@ -974,10 +981,13 @@ $width_normalMenu : 250px;
         }
         button {
             position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             top: 50%;
             transform: translateY(-50%);
             right: 0;
-            width: 42px;
+            width: 55px;
             height: 41px;
             border: none;
             box-shadow: none;

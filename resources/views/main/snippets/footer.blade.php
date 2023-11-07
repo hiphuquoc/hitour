@@ -4,7 +4,7 @@
                 <div class="footerBox_item">
                     <ul style="margin:0;">
                         <li>
-                            <b style="font-size:1.05rem;font-family:'Segoe-UI Bold', serif;display:flex;margin-top:-5px;">{{ config('company.name') }}</b>
+                            <b style="font-size:1.05rem;font-family:'Segoe-UI Bold', serif;display:flex;margin-top:-5px;line-height:1.45;">{{ config('company.name') }}</b>
                         </li>
                         <li>
                             <i class="fa-solid fa-location-dot"></i>trụ sở: {{ config('company.address') }}
@@ -22,7 +22,7 @@
                 </div>
                 <div class="footerBox_item">
                     <div class="footerBox_item_title">Góc khách hàng</div>
-                    <ul class="footerBox_item_list">
+                    <ul class="footerBox_item_list" style="opacity: 0.5;">
                         <li>
                             <div>Thông tin thanh toán</div>
                         </li>
@@ -96,19 +96,27 @@
                 </div>
             </div>
             <div class="footerBox_item">
-                <div class="footerBox_item_title">Hệ thống {{ config('company.sortname') }}</div>
+                <div class="footerBox_item_title">Dự án của {{ config('company.sortname') }}</div>
                 <ul>
                     <li>
-                        <a href="https://superdong.vn" title="Cẩm nang du lịch Việt" target="_blank" rel="nofollow">Cẩm nang du lịch Việt</a>
+                        <a href="https://name.com.vn" title="Hình nền điện thoại" target="_blank" rel="nofollow">
+                            <i class="fa-regular fa-image"></i>Hình nền điện thoại
+                        </a>
                     </li>
                     <li>
-                        <a href="https://tickets.com.vn" title="Trang vé toàn quốc" target="_blank" rel="nofollow">Trang vé toàn quốc</a>
+                        <a href="https://superdong.vn" title="Cẩm nang du lịch Việt" target="_blank" rel="nofollow">
+                            <i class="fa-solid fa-book"></i>Cẩm nang du lịch Việt
+                        </a>
                     </li>
                     <li>
-                        <a href="https://name.com.vn" title="Đặc sản ba miền" target="_blank" rel="nofollow">Đặc sản ba miền</a>
+                        <a href="https://tickets.com.vn" title="Trang vé toàn quốc" target="_blank" rel="nofollow">
+                            <i class="fa-solid fa-ticket"></i>Trang vé toàn quốc
+                        </a>
                     </li>
                     <li>
-                        <a href="https://name.com.vn" title="Bất động sản" target="_blank" rel="nofollow">Bất động sản</a>
+                        <a href="https://nhadatbonphuong.com" title="Bất động sản" target="_blank" rel="nofollow">
+                            <i class="fa-solid fa-thumbtack"></i>Bất động sản
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -116,9 +124,9 @@
                 <div class="footerBox_item_title">Kết nối với chúng tôi</div>
                 <div class="socialBox">
                     <div class="socialBox_item socialFacebook"></div>
-                    {{-- <div class="socialBox_item socialInstagram"></div> --}}
+                    <div class="socialBox_item socialInstagram"></div>
                     <div class="socialBox_item socialYoutube"></div>
-                    <div class="socialBox_item socialLinkendin"></div>
+                    {{-- <div class="socialBox_item socialLinkendin"></div> --}}
                     <div class="socialBox_item socialTwitter"></div>
                 </div>
             </div>
