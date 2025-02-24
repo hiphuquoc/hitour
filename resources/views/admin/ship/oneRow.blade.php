@@ -111,7 +111,7 @@
             <div class="oneLine">
                 Nhân viên:<br/>
                 @foreach($item->staffs as $staff)
-                    <div class="badge bg-primary" {{ $loop->index>0 ? 'style=margin-left:0.25rem' : null }}>{{ $staff->infoStaff['prefix_name'] }}. {{ $staff->infoStaff['lastname'] }}</div>
+                    <div class="badge bg-primary" {{ $loop->index>0 ? 'style=margin-left:0.25rem' : null }}>{{ $staff->infoStaff['prefix_name']}}. {{ $staff->infoStaff['lastname']}}</div>
                 @endforeach
             </div>
         @endif

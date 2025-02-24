@@ -28,6 +28,8 @@ use App\Models\HotelFacility;
 use App\Models\RelationHotelInfoHotelFacility;
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
 
 class AdminHotelInfoController extends Controller {
 
@@ -401,14 +403,19 @@ class AdminHotelInfoController extends Controller {
     }
 
     public function downloadHotelInfo(Request $request){
-        try {
+        // try {
             /* ============= Lấy dữ liệu của Mytour */
             if(!empty($request->get('url_crawler_mytour'))) $this->downloadHotelInfo_mytour($request->get('url_crawler_mytour'));
-            /* ============= Lấy dữ liệu của Tripadvisor */
-            if(!empty($request->get('url_crawler_tripadvisor'))) $this->downloadHotelInfo_tripadvisor($request->get('url_crawler_tripadvisor'));
+            
+            // /* ============= Lấy dữ liệu của Tripadvisor */
+            // if(!empty($request->get('url_crawler_tripadvisor'))) $this->downloadHotelInfo_tripadvisor($request->get('url_crawler_tripadvisor'));
+            
             /* ============= Lấy dữ liệu của Traveloka */
             if(!empty($request->get('url_crawler_traveloka'))) $this->downloadHotelInfo_traveloka($request->get('url_crawler_traveloka'));
 
+            dd($this->arrayData);
+
+            
             $type               = !empty($item) ? 'edit' : 'create';
             $type               = $request->get('type') ?? $type;
             $item               = self::convertToCollectionRecursive($this->arrayData);
@@ -449,12 +456,12 @@ class AdminHotelInfoController extends Controller {
                 }
                 $item->facilities   = self::insertOrGetHotelFacility($arrayFacilities);
             }
-            // Lưu trữ trong 60 phút
-            Cache::put('item_download', $item, 3600); 
-            return redirect()->route('admin.hotel.view', ['type' => 'create']);
-        } catch (\Exception $exception){
-            return redirect()->route('admin.hotel.view', ['type' => 'create']);
-        }
+        //     // Lưu trữ trong 60 phút
+        //     Cache::put('item_download', $item, 3600); 
+        //     return redirect()->route('admin.hotel.view', ['type' => 'create']);
+        // } catch (\Exception $exception){
+        //     return redirect()->route('admin.hotel.view', ['type' => 'create']);
+        // }
     }
 
     private static function insertOrGetHotelFacility($arrayFacilities = null){
@@ -553,7 +560,7 @@ class AdminHotelInfoController extends Controller {
             $crawlerContent = $client->request('GET', $url);
             $this->arrayData['url_crawler_tripadvisor'] = $url;
             /* địa chỉ khách sạn */
-            $this->arrayData['address']     = $crawlerContent->filter('.gZwVG')->text();
+            $this->arrayData['address']     = $crawlerContent->filter('.pZUbB')->text();
             /* ===== tiện nghi khách sạn */
             $crawlerContent->filter('.MXlSZ .ssr-init-26f')->each(function($node){
                 $this->arrayData['tmp'][]   = $node->attr('data-ssrev-handlers');
@@ -668,11 +675,23 @@ class AdminHotelInfoController extends Controller {
     public function downloadHotelInfo_traveloka($url){
         $flag       = false;
         if(!empty($url)){
-            // Tạo đối tượng Client của Goutte
-            $client         = new Client();
-            // Gửi yêu cầu GET đến URL cần lấy dữ liệu
-            $crawlerContent = $client->request('GET', $url);
-            $this->arrayData['url_crawler_traveloka'] = $url;
+            // // Tạo đối tượng Client của Goutte
+            // $client         = new Client();
+            // // Gửi yêu cầu GET đến URL cần lấy dữ liệu
+            // $crawlerContent = $client->request('GET', $url);
+            // $this->arrayData['url_crawler_traveloka'] = $url;
+            $process = new Process(['node', base_path('scripts/get_html.js'), $url]);
+            $process->run();
+            if (!$process->isSuccessful()) {
+                throw new ProcessFailedException($process);
+            }
+            $html = $process->getOutput();
+
+            // Sử dụng Goutte để bóc tách dữ liệu từ HTML
+            $client = new \Goutte\Client();
+            $crawler = $client->request('GET', 'data:text/html;charset=utf-8,' . urlencode($html));
+            dd($crawler);
+
             /* ===== loại khách sạn */
             $crawlerContent->filter('.r-ml3lyg .r-1ssbvtb .r-1h0z5md')->each(function($node){
                 $this->arrayData['type_name'][]     = $node->text();
@@ -704,53 +723,6 @@ class AdminHotelInfoController extends Controller {
         }
         return $flag;
     }
-
-    // private function getComment_tripadvisor($url, $number, $count){
-    //     try {
-    //         /* Tạo đối tượng Client của Goutte */
-    //         $client         = new Client();
-    //         $everyTime      = 5; /* đây là số comment mặc định trên mỗi trang của tripadvisor */
-    //         /* Gửi yêu cầu GET đến URL cần lấy dữ liệu */
-    //         $url            = explode('Reviews', $url);
-    //         $url            = implode('Reviews-or'.$number, $url);
-    //         $crawlerContent = $client->request('GET', $url);
-    //         /* lấy comment */
-    //         $this->count    = $count;
-    //         if($crawlerContent->filter('[data-test-target=reviews-tab] .YibKl')->count()>0){
-    //             $crawlerContent->filter('[data-test-target=reviews-tab] .YibKl')->each(function($node){
-    //                 /* số sao */
-    //                 $number         = preg_replace("/[^0-9]/", '', $node->filter('[data-test-target=review-rating] > span')->attr('class'));
-    //                 $this->arrayData['comments'][$this->count]['rating']        = $number/10;
-    //                 /* người đánh giá + lúc đánh giá */
-    //                 $tmp            = $node->filter('.cRVSd')->text();
-    //                 $tmp            = explode('đã viết đánh giá vào', $tmp);
-    //                 $authorName     = $tmp[0];
-    //                 /* xử lý ngày tháng comment */
-    //                 $chuoiNgayThang = $tmp[1];
-    //                 $mangChuoi      = explode(" ", $chuoiNgayThang);
-    //                 $thang          = 0;
-    //                 $tungay         = array("thg", " ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
-    //                 $denngay        = array("", "", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
-    //                 $mangChuoi[1]   = str_replace($tungay, $denngay, strtolower($mangChuoi[1]));
-    //                 $thang          = (int)$mangChuoi[1];
-    //                 $this->arrayData['comments'][$this->count]['created_at']    = sprintf("%d-%02d-%02d", (int)$mangChuoi[2], $thang, 01);
-
-    //                 $this->arrayData['comments'][$this->count]['author_name']   = $authorName;
-    //                 /* tiêu đề đánh giá */
-    //                 $this->arrayData['comments'][$this->count]['title']         = $node->filter('.Qwuub')->text();
-    //                 /* nội dung đánh giá */
-    //                 $this->arrayData['comments'][$this->count]['comment']       = $node->filter('.fIrGe')->text();
-    
-    //                 $this->count    += 1;
-    //             });
-    //             $this->getComment_tripadvisor($url, ($number + $everyTime), $this->count);
-    //         }else {
-    //             return true;
-    //         }
-    //     }catch (\Exception $e) {
-    //         return false;
-    //     }
-    // }
 
     public function loadFormDownloadImageHotelInfo(Request $request){
         $idHotel    = $request->get('hotel_info_id') ?? null;
@@ -816,5 +788,24 @@ class AdminHotelInfoController extends Controller {
 
         return collect($result);
     }
+    // /* gọi đến file js để crawler dữ liệu vượt chặn js */
+    // public static function scrape($url){
+    //     $process = new Process(['node', base_path('scripts/get_html.js'), $url]);
+    //     $process->run();
+
+    //     if (!$process->isSuccessful()) {
+    //         throw new ProcessFailedException($process);
+    //     }
+
+    //     $html = $process->getOutput();
+
+    //     // Sử dụng Goutte để bóc tách dữ liệu từ HTML
+    //     $client = new \Goutte\Client();
+    //     $crawler = $client->request('GET', 'data:text/html;charset=utf-8,' . urlencode($html));
+
+    //     // Ví dụ bóc tách dữ liệu từ HTML
+    //     $title = $crawler->filter('title')->text();
+    //     return response()->json(['title' => $title]);
+    // }
 }
 

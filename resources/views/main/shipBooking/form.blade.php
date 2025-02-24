@@ -124,7 +124,7 @@
                                         <div class="formColumnCustom">
                                             <div class="formColumnCustom_item">
                                                 <div class="inputWithLabelInside location">
-                                                    <label class="form-label {{ $requiredClass }}" for="js_loadShipLocationByShipDeparture_element_{{ $i }}">Điểm khởi hành</label>
+                                                    <label class="form-label {{ $requiredClass }}">Điểm khởi hành</label>
                                                     <select id="js_loadShipLocationByShipDeparture_element_{{ $i }}" class="select2 form-select select2-hidden-accessible" name="ship_port_departure_id_{{ $i }}" onChange="loadShipLocationByShipDeparture(this, 'js_loadShipLocationByShipDeparture_idWrite_{{ $i }}', {{ $i }});">
                                                         {{-- <option value="">- Lựa chọn -</option> --}}
                                                         @if(!empty($ports))
@@ -145,7 +145,7 @@
                                             </div>
                                             <div class="formColumnCustom_item">
                                                 <div class="inputWithLabelInside location">
-                                                    <label class="form-label {{ $requiredClass }}" for="js_loadShipLocationByShipDeparture_idWrite_{{ $i }}">Điểm đến</label>
+                                                    <label class="form-label {{ $requiredClass }}">Điểm đến</label>
                                                     <select id="js_loadShipLocationByShipDeparture_idWrite_{{ $i }}" class="select2 form-select select2-hidden-accessible" name="ship_port_location_id_{{ $i }}" onChange="loadDeparture({{ $i }});">
                                                         {{-- <option value="">- Lựa chọn -</option> --}}
                                                     </select>
