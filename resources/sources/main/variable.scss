@@ -57,58 +57,7 @@ $fontSegoeBold: "Segoe-UI Bold", serif;
 $fontSegoe: "Segoe-UI", serif;
 $fontSegoeSemi: "Segoe-UI Semi", serif;
 
-$backgroundImage: '/images/main/hitour-background.png';
-
-// font Gilroy
-// $folderFont : '/fonts/';
-// @font-face{
-// 	font-family:'mt';
-// 	font-style:normal;
-// 	font-weight:400;
-// 	src:url($folderFont+"mt-regular.otf")
-// }
-
-// @font-face{
-// 	font-family:'SVN-Gilroy Thin';
-// 	font-style:normal;
-// 	font-weight:400;
-// 	src:url($folderFont+"svn-gilroy_regular.ttf")
-// }
-
-// @font-face{
-// 	font-family:'SVN-Gilroy Light';
-// 	font-style:normal;
-// 	font-weight:400;
-// 	src:url($folderFont+"svn-gilroy_regular.ttf")
-// }
-
-// @font-face{
-// 	font-family:'SVN-Gilroy';
-// 	font-style:normal;
-// 	font-weight:500;
-// 	src:url($folderFont+"svn-gilroy_medium.ttf")
-// }
-
-// @font-face{
-// 	font-family:'SVN-Gilroy Med';
-// 	font-style:normal;
-// 	font-weight:700;
-// 	src:url($folderFont+"svn-gilroy_med.ttf")
-// }
-
-// @font-face{
-// 	font-family:'SVN-Gilroy Semi';
-// 	font-style:normal;
-// 	font-weight:700;
-// 	src:url($folderFont+"svn-gilroy_semibold.ttf")
-// }
-
-// @font-face{
-// 	font-family:'SVN-Gilroy Bold';
-// 	font-style:normal;
-// 	font-weight:700;
-// 	src:url($folderFont+"svn-gilroy_semibold.ttf")
-// }
+$backgroundImage: 'https://hitour.vn/storage/images/main/hitour-background.png';
 
 @mixin titleOfBox {
     font-family: $fontTitle;
